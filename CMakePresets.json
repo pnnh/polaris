@@ -1,0 +1,85 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 22,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "linux",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux",
+      "installDir": "${sourceDir}/install/linux",
+      "toolchainFile": "/home/applications/vcpkg/scripts/buildsystems/vcpkg.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "Boost_NO_WARN_NEW_VERSIONS": "ON",
+        "QT_DECLARATIVE_DEBUG": "ON",
+        "QT_QML_DEBUG": "ON"
+      },
+      "environment": {}
+    },
+    {
+      "name": "macos",
+      "displayName": "macOS Config",
+      "generator": "Xcode",
+      "binaryDir": "${sourceDir}/build/macos",
+      "installDir": "${sourceDir}/install",
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "Boost_NO_WARN_NEW_VERSIONS": "ON",
+        "CMAKE_OSX_ARCHITECTURES": "arm64",
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "14.0",
+        "CMAKE_PREFIX_PATH": "/Users/Larry/Qt/6.7.0/macos/lib/cmake",
+        "QT_QML_DEBUG": "ON"
+      },
+      "environment": {}
+    },
+    {
+      "name": "windows",
+      "generator": "Visual Studio 17 2022",
+      "binaryDir": "${sourceDir}/build/windows",
+      "toolchainFile": "E:\\Apps\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake",
+      "installDir": "${sourceDir}/install",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "Boost_NO_WARN_NEW_VERSIONS": "ON",
+        "CMAKE_PREFIX_PATH": "F:\\Qt\\6.7.0\\msvc2019_64\\lib\\cmake",
+        "QT_DECLARATIVE_DEBUG": "ON",
+        "QT_QML_DEBUG": "ON"
+      },
+      "environment": {},
+      "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+          "clangTidyChecks": "-checks=*, -cppcoreguidelines-*, -modernize-*, -readability-*",
+          "enableMicrosoftCodeAnalysis": true,
+          "enableClangTidyCodeAnalysis": true
+        }
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux",
+      "configurePreset": "linux"
+    },
+    {
+      "name": "macos",
+      "configurePreset": "macos",
+      "jobs": 8
+    },
+    {
+      "name": "windows",
+      "configurePreset": "windows",
+      "jobs": 8
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "windows",
+      "configurePreset": "windows"
+    }
+  ]
+}
