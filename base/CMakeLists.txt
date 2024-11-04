@@ -77,8 +77,6 @@ target_link_libraries(${APP_NAME} PRIVATE unofficial::sqlite3::sqlite3)
 find_package(cryptopp CONFIG REQUIRED)
 target_link_libraries(${APP_NAME} PRIVATE cryptopp::cryptopp)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/content/sources)
-
 install(
         TARGETS ${APP_NAME}
         BUNDLE DESTINATION .
