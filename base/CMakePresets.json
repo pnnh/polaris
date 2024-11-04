@@ -2,7 +2,7 @@
   "version": 3,
   "cmakeMinimumRequired": {
     "major": 3,
-    "minor": 22,
+    "minor": 28,
     "patch": 0
   },
   "configurePresets": [
@@ -13,10 +13,7 @@
       "installDir": "${sourceDir}/install/linux",
       "toolchainFile": "/home/applications/vcpkg/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "Boost_NO_WARN_NEW_VERSIONS": "ON",
-        "QT_DECLARATIVE_DEBUG": "ON",
-        "QT_QML_DEBUG": "ON"
+        "CMAKE_BUILD_TYPE": "Debug"
       },
       "environment": {}
     },
@@ -29,11 +26,8 @@
       "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "Boost_NO_WARN_NEW_VERSIONS": "ON",
         "CMAKE_OSX_ARCHITECTURES": "arm64",
-        "CMAKE_OSX_DEPLOYMENT_TARGET": "14.0",
-        "CMAKE_PREFIX_PATH": "/Users/Larry/Qt/6.7.0/macos/lib/cmake",
-        "QT_QML_DEBUG": "ON"
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "14.0"
       },
       "environment": {}
     },
@@ -44,20 +38,9 @@
       "toolchainFile": "E:\\Apps\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake",
       "installDir": "${sourceDir}/install",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "Boost_NO_WARN_NEW_VERSIONS": "ON",
-        "CMAKE_PREFIX_PATH": "F:\\Qt\\6.7.0\\msvc2019_64\\lib\\cmake",
-        "QT_DECLARATIVE_DEBUG": "ON",
-        "QT_QML_DEBUG": "ON"
+        "CMAKE_BUILD_TYPE": "Debug"
       },
-      "environment": {},
-      "vendor": {
-        "microsoft.com/VisualStudioSettings/CMake/1.0": {
-          "clangTidyChecks": "-checks=*, -cppcoreguidelines-*, -modernize-*, -readability-*",
-          "enableMicrosoftCodeAnalysis": true,
-          "enableClangTidyCodeAnalysis": true
-        }
-      }
+      "environment": {}
     }
   ],
   "buildPresets": [
