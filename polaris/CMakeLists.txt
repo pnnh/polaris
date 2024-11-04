@@ -34,3 +34,4 @@ CMAKE_POLICY(SET CMP0012 NEW)
 
 add_subdirectory(base)
 add_subdirectory(server)
+add_subdirectory(kde)

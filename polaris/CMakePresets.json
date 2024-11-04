@@ -11,9 +11,10 @@
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/build/linux",
       "installDir": "${sourceDir}/install/linux",
-      "toolchainFile": "/home/applications/vcpkg/scripts/buildsystems/vcpkg.cmake",
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}/Qt/6.8.0/macos/lib/cmake"
       },
       "environment": {}
     },
@@ -27,7 +28,8 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_OSX_ARCHITECTURES": "arm64",
-        "CMAKE_OSX_DEPLOYMENT_TARGET": "14.0"
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "14.0",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}/Qt/6.8.0/macos/lib/cmake"
       },
       "environment": {}
     },
@@ -35,10 +37,16 @@
       "name": "windows",
       "generator": "Visual Studio 17 2022",
       "binaryDir": "${sourceDir}/build/windows",
-      "toolchainFile": "E:\\Apps\\vcpkg\\scripts\\buildsystems\\vcpkg.cmake",
+      "toolchainFile": "$env{VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake",
       "installDir": "${sourceDir}/install",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}\\6.8.0\\msvc2022_64\\lib\\cmake"
       },
       "environment": {}
     }

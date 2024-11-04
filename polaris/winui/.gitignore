@@ -1,0 +1,10 @@
+.vs/
+packages/
+x64/
+Generated Files/
+vcpkg_installed/
+out/
+obj/
+bin/
+ARM64/
+_build/
