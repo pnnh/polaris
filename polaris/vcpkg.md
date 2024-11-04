@@ -1,0 +1,1 @@
+因为folly依赖libsodium所以添加到vcpkg.json中
