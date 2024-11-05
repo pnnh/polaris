@@ -101,10 +101,7 @@ target_link_libraries(
         Qt6::Quick
         Qt6::Gui
         Qt6::QuickControls2
-        Qt6::Sql
-        Qt6::Widgets
-        Qt6::Network
-        Qt6::Concurrent)
+        Qt6::Widgets)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/content/sources)
 
@@ -196,8 +193,3 @@ install(
         BUNDLE DESTINATION .
         RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-
-add_test(NAME ${APP_NAME}-case COMMAND ${APP_NAME} sqlite)
-set_tests_properties(${APP_NAME}-case PROPERTIES ENVIRONMENT PL_DSN=xyz)
-
-add_test(NAME polaris-tests-markdown COMMAND ${APP_NAME} markdown)

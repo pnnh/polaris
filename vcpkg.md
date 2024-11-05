@@ -1,1 +1,3 @@
 因为folly依赖libsodium所以添加到vcpkg.json中
+
+依赖Qt是因为linux下客户端需要使用

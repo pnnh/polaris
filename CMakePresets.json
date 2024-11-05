@@ -13,8 +13,7 @@
       "installDir": "${sourceDir}/install/linux",
       "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}/Qt/6.8.0/macos/lib/cmake"
+        "CMAKE_BUILD_TYPE": "Debug"
       },
       "environment": {}
     },
@@ -28,8 +27,7 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_OSX_ARCHITECTURES": "arm64",
-        "CMAKE_OSX_DEPLOYMENT_TARGET": "14.0",
-        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}/Qt/6.8.0/macos/lib/cmake"
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "14.0"
       },
       "environment": {}
     },
@@ -45,8 +43,7 @@
         "rhs": "Windows"
       },
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_PREFIX_PATH": "$env{QT_ROOT}\\6.8.0\\msvc2022_64\\lib\\cmake"
+        "CMAKE_BUILD_TYPE": "Debug"
       },
       "environment": {}
     }
@@ -65,12 +62,6 @@
       "name": "windows",
       "configurePreset": "windows",
       "jobs": 8
-    }
-  ],
-  "testPresets": [
-    {
-      "name": "windows",
-      "configurePreset": "windows"
     }
   ]
 }
