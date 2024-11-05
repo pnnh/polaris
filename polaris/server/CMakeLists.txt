@@ -19,8 +19,8 @@ add_executable(polaris-server
         controllers/index.cpp
         controllers/index.h)
     
-add_dependencies(polaris-server polaris-base)
-target_link_libraries(polaris-server PRIVATE polaris-base)
+add_dependencies(polaris-server PolarisBase)
+target_link_libraries(polaris-server PRIVATE PolarisBase)
 
 # 查找并引用Boost库
 find_package(Boost COMPONENTS system thread chrono filesystem url REQUIRED) 

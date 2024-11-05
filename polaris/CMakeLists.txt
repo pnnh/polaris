@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.29)
 
-project(polaris-native VERSION 0.1.0 LANGUAGES C CXX)
+project(PolarisNative VERSION 0.1.0 LANGUAGES C CXX)
+
+if (APPLE)
+    enable_language(OBJC OBJCXX Swift)
+endif ()
 
 # 设置语言标准
 set(CMAKE_CXX_STANDARD 23)
@@ -36,5 +40,31 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 CMAKE_POLICY(SET CMP0012 NEW)
 
 add_subdirectory(base)
-add_subdirectory(server)
-add_subdirectory(kde)
+if (WIN32)
+    add_subdirectory(windows)
+elseif(APPLE)
+    # add_subdirectory(macos)
+
+    #include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Native)
+
+    set(LIB_BASE PolarisBase)
+
+    set(LIB_NAME PolarisMacos)
+    set(LIB_SOURCES
+            Native/logger/logger.h
+            Native/logger/logger.cpp
+            Native/module.modulemap)
+
+    # 添加静态库（macOS下不支持动态链接）
+    add_library(${LIB_NAME} ${LIB_SOURCES})
+
+    #add_dependencies(${LIB_NAME} ${LIB_BASE})
+    #target_link_libraries(${LIB_NAME} PRIVATE ${LIB_BASE})
+
+    # 查找并引用日志库
+    find_package(spdlog CONFIG REQUIRED)
+    target_link_libraries(${LIB_NAME} PRIVATE spdlog::spdlog)
+elseif(LINUX)
+    add_subdirectory(kde)
+    add_subdirectory(server)
+endif()

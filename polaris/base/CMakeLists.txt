@@ -1,5 +1,5 @@
 
-set(LIB_NAME polaris-base)
+set(LIB_NAME PolarisBase)
 set(LIB_SOURCES
         models/Article.cpp
         models/Article.h

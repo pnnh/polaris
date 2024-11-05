@@ -15,8 +15,7 @@
 		461062D12560FE7900D40A89 /* ImagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461062D02560FE7900D40A89 /* ImagePreview.swift */; };
 		46149BCB2C411054005F68A6 /* NewWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46149BCA2C411054005F68A6 /* NewWindow.swift */; };
 		464F358225598C8E009CCB92 /* LayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464F358125598C8E009CCB92 /* LayoutView.swift */; };
-		46760A1F2C413330001C2021 /* libNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46760A1E2C413330001C2021 /* libNative.a */; };
-		46760A222C413B88001C2021 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 46760A212C413B88001C2021 /* Logging */; };
+		46B880562CD9C858006FB352 /* libPolarisMacos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B880552CD9C858006FB352 /* libPolarisMacos.a */; };
 		46EE3C17254B142000EC17BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE3C16254B142000EC17BB /* AppDelegate.swift */; };
 		46EE3C19254B142000EC17BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE3C18254B142000EC17BB /* ContentView.swift */; };
 		46EE3C1B254B142200EC17BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EE3C1A254B142200EC17BB /* Assets.xcassets */; };
@@ -37,6 +36,10 @@
 		464F358125598C8E009CCB92 /* LayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutView.swift; sourceTree = "<group>"; };
 		46760A1C2C412843001C2021 /* libNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libNative.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		46760A1E2C413330001C2021 /* libNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libNative.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		46B8804F2CD9B9B4006FB352 /* libPolarisMacos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPolarisMacos.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		46B880512CD9C21E006FB352 /* libPolarisMacos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPolarisMacos.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		46B880532CD9C226006FB352 /* libPolarisBase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPolarisBase.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		46B880552CD9C858006FB352 /* libPolarisMacos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPolarisMacos.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EE3C13254B142000EC17BB /* Venus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Venus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EE3C16254B142000EC17BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46EE3C18254B142000EC17BB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,8 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46760A222C413B88001C2021 /* Logging in Frameworks */,
-				46760A1F2C413330001C2021 /* libNative.a in Frameworks */,
+				46B880562CD9C858006FB352 /* libPolarisMacos.a in Frameworks */,
 				372B24FCE707164639B5ACB7 /* libPods-Venus.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,8 +72,12 @@
 		37508AEFE740CC69BDAB8CAC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46B880552CD9C858006FB352 /* libPolarisMacos.a */,
+				46B880532CD9C226006FB352 /* libPolarisBase.a */,
+				46B880512CD9C21E006FB352 /* libPolarisMacos.a */,
 				46760A1E2C413330001C2021 /* libNative.a */,
 				46760A1C2C412843001C2021 /* libNative.a */,
+				46B8804F2CD9B9B4006FB352 /* libPolarisMacos.a */,
 				7B56613AA8DBCEE8866009F4 /* libPods-Venus.a */,
 			);
 			name = Frameworks;
@@ -170,7 +176,6 @@
 			);
 			name = Venus;
 			packageProductDependencies = (
-				46760A212C413B88001C2021 /* Logging */,
 			);
 			productName = Venus;
 			productReference = 46EE3C13254B142000EC17BB /* Venus.app */;
@@ -202,7 +207,6 @@
 			);
 			mainGroup = 46EE3C0A254B142000EC17BB;
 			packageReferences = (
-				46760A202C413B88001C2021 /* XCRemoteSwiftPackageReference "swift-log" */,
 			);
 			productRefGroup = 46EE3C14254B142000EC17BB /* Products */;
 			projectDirPath = "";
@@ -420,7 +424,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Venus/Preview Content\"";
-				DEVELOPMENT_TEAM = JMFA763RW5;
+				DEVELOPMENT_TEAM = RMKRN6ST3U;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = c17;
@@ -438,8 +442,8 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
 					"\"${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
 					/usr/lib/swift,
-					"\"$(SRCROOT)/Native/build/macos/Debug\"",
-					"\"$(SRCROOT)/Native/build/macos/vcpkg_installed/arm64-osx/lib\"",
+					"\"$(SRCROOT)/build/macos/Debug\"",
+					"\"$(SRCROOT)/build/macos/vcpkg_installed/arm64-osx/lib\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				OTHER_LDFLAGS = (
@@ -448,7 +452,7 @@
 					"-lfmt",
 				);
 				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = xyz.huable.venus;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.huable.polaris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OBJC_INTEROP_MODE = objcxx;
@@ -471,7 +475,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Venus/Preview Content\"";
-				DEVELOPMENT_TEAM = JMFA763RW5;
+				DEVELOPMENT_TEAM = RMKRN6ST3U;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = c17;
@@ -499,7 +503,7 @@
 					"-lfmt",
 				);
 				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = xyz.huable.venus;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.huable.polaris;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OBJC_INTEROP_MODE = objcxx;
@@ -529,25 +533,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		46760A202C413B88001C2021 /* XCRemoteSwiftPackageReference "swift-log" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "http://github.com/apple/swift-log";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.6.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		46760A212C413B88001C2021 /* Logging */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 46760A202C413B88001C2021 /* XCRemoteSwiftPackageReference "swift-log" */;
-			productName = Logging;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 46EE3C0B254B142000EC17BB /* Project object */;
 }

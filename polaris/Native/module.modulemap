@@ -1,4 +1,4 @@
-module Native {
+module PolarisMacos {
     header "logger/logger.h"
 
     export *

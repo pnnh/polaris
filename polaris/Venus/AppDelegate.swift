@@ -7,8 +7,8 @@
 
 import Cocoa
 import SwiftUI
-import Native
-import Logging
+import PolarisMacos
+//import Logging
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -35,11 +35,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.makeKeyAndOrderFront(nil)
         
         // 尝试调用C++侧的日志打印
-        Native.native.Logger.log("Call From Swift")
+        PolarisMacos.native.Logger.log("Call From Swift")
         
         // 尝试调用SPM里的Swift-log来打印日志
-        let logger = Logger(label: "xyz.huable.venus.main")
-        logger.info("Hello Venus")
+//        let logger = Logger(label: "xyz.huable.venus.main")
+//        logger.info("Hello Venus")
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
