@@ -14,7 +14,6 @@
     },
     {
       "name": "folly",
-      "version>=": "2024.09.30.00",
       "platform": "linux&arm64"
     },
     {
@@ -54,7 +53,7 @@
   "overrides": [
     {
       "name": "folly",
-      "version": "2024.09.30.00"
+      "version-string": "2024.09.30.00"
     }
   ]
 }
