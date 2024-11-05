@@ -14,8 +14,8 @@
 		461062CD256022DB00D40A89 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461062CC256022DB00D40A89 /* GridView.swift */; };
 		461062D12560FE7900D40A89 /* ImagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461062D02560FE7900D40A89 /* ImagePreview.swift */; };
 		46149BCB2C411054005F68A6 /* NewWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46149BCA2C411054005F68A6 /* NewWindow.swift */; };
+		462C786F2CD9D76A00BAD0D6 /* libPolarisMacos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 462C786E2CD9D70200BAD0D6 /* libPolarisMacos.a */; };
 		464F358225598C8E009CCB92 /* LayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464F358125598C8E009CCB92 /* LayoutView.swift */; };
-		46B880562CD9C858006FB352 /* libPolarisMacos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B880552CD9C858006FB352 /* libPolarisMacos.a */; };
 		46EE3C17254B142000EC17BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE3C16254B142000EC17BB /* AppDelegate.swift */; };
 		46EE3C19254B142000EC17BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE3C18254B142000EC17BB /* ContentView.swift */; };
 		46EE3C1B254B142200EC17BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EE3C1A254B142200EC17BB /* Assets.xcassets */; };
@@ -26,6 +26,23 @@
 		46EE3C50254D51CF00EC17BB /* Waterfalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE3C4F254D51CF00EC17BB /* Waterfalls.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		462C786B2CD9D70200BAD0D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 462C78602CD9D70200BAD0D6 /* PolarisNative.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1C0DB844DB8541349A8859A5;
+			remoteInfo = PolarisBase;
+		};
+		462C786D2CD9D70200BAD0D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 462C78602CD9D70200BAD0D6 /* PolarisNative.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C63FA98DACB64215BE0F147F;
+			remoteInfo = PolarisMacos;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		45CCC81B0A89273CCE64129B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45CCC8B9C25C93AA2BAC1BF9 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
@@ -33,6 +50,7 @@
 		461062CC256022DB00D40A89 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		461062D02560FE7900D40A89 /* ImagePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreview.swift; sourceTree = "<group>"; };
 		46149BCA2C411054005F68A6 /* NewWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewWindow.swift; sourceTree = "<group>"; };
+		462C78602CD9D70200BAD0D6 /* PolarisNative.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PolarisNative.xcodeproj; path = ../build/macos/PolarisNative.xcodeproj; sourceTree = SOURCE_ROOT; };
 		464F358125598C8E009CCB92 /* LayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutView.swift; sourceTree = "<group>"; };
 		46760A1C2C412843001C2021 /* libNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libNative.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		46760A1E2C413330001C2021 /* libNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libNative.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,7 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46B880562CD9C858006FB352 /* libPolarisMacos.a in Frameworks */,
+				462C786F2CD9D76A00BAD0D6 /* libPolarisMacos.a in Frameworks */,
 				372B24FCE707164639B5ACB7 /* libPods-Venus.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,9 +101,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		462C78632CD9D70200BAD0D6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				462C786C2CD9D70200BAD0D6 /* libPolarisBase.a */,
+				462C786E2CD9D70200BAD0D6 /* libPolarisMacos.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		46EE3C0A254B142000EC17BB = {
 			isa = PBXGroup;
 			children = (
+				462C78602CD9D70200BAD0D6 /* PolarisNative.xcodeproj */,
 				46EE3C15254B142000EC17BB /* Venus */,
 				46EE3C14254B142000EC17BB /* Products */,
 				45CCC8B9C25C93AA2BAC1BF9 /* .gitignore */,
@@ -210,12 +238,35 @@
 			);
 			productRefGroup = 46EE3C14254B142000EC17BB /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 462C78632CD9D70200BAD0D6 /* Products */;
+					ProjectRef = 462C78602CD9D70200BAD0D6 /* PolarisNative.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				46EE3C12254B142000EC17BB /* Venus */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		462C786C2CD9D70200BAD0D6 /* libPolarisBase.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libPolarisBase.a;
+			remoteRef = 462C786B2CD9D70200BAD0D6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		462C786E2CD9D70200BAD0D6 /* libPolarisMacos.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libPolarisMacos.a;
+			remoteRef = 462C786D2CD9D70200BAD0D6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		46EE3C11254B142000EC17BB /* Resources */ = {
@@ -430,7 +481,7 @@
 				GCC_C_LANGUAGE_STANDARD = c17;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Native\"",
+					"\"$(SRCROOT)/../macos/Native\"",
 				);
 				INFOPLIST_FILE = Venus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -442,8 +493,8 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
 					"\"${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
 					/usr/lib/swift,
-					"\"$(SRCROOT)/build/macos/Debug\"",
-					"\"$(SRCROOT)/build/macos/vcpkg_installed/arm64-osx/lib\"",
+					"\"$(SRCROOT)/../build/macos/macos/Debug\"",
+					"\"$(SRCROOT)/../build/macos/vcpkg_installed/arm64-osx/lib\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				OTHER_LDFLAGS = (
@@ -481,7 +532,7 @@
 				GCC_C_LANGUAGE_STANDARD = c17;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Native\"",
+					"\"$(SRCROOT)/../macos/Native\"",
 				);
 				INFOPLIST_FILE = Venus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
