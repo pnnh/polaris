@@ -2,6 +2,7 @@ build/
 *.user
 .vs/
 .idea/
+vcpkg_installed/
 
 # macos and ios
 .idea
