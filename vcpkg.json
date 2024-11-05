@@ -10,14 +10,20 @@
       "name": "libsodium"
     },
     {
-      "name": "folly"
+      "name": "zlib"
+    },
+    {
+      "name": "folly",
+      "version>=": "2024.09.30.00",
+      "platform": "linux&arm64"
     },
     {
       "name": "qtbase",
       "platform": "linux&x64"
     },
     {
-      "name": "workflow"
+      "name": "workflow",
+      "platform": "linux&arm64"
     },
     {
       "name": "boost"
@@ -44,5 +50,11 @@
       "name": "cryptopp"
     }
   ],
-  "builtin-baseline": "5f4628b89f3f98cd9a0b43c27ded2aa53da1f790"
+  "builtin-baseline": "5f4628b89f3f98cd9a0b43c27ded2aa53da1f790",
+  "overrides": [
+    {
+      "name": "folly",
+      "version": "2024.09.30.00"
+    }
+  ]
 }

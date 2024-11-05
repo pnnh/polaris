@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.29)
+cmake_minimum_required(VERSION 3.28)
 
 project(PolarisNative VERSION 0.1.0 LANGUAGES C CXX)
 
@@ -25,12 +25,6 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 # 启用测试
 enable_testing()
 
-# 查找并设置ccache
-find_program(CCACHE_PROGRAM ccache)
-if (CCACHE_PROGRAM)
-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE "${CCACHE_PROGRAM}")
-endif ()
-
 # 设置生成clangd compile_commands.json文件，方便和IDE集成
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
@@ -45,8 +39,7 @@ if (WIN32)
 elseif(APPLE)
     add_subdirectory(macos)
 elseif(LINUX)
-    message(STATUS "LINUX ${CMAKE_SYSTEM_PROCESSOR}")
-    if(CMAKE_SYSTEM_PROCESSOR MATCHES "arm")
+    if(CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
         add_subdirectory(server)
     else()
         add_subdirectory(linux)
