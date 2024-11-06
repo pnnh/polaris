@@ -3,37 +3,32 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		372B24FCE707164639B5ACB7 /* libPods-Venus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B56613AA8DBCEE8866009F4 /* libPods-Venus.a */; };
 		45CCC881F53994BADE5FA9CE /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 45CCC81B0A89273CCE64129B /* README.md */; };
 		45CCCE220F4FF4D7D92D3115 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 45CCC8B9C25C93AA2BAC1BF9 /* .gitignore */; };
-		461062CA256019CA00D40A89 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461062C9256019CA00D40A89 /* ImageView.swift */; };
 		461062CD256022DB00D40A89 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461062CC256022DB00D40A89 /* GridView.swift */; };
-		461062D12560FE7900D40A89 /* ImagePreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 461062D02560FE7900D40A89 /* ImagePreview.swift */; };
-		46149BCB2C411054005F68A6 /* NewWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46149BCA2C411054005F68A6 /* NewWindow.swift */; };
-		464F358225598C8E009CCB92 /* LayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464F358125598C8E009CCB92 /* LayoutView.swift */; };
+		463412FF2CDB0F0600EE94E8 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 463412FE2CDB0F0600EE94E8 /* Logging */; };
+		463413092CDB14D900EE94E8 /* ArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463413082CDB14D200EE94E8 /* ArticleModel.swift */; };
+		4634130B2CDB156E00EE94E8 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4634130A2CDB156E00EE94E8 /* ImageView.swift */; };
 		4681D5AF2CDA1B9B000799DC /* libPolarisMacos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4681D5AE2CDA1B9B000799DC /* libPolarisMacos.a */; };
 		46EE3C17254B142000EC17BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE3C16254B142000EC17BB /* AppDelegate.swift */; };
 		46EE3C19254B142000EC17BB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE3C18254B142000EC17BB /* ContentView.swift */; };
 		46EE3C1B254B142200EC17BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EE3C1A254B142200EC17BB /* Assets.xcassets */; };
 		46EE3C1E254B142200EC17BB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EE3C1D254B142200EC17BB /* Preview Assets.xcassets */; };
 		46EE3C21254B142200EC17BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 46EE3C1F254B142200EC17BB /* Main.storyboard */; };
-		46EE3C3C254B160100EC17BB /* GridLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE3C3B254B160100EC17BB /* GridLayoutView.swift */; };
-		46EE3C4B254C5E7600EC17BB /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE3C4A254C5E7600EC17BB /* ImageModel.swift */; };
 		46EE3C50254D51CF00EC17BB /* Waterfalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE3C4F254D51CF00EC17BB /* Waterfalls.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		45CCC81B0A89273CCE64129B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45CCC8B9C25C93AA2BAC1BF9 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
-		461062C9256019CA00D40A89 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		461062CC256022DB00D40A89 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
-		461062D02560FE7900D40A89 /* ImagePreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreview.swift; sourceTree = "<group>"; };
-		46149BCA2C411054005F68A6 /* NewWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewWindow.swift; sourceTree = "<group>"; };
-		464F358125598C8E009CCB92 /* LayoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutView.swift; sourceTree = "<group>"; };
+		463413082CDB14D200EE94E8 /* ArticleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleModel.swift; sourceTree = "<group>"; };
+		4634130A2CDB156E00EE94E8 /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		46760A1C2C412843001C2021 /* libNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libNative.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		46760A1E2C413330001C2021 /* libNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libNative.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4681D5AE2CDA1B9B000799DC /* libPolarisMacos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPolarisMacos.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -49,19 +44,23 @@
 		46EE3C20254B142200EC17BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		46EE3C22254B142200EC17BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46EE3C23254B142200EC17BB /* Venus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Venus.entitlements; sourceTree = "<group>"; };
-		46EE3C3B254B160100EC17BB /* GridLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridLayoutView.swift; sourceTree = "<group>"; };
-		46EE3C4A254C5E7600EC17BB /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
 		46EE3C4F254D51CF00EC17BB /* Waterfalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waterfalls.swift; sourceTree = "<group>"; };
 		552C9D0993262ECFCE02CC1D /* Pods-Venus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Venus.release.xcconfig"; path = "Target Support Files/Pods-Venus/Pods-Venus.release.xcconfig"; sourceTree = "<group>"; };
 		7B56613AA8DBCEE8866009F4 /* libPods-Venus.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Venus.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		923DCB4D8CF4B15A3C4FC1DC /* Pods-Venus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Venus.debug.xcconfig"; path = "Target Support Files/Pods-Venus/Pods-Venus.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		463413002CDB120F00EE94E8 /* Windows */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Windows; sourceTree = "<group>"; };
+		463413042CDB13BB00EE94E8 /* Services */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Services; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		46EE3C10254B142000EC17BB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				463412FF2CDB0F0600EE94E8 /* Logging in Frameworks */,
 				4681D5AF2CDA1B9B000799DC /* libPolarisMacos.a in Frameworks */,
 				372B24FCE707164639B5ACB7 /* libPods-Venus.a in Frameworks */,
 			);
@@ -108,17 +107,16 @@
 		46EE3C15254B142000EC17BB /* Venus */ = {
 			isa = PBXGroup;
 			children = (
+				463413042CDB13BB00EE94E8 /* Services */,
+				463413002CDB120F00EE94E8 /* Windows */,
 				46EE3C53254D521200EC17BB /* Models */,
 				46EE3C4E254D51A000EC17BB /* Views */,
-				46EE3C3B254B160100EC17BB /* GridLayoutView.swift */,
 				46EE3C16254B142000EC17BB /* AppDelegate.swift */,
-				46EE3C18254B142000EC17BB /* ContentView.swift */,
 				46EE3C1A254B142200EC17BB /* Assets.xcassets */,
 				46EE3C1F254B142200EC17BB /* Main.storyboard */,
 				46EE3C22254B142200EC17BB /* Info.plist */,
 				46EE3C23254B142200EC17BB /* Venus.entitlements */,
 				46EE3C1C254B142200EC17BB /* Preview Content */,
-				46EE3C4A254C5E7600EC17BB /* ImageModel.swift */,
 			);
 			path = Venus;
 			sourceTree = "<group>";
@@ -134,12 +132,9 @@
 		46EE3C4E254D51A000EC17BB /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				46149BCA2C411054005F68A6 /* NewWindow.swift */,
 				46EE3C4F254D51CF00EC17BB /* Waterfalls.swift */,
-				464F358125598C8E009CCB92 /* LayoutView.swift */,
-				461062C9256019CA00D40A89 /* ImageView.swift */,
 				461062CC256022DB00D40A89 /* GridView.swift */,
-				461062D02560FE7900D40A89 /* ImagePreview.swift */,
+				46EE3C18254B142000EC17BB /* ContentView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -147,6 +142,8 @@
 		46EE3C53254D521200EC17BB /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4634130A2CDB156E00EE94E8 /* ImageView.swift */,
+				463413082CDB14D200EE94E8 /* ArticleModel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -176,8 +173,13 @@
 			);
 			dependencies = (
 			);
+			fileSystemSynchronizedGroups = (
+				463413002CDB120F00EE94E8 /* Windows */,
+				463413042CDB13BB00EE94E8 /* Services */,
+			);
 			name = Venus;
 			packageProductDependencies = (
+				463412FE2CDB0F0600EE94E8 /* Logging */,
 			);
 			productName = Venus;
 			productReference = 46EE3C13254B142000EC17BB /* Venus.app */;
@@ -191,7 +193,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1210;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					46EE3C12254B142000EC17BB = {
 						CreatedOnToolsVersion = 12.1;
@@ -209,6 +211,7 @@
 			);
 			mainGroup = 46EE3C0A254B142000EC17BB;
 			packageReferences = (
+				46E363B12CDB0CA4003FBE3C /* XCRemoteSwiftPackageReference "swift-log" */,
 			);
 			productRefGroup = 46EE3C14254B142000EC17BB /* Products */;
 			projectDirPath = "";
@@ -263,16 +266,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				461062CA256019CA00D40A89 /* ImageView.swift in Sources */,
 				46EE3C19254B142000EC17BB /* ContentView.swift in Sources */,
-				46EE3C4B254C5E7600EC17BB /* ImageModel.swift in Sources */,
-				464F358225598C8E009CCB92 /* LayoutView.swift in Sources */,
+				463413092CDB14D900EE94E8 /* ArticleModel.swift in Sources */,
 				46EE3C17254B142000EC17BB /* AppDelegate.swift in Sources */,
-				46EE3C3C254B160100EC17BB /* GridLayoutView.swift in Sources */,
-				46149BCB2C411054005F68A6 /* NewWindow.swift in Sources */,
 				461062CD256022DB00D40A89 /* GridView.swift in Sources */,
 				46EE3C50254D51CF00EC17BB /* Waterfalls.swift in Sources */,
-				461062D12560FE7900D40A89 /* ImagePreview.swift in Sources */,
+				4634130B2CDB156E00EE94E8 /* ImageView.swift in Sources */,
 				45CCC881F53994BADE5FA9CE /* README.md in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -535,6 +534,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		46E363B12CDB0CA4003FBE3C /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "http://github.com/apple/swift-log";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.6.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		463412FE2CDB0F0600EE94E8 /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46E363B12CDB0CA4003FBE3C /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 46EE3C0B254B142000EC17BB /* Project object */;
 }

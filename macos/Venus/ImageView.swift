@@ -1,10 +1,3 @@
-//
-//  ImageView.swift
-//  Venus
-//
-//  Created by Larry on 2020/11/14.
-//
-
 import Foundation
 import SwiftUI
 import Cocoa

@@ -83,7 +83,7 @@ class Model: ObservableObject {
 struct EmoView2: View {
     
     private var columnWidth: Double
-        @State private var model: ImageModel
+        @State private var model: ArticleModel
     @State private var show: Bool = false
     private var path: String
     var publisher: PassthroughSubject<String, Never>
@@ -93,7 +93,7 @@ struct EmoView2: View {
     init(path: String, colWidth: Double, publisher: PassthroughSubject<String, Never>) {
         self.path = path
         self.columnWidth = colWidth
-        self.model = ImageModel(Path: path, Text: "新")
+        self.model = ArticleModel(Path: path, Text: "新")
         _show = State(initialValue: false)
 //                self.model2.show = false
         print("onAppear \(path)")
