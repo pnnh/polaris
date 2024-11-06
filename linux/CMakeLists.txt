@@ -27,22 +27,22 @@ set(APP_SOURCES
         models/LibraryModel.h
         models/ImageModel.cpp
         models/ImageModel.h
-        services/SqliteService.cpp
-        services/SqliteService.h
-        services/MarkdownService.cpp
-        services/MarkdownService.h
+        native/services/sqlite/SqliteService.cpp
+        native/services/sqlite/SqliteService.h
+        native/services/sqlite/MarkdownService.cpp
+        native/services/sqlite/MarkdownService.h
         tests/tests.h
         tests/tests.cpp
-        services/UserService.cpp
-        services/UserService.h
-        services/SyncService.cpp
-        services/SyncService.h
-        services/imageservice.cpp
-        services/imageservice.h
-        services/LibraryService.cpp
-        services/LibraryService.h
-        services/FolderService.h
-        services/FolderService.cpp
+        native/services/sqlite/UserService.cpp
+        native/services/sqlite/UserService.h
+        native/services/sqlite/SyncService.cpp
+        native/services/sqlite/SyncService.h
+        native/services/sqlite/imageservice.cpp
+        native/services/sqlite/imageservice.h
+        native/services/sqlite/LibraryService.cpp
+        native/services/sqlite/LibraryService.h
+        native/services/sqlite/FolderService.h
+        native/services/sqlite/FolderService.cpp
         threads/SyncThread.cpp
         threads/SyncThread.h
         utils/base32.cpp

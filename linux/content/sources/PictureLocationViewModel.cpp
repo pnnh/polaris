@@ -1,13 +1,13 @@
 #include "PictureLocationViewModel.h"
 
-#include "services/UserService.h"
+#include "native/services/sqlite/UserService.h"
 
 #include <QDebug>
 #include <QDir>
 #include <QStringView>
 #include <QVector>
 
-#include <services/FolderService.h>
+#include <native/services/sqlite/FolderService.h>
 
 PictureLocationViewModel::PictureLocationViewModel(QObject *parent)
     : QAbstractListModel(parent) {

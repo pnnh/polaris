@@ -1,4 +1,4 @@
-#include "base/utils/query.h"
+#include "native/utils/query.h"
 #include <boost/range/algorithm.hpp>
 
 QueryParam::QueryParam(const std::string &url_string)

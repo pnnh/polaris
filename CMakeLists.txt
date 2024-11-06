@@ -25,15 +25,12 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 # 启用测试
 enable_testing()
 
-# 设置生成clangd compile_commands.json文件，方便和IDE集成
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
 # 避免警告
 CMAKE_POLICY(SET CMP0012 NEW)
 
-add_subdirectory(base)
+add_subdirectory(native)
 if (WIN32)
     add_subdirectory(windows)
 elseif(APPLE)

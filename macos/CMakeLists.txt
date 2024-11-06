@@ -1,7 +1,7 @@
 
 #include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Native)
 
-set(LIB_BASE PolarisBase)
+set(LIB_BASE ${PROJECT_NAME})
 
 set(LIB_NAME PolarisMacos)
 set(LIB_SOURCES
@@ -18,3 +18,12 @@ add_library(${LIB_NAME} ${LIB_SOURCES})
 # 查找并引用日志库
 find_package(spdlog CONFIG REQUIRED)
 target_link_libraries(${LIB_NAME} PRIVATE spdlog::spdlog)
+
+#set_target_properties(${LIB_NAME} PROPERTIES
+#        FRAMEWORK TRUE
+#        FRAMEWORK_VERSION C
+#        MACOSX_FRAMEWORK_IDENTIFIER xyz.calieo.PolarisMacos
+#        VERSION ${spectral_VERSION}
+#        SOVERSION ${spectral_VERSION}
+#        PUBLIC_HEADER PolarisMacos.h
+#        XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "Apple Development")

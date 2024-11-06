@@ -1,6 +1,6 @@
 #include "SAChannelViewModel.h"
 
-#include "services/UserService.h"
+#include "native/services/sqlite/UserService.h"
 
 #include <QDebug>
 #include <QDir>

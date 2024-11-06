@@ -6,7 +6,7 @@
 #include <spdlog/spdlog.h>
 #include <workflow/HttpMessage.h>
 
-#include "base/utils/query.h"
+#include "native/utils/query.h"
 
 using json = nlohmann::json;
 

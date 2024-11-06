@@ -12,7 +12,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Create the SwiftUI view that provides the window contents.
         //let contentView = ContentView()
 //        let contentView = GridLayoutView()
-        let contentView = WaterfallsView()
+        let contentView = PSMainView()
 
         window = PSMainWindow(
             contentRect: NSRect(x: 0, y: 0, width: PSMainWindow.minWinSize.width, height: PSMainWindow.minWinSize.height),

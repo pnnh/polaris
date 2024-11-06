@@ -1,5 +1,5 @@
 #include "content/sources/markdown.h"
-#include "services/MarkdownService.h"
+#include "native/services/sqlite/MarkdownService.h"
 
 MarkdownModel::MarkdownModel(QObject *parent) {
 }

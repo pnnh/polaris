@@ -1,6 +1,6 @@
 #include "LibraryModel.h"
 
-// #include "../services/UserService.h"
+// #include "../native/services/sqlite/UserService.h"
 
 // #include <QSqlQuery>
 // #include <QtWidgets/QApplication>

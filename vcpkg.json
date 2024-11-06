@@ -25,7 +25,8 @@
       "platform": "linux&arm64"
     },
     {
-      "name": "boost"
+      "name": "boost",
+      "version>=": "1.86.0"
     },
     {
       "name": "inja"
@@ -54,6 +55,10 @@
     {
       "name": "folly",
       "version-string": "2024.09.30.00"
+    },
+    {
+      "name": "boost",
+      "version": "1.86.0"
     }
   ]
 }

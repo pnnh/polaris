@@ -1,6 +1,6 @@
 #include "content/sources/PartitionViewModel.h"
 
-#include "services/LibraryService.h"
+#include "native/services/sqlite/LibraryService.h"
 
 PartitionViewModel::PartitionViewModel(QObject *parent)
     : QAbstractListModel(parent) {

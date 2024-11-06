@@ -1,6 +1,6 @@
 #pragma once
 
-#include "services/LibraryService.h"
+#include "native/services/sqlite/LibraryService.h"
 
 #include <QtCore>
 #include <QtQml/qqmlregistration.h>

@@ -4,7 +4,7 @@
 
 #include "SyncThread.h"
 
-#include "services/SyncService.h"
+#include "native/services/sqlite/SyncService.h"
 
 #include <QDebug>
 
