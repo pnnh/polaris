@@ -1,0 +1,10 @@
+.toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .toolbarLeft {
+    display: flex;
+    gap: 0.5rem;
+  }
+}

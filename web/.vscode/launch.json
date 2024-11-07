@@ -1,0 +1,35 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "polaris-worker",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run-script",
+        "worker"
+      ],
+      "console": "internalConsole",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    {
+      "name": "polaris-nextjs",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run-script",
+        "dev"
+      ],
+      "console": "internalConsole",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  ]
+}
