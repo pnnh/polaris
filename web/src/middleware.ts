@@ -1,4 +1,7 @@
 import {NextRequest, NextResponse} from 'next/server';
+import {fallbackLng, languages} from '@/services/common/i18n/settings'
+import {getAcceptLanguage} from "@/services/server/i18n";
+
 
 export function middleware(request: NextRequest) {
     const requestHeaders = new Headers(request.headers);
@@ -24,13 +27,31 @@ export function middleware(request: NextRequest) {
         }
     }
 
+
+    let lang
+    const langInPathname = languages.find((l: string) => request.nextUrl.pathname.startsWith(`/${l}`))
+    if (langInPathname) {
+        lang = getAcceptLanguage(langInPathname)
+    }
+    if (!lang) lang = getAcceptLanguage(request.headers.get('Accept-Language') || '')
+    if (!lang) lang = fallbackLng
+
+    if (
+        !langInPathname &&
+        !request.nextUrl.pathname.startsWith('/_next')
+    ) {
+        const newPath = `/${lang}${request.nextUrl.pathname}`
+        return NextResponse.redirect(new URL(newPath, request.url))
+    }
+
+    requestHeaders.set('x-lang', lang)
     return NextResponse.next({
         request: {
             headers: requestHeaders,
         }
-    });
+    })
 }
 
 export const config = {
-    matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+    matcher: ['/((?!api|_next/static|_next/image|images|assets|restful|static|favicon.ico).*)'],
 }

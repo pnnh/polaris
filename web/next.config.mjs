@@ -44,7 +44,8 @@ let nextConfig = {
     },
     compress: process.env.NODE_ENV === 'production',
     sassOptions: {
-        includePaths: [path.join(__dirname, 'styles')]
+        includePaths: [path.join(__dirname, 'styles')],
+        silenceDeprecations: ['legacy-js-api'],
     }
 }
 

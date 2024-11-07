@@ -8,11 +8,11 @@ import {getType} from "@pnnh/atom";
 export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest,
-                          {params}: { params: { path: string[] } },
+                          {params}: { params: Promise<{ path: string[] }> },
 ) {
-    console.log('GET', params)
+    const baseParams = await params
     const basePath = isProd() ? '.next/static/modules' : 'node_modules'
-    const filePath = path.join(basePath, params.path.join('/'))
+    const filePath = path.join(basePath, baseParams.path.join('/'))
     if (fs.existsSync(filePath)) {
         const data = fs.readFileSync(filePath)
         const mimeType = getType(filePath)
