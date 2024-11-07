@@ -1,6 +1,5 @@
 import React from 'react'
 import Link from 'next/link'
-import {PSImageServer} from '@pnnh/atom-react/server'
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import ContentLayout from "@/components/server/content/layout";
 import {IDomain} from "@/services/common/domain";
@@ -8,9 +7,10 @@ import {getPathname} from "@/services/server/pathname";
 import './page.scss'
 import {PLSelectResult} from "@/models/common/common-result";
 import {PSChannelModel} from "@/models/common/channel";
-import { BaseRouterParams } from '@/models/server/router';
-import { useServerTranslation } from '@/services/server/i18n';
-import { Metadata } from 'next';
+import {BaseRouterParams} from '@/models/server/router';
+import {useServerTranslation} from '@/services/server/i18n';
+import {Metadata} from 'next';
+import {PSImageServer} from "@/components/server/image";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ viewer: string } & BaseRouterParams>,
@@ -30,7 +30,7 @@ export default async function Page({params, searchParams}: {
     const metadata: Metadata = {
         title: trans('codegen.seo.title'),
         keywords: trans('codegen.seo.keywords'),
-        description: trans('codegen.seo.description'), 
+        description: trans('codegen.seo.description'),
     }
 
     return <ContentLayout searchParams={await searchParams} pathname={pathname} metadata={metadata} params={baseParams}>

@@ -1,9 +1,7 @@
 import React from 'react'
 import './page.scss'
-import {PaginationServer} from '@pnnh/atom-react/server'
 import {replaceSearchParams} from '@pnnh/atom'
 import queryString from 'query-string'
-import {NoData} from '@pnnh/atom-react'
 import {calcPagination} from "@pnnh/atom";
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import ContentLayout from '@/components/server/content/layout'
@@ -12,9 +10,11 @@ import {IDomain} from "@/services/common/domain";
 import {ArticleCard} from "@/components/server/content/article/card";
 import {CommonResult, PLSelectResult} from "@/models/common/common-result";
 import {PSArticleModel} from "@/models/common/article";
-import { BaseRouterParams } from '@/models/server/router'
-import { useServerTranslation } from '@/services/server/i18n'
-import { Metadata } from 'next'
+import {BaseRouterParams} from '@/models/server/router'
+import {useServerTranslation} from '@/services/server/i18n'
+import {Metadata} from 'next'
+import {NoData} from "@/components/common/empty";
+import {PaginationServer} from "@/components/server/pagination";
 
 export const dynamic = "force-dynamic";
 
@@ -28,7 +28,7 @@ export default async function Page({params, searchParams}: {
     const metadata: Metadata = {
         title: trans('codegen.seo.title'),
         keywords: trans('codegen.seo.keywords'),
-        description: trans('codegen.seo.description'), 
+        description: trans('codegen.seo.description'),
     }
     const searchParamsValue = await searchParams
     let page = Number(searchParamsValue.page)
@@ -54,7 +54,7 @@ export default async function Page({params, searchParams}: {
     if (!selectResult || !selectResult.data) {
         return <NoData size={'large'}/>
     }
-    const pagination = calcPagination(page, selectResult.data.count, pageSize) 
+    const pagination = calcPagination(page, selectResult.data.count, pageSize)
     return <ContentLayout searchParams={searchParamsValue} pathname={pathname} metadata={metadata} params={baseParams}>
         <div className={'searchPage'}>
             <div className={'pageContainer'}>

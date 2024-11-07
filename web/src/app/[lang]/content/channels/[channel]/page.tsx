@@ -3,8 +3,6 @@ import './page.scss'
 import Link from 'next/link'
 import {replaceSearchParams} from '@pnnh/atom'
 import queryString from 'query-string'
-import {NoData} from '@pnnh/atom-react'
-import {PaginationServer, PSImageServer} from '@pnnh/atom-react/server'
 import {calcPagination} from "@pnnh/atom";
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import {Metadata} from "next";
@@ -16,8 +14,10 @@ import {ArticleCard} from "@/components/server/content/article/card";
 import {ArticleRankCard} from "@/components/server/content/article/rank";
 import {PLSelectResult} from "@/models/common/common-result";
 import {PSArticleModel} from "@/models/common/article";
-import { BaseRouterParams } from '@/models/server/router'
-import { useServerTranslation } from '@/services/server/i18n'
+import {BaseRouterParams} from '@/models/server/router'
+import {useServerTranslation} from '@/services/server/i18n'
+import {PaginationServer} from "@/components/server/pagination";
+import {NoData} from "@/components/common/empty";
 
 export const dynamic = "force-dynamic";
 
@@ -27,7 +27,7 @@ export default async function Page({params, searchParams}: {
 }) {
     const pathname = await getPathname()
     const baseParams = await params;
-    const { t: trans } = await useServerTranslation(baseParams.lang) 
+    const {t: trans} = await useServerTranslation(baseParams.lang)
     const searchParamsValue = await searchParams
 
     let page = Number(searchParamsValue.page)
@@ -70,7 +70,7 @@ export default async function Page({params, searchParams}: {
     const filterClass = (filter: string) => {
         const queryFilter = (searchParamsValue.filter ?? 'all')
         return ' ' + (queryFilter === filter ? 'activeLink' : '')
-    } 
+    }
     return <ContentLayout searchParams={searchParamsValue} pathname={pathname} metadata={metadata} params={baseParams}>
         <div className={'contentContainer'}>
             <div className={'conMiddle'}>

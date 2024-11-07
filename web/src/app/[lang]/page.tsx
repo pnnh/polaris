@@ -1,11 +1,8 @@
 import React from 'react'
 import './page.scss'
 import Link from 'next/link'
-import {PaginationServer} from '@pnnh/atom-react/server'
 import {replaceSearchParams} from '@pnnh/atom'
 import queryString from 'query-string'
-import {NoData} from '@pnnh/atom-react'
-import {PSImageServer} from '@pnnh/atom-react/server'
 import {formatRfc3339} from '@pnnh/atom'
 import {calcPagination} from "@pnnh/atom";
 import {STSubString} from "@pnnh/atom";
@@ -16,10 +13,13 @@ import {IDomain} from "@/services/common/domain";
 import {FaEye} from "react-icons/fa";
 import {CiAlarmOn} from "react-icons/ci";
 import {CommonResult, PLSelectResult} from "@/models/common/common-result";
-import {channelName, PSArticleModel} from "@/models/common/article"; 
-import { useServerTranslation } from '@/services/server/i18n'
-import { BaseRouterParams } from '@/models/server/router'
-import { Metadata } from 'next'
+import {channelName, PSArticleModel} from "@/models/common/article";
+import {useServerTranslation} from '@/services/server/i18n'
+import {BaseRouterParams} from '@/models/server/router'
+import {Metadata} from 'next'
+import {NoData} from "@/components/common/empty";
+import {PaginationServer} from "@/components/server/pagination";
+import {PSImageServer} from "@/components/server/image";
 
 export const dynamic = "force-dynamic";
 
@@ -34,7 +34,7 @@ export default async function Page({params, searchParams}: {
     const metadata: Metadata = {
         title: trans('codegen.seo.title'),
         keywords: trans('codegen.seo.keywords'),
-        description: trans('codegen.seo.description'), 
+        description: trans('codegen.seo.description'),
     }
 
     let page = Number(searchParamsValue.page)

@@ -2,11 +2,11 @@ import Link from "next/link";
 import {formatRfc3339, STSubString} from "@pnnh/atom";
 import {FaEye} from "react-icons/fa";
 import {CiAlarmOn} from "react-icons/ci";
-import {PSImageServer} from "@pnnh/atom-react/server";
 import React from "react";
 import {IDomain} from "@/services/common/domain";
 import './card.scss'
 import {channelName, PSArticleModel} from "@/models/common/article";
+import {PSImageServer} from "@/components/server/image";
 
 export function ArticleCard({model, domain}: { model: PSArticleModel, domain: IDomain }) {
     const readUrl = `/content/channels/${channelName(model.channel)}/articles/${model.urn}`
@@ -29,6 +29,5 @@ export function ArticleCard({model, domain}: { model: PSArticleModel, domain: ID
         <div className={'itemCover'}>
             <PSImageServer src={imageUrl} alt={model.title} fill={true}/>
         </div>
-
     </div>
 }

@@ -1,0 +1,21 @@
+.ARButtonText {
+  width: 60px;
+  height: 40px;
+  border-radius: 100px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: green;
+  padding: 4px 8px;
+
+  .content {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  &:hover {
+    opacity: 0.8;
+  }
+
+}
