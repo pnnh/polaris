@@ -18,7 +18,7 @@ export default async function Page({params, searchParams}: {
 }) {
     const domain = serverSigninDomain()
     const pageSize = 64
-    const url = '/channels?' + `page=1&size=${pageSize}`
+    const url = '/articles?' + `page=1&size=${pageSize}`
     const result = await domain.makeGet<PLSelectResult<PSChannelModel>>(url)
 
     if (!result) {
@@ -48,12 +48,12 @@ export default async function Page({params, searchParams}: {
 }
 
 function Item(props: { model: PSChannelModel, domain: IDomain }) {
-    const readUrl = `/content/channels/${props.model.urn}`
+    const readUrl = `/content/articles/${props.model.urn}`
     let imageUrl = '/images/default/channel.webp'
     // 针对特定资产类型的图片，返回拼接的URL以进行资源寻址
     if (props.model.image) {
         // 拼接资源地址，并截取掉前缀
-        imageUrl = props.domain.assetUrl(`/channels/${props.model.urn}/assets/${props.model.image}`)
+        imageUrl = props.domain.assetUrl(`/articles/${props.model.urn}/assets/${props.model.image}`)
     }
 
     return < div className={'item'}>

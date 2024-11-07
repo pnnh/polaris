@@ -1,4 +1,3 @@
-
 import parseURI from "parse-uri"
 import {cookies} from "next/headers";
 import {IDomain} from "@/services/common/domain";
@@ -16,7 +15,7 @@ export class RemoteDomain implements IDomain {
     async makeGet<T>(urlString: string) {
         urlString = this.baseUrl + urlString
 
-        const cookieStore = cookies()
+        const cookieStore = await cookies()
         const authHeader = cookieStore.toString()
 
         const response = await fetch(urlString, {
@@ -33,7 +32,7 @@ export class RemoteDomain implements IDomain {
     async makePost<T>(url: string, params: unknown): Promise<T> {
         url = this.baseUrl + url
 
-        const cookieStore = cookies()
+        const cookieStore = await cookies()
         const authHeader = cookieStore.toString()
 
         const response = await fetch(url, {

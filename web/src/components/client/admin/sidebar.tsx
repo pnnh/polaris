@@ -14,8 +14,7 @@ export function AdminSidebar() {
         </div>
         <div className={styles.sidebarItem}>
             <Link
-                href="/admin/channels"
-            >
+                href="/admin/articles">
                 频道列表
             </Link>
         </div>

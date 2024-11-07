@@ -3,7 +3,7 @@
 import styles from './assets.module.css'
 import React, {useEffect, useState} from "react";
 import {getIcon} from "material-file-icons";
-import {useRecoilState, useRecoilValue} from "recoil"; 
+import {useRecoilState, useRecoilValue} from "recoil";
 import {clientSigninDomain} from "@/services/client/domain";
 import {ClientConfig, useClientConfig} from "@/services/client/config";
 import {IDomain} from "@/services/common/domain";
@@ -11,11 +11,11 @@ import {encodeBase64String} from "@pnnh/atom";
 import {FaAngleRight, FaAngleDown} from "react-icons/fa6";
 import {CommonResult, PLSelectResult} from "@/models/common/common-result";
 import {PSArticleFileModel} from "@/models/common/article";
-import { ArticleAssertPreview } from './preview';
-import { articleAssetsPreviewAtom } from './state';
+import {ArticleAssertPreview} from './preview';
+import {articleAssetsPreviewAtom} from './state';
 
 async function selectFiles(domain: IDomain, channelUrn: string, articleUrn: string, parentPath: string = '') {
-    const assetsUrl = `/channels/${channelUrn}/articles/${articleUrn}/assets?parent=${encodeURIComponent(parentPath)}`
+    const assetsUrl = `/articles/${channelUrn}/articles/${articleUrn}/assets?parent=${encodeURIComponent(parentPath)}`
     return await domain.makeGet<CommonResult<PLSelectResult<PSArticleFileModel>>>(assetsUrl)
 }
 
@@ -101,7 +101,7 @@ function FileGroup({domain, channelUrn, articleUrn, model, level}:
                           }
                           const currentTarget = event.currentTarget as HTMLSpanElement
                           const itemTop = currentTarget.offsetTop - assetsBodyElement.scrollTop - 6 // 大概减去点击元素所在父级的上边距
-                          const assetsUrl = domain.assetUrl(`/channels/${channelUrn}/articles/${articleUrn}/assets`)
+                          const assetsUrl = domain.assetUrl(`/articles/${channelUrn}/articles/${articleUrn}/assets`)
                           setPreviewState({
                               show: previewState.path === model.path ? !previewState.show : true,
                               assetsUrl: assetsUrl,

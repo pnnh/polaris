@@ -7,7 +7,7 @@ export async function UserProfileSelector() {
     const pathname = await getPathname()
 
     const siteLinks = [
-        {name: '哈宝笔记', href: `/`},
+        {name: '加利资源', href: `/`},
     ]
 
     return <>
@@ -34,11 +34,11 @@ export async function UserProfileSelector() {
 
 function ArticleNavbar({pathname}: { pathname: string }) {
     const navLinks = [
-        {name: '频道', href: `/content/channels`},
-        // {name: '分类', href: `/content/categories`},
-        // {name: '标签', href: `/content/tags`},
-        // {name: '留言', href: `/content/comments`},
-        // {name: '关于', href: `/content/about`},
+        {name: '笔记', href: `/content/articles`},
+        {name: '图片', href: `/content/pictures`},
+        {name: '文件', href: `/content/files`},
+        {name: '工具', href: `/content/tools`},
+        {name: '关于', href: `/about`},
     ]
     return <>
         {navLinks.map((link) => {

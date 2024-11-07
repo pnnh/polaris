@@ -13,7 +13,7 @@ export function ArticleRankCard({rankResult}: { rankResult: PLSelectResult<PSArt
             {
                 rankResult && rankResult.range && rankResult.range.length > 0
                     ? rankResult.range.map((model, index) => {
-                        const readUrl = `/content/channels/${model.channel}/articles/${model.urn}`
+                        const readUrl = `/content/articles/${model.channel}/articles/${model.urn}`
                         return <div key={model.urn} className={'rankItem'}>
                             <div
                                 className={'rankIndex' + (index <= 2 ? ' rankTop' : '')}>{index + 1}</div>

@@ -47,7 +47,7 @@ export default async function Page({params, searchParams}: {
         size: 10
     })
     const domain = serverSigninDomain()
-    const rankUrl = `/channels/${baseParams.channel}/articles?${rankQuery}`
+    const rankUrl = `/articles/${baseParams.channel}/articles?${rankQuery}`
     const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)
 
     const selectQuery = {
@@ -58,7 +58,7 @@ export default async function Page({params, searchParams}: {
         channel: channelPk
     }
     const rawQuery = queryString.stringify(selectQuery)
-    const url = `/channels/${baseParams.channel}/articles?${rawQuery}`
+    const url = `/articles/${baseParams.channel}/articles?${rawQuery}`
 
     const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
 

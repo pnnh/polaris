@@ -5,7 +5,7 @@ import {formatRfc3339} from '@pnnh/atom'
 import {Metadata} from 'next'
 import {generatorRandomString} from "@pnnh/atom";
 import {TocItem} from "@pnnh/stele";
-import {serverSigninDomain} from "@/services/server/domain/domain"; 
+import {serverSigninDomain} from "@/services/server/domain/domain";
 import {pageTitle} from "@/utils/page";
 import Image from "next/image";
 import ContentLayout, {templateBodyId} from '@/components/server/content/layout'
@@ -15,9 +15,9 @@ import {GoTop} from "@/components/client/gotop";
 import {CiAlarmOn} from "react-icons/ci";
 import {FaEye} from "react-icons/fa";
 import {PSArticleModel} from "@/models/common/article";
-import { BaseRouterParams } from '@/models/server/router'
-import { useServerTranslation } from '@/services/server/i18n'
-import { ArticleAssets } from './assets'
+import {BaseRouterParams} from '@/models/server/router'
+import {useServerTranslation} from '@/services/server/i18n'
+import {ArticleAssets} from './assets'
 
 export const dynamic = "force-dynamic";
 
@@ -27,10 +27,10 @@ export default async function Home({params, searchParams}: {
 }) {
     const pathname = await getPathname()
     const baseParams = await params;
-    const {t: trans} = await useServerTranslation(baseParams.lang) 
+    const {t: trans} = await useServerTranslation(baseParams.lang)
     const metadata: Metadata = {}
     const domain = serverSigninDomain()
-    const url = `/channels/${baseParams.channel}/articles/${baseParams.article}`
+    const url = `/articles/${baseParams.channel}/articles/${baseParams.article}`
     const model = await domain.makeGet<PSArticleModel | undefined>(url)
 
     if (model == null) {
@@ -47,18 +47,18 @@ export default async function Home({params, searchParams}: {
     tocList.push({title: article.title, header: 0, id: titleId})
     if (!article.body) {
         return <div>暂不支持的文章类型</div>
-    } 
+    }
     const clientIp = await getClientIp()
     // 更新文章阅读次数
     if (clientIp) {
         await domain.makePost(`/articles/${baseParams.article}/viewer`, {clientIp})
     }
-    const readUrl = `/content/channels/${baseParams.channel}/articles/${baseParams.article}`
-    const assetsUrl = domain.assetUrl(`/channels/${baseParams.channel}/articles/${baseParams.article}/assets`)
+    const readUrl = `/content/articles/${baseParams.channel}/articles/${baseParams.article}`
+    const assetsUrl = domain.assetUrl(`/articles/${baseParams.channel}/articles/${baseParams.article}/assets`)
     let imageUrl = '/images/default/cover.png'
     if (model.cover) {
-        imageUrl = domain.assetUrl(`/channels/${model.channel}/articles/${model.urn}/assets/${model.cover}`)
-    } 
+        imageUrl = domain.assetUrl(`/articles/${model.channel}/articles/${model.urn}/assets/${model.cover}`)
+    }
     return <ContentLayout searchParams={await searchParams} pathname={pathname} metadata={metadata} params={baseParams}>
         <div>
             <div className={'articleCover'}>

@@ -114,7 +114,7 @@ export default async function Page({params, searchParams}: {
                         {
                             rankSelectResult.data && rankSelectResult.data.range && rankSelectResult.data.range.length > 0
                                 ? rankSelectResult.data.range.map((model, index) => {
-                                    const readUrl = `/content/channels/${model.channel}/articles/${model.urn}`
+                                    const readUrl = `/content/articles/${model.channel}/articles/${model.urn}`
                                     return <div key={model.urn} className={'rankItem'}>
                                         <div
                                             className={'rankIndex' + (index <= 2 ? ' rankTop' : '')}>{index + 1}</div>
@@ -139,10 +139,10 @@ function MiddleBody({selectResult, domain}: { selectResult: PLSelectResult<PSArt
         return <NoData size='large'/>
     }
     return selectResult.range.map((model) => {
-        const readUrl = `/content/channels/${channelName(model.channel)}/articles/${model.urn}`
+        const readUrl = `/content/articles/${channelName(model.channel)}/articles/${model.urn}`
         let imageUrl = '/images/default.png'
         if (model.cover) {
-            imageUrl = domain.assetUrl(`/channels/${model.channel}/articles/${model.urn}/assets/${model.cover}`)
+            imageUrl = domain.assetUrl(`/articles/${model.channel}/articles/${model.urn}/assets/${model.cover}`)
         }
         return <div className={'middleItem'} key={model.urn}>
             <div className={'itemDetail'}>

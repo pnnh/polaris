@@ -9,10 +9,10 @@ import {channelName, PSArticleModel} from "@/models/common/article";
 import {PSImageServer} from "@/components/server/image";
 
 export function ArticleCard({model, domain}: { model: PSArticleModel, domain: IDomain }) {
-    const readUrl = `/content/channels/${channelName(model.channel)}/articles/${model.urn}`
+    const readUrl = `/content/articles/${channelName(model.channel)}/articles/${model.urn}`
     let imageUrl = '/images/default.png'
     if (model.cover) {
-        imageUrl = domain.assetUrl(`/channels/${model.channel}/articles/${model.urn}/assets/${model.cover}`)
+        imageUrl = domain.assetUrl(`/articles/${model.channel}/articles/${model.urn}/assets/${model.cover}`)
     }
     return <div className={'middleItem'} key={model.urn}>
         <div className={'itemDetail'}>
