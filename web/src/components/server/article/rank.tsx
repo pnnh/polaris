@@ -1,7 +1,8 @@
 import Link from "next/link";
 import React from "react";
-import {PLSelectResult, PSArticleModel} from "@pnnh/polaris-business";
 import './rank.scss'
+import {PLSelectResult} from "@/models/common/common-result";
+import {PSArticleModel} from "@/models/common/article";
 
 export function ArticleRankCard({rankResult}: { rankResult: PLSelectResult<PSArticleModel> }) {
     return <div className={'rankCard'}>

@@ -4,7 +4,6 @@ import {TocInfo} from '@/components/common/toc'
 import {formatRfc3339} from '@pnnh/atom'
 import {Metadata} from 'next'
 import {generatorRandomString} from "@pnnh/atom";
-import {channelName, PSArticleModel} from "@pnnh/polaris-business";
 import {TocItem} from "@pnnh/stele";
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import {ArticleAssets} from "@/app/content/channels/[channel]/articles/[article]/assets";
@@ -17,6 +16,7 @@ import {GoTop} from "@/components/client/gotop";
 import {headers} from "next/headers";
 import {CiAlarmOn} from "react-icons/ci";
 import {FaEye} from "react-icons/fa";
+import {PSArticleModel} from "@/models/common/article";
 
 export const dynamic = "force-dynamic";
 

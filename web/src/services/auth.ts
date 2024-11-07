@@ -1,7 +1,7 @@
 import 'server-only'
-import {SessionModel} from "@pnnh/polaris-business";
 import {serverSigninDomain} from "@/services/server/domain/domain";
-import {AccountModel} from "@pnnh/polaris-business";
+import {SessionModel} from "@/models/common/session";
+import {AccountModel} from "@/models/common/account";
 
 export async function loadSessions2() {
     const sessionList: SessionModel[] = []

@@ -2,8 +2,6 @@
 
 import styles from './assets.module.css'
 import React, {useEffect, useState} from "react";
-import {PSArticleFileModel} from "@pnnh/polaris-business";
-import {CommonResult, PLSelectResult} from "@pnnh/polaris-business";
 import {getIcon} from "material-file-icons";
 import {useRecoilState, useRecoilValue} from "recoil";
 import {articleAssetsPreviewAtom} from "@/app/content/channels/[channel]/articles/[article]/state";
@@ -13,6 +11,8 @@ import {ClientConfig, useClientConfig} from "@/services/client/config";
 import {IDomain} from "@/services/common/domain";
 import {encodeBase64String} from "@pnnh/atom";
 import {FaAngleRight, FaAngleDown} from "react-icons/fa6";
+import {CommonResult, PLSelectResult} from "@/models/common/common-result";
+import {PSArticleFileModel} from "@/models/common/article";
 
 async function selectFiles(domain: IDomain, channelUrn: string, articleUrn: string, parentPath: string = '') {
     const assetsUrl = `/channels/${channelUrn}/articles/${articleUrn}/assets?parent=${encodeURIComponent(parentPath)}`

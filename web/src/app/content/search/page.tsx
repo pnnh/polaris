@@ -4,14 +4,14 @@ import {PaginationServer} from '@pnnh/atom-react/server'
 import {replaceSearchParams} from '@pnnh/atom'
 import queryString from 'query-string'
 import {NoData} from '@pnnh/atom-react'
-import {CommonResult, PLSelectResult} from '@pnnh/polaris-business'
 import {calcPagination} from "@pnnh/atom";
-import {channelName, PSArticleModel} from "@pnnh/polaris-business";
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/services/server/pathname";
 import {IDomain} from "@/services/common/domain";
 import {ArticleCard} from "@/components/server/article/card";
+import {CommonResult, PLSelectResult} from "@/models/common/common-result";
+import {PSArticleModel} from "@/models/common/article";
 
 export const dynamic = "force-dynamic";
 

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import styles from './sidebar.module.scss'
 
-export function ConsoleSidebar() {
+export function AdminSidebar() {
     return <div className={styles.sidebar}>
         <div className={styles.sidebarItem}>
             <Link

@@ -3,7 +3,7 @@
 import React from 'react'
 import './toolbar.scss'
 
-export function Toolbar() {
+export function AdminChannelToolbar() {
     return <div className={'toolbar'}>
         <div>
             <button type={'button'}

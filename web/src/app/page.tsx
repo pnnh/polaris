@@ -7,16 +7,16 @@ import queryString from 'query-string'
 import {NoData} from '@pnnh/atom-react'
 import {PSImageServer} from '@pnnh/atom-react/server'
 import {formatRfc3339} from '@pnnh/atom'
-import {CommonResult, PLSelectResult} from '@pnnh/polaris-business'
 import {calcPagination} from "@pnnh/atom";
 import {STSubString} from "@pnnh/atom";
-import {channelName, PSArticleModel} from "@pnnh/polaris-business";
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/services/server/pathname";
 import {IDomain} from "@/services/common/domain";
 import {FaEye} from "react-icons/fa";
 import {CiAlarmOn} from "react-icons/ci";
+import {CommonResult, PLSelectResult} from "@/models/common/common-result";
+import {channelName, PSArticleModel} from "@/models/common/article";
 
 export const dynamic = "force-dynamic";
 

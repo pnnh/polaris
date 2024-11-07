@@ -1,24 +1,27 @@
 import styles from './page.module.scss'
 import React from 'react'
-import {Toolbar} from './partials/toolbar'
-import {ArticleTable} from './partials/table'
-import {PLSelectResult} from '@pnnh/polaris-business'
-import {PSArticleModel} from "@pnnh/polaris-business";
-import {serverMakeHttpGetV2} from "@/services/server/fetch";
+import {AdminLayout} from "@/components/server/admin/layout";
+import {AdminArticleToolbar} from "@/components/client/admin/articles/toolbar";
+import {AdminArticleTable} from "@/components/client/admin/articles/table";
+import {PLSelectResult} from "@/models/common/common-result";
+import {PSArticleModel} from "@/models/common/article";
 
 export default async function Page({searchParams}: {
     searchParams: Record<string, string>
 }) {
     console.debug('searchParams', searchParams)
     const url = '/admin/articles?' + 'page=1&size=20'
-    const result = await serverMakeHttpGetV2<PLSelectResult<PSArticleModel>>(url)
+    //const result = await serverMakeHttpGetV2<PLSelectResult<PSArticleModel>>(url)
+    const result = {} as PLSelectResult<PSArticleModel>
 
-    return <div>
-        <div className={styles.titleBar}>
-            <Toolbar/>
+    return (<AdminLayout>
+        <div>
+            <div className={styles.titleBar}>
+                <AdminArticleToolbar/>
+            </div>
+            <div className={styles.pageBody}>
+                <AdminArticleTable result={result} search={searchParams}/>
+            </div>
         </div>
-        <div className={styles.pageBody}>
-            <ArticleTable result={result} search={searchParams}/>
-        </div>
-    </div>
+    </AdminLayout>)
 }

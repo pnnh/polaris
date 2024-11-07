@@ -11,7 +11,6 @@
     "@next/third-parties": "^14.2.5",
     "@pnnh/atom": "0.5.0",
     "@pnnh/atom-react": "0.3.0",
-    "@pnnh/polaris-business": "0.1.1",
     "@pnnh/stele": "0.3.0",
     "@scure/base": "^1.1.7",
     "base64url": "^3.0.1",

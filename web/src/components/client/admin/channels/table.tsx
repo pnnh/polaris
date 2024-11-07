@@ -3,10 +3,10 @@
 import {formatRfc3339} from '@pnnh/atom'
 import './table.scss'
 import React from 'react'
-import {PLSelectResult} from '@pnnh/polaris-business'
-import {PSChannelModel} from "@pnnh/polaris-business";
+import {PLSelectResult} from "@/models/common/common-result";
+import {PSChannelModel} from "@/models/common/channel";
 
-export function ChannelTable(props: { data: PLSelectResult<PSChannelModel> }) {
+export function AdminChannelTable(props: { data: PLSelectResult<PSChannelModel> }) {
     return <div>
         <table className={'Table'} aria-label={'simple table'}>
             <thead>

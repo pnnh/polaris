@@ -3,13 +3,13 @@
 import {formatRfc3339} from '@pnnh/atom'
 import './table.scss'
 import React from 'react'
-import {PLSelectResult} from '@pnnh/polaris-business'
 import {PaginationPartial} from '@pnnh/atom-react/client'
 import {replaceSearchParams} from '@pnnh/atom'
 import {calcPagination} from "@pnnh/atom";
-import {channelName, PSArticleModel} from "@pnnh/polaris-business";
+import {PLSelectResult} from "@/models/common/common-result";
+import {channelName, PSArticleModel} from "@/models/common/article";
 
-export function ArticleTable(props: {
+export function AdminArticleTable(props: {
     result: PLSelectResult<PSArticleModel>,
     search: Record<string, string>
 }) {

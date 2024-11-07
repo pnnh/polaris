@@ -3,9 +3,9 @@
 import React from 'react'
 import {useEffect, useState} from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil'
-import {PSNotebookModel} from '@pnnh/polaris-business'
 import './notebook.scss'
 import {libraryAtom, notebookAtom} from "@/services/client/console/providers/notebook";
+import {PSNotebookModel} from "@/models/common/personal/notebook";
 
 export function NotebookList() {
     const libraryState = useRecoilValue(libraryAtom)

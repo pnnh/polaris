@@ -3,7 +3,7 @@
 import React from 'react'
 import './toolbar.scss'
 
-export function Toolbar() {
+export function AdminArticleToolbar() {
     return <div className={'toolbar'}>
         <div className={'toolbarLeft'}>
             <button type={'button'}>删除</button>

@@ -1,13 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
 import {PSImageServer} from '@pnnh/atom-react/server'
-import {PLSelectResult} from '@pnnh/polaris-business'
-import {PSChannelModel} from "@pnnh/polaris-business"
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import ContentLayout from "@/components/server/content/layout";
 import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
 import './page.scss'
+import {PLSelectResult} from "@/models/common/common-result";
+import {PSChannelModel} from "@/models/common/channel";
 
 export default async function Page({params, searchParams}: {
     params: { viewer: string },

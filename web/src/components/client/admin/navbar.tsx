@@ -2,9 +2,9 @@
 
 import styles from './navbar.module.scss'
 import Link from 'next/link'
-import {AccountModel} from "@pnnh/polaris-business";
+import {AccountModel} from "@/models/common/account";
 
-export function ConsoleNavbar(props: { account?: AccountModel }) {
+export function AdminNavbar(props: { account?: AccountModel }) {
     return <div className={styles.navHeader}>
         <div className={styles.leftNav}>
             <Link className={styles.brandLink} href='/'>POLARIS</Link>

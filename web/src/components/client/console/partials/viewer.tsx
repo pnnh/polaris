@@ -4,8 +4,8 @@ import React from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil'
 import {ArticleContainer} from "@/components/client/console/note";
 import './viewer.scss'
-import {PSNoteModel} from "@pnnh/polaris-business";
 import {noteAtom} from "@/services/client/console/providers/notebook";
+import {PSNoteModel} from "@/models/common/personal/note";
 
 export function ArticleEditorArea() {
     const [selectedArticle, setSelectedArticle] = useRecoilState(noteAtom)
