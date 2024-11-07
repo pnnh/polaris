@@ -1,6 +1,6 @@
 
 set(EXE_NAME ${PROJECT_NAME}Server)
-add_executable(polaris-server
+add_executable(${EXE_NAME}
     main.cpp
     process.cpp
     process.h

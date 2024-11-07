@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
 #endif
   spdlog::info("Server {}", "Started");
 
-  constexpr int PORT = 8501;
+  constexpr int PORT = 7501;
 
   return runServer(PORT);
 }

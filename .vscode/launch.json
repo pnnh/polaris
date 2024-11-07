@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "PolarisWeb",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "npm",
+            "cwd": "${workspaceFolder}/web",
+            "runtimeArgs": [
+                "run",
+                "dev"
+            ],
+            "autoAttachChildProcesses": true,
+            "restart": true,
+            "sourceMaps": true,
+            "stopOnEntry": false,
+            "console": "integratedTerminal",
+        },
+        {
+            "name": "PolarisNativeServer",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/linux/server/PolarisNativeServer",
+            "args": [],
+            "cwd": "${workspaceFolder}/server",
+            "preLaunchTask": "PolarisNativeServerBuild",
+            "envFile": "${workspaceFolder}/server/.env.local",
+            "stopAtEntry": false,
+            "linux": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "/usr/bin/gdb"
+            },
+        }
+    ]
+}
