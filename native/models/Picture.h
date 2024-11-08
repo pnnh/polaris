@@ -3,10 +3,12 @@
 #include <string>
 #include <chrono>
 
-namespace polaris {
-    class Article {
+namespace polaris
+{
+    class Picture
+    {
     public:
-        Article(std::string title, std::string content);
+        Picture(std::string title, std::string content);
         std::string getTitle();
         std::string getContent();
         std::string uid;
@@ -16,8 +18,7 @@ namespace polaris {
         std::string body;
         std::string keywords;
         std::string description;
-        std::chrono::system_clock::time_point create_time;
-        std::chrono::system_clock::time_point update_time;
+
     private:
         std::string title;
         std::string content;

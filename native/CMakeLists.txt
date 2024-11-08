@@ -3,8 +3,14 @@ set(LIB_NAME ${PROJECT_NAME})
 set(LIB_SOURCES
         models/Article.cpp
         models/Article.h
+        models/Picture.cpp
+        models/Picture.h
         models/protocol/Exception.cpp
         models/protocol/Exception.h
+        models/Codes.cpp
+        models/Codes.h
+        models/CommonResult.cpp
+        models/CommonResult.h
         utils/md5.cc
         utils/md5.h
         utils/mime.cpp

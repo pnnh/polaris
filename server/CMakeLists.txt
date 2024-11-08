@@ -10,12 +10,6 @@ add_executable(${EXE_NAME}
     controllers/article.h
     controllers/sitemap.cpp
     controllers/sitemap.h
-    models/common_result.cpp
-    models/common_result.h
-    models/codes.cpp
-    models/codes.h
-    models/article.cpp
-    models/article.h
     services/config/appconfig.cpp
     services/config/appconfig.h
         controllers/index.cpp
