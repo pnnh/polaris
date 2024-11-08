@@ -11,6 +11,7 @@ import {BaseRouterParams} from '@/models/server/router';
 import {useServerTranslation} from '@/services/server/i18n';
 import {Metadata} from 'next';
 import {PSImageServer} from "@/components/server/image";
+import {NoData} from "@/components/common/empty";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ viewer: string } & BaseRouterParams>,
@@ -21,8 +22,8 @@ export default async function Page({params, searchParams}: {
     const url = '/articles?' + `page=1&size=${pageSize}`
     const result = await domain.makeGet<PLSelectResult<PSChannelModel>>(url)
 
-    if (!result) {
-        return <div>遇到错误</div>
+    if (!result || !result.data) {
+        return <NoData size={'middle'}/>
     }
     const pathname = await getPathname()
     const baseParams = await params;
@@ -33,12 +34,13 @@ export default async function Page({params, searchParams}: {
         description: trans('codegen.seo.description'),
     }
 
-    return <ContentLayout searchParams={await searchParams} pathname={pathname} metadata={metadata} params={baseParams}>
+    return <ContentLayout lang={baseParams.lang} searchParams={await searchParams} pathname={pathname}
+                          metadata={metadata} params={baseParams}>
         <div className={'container'}>
             <div className={'body'}>
                 <div className={'list'}>
-                    {result.range.map((model) => {
-                        return <Item key={model.urn} model={model} domain={domain}/>
+                    {result.data.range.map((model) => {
+                        return <Item key={model.urn} model={model} domain={domain} lang={baseParams.lang}/>
                     })
                     }
                 </div>
@@ -47,8 +49,8 @@ export default async function Page({params, searchParams}: {
     </ContentLayout>
 }
 
-function Item(props: { model: PSChannelModel, domain: IDomain }) {
-    const readUrl = `/content/articles/${props.model.urn}`
+function Item(props: { model: PSChannelModel, domain: IDomain, lang: string }) {
+    const readUrl = `/${props.lang}/content/articles/${props.model.urn}`
     let imageUrl = '/images/default/channel.webp'
     // 针对特定资产类型的图片，返回拼接的URL以进行资源寻址
     if (props.model.image) {

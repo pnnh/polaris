@@ -50,12 +50,13 @@ export default async function Page({params, searchParams}: {
     const rawQuery = queryString.stringify(selectQuery)
     const url = `/articles?${rawQuery}`
 
-    const selectResult = await domain.makeGet<CommonResult<PLSelectResult<PSArticleModel>>>(url)
+    const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
     if (!selectResult || !selectResult.data) {
         return <NoData size={'large'}/>
     }
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
-    return <ContentLayout searchParams={searchParamsValue} pathname={pathname} metadata={metadata} params={baseParams}>
+    return <ContentLayout lang={baseParams.lang} searchParams={searchParamsValue} pathname={pathname}
+                          metadata={metadata} params={baseParams}>
         <div className={'searchPage'}>
             <div className={'pageContainer'}>
                 搜索关键词: {searchParamsValue.keyword}
@@ -63,7 +64,7 @@ export default async function Page({params, searchParams}: {
             <div className={'contentContainer'}>
                 <div className={'conMiddle'}>
                     <div className={'middleBody'}>
-                        <MiddleBody selectResult={selectResult.data} domain={domain}/>
+                        <MiddleBody selectResult={selectResult} domain={domain}/>
                     </div>
                     <div className={'middlePagination'}>
                         <PaginationServer pagination={pagination}
@@ -76,10 +77,10 @@ export default async function Page({params, searchParams}: {
 }
 
 function MiddleBody({selectResult, domain}: { selectResult: PLSelectResult<PSArticleModel>, domain: IDomain }) {
-    if (!selectResult || !selectResult.range || selectResult.range.length === 0) {
+    if (!selectResult || !selectResult.data || !selectResult.data.range || selectResult.data.range.length === 0) {
         return <NoData size='large'/>
     }
-    return selectResult.range.map((model) => {
+    return selectResult.data.range.map((model) => {
         return <ArticleCard model={model} domain={domain}/>
     })
 }

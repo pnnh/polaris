@@ -16,7 +16,7 @@ import {articleAssetsPreviewAtom} from './state';
 
 async function selectFiles(domain: IDomain, channelUrn: string, articleUrn: string, parentPath: string = '') {
     const assetsUrl = `/articles/${channelUrn}/articles/${articleUrn}/assets?parent=${encodeURIComponent(parentPath)}`
-    return await domain.makeGet<CommonResult<PLSelectResult<PSArticleFileModel>>>(assetsUrl)
+    return await domain.makeGet<PLSelectResult<PSArticleFileModel>>(assetsUrl)
 }
 
 export function ArticleAssets({channelUrn, articleUrn}: { channelUrn: string, articleUrn: string }) {

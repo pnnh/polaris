@@ -6,7 +6,7 @@ import React from 'react'
 import {PLSelectResult} from "@/models/common/common-result";
 import {PSChannelModel} from "@/models/common/channel";
 
-export function AdminChannelTable(props: { data: PLSelectResult<PSChannelModel> }) {
+export function AdminChannelTable({data: selectResult}: { data: PLSelectResult<PSChannelModel> }) {
     return <div>
         <table className={'Table'} aria-label={'simple table'}>
             <thead>
@@ -23,7 +23,7 @@ export function AdminChannelTable(props: { data: PLSelectResult<PSChannelModel> 
             </thead>
             <tbody>
             {
-                props.data.range.map((item, index) => {
+                selectResult.data.range.map((item, index) => {
                     return <ChannelTableRow key={index} model={item}/>
                 })
             }

@@ -62,7 +62,7 @@ export default async function Page({params, searchParams}: {
 
     const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
 
-    const pagination = calcPagination(page, selectResult.count, pageSize)
+    const pagination = calcPagination(page, selectResult.data.count, pageSize)
     const sortClass = (sort: string) => {
         const querySort = (searchParamsValue.sort ?? 'latest')
         return ' ' + (querySort === sort ? 'activeLink' : '')
@@ -71,7 +71,8 @@ export default async function Page({params, searchParams}: {
         const queryFilter = (searchParamsValue.filter ?? 'all')
         return ' ' + (queryFilter === filter ? 'activeLink' : '')
     }
-    return <ContentLayout searchParams={searchParamsValue} pathname={pathname} metadata={metadata} params={baseParams}>
+    return <ContentLayout lang={baseParams.lang} searchParams={searchParamsValue} pathname={pathname}
+                          metadata={metadata} params={baseParams}>
         <div className={'contentContainer'}>
             <div className={'conMiddle'}>
                 <div className={'middleTop'}>
@@ -106,10 +107,10 @@ export default async function Page({params, searchParams}: {
 }
 
 function MiddleBody({selectResult, domain}: { selectResult: PLSelectResult<PSArticleModel>, domain: IDomain }) {
-    if (!selectResult || !selectResult.range || selectResult.range.length === 0) {
+    if (!selectResult || !selectResult.data || !selectResult.data.range || selectResult.data.range.length === 0) {
         return <NoData size='large'/>
     }
-    return selectResult.range.map((model) => {
+    return selectResult.data.range.map((model) => {
         return <ArticleCard key={model.urn} model={model} domain={domain}/>
     })
 }

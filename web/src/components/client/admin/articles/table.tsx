@@ -8,13 +8,17 @@ import {calcPagination} from "@pnnh/atom";
 import {PLSelectResult} from "@/models/common/common-result";
 import {channelName, PSArticleModel} from "@/models/common/article";
 import {PaginationPartial} from "@/components/common/pagination";
+import {NoData} from "@/components/common/empty";
 
 export function AdminArticleTable(props: {
     result: PLSelectResult<PSArticleModel>,
     search: Record<string, string>
 }) {
     const result = props.result
-    const pagination = calcPagination(result.page, result.count, result.size)
+    if (!result || !result.data || !result.data.range) {
+        return <NoData size={'middle'}/>
+    }
+    const pagination = calcPagination(result.data.page, result.data.count, result.data.size)
     return <>
         <div className={'tableContainer'}>
             <table className={'articleTable'}>
@@ -32,11 +36,10 @@ export function AdminArticleTable(props: {
                 </thead>
                 <tbody>
                 {
-                    props.result.range.map((item, index) => {
+                    props.result.data.range.map((item, index) => {
                         return <ArticleTableRow key={index} model={item}/>
                     })
                 }
-
                 </tbody>
             </table>
         </div>

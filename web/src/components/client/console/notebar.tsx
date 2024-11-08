@@ -22,12 +22,12 @@ export function ConsoleNotebar() {
         // })
     }, [notebookState])
 
-    if (!notesResult || !notesResult.range || notesResult.range.length <= 0) {
+    if (!notesResult || !notesResult.data || !notesResult.data.range || notesResult.data.range.length <= 0) {
         return <div>Empty</div>
     }
     return <div className={'noteList'}>
         {
-            notesResult.range.map(item => {
+            notesResult.data.range.map(item => {
                 return <NoteCard key={item.urn} item={item}/>
             })
         }

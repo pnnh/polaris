@@ -21,7 +21,8 @@ export default async function Page({params, searchParams}: {
         keywords: trans('codegen.seo.keywords'),
         description: trans('codegen.seo.description'),
     }
-    return <ContentLayout searchParams={searchParamsValue} pathname={pathname} metadata={metadata} params={baseParams}>
+    return <ContentLayout lang={baseParams.lang} searchParams={searchParamsValue} pathname={pathname}
+                          metadata={metadata} params={baseParams}>
         <div className={'aboutContainer'}>
             文件页面
         </div>

@@ -1,10 +1,10 @@
 import styles from './page.module.scss'
 import React from 'react'
 import {AdminLayout} from "@/components/server/admin/layout";
-import {AdminChannelToolbar} from "@/components/client/admin/articles/toolbar";
-import {AdminChannelTable} from "@/components/client/admin/articles/table";
 import {PLSelectResult} from "@/models/common/common-result";
 import {PSChannelModel} from "@/models/common/channel";
+import {AdminChannelToolbar} from "@/components/client/admin/channels/toolbar";
+import {AdminChannelTable} from "@/components/client/admin/channels/table";
 
 export default async function Page() {
     const url = '/admin/articles/?' + 'page=1&size=20'

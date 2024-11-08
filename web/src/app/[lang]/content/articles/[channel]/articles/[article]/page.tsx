@@ -53,13 +53,14 @@ export default async function Home({params, searchParams}: {
     if (clientIp) {
         await domain.makePost(`/articles/${baseParams.article}/viewer`, {clientIp})
     }
-    const readUrl = `/content/articles/${baseParams.channel}/articles/${baseParams.article}`
+    const readUrl = `/${baseParams.lang}/content/articles/${baseParams.channel}/articles/${baseParams.article}`
     const assetsUrl = domain.assetUrl(`/articles/${baseParams.channel}/articles/${baseParams.article}/assets`)
     let imageUrl = '/images/default/cover.png'
     if (model.cover) {
         imageUrl = domain.assetUrl(`/articles/${model.channel}/articles/${model.urn}/assets/${model.cover}`)
     }
-    return <ContentLayout searchParams={await searchParams} pathname={pathname} metadata={metadata} params={baseParams}>
+    return <ContentLayout lang={baseParams.lang} searchParams={await searchParams} pathname={pathname}
+                          metadata={metadata} params={baseParams}>
         <div>
             <div className={'articleCover'}>
                 <Image className={'coverImage'} src={imageUrl} alt={'cover'} fill={true}/>

@@ -1,5 +1,5 @@
 import React, {CSSProperties} from "react";
-import styles from './profile.module.css'
+import './profile.scss'
 import Link from "next/link";
 import {getPathname} from "@/services/server/pathname";
 
@@ -11,7 +11,7 @@ export async function UserProfileSelector() {
     ]
 
     return <>
-        <div className={styles.roleButtonContainer}>
+        <div className={'roleButtonContainer'}>
             {
                 siteLinks.map((link) => {
                     let style: CSSProperties = {}
@@ -20,7 +20,7 @@ export async function UserProfileSelector() {
                             color: '#4A95DD',
                         }
                     }
-                    return <Link key={link.name} className={styles.siteLink} style={style} href={link
+                    return <Link key={link.name} className={'siteLink'} style={style} href={link
                         .href}>{link.name}</Link>
                 })
             }
@@ -37,7 +37,7 @@ function ArticleNavbar({pathname}: { pathname: string }) {
         {name: '笔记', href: `/content/articles`},
         {name: '图片', href: `/content/pictures`},
         {name: '文件', href: `/content/files`},
-        {name: '工具', href: `/content/tools`},
+        {name: '工具', href: `/tools`},
         {name: '关于', href: `/about`},
     ]
     return <>
@@ -48,7 +48,7 @@ function ArticleNavbar({pathname}: { pathname: string }) {
                     color: '#4A95DD',
                 }
             }
-            return <Link key={link.name} className={styles.navLink} style={style} href={link.href}>{link.name}</Link>
+            return <Link key={link.name} className={'navLink'} style={style} href={link.href}>{link.name}</Link>
         })}
     </>
 }

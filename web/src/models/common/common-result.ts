@@ -4,32 +4,9 @@ export const CodeBadRequest = 400
 export const CodeNotFound = 404
 export const CodeUnauthorized = 401
 
-export interface PLInsertResult {
-    pk: string
-    changes: number
-}
-
-export interface PLDeleteResult {
-    pk: string
-    changes: number
-}
-
-export interface PLUpdateResult {
-    pk: string
-    changes: number
-}
-
 export interface PLBizError extends Error {
     code: number
     message: string
-}
-
-export function NewBizError(code: number, message: string): Error {
-    const fullMessage = JSON.stringify({
-        code,
-        message
-    })
-    return new Error(fullMessage)
 }
 
 export function PLParseBizError(error: Error) {
@@ -43,27 +20,14 @@ export function PLParseBizError(error: Error) {
     }
 }
 
-export function plAssertBizError(error: Error) {
-    if (error) {
-        throw new Error(error.toString())
-    }
-}
-
-export interface PLSelectResult<T> {
+export interface PLSelectData<T> {
     page: number
     size: number
     count: number
     range: T[]
 }
 
-export function emptySelectResult<T>(): PLSelectResult<T> {
-    return {
-        page: 0,
-        size: 0,
-        count: 0,
-        range: []
-    }
-}
+export type PLSelectResult<T> = CommonResult<PLSelectData<T>>
 
 export class CommonResult<T> {
     code = 0

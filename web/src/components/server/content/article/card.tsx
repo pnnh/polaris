@@ -8,8 +8,8 @@ import './card.scss'
 import {channelName, PSArticleModel} from "@/models/common/article";
 import {PSImageServer} from "@/components/server/image";
 
-export function ArticleCard({model, domain}: { model: PSArticleModel, domain: IDomain }) {
-    const readUrl = `/content/articles/${channelName(model.channel)}/articles/${model.urn}`
+export function ArticleCard({model, domain, lang}: { model: PSArticleModel, domain: IDomain, lang: string }) {
+    const readUrl = `/${lang}/content/articles/${channelName(model.channel)}/articles/${model.urn}`
     let imageUrl = '/images/default.png'
     if (model.cover) {
         imageUrl = domain.assetUrl(`/articles/${model.channel}/articles/${model.urn}/assets/${model.cover}`)

@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 export async function GET(request: NextRequest) {
     const domain = serverSigninDomain()
     const url = `/articles?` + `page=1&size=${100}`
-    const result = await domain.makeGet<CommonResult<PLSelectResult<PSArticleModel>>>(url)
+    const result = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
     const serverConfig = useServerConfig()
     const selfUrl = serverConfig.NEXT_PUBLIC_SELF_URL
     let links: SitemapItemLoose[] = []

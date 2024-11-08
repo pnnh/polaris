@@ -53,7 +53,7 @@ export default async function Page({params, searchParams}: {
     })
     const domain = serverSigninDomain()
     const rankUrl = `/articles?${rankQuery}`
-    const rankSelectResult = await domain.makeGet<CommonResult<PLSelectResult<PSArticleModel>>>(rankUrl)
+    const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)
 
     const selectQuery = {
         sort: searchParamsValue.sort,
@@ -65,8 +65,8 @@ export default async function Page({params, searchParams}: {
     const rawQuery = queryString.stringify(selectQuery)
     const url = `/articles?${rawQuery}`
 
-    const selectResult = await domain.makeGet<CommonResult<PLSelectResult<PSArticleModel>>>(url)
-    if (!selectResult || !selectResult.data) {
+    const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
+    if (!selectResult || !selectResult.data || !selectResult.data.range) {
         return <NoData size={'large'}/>
     }
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
@@ -78,7 +78,8 @@ export default async function Page({params, searchParams}: {
         const queryFilter = (searchParamsValue.filter ?? 'all')
         return ' ' + (queryFilter === filter ? ' activeLink' : '')
     }
-    return <ContentLayout searchParams={searchParamsValue} pathname={pathname} metadata={metadata} params={baseParams}>
+    return <ContentLayout lang={baseParams.lang} searchParams={searchParamsValue} pathname={pathname}
+                          metadata={metadata} params={baseParams}>
         <div className={'contentContainer'}>
             <div className={'conMiddle'}>
                 <div className={'middleTop'}>
@@ -98,7 +99,7 @@ export default async function Page({params, searchParams}: {
                     </div>
                 </div>
                 <div className={'middleBody'}>
-                    <MiddleBody selectResult={selectResult.data} domain={domain}/>
+                    <MiddleBody selectResult={selectResult} domain={domain} lang={baseParams.lang}/>
                 </div>
                 <div className={'middlePagination'}>
                     <PaginationServer pagination={pagination}
@@ -114,7 +115,7 @@ export default async function Page({params, searchParams}: {
                         {
                             rankSelectResult.data && rankSelectResult.data.range && rankSelectResult.data.range.length > 0
                                 ? rankSelectResult.data.range.map((model, index) => {
-                                    const readUrl = `/content/articles/${model.channel}/articles/${model.urn}`
+                                    const readUrl = `/${baseParams.lang}/content/articles/${model.channel}/articles/${model.urn}`
                                     return <div key={model.urn} className={'rankItem'}>
                                         <div
                                             className={'rankIndex' + (index <= 2 ? ' rankTop' : '')}>{index + 1}</div>
@@ -134,12 +135,14 @@ export default async function Page({params, searchParams}: {
     </ContentLayout>
 }
 
-function MiddleBody({selectResult, domain}: { selectResult: PLSelectResult<PSArticleModel>, domain: IDomain }) {
-    if (!selectResult || !selectResult.range || selectResult.range.length === 0) {
+function MiddleBody({selectResult, domain, lang}: {
+    selectResult: PLSelectResult<PSArticleModel>, domain: IDomain, lang: string
+}) {
+    if (!selectResult || !selectResult.data || !selectResult.data.range || selectResult.data.range.length === 0) {
         return <NoData size='large'/>
     }
-    return selectResult.range.map((model) => {
-        const readUrl = `/content/articles/${channelName(model.channel)}/articles/${model.urn}`
+    return selectResult.data.range.map((model) => {
+        const readUrl = `/${lang}/content/articles/${channelName(model.channel)}/articles/${model.urn}`
         let imageUrl = '/images/default.png'
         if (model.cover) {
             imageUrl = domain.assetUrl(`/articles/${model.channel}/articles/${model.urn}/assets/${model.cover}`)
