@@ -11,6 +11,6 @@
   </metadata>
   <files>
     <file src="..\..\_build\x64\Release\SimpleMathProjection\bin\SimpleMathProjection.dll" target="lib\net8.0-windows10.0.26100.0\SimpleMathProjection.dll" />
-    <file src="..\..\_build\x64\Release\SimpleMathComponent\bin\SimpleMathComponent\SimpleMathComponent.dll" target="runtimes\win10-x64\native\SimpleMathComponent.dll" />
+    <file src="..\..\_build\x64\Release\SimpleMathComponent\bin\SimpleMathComponent\SimpleMathComponent.dll" target="runtimes\win-x64\native\SimpleMathComponent.dll" />
   </files>
 </package>

@@ -2,10 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
-    <!-- Set Platform to AnyCPU to allow consumption of the projection assembly from any architecture. -->
-    <Platform>AnyCPU</Platform>
-    <!-- Workaround for MSB3271 error on processor architecture mismatch -->
+    <TargetPlatformMinVersion>10.0.26100.0</TargetPlatformMinVersion>
+    <Platform>x64</Platform>
     <ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>None</ResolveAssemblyWarnOrErrorOnTargetArchitectureMismatch>
     <Platforms>x64</Platforms>
   </PropertyGroup>
