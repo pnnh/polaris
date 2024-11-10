@@ -3,8 +3,8 @@ set(LIB_NAME ${PROJECT_NAME})
 set(LIB_SOURCES
         models/articles/Article.cpp
         models/articles/Article.h
-        models/articles/channel.cpp
-        models/articles/channel.h
+        models/articles/Channel.cpp
+        models/articles/Channel.h
         models/pictures/Picture.cpp
         models/pictures/Picture.h
         models/files/File.cpp

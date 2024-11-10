@@ -15,15 +15,11 @@
     },
     {
       "name": "folly",
-      "platform": "linux&arm64"
-    },
-    {
-      "name": "qtbase",
-      "platform": "linux&x64"
+      "platform": "linux"
     },
     {
       "name": "workflow",
-      "platform": "linux&arm64"
+      "platform": "linux"
     },
     {
       "name": "boost",
@@ -36,7 +32,8 @@
       "name": "nlohmann-json"
     },
     {
-      "name": "cmark"
+      "name": "cmark",
+      "version>=": "0.31.1"
     },
     {
       "name": "sqlite3"
@@ -60,6 +57,10 @@
     {
       "name": "boost",
       "version": "1.86.0"
+    },
+    {
+      "name": "boost",
+      "version": "0.31.1"
     }
   ]
 }

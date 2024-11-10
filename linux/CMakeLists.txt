@@ -18,65 +18,17 @@ find_package(
         ShaderTools
         REQUIRED)
 
-qt_policy(SET QTP0001 NEW)
-
-set(APP_NAME ${PROJECT_NAME})
+set(APP_NAME ${PROJECT_NAME}Linux)
 set(APP_SOURCES
         main.cpp
         models/LibraryModel.cpp
         models/LibraryModel.h
         models/ImageModel.cpp
         models/ImageModel.h
-        native/services/sqlite/SqliteService.cpp
-        native/services/sqlite/SqliteService.h
-        native/services/sqlite/MarkdownService.cpp
-        native/services/sqlite/MarkdownService.h
-        tests/tests.h
-        tests/tests.cpp
-        native/services/sqlite/UserService.cpp
-        native/services/sqlite/UserService.h
-        native/services/sqlite/SyncService.cpp
-        native/services/sqlite/SyncService.h
-        native/services/sqlite/imageservice.cpp
-        native/services/sqlite/imageservice.h
-        native/services/sqlite/LibraryService.cpp
-        native/services/sqlite/LibraryService.h
-        native/services/sqlite/FolderService.h
-        native/services/sqlite/FolderService.cpp
         threads/SyncThread.cpp
-        threads/SyncThread.h
-        utils/base32.cpp
-        utils/base32.h
-        utils/mime.h
-        utils/mime.cpp)
+        threads/SyncThread.h)
 
-if (APPLE)
-    # list(APPEND APPLICATION_LIBRARIES "-framework AppKit") list(APPEND
-    # APPLICATION_SOURCES macos/macwindow.h macos/macwindow.mm macos/objc_code.mm
-    # macos/objc_code.h macos/WindowController.mm macos/WindowController.h)
-
-    set(MACOSX_BUNDLE_GUI_IDENTIFIER ${IDENTIFIER})
-    set(MACOSX_BUNDLE_BUNDLE_NAME ${PROJECT_NAME})
-    set(MACOSX_BUNDLE_COPYRIGHT ${COPYRIGHT})
-    set(MACOSX_BUNDLE_SHORT_VERSION_STRING ${spectral_VERSION})
-    set(MACOSX_BUNDLE_BUNDLE_VERSION ${spectral_VERSION})
-    set(ICON_NAME "icon.icns")
-    set(APP_MAC_ICON "${PROJECT_SOURCE_DIR}/content/assets/macos/${ICON_NAME}")
-    list(APPEND APP_SOURCES ${APP_MAC_ICON})
-    set(MACOSX_BUNDLE_ICON_FILE ${ICON_NAME})
-    set_property(SOURCE "${APP_MAC_ICON}" PROPERTY MACOSX_PACKAGE_LOCATION
-            Resources)
-endif ()
-
-qt6_add_executable(${APP_NAME} WIN32 MACOSX_BUNDLE MANUAL_FINALIZATION
-        ${APP_SOURCES})
-
-if (APPLE)
-    set_target_properties(
-            ${APP_NAME}
-            PROPERTIES MACOSX_BUNDLE_INFO_PLIST
-            "${PROJECT_SOURCE_DIR}/content/assets/macos/Info.plist.in")
-endif ()
+qt6_add_executable(${APP_NAME} WIN32 MACOSX_BUNDLE MANUAL_FINALIZATION ${APP_SOURCES})
 
 # 查找并引用日志库
 find_package(spdlog CONFIG REQUIRED)
@@ -84,7 +36,7 @@ target_link_libraries(${APP_NAME} PRIVATE spdlog::spdlog)
 
 # 查找并引用Markdown解析库
 find_package(cmark CONFIG REQUIRED)
-target_link_libraries(${APP_NAME} PRIVATE cmark::cmark_static)
+target_link_libraries(${APP_NAME} PRIVATE cmark::cmark)
 
 # 查找并引用Sqlite解析库
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
