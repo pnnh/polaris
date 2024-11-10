@@ -1,16 +1,28 @@
 
 set(LIB_NAME ${PROJECT_NAME})
 set(LIB_SOURCES
-        models/Article.cpp
-        models/Article.h
-        models/Picture.cpp
-        models/Picture.h
+        models/articles/Article.cpp
+        models/articles/Article.h
+        models/articles/channel.cpp
+        models/articles/channel.h
+        models/pictures/Picture.cpp
+        models/pictures/Picture.h
+        models/files/File.cpp
+        models/files/File.h
         models/protocol/Exception.cpp
         models/protocol/Exception.h
-        models/Codes.cpp
-        models/Codes.h
-        models/CommonResult.cpp
-        models/CommonResult.h
+        models/protocol/Codes.cpp
+        models/protocol/Codes.h
+        models/protocol/CommonResult.cpp
+        models/protocol/CommonResult.h
+        business/articles/article.cpp
+        business/articles/article.h
+        business/articles/channel.cpp
+        business/articles/channel.h
+        business/pictures/picture.cpp
+        business/pictures/picture.h
+        business/pictures/channel.cpp
+        business/pictures/channel.h
         utils/md5.cc
         utils/md5.h
         utils/mime.cpp
@@ -32,7 +44,9 @@ set(LIB_SOURCES
         services/sqlite/SqliteColumn.cpp
         services/sqlite/SqliteColumn.h
         services/sqlite/SqliteService.cpp
-        services/sqlite/SqliteService.h)
+        services/sqlite/SqliteService.h
+        services/filesystem/filesystem.cpp
+        services/filesystem/filesystem.h)
 
 add_library(${LIB_NAME} ${LIB_SOURCES})
 
