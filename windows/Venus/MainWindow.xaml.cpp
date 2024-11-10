@@ -7,6 +7,7 @@
 #include "ImageFileInfo.h"
 #include <algorithm>
 #include "windows/Native/logger/logger.h"
+#include <tchar.h>
 
 namespace winrt
 {
@@ -49,15 +50,6 @@ namespace winrt::Venus::implementation
 
     IAsyncOperation<Venus::ImageFileInfo> MainWindow::LoadImageInfoAsync(StorageFile file)
     {
-        //auto sink = std::make_shared<spdlog::sinks::msvc_sink_mt>();
-        //auto logger = std::make_shared<spdlog::logger>("msvc_logger", sink);
-        //logger->critical("Use output to view this message.");
-
-        //// 以下日志不会输出到Output窗口
-        //spdlog::debug("i love c++1");
-        //spdlog::info("i love c++2");
-        //spdlog::error("i love c++3");
-
 		native::Logger::log("i love c++1"); 
 
         auto properties = co_await file.Properties().GetImagePropertiesAsync();
