@@ -4,12 +4,11 @@
 #include <ctime>
 #include <sstream>
 
-#include <iconv.h>
-#include <sys/stat.h>
-#include <unistd.h>
+// #include <iconv.h>
+// #include <sys/stat.h>
+// #include <unistd.h>
 
-std::string WString2String(const std::wstring &wstr)
-{
+std::string WString2String(const std::wstring &wstr) {
     setlocale(LC_ALL, "en_US.UTF-8");
     const wchar_t *wchSrc = wstr.c_str();
     size_t nWStr = wcstombs(NULL, wchSrc, 0) + 1;
@@ -22,8 +21,7 @@ std::string WString2String(const std::wstring &wstr)
     return strRes;
 }
 
-std::wstring String2WString(const std::string &str)
-{
+std::wstring String2WString(const std::string &str) {
     std::string strUtf8 = str;
     setlocale(LC_ALL, "en_US.UTF-8");
     const char *chSrc = strUtf8.c_str();
@@ -36,8 +34,7 @@ std::wstring String2WString(const std::string &str)
     return wStrRes;
 }
 
-std::chrono::system_clock::time_point ParseDate(const std::wstring &dateText, const wchar_t *const format)
-{
+std::chrono::system_clock::time_point ParseDate(const std::wstring &dateText, const wchar_t *const format) {
     boost::posix_time::ptime time;
     std::wstringstream buffer(dateText);
     buffer.imbue(std::locale(std::locale::classic(), new boost::posix_time::wtime_input_facet(format)));
@@ -47,8 +44,7 @@ std::chrono::system_clock::time_point ParseDate(const std::wstring &dateText, co
     return result;
 }
 
-std::chrono::system_clock::time_point makeTimePoint(const std::string &time_string)
-{
+std::chrono::system_clock::time_point makeTimePoint(const std::string &time_string) {
     // using namespace boost::posix_time;
     // using namespace std::chrono;
 
@@ -65,8 +61,7 @@ std::chrono::system_clock::time_point makeTimePoint(const std::string &time_stri
     return timePoint;
 }
 
-std::string formatTime(const std::chrono::system_clock::time_point &time_point)
-{
+std::string formatTime(const std::chrono::system_clock::time_point &time_point) {
     std::time_t now = std::chrono::system_clock::to_time_t(time_point);
 
     char mbstr[100];

@@ -6,6 +6,7 @@
 
 #include "ImageFileInfo.h"
 #include <algorithm>
+#include "windows/Native/logger/logger.h"
 
 namespace winrt
 {
@@ -56,6 +57,9 @@ namespace winrt::Venus::implementation
         //spdlog::debug("i love c++1");
         //spdlog::info("i love c++2");
         //spdlog::error("i love c++3");
+
+		native::Logger::log("i love c++1"); 
+
         auto properties = co_await file.Properties().GetImagePropertiesAsync();
         Venus::ImageFileInfo info(properties,
             file, file.DisplayName(), file.DisplayType());

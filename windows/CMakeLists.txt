@@ -1,7 +1,7 @@
 
 set(LIB_BASE ${PROJECT_NAME})
 
-set(LIB_NAME PolarisWindows)
+set(LIB_NAME ${PROJECT_NAME}Windows)
 set(LIB_SOURCES
         Native/logger/logger.h
         Native/logger/logger.cpp)
