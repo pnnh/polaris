@@ -12,6 +12,7 @@ namespace native::models::articles
 
         std::string URN;
         std::string Name;
+        std::string Title;
         std::string Keywords;
         std::string Description;
         std::chrono::system_clock::time_point CreateTime;

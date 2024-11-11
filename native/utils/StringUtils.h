@@ -13,5 +13,6 @@ namespace native::utils
         static bool IsBlank(const std::string& str);
         static bool StartsWith(const std::string& str, const std::string& prefix);
         static bool EndsWith(const std::string& str, const std::string& suffix);
+        static std::vector<std::string> Split(const std::string& str, char delimiter);
     };
 }

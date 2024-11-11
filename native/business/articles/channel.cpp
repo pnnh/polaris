@@ -7,8 +7,10 @@
 #include <string>
 #include <iostream>
 #include "native/models/protocol/Exception.h"
+#include "native/services/filesystem/filesystem.h"
 #include "native/services/sqlite/SqliteService.h"
 #include "native/services/logger/logger.h"
+#include "native/services/yaml/yaml.h"
 #include "native/utils/StringUtils.h"
 
 namespace models = native::models;
@@ -44,10 +46,16 @@ business::articles::ChannelServerBusiness::selectChannels() const
         {
             continue;
         }
-        channels->emplace_back(ptr->d_name);
+        auto channelModel = models::articles::PSChannelModel(ptr->d_name);
+        auto metadataFilePath = services::filesystem::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
+        if (services::filesystem::IsFileExist(metadataFilePath))
+        {
+            auto yamlHandler = services::yaml::YamlHandler(metadataFilePath);
+            channelModel.Title = yamlHandler.getString("metadata.title").value_or(ptr->d_name);
+        }
+        channels->emplace_back(channelModel);
     }
     closedir(pDir);
-
 
     return channels;
 }

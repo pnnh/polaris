@@ -1,6 +1,7 @@
 #include "StringUtils.h"
 
 #include <algorithm>
+#include <sstream>
 
 template <typename... Args>
 std::string native::utils::StringUtils::DynamicPrint(std::string_view rt_fmt_str, Args&&... args)
@@ -21,4 +22,16 @@ bool native::utils::StringUtils::StartsWith(const std::string& str, const std::s
 bool native::utils::StringUtils::EndsWith(const std::string& str, const std::string& suffix)
 {
     return str.size() >= suffix.size() && str.compare(str.size() - suffix.size(), suffix.size(), suffix) == 0;
+}
+
+std::vector<std::string> native::utils::StringUtils::Split(const std::string& str, char delimiter)
+{
+    std::vector<std::string> stringList;
+    std::istringstream iss(str);
+    std::string s;
+    while (getline(iss, s, delimiter))
+    {
+        stringList.push_back(s);
+    }
+    return stringList;
 }

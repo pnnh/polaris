@@ -29,6 +29,10 @@
       "name": "inja"
     },
     {
+      "name": "yaml-cpp",
+      "version>=": "0.8.0"
+    },
+    {
       "name": "nlohmann-json"
     },
     {

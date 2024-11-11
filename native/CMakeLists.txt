@@ -48,7 +48,9 @@ set(LIB_SOURCES
         services/filesystem/filesystem.cpp
         services/filesystem/filesystem.h
         services/logger/logger.cpp
-        services/logger/logger.h)
+        services/logger/logger.h
+        services/yaml/yaml.cpp
+        services/yaml/yaml.h)
 
 add_library(${LIB_NAME} ${LIB_SOURCES})
 
@@ -72,6 +74,10 @@ target_link_libraries(${LIB_NAME} PRIVATE unofficial::sqlite3::sqlite3)
 # 查找并引用CryptoPP解析库
 find_package(cryptopp CONFIG REQUIRED)
 target_link_libraries(${LIB_NAME} PRIVATE cryptopp::cryptopp)
+
+# 查找并引用yaml-cpp解析库
+find_package(yaml-cpp CONFIG REQUIRED)
+target_link_libraries(${LIB_NAME} PRIVATE yaml-cpp::yaml-cpp)
 
 install(TARGETS ${LIB_NAME}
         BUNDLE DESTINATION .
