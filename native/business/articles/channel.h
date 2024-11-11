@@ -5,6 +5,8 @@
 
 namespace native::business::articles
 {
+    bool isChannelDirectory(const std::string& directoryName);
+
     class ChannelServerBusiness
     {
     public:

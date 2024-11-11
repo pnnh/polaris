@@ -9,6 +9,7 @@
 #include "native/models/protocol/Exception.h"
 #include "native/services/sqlite/SqliteService.h"
 #include "native/services/logger/logger.h"
+#include "native/utils/StringUtils.h"
 
 namespace models = native::models;
 namespace business = native::business;
@@ -33,13 +34,26 @@ business::articles::ChannelServerBusiness::selectChannels() const
     }
     while ((ptr = readdir(pDir)) != nullptr)
     {
-        if (strcmp(ptr->d_name, ".") != 0 && strcmp(ptr->d_name, "..") != 0)
+        if (strcmp(ptr->d_name, ".") == 0 || strcmp(ptr->d_name, "..") == 0 || ptr->d_type != DT_DIR)
         {
-            channels->emplace_back(ptr->d_name);
+            continue;
         }
+        auto dirName = std::string(ptr->d_name);
+
+        if (!isChannelDirectory(dirName))
+        {
+            continue;
+        }
+        channels->emplace_back(ptr->d_name);
     }
     closedir(pDir);
 
 
     return channels;
+}
+
+bool business::articles::isChannelDirectory(const std::string& directoryName)
+{
+    return utils::StringUtils::EndsWith(directoryName, ".chan") || utils::StringUtils::EndsWith(
+        directoryName, ".channel") || utils::StringUtils::EndsWith(directoryName, ".notechannel");
 }
