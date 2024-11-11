@@ -1,9 +1,8 @@
 #include <iostream>
 
-namespace polaris::native::examples {
+namespace native::examples::sqlite
+{
     int TestSqliteVersion();
 
     int TestSqliteSelect();
-
-    int TestHelloWorld();
 }

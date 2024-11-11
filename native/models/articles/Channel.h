@@ -2,21 +2,19 @@
 #include <string>
 #include <chrono>
 
-namespace polaris::models::articles {
-    class PSChannelModel {
+namespace native::models::articles
+{
+    class PSChannelModel
+    {
     public:
-        PSChannelModel(std::string title, std::string content);
+        explicit PSChannelModel();
+        explicit PSChannelModel(const std::string&& name);
 
-        std::string getTitle();
-
-        std::string getContent();
-
-        std::string uid;
-        long nid;
-        std::string title;
-        std::string keywords;
-        std::string description;
-        std::chrono::system_clock::time_point create_time;
-        std::chrono::system_clock::time_point update_time;
+        std::string URN;
+        std::string Name;
+        std::string Keywords;
+        std::string Description;
+        std::chrono::system_clock::time_point CreateTime;
+        std::chrono::system_clock::time_point UpdateTime;
     };
 }

@@ -3,26 +3,27 @@
 
 #include "native/models/articles/Channel.h"
 
-namespace polaris::native::business::ChannelBusiness {
-    class ChannelServerBusiness {
+namespace native::business::articles
+{
+    class ChannelServerBusiness
+    {
     public:
-        ChannelServerBusiness();
+        explicit ChannelServerBusiness(const std::string& baseUrl);
 
-        ~ChannelServerBusiness();
-
-        std::shared_ptr<std::vector<models::articles::PSChannelModel> > selectChannels();
+        [[nodiscard]] std::shared_ptr<std::vector<models::articles::PSChannelModel>> selectChannels() const;
 
     private:
         std::string baseUrl;
     };
 
-    class ChannelClientBusiness {
+    class ChannelClientBusiness
+    {
     public:
         ChannelClientBusiness();
 
         ~ChannelClientBusiness();
 
-        std::shared_ptr<std::vector<models::articles::PSChannelModel> > selectChannels();
+        std::shared_ptr<std::vector<models::articles::PSChannelModel>> selectChannels();
     };
 }
 

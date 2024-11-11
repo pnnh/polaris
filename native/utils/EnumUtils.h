@@ -2,7 +2,7 @@
 
 #include <type_traits>
 
-namespace polaris::native::utils
+namespace native::utils
 {
     class EnumUtils
     {

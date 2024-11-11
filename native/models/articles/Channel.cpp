@@ -1,5 +1,9 @@
-//
-// Created by linya on 11/10/2024.
-//
-
 #include "Channel.h"
+
+namespace articles = native::models::articles;
+
+articles::PSChannelModel::PSChannelModel() = default;
+
+articles::PSChannelModel::PSChannelModel(const std::string&& name): Name(name)
+{
+}

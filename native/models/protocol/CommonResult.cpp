@@ -1,2 +1,2 @@
 
-#include "../CommonResult.h"
+#include "CommonResult.h"

@@ -1,11 +1,11 @@
 #include <iostream>
 #include "native/services/sqlite/SqliteService.h"
-#include "cases.h"
+#include "sqlite.h"
 
-int polaris::native::examples::TestSqliteVersion()
+int native::examples::sqlite::TestSqliteVersion()
 {
     auto database_path = "polaris.sqlite";
-    auto sqliteService = polaris::native::services::sqlite::SqliteService();
+    auto sqliteService = native::services::sqlite::SqliteService();
     auto dbHandle = sqliteService.openDatabase(database_path);
     auto version = sqliteService.sqliteVersion(dbHandle);
 
@@ -13,10 +13,10 @@ int polaris::native::examples::TestSqliteVersion()
     return (int)version.starts_with("3.");
 }
 
-int polaris::native::examples::TestSqliteSelect()
+int native::examples::sqlite::TestSqliteSelect()
 {
     auto database_path = "polaris.sqlite";
-    auto sqliteService = polaris::native::services::sqlite::SqliteService();
+    auto sqliteService = native::services::sqlite::SqliteService();
     auto dbHandle = sqliteService.openDatabase(database_path);
     std::string sqlText = "SELECT * FROM sqlite_master;";
     auto sqlResult = sqliteService.runSql(dbHandle, sqlText);
@@ -38,8 +38,3 @@ int polaris::native::examples::TestSqliteSelect()
     return 0;
 }
 
-int polaris::native::examples::TestHelloWorld()
-{
-    std::cout << "TestHelloWorld: OK" << std::endl;
-    return 0;
-}

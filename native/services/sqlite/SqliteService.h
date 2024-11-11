@@ -6,7 +6,7 @@
 #include "native/models/protocol/Exception.h"
 #include "native/services/sqlite/SqliteResult.h"
 
-namespace polaris::native::services::sqlite
+namespace native::services::sqlite
 {
     typedef unsigned long SqliteHandle;
 

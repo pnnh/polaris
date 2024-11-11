@@ -1,7 +1,7 @@
 #include "SqliteRow.h"
 #include <algorithm>
 
-namespace sqlite = polaris::native::services::sqlite;
+namespace sqlite = native::services::sqlite;
 
 void sqlite::SqliteRow::appendColumn(const SqliteColumn &&column)
 {

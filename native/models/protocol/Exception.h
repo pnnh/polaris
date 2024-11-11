@@ -4,7 +4,7 @@
 #include <optional>
 #include <string>
 
-namespace polaris::native::models::protocol
+namespace native::models::protocol
 {
     enum class QuantumError
     {

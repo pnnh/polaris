@@ -2,7 +2,7 @@
 #include <string>
 #include <chrono>
 
-namespace polaris::models::files {
+namespace native::models::files {
     class PSFileModel {
     public:
         PSFileModel(std::string title, std::string content);

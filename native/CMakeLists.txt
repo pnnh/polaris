@@ -46,7 +46,9 @@ set(LIB_SOURCES
         services/sqlite/SqliteService.cpp
         services/sqlite/SqliteService.h
         services/filesystem/filesystem.cpp
-        services/filesystem/filesystem.h)
+        services/filesystem/filesystem.h
+        services/logger/logger.cpp
+        services/logger/logger.h)
 
 add_library(${LIB_NAME} ${LIB_SOURCES})
 

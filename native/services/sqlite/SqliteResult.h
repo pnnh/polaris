@@ -7,7 +7,7 @@
 #include <vector>
 #include "native/services/sqlite/SqliteRow.h"
 
-namespace polaris::native::services::sqlite
+namespace native::services::sqlite
 {
     class SqliteResult
     {

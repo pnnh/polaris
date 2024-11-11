@@ -2,7 +2,7 @@
 #include "SqliteService.h"
 #include <sqlite3.h>
 
-namespace sqlite = polaris::native::services::sqlite;
+namespace sqlite = native::services::sqlite;
 sqlite::SqliteService::SqliteService() : dbHandles()
 {
 }
@@ -37,7 +37,7 @@ sqlite::SqliteHandle sqlite::SqliteService::openDatabase(std::string&& path)
     return handle;
 }
 
-polaris::native::models::protocol::QuantumError sqlite::SqliteService::closeDatabase(sqlite::SqliteHandle dbHandle)
+native::models::protocol::QuantumError sqlite::SqliteService::closeDatabase(sqlite::SqliteHandle dbHandle)
 {
     auto db = dbHandles[dbHandle];
     if (db == nullptr) throw models::protocol::QuantumException("Database handle not found");

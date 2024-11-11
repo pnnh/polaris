@@ -2,8 +2,14 @@
 set(EXAMPLE_NAME ${PROJECT_NAME}Example)
 add_executable(${EXAMPLE_NAME}
         main.cpp
-        cases/cases.cpp
-        cases/cases.h)
+        cases.cpp
+        cases.h
+        sqlite/sqlite.cpp
+        sqlite/sqlite.h
+        articles/channel.cpp
+        articles/channel.h
+        articles/article.cpp
+        articles/article.h)
 
 add_dependencies(${EXAMPLE_NAME} ${PROJECT_NAME})
 target_link_libraries(${EXAMPLE_NAME} PRIVATE ${PROJECT_NAME})

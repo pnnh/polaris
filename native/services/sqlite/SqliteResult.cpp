@@ -1,6 +1,6 @@
 #include "SqliteResult.h"
 
-namespace sqlite = polaris::native::services::sqlite;
+namespace sqlite = native::services::sqlite;
 
 void sqlite::SqliteResult::appendRow(const sqlite::SqliteRow&& row)
 {

@@ -3,7 +3,7 @@
 #include <format>
 #include <string>
 
-namespace polaris::native::utils
+namespace native::utils
 {
     class StringUtils
     {

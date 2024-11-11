@@ -1,6 +1,6 @@
 #include "Exception.h"
 
-namespace protocol = polaris::native::models::protocol;
+namespace protocol = native::models::protocol;
 
 protocol::QuantumException::QuantumException() : error(QuantumError::ERROR), message()
 {

@@ -4,7 +4,7 @@
 #include <string>
 #include <variant>
 
-namespace polaris::native::services::sqlite
+namespace native::services::sqlite
 {
     class SqliteColumn
     {
