@@ -18,13 +18,13 @@
             "console": "integratedTerminal",
         },
         {
-            "name": "PolarisNativeServer",
+            "name": "PolarisServer",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/linux/server/PolarisNativeServer",
+            "program": "${workspaceFolder}/build/linux/server/PolarisServer",
             "args": [],
             "cwd": "${workspaceFolder}/server",
-            "preLaunchTask": "PolarisNativeServerBuild",
+            "preLaunchTask": "PolarisServerBuild",
             "envFile": "${workspaceFolder}/server/.env.local",
             "stopAtEntry": false,
             "linux": {

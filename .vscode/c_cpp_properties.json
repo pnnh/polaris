@@ -5,18 +5,20 @@
             "defines": [],
             "cStandard": "c23",
             "cppStandard": "c++23",
-            "intelliSenseMode": "linux-gcc-x64",
-            "compilerPath": "/usr/bin/gcc",
-            "compilerArgs": [
-                "-m32"
-            ],
+            "intelliSenseMode": "linux-gcc-arm64",
+            "compilerPath": "/usr/bin/g++-14",
+            "compilerArgs": [],
             "configurationProvider": "ms-vscode.cmake-tools",
             "forcedInclude": [],
+            "includePath": [
+                "/usr/include",
+                "/usr/local/include",
+                "${workspaceFolder}",
+                "${workspaceFolder}/build/linux/vcpkg_installed/arm64-linux/include"
+            ],
             "compileCommands": "${workspaceFolder}/build/linux/compile_commands.json",
             "mergeConfigurations": true,
-            "customConfigurationVariables": {
-                "myVar": "myvalue"
-            }
+            "customConfigurationVariables": {}
         }
     ],
     "version": 4,

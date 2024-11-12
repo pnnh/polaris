@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "dependencies": [
     {
-      "name": "spdlog"
+      "name": "spdlog",
+      "version>=": "1.14.1"
     },
     {
       "name": "libsodium",
@@ -49,7 +50,9 @@
       "name": "date"
     },
     {
-      "name": "cryptopp"
+      "name": "cryptopp",
+      "version>=": "8.9.0",
+      "platform": "linux"
     }
   ],
   "builtin-baseline": "5f4628b89f3f98cd9a0b43c27ded2aa53da1f790",
@@ -59,12 +62,20 @@
       "version-string": "2024.09.30.00"
     },
     {
+      "name": "spdlog",
+      "version": "1.14.1"
+    },
+    {
       "name": "boost",
       "version": "1.86.0"
     },
     {
-      "name": "boost",
+      "name": "cmark",
       "version": "0.31.1"
+    },
+    {
+      "name": "cryptopp",
+      "version": "8.9.0"
     }
   ]
 }

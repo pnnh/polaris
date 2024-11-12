@@ -1,7 +1,12 @@
 
 set(EXE_NAME ${PROJECT_NAME}Server)
+set(EXE_MODULE ${PROJECT_NAME}ServerModule)
+
+add_library(${EXE_MODULE})
+target_sources(${EXE_MODULE} PUBLIC FILE_SET CXX_MODULES FILES foo.cxx)
+
 add_executable(${EXE_NAME}
-    main.cpp
+    main.cxx
     process.cpp
     process.h
     router.cpp
@@ -14,9 +19,9 @@ add_executable(${EXE_NAME}
     services/config/appconfig.h
         controllers/index.cpp
         controllers/index.h)
-    
+
 add_dependencies(${EXE_NAME} ${PROJECT_NAME})
-target_link_libraries(${EXE_NAME} PRIVATE ${PROJECT_NAME})
+target_link_libraries(${EXE_NAME} PRIVATE  ${EXE_MODULE} ${PROJECT_NAME})
 
 # 查找并引用Boost库
 find_package(Boost COMPONENTS system thread chrono filesystem url REQUIRED) 
@@ -64,3 +69,4 @@ install(TARGETS ${EXE_NAME}
         RUNTIME_DEPENDENCY_SET ${EXE_NAME}-dependencies
         DESTINATION lib)
 install(RUNTIME_DEPENDENCY_SET ${EXE_NAME}-dependencies)
+ 

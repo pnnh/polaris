@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "PolarisNativeServerBuild",
+            "label": "PolarisServerBuild",
             "command": "cmake",
             "type": "process",
             "args": [
@@ -10,7 +10,7 @@
                 "--preset",
                 "linux",
                 "--target",
-                "PolarisNativeServer",
+                "PolarisServer",
                 "--verbose"
             ]
         }

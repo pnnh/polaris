@@ -1,8 +1,13 @@
-
 #include "server/process.h"
 #include <spdlog/spdlog.h>
 
-int main(int argc, char *argv[]) {
+import foo;
+
+int main(int argc, char *argv[])
+{
+  foo f;
+  f.helloworld();
+
 #ifndef NDEBUG
   spdlog::set_level(spdlog::level::info);
 #endif
