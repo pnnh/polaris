@@ -1,7 +1,12 @@
 
 set(EXAMPLE_NAME ${PROJECT_NAME}Example)
+set(EXAMPLE_MODULE ${PROJECT_NAME}ExampleModule)
+
+add_library(${EXAMPLE_MODULE})
+target_sources(${EXAMPLE_MODULE} PUBLIC FILE_SET CXX_MODULES FILES foo.cppm)
+
 add_executable(${EXAMPLE_NAME}
-        main.cpp
+        main.cppm
         cases.cpp
         cases.h
         sqlite/sqlite.cpp
@@ -16,13 +21,13 @@ add_executable(${EXAMPLE_NAME}
         articles/notebook.h)
 
 add_dependencies(${EXAMPLE_NAME} ${PROJECT_NAME})
-target_link_libraries(${EXAMPLE_NAME} PRIVATE ${PROJECT_NAME})
+target_link_libraries(${EXAMPLE_NAME} PRIVATE ${EXAMPLE_MODULE} ${PROJECT_NAME})
 
 # 查找并引用Boost库
 find_package(Boost COMPONENTS program_options REQUIRED)
 target_include_directories(${EXAMPLE_NAME} PRIVATE ${Boost_INCLUDE_DIRS})
 target_link_libraries(${EXAMPLE_NAME} PRIVATE ${Boost_LIBRARIES})
 
-add_test(NAME ${EXAMPLE_NAME} COMMAND ${EXAMPLE_NAME} hello)
-set_tests_properties(${EXAMPLE_NAME} PROPERTIES ENVIRONMENT DSN=xyz)
+add_test(NAME ${EXAMPLE_NAME}HelloWorld COMMAND ${EXAMPLE_NAME} --caseName TestHelloWorld)
+set_tests_properties(${EXAMPLE_NAME}HelloWorld PROPERTIES ENVIRONMENT DSN=xyz)
 

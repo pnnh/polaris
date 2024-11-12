@@ -8,9 +8,12 @@
 #include "cases.h"
 
 namespace program_options = boost::program_options;
+import foo;
 
 int main(int argc, char* argv[])
 {
+    foo f;
+    f.helloworld();
     std::string caseName;
 
     program_options::options_description desc("Allowed options");

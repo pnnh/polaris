@@ -18,8 +18,8 @@
         "CMAKE_C_COMPILER_LAUNCHER": "ccache",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
         "CMAKE_MAKE_PROGRAM": "ninja",
-        "CMAKE_C_COMPILER": "gcc-14",
-        "CMAKE_CXX_COMPILER": "g++-14"
+        "CMAKE_C_COMPILER": "/usr/bin/gcc-14",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++-14"
       },
       "environment": {}
     },
@@ -71,6 +71,12 @@
       "name": "windows",
       "configurePreset": "windows",
       "jobs": 8
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "linux",
+      "configurePreset": "linux"
     }
   ]
 }

@@ -8,10 +8,6 @@
       "version>=": "1.14.1"
     },
     {
-      "name": "libsodium",
-      "platform": "linux&arm64"
-    },
-    {
       "name": "zlib"
     },
     {

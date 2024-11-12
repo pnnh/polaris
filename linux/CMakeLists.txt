@@ -1,7 +1,4 @@
 
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
 
 # 查找并引用Qt库
 find_package(
@@ -17,6 +14,14 @@ find_package(
         Concurrent
         ShaderTools
         REQUIRED)
+
+qt_standard_project_setup()
+
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+qt_policy(SET QTP0001 NEW)
+qt_policy(SET QTP0004 NEW)
 
 set(APP_NAME ${PROJECT_NAME}Linux)
 set(APP_SOURCES
