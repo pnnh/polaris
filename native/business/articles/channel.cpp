@@ -1,11 +1,7 @@
 
 #include "channel.h"
 #include <string>
-#include <dirent.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string>
-#include <iostream>
+#include <filesystem>
 #include "native/models/protocol/Exception.h"
 #include "native/services/filesystem/filesystem.h"
 #include "native/services/sqlite/SqliteService.h"
@@ -27,35 +23,28 @@ std::shared_ptr<std::vector<models::articles::PSChannelModel>>
 business::articles::ChannelServerBusiness::selectChannels() const
 {
     auto channels = std::make_shared<std::vector<models::articles::PSChannelModel>>();
-    DIR* pDir;
-    dirent* ptr;
-    if (!((pDir = opendir(this->baseUrl.c_str()))))
+
+    for (const auto& entry : std::filesystem::directory_iterator(this->baseUrl))
     {
-        logger::Logger::LogInfo("Folder doesn't Exist!");
-        return channels;
-    }
-    while ((ptr = readdir(pDir)) != nullptr)
-    {
-        if (strcmp(ptr->d_name, ".") == 0 || strcmp(ptr->d_name, "..") == 0 || ptr->d_type != DT_DIR)
+        auto dirName = entry.path().filename();
+        if (entry.path() == "." || entry.path() == ".." || !entry.is_directory())
         {
             continue;
         }
-        auto dirName = std::string(ptr->d_name);
 
         if (!isChannelDirectory(dirName))
         {
             continue;
         }
-        auto channelModel = models::articles::PSChannelModel(ptr->d_name);
+        auto channelModel = models::articles::PSChannelModel(dirName);
         auto metadataFilePath = services::filesystem::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
         if (services::filesystem::IsFileExist(metadataFilePath))
         {
             auto yamlHandler = services::yaml::YamlHandler(metadataFilePath);
-            channelModel.Title = yamlHandler.getString("metadata.title").value_or(ptr->d_name);
+            channelModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
         }
         channels->emplace_back(channelModel);
     }
-    closedir(pDir);
 
     return channels;
 }
