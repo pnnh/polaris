@@ -4,7 +4,10 @@
 #include <functional>
 #include <unordered_map>
 
+#include "articles/article.h"
 #include "articles/channel.h"
+#include "articles/library.h"
+#include "articles/notebook.h"
 #include "sqlite/sqlite.h"
 
 namespace examples = native::examples;
@@ -20,7 +23,10 @@ const std::unordered_map<std::string, std::function<int()>> caseMap{
     {"TestHelloWorld", examples::TestHelloWorld},
     {"TestSqliteSelect", sqlite::TestSqliteSelect},
     {"TestSqliteVersion", sqlite::TestSqliteVersion},
-    {"TestArticleSelectChannels", examples::articles::TestArticleSelectChannels}
+    {"TestArticleSelectArticles", examples::articles::TestArticleSelectArticles},
+    {"TestArticleSelectChannels", examples::articles::TestArticleSelectChannels},
+    {"TestArticleSelectLibraries", examples::articles::TestArticleSelectLibraries},
+    {"TestArticleSelectNotebooks", examples::articles::TestArticleSelectNotebooks}
 };
 
 int native::examples::runCase(const std::string& caseName)

@@ -9,7 +9,11 @@ add_executable(${EXAMPLE_NAME}
         articles/channel.cpp
         articles/channel.h
         articles/article.cpp
-        articles/article.h)
+        articles/article.h
+        articles/library.cpp
+        articles/library.h
+        articles/notebook.cpp
+        articles/notebook.h)
 
 add_dependencies(${EXAMPLE_NAME} ${PROJECT_NAME})
 target_link_libraries(${EXAMPLE_NAME} PRIVATE ${PROJECT_NAME})

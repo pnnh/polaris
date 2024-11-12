@@ -16,7 +16,7 @@ int native::examples::articles::TestArticleSelectChannels()
     auto channelsPtr = channelServer->selectChannels();
     for (const auto& model : *channelsPtr)
     {
-        logger::Logger::LogInfo({model.Name, model.Title});
+        logger::Logger::LogInfo({model.URN, model.Name, model.Title});
     }
     return 0;
 }

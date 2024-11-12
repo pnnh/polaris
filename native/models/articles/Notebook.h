@@ -1,17 +1,17 @@
+#pragma once
 
 #include <string>
 #include <chrono>
 
 namespace native::models::articles
 {
-    class PSChannelModel
+    class PSNotebookModel
     {
     public:
-        explicit PSChannelModel();
-        explicit PSChannelModel(const std::string&& name);
+        PSNotebookModel();
+        explicit PSNotebookModel(const std::string& name);
 
         std::string URN;
-        std::string Name;
         std::string Title;
         std::string Keywords;
         std::string Description;

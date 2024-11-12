@@ -7,12 +7,13 @@
 #include "native/services/sqlite/SqliteService.h"
 #include "native/services/logger/logger.h"
 #include "native/services/yaml/yaml.h"
+#include "native/utils/md5.h"
 #include "native/utils/StringUtils.h"
 
 namespace models = native::models;
 namespace business = native::business;
 namespace services = native::services;
-namespace logger = native::services::logger;
+namespace logger = services::logger;
 
 business::articles::ChannelServerBusiness::ChannelServerBusiness(const std::string& baseUrl)
 {
@@ -41,7 +42,14 @@ business::articles::ChannelServerBusiness::selectChannels() const
         if (services::filesystem::IsFileExist(metadataFilePath))
         {
             auto yamlHandler = services::yaml::YamlHandler(metadataFilePath);
+            channelModel.URN = yamlHandler.getString("metadata.urn").value_or("");
             channelModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
+            channelModel.Description = yamlHandler.getString("metadata.description").value_or("");
+            channelModel.Image = yamlHandler.getString("metadata.image").value_or("");
+        }
+        if (channelModel.URN.empty())
+        {
+            channelModel.URN = utils::calcMd5(entry.path().string());
         }
         channels->emplace_back(channelModel);
     }

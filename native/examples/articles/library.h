@@ -2,5 +2,5 @@
 
 namespace native::examples::articles
 {
-    int TestArticleSelectArticles();
+    int TestArticleSelectLibraries();
 }

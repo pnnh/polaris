@@ -23,6 +23,8 @@ set(LIB_SOURCES
         business/pictures/picture.h
         business/pictures/channel.cpp
         business/pictures/channel.h
+        business/articles/library.cpp
+        business/articles/library.h
         utils/md5.cc
         utils/md5.h
         utils/mime.cpp
@@ -37,6 +39,8 @@ set(LIB_SOURCES
         utils/StringUtils.h
         utils/EnumUtils.cpp
         utils/EnumUtils.h
+        utils/basex.cpp
+        utils/basex.h
         services/sqlite/SqliteResult.cpp
         services/sqlite/SqliteResult.h
         services/sqlite/SqliteRow.cpp
@@ -50,7 +54,13 @@ set(LIB_SOURCES
         services/logger/logger.cpp
         services/logger/logger.h
         services/yaml/yaml.cpp
-        services/yaml/yaml.h)
+        services/yaml/yaml.h
+        models/articles/Library.cpp
+        models/articles/Library.h
+        business/articles/notebook.cpp
+        business/articles/notebook.h
+        models/articles/Notebook.cpp
+        models/articles/Notebook.h)
 
 add_library(${LIB_NAME} ${LIB_SOURCES})
 

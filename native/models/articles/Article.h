@@ -3,23 +3,22 @@
 #include <string>
 #include <chrono>
 
-namespace polaris {
-    class Article {
+namespace native::models::articles
+{
+    class PSArticleModel
+    {
     public:
-        Article(std::string title, std::string content);
+        PSArticleModel();
+        explicit PSArticleModel(const std::string& title);
 
-        std::string getTitle();
-
-        std::string getContent();
-
-        std::string uid;
-        long nid;
-        std::string title;
-        std::string header;
-        std::string body;
-        std::string keywords;
-        std::string description;
-        std::chrono::system_clock::time_point create_time;
-        std::chrono::system_clock::time_point update_time;
+        std::string URN;
+        std::string Title;
+        std::string Header;
+        std::string Body;
+        std::string Keywords;
+        std::string Description;
+        std::string Image;
+        std::chrono::system_clock::time_point CreateTime;
+        std::chrono::system_clock::time_point UpdateTime;
     };
 }
