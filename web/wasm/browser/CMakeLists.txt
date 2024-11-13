@@ -1,4 +1,4 @@
-set(LIB_WASM ${PROJECT_NAME}WebAssembly)
+set(LIB_WASM ${PROJECT_NAME}WasmCommon)
 set(WASM_BROWSER ${PROJECT_NAME}WasmBrowser)
 
 add_executable(${WASM_BROWSER}

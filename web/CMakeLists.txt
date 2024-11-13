@@ -1,7 +1,7 @@
 
 set(LIB_BASE ${PROJECT_NAME})
 
-set(LIB_NAME ${PROJECT_NAME}WebAssembly)
+set(LIB_NAME ${PROJECT_NAME}WasmCommon)
 set(LIB_SOURCES
         wasm/wasm.cpp
         wasm/wasm.h)

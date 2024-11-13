@@ -2,7 +2,6 @@ import './page.scss'
 import React from 'react'
 import {TocInfo} from '@/components/common/toc'
 import {Metadata} from 'next'
-import {TocItem} from "@pnnh/stele";
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import {pageTitle} from "@/utils/page";
 import Image from "next/image";
@@ -18,6 +17,7 @@ import {useServerTranslation} from '@/services/server/i18n'
 import {ArticleAssets} from './assets'
 import {generatorRandomString} from "@/utils/string";
 import {formatRfc3339} from "@/utils/datetime";
+import {TocItem} from "@/models/common/toc";
 
 export const dynamic = "force-dynamic";
 

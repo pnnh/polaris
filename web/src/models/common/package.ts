@@ -1,0 +1,1 @@
+export const packageName = '__PACKAGE_NAME__'

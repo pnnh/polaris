@@ -13,22 +13,22 @@ let nextConfig = {
     experimental: {
         esmExternals: true,
     },
-    webpack: function (config) {
-        config.plugins.push(
-            new CopyPlugin({
-                patterns: [
-                    {from: "node_modules/@pnnh/stele/lib/assets", to: "static/modules/@pnnh/stele/lib/assets"},
-                ],
-            }),
-        )
-        config.experiments = {
-            asyncWebAssembly: true,
-            syncWebAssembly: true,
-            topLevelAwait: true,
-            layers: true,
-        };
-        return config;
-    },
+    // webpack: function (config) {
+    //     // config.plugins.push(
+    //     //     new CopyPlugin({
+    //     //         patterns: [
+    //     //             {from: "node_modules/@pnnh/stele/lib/assets", to: "static/modules/@pnnh/stele/lib/assets"},
+    //     //         ],
+    //     //     }),
+    //     // )
+    //     config.experiments = {
+    //         asyncWebAssembly: true,
+    //         syncWebAssembly: true,
+    //         topLevelAwait: true,
+    //         layers: true,
+    //     };
+    //     return config;
+    // },
     images: {
         remotePatterns: [
             {
@@ -38,7 +38,7 @@ let nextConfig = {
                 hostname: '127.0.0.1'
             },
             {
-                hostname: 'huable.xyz'
+                hostname: 'calieo.xyz'
             }
         ]
     },

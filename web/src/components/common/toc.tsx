@@ -1,5 +1,5 @@
-import {TocItem} from '@pnnh/stele'
 import {css, styleGroup} from "@/components/style";
+import {TocItem} from "@/models/common/toc";
 
 const styles = styleGroup.create({
     tocCard: css`

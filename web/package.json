@@ -3,13 +3,12 @@
   "version": "0.1.5",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 7100",
+    "dev": "next dev -p 7100 --turbo",
     "build": "next build",
     "analyze": "ENV=production ANALYZE=true next build"
   },
   "dependencies": {
     "@next/third-parties": "^15.0.2",
-    "@pnnh/stele": "0.3.0",
     "@scure/base": "^1.1.7",
     "accept-language": "^3.0.20",
     "base64url": "^3.0.1",
@@ -30,6 +29,8 @@
     "node-cron": "^3.0.3",
     "parse-uri": "^1.0.9",
     "pluralize": "^8.0.0",
+    "polaris-wasm-browser": "file:../build/webassembly/web/wasm/browser",
+    "polaris-wasm-server": "file:../build/webassembly/web/wasm/server",
     "prop-types": "^15.8.1",
     "qs": "^6.12.3",
     "query-string": "^9.1.0",

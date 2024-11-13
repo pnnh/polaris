@@ -1,9 +1,9 @@
 'use client'
 
 import React from "react";
+import {TocItem} from "@/models/common/toc";
+import {ArticleComponent} from "@/components/client/article";
 
-import {TocItem} from "@pnnh/stele/common";
-import {ArticleComponent} from "@pnnh/stele/client";
 
 export function ArticleContainer({tocList, header, body, assetsUrl}: {
     tocList: Array<TocItem>, header: string, body: unknown,

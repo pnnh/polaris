@@ -1,9 +1,19 @@
 'use client'
 
-import {BuildBodyHtml} from '@pnnh/stele/server'
 import React from "react";
-import {TocItem} from "@pnnh/stele/common";
-import {ArticleComponent} from "@pnnh/stele/client";
+
+import {ArticleStyle} from "./style";
+import {TocItem} from "@/models/common/toc";
+import {BuildBodyHtml} from "@/components/server/article";
+
+export function ArticleComponent({children}: {
+    children: React.ReactNode
+}) {
+    return <div>
+        <ArticleStyle/>
+        {children}
+    </div>
+}
 
 export function ArticleContainer({tocList, header, body, assetsUrl}: {
     tocList: Array<TocItem>,
