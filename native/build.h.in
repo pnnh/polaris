@@ -1,0 +1,6 @@
+#ifdef NDEBUG
+// release
+#else
+// debug
+#define PROJECT_SOURCE_DIR "@PROJECT_SOURCE_DIR@"
+#endif

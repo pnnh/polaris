@@ -2,6 +2,8 @@
 #include "library.h"
 #include "native/business/articles/library.h"
 
+#include <build.h>
+
 #include "native/services/filesystem/filesystem.h"
 #include "native/services/logger/logger.h"
 
@@ -10,7 +12,7 @@ namespace logger = native::services::logger;
 
 int native::examples::articles::TestArticleSelectLibraries()
 {
-    const std::string baseUrl = services::filesystem::JoinFilePath({"assets", "data"});
+    const std::string baseUrl = services::filesystem::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
     auto libraryServer = std::make_shared<business::articles::LibraryServerBusiness>(baseUrl);
     auto libraryPtr = libraryServer->selectLibraries();
     for (const auto& model : *libraryPtr)

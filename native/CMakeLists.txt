@@ -64,6 +64,8 @@ set(LIB_SOURCES
 
 add_library(${LIB_NAME} ${LIB_SOURCES})
 
+configure_file("build.h.in" "${PROJECT_BINARY_DIR}/build.h")
+
 # 查找并引用Boost库
 find_package(Boost COMPONENTS system thread chrono filesystem url program_options REQUIRED)
 target_include_directories(${LIB_NAME} PRIVATE ${Boost_INCLUDE_DIRS})
@@ -82,8 +84,8 @@ find_package(unofficial-sqlite3 CONFIG REQUIRED)
 target_link_libraries(${LIB_NAME} PRIVATE unofficial::sqlite3::sqlite3)
 
 # 查找并引用CryptoPP解析库
-find_package(cryptopp CONFIG REQUIRED)
-target_link_libraries(${LIB_NAME} PRIVATE cryptopp::cryptopp)
+#find_package(cryptopp CONFIG REQUIRED)
+#target_link_libraries(${LIB_NAME} PRIVATE cryptopp::cryptopp)
 
 # 查找并引用yaml-cpp解析库
 find_package(yaml-cpp CONFIG REQUIRED)

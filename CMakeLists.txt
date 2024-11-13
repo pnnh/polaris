@@ -26,6 +26,7 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 enable_testing()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${PROJECT_BINARY_DIR})
 
 # 避免警告
 CMAKE_POLICY(SET CMP0012 NEW)

@@ -1,12 +1,7 @@
 
 set(EXAMPLE_NAME ${PROJECT_NAME}Example)
-set(EXAMPLE_MODULE ${PROJECT_NAME}ExampleModule)
-
-add_library(${EXAMPLE_MODULE})
-target_sources(${EXAMPLE_MODULE} PUBLIC FILE_SET CXX_MODULES FILES foo.cppm)
-
 add_executable(${EXAMPLE_NAME}
-        main.cppm
+        main.cpp
         cases.cpp
         cases.h
         sqlite/sqlite.cpp
@@ -21,7 +16,7 @@ add_executable(${EXAMPLE_NAME}
         articles/notebook.h)
 
 add_dependencies(${EXAMPLE_NAME} ${PROJECT_NAME})
-target_link_libraries(${EXAMPLE_NAME} PRIVATE ${EXAMPLE_MODULE} ${PROJECT_NAME})
+target_link_libraries(${EXAMPLE_NAME} PRIVATE ${PROJECT_NAME})
 
 # 查找并引用Boost库
 find_package(Boost COMPONENTS program_options REQUIRED)
@@ -30,4 +25,9 @@ target_link_libraries(${EXAMPLE_NAME} PRIVATE ${Boost_LIBRARIES})
 
 add_test(NAME ${EXAMPLE_NAME}HelloWorld COMMAND ${EXAMPLE_NAME} --caseName TestHelloWorld)
 set_tests_properties(${EXAMPLE_NAME}HelloWorld PROPERTIES ENVIRONMENT DSN=xyz)
-
+add_test(NAME ${EXAMPLE_NAME}SqliteVersion COMMAND ${EXAMPLE_NAME} --caseName TestSqliteVersion)
+add_test(NAME ${EXAMPLE_NAME}SqliteSelect COMMAND ${EXAMPLE_NAME} --caseName TestSqliteSelect)
+add_test(NAME ${EXAMPLE_NAME}ArticleSelectChannels COMMAND ${EXAMPLE_NAME} --caseName TestArticleSelectChannels)
+add_test(NAME ${EXAMPLE_NAME}ArticleSelectArticles COMMAND ${EXAMPLE_NAME} --caseName TestArticleSelectArticles)
+add_test(NAME ${EXAMPLE_NAME}ArticleSelectLibraries COMMAND ${EXAMPLE_NAME} --caseName TestArticleSelectLibraries)
+add_test(NAME ${EXAMPLE_NAME}ArticleSelectNotebooks COMMAND ${EXAMPLE_NAME} --caseName TestArticleSelectNotebooks)

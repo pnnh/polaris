@@ -1,7 +1,7 @@
 
 #include "channel.h"
 #include "native/business/articles/channel.h"
-
+#include "build.h"
 #include "native/services/filesystem/filesystem.h"
 #include "native/services/logger/logger.h"
 #include "native/services/sqlite/SqliteService.h"
@@ -11,7 +11,7 @@ namespace logger = native::services::logger;
 
 int native::examples::articles::TestArticleSelectChannels()
 {
-    const std::string baseUrl = services::filesystem::JoinFilePath({"assets", "data"});
+    const std::string baseUrl = services::filesystem::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
     auto channelServer = std::make_shared<business::articles::ChannelServerBusiness>(baseUrl);
     auto channelsPtr = channelServer->selectChannels();
     for (const auto& model : *channelsPtr)

@@ -4,16 +4,14 @@
 #include <boost/program_options/parsers.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <boost/program_options/options_description.hpp>
+#include <filesystem>
 
 #include "cases.h"
 
 namespace program_options = boost::program_options;
-import foo;
 
 int main(int argc, char* argv[])
 {
-    foo f;
-    f.helloworld();
     std::string caseName;
 
     program_options::options_description desc("Allowed options");
@@ -32,6 +30,7 @@ int main(int argc, char* argv[])
     }
 
     std::cout << "selected case: " << caseName << " " << caseName << std::endl;
+    std::cout << "current path: " << std::filesystem::current_path() << std::endl;
 
     native::examples::runCase(caseName);
 }
