@@ -4,8 +4,8 @@ import {useRecoilState, useRecoilValue} from "recoil";
 import {articleAssetsPreviewAtom} from "./state";
 import "./preview.scss";
 import React, {useEffect, useState} from "react";
-import {encodeBase64String} from "@pnnh/atom";
 import {IoClose} from "react-icons/io5";
+import {encodeBase64String} from "@/utils/basex";
 
 function isTextContent(mimeType: string) {
     if (mimeType.startsWith('text/')) {

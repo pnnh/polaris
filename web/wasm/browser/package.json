@@ -1,0 +1,6 @@
+{
+  "name": "polaris-wasm-browser",
+  "version": "0.1.0",
+  "main": "./PolarisWasmBrowser.js",
+  "types": "./PolarisWasmBrowser.d.ts"
+}

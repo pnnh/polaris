@@ -7,12 +7,12 @@ import {useRecoilState, useRecoilValue} from "recoil";
 import {clientSigninDomain} from "@/services/client/domain";
 import {ClientConfig, useClientConfig} from "@/services/client/config";
 import {IDomain} from "@/services/common/domain";
-import {encodeBase64String} from "@pnnh/atom";
 import {FaAngleRight, FaAngleDown} from "react-icons/fa6";
 import {CommonResult, PLSelectResult} from "@/models/common/common-result";
 import {PSArticleFileModel} from "@/models/common/article";
 import {ArticleAssertPreview} from './preview';
 import {articleAssetsPreviewAtom} from './state';
+import {encodeBase64String} from "@/utils/basex";
 
 async function selectFiles(domain: IDomain, channelUrn: string, articleUrn: string, parentPath: string = '') {
     const assetsUrl = `/articles/${channelUrn}/articles/${articleUrn}/assets?parent=${encodeURIComponent(parentPath)}`

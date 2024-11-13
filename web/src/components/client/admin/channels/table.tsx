@@ -1,10 +1,10 @@
 'use client'
 
-import {formatRfc3339} from '@pnnh/atom'
 import './table.scss'
 import React from 'react'
 import {PLSelectResult} from "@/models/common/common-result";
 import {PSChannelModel} from "@/models/common/channel";
+import {formatRfc3339} from "@/utils/datetime";
 
 export function AdminChannelTable({data: selectResult}: { data: PLSelectResult<PSChannelModel> }) {
     return <div>

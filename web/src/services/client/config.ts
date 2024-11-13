@@ -1,6 +1,6 @@
 'use client'
 
-import {decodeBase64String} from "@pnnh/atom";
+import {decodeBase64String} from "@/utils/basex";
 
 export interface ClientConfig {
     ENV: string,

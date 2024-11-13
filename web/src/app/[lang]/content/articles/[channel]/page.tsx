@@ -1,9 +1,7 @@
 import React from 'react'
 import './page.scss'
 import Link from 'next/link'
-import {replaceSearchParams} from '@pnnh/atom'
 import queryString from 'query-string'
-import {calcPagination} from "@pnnh/atom";
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import {Metadata} from "next";
 import {pageTitle} from "@/utils/page";
@@ -18,6 +16,8 @@ import {BaseRouterParams} from '@/models/server/router'
 import {useServerTranslation} from '@/services/server/i18n'
 import {PaginationServer} from "@/components/server/pagination";
 import {NoData} from "@/components/common/empty";
+import {calcPagination} from "@/utils/pagination";
+import {replaceSearchParams} from "@/utils/query";
 
 export const dynamic = "force-dynamic";
 
@@ -92,7 +92,7 @@ export default async function Page({params, searchParams}: {
                     </div>
                 </div>
                 <div className={'middleBody'}>
-                    <MiddleBody selectResult={selectResult} domain={domain}/>
+                    <MiddleBody selectResult={selectResult} domain={domain} lang={baseParams.lang}/>
                 </div>
                 <div className={'middlePagination'}>
                     <PaginationServer pagination={pagination}
@@ -100,18 +100,22 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
             <div className={'conRight'}>
-                <ArticleRankCard rankResult={rankSelectResult}/>
+                <ArticleRankCard rankResult={rankSelectResult} lang={baseParams.lang}/>
             </div>
         </div>
     </ContentLayout>
 }
 
-function MiddleBody({selectResult, domain}: { selectResult: PLSelectResult<PSArticleModel>, domain: IDomain }) {
+function MiddleBody({selectResult, domain, lang}: {
+    selectResult: PLSelectResult<PSArticleModel>,
+    domain: IDomain,
+    lang: string
+}) {
     if (!selectResult || !selectResult.data || !selectResult.data.range || selectResult.data.range.length === 0) {
         return <NoData size='large'/>
     }
     return selectResult.data.range.map((model) => {
-        return <ArticleCard key={model.urn} model={model} domain={domain}/>
+        return <ArticleCard key={model.urn} model={model} domain={domain} lang={lang}/>
     })
 }
 

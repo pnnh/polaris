@@ -3,10 +3,10 @@ import {GoogleAnalytics} from "@next/third-parties/google";
 import {Metadata} from "next";
 import {pageTitle} from "@/utils/page";
 import {isProd, usePublicConfig} from "@/services/server/config";
-import {encodeBase64String} from "@pnnh/atom";
 import {GlobalStyleTag} from "@/components/style";
 import React from "react";
 import {RecoilProvider} from "@/components/client/provider";
+import {encodeBase64String} from "@/utils/basex";
 
 export function HtmlLayout({
                                metadata,

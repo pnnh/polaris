@@ -1,14 +1,14 @@
 'use client'
 
-import {formatRfc3339} from '@pnnh/atom'
 import './table.scss'
 import React from 'react'
-import {replaceSearchParams} from '@pnnh/atom'
-import {calcPagination} from "@pnnh/atom";
 import {PLSelectResult} from "@/models/common/common-result";
 import {channelName, PSArticleModel} from "@/models/common/article";
 import {PaginationPartial} from "@/components/common/pagination";
 import {NoData} from "@/components/common/empty";
+import {calcPagination} from "@/utils/pagination";
+import {formatRfc3339} from "@/utils/datetime";
+import {replaceSearchParams} from "@/utils/query";
 
 export function AdminArticleTable(props: {
     result: PLSelectResult<PSArticleModel>,

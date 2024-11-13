@@ -1,5 +1,5 @@
-import {FullPagination} from "@pnnh/atom";
 import objToString from 'style-object-to-css-string'
+import {FullPagination} from "@/utils/pagination";
 
 const styles = {
     pageList: objToString({

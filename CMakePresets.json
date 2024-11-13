@@ -28,15 +28,17 @@
       "displayName": "macOS Config",
       "generator": "Xcode",
       "binaryDir": "${sourceDir}/build/macos",
-      "installDir": "${sourceDir}/install",
+      "installDir": "${sourceDir}/install/macos",
       "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
         "CMAKE_OSX_ARCHITECTURES": "arm64",
         "CMAKE_OSX_DEPLOYMENT_TARGET": "14.0",
+        "VCPKG_HOST_TRIPLET": "arm64-osx",
+        "VCPKG_TARGET_TRIPLET": "arm64-osx",
         "CMAKE_CXX_COMPILER_LAUNCHER": "/opt/homebrew/bin/ccache",
         "CMAKE_C_COMPILER_LAUNCHER": "/opt/homebrew/bin/ccache",
-        "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
         "CMAKE_C_COMPILER": "/opt/homebrew/opt/llvm/bin/clang",
         "CMAKE_CXX_COMPILER": "/opt/homebrew/opt/llvm/bin/clang++"
       },
@@ -46,15 +48,37 @@
       "name": "windows",
       "generator": "Visual Studio 17 2022",
       "binaryDir": "${sourceDir}/build/windows",
+      "installDir": "${sourceDir}/install/windows",
       "toolchainFile": "$env{VCPKG_ROOT}\\scripts\\buildsystems\\vcpkg.cmake",
-      "installDir": "${sourceDir}/install",
       "condition": {
         "type": "equals",
         "lhs": "${hostSystemName}",
         "rhs": "Windows"
       },
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug"
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
+        "VCPKG_HOST_TRIPLET": "x64-windows",
+        "VCPKG_TARGET_TRIPLET": "x64-windows"
+      },
+      "environment": {}
+    },
+    {
+      "name": "webassembly",
+      "displayName": "WebAssembly Config",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/webassembly",
+      "installDir": "${sourceDir}/install/webassembly",
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
+        "VCPKG_HOST_TRIPLET": "arm64-osx",
+        "VCPKG_TARGET_TRIPLET": "wasm32-emscripten",
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": {
+          "type": "FILEPATH",
+          "value": "$env{EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
+        }
       },
       "environment": {}
     }
@@ -66,13 +90,15 @@
     },
     {
       "name": "macos",
-      "configurePreset": "macos",
-      "jobs": 8
+      "configurePreset": "macos"
     },
     {
       "name": "windows",
-      "configurePreset": "windows",
-      "jobs": 8
+      "configurePreset": "windows"
+    },
+    {
+      "name": "webassembly",
+      "configurePreset": "webassembly"
     }
   ],
   "testPresets": [

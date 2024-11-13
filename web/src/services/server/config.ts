@@ -1,7 +1,7 @@
 import 'server-only'
 
 import * as fs from "node:fs";
-import {encodeBase64String} from "@pnnh/atom";
+import {encodeBase64String} from "@/utils/basex";
 
 export function useServerConfig() {
     const config = {

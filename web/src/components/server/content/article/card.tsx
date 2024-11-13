@@ -1,5 +1,4 @@
 import Link from "next/link";
-import {formatRfc3339, STSubString} from "@pnnh/atom";
 import {FaEye} from "react-icons/fa";
 import {CiAlarmOn} from "react-icons/ci";
 import React from "react";
@@ -7,6 +6,8 @@ import {IDomain} from "@/services/common/domain";
 import './card.scss'
 import {channelName, PSArticleModel} from "@/models/common/article";
 import {PSImageServer} from "@/components/server/image";
+import {STSubString} from "@/utils/string";
+import {formatRfc3339} from "@/utils/datetime";
 
 export function ArticleCard({model, domain, lang}: { model: PSArticleModel, domain: IDomain, lang: string }) {
     const readUrl = `/${lang}/content/articles/${channelName(model.channel)}/articles/${model.urn}`

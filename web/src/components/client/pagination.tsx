@@ -1,5 +1,5 @@
-import {FullPagination} from "@pnnh/atom";
 import {css} from "@emotion/css";
+import {FullPagination} from "@/utils/pagination";
 
 const styles = {
     pageList: css({
@@ -33,7 +33,7 @@ const styles = {
         color: '#FFFFFF',
     })
 }
- 
+
 export function PaginationClient(props: { pagination: FullPagination, pageLinkFunc: (page: number) => string }) {
     const pagination = props.pagination
     return <div>
