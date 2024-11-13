@@ -45,6 +45,26 @@
       "environment": {}
     },
     {
+      "name": "ios",
+      "displayName": "iOS Config",
+      "generator": "Xcode",
+      "binaryDir": "${sourceDir}/build/ios",
+      "installDir": "${sourceDir}/install/ios",
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "VCPKG_HOST_TRIPLET": "arm64-osx",
+        "VCPKG_TARGET_TRIPLET": "arm64-ios",
+        "CMAKE_SYSTEM_NAME": "iOS",
+        "CMAKE_IOS_INSTALL_COMBINED": "YES",
+        "CMAKE_OSX_ARCHITECTURES": "arm64",
+        "CMAKE_OSX_DEPLOYMENT_TARGET": "14.0",
+        "CMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH": "NO",
+        "CMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED": "NO",
+        "CMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED": "NO"
+      }
+    },
+    {
       "name": "windows",
       "generator": "Visual Studio 17 2022",
       "binaryDir": "${sourceDir}/build/windows",
