@@ -6,25 +6,27 @@ add_library(${EXE_MODULE})
 target_sources(${EXE_MODULE} PUBLIC FILE_SET CXX_MODULES FILES foo.cxx)
 
 add_executable(${EXE_NAME}
-    main.cxx
-    process.cpp
-    process.h
-    router.cpp
-    router.h
-    controllers/article.cpp
-    controllers/article.h
-    controllers/sitemap.cpp
-    controllers/sitemap.h
-    services/config/appconfig.cpp
-    services/config/appconfig.h
+        main.cxx
+        process.cpp
+        process.h
+        router.cpp
+        router.h
+        controllers/article.cpp
+        controllers/article.h
+        controllers/sitemap.cpp
+        controllers/sitemap.h
         controllers/index.cpp
-        controllers/index.h)
+        controllers/index.h
+        services/config/appconfig.cpp
+        services/config/appconfig.h
+        utils/mime.cpp
+        utils/mime.h)
 
 add_dependencies(${EXE_NAME} ${PROJECT_NAME})
-target_link_libraries(${EXE_NAME} PRIVATE  ${EXE_MODULE} ${PROJECT_NAME})
+target_link_libraries(${EXE_NAME} PRIVATE ${EXE_MODULE} ${PROJECT_NAME})
 
 # 查找并引用Boost库
-find_package(Boost COMPONENTS system thread chrono filesystem url REQUIRED) 
+find_package(Boost COMPONENTS system thread chrono filesystem url REQUIRED)
 target_include_directories(${EXE_NAME} PRIVATE ${Boost_INCLUDE_DIRS})
 target_link_libraries(${EXE_NAME} PRIVATE ${Boost_LIBRARIES})
 

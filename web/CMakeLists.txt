@@ -8,8 +8,8 @@ set(LIB_SOURCES
 
 add_library(${LIB_NAME} STATIC ${LIB_SOURCES})
 
-#add_dependencies(${LIB_NAME} ${LIB_BASE})
-#target_link_libraries(${LIB_NAME} PUBLIC ${LIB_BASE})
+add_dependencies(${LIB_NAME} ${LIB_BASE})
+target_link_libraries(${LIB_NAME} PUBLIC ${LIB_BASE})
 
 # 查找并引用日志库
 find_package(spdlog CONFIG REQUIRED)

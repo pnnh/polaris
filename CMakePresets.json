@@ -73,6 +73,7 @@
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
+        "CMAKE_CXX_SCAN_FOR_MODULES": "OFF",
         "VCPKG_HOST_TRIPLET": "arm64-osx",
         "VCPKG_TARGET_TRIPLET": "wasm32-emscripten",
         "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": {
