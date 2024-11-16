@@ -35,3 +35,17 @@ std::vector<std::string> native::utils::StringUtils::Split(const std::string& st
     }
     return stringList;
 }
+
+std::string native::utils::StringUtils::toLower(const std::string& str)
+{
+    auto newStr = std::string(str);
+    std::ranges::transform(newStr, newStr.begin(), ::tolower);
+    return newStr;
+}
+
+std::string native::utils::StringUtils::toUpper(const std::string& str)
+{
+    auto newStr = std::string(str);
+    std::ranges::transform(newStr, newStr.begin(), ::toupper);
+    return newStr;
+}

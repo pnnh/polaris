@@ -1,7 +1,7 @@
 module;
 #include <iostream>
 
-export module foo;
+export module PolarisServerModule;
 
 export class foo
 {

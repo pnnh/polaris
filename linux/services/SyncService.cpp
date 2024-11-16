@@ -1,15 +1,13 @@
 #include "SyncService.h"
 
 #include "UserService.h"
-#include "utils/mime.h"
-
-#include <QUuid>
 #include <iostream>
 #include <qdir.h>
 #include <qdiriterator.h>
 
 #include "native/models/pictures/Picture.h"
 #include "native/utils/basex.h"
+#include "native/utils/mime.h"
 
 void SyncService::SyncLibraries()
 {
@@ -72,8 +70,8 @@ int SyncService::SyncImages(const QString& path)
     const auto& fileName = fileInfo.fileName();
     if (fileInfo.isDir())
     {
-      qDebug() << "===" << filePath;
-      if (MimeUtils::isIgnore(filePath))
+      auto stdPathString = filePath.toStdString();
+      if (native::utils::MimeUtils::isIgnore(stdPathString))
       {
         continue;
       }
@@ -81,8 +79,8 @@ int SyncService::SyncImages(const QString& path)
     }
     else
     {
-      qDebug() << "===" << filePath << fileName;
-      if (MimeUtils::isImage(filePath))
+      auto stdFilePath = filePath.toStdString();
+      if (native::utils::MimeUtils::isImage(stdFilePath))
       {
         auto stdPathString = filePath.toStdString();
         auto uid = native::utils::encode64(stdPathString);

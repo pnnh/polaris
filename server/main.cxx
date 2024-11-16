@@ -1,9 +1,9 @@
 #include "server/process.h"
 #include <spdlog/spdlog.h>
 
-import foo;
+import PolarisServerModule;
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   foo f;
   f.helloworld();

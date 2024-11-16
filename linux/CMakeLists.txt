@@ -42,16 +42,12 @@ set(APP_SOURCES
         services/ImageService.h
         services/LibraryService.cpp
         services/LibraryService.h
-        services/MarkdownService.cpp
-        services/MarkdownService.h
         services/SqliteService.cpp
         services/SqliteService.h
         services/SyncService.cpp
         services/SyncService.h
         services/UserService.cpp
-        services/UserService.h
-        utils/mime.cpp
-        utils/mime.h)
+        services/UserService.h)
 
 qt6_add_executable(${APP_NAME} WIN32 MACOSX_BUNDLE MANUAL_FINALIZATION ${APP_SOURCES})
 add_dependencies(${APP_NAME} ${PROJECT_NAME})

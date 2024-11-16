@@ -1,11 +1,10 @@
-#include "server/process.h"
+
 #include <spdlog/spdlog.h>
 #include "linux/services/threads/SyncThread.h"
 #include <QtQuick>
 #include <iostream>
-#include <spdlog/spdlog.h>
 
-import foo;
+import PolarisLinuxModule;
 
 int main(int argc, char* argv[])
 {

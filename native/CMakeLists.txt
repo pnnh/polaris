@@ -55,6 +55,8 @@ set(LIB_SOURCES
         services/logger/logger.h
         services/yaml/yaml.cpp
         services/yaml/yaml.h
+        services/markdown/MarkdownService.h
+        services/markdown/MarkdownService.cpp
         models/articles/Library.cpp
         models/articles/Library.h
         business/articles/notebook.cpp
