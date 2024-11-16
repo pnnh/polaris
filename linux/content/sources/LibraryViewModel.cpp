@@ -1,9 +1,8 @@
 #include "content/sources/LibraryViewModel.h"
 
-#include "models/LibraryModel.h"
-
-LibraryViewModel::LibraryViewModel(QObject *parent)
-    : QAbstractListModel(parent) {
+LibraryViewModel::LibraryViewModel(QObject* parent)
+  : QAbstractListModel(parent)
+{
   int role = Qt::UserRole;
   dataNames.insert(role++, "uid");
   dataNames.insert(role++, "name");
@@ -11,17 +10,21 @@ LibraryViewModel::LibraryViewModel(QObject *parent)
   loadData();
 }
 
-LibraryViewModel::~LibraryViewModel() {}
+LibraryViewModel::~LibraryViewModel()
+{
+}
 
-void LibraryViewModel::loadData() {
+void LibraryViewModel::loadData()
+{
   auto libraryList = libraryService.SelectLibraries();
 
-  QVector<LibraryModel>::iterator iter;
-  for (iter = libraryList.begin(); iter != libraryList.end(); iter++) {
-    auto *dataPtr = new LibraryData();
+  QVector<native::models::articles::PSLibraryModel>::iterator iter;
+  for (iter = libraryList.begin(); iter != libraryList.end(); iter++)
+  {
+    auto* dataPtr = new LibraryData();
 
-    QString uid = (*iter).uid;
-    QString name = (*iter).name;
+    QString uid = QString::fromStdString((*iter).URN);
+    QString name = QString::fromStdString((*iter).Name);
 
     dataPtr->append(uid);
     dataPtr->append(name);
@@ -30,13 +33,15 @@ void LibraryViewModel::loadData() {
 }
 
 int LibraryViewModel::rowCount(
-    const QModelIndex &parent = QModelIndex()) const {
+  const QModelIndex& parent = QModelIndex()) const
+{
   auto size = dataList.size();
   return size;
 }
 
-QVariant LibraryViewModel::data(const QModelIndex &index, int role) const {
-  LibraryData *dataPtr = dataList[index.row()];
+QVariant LibraryViewModel::data(const QModelIndex& index, int role) const
+{
+  LibraryData* dataPtr = dataList[index.row()];
   auto value = dataPtr->at(role - Qt::UserRole);
   return value;
 }

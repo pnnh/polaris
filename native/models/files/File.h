@@ -1,9 +1,11 @@
-
+#pragma once
 #include <string>
 #include <chrono>
 
-namespace native::models::files {
-    class PSFileModel {
+namespace native::models::files
+{
+    class PSFileModel
+    {
     public:
         PSFileModel(std::string title, std::string content);
 

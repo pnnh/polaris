@@ -32,10 +32,6 @@ target_sources(${APP_MODULE} PUBLIC FILE_SET CXX_MODULES FILES foo.cxx)
 
 set(APP_SOURCES
         main.cxx
-        models/LibraryModel.cpp
-        models/LibraryModel.h
-        models/ImageModel.cpp
-        models/ImageModel.h
         services/sqlite/sqlite.cpp
         services/sqlite/sqlite.h
         services/threads/SyncThread.cpp
@@ -54,8 +50,6 @@ set(APP_SOURCES
         services/SyncService.h
         services/UserService.cpp
         services/UserService.h
-        utils/base32.cpp
-        utils/base32.h
         utils/mime.cpp
         utils/mime.h)
 

@@ -1,15 +1,16 @@
 #pragma once
 
-#include "models/ImageModel.h"
-
 #include <QString>
 
-class ImageService {
+#include "native/models/pictures/Picture.h"
+
+class ImageService
+{
 public:
   ImageService();
 
-  std::optional<ImageModel> Find(const QString &uid) const;
-  void InsertOrUpdate(const QVector<ImageModel>& libraryList);
+  std::optional<native::models::pictures::PSPictureModel> Find(const QString& uid) const;
+  void InsertOrUpdate(const QVector<native::models::pictures::PSPictureModel>& libraryList);
 
 private:
   QString dbPath;

@@ -1,16 +1,21 @@
 #pragma once
 
-#include "models/LibraryModel.h"
+#include <QVector>
 
-class LibraryService {
+#include "native/models/articles/Library.h"
+#include "native/models/articles/Notebook.h"
+
+class LibraryService
+{
 public:
   LibraryService();
 
 
-  std::optional<LibraryModel> FindLibrary(const QString &uid) const;
-  QVector<LibraryModel> SelectLibraries() const;
-  static QVector<PartitionModel> SelectPartitions(const LibraryModel &libraryModel) ;
-  void InsertOrUpdateLibrary(const QVector<LibraryModel>& libraryList);
+  std::optional<native::models::articles::PSLibraryModel> FindLibrary(const QString& uid) const;
+  QVector<native::models::articles::PSLibraryModel> SelectLibraries() const;
+  static QVector<native::models::articles::PSNotebookModel> SelectPartitions(
+    const native::models::articles::PSLibraryModel& libraryModel);
+  void InsertOrUpdateLibrary(const QVector<native::models::articles::PSLibraryModel>& libraryList);
 
 private:
   QString dbPath;

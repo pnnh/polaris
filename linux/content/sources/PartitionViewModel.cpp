@@ -1,6 +1,7 @@
 #include "content/sources/PartitionViewModel.h"
 
 #include "linux/services/LibraryService.h"
+#include "native/models/articles/Notebook.h"
 
 PartitionViewModel::PartitionViewModel(QObject* parent)
   : QAbstractListModel(parent)
@@ -40,13 +41,13 @@ void PartitionViewModel::loadData()
   beginResetModel();
   dataList.clear();
 
-  QVector<PartitionModel>::iterator iter;
+  QVector<native::models::articles::PSNotebookModel>::iterator iter;
   for (iter = partitionList.begin(); iter != partitionList.end(); iter++)
   {
     auto* dataPtr = new PartitionData();
 
-    QString uid = (*iter).uid;
-    QString name = (*iter).name;
+    QString uid = QString::fromStdString((*iter).URN);
+    QString name = QString::fromStdString((*iter).Name);
 
     dataPtr->append(uid);
     dataPtr->append(name);
