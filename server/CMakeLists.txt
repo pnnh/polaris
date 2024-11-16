@@ -1,11 +1,9 @@
 
 set(EXE_NAME ${PROJECT_NAME}Server)
-set(EXE_MODULE ${PROJECT_NAME}ServerModule)
 
-add_library(${EXE_MODULE})
-target_sources(${EXE_MODULE} PUBLIC FILE_SET CXX_MODULES FILES foo.cxx)
-
-add_executable(${EXE_NAME}
+add_executable(${EXE_NAME})
+target_sources(${EXE_NAME}
+        PUBLIC
         main.cxx
         process.cpp
         process.h
@@ -19,9 +17,12 @@ add_executable(${EXE_NAME}
         controllers/index.h
         services/config/appconfig.cpp
         services/config/appconfig.h)
+target_sources(${EXE_NAME}
+        PUBLIC FILE_SET CXX_MODULES
+        FILES foo.cxx)
 
 add_dependencies(${EXE_NAME} ${PROJECT_NAME})
-target_link_libraries(${EXE_NAME} PRIVATE ${EXE_MODULE} ${PROJECT_NAME})
+target_link_libraries(${EXE_NAME} PRIVATE ${PROJECT_NAME})
 
 # 查找并引用Boost库
 find_package(Boost COMPONENTS system thread chrono filesystem url REQUIRED)

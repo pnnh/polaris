@@ -25,10 +25,6 @@ qt_policy(SET QTP0001 NEW)
 qt_policy(SET QTP0004 NEW)
 
 set(APP_NAME ${PROJECT_NAME}Linux)
-set(APP_MODULE ${APP_NAME}Module)
-add_library(${APP_MODULE})
-target_sources(${APP_MODULE} PUBLIC FILE_SET CXX_MODULES FILES foo.cxx)
-
 
 set(APP_SOURCES
         main.cxx
@@ -49,9 +45,12 @@ set(APP_SOURCES
         services/UserService.cpp
         services/UserService.h)
 
-qt6_add_executable(${APP_NAME} WIN32 MACOSX_BUNDLE MANUAL_FINALIZATION ${APP_SOURCES})
+qt6_add_executable(${APP_NAME} MANUAL_FINALIZATION)
+target_sources(${APP_NAME} PUBLIC ${APP_SOURCES})
+target_sources(${APP_NAME} PUBLIC FILE_SET CXX_MODULES FILES foo.cxx)
+
 add_dependencies(${APP_NAME} ${PROJECT_NAME})
-target_link_libraries(${APP_NAME} PRIVATE ${APP_MODULE} ${PROJECT_NAME})
+target_link_libraries(${APP_NAME} PRIVATE ${PROJECT_NAME})
 
 # 查找并引用日志库
 find_package(spdlog CONFIG REQUIRED)
