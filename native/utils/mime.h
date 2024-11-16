@@ -10,5 +10,6 @@ namespace native::utils
         static bool isImage(const std::string& path);
         static bool isHidden(const std::string& path);
         static bool isIgnore(const std::string& path);
+        static std::string getMimeType(const std::string& path);
     };
 }

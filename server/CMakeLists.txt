@@ -18,9 +18,7 @@ add_executable(${EXE_NAME}
         controllers/index.cpp
         controllers/index.h
         services/config/appconfig.cpp
-        services/config/appconfig.h
-        utils/mime.cpp
-        utils/mime.h)
+        services/config/appconfig.h)
 
 add_dependencies(${EXE_NAME} ${PROJECT_NAME})
 target_link_libraries(${EXE_NAME} PRIVATE ${EXE_MODULE} ${PROJECT_NAME})
