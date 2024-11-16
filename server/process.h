@@ -1,3 +1,7 @@
 #pragma once
 
-int runServer(int port);
+namespace server
+{
+    int runServer(int port);
+}
+

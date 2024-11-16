@@ -19,10 +19,10 @@
 
 #include "controllers/index.h"
 
-void process(WFHttpTask *httpTask)
+void process(WFHttpTask* httpTask)
 {
-  protocol::HttpRequest *request = httpTask->get_req();
-  protocol::HttpResponse *response = httpTask->get_resp();
+  protocol::HttpRequest* request = httpTask->get_req();
+  protocol::HttpResponse* response = httpTask->get_resp();
 
   auto request_uri = request->get_request_uri();
   Router router;
@@ -74,17 +74,17 @@ void process(WFHttpTask *httpTask)
   socklen_t l = sizeof addr;
   unsigned short port = 0;
 
-  httpTask->get_peer_addr((struct sockaddr *)&addr, &l);
+  httpTask->get_peer_addr((struct sockaddr*)&addr, &l);
 
   if (addr.ss_family == AF_INET)
   {
-    struct sockaddr_in *s = (struct sockaddr_in *)&addr;
+    struct sockaddr_in* s = (struct sockaddr_in*)&addr;
     port = ntohs(s->sin_port);
     inet_ntop(AF_INET, &s->sin_addr, addrstr, sizeof addrstr);
   }
   else if (addr.ss_family == AF_INET6)
   {
-    struct sockaddr_in6 *s = (struct sockaddr_in6 *)&addr;
+    struct sockaddr_in6* s = (struct sockaddr_in6*)&addr;
     port = ntohs(s->sin6_port);
     inet_ntop(AF_INET6, &s->sin6_addr, addrstr, sizeof addrstr);
   }
@@ -96,9 +96,8 @@ void process(WFHttpTask *httpTask)
   fprintf(stderr, "seq: %lld, peer: %s:%hu\n", seq, addrstr, port);
 }
 
-int runServer(int port)
+int server::runServer(int port)
 {
-
   WFHttpServer server(process);
 
   if (port <= 0)
