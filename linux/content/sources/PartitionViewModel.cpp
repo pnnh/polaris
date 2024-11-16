@@ -1,9 +1,10 @@
 #include "content/sources/PartitionViewModel.h"
 
-#include "native/services/sqlite/LibraryService.h"
+#include "linux/services/LibraryService.h"
 
-PartitionViewModel::PartitionViewModel(QObject *parent)
-    : QAbstractListModel(parent) {
+PartitionViewModel::PartitionViewModel(QObject* parent)
+  : QAbstractListModel(parent)
+{
   int role = Qt::UserRole;
   dataNames.insert(role++, "uid");
   dataNames.insert(role++, "name");
@@ -11,19 +12,27 @@ PartitionViewModel::PartitionViewModel(QObject *parent)
   loadData();
 }
 
-PartitionViewModel::~PartitionViewModel() {}
+PartitionViewModel::~PartitionViewModel()
+{
+}
+
 QString PartitionViewModel::library() const { return currentLibrary; }
-void PartitionViewModel::setLibrary(const QString &library) {
+
+void PartitionViewModel::setLibrary(const QString& library)
+{
   currentLibrary = library;
   loadData();
 }
 
-void PartitionViewModel::loadData() {
-  if (currentLibrary.isEmpty()) {
+void PartitionViewModel::loadData()
+{
+  if (currentLibrary.isEmpty())
+  {
     return;
   }
   const auto libraryModel = libraryService.FindLibrary(currentLibrary);
-  if (!libraryModel.has_value()) {
+  if (!libraryModel.has_value())
+  {
     return;
   }
   auto partitionList = LibraryService::SelectPartitions(libraryModel.value());
@@ -32,8 +41,9 @@ void PartitionViewModel::loadData() {
   dataList.clear();
 
   QVector<PartitionModel>::iterator iter;
-  for (iter = partitionList.begin(); iter != partitionList.end(); iter++) {
-    auto *dataPtr = new PartitionData();
+  for (iter = partitionList.begin(); iter != partitionList.end(); iter++)
+  {
+    auto* dataPtr = new PartitionData();
 
     QString uid = (*iter).uid;
     QString name = (*iter).name;
@@ -46,17 +56,20 @@ void PartitionViewModel::loadData() {
 }
 
 int PartitionViewModel::rowCount(
-    const QModelIndex &parent = QModelIndex()) const {
+  const QModelIndex& parent = QModelIndex()) const
+{
   auto size = dataList.size();
   return size;
 }
 
-QVariant PartitionViewModel::data(const QModelIndex &index, int role) const {
-  PartitionData *dataPtr = dataList[index.row()];
+QVariant PartitionViewModel::data(const QModelIndex& index, int role) const
+{
+  PartitionData* dataPtr = dataList[index.row()];
   auto value = dataPtr->at(role - Qt::UserRole);
   return value;
 }
 
-QHash<int, QByteArray> PartitionViewModel::roleNames() const {
+QHash<int, QByteArray> PartitionViewModel::roleNames() const
+{
   return dataNames;
 }

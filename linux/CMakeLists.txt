@@ -13,6 +13,7 @@ find_package(
         Network
         Concurrent
         ShaderTools
+        Sql
         REQUIRED)
 
 qt_standard_project_setup()
@@ -24,16 +25,43 @@ qt_policy(SET QTP0001 NEW)
 qt_policy(SET QTP0004 NEW)
 
 set(APP_NAME ${PROJECT_NAME}Linux)
+set(APP_MODULE ${APP_NAME}Module)
+add_library(${APP_MODULE})
+target_sources(${APP_MODULE} PUBLIC FILE_SET CXX_MODULES FILES foo.cxx)
+
+
 set(APP_SOURCES
-        main.cpp
+        main.cxx
         models/LibraryModel.cpp
         models/LibraryModel.h
         models/ImageModel.cpp
         models/ImageModel.h
-        threads/SyncThread.cpp
-        threads/SyncThread.h)
+        services/sqlite/sqlite.cpp
+        services/sqlite/sqlite.h
+        services/threads/SyncThread.cpp
+        services/threads/SyncThread.h
+        services/FolderService.h
+        services/FolderService.cpp
+        services/ImageService.cpp
+        services/ImageService.h
+        services/LibraryService.cpp
+        services/LibraryService.h
+        services/MarkdownService.cpp
+        services/MarkdownService.h
+        services/SqliteService.cpp
+        services/SqliteService.h
+        services/SyncService.cpp
+        services/SyncService.h
+        services/UserService.cpp
+        services/UserService.h
+        utils/base32.cpp
+        utils/base32.h
+        utils/mime.cpp
+        utils/mime.h)
 
 qt6_add_executable(${APP_NAME} WIN32 MACOSX_BUNDLE MANUAL_FINALIZATION ${APP_SOURCES})
+add_dependencies(${APP_NAME} ${PROJECT_NAME})
+target_link_libraries(${APP_NAME} PRIVATE ${APP_MODULE} ${PROJECT_NAME})
 
 # 查找并引用日志库
 find_package(spdlog CONFIG REQUIRED)
@@ -58,7 +86,8 @@ target_link_libraries(
         Qt6::Quick
         Qt6::Gui
         Qt6::QuickControls2
-        Qt6::Widgets)
+        Qt6::Widgets
+        Qt6::Sql)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/content/sources)
 

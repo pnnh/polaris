@@ -1,6 +1,6 @@
 #pragma once
 
-#include "native/services/sqlite/LibraryService.h"
+#include "linux/services/LibraryService.h"
 
 #include <QtCore>
 #include <QtQml/qqmlregistration.h>
@@ -14,25 +14,25 @@ class PartitionViewModel : public QAbstractListModel
   Q_PROPERTY(QString library READ library WRITE setLibrary)
 
 public:
-  explicit PartitionViewModel(QObject *parent = nullptr);
+  explicit PartitionViewModel(QObject* parent = nullptr);
   ~PartitionViewModel() override;
 
-  PartitionViewModel(const PartitionViewModel &) = delete;
-  PartitionViewModel &operator=(const PartitionViewModel &) = delete;
-  PartitionViewModel(PartitionViewModel &&) = delete;
-  PartitionViewModel &operator=(PartitionViewModel &&) = delete;
+  PartitionViewModel(const PartitionViewModel&) = delete;
+  PartitionViewModel& operator=(const PartitionViewModel&) = delete;
+  PartitionViewModel(PartitionViewModel&&) = delete;
+  PartitionViewModel& operator=(PartitionViewModel&&) = delete;
 
   QString library() const;
-  void setLibrary(const QString &library);
+  void setLibrary(const QString& library);
 
-  [[nodiscard]] int rowCount(const QModelIndex &parent) const override;
+  [[nodiscard]] int rowCount(const QModelIndex& parent) const override;
   [[nodiscard]] QHash<int, QByteArray> roleNames() const override;
-  [[nodiscard]] QVariant data(const QModelIndex &index, int role) const override;
+  [[nodiscard]] QVariant data(const QModelIndex& index, int role) const override;
 
 private:
   void loadData();
   QString currentLibrary;
   QHash<int, QByteArray> dataNames;
-  QVector<PartitionData *> dataList;
+  QVector<PartitionData*> dataList;
   LibraryService libraryService;
 };
