@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "CSharpUI (Package)": {
+      "commandName": "MsixPackage",
+      "nativeDebugging": true
+    },
+    "CSharpUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
