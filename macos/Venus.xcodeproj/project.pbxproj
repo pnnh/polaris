@@ -45,6 +45,7 @@
 		463413042CDB13BB00EE94E8 /* Services */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Services; sourceTree = "<group>"; };
 		4634130C2CDB15E700EE94E8 /* Models */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Models; sourceTree = "<group>"; };
 		4634130D2CDB15F500EE94E8 /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
+		46CB5C122CEB718D00525A0C /* Assets */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Assets; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +100,7 @@
 		46EE3C15254B142000EC17BB /* Venus */ = {
 			isa = PBXGroup;
 			children = (
+				46CB5C122CEB718D00525A0C /* Assets */,
 				4634130D2CDB15F500EE94E8 /* Views */,
 				4634130C2CDB15E700EE94E8 /* Models */,
 				463413042CDB13BB00EE94E8 /* Services */,
@@ -151,6 +153,7 @@
 				463413042CDB13BB00EE94E8 /* Services */,
 				4634130C2CDB15E700EE94E8 /* Models */,
 				4634130D2CDB15F500EE94E8 /* Views */,
+				46CB5C122CEB718D00525A0C /* Assets */,
 			);
 			name = Venus;
 			packageProductDependencies = (

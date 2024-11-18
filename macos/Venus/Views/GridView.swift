@@ -154,7 +154,7 @@ struct EmoView2: View {
                     .popover(isPresented: $model2.show,attachmentAnchor: .point(.bottom),
                              arrowEdge: .bottom){
                         // 通过这种方式设置大小有问题，图片被裁剪了
-                        SJImageView(image: nsImg.Image)
+                        PSImageView(image: nsImg.Image)
                             .frame(
                                 minWidth: 150, idealWidth:  nil, maxWidth: 350, minHeight: 150, idealHeight: nil,  maxHeight: 350)
                         
