@@ -19,6 +19,23 @@
   gap: 0.5rem;
   overflow-y: auto;
   height: calc(100vh - 6rem);
+
+  .functionLabel {
+    color: #5e5e5e;
+    font-size: 0.9rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  .directoryGroup {
+    background: #d6d6d6;
+    padding: 0.2rem 0.5rem;
+
+  }
+
+  .directoryItem {
+    font-size: 0.9rem;
+    padding: 0.2rem 1rem;
+  }
 }
 
 .notebookSelector {

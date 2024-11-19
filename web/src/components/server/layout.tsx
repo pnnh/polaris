@@ -3,9 +3,7 @@ import {GoogleAnalytics} from "@next/third-parties/google";
 import {Metadata} from "next";
 import {pageTitle} from "@/utils/page";
 import {isProd, usePublicConfig} from "@/services/server/config";
-import {GlobalStyleTag} from "@/components/style";
 import React from "react";
-import {RecoilProvider} from "@/components/client/provider";
 import {encodeBase64String} from "@/utils/basex";
 
 export function HtmlLayout({
@@ -26,13 +24,10 @@ export function HtmlLayout({
         <title>{pageTitle(metadata.title as string)}</title>
         {metadata.description && <meta name="description" content={metadata.description as string}></meta>}
         {isProd() && <GoogleAnalytics gaId="G-Z98PEGYB12"/>}
-        <GlobalStyleTag/>
     </head>
     <body>
     <ServerData/>
-    <RecoilProvider>
-        {children}
-    </RecoilProvider>
+    {children}
     </body>
     </html>
 }

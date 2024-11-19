@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import {ArticleStyle} from "./style";
+import './article.scss'
 import {TocItem} from "@/models/common/toc";
 import {BuildBodyHtml} from "@/components/server/article";
 
@@ -10,7 +10,6 @@ export function ArticleComponent({children}: {
     children: React.ReactNode
 }) {
     return <div>
-        <ArticleStyle/>
         {children}
     </div>
 }

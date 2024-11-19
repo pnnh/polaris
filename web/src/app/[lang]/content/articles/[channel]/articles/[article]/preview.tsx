@@ -1,6 +1,6 @@
 'use client'
 
-import {useRecoilState, useRecoilValue} from "recoil";
+// import {useRecoilState, useRecoilValue} from "recoil";
 import {articleAssetsPreviewAtom} from "./state";
 import "./preview.scss";
 import React, {useEffect, useState} from "react";
@@ -18,64 +18,64 @@ function isTextContent(mimeType: string) {
 }
 
 export function ArticleAssertPreview() {
-    const [previewState, setPreviewState] = useRecoilState(articleAssetsPreviewAtom)
-    const assetUrn = encodeBase64String(previewState.path)
-    const assetsUrl = `${previewState.assetsUrl}/${assetUrn}`
-    const [assertData, setAssertData] = useState<{
-        mime: string,
-        data: ArrayBuffer | string
-    }>({
-        mime: '',
-        data: ''
-    })
+    // const [previewState, setPreviewState] = useRecoilState(articleAssetsPreviewAtom)
+    // const assetUrn = encodeBase64String(previewState.path)
+    // const assetsUrl = `${previewState.assetsUrl}/${assetUrn}`
+    // const [assertData, setAssertData] = useState<{
+    //     mime: string,
+    //     data: ArrayBuffer | string
+    // }>({
+    //     mime: '',
+    //     data: ''
+    // })
 
-    useEffect(() => {
-        if (!previewState.show || !previewState.path) {
-            return
-        }
-        fetch(assetsUrl).then(async (response) => {
-            const contentType = response.headers.get('Content-Type')
-            console.log('response:', contentType, response)
-            if (isTextContent(contentType || '')) {
-                const bodyText = await response.text()
-                setAssertData({
-                    mime: contentType || 'text/plain',
-                    data: bodyText
-                })
-            } else {
-                setAssertData({
-                    mime: contentType || 'application/octet-stream',
-                    data: assetsUrl
-                })
-            }
-        })
-    }, [previewState])
+    // useEffect(() => {
+    //     if (!previewState.show || !previewState.path) {
+    //         return
+    //     }
+    //     fetch(assetsUrl).then(async (response) => {
+    //         const contentType = response.headers.get('Content-Type')
+    //         console.log('response:', contentType, response)
+    //         if (isTextContent(contentType || '')) {
+    //             const bodyText = await response.text()
+    //             setAssertData({
+    //                 mime: contentType || 'text/plain',
+    //                 data: bodyText
+    //             })
+    //         } else {
+    //             setAssertData({
+    //                 mime: contentType || 'application/octet-stream',
+    //                 data: assetsUrl
+    //             })
+    //         }
+    //     })
+    // }, [previewState])
 
-    if (!previewState.show) {
-        return <></>
-    }
+    // if (!previewState.show) {
+    //     return <></>
+    // }
     return <div className={'assertPreview'} style={{
-        top: previewState.top,
-        left: previewState.left,
-        width: previewState.size.width
+        // top: previewState.top,
+        // left: previewState.left,
+        // width: previewState.size.width
     }}>
         <div className={'previewHeader'}>
             <div className={'pathTitle'}>
-                {previewState.path}
+                {/*{previewState.path}*/}
             </div>
             <div className={'closeContainer'}>
                 <i onClick={() => {
-                    setPreviewState({
-                        ...previewState,
-                        show: false
-                    })
+                    // setPreviewState({
+                    //     ...previewState,
+                    //     show: false
+                    // })
                 }}>
                     <IoClose size={'1rem'}/>
                 </i>
             </div>
         </div>
         <div className={'previewBody'}>
-            <PreviewBody mime={assertData.mime} data={assertData.data}/>
+            {/*<PreviewBody mime={assertData.mime} data={assertData.data}/>*/}
         </div>
     </div>
 }

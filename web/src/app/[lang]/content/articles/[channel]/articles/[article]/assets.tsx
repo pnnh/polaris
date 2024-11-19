@@ -3,7 +3,7 @@
 import styles from './assets.module.css'
 import React, {useEffect, useState} from "react";
 import {getIcon} from "material-file-icons";
-import {useRecoilState, useRecoilValue} from "recoil";
+// import {useRecoilState, useRecoilValue} from "recoil";
 import {clientSigninDomain} from "@/services/client/domain";
 import {ClientConfig, useClientConfig} from "@/services/client/config";
 import {IDomain} from "@/services/common/domain";
@@ -52,16 +52,16 @@ export function ArticleAssets({channelUrn, articleUrn}: { channelUrn: string, ar
 }
 
 function FileGroup({domain, channelUrn, articleUrn, model, level}:
-                       {
-                           domain: IDomain,
-                           channelUrn: string,
-                           articleUrn: string,
-                           model: PSArticleFileModel,
-                           level: number
-                       }) {
+                   {
+                       domain: IDomain,
+                       channelUrn: string,
+                       articleUrn: string,
+                       model: PSArticleFileModel,
+                       level: number
+                   }) {
     const [files, setFiles] = useState<PSArticleFileModel[]>([])
     const [open, setOpen] = useState(false)
-    const [previewState, setPreviewState] = useRecoilState(articleAssetsPreviewAtom)
+    // const [previewState, setPreviewState] = useRecoilState(articleAssetsPreviewAtom)
 
     const openIcon = () => {
         if (model.type != 'directory') {
@@ -102,15 +102,15 @@ function FileGroup({domain, channelUrn, articleUrn, model, level}:
                           const currentTarget = event.currentTarget as HTMLSpanElement
                           const itemTop = currentTarget.offsetTop - assetsBodyElement.scrollTop - 6 // 大概减去点击元素所在父级的上边距
                           const assetsUrl = domain.assetUrl(`/articles/${channelUrn}/articles/${articleUrn}/assets`)
-                          setPreviewState({
-                              show: previewState.path === model.path ? !previewState.show : true,
-                              assetsUrl: assetsUrl,
-                              path: model.path,
-                              left: -1 * (articleReadBody.clientWidth + 32),
-                              top: itemTop + 2,
-                              position: {x: articleReadBody.clientLeft, y: event.clientY},
-                              size: {width: articleReadBody.clientWidth + 32, height: 200}
-                          })
+                          // setPreviewState({
+                          //     show: previewState.path === model.path ? !previewState.show : true,
+                          //     assetsUrl: assetsUrl,
+                          //     path: model.path,
+                          //     left: -1 * (articleReadBody.clientWidth + 32),
+                          //     top: itemTop + 2,
+                          //     position: {x: articleReadBody.clientLeft, y: event.clientY},
+                          //     size: {width: articleReadBody.clientWidth + 32, height: 200}
+                          // })
                       }}>{model.name}</span>
             </div>
             {

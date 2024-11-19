@@ -2,13 +2,11 @@
 
 import React from 'react'
 import {useEffect, useState} from 'react'
-import {useRecoilState, useRecoilValue} from 'recoil'
 import './library.scss'
-import {libraryAtom} from "@/services/client/console/providers/notebook";
 
 export function LibrarySelector() {
     const [notebookDropdown, setLibraryDropdown] = useState<boolean>(false)
-    const [libraryState, setLibraryState] = useRecoilState(libraryAtom)
+    // const [libraryState, setLibraryState] = useRecoilState(libraryAtom)
 
     // useEffect(() => {
     //     selectLibraries().then(selectResult => {
@@ -20,15 +18,15 @@ export function LibrarySelector() {
     //         }
     //     })
     // }, [])
-
-    if (!libraryState || !libraryState.models || libraryState.models.length <= 0 || !libraryState.current) {
-        return <div>暂无笔记本</div>
-    }
-    const defaultLibrary = libraryState.current
+    //
+    // if (!libraryState || !libraryState.models || libraryState.models.length <= 0 || !libraryState.current) {
+    //     return <div>暂无笔记本</div>
+    // }
+    // const defaultLibrary = libraryState.current
     return <>
         <div className={'notebookSelector'}>
             <div className={'notebookTitle'}>
-                <span>{defaultLibrary.name}</span>
+                <span>{'defaultLibrary.name'}</span>
                 <img src='/icons/console/down-arrow.png' alt='选择笔记本' width={24} height={24}
                      onClick={() => setLibraryDropdown(!notebookDropdown)}></img>
             </div>
@@ -40,19 +38,19 @@ export function LibrarySelector() {
         {
             notebookDropdown && <div className={'libraryContainer'}>
                 <div className={'libraryList'}>
-                    {
-                        libraryState.models.map(item => {
-                            return <div key={item.urn} className={'notebookItem'} onClick={() => {
-                                setLibraryDropdown(!notebookDropdown)
-                                setLibraryState({
-                                    models: libraryState.models,
-                                    current: item
-                                })
-                            }}>
-                                <span className={'notebookName'}>{item.name}</span>
-                            </div>
-                        })
-                    }
+                    {/*{*/}
+                    {/*    libraryState.models.map(item => {*/}
+                    {/*        return <div key={item.urn} className={'notebookItem'} onClick={() => {*/}
+                    {/*            setLibraryDropdown(!notebookDropdown)*/}
+                    {/*            setLibraryState({*/}
+                    {/*                models: libraryState.models,*/}
+                    {/*                current: item*/}
+                    {/*            })*/}
+                    {/*        }}>*/}
+                    {/*            <span className={'notebookName'}>{item.name}</span>*/}
+                    {/*        </div>*/}
+                    {/*    })*/}
+                    {/*}*/}
                 </div>
                 <div className={'newLibrary'}>新增资料库</div>
             </div>

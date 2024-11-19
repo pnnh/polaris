@@ -1,50 +1,32 @@
 'use client'
 
 import React from 'react'
-import {useEffect, useState} from 'react'
-import {useRecoilState, useRecoilValue} from 'recoil'
 import './notebook.scss'
-import {libraryAtom, notebookAtom} from "@/services/client/console/providers/notebook";
 import {PSNotebookModel} from "@/models/common/personal/notebook";
 
 export function NotebookList() {
-    const libraryState = useRecoilValue(libraryAtom)
-    const [notebookState, setNotebookState] = useRecoilState(notebookAtom)
-    // useEffect(() => {
-    //     if (!libraryState.current || !libraryState.current.urn) {
-    //         return
-    //     }
-    //     selectNotebooks(libraryState.current.urn).then(selectResult => {
-    //         setNotebookState({
-    //             models: selectResult.range,
-    //             current: selectResult.range[0]
-    //         })
-    //     })
-    // }, [libraryState])
-
-    if (!notebookState || !notebookState.models || notebookState.models.length <= 0) {
-        return <div>Empty</div>
-    }
     return <div className={'notebookContainer'}>
         <div className={'notebookList'}>
-            {
-                notebookState.models.map(item => {
-                    return <NotebookCard key={item.urn} item={item}/>
-                })
-            }
+            <div className={'functionLabel'}>资源管理器</div>
+            <div className={'directoryBody'}>
+                <div className={'directoryGroup'}>位置</div>
+                <div className={'directoryList'}>
+                    <div className={'directoryItem'}>根目录</div>
+                    <div className={'directoryItem'}>主目录</div>
+                </div>
+            </div>
         </div>
-        <div className={'newNotebook'}>新增笔记本</div>
     </div>
 }
 
 function NotebookCard({item}: { item: PSNotebookModel }) {
-    const [notebookState, setNotebookState] = useRecoilState(notebookAtom)
+    // const [notebookState, setNotebookState] = useRecoilState(notebookAtom)
     return <div>
         <div className={'directorySelf'} onClick={() => {
-            setNotebookState({
-                models: notebookState.models,
-                current: item
-            })
+            // setNotebookState({
+            //     models: notebookState.models,
+            //     current: item
+            // })
         }}>
             <div className={'directoryName'}>
                 {item.title}</div>
