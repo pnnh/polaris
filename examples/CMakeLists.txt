@@ -1,7 +1,6 @@
 
 set(EXAMPLE_NAME ${PROJECT_NAME}Example)
 
-
 file(GLOB_RECURSE EXAMPLE_SOURCES
         sqlite/*.cpp
         articles/*.cpp
@@ -29,3 +28,4 @@ add_test(NAME ${EXAMPLE_NAME}ArticleSelectChannels COMMAND ${EXAMPLE_NAME} --cas
 add_test(NAME ${EXAMPLE_NAME}ArticleSelectArticles COMMAND ${EXAMPLE_NAME} --caseName TestArticleSelectArticles)
 add_test(NAME ${EXAMPLE_NAME}ArticleSelectLibraries COMMAND ${EXAMPLE_NAME} --caseName TestArticleSelectLibraries)
 add_test(NAME ${EXAMPLE_NAME}ArticleSelectNotebooks COMMAND ${EXAMPLE_NAME} --caseName TestArticleSelectNotebooks)
+add_test(NAME ${EXAMPLE_NAME}SelectFiles COMMAND ${EXAMPLE_NAME} --caseName TestSelectFiles)

@@ -32,6 +32,11 @@ include_directories(${PROJECT_BINARY_DIR})
 CMAKE_POLICY(SET CMP0012 NEW)
 
 add_subdirectory(native)
+
+if (CMAKE_BUILD_TYPE STREQUAL "Debug" AND (LINUX OR APPLE OR WIN32))
+    add_subdirectory(examples)
+endif ()
+
 if (WIN32)
     add_subdirectory(windows)
 elseif (APPLE)

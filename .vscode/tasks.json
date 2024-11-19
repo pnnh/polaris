@@ -13,6 +13,19 @@
                 "PolarisServer",
                 "--verbose"
             ]
+        },
+        {
+            "label": "PolarisExampleBuild",
+            "command": "cmake",
+            "type": "process",
+            "args": [
+                "--build",
+                "--preset",
+                "linux",
+                "--target",
+                "PolarisExample",
+                "--verbose"
+            ]
         }
     ]
 }

@@ -31,6 +31,23 @@
                 "MIMode": "gdb",
                 "miDebuggerPath": "/usr/bin/gdb"
             },
+        },
+        {
+            "name": "PolarisExample",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/linux/examples/PolarisExample",
+            "cwd": "${workspaceFolder}/examples",
+            "args": [
+                "--caseName",
+                "TestSelectFiles"
+            ],
+            "preLaunchTask": "PolarisExampleBuild",
+            "stopAtEntry": false,
+            "linux": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "/usr/bin/gdb"
+            },
         }
     ]
 }
