@@ -18,6 +18,7 @@
 #include <workflow/WFHttpServer.h>
 
 #include "controllers/index.h"
+#include "controllers/channel.h"
 
 void process(WFHttpTask* httpTask)
 {
@@ -29,6 +30,7 @@ void process(WFHttpTask* httpTask)
   router.register_route("/", "GET", polaris::HandleIndex);
   router.register_route("^/server/sitemap$", "GET", HandleSitemap);
   router.register_route("^/server/articles$", "GET", HandleArticles);
+  router.register_route("^/server/channels$", "GET", HandleChannels);
   router.register_route("^/server/articles/get\\?[\\w\\d=-]+$", "GET", HandleArticleGet);
   router.route_request(httpTask);
 

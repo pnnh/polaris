@@ -8,9 +8,21 @@
 
 #include "native/utils/query.h"
 
+#include "native/business/articles/article.h"
+
+#include <build.h>
+
+#include "native/services/filesystem/filesystem.h"
+#include "native/services/logger/logger.h"
+
+namespace business = native::business;
+namespace logger = native::services::logger;
+namespace services = native::services;
+
 using json = nlohmann::json;
 
-void HandleArticleGet(WFHttpTask *httpTask) {
+void HandleArticleGet(WFHttpTask *httpTask)
+{
 
   protocol::HttpRequest *request = httpTask->get_req();
   protocol::HttpResponse *response = httpTask->get_resp();
@@ -47,7 +59,8 @@ void HandleArticleGet(WFHttpTask *httpTask) {
   auto uid = queryParam.getString("uid");
   auto nid = queryParam.getLong("nid");
 
-  if (uid == std::nullopt && nid == std::nullopt) {
+  if (uid == std::nullopt && nid == std::nullopt)
+  {
     response->set_status_code("400");
     return;
   }
@@ -176,7 +189,8 @@ void HandleArticleGet(WFHttpTask *httpTask) {
 
 // }
 
-void HandleArticles(WFHttpTask *httpTask) {
+void HandleArticles(WFHttpTask *httpTask)
+{
 
   protocol::HttpRequest *request = httpTask->get_req();
   protocol::HttpResponse *response = httpTask->get_resp();
@@ -191,52 +205,54 @@ void HandleArticles(WFHttpTask *httpTask) {
   auto fullUrl = std::string("http://localhost") + request_uri;
 
   auto url = boost::urls::parse_uri(fullUrl);
-  if (url.has_error()) {
+  if (url.has_error())
+  {
     spdlog::error("url parse error: {}", url.error().message());
     response->set_status_code("500");
     return;
   }
 
   auto it = boost::range::find_if(
-      url->params(), [](boost::urls::param p) { return p.key == "limit"; });
+      url->params(), [](boost::urls::param p)
+      { return p.key == "limit"; });
 
   int limit = 10;
   std::string limitString;
-  if (it != url->params().end()) {
+  if (it != url->params().end())
+  {
     limitString = (*it).value;
   }
-  if (!limitString.empty()) {
+  if (!limitString.empty())
+  {
     limit = std::stoi(limitString);
   }
-  //
-  // auto result = MessageService().selectMessages(limit);
-  // if (result == std::nullopt) {
-  //   response->set_status_code("404");
-  //   return;
-  // }
-  //
-  // auto count = MessageService().count();
-  //
-  // json range = json::array();
-  // for (auto &m : *result) {
-  //   json item = {
-  //       {"uid", m.uid},
-  //       {"title", m.title},
-  //       {"header", m.header},
-  //       {"body", m.body},
-  //       {"description", m.description},
-  //   };
-  //   range.push_back(item);
-  // }
-  //
-  // json data = json::object({{"count", count},
-  //                           {
-  //                               "range",
-  //                               range,
-  //                           }});
+
+  const std::string baseUrl = services::filesystem::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data", "CPlus.notelibrary", "CMake笔记本.notebook"});
+  auto articleServer = std::make_shared<business::articles::ArticleServerBusiness>(baseUrl);
+  auto articlePtr = articleServer->selectArticles();
+  json range = json::array();
+  for (const auto &model : *articlePtr)
+  {
+    logger::Logger::LogInfo({model.URN, model.Title, model.Title});
+    json item = {
+        {"urn", model.URN},
+        {"title", model.Title},
+        {"header", model.Header},
+        {"body", model.Body},
+        {"description", model.Description},
+    };
+    range.push_back(item);
+  }
+  auto count = articlePtr->size();
+
+  json data = json::object({{"count", count},
+                            {
+                                "range",
+                                range,
+                            }});
 
   std::ostringstream oss;
-  // oss << data;
+  oss << data;
 
   auto bodyStr = oss.str();
   auto bodySize = bodyStr.size();

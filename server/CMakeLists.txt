@@ -2,6 +2,12 @@
 set(EXE_NAME ${PROJECT_NAME}Server)
 
 add_executable(${EXE_NAME})
+
+file(GLOB_RECURSE EXE_SOURCES
+        controllers/*.cpp
+        services/*.cpp
+        models/*.cpp)
+
 target_sources(${EXE_NAME}
         PUBLIC
         main.cxx
@@ -9,14 +15,8 @@ target_sources(${EXE_NAME}
         process.h
         router.cpp
         router.h
-        controllers/article.cpp
-        controllers/article.h
-        controllers/sitemap.cpp
-        controllers/sitemap.h
-        controllers/index.cpp
-        controllers/index.h
-        services/config/appconfig.cpp
-        services/config/appconfig.h)
+        ${EXE_SOURCES})
+        
 target_sources(${EXE_NAME}
         PUBLIC FILE_SET CXX_MODULES
         FILES foo.cxx)

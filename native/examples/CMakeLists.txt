@@ -1,19 +1,17 @@
 
 set(EXAMPLE_NAME ${PROJECT_NAME}Example)
+
+
+file(GLOB_RECURSE EXAMPLE_SOURCES
+        sqlite/*.cpp
+        articles/*.cpp
+        files/*.cpp)
+
 add_executable(${EXAMPLE_NAME}
         main.cpp
         cases.cpp
         cases.h
-        sqlite/sqlite.cpp
-        sqlite/sqlite.h
-        articles/channel.cpp
-        articles/channel.h
-        articles/article.cpp
-        articles/article.h
-        articles/library.cpp
-        articles/library.h
-        articles/notebook.cpp
-        articles/notebook.h)
+        ${EXAMPLE_SOURCES})
 
 add_dependencies(${EXAMPLE_NAME} ${PROJECT_NAME})
 target_link_libraries(${EXAMPLE_NAME} PRIVATE ${PROJECT_NAME})

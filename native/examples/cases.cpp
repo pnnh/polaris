@@ -9,6 +9,7 @@
 #include "articles/library.h"
 #include "articles/notebook.h"
 #include "sqlite/sqlite.h"
+#include "files/file.h"
 
 namespace examples = native::examples;
 namespace sqlite = examples::sqlite;
@@ -26,10 +27,10 @@ const std::unordered_map<std::string, std::function<int()>> caseMap{
     {"TestArticleSelectArticles", examples::articles::TestArticleSelectArticles},
     {"TestArticleSelectChannels", examples::articles::TestArticleSelectChannels},
     {"TestArticleSelectLibraries", examples::articles::TestArticleSelectLibraries},
-    {"TestArticleSelectNotebooks", examples::articles::TestArticleSelectNotebooks}
-};
+    {"TestArticleSelectNotebooks", examples::articles::TestArticleSelectNotebooks},
+    {"TestSelectFiles", examples::TestSelectFiles}};
 
-int native::examples::runCase(const std::string& caseName)
+int native::examples::runCase(const std::string &caseName)
 {
     const auto end = caseMap.end();
     auto it = caseMap.find(caseName);
