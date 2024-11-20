@@ -1,54 +1,53 @@
 #include "Exception.h"
 
-namespace protocol = native::models::protocol;
-
-protocol::QuantumException::QuantumException() : error(QuantumError::ERROR), message()
+native::QuantumException::QuantumException() : _codeEnum(QuantumEnum::ERROR)
 {
 }
 
-protocol::QuantumException::QuantumException(const std::string &message) : error(QuantumError::ERROR),
-                                                                           message(message)
+native::QuantumException::QuantumException(const std::string& exceptionMessage) : _codeEnum(QuantumEnum::ERROR),
+    _exceptionMessage(exceptionMessage)
 {
 }
 
-protocol::QuantumException::QuantumException(const char *firstMessage, const char *secondMessage) : error(QuantumError::ERROR),
-                                                                                                    message(firstMessage)
+native::QuantumException::QuantumException(const char* firstMessage, const char* secondMessage) :
+    _codeEnum(QuantumEnum::ERROR),
+    _exceptionMessage(firstMessage)
 {
-    message = message.value_or("") + secondMessage;
+    _exceptionMessage = _exceptionMessage.value_or("") + secondMessage;
 }
 
-protocol::QuantumException::QuantumException(const QuantumException &other) : exception(other)
+native::QuantumException::QuantumException(const QuantumException& other) : exception(other)
 {
-    error = other.error;
-    message = other.message;
+    _codeEnum = other._codeEnum;
+    _exceptionMessage = other._exceptionMessage;
 }
 
-protocol::QuantumException &protocol::QuantumException::operator=(const QuantumException &other)
+native::QuantumException& native::QuantumException::operator=(const QuantumException& other)
 {
-    error = other.error;
-    message = other.message;
+    _codeEnum = other._codeEnum;
+    _exceptionMessage = other._exceptionMessage;
     return *this;
 }
 
-protocol::QuantumException::QuantumException(QuantumException &&other) noexcept : exception(other)
+native::QuantumException::QuantumException(QuantumException&& other) noexcept : exception(other)
 {
-    error = other.error;
-    message = other.message;
+    _codeEnum = other._codeEnum;
+    _exceptionMessage = other._exceptionMessage;
 }
 
-protocol::QuantumException &protocol::QuantumException::operator=(QuantumException &&other) noexcept
+native::QuantumException& native::QuantumException::operator=(QuantumException&& other) noexcept
 {
-    error = other.error;
-    message = other.message;
+    _codeEnum = other._codeEnum;
+    _exceptionMessage = other._exceptionMessage;
     return *this;
 }
 
-protocol::QuantumException::QuantumException(QuantumError error, std::string message) : error(error),
-                                                                                        message(message)
+native::QuantumException::QuantumException(QuantumEnum error, std::string exceptionMessage) : _codeEnum(error),
+    _exceptionMessage(exceptionMessage)
 {
 }
 
-void protocol::QuantumException::AppendMessage(const std::string &message)
+void native::QuantumException::AppendMessage(const std::string& exceptionMessage)
 {
-    this->message = this->message.value_or("") + message;
+    this->_exceptionMessage = this->_exceptionMessage.value_or("") + exceptionMessage;
 }

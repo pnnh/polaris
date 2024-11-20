@@ -4,13 +4,14 @@
 #include <optional>
 #include <string>
 
-class QueryParam {
+class QueryParam
+{
 public:
-  QueryParam(const std::string &url_string);
+  explicit QueryParam(const std::string& url_string);
 
-  std::optional<std::string> getString(const std::string &key);
-  std::optional<long> getLong(const std::string &key);
+  std::optional<std::string> getString(const std::string& key) const;
+  std::optional<long> getLong(const std::string& key);
 
 private:
-  boost::system::result<boost::urls::url_view> parsed_url;
+  std::string _fullUrl;
 };

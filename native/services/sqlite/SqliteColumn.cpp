@@ -14,7 +14,7 @@ native::services::sqlite::SqliteColumn::SqliteColumn(const int colType, const in
     colType(colType), colIndex(colIndex),
     colName(colName)
 {
-    if (colIndex < 0) throw native::models::protocol::QuantumException("列索引必须大于等于0");
+    if (colIndex < 0) throw native::QuantumException("列索引必须大于等于0");
 }
 
 native::services::sqlite::SqliteColumn::~SqliteColumn()

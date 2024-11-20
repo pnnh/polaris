@@ -21,16 +21,14 @@ namespace services = native::services;
 
 using json = nlohmann::json;
 
-void HandleArticleGet(WFHttpTask *httpTask)
+void HandleArticleGet(WFHttpTask* httpTask)
 {
-
-  protocol::HttpRequest *request = httpTask->get_req();
-  protocol::HttpResponse *response = httpTask->get_resp();
+  protocol::HttpRequest* request = httpTask->get_req();
+  protocol::HttpResponse* response = httpTask->get_resp();
 
   response->set_http_version("HTTP/1.1");
   response->add_header_pair("Content-Type", "application/json; charset=utf-8");
   response->add_header_pair("Access-Control-Allow-Origin", "*");
-  response->add_header_pair("Server", "Sogou WFHttpServer");
 
   auto request_uri = request->get_request_uri();
 
@@ -189,11 +187,10 @@ void HandleArticleGet(WFHttpTask *httpTask)
 
 // }
 
-void HandleArticles(WFHttpTask *httpTask)
+void HandleArticles(WFHttpTask* httpTask)
 {
-
-  protocol::HttpRequest *request = httpTask->get_req();
-  protocol::HttpResponse *response = httpTask->get_resp();
+  protocol::HttpRequest* request = httpTask->get_req();
+  protocol::HttpResponse* response = httpTask->get_resp();
 
   response->set_http_version("HTTP/1.1");
   response->add_header_pair("Content-Type", "application/json; charset=utf-8");
@@ -213,8 +210,10 @@ void HandleArticles(WFHttpTask *httpTask)
   }
 
   auto it = boost::range::find_if(
-      url->params(), [](boost::urls::param p)
-      { return p.key == "limit"; });
+    url->params(), [](boost::urls::param p)
+    {
+      return p.key == "limit";
+    });
 
   int limit = 10;
   std::string limitString;
@@ -227,29 +226,33 @@ void HandleArticles(WFHttpTask *httpTask)
     limit = std::stoi(limitString);
   }
 
-  const std::string baseUrl = services::filesystem::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data", "CPlus.notelibrary", "CMake笔记本.notebook"});
+  const std::string baseUrl = services::filesystem::JoinFilePath({
+    PROJECT_SOURCE_DIR, "assets", "data", "CPlus.notelibrary", "CMake笔记本.notebook"
+  });
   auto articleServer = std::make_shared<business::articles::ArticleServerBusiness>(baseUrl);
   auto articlePtr = articleServer->selectArticles();
   json range = json::array();
-  for (const auto &model : *articlePtr)
+  for (const auto& model : *articlePtr)
   {
     logger::Logger::LogInfo({model.URN, model.Title, model.Title});
     json item = {
-        {"urn", model.URN},
-        {"title", model.Title},
-        {"header", model.Header},
-        {"body", model.Body},
-        {"description", model.Description},
+      {"urn", model.URN},
+      {"title", model.Title},
+      {"header", model.Header},
+      {"body", model.Body},
+      {"description", model.Description},
     };
     range.push_back(item);
   }
   auto count = articlePtr->size();
 
-  json data = json::object({{"count", count},
-                            {
-                                "range",
-                                range,
-                            }});
+  json data = json::object({
+    {"count", count},
+    {
+      "range",
+      range,
+    }
+  });
 
   std::ostringstream oss;
   oss << data;

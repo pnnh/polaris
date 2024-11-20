@@ -4,21 +4,21 @@
 #include <optional>
 #include <string>
 
-namespace native::models::protocol
+namespace native
 {
-    enum class QuantumError
+    enum class QuantumEnum
     {
         OK = 0,
         ERROR = 1
     };
 
-    constexpr const char* QuantumErrorToString(QuantumError error)
+    constexpr const char* QuantumEnumToString(QuantumEnum error)
     {
         switch (error)
         {
-        case QuantumError::OK:
+        case QuantumEnum::OK:
             return "OK";
-        case QuantumError::ERROR:
+        case QuantumEnum::ERROR:
             return "ERROR";
         default:
             return "UNKNOWN";
@@ -30,7 +30,7 @@ namespace native::models::protocol
     public:
         QuantumException();
         explicit QuantumException(const std::string& message);
-        QuantumException(QuantumError error, std::string message);
+        QuantumException(QuantumEnum error, std::string message);
         QuantumException(const char* firstMessage, const char* secondMessage);
 
         QuantumException(const QuantumException& other);
@@ -43,13 +43,13 @@ namespace native::models::protocol
         [[nodiscard]]
         const char* what() const noexcept override
         {
-            std::cerr << QuantumErrorToString(error) << ": " << message.value_or("") << std::endl;
-            return QuantumErrorToString(error);
+            std::cerr << QuantumEnumToString(_codeEnum) << ": " << _exceptionMessage.value_or("") << std::endl;
+            return QuantumEnumToString(_codeEnum);
         }
 
     private:
-        QuantumError error;
-        std::optional<std::string> message;
+        QuantumEnum _codeEnum;
+        std::optional<std::string> _exceptionMessage;
     };
 }
 

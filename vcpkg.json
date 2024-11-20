@@ -11,12 +11,8 @@
       "name": "zlib"
     },
     {
-      "name": "folly",
-      "platform": "linux"
-    },
-    {
       "name": "workflow",
-      "platform": "linux"
+      "platform": "linux|osx"
     },
     {
       "name": "boost",
@@ -44,11 +40,6 @@
     },
     {
       "name": "date"
-    },
-    {
-      "name": "cryptopp",
-      "version>=": "8.9.0",
-      "platform": "linux"
     }
   ],
   "builtin-baseline": "5f4628b89f3f98cd9a0b43c27ded2aa53da1f790",

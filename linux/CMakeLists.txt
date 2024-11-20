@@ -65,8 +65,8 @@ find_package(unofficial-sqlite3 CONFIG REQUIRED)
 target_link_libraries(${APP_NAME} PRIVATE unofficial::sqlite3::sqlite3)
 
 # 查找并引用CryptoPP解析库
-find_package(cryptopp CONFIG REQUIRED)
-target_link_libraries(${APP_NAME} PRIVATE cryptopp::cryptopp)
+#find_package(cryptopp CONFIG REQUIRED)
+#target_link_libraries(${APP_NAME} PRIVATE cryptopp::cryptopp)
 
 target_link_libraries(
         ${APP_NAME}

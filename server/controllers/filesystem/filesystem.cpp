@@ -8,40 +8,42 @@
 #include <workflow/HttpMessage.h>
 #include "native/business/filesystem/file.h"
 #include "native/services/filesystem/filesystem.h"
-#include "native/services/logger/logger.h"
-#include "native/services/sqlite/SqliteService.h"
-#include "server/services/query/query.h"
 
-namespace business = native::business;
+#include <iostream>
+#include <native/utils/query.h>
+
+#include "native/services/logger/logger.h"
+
 namespace logger = native::services::logger;
 
 using json = nlohmann::json;
 
-void HandleFileList(WFHttpTask *httpTask)
+void HandleFileList(WFHttpTask* httpTask)
 {
-    protocol::HttpRequest *request = httpTask->get_req();
-    protocol::HttpResponse *response = httpTask->get_resp();
+    protocol::HttpRequest* request = httpTask->get_req();
+    protocol::HttpResponse* response = httpTask->get_resp();
 
     response->set_http_version("HTTP/1.1");
     response->add_header_pair("Content-Type", "application/json; charset=utf-8");
     response->add_header_pair("Access-Control-Allow-Origin", "*");
-    response->add_header_pair("Server", "Sogou WFHttpServer");
 
     auto request_uri = request->get_request_uri();
 
-    auto queryUtils = server::QueryUtils(request_uri);
+    QueryParam queryParam{std::string(request_uri)};
 
-    auto encodePath = queryUtils.GetString("path");
+    auto encodePath = queryParam.getString("path");
+    if (encodePath.has_value())
+    {
+        std::cout << "path: " << "==" << *encodePath << std::endl;
+    }
 
     std::ostringstream oss;
     const std::string baseUrl = native::services::filesystem::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
     auto fileServer = std::make_shared<native::FileServerBusiness>(baseUrl);
     auto filesPtr = fileServer->selectFiles();
     json range = json::array();
-    for (const auto &model : *filesPtr)
+    for (const auto& model : *filesPtr)
     {
-        logger::Logger::LogInfo({model.URN, model.Name, model.Title});
-
         json item = {
             {"urn", model.URN},
             {"title", model.Title},
@@ -52,11 +54,13 @@ void HandleFileList(WFHttpTask *httpTask)
     }
 
     auto count = filesPtr->size();
-    json data = json::object({{"count", count},
-                              {
-                                  "range",
-                                  range,
-                              }});
+    json data = json::object({
+        {"count", count},
+        {
+            "range",
+            range,
+        }
+    });
     oss << data;
 
     auto bodyStr = oss.str();

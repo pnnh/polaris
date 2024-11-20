@@ -24,7 +24,7 @@ namespace native::services::sqlite
 
         SqliteHandle openDatabase(const char* path);
         SqliteHandle openDatabase(std::string&& path);
-        models::protocol::QuantumError closeDatabase(SqliteHandle dbHandle);
+        native::QuantumEnum closeDatabase(SqliteHandle dbHandle);
         SqliteResult runSql(SqliteHandle dbHandle, std::string& text);
         SqliteResult runSql(SqliteHandle dbHandle, std::string&& text);
         std::string sqliteVersion(SqliteHandle dbHandle);

@@ -28,7 +28,7 @@ sqlite::SqliteHandle sqlite::SqliteService::openDatabase(std::string&& path)
 
     auto cPath = path.c_str();
     int rc = sqlite3_open(cPath, &db);
-    if (rc) throw models::protocol::QuantumException("Can't open database", sqlite3_errmsg(db));
+    if (rc) throw native::QuantumException("Can't open database", sqlite3_errmsg(db));
 
     const SqliteHandle handle = dbHandles.size();
 
@@ -37,13 +37,13 @@ sqlite::SqliteHandle sqlite::SqliteService::openDatabase(std::string&& path)
     return handle;
 }
 
-native::models::protocol::QuantumError sqlite::SqliteService::closeDatabase(sqlite::SqliteHandle dbHandle)
+native::QuantumEnum sqlite::SqliteService::closeDatabase(sqlite::SqliteHandle dbHandle)
 {
     auto db = dbHandles[dbHandle];
-    if (db == nullptr) throw models::protocol::QuantumException("Database handle not found");
+    if (db == nullptr) throw QuantumException("Database handle not found");
     auto rc = sqlite3_close(db);
-    if (rc) throw models::protocol::QuantumException("Can't close database", sqlite3_errmsg(db));
-    return models::protocol::QuantumError::OK;
+    if (rc) throw QuantumException("Can't close database", sqlite3_errmsg(db));
+    return QuantumEnum::OK;
 }
 
 sqlite::SqliteResult sqlite::SqliteService::runSql(SqliteHandle dbHandle, std::string& text)
@@ -55,7 +55,7 @@ std::string sqlite::SqliteService::sqliteVersion(SqliteHandle dbHandle)
 {
     auto sqlResult = runSql(dbHandle, "SELECT sqlite_version() as version;");
     auto verColumn = sqlResult.getColumn(0, 0);
-    if (!verColumn.has_value()) throw models::protocol::QuantumException("Can't get sqlite version");
+    if (!verColumn.has_value()) throw QuantumException("Can't get sqlite version");
 
     return verColumn.value().getStringValue();
 }
@@ -64,13 +64,13 @@ sqlite::SqliteResult sqlite::SqliteService::runSql(SqliteHandle dbHandle,
                                                                    std::string&& sqlText)
 {
     auto db = dbHandles[dbHandle];
-    if (db == nullptr) throw models::protocol::QuantumException("Database handle not found");
+    if (db == nullptr) throw QuantumException("Database handle not found");
 
     sqlite3_stmt* stmt;
     int row = 0;
 
     auto rc = sqlite3_prepare_v2(db, sqlText.c_str(), static_cast<int>(sqlText.length() + 1), &stmt, nullptr);
-    if (rc) throw models::protocol::QuantumException("Can't prepare statement", sqlite3_errmsg(db));
+    if (rc) throw QuantumException("Can't prepare statement", sqlite3_errmsg(db));
 
     SqliteResult sqlResult;
     while (true)
@@ -129,7 +129,7 @@ sqlite::SqliteResult sqlite::SqliteService::runSql(SqliteHandle dbHandle,
         }
         else
         {
-            throw models::protocol::QuantumException("Can't step statement", sqlite3_errmsg(db));
+            throw QuantumException("Can't step statement", sqlite3_errmsg(db));
         }
     }
     return sqlResult;

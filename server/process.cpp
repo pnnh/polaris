@@ -19,20 +19,14 @@
 
 #include "controllers/index.h"
 #include "controllers/channel.h"
+#include "controllers/filesystem/filesystem.h"
 
 void process(WFHttpTask* httpTask)
 {
   protocol::HttpRequest* request = httpTask->get_req();
   protocol::HttpResponse* response = httpTask->get_resp();
 
-  auto request_uri = request->get_request_uri();
-  Router router;
-  router.register_route("/", "GET", polaris::HandleIndex);
-  router.register_route("^/server/sitemap$", "GET", HandleSitemap);
-  router.register_route("^/server/articles$", "GET", HandleArticles);
-  router.register_route("^/server/channels$", "GET", HandleChannels);
-  router.register_route("^/server/articles/get\\?[\\w\\d=-]+$", "GET", HandleArticleGet);
-  router.route_request(httpTask);
+  server::route_request(httpTask);
 
   return;
 

@@ -10,16 +10,12 @@ file(GLOB_RECURSE EXE_SOURCES
 
 target_sources(${EXE_NAME}
         PUBLIC
-        main.cxx
+        main.cpp
         process.cpp
         process.h
         router.cpp
         router.h
         ${EXE_SOURCES})
-        
-target_sources(${EXE_NAME}
-        PUBLIC FILE_SET CXX_MODULES
-        FILES foo.cxx)
 
 add_dependencies(${EXE_NAME} ${PROJECT_NAME})
 target_link_libraries(${EXE_NAME} PRIVATE ${PROJECT_NAME})
@@ -35,8 +31,8 @@ find_library(workflow_lib workflow)
 target_link_libraries(${EXE_NAME} PRIVATE ${workflow_lib})
 
 # 查找并引用folly库
-find_package(folly CONFIG REQUIRED)
-target_link_libraries(${EXE_NAME} PRIVATE Folly::folly Folly::folly_deps Folly::follybenchmark Folly::folly_test_util)
+#find_package(folly CONFIG REQUIRED)
+#target_link_libraries(${EXE_NAME} PRIVATE Folly::folly Folly::folly_deps Folly::follybenchmark Folly::folly_test_util)
 
 # 查找并引用日志库
 find_package(spdlog CONFIG REQUIRED)

@@ -7,10 +7,11 @@ namespace native::models
     class PSFileModel
     {
     public:
-        PSFileModel(std::string title);
+        explicit PSFileModel(std::string title);
 
         std::string URN;
         std::string Title;
+        std::string Name;
         std::string Keywords;
         std::string Description;
         bool IsDir;

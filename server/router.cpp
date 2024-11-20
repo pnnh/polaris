@@ -1,32 +1,60 @@
 #include "router.h"
 #include <regex>
+#include <native/utils/StringUtils.h>
 
-void Router::register_route(std::string url_regex, 
-		std::string request_method, 
-		void (*callback)(WFHttpTask *) )
+#include "controllers/article.h"
+#include "controllers/channel.h"
+#include "controllers/index.h"
+#include "controllers/sitemap.h"
+#include "controllers/filesystem/filesystem.h"
+
+
+void routeHandleGet(WFHttpTask* httpTask, const std::string& request_uri)
 {
-	Route route;
-	route.url_regex = url_regex;
-	route.request_method = request_method;
-	route.callback = callback;
-	routes.push_back(route);	
+	if (request_uri == "/")
+	{
+		server::HandleIndex(httpTask);
+	}
+	else if (request_uri == "/server/sitemap")
+	{
+		HandleSitemap(httpTask);
+	}
+	else if (request_uri == "/server/articles")
+	{
+		HandleArticles(httpTask);
+	}
+	else if (request_uri == "/server/channels")
+	{
+		HandleChannels(httpTask);
+	}
+	else if (native::StringUtils::StartsWith(request_uri, "/server/files"))
+	{
+		HandleFileList(httpTask);
+	}
+	else if (request_uri == "/server/articles/get")
+	{
+		HandleArticleGet(httpTask);
+	}
+	else
+	{
+		protocol::HttpResponse* response = httpTask->get_resp();
+		response->set_status_code("404");
+	}
 }
 
-void Router::route_request(WFHttpTask *httpTask)
+void server::route_request(WFHttpTask* httpTask)
 {
-    protocol::HttpRequest *request = httpTask->get_req();
-    std::string request_uri = request -> get_request_uri();
-	std::string request_method = request -> get_method();
-	for (auto& r : routes) {
-		std::regex pat {r.url_regex};
-		std::smatch match;
+	protocol::HttpRequest* request = httpTask->get_req();
+	std::string request_uri = request->get_request_uri();
+	std::string request_method = request->get_method();
 
-		if (std::regex_match(request_uri, match, pat) 
-				&& (request_method.compare(r.request_method) == 0)) {
-			r.callback(httpTask);
-			return;
-		}
+	if (request_method == "GET")
+	{
+		routeHandleGet(httpTask, request_uri);
 	}
-	protocol::HttpResponse *response = httpTask->get_resp();
-	response->set_status_code("404");
+	else
+	{
+		protocol::HttpResponse* response = httpTask->get_resp();
+		response->set_status_code("404");
+	}
 }

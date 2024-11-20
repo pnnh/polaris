@@ -1,7 +1,4 @@
 #include "MarkdownService.h"
-
-#include <c++/13/cstring>
-
 #include "cmark.h"
 
 std::string native::services::markdown::markdownToHtml(const std::string& markdownText)
