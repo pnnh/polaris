@@ -38,6 +38,8 @@ namespace native::models::protocol
         QuantumException(QuantumException&& other) noexcept;
         QuantumException& operator=(QuantumException&& other) noexcept;
 
+        void AppendMessage(const std::string& message);
+
         [[nodiscard]]
         const char* what() const noexcept override
         {

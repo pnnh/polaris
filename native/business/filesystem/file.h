@@ -3,7 +3,7 @@
 
 #include "native/models/files/File.h"
 
-namespace native::business
+namespace native
 {
     class FileServerBusiness
     {
@@ -11,6 +11,7 @@ namespace native::business
         explicit FileServerBusiness(const std::string &baseUrl);
 
         [[nodiscard]] std::shared_ptr<std::vector<models::PSFileModel>> selectFiles() const;
+        [[nodiscard]] std::shared_ptr<std::vector<models::PSFileModel>> selectFiles(std::string parentPath) const;
 
     private:
         std::string baseUrl;

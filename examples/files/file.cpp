@@ -17,5 +17,11 @@ int native::examples::TestSelectFiles()
     {
         logger::Logger::LogInfo({model.URN, model.Title});
     }
+    auto filesPtr2 = fileServer->selectFiles("CPlus.chan/assets");
+    auto size = filesPtr2->size();
+    for (const auto &model : *filesPtr2)
+    {
+        logger::Logger::LogInfo({model.URN, model.Title});
+    }
     return 0;
 }

@@ -58,5 +58,5 @@ business::articles::ArticleServerBusiness::selectArticles() const
 
 bool business::articles::isArticleDirectory(const std::string& directoryName)
 {
-    return utils::StringUtils::EndsWith(directoryName, ".note");
+    return native::StringUtils::EndsWith(directoryName, ".note");
 }

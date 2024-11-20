@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace native::utils
+namespace native
 {
     class StringUtils
     {

@@ -10,24 +10,31 @@
 #include "native/utils/StringUtils.h"
 
 namespace models = native::models;
-namespace business = native::business;
 namespace services = native::services;
 namespace logger = services::logger;
 
-business::FileServerBusiness::FileServerBusiness(const std::string &baseUrl)
+native::FileServerBusiness::FileServerBusiness(const std::string &baseUrl)
 {
     this->baseUrl = baseUrl;
 }
 
 std::shared_ptr<std::vector<models::PSFileModel>>
-business::FileServerBusiness::selectFiles() const
+native::FileServerBusiness::selectFiles() const
+{
+    return selectFiles("");
+}
+
+std::shared_ptr<std::vector<models::PSFileModel>>
+native::FileServerBusiness::selectFiles(std::string parentPath) const
 {
     auto files = std::make_shared<std::vector<models::PSFileModel>>();
 
-    for (const auto &entry : std::filesystem::directory_iterator(this->baseUrl))
+    const std::string fullPath = services::filesystem::JoinFilePath({this->baseUrl, parentPath});
+
+    for (const auto &entry : std::filesystem::directory_iterator(fullPath))
     {
         auto dirName = entry.path().filename();
-        if (entry.path() == "." || entry.path() == ".." || !entry.is_directory())
+        if (entry.path() == "." || entry.path() == "..")
         {
             continue;
         }
@@ -36,7 +43,8 @@ business::FileServerBusiness::selectFiles() const
         if (fileModel.URN.empty())
         {
             fileModel.URN = utils::calcMd5(entry.path().string());
-        } 
+        }
+        fileModel.IsDir = entry.is_directory();
         fileModel.Title = dirName;
         files->emplace_back(fileModel);
     }

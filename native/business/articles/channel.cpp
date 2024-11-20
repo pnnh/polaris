@@ -59,6 +59,5 @@ business::articles::ChannelServerBusiness::selectChannels() const
 
 bool business::articles::isChannelDirectory(const std::string& directoryName)
 {
-    return utils::StringUtils::EndsWith(directoryName, ".chan") || utils::StringUtils::EndsWith(
-        directoryName, ".channel") || utils::StringUtils::EndsWith(directoryName, ".notechannel");
+    return native::StringUtils::EndsWith(directoryName, ".chan") || native::StringUtils::EndsWith(directoryName, ".channel") || native::StringUtils::EndsWith(directoryName, ".notechannel");
 }

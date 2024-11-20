@@ -58,5 +58,5 @@ business::articles::LibraryServerBusiness::selectLibraries() const
 
 bool business::articles::isLibraryDirectory(const std::string& directoryName)
 {
-    return utils::StringUtils::EndsWith(directoryName, ".notelibrary");
+    return native::StringUtils::EndsWith(directoryName, ".notelibrary");
 }

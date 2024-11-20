@@ -58,5 +58,5 @@ business::articles::NotebookServerBusiness::selectNotebooks() const
 
 bool business::articles::isNotebookDirectory(const std::string& directoryName)
 {
-    return utils::StringUtils::EndsWith(directoryName, ".notebook");
+    return native::StringUtils::EndsWith(directoryName, ".notebook");
 }

@@ -10,7 +10,7 @@ std::optional<std::string> native::services::yaml::YamlHandler::getString(const 
     // 多级key
     if (keyName.rfind('.', 0) > 0 && std::regex_match(keyName, std::regex(R"(^(\w+\.)+\w+$)")))
     {
-        auto nameList = native::utils::StringUtils::Split(keyName, '.');
+        auto nameList = native::StringUtils::Split(keyName, '.');
         YAML::Node node = _yamlConfig;
         for (const auto& name : nameList)
         {

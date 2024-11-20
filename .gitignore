@@ -27,3 +27,4 @@ DerivedData/
 !default.perspectivev3
 *.hmap
 Pods/
+cmake-build-*

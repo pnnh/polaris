@@ -6,10 +6,11 @@
 #include <spdlog/spdlog.h>
 #include "build.h"
 #include <workflow/HttpMessage.h>
-#include "native/business/articles/channel.h"
+#include "native/business/filesystem/file.h"
 #include "native/services/filesystem/filesystem.h"
 #include "native/services/logger/logger.h"
 #include "native/services/sqlite/SqliteService.h"
+#include "server/services/query/query.h"
 
 namespace business = native::business;
 namespace logger = native::services::logger;
@@ -28,37 +29,16 @@ void HandleFileList(WFHttpTask *httpTask)
 
     auto request_uri = request->get_request_uri();
 
-    auto fullUrl = std::string("http://localhost") + request_uri;
+    auto queryUtils = server::QueryUtils(request_uri);
 
-    auto url = boost::urls::parse_uri(fullUrl);
-    if (url.has_error())
-    {
-        spdlog::error("url parse error: {}", url.error().message());
-        response->set_status_code("500");
-        return;
-    }
-
-    auto it = boost::range::find_if(
-        url->params(), [](boost::urls::param p)
-        { return p.key == "limit"; });
-
-    int limit = 10;
-    std::string limitString;
-    if (it != url->params().end())
-    {
-        limitString = (*it).value;
-    }
-    if (!limitString.empty())
-    {
-        limit = std::stoi(limitString);
-    }
+    auto encodePath = queryUtils.GetString("path");
 
     std::ostringstream oss;
     const std::string baseUrl = native::services::filesystem::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
-    auto channelServer = std::make_shared<business::articles::ChannelServerBusiness>(baseUrl);
-    auto channelsPtr = channelServer->selectChannels();
+    auto fileServer = std::make_shared<native::FileServerBusiness>(baseUrl);
+    auto filesPtr = fileServer->selectFiles();
     json range = json::array();
-    for (const auto &model : *channelsPtr)
+    for (const auto &model : *filesPtr)
     {
         logger::Logger::LogInfo({model.URN, model.Name, model.Title});
 
@@ -71,7 +51,7 @@ void HandleFileList(WFHttpTask *httpTask)
         range.push_back(item);
     }
 
-    auto count = channelsPtr->size();
+    auto count = filesPtr->size();
     json data = json::object({{"count", count},
                               {
                                   "range",

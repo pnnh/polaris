@@ -13,6 +13,7 @@ namespace native::models
         std::string Title;
         std::string Keywords;
         std::string Description;
+        bool IsDir;
         std::chrono::system_clock::time_point CreateTime;
         std::chrono::system_clock::time_point UpdateTime;
     };
