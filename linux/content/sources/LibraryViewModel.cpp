@@ -18,7 +18,7 @@ void LibraryViewModel::loadData()
 {
   auto libraryList = libraryService.SelectLibraries();
 
-  QVector<native::models::articles::PSLibraryModel>::iterator iter;
+  QVector<polaris::native::PSLibraryModel>::iterator iter;
   for (iter = libraryList.begin(); iter != libraryList.end(); iter++)
   {
     auto* dataPtr = new LibraryData();

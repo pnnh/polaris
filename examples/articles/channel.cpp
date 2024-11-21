@@ -2,9 +2,9 @@
 #include "channel.h"
 #include "native/business/articles/channel.h"
 #include "build.h"
-#include "native/services/filesystem/filesystem.h"
-#include "native/services/logger/logger.h"
-#include "native/services/sqlite/SqliteService.h"
+#include "base/services/filesystem/filesystem.h"
+#include "base/services/logger/logger.h"
+#include "base/services/sqlite/SqliteService.h"
 
 namespace business = native::business;
 namespace logger = native::services::logger;

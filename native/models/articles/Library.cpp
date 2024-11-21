@@ -1,9 +1,7 @@
 #include "Library.h"
 
-namespace articles = native::models::articles;
+polaris::native::PSLibraryModel::PSLibraryModel() = default;
 
-articles::PSLibraryModel::PSLibraryModel() = default;
-
-articles::PSLibraryModel::PSLibraryModel(const std::string& title): Title(title)
+polaris::native::PSLibraryModel::PSLibraryModel(const std::string& title): Title(title)
 {
 }

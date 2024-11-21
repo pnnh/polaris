@@ -8,4 +8,7 @@
 
 #include "workflow/WFTaskFactory.h"
 
-void HandleFileList(WFHttpTask *httpTask);
+namespace polaris::server
+{
+    void HandleFileList(WFHttpTask* httpTask);
+}

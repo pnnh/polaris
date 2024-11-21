@@ -10,5 +10,5 @@ int main(int argc, char* argv[])
 
   constexpr int PORT = 7501;
 
-  return server::runServer(PORT);
+  return polaris::server::runServer(PORT);
 }

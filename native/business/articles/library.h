@@ -2,7 +2,7 @@
 #include <vector>
 #include "native/models/articles/Library.h"
 
-namespace native::business::articles
+namespace polaris::native
 {
     bool isLibraryDirectory(const std::string& directoryName);
 
@@ -11,7 +11,7 @@ namespace native::business::articles
     public:
         explicit LibraryServerBusiness(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<models::articles::PSLibraryModel>> selectLibraries() const;
+        [[nodiscard]] std::shared_ptr<std::vector<polaris::native::PSLibraryModel>> selectLibraries() const;
 
     private:
         std::string baseUrl;

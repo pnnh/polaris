@@ -2,8 +2,10 @@
 
 #include <string>
 
-namespace native {
-    class Logger {
+namespace polaris::macos
+{
+    class Logger
+    {
     public:
         static void log(const std::string& message);
     };

@@ -11,11 +11,11 @@ public:
   LibraryService();
 
 
-  std::optional<native::models::articles::PSLibraryModel> FindLibrary(const QString& uid) const;
-  QVector<native::models::articles::PSLibraryModel> SelectLibraries() const;
-  static QVector<native::models::articles::PSNotebookModel> SelectPartitions(
-    const native::models::articles::PSLibraryModel& libraryModel);
-  void InsertOrUpdateLibrary(const QVector<native::models::articles::PSLibraryModel>& libraryList);
+  std::optional<polaris::native::PSLibraryModel> FindLibrary(const QString& uid) const;
+  QVector<polaris::native::PSLibraryModel> SelectLibraries() const;
+  static QVector<polaris::native::PSNotebookModel> SelectPartitions(
+    const polaris::native::PSLibraryModel& libraryModel);
+  void InsertOrUpdateLibrary(const QVector<polaris::native::PSLibraryModel>& libraryList);
 
 private:
   QString dbPath;

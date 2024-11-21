@@ -2,27 +2,23 @@
 #include "library.h"
 #include <string>
 #include <filesystem>
-#include "native/models/protocol/Exception.h"
-#include "native/services/filesystem/filesystem.h"
-#include "native/services/logger/logger.h"
-#include "native/services/yaml/yaml.h"
-#include "native/utils/md5.h"
-#include "native/utils/StringUtils.h"
+#include <base/types/StringUtils.h>
 
-namespace models = native::models;
-namespace business = native::business;
-namespace services = native::services;
-namespace logger = services::logger;
+#include "base/types/Exception.h"
+#include "base/services/filesystem/filesystem.h"
+#include "base/services/logger/logger.h"
+#include "base/services/yaml/yaml.h"
+#include "base/utils/md5.h"
 
-business::articles::LibraryServerBusiness::LibraryServerBusiness(const std::string& baseUrl)
+polaris::native::LibraryServerBusiness::LibraryServerBusiness(const std::string& baseUrl)
 {
     this->baseUrl = baseUrl;
 }
 
-std::shared_ptr<std::vector<models::articles::PSLibraryModel>>
-business::articles::LibraryServerBusiness::selectLibraries() const
+std::shared_ptr<std::vector<polaris::native::PSLibraryModel>>
+polaris::native::LibraryServerBusiness::selectLibraries() const
 {
-    auto libraries = std::make_shared<std::vector<models::articles::PSLibraryModel>>();
+    auto libraries = std::make_shared<std::vector<polaris::native::PSLibraryModel>>();
 
     for (const auto& entry : std::filesystem::directory_iterator(this->baseUrl))
     {
@@ -36,11 +32,11 @@ business::articles::LibraryServerBusiness::selectLibraries() const
         {
             continue;
         }
-        auto libraryModel = models::articles::PSLibraryModel(dirName);
-        auto metadataFilePath = services::filesystem::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
-        if (services::filesystem::IsFileExist(metadataFilePath))
+        auto libraryModel = polaris::native::PSLibraryModel(dirName);
+        auto metadataFilePath = polaris::base::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
+        if (polaris::base::IsFileExist(metadataFilePath))
         {
-            auto yamlHandler = services::yaml::YamlHandler(metadataFilePath);
+            auto yamlHandler = polaris::base::YamlHandler(metadataFilePath);
             libraryModel.URN = yamlHandler.getString("metadata.urn").value_or("");
             libraryModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
             libraryModel.Description = yamlHandler.getString("metadata.description").value_or("");
@@ -48,7 +44,7 @@ business::articles::LibraryServerBusiness::selectLibraries() const
         }
         if (libraryModel.URN.empty())
         {
-            libraryModel.URN = utils::calcMd5(entry.path().string());
+            libraryModel.URN = polaris::base::calcMd5(entry.path().string());
         }
         libraries->emplace_back(libraryModel);
     }
@@ -56,7 +52,7 @@ business::articles::LibraryServerBusiness::selectLibraries() const
     return libraries;
 }
 
-bool business::articles::isLibraryDirectory(const std::string& directoryName)
+bool polaris::native::isLibraryDirectory(const std::string& directoryName)
 {
-    return native::StringUtils::EndsWith(directoryName, ".notelibrary");
+    return polaris::base::StringUtils::EndsWith(directoryName, ".notelibrary");
 }

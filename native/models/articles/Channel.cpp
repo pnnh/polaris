@@ -1,9 +1,7 @@
 #include "Channel.h"
 
-namespace articles = native::models::articles;
+polaris::native::PSChannelModel::PSChannelModel() = default;
 
-articles::PSChannelModel::PSChannelModel() = default;
-
-articles::PSChannelModel::PSChannelModel(const std::string&& name): Name(name)
+polaris::native::PSChannelModel::PSChannelModel(const std::string&& name): Name(name)
 {
 }

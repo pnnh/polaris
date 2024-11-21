@@ -3,7 +3,7 @@
 #include <string>
 #include <chrono>
 
-namespace native::models::articles
+namespace polaris::native
 {
     class PSNotebookModel
     {

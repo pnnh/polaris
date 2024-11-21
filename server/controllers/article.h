@@ -8,5 +8,8 @@
 
 #include "workflow/WFTaskFactory.h"
 
-void HandleArticles(WFHttpTask *httpTask);
-void HandleArticleGet(WFHttpTask *httpTask);
+namespace polaris::server
+{
+    void HandleArticles(WFHttpTask* httpTask);
+    void HandleArticleGet(WFHttpTask* httpTask);
+}

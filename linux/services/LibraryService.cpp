@@ -8,7 +8,7 @@
 
 #include "native/models/articles/Library.h"
 #include "native/models/articles/Notebook.h"
-#include "native/utils/basex.h"
+#include "base/utils/basex.h"
 
 LibraryService::LibraryService()
 {
@@ -31,7 +31,7 @@ LibraryService::LibraryService()
   }
 }
 
-std::optional<native::models::articles::PSLibraryModel>
+std::optional<polaris::native::PSLibraryModel>
 LibraryService::FindLibrary(const QString& uid) const
 {
   auto findSql = QString("select * from libraries where uid = :uid");
@@ -47,7 +47,7 @@ LibraryService::FindLibrary(const QString& uid) const
 
   while (sqlIterator->next())
   {
-    auto model = std::make_optional<native::models::articles::PSLibraryModel>();
+    auto model = std::make_optional<polaris::native::PSLibraryModel>();
     model->URN = sqlIterator->value("uid").toString().toStdString();
     model->Name = sqlIterator->value("name").toString().toStdString();
     model->Path = sqlIterator->value("path").toString().toStdString();
@@ -56,16 +56,16 @@ LibraryService::FindLibrary(const QString& uid) const
   return std::nullopt;
 }
 
-QVector<native::models::articles::PSLibraryModel> LibraryService::SelectLibraries() const
+QVector<polaris::native::PSLibraryModel> LibraryService::SelectLibraries() const
 {
-  QVector<native::models::articles::PSLibraryModel> libraryList;
+  QVector<polaris::native::PSLibraryModel> libraryList;
   auto selectSql = QString("select * from libraries");
 
   auto sqlIterator = services::SqliteService::execute_query(dbPath, selectSql);
 
   while (sqlIterator->next())
   {
-    auto model = native::models::articles::PSLibraryModel();
+    auto model = polaris::native::PSLibraryModel();
     model.URN = sqlIterator->value("uid").toString().toStdString();
     model.Name = sqlIterator->value("name").toString().toStdString();
     model.Path = sqlIterator->value("path").toString().toStdString();
@@ -76,10 +76,10 @@ QVector<native::models::articles::PSLibraryModel> LibraryService::SelectLibrarie
   return libraryList;
 }
 
-QVector<native::models::articles::PSNotebookModel>
-LibraryService::SelectPartitions(const native::models::articles::PSLibraryModel& libraryModel)
+QVector<polaris::native::PSNotebookModel>
+LibraryService::SelectPartitions(const polaris::native::PSLibraryModel& libraryModel)
 {
-  QVector<native::models::articles::PSNotebookModel> partitionList;
+  QVector<polaris::native::PSNotebookModel> partitionList;
   QDir dir(QString::fromStdString(libraryModel.Path));
   if (!dir.exists())
   {
@@ -98,10 +98,10 @@ LibraryService::SelectPartitions(const native::models::articles::PSLibraryModel&
     if (!filePath.isEmpty())
     {
       auto stdPathString = filePath.toStdString();
-      auto uid = native::utils::encode64(stdPathString);
+      auto uid = polaris::base::encode64(stdPathString);
 
       auto model =
-        native::models::articles::PSNotebookModel();
+        polaris::native::PSNotebookModel();
       model.URN = uid;
       model.Name = fileName.toStdString();
       model.Path = filePath.toStdString();
@@ -112,7 +112,7 @@ LibraryService::SelectPartitions(const native::models::articles::PSLibraryModel&
 }
 
 void LibraryService::InsertOrUpdateLibrary(
-  const QVector<native::models::articles::PSLibraryModel>& libraryList)
+  const QVector<polaris::native::PSLibraryModel>& libraryList)
 {
   // std::cout << "InsertOrUpdateLibrary: " << libraryList.size() << std::endl;
 

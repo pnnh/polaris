@@ -2,28 +2,21 @@
 #include "channel.h"
 #include <string>
 #include <filesystem>
-#include "native/models/protocol/Exception.h"
-#include "native/services/filesystem/filesystem.h"
-#include "native/services/sqlite/SqliteService.h"
-#include "native/services/logger/logger.h"
-#include "native/services/yaml/yaml.h"
-#include "native/utils/md5.h"
-#include "native/utils/StringUtils.h"
+#include "base/types/Exception.h"
+#include "base/services/filesystem/filesystem.h"
+#include "base/services/yaml/yaml.h"
+#include "base/utils/md5.h"
+#include "base/types//StringUtils.h"
 
-namespace models = native::models;
-namespace business = native::business;
-namespace services = native::services;
-namespace logger = services::logger;
-
-business::articles::ChannelServerBusiness::ChannelServerBusiness(const std::string& baseUrl)
+polaris::native::ChannelServerBusiness::ChannelServerBusiness(const std::string& baseUrl)
 {
     this->baseUrl = baseUrl;
 }
 
-std::shared_ptr<std::vector<models::articles::PSChannelModel>>
-business::articles::ChannelServerBusiness::selectChannels() const
+std::shared_ptr<std::vector<polaris::native::PSChannelModel>>
+polaris::native::ChannelServerBusiness::selectChannels() const
 {
-    auto channels = std::make_shared<std::vector<models::articles::PSChannelModel>>();
+    auto channels = std::make_shared<std::vector<polaris::native::PSChannelModel>>();
 
     for (const auto& entry : std::filesystem::directory_iterator(this->baseUrl))
     {
@@ -37,11 +30,11 @@ business::articles::ChannelServerBusiness::selectChannels() const
         {
             continue;
         }
-        auto channelModel = models::articles::PSChannelModel(dirName);
-        auto metadataFilePath = services::filesystem::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
-        if (services::filesystem::IsFileExist(metadataFilePath))
+        auto channelModel = polaris::native::PSChannelModel(dirName);
+        auto metadataFilePath = polaris::base::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
+        if (polaris::base::IsFileExist(metadataFilePath))
         {
-            auto yamlHandler = services::yaml::YamlHandler(metadataFilePath);
+            auto yamlHandler = polaris::base::YamlHandler(metadataFilePath);
             channelModel.URN = yamlHandler.getString("metadata.urn").value_or("");
             channelModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
             channelModel.Description = yamlHandler.getString("metadata.description").value_or("");
@@ -49,7 +42,7 @@ business::articles::ChannelServerBusiness::selectChannels() const
         }
         if (channelModel.URN.empty())
         {
-            channelModel.URN = utils::calcMd5(entry.path().string());
+            channelModel.URN = polaris::base::calcMd5(entry.path().string());
         }
         channels->emplace_back(channelModel);
     }
@@ -57,7 +50,9 @@ business::articles::ChannelServerBusiness::selectChannels() const
     return channels;
 }
 
-bool business::articles::isChannelDirectory(const std::string& directoryName)
+bool polaris::native::isChannelDirectory(const std::string& directoryName)
 {
-    return native::StringUtils::EndsWith(directoryName, ".chan") || native::StringUtils::EndsWith(directoryName, ".channel") || native::StringUtils::EndsWith(directoryName, ".notechannel");
+    return polaris::base::StringUtils::EndsWith(directoryName, ".chan") ||
+        polaris::base::StringUtils::EndsWith(directoryName, ".channel") || polaris::base::StringUtils::EndsWith(
+            directoryName, ".notechannel");
 }

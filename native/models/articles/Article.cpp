@@ -1,10 +1,8 @@
 #include "Article.h"
 
-namespace articles = native::models::articles;
+polaris::native::PSArticleModel::PSArticleModel() = default;
 
-articles::PSArticleModel::PSArticleModel() = default;
-
-articles::PSArticleModel::PSArticleModel(const std::string& title): Title(title)
+polaris::native::PSArticleModel::PSArticleModel(const std::string& title): Title(title)
 {
 }
 

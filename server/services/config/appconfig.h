@@ -4,20 +4,23 @@
 #include <string>
 #include <libenvpp/env.hpp>
 
-class AppConfig
+namespace polaris::server
 {
-public:
-    static AppConfig &Default()
+    class AppConfig
     {
-        static AppConfig instance;
-        return instance;
-    }
-    AppConfig();
+    public:
+        static AppConfig& Default()
+        {
+            static AppConfig instance;
+            return instance;
+        }
 
-    std::string GetDSN();
+        AppConfig();
 
-private:
-    std::shared_ptr<env::parsed_and_validated_prefix<env::prefix>> parsedEnvPrefixPtr;
-    std::string dnsValue;
-};
+        std::string GetDSN();
 
+    private:
+        std::shared_ptr<env::parsed_and_validated_prefix<env::prefix>> parsedEnvPrefixPtr;
+        std::string dnsValue;
+    };
+}

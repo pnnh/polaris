@@ -1,16 +1,12 @@
 
-set(LIB_NAME ${PROJECT_NAME})
+set(LIB_NAME ${PROJECT_NAME}Native)
 
 file(GLOB_RECURSE LIB_SOURCES
         models/*.cpp
         business/*.cpp
-        utils/*.cpp
-        services/*.cpp
-        business/*.cpp)
+        services/*.cpp)
 
 add_library(${LIB_NAME} ${LIB_SOURCES})
-
-configure_file("build.h.in" "${PROJECT_BINARY_DIR}/build.h")
 
 # 查找并引用Boost库
 find_package(Boost COMPONENTS system thread chrono filesystem url program_options REQUIRED)

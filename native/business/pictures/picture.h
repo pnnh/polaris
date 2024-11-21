@@ -1,5 +1,8 @@
 #pragma once
 
-class article {
+namespace polaris::native
+{
+    class article {
 
-};
+    };
+}

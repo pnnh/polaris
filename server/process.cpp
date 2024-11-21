@@ -26,7 +26,7 @@ void process(WFHttpTask* httpTask)
   protocol::HttpRequest* request = httpTask->get_req();
   protocol::HttpResponse* response = httpTask->get_resp();
 
-  server::route_request(httpTask);
+  polaris::server::route_request(httpTask);
 
   return;
 
@@ -92,7 +92,7 @@ void process(WFHttpTask* httpTask)
   fprintf(stderr, "seq: %lld, peer: %s:%hu\n", seq, addrstr, port);
 }
 
-int server::runServer(int port)
+int polaris::server::runServer(int port)
 {
   WFHttpServer server(process);
 

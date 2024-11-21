@@ -2,7 +2,7 @@
 
 #include "workflow/WFTaskFactory.h"
 
-namespace server
+namespace polaris::server
 {
     void HandleIndex(WFHttpTask* httpTask);
 }

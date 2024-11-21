@@ -7,18 +7,15 @@
 #include "build.h"
 #include <workflow/HttpMessage.h>
 #include "native/business/filesystem/file.h"
-#include "native/services/filesystem/filesystem.h"
-
+#include "base/services/filesystem/filesystem.h"
 #include <iostream>
-#include <native/utils/query.h>
+#include <base/utils/basex.h>
+#include <base/utils/query.h>
 
-#include "native/services/logger/logger.h"
-
-namespace logger = native::services::logger;
 
 using json = nlohmann::json;
 
-void HandleFileList(WFHttpTask* httpTask)
+void polaris::server::HandleFileList(WFHttpTask* httpTask)
 {
     protocol::HttpRequest* request = httpTask->get_req();
     protocol::HttpResponse* response = httpTask->get_resp();
@@ -29,17 +26,20 @@ void HandleFileList(WFHttpTask* httpTask)
 
     auto request_uri = request->get_request_uri();
 
-    QueryParam queryParam{std::string(request_uri)};
+    polaris::base::QueryParam queryParam{std::string(request_uri)};
 
     auto encodePath = queryParam.getString("path");
-    if (encodePath.has_value())
+    if (!encodePath.has_value())
     {
-        std::cout << "path: " << "==" << *encodePath << std::endl;
+        response->set_status_code("500");
+        return;
     }
+    auto decodePath = polaris::base::decode64(encodePath.value());
 
     std::ostringstream oss;
-    const std::string baseUrl = native::services::filesystem::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
-    auto fileServer = std::make_shared<native::FileServerBusiness>(baseUrl);
+    const std::string baseUrl = decodePath;
+    //native::services::filesystem::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
+    auto fileServer = std::make_shared<polaris::native::FileServerBusiness>(baseUrl);
     auto filesPtr = fileServer->selectFiles();
     json range = json::array();
     for (const auto& model : *filesPtr)

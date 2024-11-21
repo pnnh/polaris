@@ -1,8 +1,9 @@
 #pragma once
 #include <string>
 #include <chrono>
+#include <base/types/datetime.h>
 
-namespace native::models
+namespace polaris::native
 {
     class PSFileModel
     {
@@ -14,8 +15,8 @@ namespace native::models
         std::string Name;
         std::string Keywords;
         std::string Description;
-        bool IsDir;
-        std::chrono::system_clock::time_point CreateTime;
-        std::chrono::system_clock::time_point UpdateTime;
+        bool IsDir{};
+        polaris::base::PSDatetime CreateTime;
+        polaris::base::PSDatetime UpdateTime;
     };
 }

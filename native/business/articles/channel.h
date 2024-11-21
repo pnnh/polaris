@@ -3,7 +3,7 @@
 
 #include "native/models/articles/Channel.h"
 
-namespace native::business::articles
+namespace polaris::native
 {
     bool isChannelDirectory(const std::string& directoryName);
 
@@ -12,7 +12,7 @@ namespace native::business::articles
     public:
         explicit ChannelServerBusiness(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<models::articles::PSChannelModel>> selectChannels() const;
+        [[nodiscard]] std::shared_ptr<std::vector<polaris::native::PSChannelModel>> selectChannels() const;
 
     private:
         std::string baseUrl;
@@ -25,7 +25,7 @@ namespace native::business::articles
 
         ~ChannelClientBusiness();
 
-        std::shared_ptr<std::vector<models::articles::PSChannelModel>> selectChannels();
+        std::shared_ptr<std::vector<polaris::native::PSChannelModel>> selectChannels();
     };
 }
 

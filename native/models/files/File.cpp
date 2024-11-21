@@ -1,7 +1,7 @@
 
 #include "File.h"
 
-native::models::PSFileModel::PSFileModel(std::string title)
+polaris::native::PSFileModel::PSFileModel(std::string title)
 {
     this->Title = title;
     this->CreateTime = std::chrono::system_clock::now();

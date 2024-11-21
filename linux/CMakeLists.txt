@@ -1,5 +1,4 @@
 
-
 # 查找并引用Qt库
 find_package(
         Qt6
@@ -21,36 +20,20 @@ qt_standard_project_setup()
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
+
 qt_policy(SET QTP0001 NEW)
 qt_policy(SET QTP0004 NEW)
 
 set(APP_NAME ${PROJECT_NAME}Linux)
 
-set(APP_SOURCES
-        main.cxx
-        services/sqlite/sqlite.cpp
-        services/sqlite/sqlite.h
-        services/threads/SyncThread.cpp
-        services/threads/SyncThread.h
-        services/FolderService.h
-        services/FolderService.cpp
-        services/ImageService.cpp
-        services/ImageService.h
-        services/LibraryService.cpp
-        services/LibraryService.h
-        services/SqliteService.cpp
-        services/SqliteService.h
-        services/SyncService.cpp
-        services/SyncService.h
-        services/UserService.cpp
-        services/UserService.h)
+file(GLOB_RECURSE APP_SOURCES
+        services/*.cpp)
 
 qt6_add_executable(${APP_NAME} MANUAL_FINALIZATION)
-target_sources(${APP_NAME} PUBLIC ${APP_SOURCES})
-target_sources(${APP_NAME} PUBLIC FILE_SET CXX_MODULES FILES foo.cxx)
+target_sources(${APP_NAME} PUBLIC main.cpp ${APP_SOURCES})
 
-add_dependencies(${APP_NAME} ${PROJECT_NAME})
-target_link_libraries(${APP_NAME} PRIVATE ${PROJECT_NAME})
+add_dependencies(${APP_NAME} ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
+target_link_libraries(${APP_NAME} PRIVATE ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
 
 # 查找并引用日志库
 find_package(spdlog CONFIG REQUIRED)
@@ -80,6 +63,18 @@ target_link_libraries(
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/content/sources)
 
+file(GLOB_RECURSE RELATIVE_PATH ASSETS_SOURCES
+        content/*.png
+        content/*.svg
+        content/*.jpeg
+        content/*.webp)
+
+file(GLOB_RECURSE MODEL_SOURCES
+        content/*.cpp)
+
+file(GLOB_RECURSE RELATIVE_PATH QUICK_SOURCES
+        content/*.qml)
+
 qt6_add_qml_module(
         ${APP_NAME}
         URI
@@ -87,69 +82,11 @@ qt6_add_qml_module(
         VERSION
         1.0
         RESOURCES
-        content/assets/images/flag-fill.png
-        content/assets/images/logo.png
-        content/assets/images/files.svg
-        content/assets/photos/photo1.webp
-        content/assets/photos/photo2.jpeg
-        content/assets/material/symbols/web/description/description_48px.svg
-        content/assets/material/symbols/web/description/description_fill1_48px.svg
-        content/assets/material/symbols/web/keyboard_arrow_down/keyboard_arrow_down_48px.svg
-        content/assets/material/symbols/web/keyboard_arrow_down/keyboard_arrow_down_fill1_48px.svg
-        content/assets/material/symbols/web/book_2/book_2_48px.svg
-        content/assets/material/symbols/web/book_2/book_2_fill1_48px.svg
-        content/assets/material/symbols/web/imagesmode/imagesmode_48px.svg
-        content/assets/material/symbols/web/imagesmode/imagesmode_fill1_48px.svg
-        content/assets/material/symbols/web/photo_library/photo_library_48px.svg
-        content/assets/material/symbols/web/photo_library/photo_library_fill1_48px.svg
-        content/assets/material/symbols/web/library_books/library_books_48px.svg
-        content/assets/material/symbols/web/library_books/library_books_fill1_48px.svg
-        content/assets/material/symbols/web/image_search/image_search_48px.svg
-        content/assets/material/symbols/web/image_search/image_search_fill1_48px.svg
-        content/assets/material/symbols/web/mail/mail_48px.svg
-        content/assets/material/symbols/web/mail/mail_fill1_48px.svg
-        content/assets/material/symbols/chevron_right_24dp_FILL.svg
+        ${ASSETS_SOURCES}
         SOURCES
-        content/sources/markdown.h
-        content/sources/markdown.cpp
-        content/sources/PartitionViewModel.h
-        content/sources/PartitionViewModel.cpp
-        content/sources/LibraryViewModel.h
-        content/sources/LibraryViewModel.cpp
-        content/sources/PictureLocationViewModel.h
-        content/sources/PictureLocationViewModel.cpp
-        content/sources/PictureGridModel.h
-        content/sources/PictureGridModel.cpp
-        content/sources/SAChannelViewModel.h
-        content/sources/SAChannelViewModel.cpp
-        content/sources/SASessionListViewModel.h
-        content/sources/SASessionListViewModel.cpp
+        ${MODEL_SOURCES}
         QML_FILES
-        content/Main.qml
-        content/App.qml
-        content/Users.qml
-        content/Profiles.qml
-        content/Topbar.qml
-        content/FxScrollBar.qml
-        content/TaskList.qml
-        content/NavList.qml
-        content/polaris/Editor.qml
-        content/polaris/Sidebar.qml
-        content/polaris/LibraryItem.qml
-        content/polaris/PartitionItem.qml
-        content/polaris/Navbar.qml
-        content/polaris/Page.qml
-        content/venus/Navbar.qml
-        content/venus/LibraryPage.qml
-        content/venus/BrowserPage.qml
-        content/venus/Sidebar.qml
-        content/venus/Location.qml
-        content/venus/LibraryItem.qml
-        content/venus/PartitionItem.qml
-        content/venus/PictureGrid.qml
-        content/pulsar/Page.qml
-        content/pulsar/ChannelList.qml
-        content/pulsar/SessionList.qml)
+        ${QUICK_SOURCES})
 
 qt6_add_shaders(
         ${APP_NAME}

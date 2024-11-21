@@ -1,3 +1,3 @@
 #include "Picture.h"
 
-native::models::pictures::PSPictureModel::PSPictureModel() = default;
+polaris::native::PSPictureModel::PSPictureModel() = default;

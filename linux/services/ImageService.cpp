@@ -28,7 +28,7 @@ ImageService::ImageService()
   }
 }
 
-std::optional<native::models::pictures::PSPictureModel>
+std::optional<polaris::native::PSPictureModel>
 ImageService::Find(const QString& uid) const
 {
   auto findSql = QString("select * from images where uid = :uid");
@@ -44,7 +44,7 @@ ImageService::Find(const QString& uid) const
 
   while (sqlIterator->next())
   {
-    auto model = std::make_optional<native::models::pictures::PSPictureModel>();
+    auto model = std::make_optional<polaris::native::PSPictureModel>();
     model->URN = sqlIterator->value("uid").toString().toStdString();
     model->Name = sqlIterator->value("name").toString().toStdString();
     model->Path = sqlIterator->value("path").toString().toStdString();
@@ -55,7 +55,7 @@ ImageService::Find(const QString& uid) const
 }
 
 void ImageService::InsertOrUpdate(
-  const QVector<native::models::pictures::PSPictureModel>& imageList)
+  const QVector<polaris::native::PSPictureModel>& imageList)
 {
   const auto insertSql =
     QString("insert into images(uid, name, path)"

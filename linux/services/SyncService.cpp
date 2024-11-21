@@ -6,8 +6,8 @@
 #include <qdiriterator.h>
 
 #include "native/models/pictures/Picture.h"
-#include "native/utils/basex.h"
-#include "native/utils/mime.h"
+#include "base/utils/basex.h"
+#include "base/utils/mime.h"
 
 void SyncService::SyncLibraries()
 {
@@ -22,7 +22,7 @@ void SyncService::SyncLibraries()
   dir.setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
   dir.setSorting(QDir::Name | QDir::IgnoreCase); // 按照名称排序
   QDirIterator iterator(dir);
-  QVector<native::models::articles::PSLibraryModel> libraryList;
+  QVector<polaris::native::PSLibraryModel> libraryList;
   while (iterator.hasNext())
   {
     QFileInfo info(iterator.next());
@@ -36,8 +36,8 @@ void SyncService::SyncLibraries()
         continue;
       }
       auto stdPathString = filePath.toStdString();
-      auto uid = native::utils::encode64(stdPathString);
-      auto model = native::models::articles::PSLibraryModel();
+      auto uid = polaris::base::encode64(stdPathString);
+      auto model = polaris::native::PSLibraryModel();
       model.URN = uid;
       model.Name = fileName.toStdString();
       model.Path = filePath.toStdString();
@@ -59,7 +59,7 @@ int SyncService::SyncImages(const QString& path)
   dir.setSorting(QDir::DirsFirst);
   QFileInfoList entryInfoList = dir.entryInfoList();
 
-  QVector<native::models::pictures::PSPictureModel> imageList;
+  QVector<polaris::native::PSPictureModel> imageList;
   for (const auto& fileInfo : entryInfoList)
   {
     if (fileInfo.fileName() == "." || fileInfo.fileName() == "..")
@@ -71,7 +71,7 @@ int SyncService::SyncImages(const QString& path)
     if (fileInfo.isDir())
     {
       auto stdPathString = filePath.toStdString();
-      if (native::utils::MimeUtils::isIgnore(stdPathString))
+      if (polaris::base::MimeUtils::isIgnore(stdPathString))
       {
         continue;
       }
@@ -80,11 +80,11 @@ int SyncService::SyncImages(const QString& path)
     else
     {
       auto stdFilePath = filePath.toStdString();
-      if (native::utils::MimeUtils::isImage(stdFilePath))
+      if (polaris::base::MimeUtils::isImage(stdFilePath))
       {
         auto stdPathString = filePath.toStdString();
-        auto uid = native::utils::encode64(stdPathString);
-        auto model = native::models::pictures::PSPictureModel();
+        auto uid = polaris::base::encode64(stdPathString);
+        auto model = polaris::native::PSPictureModel();
         model.URN = uid;
         model.Name = fileName.toStdString();
         model.Path = filePath.toStdString();

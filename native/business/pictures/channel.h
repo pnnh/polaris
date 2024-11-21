@@ -1,6 +1,8 @@
 #pragma once
 
-class channel {
+namespace polaris::native
+{
+    class channel {
 
-};
-
+    };
+}

@@ -6,22 +6,18 @@
 #include <spdlog/spdlog.h>
 #include <workflow/HttpMessage.h>
 
-#include "native/utils/query.h"
+#include "base/utils/query.h"
 
 #include "native/business/articles/article.h"
 
 #include <build.h>
 
-#include "native/services/filesystem/filesystem.h"
-#include "native/services/logger/logger.h"
-
-namespace business = native::business;
-namespace logger = native::services::logger;
-namespace services = native::services;
+#include "base/services/filesystem/filesystem.h"
+#include "base/services/logger/logger.h"
 
 using json = nlohmann::json;
 
-void HandleArticleGet(WFHttpTask* httpTask)
+void polaris::server::HandleArticleGet(WFHttpTask* httpTask)
 {
   protocol::HttpRequest* request = httpTask->get_req();
   protocol::HttpResponse* response = httpTask->get_resp();
@@ -32,7 +28,7 @@ void HandleArticleGet(WFHttpTask* httpTask)
 
   auto request_uri = request->get_request_uri();
 
-  QueryParam queryParam{std::string(request_uri)};
+  polaris::base::QueryParam queryParam{std::string(request_uri)};
 
   // auto fullUrl = std::string("http://localhost") + request_uri;
 
@@ -187,7 +183,7 @@ void HandleArticleGet(WFHttpTask* httpTask)
 
 // }
 
-void HandleArticles(WFHttpTask* httpTask)
+void polaris::server::HandleArticles(WFHttpTask* httpTask)
 {
   protocol::HttpRequest* request = httpTask->get_req();
   protocol::HttpResponse* response = httpTask->get_resp();
@@ -226,15 +222,15 @@ void HandleArticles(WFHttpTask* httpTask)
     limit = std::stoi(limitString);
   }
 
-  const std::string baseUrl = services::filesystem::JoinFilePath({
+  const std::string baseUrl = polaris::base::JoinFilePath({
     PROJECT_SOURCE_DIR, "assets", "data", "CPlus.notelibrary", "CMake笔记本.notebook"
   });
-  auto articleServer = std::make_shared<business::articles::ArticleServerBusiness>(baseUrl);
+  auto articleServer = std::make_shared<polaris::native::ArticleServerBusiness>(baseUrl);
   auto articlePtr = articleServer->selectArticles();
   json range = json::array();
   for (const auto& model : *articlePtr)
   {
-    logger::Logger::LogInfo({model.URN, model.Title, model.Title});
+    polaris::base::Logger::LogInfo({model.URN, model.Title, model.Title});
     json item = {
       {"urn", model.URN},
       {"title", model.Title},

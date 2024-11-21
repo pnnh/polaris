@@ -2,7 +2,7 @@
 #include <string>
 #include <chrono>
 
-namespace native::models::pictures
+namespace polaris::native
 {
     class PSPictureModel
     {

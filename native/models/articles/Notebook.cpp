@@ -1,12 +1,9 @@
 
 #include "Notebook.h"
 
+polaris::native::PSNotebookModel::PSNotebookModel() = default;
 
-namespace articles = native::models::articles;
-
-articles::PSNotebookModel::PSNotebookModel() = default;
-
-articles::PSNotebookModel::PSNotebookModel(const std::string& title): Title(title)
+polaris::native::PSNotebookModel::PSNotebookModel(const std::string& title): Title(title)
 {
 }
 

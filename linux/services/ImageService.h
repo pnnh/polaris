@@ -9,8 +9,8 @@ class ImageService
 public:
   ImageService();
 
-  std::optional<native::models::pictures::PSPictureModel> Find(const QString& uid) const;
-  void InsertOrUpdate(const QVector<native::models::pictures::PSPictureModel>& libraryList);
+  std::optional<polaris::native::PSPictureModel> Find(const QString& uid) const;
+  void InsertOrUpdate(const QVector<polaris::native::PSPictureModel>& libraryList);
 
 private:
   QString dbPath;

@@ -12,8 +12,8 @@ add_executable(${EXAMPLE_NAME}
         cases.h
         ${EXAMPLE_SOURCES})
 
-add_dependencies(${EXAMPLE_NAME} ${PROJECT_NAME})
-target_link_libraries(${EXAMPLE_NAME} PRIVATE ${PROJECT_NAME})
+add_dependencies(${EXAMPLE_NAME} ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
+target_link_libraries(${EXAMPLE_NAME} PRIVATE ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
 
 # 查找并引用Boost库
 find_package(Boost COMPONENTS program_options REQUIRED)

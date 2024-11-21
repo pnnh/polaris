@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace native::services::markdown
+namespace polaris::native
 {
     std::string markdownToHtml(const std::string& markdownText);
 }

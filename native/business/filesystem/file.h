@@ -3,15 +3,15 @@
 
 #include "native/models/files/File.h"
 
-namespace native
+namespace polaris::native
 {
     class FileServerBusiness
     {
     public:
         explicit FileServerBusiness(const std::string &baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<models::PSFileModel>> selectFiles() const;
-        [[nodiscard]] std::shared_ptr<std::vector<models::PSFileModel>> selectFiles(std::string parentPath) const;
+        [[nodiscard]] std::shared_ptr<std::vector<native::PSFileModel>> selectFiles() const;
+        [[nodiscard]] std::shared_ptr<std::vector<native::PSFileModel>> selectFiles(std::string parentPath) const;
 
     private:
         std::string baseUrl;
@@ -24,6 +24,6 @@ namespace native
 
         ~FileClientBusiness();
 
-        std::shared_ptr<std::vector<models::PSFileModel>> selectFiles();
+        std::shared_ptr<std::vector<native::PSFileModel>> selectFiles();
     };
 }

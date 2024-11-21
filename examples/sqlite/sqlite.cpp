@@ -1,5 +1,5 @@
 #include <iostream>
-#include "native/services/sqlite/SqliteService.h"
+#include "base/services/sqlite/SqliteService.h"
 #include "sqlite.h"
 
 int native::examples::sqlite::TestSqliteVersion()

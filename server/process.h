@@ -1,6 +1,6 @@
 #pragma once
 
-namespace server
+namespace polaris::server
 {
     int runServer(int port);
 }

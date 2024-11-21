@@ -41,7 +41,7 @@ void PartitionViewModel::loadData()
   beginResetModel();
   dataList.clear();
 
-  QVector<native::models::articles::PSNotebookModel>::iterator iter;
+  QVector<polaris::native::PSNotebookModel>::iterator iter;
   for (iter = partitionList.begin(); iter != partitionList.end(); iter++)
   {
     auto* dataPtr = new PartitionData();

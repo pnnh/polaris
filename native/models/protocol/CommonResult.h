@@ -3,27 +3,30 @@
 #include <string>
 #include <stdint.h>
 
-class CommonResult {
-public:
-    CommonResult(int code, std::string message) : code(code), message(std::move(message)) {}
+namespace polaris::native
+{
+    class CommonResult {
+    public:
+        CommonResult(int code, std::string message) : code(code), message(std::move(message)) {}
 
-    int getCode() const {
-        return code;
-    }
+        int getCode() const {
+            return code;
+        }
 
-    void setCode(int code) {
-        CommonResult::code = code;
-    }
+        void setCode(int code) {
+            CommonResult::code = code;
+        }
 
-    const std::string &getMessage() const {
-        return message;
-    }
+        const std::string &getMessage() const {
+            return message;
+        }
 
-    void setMessage(const std::string &message) {
-        CommonResult::message = message;
-    }
+        void setMessage(const std::string &message) {
+            CommonResult::message = message;
+        }
 
-private:
-    uint16_t code;
-    std::string message;
-};
+    private:
+        uint16_t code;
+        std::string message;
+    };
+}

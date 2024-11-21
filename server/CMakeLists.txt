@@ -17,8 +17,8 @@ target_sources(${EXE_NAME}
         router.h
         ${EXE_SOURCES})
 
-add_dependencies(${EXE_NAME} ${PROJECT_NAME})
-target_link_libraries(${EXE_NAME} PRIVATE ${PROJECT_NAME})
+add_dependencies(${EXE_NAME} ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
+target_link_libraries(${EXE_NAME} PRIVATE ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
 
 # 查找并引用Boost库
 find_package(Boost COMPONENTS system thread chrono filesystem url REQUIRED)

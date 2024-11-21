@@ -1,6 +1,6 @@
 #include "router.h"
 #include <regex>
-#include <native/utils/StringUtils.h>
+#include <base/types/StringUtils.h>
 
 #include "controllers/article.h"
 #include "controllers/channel.h"
@@ -13,27 +13,27 @@ void routeHandleGet(WFHttpTask* httpTask, const std::string& request_uri)
 {
 	if (request_uri == "/")
 	{
-		server::HandleIndex(httpTask);
+		polaris::server::HandleIndex(httpTask);
 	}
 	else if (request_uri == "/server/sitemap")
 	{
-		HandleSitemap(httpTask);
+		polaris::server::HandleSitemap(httpTask);
 	}
 	else if (request_uri == "/server/articles")
 	{
-		HandleArticles(httpTask);
+		polaris::server::HandleArticles(httpTask);
 	}
 	else if (request_uri == "/server/channels")
 	{
-		HandleChannels(httpTask);
+		polaris::server::HandleChannels(httpTask);
 	}
-	else if (native::StringUtils::StartsWith(request_uri, "/server/files"))
+	else if (polaris::base::StringUtils::StartsWith(request_uri, "/server/files"))
 	{
-		HandleFileList(httpTask);
+		polaris::server::HandleFileList(httpTask);
 	}
 	else if (request_uri == "/server/articles/get")
 	{
-		HandleArticleGet(httpTask);
+		polaris::server::HandleArticleGet(httpTask);
 	}
 	else
 	{
@@ -42,7 +42,7 @@ void routeHandleGet(WFHttpTask* httpTask, const std::string& request_uri)
 	}
 }
 
-void server::route_request(WFHttpTask* httpTask)
+void polaris::server::route_request(WFHttpTask* httpTask)
 {
 	protocol::HttpRequest* request = httpTask->get_req();
 	std::string request_uri = request->get_request_uri();

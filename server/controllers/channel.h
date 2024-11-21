@@ -8,4 +8,7 @@
 
 #include "workflow/WFTaskFactory.h"
 
-void HandleChannels(WFHttpTask *httpTask);
+namespace polaris::server
+{
+    void HandleChannels(WFHttpTask* httpTask);
+}

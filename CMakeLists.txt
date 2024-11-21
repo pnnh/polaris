@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.28)
 project(Polaris VERSION 0.1.0 LANGUAGES C CXX)
 
 if (APPLE)
-    enable_language(OBJC OBJCXX Swift)
+    enable_language(Swift)
 endif ()
 
 # 设置语言标准
@@ -31,6 +31,7 @@ include_directories(${PROJECT_BINARY_DIR})
 # 避免警告
 CMAKE_POLICY(SET CMP0012 NEW)
 
+add_subdirectory(base)
 add_subdirectory(native)
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug" AND (LINUX OR APPLE OR WIN32))
@@ -38,10 +39,11 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug" AND (LINUX OR APPLE OR WIN32))
 endif ()
 
 message(STATUS "VCPKG_TARGET_TRIPLET: ${VCPKG_TARGET_TRIPLET}")
-if (WIN32)
+if (VCPKG_TARGET_TRIPLET STREQUAL "x64-windows")
     add_subdirectory(windows)
-elseif (APPLE)
+elseif (VCPKG_TARGET_TRIPLET STREQUAL "arm64-osx")
     add_subdirectory(macos)
+    add_subdirectory(linux)
     add_subdirectory(server)
 elseif (EMSCRIPTEN)
     add_subdirectory(web)

@@ -3,7 +3,7 @@
 #include <vector>
 #include "native/models/articles/Article.h"
 
-namespace native::business::articles
+namespace polaris::native
 {
     bool isArticleDirectory(const std::string& directoryName);
 
@@ -12,7 +12,7 @@ namespace native::business::articles
     public:
         explicit ArticleServerBusiness(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<models::articles::PSArticleModel>> selectArticles() const;
+        [[nodiscard]] std::shared_ptr<std::vector<polaris::native::PSArticleModel>> selectArticles() const;
 
     private:
         std::string baseUrl;
