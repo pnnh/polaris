@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.28...3.30)
 
 project(Polaris VERSION 0.1.0 LANGUAGES C CXX)
 
@@ -29,7 +29,13 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${PROJECT_BINARY_DIR})
 
 # 避免警告
-CMAKE_POLICY(SET CMP0012 NEW)
+if (POLICY CMP0012)
+    cmake_policy(SET CMP0012 NEW)
+endif ()
+# 针对CMake 3.30版本Boost查找相关警告
+if (POLICY CMP0167)
+    cmake_policy(SET CMP0167 NEW)
+endif ()
 
 add_subdirectory(base)
 add_subdirectory(native)
@@ -38,7 +44,6 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug" AND (LINUX OR APPLE OR WIN32))
     add_subdirectory(examples)
 endif ()
 
-message(STATUS "VCPKG_TARGET_TRIPLET: ${VCPKG_TARGET_TRIPLET}")
 if (VCPKG_TARGET_TRIPLET STREQUAL "x64-windows")
     add_subdirectory(windows)
     add_subdirectory(linux)

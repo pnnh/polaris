@@ -15,7 +15,31 @@
       "platform": "linux|osx"
     },
     {
-      "name": "boost",
+      "name": "boost-core",
+      "version>=": "1.86.0"
+    },
+    {
+      "name": "boost-system",
+      "version>=": "1.86.0"
+    },
+    {
+      "name": "boost-filesystem",
+      "version>=": "1.86.0"
+    },
+    {
+      "name": "boost-chrono",
+      "version>=": "1.86.0"
+    },
+    {
+      "name": "boost-thread",
+      "version>=": "1.86.0"
+    },
+    {
+      "name": "boost-url",
+      "version>=": "1.86.0"
+    },
+    {
+      "name": "boost-program-options",
       "version>=": "1.86.0"
     },
     {
@@ -53,7 +77,31 @@
       "version": "1.14.1"
     },
     {
-      "name": "boost",
+      "name": "boost-core",
+      "version": "1.86.0"
+    },
+    {
+      "name": "boost-system",
+      "version": "1.86.0"
+    },
+    {
+      "name": "boost-filesystem",
+      "version": "1.86.0"
+    },
+    {
+      "name": "boost-chrono",
+      "version": "1.86.0"
+    },
+    {
+      "name": "boost-thread",
+      "version": "1.86.0"
+    },
+    {
+      "name": "boost-url",
+      "version": "1.86.0"
+    },
+    {
+      "name": "boost-program-options",
       "version": "1.86.0"
     },
     {
@@ -61,8 +109,8 @@
       "version": "0.31.1"
     },
     {
-      "name": "cryptopp",
-      "version": "8.9.0"
+      "name": "openssl",
+      "version": "3.4.0"
     }
   ]
 }

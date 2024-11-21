@@ -66,6 +66,30 @@
       }
     },
     {
+      "name": "android",
+      "displayName": "Android Config",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/android",
+      "installDir": "${sourceDir}/install/android",
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "ANDROID_PLATFORM": "33",
+        "ANDROID_ABI": "arm64-v8a",
+        "ANDROID_STL": "c++_shared",
+        "ANDROID_NDK": "$env{ANDROID_NDK_HOME}",
+        "CMAKE_SYSTEM_NAME": "Android",
+        "VCPKG_HOST_TRIPLET": "arm64-osx",
+        "VCPKG_TARGET_TRIPLET": "arm64-android",
+        "VCPKG_CMAKE_SYSTEM_VERSION": "33",
+        "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/vcpkg/triplets",
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": {
+          "type": "FILEPATH",
+          "value": "$env{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake"
+        }
+      }
+    },
+    {
       "name": "windows",
       "generator": "Visual Studio 17 2022",
       "binaryDir": "${sourceDir}/build/windows",
@@ -117,6 +141,14 @@
     {
       "name": "macos",
       "configurePreset": "macos"
+    },
+    {
+      "name": "ios",
+      "configurePreset": "ios"
+    },
+    {
+      "name": "android",
+      "configurePreset": "android"
     },
     {
       "name": "windows",
