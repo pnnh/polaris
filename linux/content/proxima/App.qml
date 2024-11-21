@@ -20,7 +20,8 @@ Rectangle {
         RowLayout {
             anchors.fill: parent
             spacing: 0
-            Sidebar {}
+            Sidebar {
+            }
             Rectangle {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -33,9 +34,10 @@ Rectangle {
                     cellHeight: cellWidth
                     //model: Model {}
                     model: PictureGridModel {
-                        source: "/Users/linyangz/Projects/github/emotion-desktop/data"
+                        //source: "/Users/linyangz/Projects/github/emotion-desktop/data"
                     }
-                    delegate: Cell {}
+                    delegate: Cell {
+                    }
                     boundsBehavior: Flickable.StopAtBounds
                     clip: true // 超出边界的进行裁剪，即不显示，默认为false
 
@@ -169,6 +171,7 @@ Rectangle {
             }
         }
     }
+
     function windowResize() {
         quickView.visible = false
         console.debug("windowResize", grid.width, grid.width / 112)

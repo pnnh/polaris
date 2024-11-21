@@ -1,19 +1,49 @@
 
-set(LIB_BASE ${PROJECT_NAME})
+#=========================WASM BROWSER==========================#
+set(WASM_BROWSER ${PROJECT_NAME}WasmBrowser)
 
-set(LIB_NAME ${PROJECT_NAME}WasmCommon)
-set(LIB_SOURCES
+add_executable(${WASM_BROWSER}
+        wasm/browser/main.cpp
         wasm/wasm.cpp
-        wasm/wasm.h)
+        wasm/wasm.h
+)
 
-add_library(${LIB_NAME} STATIC ${LIB_SOURCES})
+add_dependencies(${WASM_BROWSER} ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
+target_link_libraries(${WASM_BROWSER} PRIVATE ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
 
-add_dependencies(${LIB_NAME} ${LIB_BASE})
-target_link_libraries(${LIB_NAME} PUBLIC ${LIB_BASE})
+set_target_properties(${WASM_BROWSER} PROPERTIES LINK_FLAGS "-lembind -sMODULARIZE -sENVIRONMENT=web -sTOTAL_MEMORY=32MB --embind-emit-tsd ${WASM_BROWSER}.d.ts")
 
-# 查找并引用日志库
-find_package(spdlog CONFIG REQUIRED)
-target_link_libraries(${LIB_NAME} PRIVATE spdlog::spdlog)
+file(COPY_FILE ${CMAKE_CURRENT_SOURCE_DIR}/package.json ${CMAKE_CURRENT_BINARY_DIR}/package.json)
 
-add_subdirectory(wasm/browser)
-add_subdirectory(wasm/server)
+install(FILES
+        "$<TARGET_FILE_DIR:${WASM_BROWSER}>/${WASM_BROWSER}.js"
+        "$<TARGET_FILE_DIR:${WASM_BROWSER}>/${WASM_BROWSER}.wasm"
+        "$<TARGET_FILE_DIR:${WASM_BROWSER}>/${WASM_BROWSER}.d.ts"
+        "$<TARGET_FILE_DIR:${WASM_BROWSER}>/package.json"
+        DESTINATION browser)
+
+
+#========================WASM SERVER===========================#
+set(LIB_WASM ${PROJECT_NAME}WasmCommon)
+set(WASM_SERVER ${PROJECT_NAME}WasmServer)
+
+add_executable(${WASM_SERVER}
+        wasm/server/main.cpp
+        wasm/wasm.cpp
+        wasm/wasm.h
+)
+
+add_dependencies(${WASM_SERVER} ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
+target_link_libraries(${WASM_SERVER} PRIVATE ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
+
+set_target_properties(${WASM_SERVER} PROPERTIES LINK_FLAGS "-lembind -sMODULARIZE -sTOTAL_MEMORY=32MB --embind-emit-tsd ${WASM_SERVER}.d.ts")
+
+file(COPY_FILE ${CMAKE_CURRENT_SOURCE_DIR}/package.json ${CMAKE_CURRENT_BINARY_DIR}/package.json)
+
+install(FILES
+        "$<TARGET_FILE_DIR:${WASM_SERVER}>/${WASM_SERVER}.js"
+        "$<TARGET_FILE_DIR:${WASM_SERVER}>/${WASM_SERVER}.wasm"
+        "$<TARGET_FILE_DIR:${WASM_SERVER}>/${WASM_SERVER}.d.ts"
+        "$<TARGET_FILE_DIR:${WASM_SERVER}>/package.json"
+        DESTINATION server)
+

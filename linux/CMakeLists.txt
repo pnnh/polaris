@@ -63,16 +63,19 @@ target_link_libraries(
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/content/sources)
 
-file(GLOB_RECURSE RELATIVE_PATH ASSETS_SOURCES
+file(GLOB_RECURSE ASSETS_SOURCES
+        RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
         content/*.png
         content/*.svg
         content/*.jpeg
         content/*.webp)
 
 file(GLOB_RECURSE MODEL_SOURCES
+        RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
         content/*.cpp)
 
-file(GLOB_RECURSE RELATIVE_PATH QUICK_SOURCES
+file(GLOB_RECURSE QUICK_SOURCES
+        RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
         content/*.qml)
 
 qt6_add_qml_module(
