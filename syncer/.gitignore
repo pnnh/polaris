@@ -1,0 +1,7 @@
+.idea/
+target/
+output/
+cmake-build-*
+docker/proxima
+docker/assets
+.vscode/

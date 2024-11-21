@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    {{> headmeta }}
+    {{> analytics }}
+    <title>用户信息 - 泛涵</title>
+    {{> styles }}
+</head>
+<body>
+<div class="ms-Grid" dir="ltr">
+    {{> header }}
+    <main>
+        <div class="ms-Grid-row">
+            <div class="ms-Grid-col ms-sm0 ms-xl2">
+            </div>
+            <div class="ms-Grid-col ms-sm12 ms-xl8">
+                <div id="root"></div>
+                <div class="personal-page">
+                    <div class="content-body fx-card">
+                        <div class="user-info">
+                            <div class="column-left">
+                                <div class="row-nickname">
+                                    <h3>昵称</h3>
+                                    {{nickname}}
+                                </div>
+                                <div class="row-nickname">
+                                    <h3>邮箱</h3>
+                                    {{email}}
+                                </div>
+                                <div class="row-nickname">
+                                    <h3>个人描述</h3>
+                                    {{description}}
+                                </div>
+                                <div class="row-regtime">
+                                    <h3>注册时间</h3>
+                                    {{create_time}}
+                                </div>
+                            </div>
+                            <div class="column-right">
+                                <div class="row-photo">
+                                    <img alt="头像" class="photo" src="{{photo}}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ms-Grid-col ms-sm0 ms-xl2">
+            </div>
+        </div>
+    </main>
+    {{> footer }}
+</div>
+{{> scripts }}
+</body>
+</html>

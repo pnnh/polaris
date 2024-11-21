@@ -84,7 +84,7 @@ Rectangle {
                 Image {
                     height: 16
                     width: 16
-                    source: "qrc:/desktop/assets/images/icons/search.svg"
+                    source: "qrc:/qt/qml/quick/content/assets/images/icons/search.svg"
                     Layout.alignment: Qt.AlignVCenter
                     Layout.leftMargin: 8
                 }

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    {{> headmeta }}
+    {{> analytics }}
+    <title>{{title}} - 泛涵</title>
+    <meta name="description" content="{{description}}"/>
+    <meta name="keywords" content="{{keywords}}"/>
+    <link rel="canonical" href="https://www.sfx.xyz/article/read/{{pk}}"/>
+    {{> styles }}
+</head>
+<body class="article-read-page">
+<div>
+    {{> header }}
+    <main>
+        <div class="page-left">
+            <article>
+                <div class="article-title">
+                    <h1 id="{{title}}">{{title}}</h1>
+                    <div class="description">{{description}}</div>
+                    <div class="keywords-list">
+                        {{#each keywords_list as |l|}}
+                            <span class="keyword">{{this}}</span>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="article-body">
+                    {{{body_html}}}
+                </div>
+            </article>
+        </div>
+        <div class="page-right">
+            
+            <div class="article-toc fx-card">
+                <div class="fx-card-title">文章目录</div>
+                <div class="fx-card-body">
+                    {{#each toc_list as |l|}}
+                        <div class="toc-item" style="padding-left: calc(8px*{{header}});">
+                            <a class="fx-link" href="#{{title}}" title="{{title}}">{{title}}</a>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </main>
+    {{> footer }}
+</div>
+{{> scripts }}
+</body>
+</html>

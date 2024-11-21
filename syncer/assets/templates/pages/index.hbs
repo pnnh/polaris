@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>泛涵</title>
+    {{> headmeta}}
+    {{> analytics}}
+    {{> styles}}
+</head>
+<body class="home-page">
+<div>
+    {{> header}}
+
+    <main>
+        <div class="fx-grid">
+            <div class="ms-Grid-col ms-sm12 ms-xl8">
+                <div class="article-list">
+                    {{#each models as |s|}}
+                        <div class="article-item">
+                            <div data-name="{{pk}}" data-type="object">
+                                <div class="article-link">
+                                    <a href="{{read_url}}">{{title}}</a>
+                                </div>
+                                <div class="article-description">
+                                    {{description}}
+                                </div>
+                                <div class="article-info">
+                                    <a class="article-creator" href="/user/{{creator}}"><i
+                                            class="ri-user-line"></i>{{creator_nickname}}</a>
+                                    <span class="update-time"><i
+                                            class="ri-time-line"></i>{{update_time_formatted}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {{/each}}
+                </div>
+                <div class="page-list">
+                    {{{ pages_html }}}
+                </div>
+            </div>
+        </div>
+    </main>
+    {{> footer }}
+</div>
+<div id="root"></div>
+<script id="data" type="application/json">{{data}}</script>
+{{> scripts }}
+{{> footer }}
+</body>
+</html>

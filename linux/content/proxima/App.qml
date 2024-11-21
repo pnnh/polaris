@@ -96,7 +96,7 @@ Rectangle {
                                 Image {
                                     height: 16
                                     width: 16
-                                    source: "qrc:/desktop/assets/images/icons/shoucang.svg"
+                                    source: "qrc:/qt/qml/quick/content/assets/images/icons/shoucang.svg"
                                     Layout.alignment: Qt.AlignVCenter | Qt.LeftToRight
                                 }
                                 Text {
@@ -108,7 +108,7 @@ Rectangle {
                                 Image {
                                     height: 16
                                     width: 16
-                                    source: "qrc:/desktop/assets/images/icons/hao.svg"
+                                    source: "qrc:/qt/qml/quick/content/assets/images/icons/hao.svg"
                                     Layout.alignment: Qt.AlignVCenter | Qt.LeftToRight
                                 }
                                 Text {
@@ -120,7 +120,7 @@ Rectangle {
                                 Image {
                                     height: 16
                                     width: 16
-                                    source: "qrc:/desktop/assets/images/icons/cha.svg"
+                                    source: "qrc:/qt/qml/quick/content/assets/images/icons/cha.svg"
                                     Layout.alignment: Qt.AlignVCenter | Qt.LeftToRight
                                 }
                                 Text {
@@ -136,7 +136,7 @@ Rectangle {
                                 Image {
                                     height: 16
                                     width: 16
-                                    source: "qrc:/desktop/assets/images/icons/trash_fill.svg"
+                                    source: "qrc:/qt/qml/quick/content/assets/images/icons/trash_fill.svg"
                                     Layout.alignment: Qt.AlignVCenter | Qt.LeftToRight
                                 }
                                 Text {
@@ -148,7 +148,7 @@ Rectangle {
                                 Image {
                                     height: 16
                                     width: 16
-                                    source: "qrc:/desktop/assets/images/icons/close_fill.svg"
+                                    source: "qrc:/qt/qml/quick/content/assets/images/icons/close_fill.svg"
                                     Layout.alignment: Qt.AlignVCenter | Qt.LeftToRight
                                 }
                                 Text {

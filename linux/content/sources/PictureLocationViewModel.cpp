@@ -115,7 +115,7 @@ void PictureLocationViewModel::close(const int index)
 //   beginInsertRows(QModelIndex(), index, index);
 
 //   auto video2 = new QVector<QString>();
-//   video2->append("qrc:/desktop/assets/images/icons/folder.svg");
+//   video2->append("qrc:/qt/qml/quick/content/assets/images/icons/folder.svg");
 //   video2->append(path);
 //   video2->append("18222");
 //   video2->append(path);
