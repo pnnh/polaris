@@ -1,4 +1,7 @@
 #include "server/process.h"
+
+#include <iostream>
+
 #include "server/controllers/article.h"
 #include "server/controllers/sitemap.h"
 #include "router.h"
@@ -92,6 +95,21 @@ void process(WFHttpTask* httpTask)
   fprintf(stderr, "seq: %lld, peer: %s:%hu\n", seq, addrstr, port);
 }
 
+void loopCmd(const WFHttpServer& httpServer)
+{
+  std::string cmd;
+  while (true)
+  {
+    std::cout << "等待操作命令..." << std::endl;
+    std::getline(std::cin, cmd);
+    std::cin.clear();
+    if (cmd == "exit")
+    {
+      break;
+    }
+  }
+}
+
 int polaris::server::runServer(int port)
 {
   WFHttpServer server(process);
@@ -101,7 +119,7 @@ int polaris::server::runServer(int port)
 
   if (server.start(port) == 0)
   {
-    pause();
+    loopCmd(server);
     server.stop();
   }
   else

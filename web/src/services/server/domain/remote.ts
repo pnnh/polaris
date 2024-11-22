@@ -1,15 +1,11 @@
-import parseURI from "parse-uri"
 import {cookies} from "next/headers";
 import {IDomain} from "@/services/common/domain";
 
 export class RemoteDomain implements IDomain {
-    userUri: parseURI.URI
     baseUrl: string
 
-    constructor(userUri: parseURI.URI) {
-        this.userUri = userUri
-
-        this.baseUrl = userUri.source
+    constructor(baseUrl: string) {
+        this.baseUrl = baseUrl
     }
 
     async makeGet<T>(urlString: string) {

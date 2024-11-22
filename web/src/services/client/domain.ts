@@ -1,17 +1,12 @@
 import parseUri, {URI} from "parse-uri";
-import parseURI from "parse-uri"
 import {IDomain} from "@/services/common/domain";
-import {useServerConfig} from "@/services/server/config";
 import {ClientConfig} from "@/services/client/config";
 
 export class RemoteDomain implements IDomain {
-    userUri: parseURI.URI
     baseUrl: string
 
-    constructor(userUri: parseURI.URI) {
-        this.userUri = userUri
-
-        this.baseUrl = userUri.source
+    constructor(baseUrl: string) {
+        this.baseUrl = baseUrl
     }
 
     async makeGet<T>(urlString: string) {
@@ -47,19 +42,24 @@ export class RemoteDomain implements IDomain {
     }
 }
 
-function trySigninDomain(domainUrl: string): IDomain | undefined {
-    let remoteUri: URI
-    if (domainUrl.startsWith('http://') || domainUrl.startsWith('https://')) {
-        remoteUri = parseUri(domainUrl)
-    } else {
-        throw new Error('protocol not supported')
+export function clientTrySigninDomain(domainUrl: string | undefined = ""): IDomain | undefined {
+    if (!domainUrl) {
+        domainUrl = ""
     }
-    const systemDomain = new RemoteDomain(remoteUri)
+    const systemDomain = new RemoteDomain(domainUrl)
     return systemDomain as IDomain
 }
 
+export function clientMustSigninDomain(domainUrl: string | undefined = ""): IDomain {
+    const domain = clientTrySigninDomain(domainUrl)
+    if (!domain) {
+        throw new Error('clientMustSigninDomain error')
+    }
+    return domain
+}
+
 export function clientSigninDomain(clientConfig: ClientConfig): IDomain {
-    const domain = trySigninDomain(clientConfig.defaultDomain.baseurl)
+    const domain = clientTrySigninDomain(clientConfig.defaultDomain.baseurl)
     if (!domain) {
         throw new Error('domain not found')
     }

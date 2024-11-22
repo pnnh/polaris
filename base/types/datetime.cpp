@@ -105,3 +105,8 @@ polaris::base::PSDatetime& polaris::base::PSDatetime::operator=(const std::time_
     this->timeValue = std::chrono::system_clock::from_time_t(time);
     return *this;
 }
+
+std::string polaris::base::PSDatetime::toString() const
+{
+    return formatTime(this->timeValue);
+}

@@ -1,3 +1,5 @@
+'use client'
+
 import './navigator.scss'
 
 export function NavigatorBar() {
@@ -24,7 +26,8 @@ function NavIcon({src}: { src: string }) {
 
 function URILocation() {
     return <div className={'uriLocation'}>
-        <input value={'本地 / 主站配置 / 文档管理 / 文档列表'}/>
+        <input value={'filesystem://home/server/files'} onChange={() => {
+        }}/>
     </div>
 }
 

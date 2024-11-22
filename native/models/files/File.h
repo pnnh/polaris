@@ -16,6 +16,8 @@ namespace polaris::native
         std::string Keywords;
         std::string Description;
         bool IsDir{};
+        bool IsHidden{};
+        bool IsIgnore{};
         polaris::base::PSDatetime CreateTime;
         polaris::base::PSDatetime UpdateTime;
     };

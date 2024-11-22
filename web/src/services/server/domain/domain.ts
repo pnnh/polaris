@@ -1,17 +1,21 @@
 import {RemoteDomain} from "@/services/server/domain/remote";
-import parseUri, {URI} from "parse-uri";
 import {IDomain} from "@/services/common/domain";
 import {useServerConfig} from "@/services/server/config";
 
-function trySigninDomain(domainUrl: string): IDomain | undefined {
-    let remoteUri: URI
-    if (domainUrl.startsWith('http://') || domainUrl.startsWith('https://')) {
-        remoteUri = parseUri(domainUrl)
-    } else {
-        throw new Error('protocol not supported')
+function trySigninDomain(domainUrl: string | undefined = ""): IDomain | undefined {
+    if (domainUrl) {
+        domainUrl = domainUrl.replace('filesystem://home', "http://127.0.0.1:7501")
     }
-    const systemDomain = new RemoteDomain(remoteUri)
+    const systemDomain = new RemoteDomain(domainUrl)
     return systemDomain as IDomain
+}
+
+export function serverMustSigninDomain(domainUrl: string | undefined = ''): IDomain {
+    const domain = trySigninDomain(domainUrl)
+    if (!domain) {
+        throw new Error('domain not found')
+    }
+    return domain
 }
 
 export function serverSigninDomain(): IDomain {

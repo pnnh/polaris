@@ -45,17 +45,12 @@ polaris::native::FileServerBusiness::selectFiles(std::string parentPath) const
             fileModel.URN = polaris::base::calcMd5(entry.path().string());
         }
         fileModel.IsDir = entry.is_directory();
+        fileModel.IsHidden = polaris::base::isHidden(dirName);
+        fileModel.IsIgnore = polaris::base::isIgnore(dirName);
         fileModel.Title = dirName;
 
-
-        auto lastWriteTime = std::filesystem::last_write_time(entry);
-
-        auto sctp = std::chrono::time_point_cast<std::chrono::system_clock::duration>(
-            lastWriteTime - std::filesystem::file_time_type::clock::now()
-            + std::chrono::system_clock::now());
-        auto timePoint = std::chrono::system_clock::to_time_t(sctp);
-
-        fileModel.CreateTime = polaris::base::convertFilesystemTime(std::filesystem::last_write_time(entry));
+        fileModel.UpdateTime = polaris::base::convertFilesystemTime(std::filesystem::last_write_time(entry));
+        fileModel.CreateTime = fileModel.UpdateTime;
         files->emplace_back(fileModel);
     }
 

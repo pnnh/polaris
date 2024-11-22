@@ -26,18 +26,16 @@ void polaris::server::HandleFileList(WFHttpTask* httpTask)
 
     auto request_uri = request->get_request_uri();
 
-    polaris::base::QueryParam queryParam{std::string(request_uri)};
+    base::QueryParam queryParam{std::string(request_uri)};
 
+    auto baseUrl = polaris::base::UserHomeDirectory();
     auto encodePath = queryParam.getString("path");
-    if (!encodePath.has_value())
+    if (encodePath.has_value())
     {
-        response->set_status_code("500");
-        return;
+        baseUrl = polaris::base::decode64(encodePath.value());
     }
-    auto decodePath = polaris::base::decode64(encodePath.value());
 
     std::ostringstream oss;
-    const std::string baseUrl = decodePath;
     //native::services::filesystem::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
     auto fileServer = std::make_shared<polaris::native::FileServerBusiness>(baseUrl);
     auto filesPtr = fileServer->selectFiles();
@@ -45,28 +43,42 @@ void polaris::server::HandleFileList(WFHttpTask* httpTask)
     for (const auto& model : *filesPtr)
     {
         json item = {
-            {"urn", model.URN},
-            {"title", model.Title},
-            {"name", model.Name},
-            {"description", model.Description},
+            {"URN", model.URN},
+            {"Title", model.Title},
+            {"Name", model.Name},
+            {"Description", model.Description},
+            {"IsDir", model.IsDir},
+            {"IsHidden", model.IsHidden},
+            {"IsIgnore", model.IsIgnore},
+            {"CreateTime", model.CreateTime.toString()},
+            {"UpdateTime", model.UpdateTime.toString()},
         };
         range.push_back(item);
     }
 
     auto count = filesPtr->size();
     json data = json::object({
-        {"count", count},
+        {"code", 200},
+        {"message", "Hello, World!"},
         {
-            "range",
-            range,
-        }
+            "data", {
+                {"count", count},
+                {
+                    "range",
+                    range,
+                }
+            }
+        },
     });
     oss << data;
 
     auto bodyStr = oss.str();
     auto bodySize = bodyStr.size();
 
-    response->append_output_body(bodyStr.c_str(), bodySize);
+    response->append_output_body(bodyStr
+                                 .c_str(), bodySize);
 
-    response->set_status_code("200");
+    response->set_status_code(
+        "200"
+    );
 }

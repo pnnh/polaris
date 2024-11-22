@@ -2,11 +2,14 @@
 import {PSNoteModel} from "@/models/common/personal/note";
 import {PSNotebookModel} from "@/models/common/personal/notebook";
 import {PSLibraryModel} from "@/models/common/personal/library";
+import {createClientMailbox, IMailbox} from "@/services/client/postoffice";
 
 // const directoryAtom = atom({
 //     key: 'directoryAtom',
 //     default: ''
 // })
+
+export const filesMailbox: IMailbox = createClientMailbox('files')
 
 // const noteAtom = atom<{
 //     current: PSNoteModel | undefined,
