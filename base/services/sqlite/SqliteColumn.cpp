@@ -13,7 +13,7 @@ polaris::base::SqliteColumn::SqliteColumn(const int colType, const int colIndex,
     colType(colType), colIndex(colIndex),
     colName(colName)
 {
-    if (colIndex < 0) throw polaris::base::QuantumException("列索引必须大于等于0");
+    if (colIndex < 0) throw polaris::base::PSException("列索引必须大于等于0");
 }
 
 polaris::base::SqliteColumn::~SqliteColumn()

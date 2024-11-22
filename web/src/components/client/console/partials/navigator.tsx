@@ -26,7 +26,7 @@ function NavIcon({src}: { src: string }) {
 
 function URILocation() {
     return <div className={'uriLocation'}>
-        <input value={'filesystem://home/server/files'} onChange={() => {
+        <input value={'filesystem://home'} onChange={() => {
         }}/>
     </div>
 }

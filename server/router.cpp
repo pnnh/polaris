@@ -1,6 +1,6 @@
 #include "router.h"
 #include <regex>
-#include <base/types/StringUtils.h>
+#include <base/types/String.h>
 
 #include "controllers/article.h"
 #include "controllers/channel.h"
@@ -27,7 +27,7 @@ void routeHandleGet(WFHttpTask* httpTask, const std::string& request_uri)
 	{
 		polaris::server::HandleChannels(httpTask);
 	}
-	else if (polaris::base::StringUtils::StartsWith(request_uri, "/server/files"))
+	else if (polaris::base::PSString::StartsWith(request_uri, "/server/files"))
 	{
 		polaris::server::HandleFileList(httpTask);
 	}

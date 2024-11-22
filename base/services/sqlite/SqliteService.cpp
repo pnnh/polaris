@@ -27,7 +27,7 @@ polaris::base::SqliteHandle polaris::base::SqliteService::openDatabase(std::stri
 
     auto cPath = path.c_str();
     int rc = sqlite3_open(cPath, &db);
-    if (rc) throw polaris::base::QuantumException("Can't open database", sqlite3_errmsg(db));
+    if (rc) throw polaris::base::PSException("Can't open database", sqlite3_errmsg(db));
 
     const SqliteHandle handle = dbHandles.size();
 
@@ -39,9 +39,9 @@ polaris::base::SqliteHandle polaris::base::SqliteService::openDatabase(std::stri
 polaris::base::QuantumEnum polaris::base::SqliteService::closeDatabase(polaris::base::SqliteHandle dbHandle)
 {
     auto db = dbHandles[dbHandle];
-    if (db == nullptr) throw polaris::base::QuantumException("Database handle not found");
+    if (db == nullptr) throw polaris::base::PSException("Database handle not found");
     auto rc = sqlite3_close(db);
-    if (rc) throw QuantumException("Can't close database", sqlite3_errmsg(db));
+    if (rc) throw PSException("Can't close database", sqlite3_errmsg(db));
     return QuantumEnum::OK;
 }
 
@@ -54,7 +54,7 @@ std::string polaris::base::SqliteService::sqliteVersion(SqliteHandle dbHandle)
 {
     auto sqlResult = runSql(dbHandle, "SELECT sqlite_version() as version;");
     auto verColumn = sqlResult.getColumn(0, 0);
-    if (!verColumn.has_value()) throw QuantumException("Can't get sqlite version");
+    if (!verColumn.has_value()) throw PSException("Can't get sqlite version");
 
     return verColumn.value().getStringValue();
 }
@@ -63,13 +63,13 @@ polaris::base::SqliteResult polaris::base::SqliteService::runSql(SqliteHandle db
                                                                  std::string&& sqlText)
 {
     auto db = dbHandles[dbHandle];
-    if (db == nullptr) throw QuantumException("Database handle not found");
+    if (db == nullptr) throw PSException("Database handle not found");
 
     sqlite3_stmt* stmt;
     int row = 0;
 
     auto rc = sqlite3_prepare_v2(db, sqlText.c_str(), static_cast<int>(sqlText.length() + 1), &stmt, nullptr);
-    if (rc) throw QuantumException("Can't prepare statement", sqlite3_errmsg(db));
+    if (rc) throw PSException("Can't prepare statement", sqlite3_errmsg(db));
 
     SqliteResult sqlResult;
     while (true)
@@ -128,7 +128,7 @@ polaris::base::SqliteResult polaris::base::SqliteService::runSql(SqliteHandle db
         }
         else
         {
-            throw QuantumException("Can't step statement", sqlite3_errmsg(db));
+            throw PSException("Can't step statement", sqlite3_errmsg(db));
         }
     }
     return sqlResult;

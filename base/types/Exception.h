@@ -25,18 +25,18 @@ namespace polaris::base
         }
     };
 
-    class QuantumException : public std::exception
+    class PSException : public std::exception
     {
     public:
-        QuantumException();
-        explicit QuantumException(const std::string& message);
-        QuantumException(QuantumEnum error, std::string message);
-        QuantumException(const char* firstMessage, const char* secondMessage);
+        PSException();
+        explicit PSException(const std::string& message);
+        PSException(QuantumEnum error, std::string message);
+        PSException(const char* firstMessage, const char* secondMessage);
 
-        QuantumException(const QuantumException& other);
-        QuantumException& operator=(const QuantumException& other);
-        QuantumException(QuantumException&& other) noexcept;
-        QuantumException& operator=(QuantumException&& other) noexcept;
+        PSException(const PSException& other);
+        PSException& operator=(const PSException& other);
+        PSException(PSException&& other) noexcept;
+        PSException& operator=(PSException&& other) noexcept;
 
         void AppendMessage(const std::string& message);
 

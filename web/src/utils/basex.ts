@@ -1,4 +1,4 @@
-import {base64url} from 'rfc4648'
+import {base64url, base64} from 'rfc4648'
 import {parse as uuidParse, v4 as uuidv4} from 'uuid';
 import {base58xrp,} from '@scure/base';
 import md5 from "md5";
@@ -6,20 +6,25 @@ import md5 from "md5";
 /**
  * 将字符串转换为base64编码的字符串
  * @param state - 待编码的字符串
+ * @param urlEncode
  * @returns base64编码的字符串
  */
-export function encodeBase64String(state: string): string {
+export function encodeBase64String(state: string, {urlEncode}: { urlEncode: boolean } = {urlEncode: true}): string {
     const enc = new TextEncoder()
-    return base64url.stringify(enc.encode(state))
+    const data = enc.encode(state)
+    return urlEncode ? base64url.stringify(data) : base64.stringify(data)
 }
 
 /**
  * 将base64编码的字符串转换为字符串
  * @param base64State - 待解码的base64编码的字符串
+ * @param urlEncode
  * @returns 解码后的字符串
  */
-export function decodeBase64String(base64State: string): string {
-    const stateData = base64url.parse(base64State)
+export function decodeBase64String(base64State: string, {urlEncode}: {
+    urlEncode: boolean
+} = {urlEncode: true}): string {
+    const stateData = urlEncode ? base64url.parse(base64State) : base64.parse(base64State)
     const decoder = new TextDecoder()
     return decoder.decode(stateData)
 }

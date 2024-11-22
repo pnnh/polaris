@@ -3,9 +3,6 @@ import {IDomain} from "@/services/common/domain";
 import {useServerConfig} from "@/services/server/config";
 
 function trySigninDomain(domainUrl: string | undefined = ""): IDomain | undefined {
-    if (domainUrl) {
-        domainUrl = domainUrl.replace('filesystem://home', "http://127.0.0.1:7501")
-    }
     const systemDomain = new RemoteDomain(domainUrl)
     return systemDomain as IDomain
 }

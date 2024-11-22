@@ -2,7 +2,7 @@
 #include "library.h"
 #include <string>
 #include <filesystem>
-#include <base/types/StringUtils.h>
+#include <base/types/String.h>
 
 #include "base/types/Exception.h"
 #include "base/services/filesystem/filesystem.h"
@@ -54,5 +54,5 @@ polaris::native::LibraryServerBusiness::selectLibraries() const
 
 bool polaris::native::isLibraryDirectory(const std::string& directoryName)
 {
-    return polaris::base::StringUtils::EndsWith(directoryName, ".notelibrary");
+    return polaris::base::PSString::EndsWith(directoryName, ".notelibrary");
 }

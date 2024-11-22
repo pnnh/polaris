@@ -5,8 +5,8 @@ import {SitemapItemLoose} from "sitemap/dist/lib/types";
 import {serverMustSigninDomain,} from "@/services/server/domain/domain";
 import {useServerConfig} from "@/services/server/config";
 import {CommonResult, PLSelectResult} from "@/models/common/common-result";
-import {PSArticleModel} from "@/models/common/article";
-import {decodeBase64String} from "@/utils/basex";
+
+import {decodeBase64String, encodeBase64String} from "@/utils/basex";
 import {PSFileModel} from "@/models/common/filesystem";
 
 export const dynamic = "force-dynamic";
@@ -20,9 +20,22 @@ export async function GET(request: NextRequest, response: NextResponse) {
             code: 500
         })
     }
+    const magicDomain = 'filesystem://home'
     const decodedUrl = decodeBase64String(resUrl)
-    const domain = serverMustSigninDomain(decodedUrl)
-    const result = await domain.makeGet<PLSelectResult<PSFileModel>>('')
-
+    const domainUrl = "http://127.0.0.1:7501"
+    const filePath = decodedUrl.replace(magicDomain, '~')
+    const domain = serverMustSigninDomain(domainUrl)
+    const queryPath = encodeURIComponent(encodeBase64String(filePath, {urlEncode: false}))
+    const requestPath = `/server/files?path=${queryPath}`
+    const result = await domain.makeGet<PLSelectResult<PSFileModel>>(requestPath)
+    console.log('result', result)
+    if (!result || !result.data || !result.data.range) {
+        return NextResponse.json({
+            code: 500
+        })
+    }
+    result.data.range.forEach((item) => {
+        item.Path = decodedUrl + '/' + item.Name
+    })
     return NextResponse.json(result)
 }

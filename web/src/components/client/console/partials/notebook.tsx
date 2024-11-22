@@ -20,7 +20,7 @@ export function NotebookList() {
                 <div className={'directoryList'}>
                     <div className={'directoryItem'} onClick={() => {
                         const domain = clientMustSigninDomain()
-                        const urlParam = encodeBase64String('filesystem://home/server/files')
+                        const urlParam = encodeBase64String('filesystem://home')
                         const rankUrl = `/restful/files?url=${urlParam}`
                         domain.makeGet<PLSelectResult<PSFileModel>>(rankUrl).then((selectResult) => {
                             console.log('selectResult', selectResult)

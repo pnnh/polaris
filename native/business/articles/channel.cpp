@@ -6,7 +6,7 @@
 #include "base/services/filesystem/filesystem.h"
 #include "base/services/yaml/yaml.h"
 #include "base/utils/md5.h"
-#include "base/types//StringUtils.h"
+#include "base/types//String.h"
 
 polaris::native::ChannelServerBusiness::ChannelServerBusiness(const std::string& baseUrl)
 {
@@ -52,7 +52,7 @@ polaris::native::ChannelServerBusiness::selectChannels() const
 
 bool polaris::native::isChannelDirectory(const std::string& directoryName)
 {
-    return polaris::base::StringUtils::EndsWith(directoryName, ".chan") ||
-        polaris::base::StringUtils::EndsWith(directoryName, ".channel") || polaris::base::StringUtils::EndsWith(
+    return polaris::base::PSString::EndsWith(directoryName, ".chan") ||
+        polaris::base::PSString::EndsWith(directoryName, ".channel") || polaris::base::PSString::EndsWith(
             directoryName, ".notechannel");
 }

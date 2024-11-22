@@ -7,7 +7,7 @@
 #include "base/services/logger/logger.h"
 #include "base/services/yaml/yaml.h"
 #include "base/utils/md5.h"
-#include "base/types/StringUtils.h"
+#include "base/types/String.h"
 
 polaris::native::ArticleServerBusiness::ArticleServerBusiness(const std::string& baseUrl)
 {
@@ -53,5 +53,5 @@ polaris::native::ArticleServerBusiness::selectArticles() const
 
 bool polaris::native::isArticleDirectory(const std::string& directoryName)
 {
-    return polaris::base::StringUtils::EndsWith(directoryName, ".note");
+    return polaris::base::PSString::EndsWith(directoryName, ".note");
 }

@@ -1,17 +1,11 @@
 #include "file.h"
 #include <string>
 #include <filesystem>
+#include <utility>
 #include <base/services/filesystem/filesystem.h>
 #include <base/types/datetime.h>
-
-#include "base/types/Exception.h"
-#include "base/services/filesystem/filesystem.h"
-#include "base/services/sqlite/SqliteService.h"
-#include "base/services/logger/logger.h"
-#include "base/services/yaml/yaml.h"
 #include "base/utils/md5.h"
-#include "base/types//StringUtils.h"
-
+#include "base/types//String.h"
 
 polaris::native::FileServerBusiness::FileServerBusiness(const std::string& baseUrl)
 {
@@ -29,7 +23,7 @@ polaris::native::FileServerBusiness::selectFiles(std::string parentPath) const
 {
     auto files = std::make_shared<std::vector<PSFileModel>>();
 
-    const std::string fullPath = polaris::base::JoinFilePath({this->baseUrl, parentPath});
+    const std::string fullPath = polaris::base::JoinFilePath({this->baseUrl, std::move(parentPath)});
 
     for (const auto& entry : std::filesystem::directory_iterator(fullPath))
     {
@@ -48,6 +42,7 @@ polaris::native::FileServerBusiness::selectFiles(std::string parentPath) const
         fileModel.IsHidden = polaris::base::isHidden(dirName);
         fileModel.IsIgnore = polaris::base::isIgnore(dirName);
         fileModel.Title = dirName;
+        fileModel.Name = dirName;
 
         fileModel.UpdateTime = polaris::base::convertFilesystemTime(std::filesystem::last_write_time(entry));
         fileModel.CreateTime = fileModel.UpdateTime;

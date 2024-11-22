@@ -2,14 +2,14 @@
 
 #include <iostream>
 #include <base/types/Exception.h>
-#include <base/types/StringUtils.h>
+#include <base/types/String.h>
 #include <boost/range/algorithm.hpp>
 
 
 polaris::base::QueryParam::QueryParam(const std::string& url_string)
 {
   auto fullUrl = std::string(url_string);
-  if (!polaris::base::StringUtils::StartsWith(fullUrl, "http://") && !polaris::base::StringUtils::StartsWith(
+  if (!polaris::base::PSString::StartsWith(fullUrl, "http://") && !polaris::base::PSString::StartsWith(
     fullUrl, "https://"))
   {
     fullUrl = std::string("http://localhost") + fullUrl;
@@ -23,8 +23,8 @@ boost::urls::url_view parseUrl(const std::string& fullUrl)
   auto parseResult = boost::urls::parse_uri(fullUrl);
   if (parseResult.has_error())
   {
-    throw polaris::base::QuantumException(polaris::base::QuantumEnum::ERROR,
-                                          std::string("url parse error") + parseResult.error().to_string());
+    throw polaris::base::PSException(polaris::base::QuantumEnum::ERROR,
+                                     std::string("url parse error") + parseResult.error().to_string());
   }
   return parseResult.value();
 }

@@ -4,25 +4,44 @@
   gap: 0.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-
+  width: 100%;
 
   .noteCard {
+    display: flex;
+    align-items: flex-start;
+    cursor: default;
+    flex-direction: column;
+  }
+
+  .noteSelf {
     height: 2rem;
     display: flex;
     flex-direction: row;
-    gap: 1rem;
     align-items: center;
-    padding-left: 1rem;
-    cursor: default;
+    width: 100%;
+    border-bottom: solid 0.5px #f3f3f3;
 
     &:hover {
       background-color: #f3f3f3;
     }
-  }
 
-  .noteSelf {
-    display: flex;
-    flex-direction: row;
+    .openIcon {
+      display: inline-flex;
+      width: 2rem;
+      height: 2rem;
+      flex-direction: row;
+      justify-items: center;
+      align-items: center;
+
+      img {
+        width: 80%;
+        height: 80%;
+
+        &.opened {
+          transform: rotate(90deg);
+        }
+      }
+    }
   }
 
   .noteName {

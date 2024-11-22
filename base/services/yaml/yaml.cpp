@@ -1,7 +1,7 @@
 #include "yaml.h"
 
 #include <regex>
-#include <base/types/StringUtils.h>
+#include <base/types/String.h>
 #include <yaml-cpp/yaml.h>
 
 
@@ -10,7 +10,7 @@ std::optional<std::string> polaris::base::YamlHandler::getString(const std::stri
     // 多级key
     if (keyName.rfind('.', 0) > 0 && std::regex_match(keyName, std::regex(R"(^(\w+\.)+\w+$)")))
     {
-        auto nameList = polaris::base::StringUtils::Split(keyName, '.');
+        auto nameList = PSString::Split(keyName, '.');
         YAML::Node node = _yamlConfig;
         for (const auto& name : nameList)
         {

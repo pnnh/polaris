@@ -5,7 +5,7 @@
 #include <base/services/filesystem/filesystem.h>
 #include <base/services/yaml/yaml.h>
 #include "base/utils/md5.h"
-#include "base/types/StringUtils.h"
+#include "base/types/String.h"
 
 polaris::native::NotebookServerBusiness::NotebookServerBusiness(const std::string& baseUrl)
 {
@@ -51,5 +51,5 @@ polaris::native::NotebookServerBusiness::selectNotebooks() const
 
 bool polaris::native::isNotebookDirectory(const std::string& directoryName)
 {
-    return polaris::base::StringUtils::EndsWith(directoryName, ".notebook");
+    return polaris::base::PSString::EndsWith(directoryName, ".notebook");
 }

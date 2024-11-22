@@ -9,6 +9,7 @@
 #include "native/business/filesystem/file.h"
 #include "base/services/filesystem/filesystem.h"
 #include <iostream>
+#include <base/types/String.h>
 #include <base/utils/basex.h>
 #include <base/utils/query.h>
 
@@ -28,15 +29,16 @@ void polaris::server::HandleFileList(WFHttpTask* httpTask)
 
     base::QueryParam queryParam{std::string(request_uri)};
 
-    auto baseUrl = polaris::base::UserHomeDirectory();
+    auto homeDirectory = base::UserHomeDirectory();
+    auto baseUrl = homeDirectory;
     auto encodePath = queryParam.getString("path");
-    if (encodePath.has_value())
+    if (encodePath.has_value() && !encodePath.value().empty())
     {
-        baseUrl = polaris::base::decode64(encodePath.value());
+        auto decodePath = base::decode64(encodePath.value());
+        baseUrl = base::PSString::LeftReplace(decodePath, "~", homeDirectory);
     }
 
     std::ostringstream oss;
-    //native::services::filesystem::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
     auto fileServer = std::make_shared<polaris::native::FileServerBusiness>(baseUrl);
     auto filesPtr = fileServer->selectFiles();
     json range = json::array();

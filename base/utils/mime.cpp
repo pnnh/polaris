@@ -1,13 +1,13 @@
 #include <filesystem>
 #include "mime.h"
 
-#include <base/types/StringUtils.h>
+#include <base/types/String.h>
 
 bool polaris::base::MimeUtils::isImage(const std::string& path)
 {
     const auto stdPath = std::filesystem::path(path);
     auto ext = stdPath.extension().string();
-    ext = StringUtils::toLower(ext);
+    ext = PSString::toLower(ext);
     if (ext == ".jpg" || ext == ".jpeg" || ext == ".png" || ext == ".gif" || ext == ".webp")
         return true;
     return false;
@@ -18,7 +18,7 @@ std::string polaris::base::MimeUtils::getMimeType(const std::string& path)
 {
     const auto stdPath = std::filesystem::path(path);
     auto ext = stdPath.extension().string();
-    ext = StringUtils::toLower(ext);
+    ext = PSString::toLower(ext);
 
     if (ext == ".txt")
         return "text/plain";

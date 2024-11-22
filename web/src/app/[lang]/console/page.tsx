@@ -15,9 +15,9 @@ export default async function Page() {
                 <div className={'notebarContainer'}>
                     <ConsoleNotebar></ConsoleNotebar>
                 </div>
-                <div className={'noteViewer'}>
-                    <ArticleEditorArea></ArticleEditorArea>
-                </div>
+                {/*<div className={'noteViewer'}>*/}
+                {/*    <ArticleEditorArea></ArticleEditorArea>*/}
+                {/*</div>*/}
             </div>
         </ConsoleLayout>
     )
