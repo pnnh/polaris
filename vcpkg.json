@@ -1,6 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
-  "name": "multiverse",
+  "name": "polaris",
   "version": "0.1.0",
   "dependencies": [
     {
@@ -16,6 +15,10 @@
     },
     {
       "name": "boost-core",
+      "version>=": "1.86.0"
+    },
+    {
+      "name": "boost-serialization",
       "version>=": "1.86.0"
     },
     {
@@ -39,7 +42,23 @@
       "version>=": "1.86.0"
     },
     {
+      "name": "boost-iterator",
+      "version>=": "1.86.0"
+    },
+    {
+      "name": "boost-uuid",
+      "version>=": "1.86.0"
+    },
+    {
       "name": "boost-program-options",
+      "version>=": "1.86.0"
+    },
+    {
+      "name": "boost-property-map",
+      "version>=": "1.86.0"
+    },
+    {
+      "name": "boost-property-tree",
       "version>=": "1.86.0"
     },
     {
@@ -66,12 +85,7 @@
       "name": "date"
     }
   ],
-  "builtin-baseline": "5f4628b89f3f98cd9a0b43c27ded2aa53da1f790",
   "overrides": [
-    {
-      "name": "folly",
-      "version-string": "2024.09.30.00"
-    },
     {
       "name": "spdlog",
       "version": "1.14.1"
@@ -101,7 +115,27 @@
       "version": "1.86.0"
     },
     {
+      "name": "boost-uuid",
+      "version": "1.86.0"
+    },
+    {
       "name": "boost-program-options",
+      "version": "1.86.0"
+    },
+    {
+      "name": "boost-iterator",
+      "version": "1.86.0"
+    },
+    {
+      "name": "boost-property-map",
+      "version": "1.86.0"
+    },
+    {
+      "name": "boost-property-tree",
+      "version": "1.86.0"
+    },
+    {
+      "name": "boost-serialization",
       "version": "1.86.0"
     },
     {

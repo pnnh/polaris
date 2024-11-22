@@ -1,7 +1,6 @@
 #include "server/controllers/channel.h"
 #include <boost/range/algorithm.hpp>
 #include <boost/url.hpp>
-#include <boost/uuid/uuid_io.hpp>
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
 #include "build.h"
