@@ -11,7 +11,7 @@ add_executable(${WASM_BROWSER}
 add_dependencies(${WASM_BROWSER} ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
 target_link_libraries(${WASM_BROWSER} PRIVATE ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
 
-set_target_properties(${WASM_BROWSER} PROPERTIES LINK_FLAGS "-lembind -sMODULARIZE -sENVIRONMENT=web -sTOTAL_MEMORY=32MB --embind-emit-tsd ${WASM_BROWSER}.d.ts")
+set_target_properties(${WASM_BROWSER} PROPERTIES LINK_FLAGS "-lembind -sMODULARIZE -sENVIRONMENT=web -sTOTAL_MEMORY=32MB --emit-tsd ${WASM_BROWSER}.d.ts")
 
 file(COPY_FILE ${CMAKE_CURRENT_SOURCE_DIR}/package.json ${CMAKE_CURRENT_BINARY_DIR}/package.json)
 
@@ -36,7 +36,7 @@ add_executable(${WASM_SERVER}
 add_dependencies(${WASM_SERVER} ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
 target_link_libraries(${WASM_SERVER} PRIVATE ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
 
-set_target_properties(${WASM_SERVER} PROPERTIES LINK_FLAGS "-lembind -sMODULARIZE -sTOTAL_MEMORY=32MB --embind-emit-tsd ${WASM_SERVER}.d.ts")
+set_target_properties(${WASM_SERVER} PROPERTIES LINK_FLAGS "-lembind -sMODULARIZE -sTOTAL_MEMORY=32MB --emit-tsd ${WASM_SERVER}.d.ts")
 
 file(COPY_FILE ${CMAKE_CURRENT_SOURCE_DIR}/package.json ${CMAKE_CURRENT_BINARY_DIR}/package.json)
 

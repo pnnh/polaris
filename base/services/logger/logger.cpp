@@ -1,12 +1,10 @@
 #include "logger.h"
 
 #include <iostream>
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/msvc_sink.h>
 
 void polaris::base::Logger::LogInfo(const std::string& message)
 {
-    spdlog::info("{}", message);
+    std::cout << "[INFO] " << message << std::endl;
 }
 
 void polaris::base::Logger::LogInfo(std::initializer_list<std::string> messageList)
@@ -16,5 +14,5 @@ void polaris::base::Logger::LogInfo(std::initializer_list<std::string> messageLi
     {
         fullMessage += " " + item;
     }
-    spdlog::info("{}", fullMessage);
+    std::cout << "[INFO] " << fullMessage << std::endl;
 }

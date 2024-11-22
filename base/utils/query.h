@@ -4,19 +4,17 @@
 #include <optional>
 #include <string>
 
-namespace polaris::base {
-
-
-class QueryParam
+namespace polaris::base
 {
-public:
-  explicit QueryParam(const std::string& url_string);
+  class QueryParam
+  {
+  public:
+    explicit QueryParam(const std::string& url_string);
 
-  std::optional<std::string> getString(const std::string& key) const;
-  std::optional<long> getLong(const std::string& key);
+    [[nodiscard]] std::optional<std::string> getString(const std::string& key) const;
+    std::optional<long> getLong(const std::string& key);
 
-private:
-  std::string _fullUrl;
-};
-
+  private:
+    std::string _fullUrl;
+  };
 }

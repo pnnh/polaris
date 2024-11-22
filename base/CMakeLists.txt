@@ -16,8 +16,8 @@ target_include_directories(${LIB_NAME} PRIVATE ${Boost_INCLUDE_DIRS})
 target_link_libraries(${LIB_NAME} PRIVATE ${Boost_LIBRARIES})
 
 # 查找并引用日志库
-find_package(spdlog CONFIG REQUIRED)
-target_link_libraries(${LIB_NAME} PRIVATE spdlog::spdlog)
+#find_package(spdlog CONFIG REQUIRED)
+#target_link_libraries(${LIB_NAME} PRIVATE spdlog::spdlog)
 
 # 查找并引用Markdown解析库
 find_package(cmark CONFIG REQUIRED)
