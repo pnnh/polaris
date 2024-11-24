@@ -1,0 +1,110 @@
+{
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "css.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "always"
+    }
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "always"
+    }
+  },
+  "files.watcherExclude": {
+    "**/.git/*/**": true,
+    "**/node_modules/*/**": true,
+    "**/dist/*/**": true,
+    "**/build/*/**": true,
+    "**/cmake-build/*/**": true,
+    "**/install/*/**": true,
+    "**/coverage/*/**": true,
+    "**/.build/*/**": true,
+    "**/target/*/**": true,
+    "**/.xmake/*/**": true
+  },
+  "search.exclude": {
+    "**/.git": true,
+    "vcpkg_installed/": false,
+    "build/": false,
+    "install/": false,
+    ".clang-format*": true,
+    ".cppcheck-ignore": true,
+    ".gitignore": true
+  },
+  "C_Cpp.codeAnalysis.exclude": {
+    "**/.git": true,
+    "install/": true,
+  },
+  "editor.foldingMaximumRegions": 50000,
+  "cmake.sourceDirectory": "${workspaceFolder}/desktop",
+  "cmake.configureOnOpen": false,
+  "editor.suggest.snippetsPreventQuickSuggestions": true,
+  "C_Cpp.autocompleteAddParentheses": true,
+  "C_Cpp.default.cppStandard": "c++23",
+  "C_Cpp.default.cStandard": "c23",
+  "C_Cpp.default.intelliSenseMode": "linux-gcc-x86",
+  "C_Cpp.default.mergeConfigurations": true,
+  "C_Cpp.inlayHints.autoDeclarationTypes.enabled": true,
+  "C_Cpp.intelliSenseEngine": "default",
+  "C_Cpp.intelliSenseEngineFallback": "disabled",
+  "C_Cpp.clang_format_sortIncludes": false,
+  "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+  "C_Cpp.errorSquiggles": "enabled",
+  "eslint.format.enable": true,
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "files.autoSave": "afterDelay",
+  "files.associations": {
+    "sstream": "cpp",
+    "*.rh": "cpp",
+    "array": "cpp",
+    "format": "cpp",
+    "future": "cpp",
+    "istream": "cpp",
+    "memory": "cpp",
+    "tuple": "cpp",
+    "type_traits": "cpp",
+    "utility": "cpp",
+    "variant": "cpp",
+    "xlocmes": "cpp",
+    "xlocmon": "cpp",
+    "xlocnum": "cpp",
+    "xloctime": "cpp",
+    "xutility": "cpp",
+    "*.ipp": "cpp",
+    "deque": "cpp",
+    "map": "cpp",
+    "unordered_map": "cpp",
+    "vector": "cpp",
+    "xstring": "cpp",
+    "bitset": "cpp",
+    "initializer_list": "cpp",
+    "list": "cpp",
+    "queue": "cpp",
+    "random": "cpp",
+    "ranges": "cpp",
+    "regex": "cpp",
+    "span": "cpp",
+    "stack": "cpp",
+    "valarray": "cpp",
+    "xhash": "cpp",
+    "xtree": "cpp",
+    "chrono": "cpp"
+  },
+  "cmake.cmakePath": "cmake",
+  "editor.guides.bracketPairs": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.bracketPairColorization.enabled": true,
+}

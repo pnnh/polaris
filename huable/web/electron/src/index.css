@@ -1,0 +1,37 @@
+
+html, body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 1.0;
+    color: #333;
+    background-color: #FFFFFF;
+    overflow: hidden !important;
+}
+
+#root {
+    min-width: 100vw;
+    min-height: 100vh;
+    overflow: hidden !important;
+}
+
+/* 约是移动手机尺寸 */
+@media (max-width: 40em) {
+    html, body {
+        font-size: 14px !important;
+    }
+}
+
+/* 约是笔记本电脑尺寸 */
+@media (min-width: 40em) {
+    html, body {
+        font-size: 15px !important;
+    }
+}
+
+/* 约是大屏幕尺寸 */
+@media (min-width: 100em) {
+    html, body {
+        font-size: 16px !important;
+    }
+}

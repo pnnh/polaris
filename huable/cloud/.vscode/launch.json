@@ -1,0 +1,91 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "polaris-web",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/web",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run-script",
+                "dev"
+            ],
+            "console": "internalConsole",
+            "env": {
+                "NODE_ENV": "development"
+            }
+        },
+        {
+            "name": "polaris-server",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "polaris-server-build",
+            "program": "${workspaceFolder}/polaris/Polaris/bin/Debug/net8.0/Polaris.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/polaris/Polaris",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "console": "internalConsole",
+            "justMyCode": false
+        },
+        {
+            "name": "portal-authorization",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/portal/authorization",
+            "args": [
+                "-config",
+                "runtime/config.yml"
+            ],
+            "env": {
+                "mode": "debug"
+            },
+            "cwd": "${workspaceFolder}/portal/authorization"
+        },
+        {
+            "name": "polaris-macos",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/desktop/build/macos/polaris-desktop",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/desktop/build/macos",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb",
+            "preLaunchTask": "polaris-macos-build",
+            "setupCommands": []
+        },
+        {
+            "name": "polaris-windows",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/desktop/build/windows/Debug/polaris-desktop.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "symbolSearchPath": "C:\\Symbols;C:\\SymbolDir2",
+            "logging": {
+                "moduleLoad": false,
+                "trace": true
+            },
+            "cwd": "${workspaceFolder}/desktop/build/windows",
+            "environment": [],
+            "console": "integratedTerminal",
+            "preLaunchTask": "polaris-windows-build"
+        },
+        {
+            "name": "pulsar-server-lldb",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/linux/pulsar/server/main/pulsar-server",
+            "args": [],
+            "cwd": "${workspaceFolder}/build/linux/pulsar/server/main",
+            "preLaunchTask": "pulsar-server-build",
+            "envFile": "${workspaceFolder}/build/linux/pulsar/server/main/assets/.env.local"
+        }
+    ]
+}

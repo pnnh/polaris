@@ -1,0 +1,66 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "polaris-server-build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/polaris/Polaris/Polaris.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "silent",
+                "revealProblems": "onProblem"
+            },
+        },
+        {
+            "label": "polaris-macos-build",
+            "command": "cmake",
+            "type": "process",
+            "options": {
+                "cwd": "${workspaceFolder}/desktop"
+            },
+            "args": [
+                "--build",
+                "--preset",
+                "macOS",
+                "--verbose"
+            ]
+        },
+        {
+            "label": "polaris-windows-build",
+            "command": "cmake",
+            "type": "process",
+            "options": {
+                "cwd": "${workspaceFolder}/desktop"
+            },
+            "args": [
+                "--build",
+                "--preset",
+                "windows",
+                "--verbose"
+            ]
+        },
+        {
+            "label": "pulsar-server-build",
+            "command": "cmake",
+            "type": "process",
+            "args": [
+                "--build",
+                "--preset",
+                "linux",
+                "--target",
+                "pulsar-server",
+                "--verbose"
+            ]
+        }
+    ]
+}

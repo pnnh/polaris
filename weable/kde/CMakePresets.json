@@ -1,0 +1,53 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 28,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "linux",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux",
+      "installDir": "${sourceDir}/install/linux",
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_MAKE_PROGRAM": "$env{NINJA}",
+        "Boost_NO_WARN_NEW_VERSIONS": "ON",
+        "QT_DECLARATIVE_DEBUG": "ON",
+        "QT_QML_DEBUG": "ON"
+      },
+      "environment": {
+      }
+    },
+    {
+      "name": "macos",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/macos",
+      "installDir": "${sourceDir}/install/macos",
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_MAKE_PROGRAM": "$env{NINJA}",
+        "Boost_NO_WARN_NEW_VERSIONS": "ON",
+        "CMAKE_PREFIX_PATH": "$env{QTDIR}/6.7.0/macos/lib/cmake",
+        "QT_DECLARATIVE_DEBUG": "ON",
+        "QT_QML_DEBUG": "ON"
+      },
+      "environment": {
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux",
+      "configurePreset": "linux"
+    },
+    {
+      "name": "macos",
+      "configurePreset": "macos"
+    }
+  ]
+}

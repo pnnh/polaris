@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>0.1.2</Version>
+    <Copyright>All rights reserved</Copyright>
+    <PackageLicenseExpression>AGPL-3.0-or-later</PackageLicenseExpression>
+    <Description>个人项目公共组件集合</Description>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+    <Folder Include="Models" />
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Remove="obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Base62" Version="1.3.0" />
+    <PackageReference Include="IdGen" Version="3.0.3" />
+    <PackageReference Include="DaanV2.UUID.Net" Version="2.3.1" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="IdentityModel" Version="6.0.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Markdig" Version="0.30.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="6.1.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.1.2" />
+    <PackageReference Include="xsitemap" Version="2.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="SimpleBase" Version="4.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="obj\**" />
+  </ItemGroup>
+</Project>

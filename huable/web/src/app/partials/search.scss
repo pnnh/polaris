@@ -1,0 +1,37 @@
+@import "@/styles/theme";
+
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+
+  .searchInput {
+    width: 13rem;
+    height: 1.8rem;
+    padding: 4px;
+    font-size: 0.9rem;
+    border: 0;
+    outline-color: transparent;
+
+    @media (max-width: $screenMediumWidth) {
+      & {
+        width: 8rem;
+      }
+    }
+  }
+
+  .iconContainer {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .searchIcon {
+    margin-right: 6px;
+    filter: drop-shadow(0px 100px #aaa);
+    transform: translateY(-100px);
+  }
+}

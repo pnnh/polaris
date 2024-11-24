@@ -1,0 +1,46 @@
+.tocCard {
+    background-color: #FFF;
+    border-radius: 4px;
+    position: relative;
+
+    .tocHeader {
+        padding: 1rem;
+        border-bottom: solid 1px #e1e1e280;
+    }
+
+    .tocBody {
+        padding: 1rem;
+        max-height: 450px;
+        overflow-y: auto;
+
+        .tocItem {
+            padding-right: 0.5rem;
+            font-size: 14px;
+
+            .assertItemText {
+                cursor: pointer;
+            }
+
+            .assetItem {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 2px;
+                height: 32px;
+
+                &:hover {
+                    background: #e6e6e6;
+                }
+
+            }
+
+            .fileIcon {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    }
+}
