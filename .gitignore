@@ -35,5 +35,5 @@ DerivedData/
 *.hmap
 Pods/
 
-# Bazel
-bazel-*/
+# Nodejs
+node_modules/

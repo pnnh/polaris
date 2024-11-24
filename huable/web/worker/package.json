@@ -3,12 +3,12 @@
   "version": "0.1.11",
   "private": true,
   "scripts": {
-    "worker": "tsx main.ts",
+    "worker": "NODE_ENV=development tsx main.ts",
     "build": "rollup -c"
   },
   "dependencies": {
     "@pnnh/atom": "^0.4.0",
-    "@pnnh/polaris-business": "0.1.1",
+    "polaris-business": "0.1.1",
     "@scure/base": "^1.1.7",
     "@types/md5": "^2.3.5",
     "@types/parse-uri": "^1.0.2",

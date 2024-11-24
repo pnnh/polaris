@@ -1,0 +1,44 @@
+{
+  "name": "@pnnh/stele",
+  "version": "0.1.7",
+  "description": "Loads themed styles.",
+  "keywords": [
+    "editor"
+  ],
+  "license": "AGPL",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "vitejs": "vite"
+  },
+  "resolutions": {},
+  "dependencies": {
+    "is-hotkey": "^0.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@pnnh/atom-react": "file:../.."
+  },
+  "devDependencies": {
+    "@types/estree": "^1.0.0",
+    "@types/marked": "^4.0.8",
+    "@types/node": "^18.15.11",
+    "@types/prismjs": "^1.16.6",
+    "@types/react": "^18.0.31",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-router-dom": "^5.3.2",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "esbuild": "^0.17.14",
+    "eslint": "^8.35.0",
+    "eslint-config-next": "^13.2.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "sass": "^1.45.0",
+    "typescript": "^5.0.3",
+    "vite": "^4.2.1"
+  }
+}

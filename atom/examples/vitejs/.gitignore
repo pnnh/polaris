@@ -1,0 +1,14 @@
+.idea
+*.iml
+bin
+.svn
+pkg
+*.log
+.DS_Store
+vendor
+build.sh
+bin/
+node_modules/
+/dist
+build/
+/lib

@@ -15,7 +15,7 @@ export async function ContentPublicNavbar({pathname, searchParams, lang}: {
     const activeClass = (item: string) => {
         return lang === item ? 'active' : ''
     }
-    const sessionList = await loadSessions2()
+    const sessionList: SessionModel[] = []
     return <div className={'navHeader'}>
         <div className={'leftNav'}>
             <div>
