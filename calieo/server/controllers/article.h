@@ -1,6 +1,6 @@
 #pragma once
 
-#include "workflow/WFTaskFactory.h"
+#include <workflow/WFTaskFactory.h>
 
 namespace polaris::server
 {

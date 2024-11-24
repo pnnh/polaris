@@ -4,6 +4,7 @@
 #include <iostream>
 #include <qdir.h>
 #include <qdiriterator.h>
+#include <quantum/services/filesystem/filesystem.h>
 
 #include "calieo/telescope/models/pictures/Picture.h"
 #include "quantum/utils/basex.h"
@@ -71,7 +72,7 @@ int SyncService::SyncImages(const QString& path)
     if (fileInfo.isDir())
     {
       auto stdPathString = filePath.toStdString();
-      if (polaris::base::MimeUtils::isIgnore(stdPathString))
+      if (polaris::base::isIgnore(stdPathString))
       {
         continue;
       }

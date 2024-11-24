@@ -1,6 +1,6 @@
 #include "SyncThread.h"
 
-#include "linux/services/SyncService.h"
+#include "calieo/linux/services/SyncService.h"
 
 #include <QDebug>
 

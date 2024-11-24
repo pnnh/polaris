@@ -1,6 +1,6 @@
 #include "content/sources/PartitionViewModel.h"
 
-#include "linux/services/LibraryService.h"
+#include "calieo/linux/services/LibraryService.h"
 #include "calieo/telescope/models/articles/Notebook.h"
 
 PartitionViewModel::PartitionViewModel(QObject* parent)

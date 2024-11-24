@@ -1,4 +1,4 @@
-#include "server/controllers/channel.h"
+#include "calieo/server/controllers/channel.h"
 #include <boost/range/algorithm.hpp>
 #include <boost/url.hpp>
 #include <nlohmann/json.hpp>

@@ -1,10 +1,18 @@
-build/
+
+# JetBrains
+.idea/
+
+# Visual Studio
 *.user
 .vs/
-.idea/
+*.suo
+
+# CMake
+build/
+cmake-build-*
 vcpkg_installed/
 
-# macos and ios
+# xcode macos and ios
 .idea
 xcuserdata/
 *.xcscmblueprint
@@ -14,7 +22,6 @@ xcuserdata/
 *.dSYM
 .build/
 Packages/
-build/
 DerivedData/
 *.moved-aside
 *.pbxuser
@@ -27,4 +34,6 @@ DerivedData/
 !default.perspectivev3
 *.hmap
 Pods/
-cmake-build-*
+
+# Bazel
+bazel-*/

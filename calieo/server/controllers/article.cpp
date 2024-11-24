@@ -1,4 +1,4 @@
-#include "server/controllers/article.h"
+#include "calieo/server/controllers/article.h"
 #include <boost/range/algorithm.hpp>
 #include <boost/url.hpp>
 #include <boost/uuid/uuid_io.hpp>

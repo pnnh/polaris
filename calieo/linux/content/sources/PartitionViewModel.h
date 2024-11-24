@@ -1,6 +1,6 @@
 #pragma once
 
-#include "linux/services/LibraryService.h"
+#include "calieo/linux/services/LibraryService.h"
 
 #include <QtCore>
 #include <QtQml/qqmlregistration.h>

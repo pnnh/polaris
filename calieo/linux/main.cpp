@@ -1,6 +1,6 @@
 
 #include <spdlog/spdlog.h>
-#include "linux/services/threads/SyncThread.h"
+#include "calieo/linux/services/threads/SyncThread.h"
 #include <QtQuick>
 #include <iostream>
 

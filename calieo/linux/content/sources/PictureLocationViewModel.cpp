@@ -1,13 +1,12 @@
 #include "PictureLocationViewModel.h"
 
-#include "linux/services/UserService.h"
+#include "calieo/linux/services/UserService.h"
 
 #include <QDebug>
 #include <QDir>
-#include <QStringView>
 #include <QVector>
 
-#include <linux/services/FolderService.h>
+#include "calieo/linux/services/FolderService.h"
 
 PictureLocationViewModel::PictureLocationViewModel(QObject* parent)
   : QAbstractListModel(parent)

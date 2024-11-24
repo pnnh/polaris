@@ -41,7 +41,7 @@
         "CMAKE_C_COMPILER_LAUNCHER": "ccache",
         "CMAKE_C_COMPILER": "clang",
         "CMAKE_CXX_COMPILER": "clang++",
-        "CMAKE_PREFIX_PATH": "~/Qt/6.8.0/macos/lib/cmake"
+        "CMAKE_PREFIX_PATH": "$env{QTDIR}/6.8.0/macos/lib/cmake"
       },
       "environment": {}
     },
@@ -81,12 +81,8 @@
         "CMAKE_SYSTEM_NAME": "Android",
         "VCPKG_HOST_TRIPLET": "arm64-osx",
         "VCPKG_TARGET_TRIPLET": "arm64-android",
-        "VCPKG_CMAKE_SYSTEM_VERSION": "33",
         "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/vcpkg/triplets",
-        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": {
-          "type": "FILEPATH",
-          "value": "$env{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake"
-        }
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "$env{ANDROID_NDK_HOME}/build/cmake/android.toolchain.cmake"
       }
     },
     {
@@ -125,10 +121,7 @@
         "CMAKE_C_COMPILER_LAUNCHER": "ccache",
         "CMAKE_C_COMPILER": "emcc",
         "CMAKE_CXX_COMPILER": "em++",
-        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": {
-          "type": "FILEPATH",
-          "value": "$env{EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
-        }
+        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "$env{EMSDK}/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake"
       },
       "environment": {}
     }
