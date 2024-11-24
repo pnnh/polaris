@@ -52,7 +52,7 @@ void polaris::server::HandleChannels(WFHttpTask* httpTask)
 
     std::ostringstream oss;
     const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
-    auto channelServer = std::make_shared<polaris::native::ChannelServerBusiness>(baseUrl);
+    auto channelServer = std::make_shared<calieo::telescope::ChannelServerBusiness>(baseUrl);
     auto channelsPtr = channelServer->selectChannels();
     json range = json::array();
     for (const auto& model : *channelsPtr)

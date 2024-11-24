@@ -7,10 +7,10 @@
 #include "quantum/services/database/SqliteService.h"
 
 
-int native::examples::articles::TestArticleSelectChannels()
+int calieo::telescope::examples::articles::TestArticleSelectChannels()
 {
     const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
-    auto channelServer = std::make_shared<polaris::native::ChannelServerBusiness>(baseUrl);
+    auto channelServer = std::make_shared<calieo::telescope::ChannelServerBusiness>(baseUrl);
     auto channelsPtr = channelServer->selectChannels();
     for (const auto& model : *channelsPtr)
     {

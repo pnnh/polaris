@@ -1,8 +1,8 @@
 #include "Article.h"
 
-polaris::native::PSArticleModel::PSArticleModel() = default;
+calieo::telescope::PSArticleModel::PSArticleModel() = default;
 
-polaris::native::PSArticleModel::PSArticleModel(const std::string& title): Title(title)
+calieo::telescope::PSArticleModel::PSArticleModel(const std::string& title): Title(title)
 {
 }
 

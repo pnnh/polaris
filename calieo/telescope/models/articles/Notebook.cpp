@@ -1,9 +1,9 @@
 
 #include "Notebook.h"
 
-polaris::native::PSNotebookModel::PSNotebookModel() = default;
+calieo::telescope::PSNotebookModel::PSNotebookModel() = default;
 
-polaris::native::PSNotebookModel::PSNotebookModel(const std::string& title): Title(title)
+calieo::telescope::PSNotebookModel::PSNotebookModel(const std::string& title): Title(title)
 {
 }
 

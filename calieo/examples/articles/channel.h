@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace native::examples::articles
+namespace calieo::telescope::examples::articles
 {
     int TestArticleSelectChannels();
 }

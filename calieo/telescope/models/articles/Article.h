@@ -3,7 +3,7 @@
 #include <string>
 #include <chrono>
 
-namespace polaris::native
+namespace calieo::telescope
 {
     class PSArticleModel
     {

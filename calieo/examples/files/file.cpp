@@ -7,10 +7,10 @@
 #include "build.h"
 #include "quantum/services/filesystem/filesystem.h"
 
-int native::examples::TestSelectFiles()
+int calieo::telescope::examples::TestSelectFiles()
 {
     const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
-    auto fileServer = std::make_shared<polaris::native::FileServerBusiness>(baseUrl);
+    auto fileServer = std::make_shared<calieo::telescope::FileServerBusiness>(baseUrl);
     auto filesPtr = fileServer->selectFiles();
     for (const auto& model : *filesPtr)
     {

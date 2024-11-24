@@ -1,6 +1,6 @@
 #include <iostream>
 
-namespace native::examples::sqlite
+namespace calieo::telescope::examples::sqlite
 {
     int TestSqliteVersion();
 

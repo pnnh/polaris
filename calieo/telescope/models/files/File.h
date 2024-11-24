@@ -3,7 +3,7 @@
 #include <chrono>
 #include "quantum/types/datetime.h"
 
-namespace polaris::native
+namespace calieo::telescope
 {
     class PSFileModel
     {

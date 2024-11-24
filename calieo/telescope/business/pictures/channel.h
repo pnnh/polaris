@@ -1,6 +1,6 @@
 #pragma once
 
-namespace polaris::native
+namespace calieo::telescope
 {
     class channel {
 

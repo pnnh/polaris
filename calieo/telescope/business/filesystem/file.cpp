@@ -7,19 +7,19 @@
 #include "quantum/utils/md5.h"
 #include "quantum/types//String.h"
 
-polaris::native::FileServerBusiness::FileServerBusiness(const std::string& baseUrl)
+calieo::telescope::FileServerBusiness::FileServerBusiness(const std::string& baseUrl)
 {
     this->baseUrl = baseUrl;
 }
 
-std::shared_ptr<std::vector<polaris::native::PSFileModel>>
-polaris::native::FileServerBusiness::selectFiles() const
+std::shared_ptr<std::vector<calieo::telescope::PSFileModel>>
+calieo::telescope::FileServerBusiness::selectFiles() const
 {
     return selectFiles("");
 }
 
-std::shared_ptr<std::vector<polaris::native::PSFileModel>>
-polaris::native::FileServerBusiness::selectFiles(std::string parentPath) const
+std::shared_ptr<std::vector<calieo::telescope::PSFileModel>>
+calieo::telescope::FileServerBusiness::selectFiles(std::string parentPath) const
 {
     auto files = std::make_shared<std::vector<PSFileModel>>();
 
@@ -33,7 +33,7 @@ polaris::native::FileServerBusiness::selectFiles(std::string parentPath) const
             continue;
         }
 
-        auto fileModel = polaris::native::PSFileModel(dirName);
+        auto fileModel = calieo::telescope::PSFileModel(dirName);
         if (fileModel.URN.empty())
         {
             fileModel.URN = quantum::calcMd5(entry.path().string());

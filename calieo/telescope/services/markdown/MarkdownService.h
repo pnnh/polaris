@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace polaris::native
+namespace calieo::telescope
 {
     std::string markdownToHtml(const std::string& markdownText);
 }

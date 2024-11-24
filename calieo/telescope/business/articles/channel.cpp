@@ -8,15 +8,15 @@
 #include "quantum/utils/md5.h"
 #include "quantum/types//String.h"
 
-polaris::native::ChannelServerBusiness::ChannelServerBusiness(const std::string& baseUrl)
+calieo::telescope::ChannelServerBusiness::ChannelServerBusiness(const std::string& baseUrl)
 {
     this->baseUrl = baseUrl;
 }
 
-std::shared_ptr<std::vector<polaris::native::PSChannelModel>>
-polaris::native::ChannelServerBusiness::selectChannels() const
+std::shared_ptr<std::vector<calieo::telescope::PSChannelModel>>
+calieo::telescope::ChannelServerBusiness::selectChannels() const
 {
-    auto channels = std::make_shared<std::vector<polaris::native::PSChannelModel>>();
+    auto channels = std::make_shared<std::vector<calieo::telescope::PSChannelModel>>();
 
     for (const auto& entry : std::filesystem::directory_iterator(this->baseUrl))
     {
@@ -30,7 +30,7 @@ polaris::native::ChannelServerBusiness::selectChannels() const
         {
             continue;
         }
-        auto channelModel = polaris::native::PSChannelModel(dirName);
+        auto channelModel = calieo::telescope::PSChannelModel(dirName);
         auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
         if (quantum::IsFileExist(metadataFilePath))
         {
@@ -50,7 +50,7 @@ polaris::native::ChannelServerBusiness::selectChannels() const
     return channels;
 }
 
-bool polaris::native::isChannelDirectory(const std::string& directoryName)
+bool calieo::telescope::isChannelDirectory(const std::string& directoryName)
 {
     return quantum::PSString::EndsWith(directoryName, ".chan") ||
         quantum::PSString::EndsWith(directoryName, ".channel") || quantum::PSString::EndsWith(

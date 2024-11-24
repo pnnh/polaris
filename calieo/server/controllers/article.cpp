@@ -225,7 +225,7 @@ void polaris::server::HandleArticles(WFHttpTask* httpTask)
   const std::string baseUrl = quantum::JoinFilePath({
     PROJECT_SOURCE_DIR, "assets", "data", "CPlus.notelibrary", "CMake笔记本.notebook"
   });
-  auto articleServer = std::make_shared<polaris::native::ArticleServerBusiness>(baseUrl);
+  auto articleServer = std::make_shared<calieo::telescope::ArticleServerBusiness>(baseUrl);
   auto articlePtr = articleServer->selectArticles();
   json range = json::array();
   for (const auto& model : *articlePtr)

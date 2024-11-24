@@ -7,10 +7,10 @@
 
 #include "quantum/services/filesystem/filesystem.h"
 
-int native::examples::articles::TestArticleSelectLibraries()
+int calieo::telescope::examples::articles::TestArticleSelectLibraries()
 {
     const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
-    auto libraryServer = std::make_shared<polaris::native::LibraryServerBusiness>(baseUrl);
+    auto libraryServer = std::make_shared<calieo::telescope::LibraryServerBusiness>(baseUrl);
     auto libraryPtr = libraryServer->selectLibraries();
     for (const auto& model : *libraryPtr)
     {

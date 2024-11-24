@@ -1,6 +1,6 @@
 #include <iostream>
 
-namespace native::examples
+namespace calieo::telescope::examples
 {
     int runCase(const std::string& caseName);
 

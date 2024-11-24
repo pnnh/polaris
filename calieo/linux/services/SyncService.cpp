@@ -23,7 +23,7 @@ void SyncService::SyncLibraries()
   dir.setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
   dir.setSorting(QDir::Name | QDir::IgnoreCase); // 按照名称排序
   QDirIterator iterator(dir);
-  QVector<polaris::native::PSLibraryModel> libraryList;
+  QVector<calieo::telescope::PSLibraryModel> libraryList;
   while (iterator.hasNext())
   {
     QFileInfo info(iterator.next());
@@ -38,7 +38,7 @@ void SyncService::SyncLibraries()
       }
       auto stdPathString = filePath.toStdString();
       auto uid = quantum::encode64(stdPathString);
-      auto model = polaris::native::PSLibraryModel();
+      auto model = calieo::telescope::PSLibraryModel();
       model.URN = uid;
       model.Name = fileName.toStdString();
       model.Path = filePath.toStdString();
@@ -60,7 +60,7 @@ int SyncService::SyncImages(const QString& path)
   dir.setSorting(QDir::DirsFirst);
   QFileInfoList entryInfoList = dir.entryInfoList();
 
-  QVector<polaris::native::PSPictureModel> imageList;
+  QVector<calieo::telescope::PSPictureModel> imageList;
   for (const auto& fileInfo : entryInfoList)
   {
     if (fileInfo.fileName() == "." || fileInfo.fileName() == "..")
@@ -85,7 +85,7 @@ int SyncService::SyncImages(const QString& path)
       {
         auto stdPathString = filePath.toStdString();
         auto uid = quantum::encode64(stdPathString);
-        auto model = polaris::native::PSPictureModel();
+        auto model = calieo::telescope::PSPictureModel();
         model.URN = uid;
         model.Name = fileName.toStdString();
         model.Path = filePath.toStdString();

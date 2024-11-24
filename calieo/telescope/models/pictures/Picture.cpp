@@ -1,3 +1,3 @@
 #include "Picture.h"
 
-polaris::native::PSPictureModel::PSPictureModel() = default;
+calieo::telescope::PSPictureModel::PSPictureModel() = default;

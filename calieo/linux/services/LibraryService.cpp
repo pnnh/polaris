@@ -31,7 +31,7 @@ LibraryService::LibraryService()
   }
 }
 
-std::optional<polaris::native::PSLibraryModel>
+std::optional<calieo::telescope::PSLibraryModel>
 LibraryService::FindLibrary(const QString& uid) const
 {
   auto findSql = QString("select * from libraries where uid = :uid");
@@ -47,7 +47,7 @@ LibraryService::FindLibrary(const QString& uid) const
 
   while (sqlIterator->next())
   {
-    auto model = std::make_optional<polaris::native::PSLibraryModel>();
+    auto model = std::make_optional<calieo::telescope::PSLibraryModel>();
     model->URN = sqlIterator->value("uid").toString().toStdString();
     model->Name = sqlIterator->value("name").toString().toStdString();
     model->Path = sqlIterator->value("path").toString().toStdString();
@@ -56,16 +56,16 @@ LibraryService::FindLibrary(const QString& uid) const
   return std::nullopt;
 }
 
-QVector<polaris::native::PSLibraryModel> LibraryService::SelectLibraries() const
+QVector<calieo::telescope::PSLibraryModel> LibraryService::SelectLibraries() const
 {
-  QVector<polaris::native::PSLibraryModel> libraryList;
+  QVector<calieo::telescope::PSLibraryModel> libraryList;
   auto selectSql = QString("select * from libraries");
 
   auto sqlIterator = services::SqliteService::execute_query(dbPath, selectSql);
 
   while (sqlIterator->next())
   {
-    auto model = polaris::native::PSLibraryModel();
+    auto model = calieo::telescope::PSLibraryModel();
     model.URN = sqlIterator->value("uid").toString().toStdString();
     model.Name = sqlIterator->value("name").toString().toStdString();
     model.Path = sqlIterator->value("path").toString().toStdString();
@@ -76,10 +76,10 @@ QVector<polaris::native::PSLibraryModel> LibraryService::SelectLibraries() const
   return libraryList;
 }
 
-QVector<polaris::native::PSNotebookModel>
-LibraryService::SelectPartitions(const polaris::native::PSLibraryModel& libraryModel)
+QVector<calieo::telescope::PSNotebookModel>
+LibraryService::SelectPartitions(const calieo::telescope::PSLibraryModel& libraryModel)
 {
-  QVector<polaris::native::PSNotebookModel> partitionList;
+  QVector<calieo::telescope::PSNotebookModel> partitionList;
   QDir dir(QString::fromStdString(libraryModel.Path));
   if (!dir.exists())
   {
@@ -101,7 +101,7 @@ LibraryService::SelectPartitions(const polaris::native::PSLibraryModel& libraryM
       auto uid = quantum::encode64(stdPathString);
 
       auto model =
-        polaris::native::PSNotebookModel();
+        calieo::telescope::PSNotebookModel();
       model.URN = uid;
       model.Name = fileName.toStdString();
       model.Path = filePath.toStdString();
@@ -112,7 +112,7 @@ LibraryService::SelectPartitions(const polaris::native::PSLibraryModel& libraryM
 }
 
 void LibraryService::InsertOrUpdateLibrary(
-  const QVector<polaris::native::PSLibraryModel>& libraryList)
+  const QVector<calieo::telescope::PSLibraryModel>& libraryList)
 {
   // std::cout << "InsertOrUpdateLibrary: " << libraryList.size() << std::endl;
 

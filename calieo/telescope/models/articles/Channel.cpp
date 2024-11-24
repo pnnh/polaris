@@ -1,7 +1,7 @@
 #include "Channel.h"
 
-polaris::native::PSChannelModel::PSChannelModel() = default;
+calieo::telescope::PSChannelModel::PSChannelModel() = default;
 
-polaris::native::PSChannelModel::PSChannelModel(const std::string&& name): Name(name)
+calieo::telescope::PSChannelModel::PSChannelModel(const std::string&& name): Name(name)
 {
 }

@@ -3,15 +3,15 @@
 
 #include "calieo/telescope/models/files/File.h"
 
-namespace polaris::native
+namespace calieo::telescope
 {
     class FileServerBusiness
     {
     public:
         explicit FileServerBusiness(const std::string &baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<native::PSFileModel>> selectFiles() const;
-        [[nodiscard]] std::shared_ptr<std::vector<native::PSFileModel>> selectFiles(std::string parentPath) const;
+        [[nodiscard]] std::shared_ptr<std::vector<calieo::telescope::PSFileModel>> selectFiles() const;
+        [[nodiscard]] std::shared_ptr<std::vector<calieo::telescope::PSFileModel>> selectFiles(std::string parentPath) const;
 
     private:
         std::string baseUrl;
@@ -24,6 +24,6 @@ namespace polaris::native
 
         ~FileClientBusiness();
 
-        std::shared_ptr<std::vector<native::PSFileModel>> selectFiles();
+        std::shared_ptr<std::vector<calieo::telescope::PSFileModel>> selectFiles();
     };
 }

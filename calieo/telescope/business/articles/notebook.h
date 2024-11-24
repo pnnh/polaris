@@ -3,7 +3,7 @@
 #include <vector>
 #include "calieo/telescope/models/articles/Notebook.h"
 
-namespace polaris::native
+namespace calieo::telescope
 {
     bool isNotebookDirectory(const std::string& directoryName);
 
@@ -12,7 +12,7 @@ namespace polaris::native
     public:
         explicit NotebookServerBusiness(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<polaris::native::PSNotebookModel>> selectNotebooks() const;
+        [[nodiscard]] std::shared_ptr<std::vector<calieo::telescope::PSNotebookModel>> selectNotebooks() const;
 
     private:
         std::string baseUrl;

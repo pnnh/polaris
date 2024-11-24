@@ -3,7 +3,7 @@
 #include <string>
 #include <stdint.h>
 
-namespace polaris::native
+namespace calieo::telescope
 {
     class CommonResult {
     public:

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace polaris::native
+namespace calieo::telescope
 {
     enum Codes { Ok = 200, Error = 500 };
 

@@ -1,13 +1,13 @@
 
 #include "Codes.h"
 
-const char* polaris::native::CodeMessage(int code)
+const char* calieo::telescope::CodeMessage(int code)
 {
   switch (code)
   {
-  case polaris::native::Codes::Ok:
+  case calieo::telescope::Codes::Ok:
     return "Ok";
-  case polaris::native::Codes::Error:
+  case calieo::telescope::Codes::Error:
     return "Error";
   default:
     return "Unknown";

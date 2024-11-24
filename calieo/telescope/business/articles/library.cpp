@@ -10,15 +10,15 @@
 #include "calieo/telescope/services/yaml/yaml.h"
 #include "quantum/utils/md5.h"
 
-polaris::native::LibraryServerBusiness::LibraryServerBusiness(const std::string& baseUrl)
+calieo::telescope::LibraryServerBusiness::LibraryServerBusiness(const std::string& baseUrl)
 {
     this->baseUrl = baseUrl;
 }
 
-std::shared_ptr<std::vector<polaris::native::PSLibraryModel>>
-polaris::native::LibraryServerBusiness::selectLibraries() const
+std::shared_ptr<std::vector<calieo::telescope::PSLibraryModel>>
+calieo::telescope::LibraryServerBusiness::selectLibraries() const
 {
-    auto libraries = std::make_shared<std::vector<polaris::native::PSLibraryModel>>();
+    auto libraries = std::make_shared<std::vector<calieo::telescope::PSLibraryModel>>();
 
     for (const auto& entry : std::filesystem::directory_iterator(this->baseUrl))
     {
@@ -32,7 +32,7 @@ polaris::native::LibraryServerBusiness::selectLibraries() const
         {
             continue;
         }
-        auto libraryModel = polaris::native::PSLibraryModel(dirName);
+        auto libraryModel = calieo::telescope::PSLibraryModel(dirName);
         auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
         if (quantum::IsFileExist(metadataFilePath))
         {
@@ -52,7 +52,7 @@ polaris::native::LibraryServerBusiness::selectLibraries() const
     return libraries;
 }
 
-bool polaris::native::isLibraryDirectory(const std::string& directoryName)
+bool calieo::telescope::isLibraryDirectory(const std::string& directoryName)
 {
     return quantum::PSString::EndsWith(directoryName, ".notelibrary");
 }

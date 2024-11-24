@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace native::examples
+namespace calieo::telescope::examples
 {
     int TestSelectFiles();
 }

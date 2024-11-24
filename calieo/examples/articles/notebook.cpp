@@ -8,12 +8,12 @@
 #include "quantum/services/filesystem/filesystem.h"
 
 
-int native::examples::articles::TestArticleSelectNotebooks()
+int calieo::telescope::examples::articles::TestArticleSelectNotebooks()
 {
     const std::string baseUrl = quantum::JoinFilePath({
         PROJECT_SOURCE_DIR, "assets", "data", "CPlus.notelibrary"
     });
-    auto notebookServer = std::make_shared<polaris::native::NotebookServerBusiness>(baseUrl);
+    auto notebookServer = std::make_shared<calieo::telescope::NotebookServerBusiness>(baseUrl);
     auto notebookPtr = notebookServer->selectNotebooks();
     for (const auto& model : *notebookPtr)
     {

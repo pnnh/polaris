@@ -7,15 +7,15 @@
 #include "quantum/utils/md5.h"
 #include "quantum/types/String.h"
 
-polaris::native::NotebookServerBusiness::NotebookServerBusiness(const std::string& baseUrl)
+calieo::telescope::NotebookServerBusiness::NotebookServerBusiness(const std::string& baseUrl)
 {
     this->baseUrl = baseUrl;
 }
 
-std::shared_ptr<std::vector<polaris::native::PSNotebookModel>>
-polaris::native::NotebookServerBusiness::selectNotebooks() const
+std::shared_ptr<std::vector<calieo::telescope::PSNotebookModel>>
+calieo::telescope::NotebookServerBusiness::selectNotebooks() const
 {
-    auto libraries = std::make_shared<std::vector<polaris::native::PSNotebookModel>>();
+    auto libraries = std::make_shared<std::vector<calieo::telescope::PSNotebookModel>>();
 
     for (const auto& entry : std::filesystem::directory_iterator(this->baseUrl))
     {
@@ -29,7 +29,7 @@ polaris::native::NotebookServerBusiness::selectNotebooks() const
         {
             continue;
         }
-        auto notebookModel = polaris::native::PSNotebookModel(dirName);
+        auto notebookModel = calieo::telescope::PSNotebookModel(dirName);
         auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
         if (quantum::IsFileExist(metadataFilePath))
         {
@@ -49,7 +49,7 @@ polaris::native::NotebookServerBusiness::selectNotebooks() const
     return libraries;
 }
 
-bool polaris::native::isNotebookDirectory(const std::string& directoryName)
+bool calieo::telescope::isNotebookDirectory(const std::string& directoryName)
 {
     return quantum::PSString::EndsWith(directoryName, ".notebook");
 }

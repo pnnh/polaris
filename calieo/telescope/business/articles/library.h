@@ -2,7 +2,7 @@
 #include <vector>
 #include "calieo/telescope/models/articles/Library.h"
 
-namespace polaris::native
+namespace calieo::telescope
 {
     bool isLibraryDirectory(const std::string& directoryName);
 
@@ -11,7 +11,7 @@ namespace polaris::native
     public:
         explicit LibraryServerBusiness(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<polaris::native::PSLibraryModel>> selectLibraries() const;
+        [[nodiscard]] std::shared_ptr<std::vector<calieo::telescope::PSLibraryModel>> selectLibraries() const;
 
     private:
         std::string baseUrl;

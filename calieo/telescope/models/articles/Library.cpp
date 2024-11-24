@@ -1,7 +1,7 @@
 #include "Library.h"
 
-polaris::native::PSLibraryModel::PSLibraryModel() = default;
+calieo::telescope::PSLibraryModel::PSLibraryModel() = default;
 
-polaris::native::PSLibraryModel::PSLibraryModel(const std::string& title): Title(title)
+calieo::telescope::PSLibraryModel::PSLibraryModel(const std::string& title): Title(title)
 {
 }

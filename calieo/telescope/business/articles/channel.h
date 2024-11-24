@@ -3,7 +3,7 @@
 
 #include "calieo/telescope/models/articles/Channel.h"
 
-namespace polaris::native
+namespace calieo::telescope
 {
     bool isChannelDirectory(const std::string& directoryName);
 
@@ -12,7 +12,7 @@ namespace polaris::native
     public:
         explicit ChannelServerBusiness(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<polaris::native::PSChannelModel>> selectChannels() const;
+        [[nodiscard]] std::shared_ptr<std::vector<calieo::telescope::PSChannelModel>> selectChannels() const;
 
     private:
         std::string baseUrl;
@@ -25,7 +25,7 @@ namespace polaris::native
 
         ~ChannelClientBusiness();
 
-        std::shared_ptr<std::vector<polaris::native::PSChannelModel>> selectChannels();
+        std::shared_ptr<std::vector<calieo::telescope::PSChannelModel>> selectChannels();
     };
 }
 

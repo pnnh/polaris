@@ -2,7 +2,7 @@
 #include "quantum/services/database/SqliteService.h"
 #include "sqlite.h"
 
-int native::examples::sqlite::TestSqliteVersion()
+int calieo::telescope::examples::sqlite::TestSqliteVersion()
 {
     auto database_path = "polaris.sqlite";
     auto sqliteService = quantum::SqliteService();
@@ -13,7 +13,7 @@ int native::examples::sqlite::TestSqliteVersion()
     return (int)version.starts_with("3.");
 }
 
-int native::examples::sqlite::TestSqliteSelect()
+int calieo::telescope::examples::sqlite::TestSqliteSelect()
 {
     auto database_path = "polaris.sqlite";
     auto sqliteService = quantum::SqliteService();
