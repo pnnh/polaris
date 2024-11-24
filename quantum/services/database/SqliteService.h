@@ -6,7 +6,7 @@
 #include "quantum/types/Exception.h"
 #include "quantum/services/database/SqliteResult.h"
 
-namespace polaris::base
+namespace quantum
 {
     typedef unsigned long SqliteHandle;
 
@@ -24,7 +24,7 @@ namespace polaris::base
 
         SqliteHandle openDatabase(const char* path);
         SqliteHandle openDatabase(std::string&& path);
-        polaris::base::QuantumEnum closeDatabase(SqliteHandle dbHandle);
+        quantum::QuantumEnum closeDatabase(SqliteHandle dbHandle);
         SqliteResult runSql(SqliteHandle dbHandle, std::string& text);
         SqliteResult runSql(SqliteHandle dbHandle, std::string&& text);
         std::string sqliteVersion(SqliteHandle dbHandle);

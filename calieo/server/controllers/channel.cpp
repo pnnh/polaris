@@ -51,13 +51,13 @@ void polaris::server::HandleChannels(WFHttpTask* httpTask)
     }
 
     std::ostringstream oss;
-    const std::string baseUrl = polaris::base::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
+    const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
     auto channelServer = std::make_shared<polaris::native::ChannelServerBusiness>(baseUrl);
     auto channelsPtr = channelServer->selectChannels();
     json range = json::array();
     for (const auto& model : *channelsPtr)
     {
-        polaris::base::Logger::LogInfo({model.URN, model.Name, model.Title});
+        quantum::Logger::LogInfo({model.URN, model.Name, model.Title});
 
         json item = {
             {"urn", model.URN},

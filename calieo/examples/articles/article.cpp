@@ -10,14 +10,14 @@
 
 int native::examples::articles::TestArticleSelectArticles()
 {
-    const std::string baseUrl = polaris::base::JoinFilePath({
+    const std::string baseUrl = quantum::JoinFilePath({
         PROJECT_SOURCE_DIR, "assets", "data", "CPlus.notelibrary", "CMake笔记本.notebook"
     });
     auto articleServer = std::make_shared<polaris::native::ArticleServerBusiness>(baseUrl);
     auto articlePtr = articleServer->selectArticles();
     for (const auto& model : *articlePtr)
     {
-        polaris::base::Logger::LogInfo({model.URN, model.Title, model.Title});
+        quantum::Logger::LogInfo({model.URN, model.Title, model.Title});
     }
     return 0;
 }

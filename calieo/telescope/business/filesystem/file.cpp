@@ -23,7 +23,7 @@ polaris::native::FileServerBusiness::selectFiles(std::string parentPath) const
 {
     auto files = std::make_shared<std::vector<PSFileModel>>();
 
-    const std::string fullPath = polaris::base::JoinFilePath({this->baseUrl, std::move(parentPath)});
+    const std::string fullPath = quantum::JoinFilePath({this->baseUrl, std::move(parentPath)});
 
     for (const auto& entry : std::filesystem::directory_iterator(fullPath))
     {
@@ -36,15 +36,15 @@ polaris::native::FileServerBusiness::selectFiles(std::string parentPath) const
         auto fileModel = polaris::native::PSFileModel(dirName);
         if (fileModel.URN.empty())
         {
-            fileModel.URN = polaris::base::calcMd5(entry.path().string());
+            fileModel.URN = quantum::calcMd5(entry.path().string());
         }
         fileModel.IsDir = entry.is_directory();
-        fileModel.IsHidden = polaris::base::isHidden(dirName);
-        fileModel.IsIgnore = polaris::base::isIgnore(dirName);
+        fileModel.IsHidden = quantum::isHidden(dirName);
+        fileModel.IsIgnore = quantum::isIgnore(dirName);
         fileModel.Title = dirName;
         fileModel.Name = dirName;
 
-        fileModel.UpdateTime = polaris::base::convertFilesystemTime(std::filesystem::last_write_time(entry));
+        fileModel.UpdateTime = quantum::convertFilesystemTime(std::filesystem::last_write_time(entry));
         fileModel.CreateTime = fileModel.UpdateTime;
         files->emplace_back(fileModel);
     }

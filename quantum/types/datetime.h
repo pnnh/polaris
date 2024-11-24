@@ -3,7 +3,7 @@
 #include <string>
 #include <chrono>
 
-namespace polaris::base
+namespace quantum
 {
     std::chrono::system_clock::time_point makeTimePoint(const std::string& s);
 

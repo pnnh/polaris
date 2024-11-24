@@ -4,7 +4,7 @@
 #include <optional>
 #include <string>
 
-namespace polaris::base
+namespace quantum
 {
     enum class QuantumEnum
     {

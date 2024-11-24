@@ -28,7 +28,7 @@ void polaris::server::HandleArticleGet(WFHttpTask* httpTask)
 
   auto request_uri = request->get_request_uri();
 
-  polaris::base::QueryParam queryParam{std::string(request_uri)};
+  quantum::QueryParam queryParam{std::string(request_uri)};
 
   // auto fullUrl = std::string("http://localhost") + request_uri;
 
@@ -222,7 +222,7 @@ void polaris::server::HandleArticles(WFHttpTask* httpTask)
     limit = std::stoi(limitString);
   }
 
-  const std::string baseUrl = polaris::base::JoinFilePath({
+  const std::string baseUrl = quantum::JoinFilePath({
     PROJECT_SOURCE_DIR, "assets", "data", "CPlus.notelibrary", "CMake笔记本.notebook"
   });
   auto articleServer = std::make_shared<polaris::native::ArticleServerBusiness>(baseUrl);
@@ -230,7 +230,7 @@ void polaris::server::HandleArticles(WFHttpTask* httpTask)
   json range = json::array();
   for (const auto& model : *articlePtr)
   {
-    polaris::base::Logger::LogInfo({model.URN, model.Title, model.Title});
+    quantum::Logger::LogInfo({model.URN, model.Title, model.Title});
     json item = {
       {"urn", model.URN},
       {"title", model.Title},

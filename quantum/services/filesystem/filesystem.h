@@ -4,7 +4,7 @@
 #include <chrono>
 #include <filesystem>
 
-namespace polaris::base
+namespace quantum
 {
     bool IsFileExist(const std::string& filePath);
 

@@ -32,10 +32,10 @@ polaris::native::ArticleServerBusiness::selectArticles() const
             continue;
         }
         auto articleModel = polaris::native::PSArticleModel(dirName);
-        auto metadataFilePath = polaris::base::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
-        if (polaris::base::IsFileExist(metadataFilePath))
+        auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
+        if (quantum::IsFileExist(metadataFilePath))
         {
-            auto yamlHandler = polaris::base::YamlHandler(metadataFilePath);
+            auto yamlHandler = quantum::YamlHandler(metadataFilePath);
             articleModel.URN = yamlHandler.getString("metadata.urn").value_or("");
             articleModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
             articleModel.Description = yamlHandler.getString("metadata.description").value_or("");
@@ -43,7 +43,7 @@ polaris::native::ArticleServerBusiness::selectArticles() const
         }
         if (articleModel.URN.empty())
         {
-            articleModel.URN = polaris::base::calcMd5(entry.path().string());
+            articleModel.URN = quantum::calcMd5(entry.path().string());
         }
         libraries->emplace_back(articleModel);
     }
@@ -53,5 +53,5 @@ polaris::native::ArticleServerBusiness::selectArticles() const
 
 bool polaris::native::isArticleDirectory(const std::string& directoryName)
 {
-    return polaris::base::PSString::EndsWith(directoryName, ".note");
+    return quantum::PSString::EndsWith(directoryName, ".note");
 }

@@ -3,7 +3,7 @@
 #include <regex>
 #include <string>
 
-namespace polaris::base {
+namespace quantum {
 
 class UUIDHelper
 {

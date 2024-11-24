@@ -5,7 +5,7 @@
 #include <boost/archive/iterators/transform_width.hpp>
 #include <boost/algorithm/string.hpp>
 
-std::string polaris::base::decode64(const std::string& val)
+std::string quantum::decode64(const std::string& val)
 {
     using namespace boost::archive::iterators;
     using It = transform_width<binary_from_base64<std::string::const_iterator>, 8, 6>;
@@ -15,7 +15,7 @@ std::string polaris::base::decode64(const std::string& val)
     });
 }
 
-std::string polaris::base::encode64(const std::string& val)
+std::string quantum::encode64(const std::string& val)
 {
     using namespace boost::archive::iterators;
     using It = base64_from_binary<transform_width<std::string::const_iterator, 6, 8>>;

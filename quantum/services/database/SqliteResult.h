@@ -7,7 +7,7 @@
 #include <vector>
 #include "quantum/services/database/SqliteRow.h"
 
-namespace polaris::base
+namespace quantum
 {
     class SqliteResult
     {

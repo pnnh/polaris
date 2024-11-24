@@ -1,9 +1,9 @@
 #include "quantum/utils/uuid.h"
 
-std::regex polaris::base::UUIDHelper::uuid_regex = std::regex(
+std::regex quantum::UUIDHelper::uuid_regex = std::regex(
     "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$");
 
-bool polaris::base::UUIDHelper::isUUID(const std::string& uuid_string)
+bool quantum::UUIDHelper::isUUID(const std::string& uuid_string)
 {
     std::smatch match;
 

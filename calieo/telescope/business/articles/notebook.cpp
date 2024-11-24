@@ -30,10 +30,10 @@ polaris::native::NotebookServerBusiness::selectNotebooks() const
             continue;
         }
         auto notebookModel = polaris::native::PSNotebookModel(dirName);
-        auto metadataFilePath = polaris::base::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
-        if (polaris::base::IsFileExist(metadataFilePath))
+        auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
+        if (quantum::IsFileExist(metadataFilePath))
         {
-            auto yamlHandler = polaris::base::YamlHandler(metadataFilePath);
+            auto yamlHandler = quantum::YamlHandler(metadataFilePath);
             notebookModel.URN = yamlHandler.getString("metadata.urn").value_or("");
             notebookModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
             notebookModel.Description = yamlHandler.getString("metadata.description").value_or("");
@@ -41,7 +41,7 @@ polaris::native::NotebookServerBusiness::selectNotebooks() const
         }
         if (notebookModel.URN.empty())
         {
-            notebookModel.URN = polaris::base::calcMd5(entry.path().string());
+            notebookModel.URN = quantum::calcMd5(entry.path().string());
         }
         libraries->emplace_back(notebookModel);
     }
@@ -51,5 +51,5 @@ polaris::native::NotebookServerBusiness::selectNotebooks() const
 
 bool polaris::native::isNotebookDirectory(const std::string& directoryName)
 {
-    return polaris::base::PSString::EndsWith(directoryName, ".notebook");
+    return quantum::PSString::EndsWith(directoryName, ".notebook");
 }

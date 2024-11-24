@@ -27,7 +27,7 @@ void routeHandleGet(WFHttpTask* httpTask, const std::string& request_uri)
 	{
 		polaris::server::HandleChannels(httpTask);
 	}
-	else if (polaris::base::PSString::StartsWith(request_uri, "/server/files"))
+	else if (quantum::PSString::StartsWith(request_uri, "/server/files"))
 	{
 		polaris::server::HandleFileList(httpTask);
 	}

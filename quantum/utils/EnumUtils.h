@@ -2,7 +2,7 @@
 
 #include <type_traits>
 
-namespace polaris::base
+namespace quantum
 {
     class EnumUtils
     {

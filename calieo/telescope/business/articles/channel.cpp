@@ -31,10 +31,10 @@ polaris::native::ChannelServerBusiness::selectChannels() const
             continue;
         }
         auto channelModel = polaris::native::PSChannelModel(dirName);
-        auto metadataFilePath = polaris::base::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
-        if (polaris::base::IsFileExist(metadataFilePath))
+        auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
+        if (quantum::IsFileExist(metadataFilePath))
         {
-            auto yamlHandler = polaris::base::YamlHandler(metadataFilePath);
+            auto yamlHandler = quantum::YamlHandler(metadataFilePath);
             channelModel.URN = yamlHandler.getString("metadata.urn").value_or("");
             channelModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
             channelModel.Description = yamlHandler.getString("metadata.description").value_or("");
@@ -42,7 +42,7 @@ polaris::native::ChannelServerBusiness::selectChannels() const
         }
         if (channelModel.URN.empty())
         {
-            channelModel.URN = polaris::base::calcMd5(entry.path().string());
+            channelModel.URN = quantum::calcMd5(entry.path().string());
         }
         channels->emplace_back(channelModel);
     }
@@ -52,7 +52,7 @@ polaris::native::ChannelServerBusiness::selectChannels() const
 
 bool polaris::native::isChannelDirectory(const std::string& directoryName)
 {
-    return polaris::base::PSString::EndsWith(directoryName, ".chan") ||
-        polaris::base::PSString::EndsWith(directoryName, ".channel") || polaris::base::PSString::EndsWith(
+    return quantum::PSString::EndsWith(directoryName, ".chan") ||
+        quantum::PSString::EndsWith(directoryName, ".channel") || quantum::PSString::EndsWith(
             directoryName, ".notechannel");
 }

@@ -9,12 +9,12 @@
 
 int native::examples::articles::TestArticleSelectLibraries()
 {
-    const std::string baseUrl = polaris::base::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
+    const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
     auto libraryServer = std::make_shared<polaris::native::LibraryServerBusiness>(baseUrl);
     auto libraryPtr = libraryServer->selectLibraries();
     for (const auto& model : *libraryPtr)
     {
-        polaris::base::Logger::LogInfo({model.URN, model.Title, model.Title});
+        quantum::Logger::LogInfo({model.URN, model.Title, model.Title});
     }
     return 0;
 }

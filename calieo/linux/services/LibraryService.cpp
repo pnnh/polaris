@@ -98,7 +98,7 @@ LibraryService::SelectPartitions(const polaris::native::PSLibraryModel& libraryM
     if (!filePath.isEmpty())
     {
       auto stdPathString = filePath.toStdString();
-      auto uid = polaris::base::encode64(stdPathString);
+      auto uid = quantum::encode64(stdPathString);
 
       auto model =
         polaris::native::PSNotebookModel();

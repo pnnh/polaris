@@ -4,7 +4,7 @@
 #include <string>
 #include <variant>
 
-namespace polaris::base
+namespace quantum
 {
     class SqliteColumn
     {

@@ -4,7 +4,7 @@
 #include <string>
 #include <yaml-cpp/node/node.h>
 
-namespace polaris::base
+namespace quantum
 {
     class YamlHandler
     {

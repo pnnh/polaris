@@ -5,10 +5,10 @@
 #include <boost/range/algorithm.hpp>
 
 
-polaris::base::QueryParam::QueryParam(const std::string& url_string)
+quantum::QueryParam::QueryParam(const std::string& url_string)
 {
   auto fullUrl = std::string(url_string);
-  if (!polaris::base::PSString::StartsWith(fullUrl, "http://") && !polaris::base::PSString::StartsWith(
+  if (!quantum::PSString::StartsWith(fullUrl, "http://") && !quantum::PSString::StartsWith(
     fullUrl, "https://"))
   {
     fullUrl = std::string("http://localhost") + fullUrl;
@@ -22,13 +22,13 @@ boost::urls::url_view parseUrl(const std::string& fullUrl)
   auto parseResult = boost::urls::parse_uri(fullUrl);
   if (parseResult.has_error())
   {
-    throw polaris::base::PSException(polaris::base::QuantumEnum::ERROR,
+    throw quantum::PSException(quantum::QuantumEnum::ERROR,
                                      std::string("url parse error") + parseResult.error().to_string());
   }
   return parseResult.value();
 }
 
-std::optional<std::string> polaris::base::QueryParam::getString(const std::string& name) const
+std::optional<std::string> quantum::QueryParam::getString(const std::string& name) const
 {
   auto parsedUrl = parseUrl(this->_fullUrl);
   const auto it =
@@ -44,7 +44,7 @@ std::optional<std::string> polaris::base::QueryParam::getString(const std::strin
   return std::nullopt;
 }
 
-std::optional<long> polaris::base::QueryParam::getLong(const std::string& key)
+std::optional<long> quantum::QueryParam::getLong(const std::string& key)
 {
   auto parsedUrl = parseUrl(this->_fullUrl);
   auto it =

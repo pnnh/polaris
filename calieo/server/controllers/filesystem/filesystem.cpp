@@ -27,15 +27,15 @@ void polaris::server::HandleFileList(WFHttpTask* httpTask)
 
     auto request_uri = request->get_request_uri();
 
-    base::QueryParam queryParam{std::string(request_uri)};
+    quantum::QueryParam queryParam{std::string(request_uri)};
 
-    auto homeDirectory = base::UserHomeDirectory();
+    auto homeDirectory = quantum::UserHomeDirectory();
     auto baseUrl = homeDirectory;
     auto encodePath = queryParam.getString("path");
     if (encodePath.has_value() && !encodePath.value().empty())
     {
-        auto decodePath = base::decode64(encodePath.value());
-        baseUrl = base::PSString::LeftReplace(decodePath, "~", homeDirectory);
+        auto decodePath = quantum::decode64(encodePath.value());
+        baseUrl = quantum::PSString::LeftReplace(decodePath, "~", homeDirectory);
     }
 
     std::ostringstream oss;

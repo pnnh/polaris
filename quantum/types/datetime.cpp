@@ -44,7 +44,7 @@ std::chrono::system_clock::time_point ParseDate(const std::wstring& dateText, co
     return result;
 }
 
-std::chrono::system_clock::time_point polaris::base::makeTimePoint(const std::string& time_string)
+std::chrono::system_clock::time_point quantum::makeTimePoint(const std::string& time_string)
 {
     // using namespace boost::posix_time;
     // using namespace std::chrono;
@@ -62,7 +62,7 @@ std::chrono::system_clock::time_point polaris::base::makeTimePoint(const std::st
     return timePoint;
 }
 
-std::string polaris::base::formatTime(const std::chrono::system_clock::time_point& time_point)
+std::string quantum::formatTime(const std::chrono::system_clock::time_point& time_point)
 {
     std::time_t now = std::chrono::system_clock::to_time_t(time_point);
 
@@ -72,41 +72,41 @@ std::string polaris::base::formatTime(const std::chrono::system_clock::time_poin
 }
 
 
-polaris::base::PSDatetime::PSDatetime(): timeValue()
+quantum::PSDatetime::PSDatetime(): timeValue()
 {
 }
 
-polaris::base::PSDatetime::PSDatetime(const std::string& datetime)
+quantum::PSDatetime::PSDatetime(const std::string& datetime)
 {
     this->timeValue = makeTimePoint(datetime);
 }
 
-polaris::base::PSDatetime::PSDatetime(const std::chrono::system_clock::time_point& datetime)
+quantum::PSDatetime::PSDatetime(const std::chrono::system_clock::time_point& datetime)
 {
     this->timeValue = datetime;
 }
 
-polaris::base::PSDatetime::PSDatetime(const std::time_t& datetime)
+quantum::PSDatetime::PSDatetime(const std::time_t& datetime)
 {
     this->timeValue = std::chrono::system_clock::from_time_t(datetime);
 }
 
-polaris::base::PSDatetime& polaris::base::PSDatetime::operator=(const PSDatetime& other)
+quantum::PSDatetime& quantum::PSDatetime::operator=(const PSDatetime& other)
 = default;
 
-polaris::base::PSDatetime& polaris::base::PSDatetime::operator=(const std::chrono::system_clock::time_point& tp)
+quantum::PSDatetime& quantum::PSDatetime::operator=(const std::chrono::system_clock::time_point& tp)
 {
     this->timeValue = tp;
     return *this;
 }
 
-polaris::base::PSDatetime& polaris::base::PSDatetime::operator=(const std::time_t& time)
+quantum::PSDatetime& quantum::PSDatetime::operator=(const std::time_t& time)
 {
     this->timeValue = std::chrono::system_clock::from_time_t(time);
     return *this;
 }
 
-std::string polaris::base::PSDatetime::toString() const
+std::string quantum::PSDatetime::toString() const
 {
     return formatTime(this->timeValue);
 }

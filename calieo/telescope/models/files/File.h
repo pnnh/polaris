@@ -18,7 +18,7 @@ namespace polaris::native
         bool IsDir{};
         bool IsHidden{};
         bool IsIgnore{};
-        polaris::base::PSDatetime CreateTime;
-        polaris::base::PSDatetime UpdateTime;
+        quantum::PSDatetime CreateTime;
+        quantum::PSDatetime UpdateTime;
     };
 }

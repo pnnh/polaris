@@ -2,11 +2,11 @@
 #include "SqliteService.h"
 #include <sqlite3.h>
 
-polaris::base::SqliteService::SqliteService() : dbHandles()
+quantum::SqliteService::SqliteService() : dbHandles()
 {
 }
 
-polaris::base::SqliteService::~SqliteService()
+quantum::SqliteService::~SqliteService()
 {
     for (auto& [handle, db] : dbHandles)
     {
@@ -15,19 +15,19 @@ polaris::base::SqliteService::~SqliteService()
     }
 }
 
-polaris::base::SqliteHandle polaris::base::SqliteService::openDatabase(const char* path)
+quantum::SqliteHandle quantum::SqliteService::openDatabase(const char* path)
 {
     return openDatabase(std::string(path));
 }
 
-polaris::base::SqliteHandle polaris::base::SqliteService::openDatabase(std::string&& path)
+quantum::SqliteHandle quantum::SqliteService::openDatabase(std::string&& path)
 {
     sqlite3* db;
     char* zErrMsg = nullptr;
 
     auto cPath = path.c_str();
     int rc = sqlite3_open(cPath, &db);
-    if (rc) throw polaris::base::PSException("Can't open database", sqlite3_errmsg(db));
+    if (rc) throw quantum::PSException("Can't open database", sqlite3_errmsg(db));
 
     const SqliteHandle handle = dbHandles.size();
 
@@ -36,21 +36,21 @@ polaris::base::SqliteHandle polaris::base::SqliteService::openDatabase(std::stri
     return handle;
 }
 
-polaris::base::QuantumEnum polaris::base::SqliteService::closeDatabase(polaris::base::SqliteHandle dbHandle)
+quantum::QuantumEnum quantum::SqliteService::closeDatabase(quantum::SqliteHandle dbHandle)
 {
     auto db = dbHandles[dbHandle];
-    if (db == nullptr) throw polaris::base::PSException("Database handle not found");
+    if (db == nullptr) throw quantum::PSException("Database handle not found");
     auto rc = sqlite3_close(db);
     if (rc) throw PSException("Can't close database", sqlite3_errmsg(db));
     return QuantumEnum::OK;
 }
 
-polaris::base::SqliteResult polaris::base::SqliteService::runSql(SqliteHandle dbHandle, std::string& text)
+quantum::SqliteResult quantum::SqliteService::runSql(SqliteHandle dbHandle, std::string& text)
 {
     return runSql(dbHandle, std::move(text));
 }
 
-std::string polaris::base::SqliteService::sqliteVersion(SqliteHandle dbHandle)
+std::string quantum::SqliteService::sqliteVersion(SqliteHandle dbHandle)
 {
     auto sqlResult = runSql(dbHandle, "SELECT sqlite_version() as version;");
     auto verColumn = sqlResult.getColumn(0, 0);
@@ -59,8 +59,8 @@ std::string polaris::base::SqliteService::sqliteVersion(SqliteHandle dbHandle)
     return verColumn.value().getStringValue();
 }
 
-polaris::base::SqliteResult polaris::base::SqliteService::runSql(SqliteHandle dbHandle,
-                                                                 std::string&& sqlText)
+quantum::SqliteResult quantum::SqliteService::runSql(SqliteHandle dbHandle,
+                                                     std::string&& sqlText)
 {
     auto db = dbHandles[dbHandle];
     if (db == nullptr) throw PSException("Database handle not found");

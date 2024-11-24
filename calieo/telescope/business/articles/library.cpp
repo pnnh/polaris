@@ -33,10 +33,10 @@ polaris::native::LibraryServerBusiness::selectLibraries() const
             continue;
         }
         auto libraryModel = polaris::native::PSLibraryModel(dirName);
-        auto metadataFilePath = polaris::base::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
-        if (polaris::base::IsFileExist(metadataFilePath))
+        auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
+        if (quantum::IsFileExist(metadataFilePath))
         {
-            auto yamlHandler = polaris::base::YamlHandler(metadataFilePath);
+            auto yamlHandler = quantum::YamlHandler(metadataFilePath);
             libraryModel.URN = yamlHandler.getString("metadata.urn").value_or("");
             libraryModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
             libraryModel.Description = yamlHandler.getString("metadata.description").value_or("");
@@ -44,7 +44,7 @@ polaris::native::LibraryServerBusiness::selectLibraries() const
         }
         if (libraryModel.URN.empty())
         {
-            libraryModel.URN = polaris::base::calcMd5(entry.path().string());
+            libraryModel.URN = quantum::calcMd5(entry.path().string());
         }
         libraries->emplace_back(libraryModel);
     }
@@ -54,5 +54,5 @@ polaris::native::LibraryServerBusiness::selectLibraries() const
 
 bool polaris::native::isLibraryDirectory(const std::string& directoryName)
 {
-    return polaris::base::PSString::EndsWith(directoryName, ".notelibrary");
+    return quantum::PSString::EndsWith(directoryName, ".notelibrary");
 }

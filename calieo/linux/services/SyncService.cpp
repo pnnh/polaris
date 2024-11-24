@@ -37,7 +37,7 @@ void SyncService::SyncLibraries()
         continue;
       }
       auto stdPathString = filePath.toStdString();
-      auto uid = polaris::base::encode64(stdPathString);
+      auto uid = quantum::encode64(stdPathString);
       auto model = polaris::native::PSLibraryModel();
       model.URN = uid;
       model.Name = fileName.toStdString();
@@ -72,7 +72,7 @@ int SyncService::SyncImages(const QString& path)
     if (fileInfo.isDir())
     {
       auto stdPathString = filePath.toStdString();
-      if (polaris::base::isIgnore(stdPathString))
+      if (quantum::isIgnore(stdPathString))
       {
         continue;
       }
@@ -81,10 +81,10 @@ int SyncService::SyncImages(const QString& path)
     else
     {
       auto stdFilePath = filePath.toStdString();
-      if (polaris::base::MimeUtils::isImage(stdFilePath))
+      if (quantum::MimeUtils::isImage(stdFilePath))
       {
         auto stdPathString = filePath.toStdString();
-        auto uid = polaris::base::encode64(stdPathString);
+        auto uid = quantum::encode64(stdPathString);
         auto model = polaris::native::PSPictureModel();
         model.URN = uid;
         model.Name = fileName.toStdString();

@@ -10,14 +10,14 @@
 
 int native::examples::articles::TestArticleSelectNotebooks()
 {
-    const std::string baseUrl = polaris::base::JoinFilePath({
+    const std::string baseUrl = quantum::JoinFilePath({
         PROJECT_SOURCE_DIR, "assets", "data", "CPlus.notelibrary"
     });
     auto notebookServer = std::make_shared<polaris::native::NotebookServerBusiness>(baseUrl);
     auto notebookPtr = notebookServer->selectNotebooks();
     for (const auto& model : *notebookPtr)
     {
-        polaris::base::Logger::LogInfo({model.URN, model.Title, model.Title});
+        quantum::Logger::LogInfo({model.URN, model.Title, model.Title});
     }
     return 0;
 }

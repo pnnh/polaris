@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace polaris::base
+namespace quantum
 {
     class Logger
     {

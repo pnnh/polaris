@@ -5,22 +5,22 @@
 #include "quantum/types/Exception.h"
 
 
-polaris::base::SqliteColumn::SqliteColumn() : colType(), colIndex()
+quantum::SqliteColumn::SqliteColumn() : colType(), colIndex()
 {
 }
 
-polaris::base::SqliteColumn::SqliteColumn(const int colType, const int colIndex, const std::string&& colName) :
+quantum::SqliteColumn::SqliteColumn(const int colType, const int colIndex, const std::string&& colName) :
     colType(colType), colIndex(colIndex),
     colName(colName)
 {
-    if (colIndex < 0) throw polaris::base::PSException("列索引必须大于等于0");
+    if (colIndex < 0) throw quantum::PSException("列索引必须大于等于0");
 }
 
-polaris::base::SqliteColumn::~SqliteColumn()
+quantum::SqliteColumn::~SqliteColumn()
 {
 }
 
-polaris::base::SqliteColumn::SqliteColumn(const SqliteColumn& other) :
+quantum::SqliteColumn::SqliteColumn(const SqliteColumn& other) :
     colType(other.colType), colIndex(other.colIndex),
     colName(other.colName), colIsNull(other.colIsNull)
 {
@@ -39,7 +39,7 @@ polaris::base::SqliteColumn::SqliteColumn(const SqliteColumn& other) :
     variantValue = other.variantValue;
 }
 
-polaris::base::SqliteColumn& polaris::base::SqliteColumn::operator=(const SqliteColumn& other)
+quantum::SqliteColumn& quantum::SqliteColumn::operator=(const SqliteColumn& other)
 {
     colType = other.colType;
     colIndex = other.colIndex;
@@ -61,7 +61,7 @@ polaris::base::SqliteColumn& polaris::base::SqliteColumn::operator=(const Sqlite
     return *this;
 }
 
-polaris::base::SqliteColumn::SqliteColumn(SqliteColumn&& other) noexcept :
+quantum::SqliteColumn::SqliteColumn(SqliteColumn&& other) noexcept :
     colType(other.colType), colIndex(other.colIndex),
     colName(std::move(other.colName)), colIsNull(other.colIsNull)
 {
@@ -80,7 +80,7 @@ polaris::base::SqliteColumn::SqliteColumn(SqliteColumn&& other) noexcept :
     variantValue = std::move(other.variantValue);
 }
 
-polaris::base::SqliteColumn& polaris::base::SqliteColumn::operator=(SqliteColumn&& other) noexcept
+quantum::SqliteColumn& quantum::SqliteColumn::operator=(SqliteColumn&& other) noexcept
 {
     colType = other.colType;
     colIndex = other.colIndex;
@@ -110,75 +110,75 @@ polaris::base::SqliteColumn& polaris::base::SqliteColumn::operator=(SqliteColumn
     return *this;
 }
 
-int polaris::base::SqliteColumn::getColIndex() const
+int quantum::SqliteColumn::getColIndex() const
 {
     return colIndex;
 }
 
-std::string polaris::base::SqliteColumn::getColName() const
+std::string quantum::SqliteColumn::getColName() const
 {
     if (colName.empty()) return "column" + std::to_string(colIndex);
     return colName;
 }
 
-std::string polaris::base::SqliteColumn::getStringValue() const
+std::string quantum::SqliteColumn::getStringValue() const
 {
     return variantValue.index() == 0 ? std::get<std::string>(variantValue) : "";
 }
 
-void polaris::base::SqliteColumn::setStringValue(const char* value)
+void quantum::SqliteColumn::setStringValue(const char* value)
 {
     // stringValue = value;
     variantValue = std::string(value);
 }
 
-void polaris::base::SqliteColumn::setStringValue(const std::string& value)
+void quantum::SqliteColumn::setStringValue(const std::string& value)
 {
     // stringValue = value;
     variantValue = value;
 }
 
-void polaris::base::SqliteColumn::setStringValue(const std::string&& value)
+void quantum::SqliteColumn::setStringValue(const std::string&& value)
 {
     // stringValue = value;
     variantValue = value;
 }
 
-int polaris::base::SqliteColumn::getIntValue() const
+int quantum::SqliteColumn::getIntValue() const
 {
     // return intValue;
     return variantValue.index() == 1 ? static_cast<int>(std::get<long>(variantValue)) : 0;
 }
 
-void polaris::base::SqliteColumn::setIntValue(int value)
+void quantum::SqliteColumn::setIntValue(int value)
 {
     // intValue = value;
     variantValue = static_cast<long>(value);
 }
 
-double polaris::base::SqliteColumn::getFloatValue() const
+double quantum::SqliteColumn::getFloatValue() const
 {
     // return floatValue;
     return variantValue.index() == 2 ? std::get<double>(variantValue) : 0;
 }
 
-void polaris::base::SqliteColumn::setFloatValue(double value)
+void quantum::SqliteColumn::setFloatValue(double value)
 {
     // floatValue = value;
     variantValue = value;
 }
 
-int polaris::base::SqliteColumn::getColType() const
+int quantum::SqliteColumn::getColType() const
 {
     return colType;
 }
 
-bool polaris::base::SqliteColumn::isNull() const
+bool quantum::SqliteColumn::isNull() const
 {
     return colIsNull;
 }
 
-void polaris::base::SqliteColumn::setNull()
+void quantum::SqliteColumn::setNull()
 {
     colIsNull = true;
 }
