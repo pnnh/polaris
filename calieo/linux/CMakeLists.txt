@@ -1,4 +1,6 @@
 
+set(APP_NAME ${CALIEO_NAME}Linux)
+
 # 查找并引用Qt库
 find_package(
         Qt6
@@ -24,16 +26,14 @@ set(CMAKE_AUTORCC ON)
 qt_policy(SET QTP0001 NEW)
 qt_policy(SET QTP0004 NEW)
 
-set(APP_NAME ${PROJECT_NAME}Linux)
-
 file(GLOB_RECURSE APP_SOURCES
         services/*.cpp)
 
 qt6_add_executable(${APP_NAME} MANUAL_FINALIZATION)
 target_sources(${APP_NAME} PUBLIC main.cpp ${APP_SOURCES})
 
-add_dependencies(${APP_NAME} ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
-target_link_libraries(${APP_NAME} PRIVATE ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
+add_dependencies(${APP_NAME} ${LIB_QUANTUM} ${LIB_TELESCOPE})
+target_link_libraries(${APP_NAME} PRIVATE ${LIB_QUANTUM} ${LIB_TELESCOPE})
 
 # 查找并引用日志库
 find_package(spdlog CONFIG REQUIRED)
@@ -46,10 +46,6 @@ target_link_libraries(${APP_NAME} PRIVATE cmark::cmark)
 # 查找并引用Sqlite解析库
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
 target_link_libraries(${APP_NAME} PRIVATE unofficial::sqlite3::sqlite3)
-
-# 查找并引用CryptoPP解析库
-#find_package(cryptopp CONFIG REQUIRED)
-#target_link_libraries(${APP_NAME} PRIVATE cryptopp::cryptopp)
 
 target_link_libraries(
         ${APP_NAME}

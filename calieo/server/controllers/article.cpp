@@ -6,14 +6,14 @@
 #include <spdlog/spdlog.h>
 #include <workflow/HttpMessage.h>
 
-#include "base/utils/query.h"
+#include "quantum/utils/query.h"
 
-#include "native/business/articles/article.h"
+#include "calieo/telescope/business/articles/article.h"
 
 #include <build.h>
 
-#include "base/services/filesystem/filesystem.h"
-#include "base/services/logger/logger.h"
+#include "quantum/services/filesystem/filesystem.h"
+#include "quantum/services/logger/logger.h"
 
 using json = nlohmann::json;
 

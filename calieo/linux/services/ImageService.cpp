@@ -5,7 +5,7 @@
 #include <QtWidgets/QApplication>
 #include <qdir.h>
 
-#include "native/models/pictures/Picture.h"
+#include "calieo/telescope/models/pictures/Picture.h"
 
 ImageService::ImageService()
 {

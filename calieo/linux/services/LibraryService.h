@@ -2,8 +2,8 @@
 
 #include <QVector>
 
-#include "native/models/articles/Library.h"
-#include "native/models/articles/Notebook.h"
+#include "calieo/telescope/models/articles/Library.h"
+#include "calieo/telescope/models/articles/Notebook.h"
 
 class LibraryService
 {

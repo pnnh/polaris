@@ -2,7 +2,7 @@
 
 #include <QString>
 
-#include "native/models/pictures/Picture.h"
+#include "calieo/telescope/models/pictures/Picture.h"
 
 class ImageService
 {

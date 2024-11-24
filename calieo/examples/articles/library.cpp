@@ -1,23 +1,20 @@
 
 #include "library.h"
-#include "native/business/articles/library.h"
+#include "calieo/telescope/business/articles/library.h"
 
 #include <build.h>
+#include <quantum/services/logger/logger.h>
 
-#include "base/services/filesystem/filesystem.h"
-#include "base/services/logger/logger.h"
-
-namespace business = native::business;
-namespace logger = native::services::logger;
+#include "quantum/services/filesystem/filesystem.h"
 
 int native::examples::articles::TestArticleSelectLibraries()
 {
-    const std::string baseUrl = services::filesystem::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
-    auto libraryServer = std::make_shared<business::articles::LibraryServerBusiness>(baseUrl);
+    const std::string baseUrl = polaris::base::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
+    auto libraryServer = std::make_shared<polaris::native::LibraryServerBusiness>(baseUrl);
     auto libraryPtr = libraryServer->selectLibraries();
     for (const auto& model : *libraryPtr)
     {
-        logger::Logger::LogInfo({model.URN, model.Title, model.Title});
+        polaris::base::Logger::LogInfo({model.URN, model.Title, model.Title});
     }
     return 0;
 }

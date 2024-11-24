@@ -1,7 +1,7 @@
 #include <filesystem>
 #include "mime.h"
 
-#include <base/types/String.h>
+#include "quantum/types/String.h"
 
 bool polaris::base::MimeUtils::isImage(const std::string& path)
 {

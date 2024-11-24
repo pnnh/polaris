@@ -1,6 +1,6 @@
 
 #=========================WASM BROWSER==========================#
-set(WASM_BROWSER ${PROJECT_NAME}WasmBrowser)
+set(WASM_BROWSER ${CALIEO_NAME}WasmBrowser)
 
 add_executable(${WASM_BROWSER}
         wasm/browser/main.cpp
@@ -8,8 +8,8 @@ add_executable(${WASM_BROWSER}
         wasm/wasm.h
 )
 
-add_dependencies(${WASM_BROWSER} ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
-target_link_libraries(${WASM_BROWSER} PRIVATE ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
+add_dependencies(${WASM_BROWSER} ${LIB_QUANTUM} ${LIB_TELESCOPE})
+target_link_libraries(${WASM_BROWSER} PRIVATE ${LIB_QUANTUM} ${LIB_TELESCOPE})
 
 set_target_properties(${WASM_BROWSER} PROPERTIES LINK_FLAGS "-lembind -sMODULARIZE -sENVIRONMENT=web -sTOTAL_MEMORY=32MB --emit-tsd ${WASM_BROWSER}.d.ts")
 
@@ -24,8 +24,7 @@ install(FILES
 
 
 #========================WASM SERVER===========================#
-set(LIB_WASM ${PROJECT_NAME}WasmCommon)
-set(WASM_SERVER ${PROJECT_NAME}WasmServer)
+set(WASM_SERVER ${CALIEO_NAME}WasmServer)
 
 add_executable(${WASM_SERVER}
         wasm/server/main.cpp
@@ -33,8 +32,8 @@ add_executable(${WASM_SERVER}
         wasm/wasm.h
 )
 
-add_dependencies(${WASM_SERVER} ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
-target_link_libraries(${WASM_SERVER} PRIVATE ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
+add_dependencies(${WASM_SERVER} ${LIB_QUANTUM} ${LIB_TELESCOPE})
+target_link_libraries(${WASM_SERVER} PRIVATE ${LIB_QUANTUM} ${LIB_TELESCOPE})
 
 set_target_properties(${WASM_SERVER} PROPERTIES LINK_FLAGS "-lembind -sMODULARIZE -sTOTAL_MEMORY=32MB --emit-tsd ${WASM_SERVER}.d.ts")
 

@@ -18,8 +18,8 @@
         "CMAKE_C_COMPILER_LAUNCHER": "ccache",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
         "CMAKE_MAKE_PROGRAM": "ninja",
-        "CMAKE_C_COMPILER": "/usr/bin/gcc-14",
-        "CMAKE_CXX_COMPILER": "/usr/bin/g++-14"
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++"
       },
       "environment": {}
     },
@@ -37,11 +37,11 @@
         "CMAKE_OSX_DEPLOYMENT_TARGET": "14.0",
         "VCPKG_HOST_TRIPLET": "arm64-osx",
         "VCPKG_TARGET_TRIPLET": "arm64-osx",
-        "CMAKE_CXX_COMPILER_LAUNCHER": "/opt/homebrew/bin/ccache",
-        "CMAKE_C_COMPILER_LAUNCHER": "/opt/homebrew/bin/ccache",
-        "CMAKE_C_COMPILER": "/opt/homebrew/opt/llvm/bin/clang",
-        "CMAKE_CXX_COMPILER": "/opt/homebrew/opt/llvm/bin/clang++",
-        "CMAKE_PREFIX_PATH": "~/Qt/6.8.0/macos/lib/cmake;/opt/homebrew/lib/cmake"
+        "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
+        "CMAKE_C_COMPILER_LAUNCHER": "ccache",
+        "CMAKE_C_COMPILER": "clang",
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_PREFIX_PATH": "~/Qt/6.8.0/macos/lib/cmake"
       },
       "environment": {}
     },

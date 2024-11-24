@@ -1,5 +1,5 @@
 #include "content/sources/markdown.h"
-#include "native/services/markdown/MarkdownService.h"
+#include "calieo/telescope/services/markdown/MarkdownService.h"
 
 MarkdownModel::MarkdownModel(QObject* parent)
 {

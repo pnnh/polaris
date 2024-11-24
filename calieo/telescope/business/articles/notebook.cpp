@@ -2,10 +2,10 @@
 
 #include <string>
 #include <filesystem>
-#include <base/services/filesystem/filesystem.h>
-#include <base/services/yaml/yaml.h>
-#include "base/utils/md5.h"
-#include "base/types/String.h"
+#include "quantum/services/filesystem/filesystem.h"
+#include "calieo/telescope/services/yaml/yaml.h"
+#include "quantum/utils/md5.h"
+#include "quantum/types/String.h"
 
 polaris::native::NotebookServerBusiness::NotebookServerBusiness(const std::string& baseUrl)
 {

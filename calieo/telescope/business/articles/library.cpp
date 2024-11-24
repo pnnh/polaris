@@ -2,13 +2,13 @@
 #include "library.h"
 #include <string>
 #include <filesystem>
-#include <base/types/String.h>
+#include "quantum/types/String.h"
 
-#include "base/types/Exception.h"
-#include "base/services/filesystem/filesystem.h"
-#include "base/services/logger/logger.h"
-#include "base/services/yaml/yaml.h"
-#include "base/utils/md5.h"
+#include "quantum/types/Exception.h"
+#include "quantum/services/filesystem/filesystem.h"
+#include "quantum/services/logger/logger.h"
+#include "calieo/telescope/services/yaml/yaml.h"
+#include "quantum/utils/md5.h"
 
 polaris::native::LibraryServerBusiness::LibraryServerBusiness(const std::string& baseUrl)
 {

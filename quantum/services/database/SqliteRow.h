@@ -6,7 +6,7 @@
 #include <sqlite3.h>
 #include <string>
 #include <vector>
-#include "base/services/sqlite/SqliteColumn.h"
+#include "quantum/services/database/SqliteColumn.h"
 
 namespace polaris::base
 {

@@ -5,9 +5,9 @@
 #include <qdir.h>
 #include <qdiriterator.h>
 
-#include "native/models/pictures/Picture.h"
-#include "base/utils/basex.h"
-#include "base/utils/mime.h"
+#include "calieo/telescope/models/pictures/Picture.h"
+#include "quantum/utils/basex.h"
+#include "quantum/utils/mime.h"
 
 void SyncService::SyncLibraries()
 {

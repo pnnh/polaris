@@ -1,22 +1,20 @@
 
 #include "channel.h"
-#include "native/business/articles/channel.h"
+#include "calieo/telescope/business/articles/channel.h"
 #include "build.h"
-#include "base/services/filesystem/filesystem.h"
-#include "base/services/logger/logger.h"
-#include "base/services/sqlite/SqliteService.h"
+#include "quantum/services/filesystem/filesystem.h"
+#include "quantum/services/logger/logger.h"
+#include "quantum/services/database/SqliteService.h"
 
-namespace business = native::business;
-namespace logger = native::services::logger;
 
 int native::examples::articles::TestArticleSelectChannels()
 {
-    const std::string baseUrl = services::filesystem::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
-    auto channelServer = std::make_shared<business::articles::ChannelServerBusiness>(baseUrl);
+    const std::string baseUrl = polaris::base::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
+    auto channelServer = std::make_shared<polaris::native::ChannelServerBusiness>(baseUrl);
     auto channelsPtr = channelServer->selectChannels();
     for (const auto& model : *channelsPtr)
     {
-        logger::Logger::LogInfo({model.URN, model.Name, model.Title});
+        polaris::base::Logger::LogInfo({model.URN, model.Name, model.Title});
     }
     return 0;
 }

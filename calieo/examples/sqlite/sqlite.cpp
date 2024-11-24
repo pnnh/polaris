@@ -1,11 +1,11 @@
 #include <iostream>
-#include "base/services/sqlite/SqliteService.h"
+#include "quantum/services/database/SqliteService.h"
 #include "sqlite.h"
 
 int native::examples::sqlite::TestSqliteVersion()
 {
     auto database_path = "polaris.sqlite";
-    auto sqliteService = native::services::sqlite::SqliteService();
+    auto sqliteService = polaris::base::SqliteService();
     auto dbHandle = sqliteService.openDatabase(database_path);
     auto version = sqliteService.sqliteVersion(dbHandle);
 
@@ -16,7 +16,7 @@ int native::examples::sqlite::TestSqliteVersion()
 int native::examples::sqlite::TestSqliteSelect()
 {
     auto database_path = "polaris.sqlite";
-    auto sqliteService = native::services::sqlite::SqliteService();
+    auto sqliteService = polaris::base::SqliteService();
     auto dbHandle = sqliteService.openDatabase(database_path);
     std::string sqlText = "SELECT * FROM sqlite_master;";
     auto sqlResult = sqliteService.runSql(dbHandle, sqlText);

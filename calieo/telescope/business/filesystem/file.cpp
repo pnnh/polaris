@@ -2,10 +2,10 @@
 #include <string>
 #include <filesystem>
 #include <utility>
-#include <base/services/filesystem/filesystem.h>
-#include <base/types/datetime.h>
-#include "base/utils/md5.h"
-#include "base/types//String.h"
+#include "quantum/services/filesystem/filesystem.h"
+#include "quantum/types/datetime.h"
+#include "quantum/utils/md5.h"
+#include "quantum/types//String.h"
 
 polaris::native::FileServerBusiness::FileServerBusiness(const std::string& baseUrl)
 {

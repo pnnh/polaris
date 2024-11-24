@@ -3,8 +3,8 @@
 #include <map>
 #include <sqlite3.h>
 #include <string>
-#include "base/types/Exception.h"
-#include "base/services/sqlite/SqliteResult.h"
+#include "quantum/types/Exception.h"
+#include "quantum/services/database/SqliteResult.h"
 
 namespace polaris::base
 {

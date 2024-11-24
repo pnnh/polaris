@@ -1,9 +1,7 @@
 
 #include_directories(${CMAKE_CURRENT_SOURCE_DIR}/Native)
 
-set(LIB_BASE ${PROJECT_NAME})
-
-set(LIB_NAME ${PROJECT_NAME}Macos)
+set(LIB_NAME ${CALIEO_NAME}Macos)
 set(LIB_SOURCES
         Native/logger/logger.h
         Native/logger/logger.cpp

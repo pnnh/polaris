@@ -2,7 +2,7 @@
 
 #include <sqlite3.h>
 
-#include "base/types/Exception.h"
+#include "quantum/types/Exception.h"
 
 
 polaris::base::SqliteColumn::SqliteColumn() : colType(), colIndex()

@@ -6,9 +6,9 @@
 #include <qdir.h>
 #include <qdiriterator.h>
 
-#include "native/models/articles/Library.h"
-#include "native/models/articles/Notebook.h"
-#include "base/utils/basex.h"
+#include "calieo/telescope/models/articles/Library.h"
+#include "calieo/telescope/models/articles/Notebook.h"
+#include "quantum/utils/basex.h"
 
 LibraryService::LibraryService()
 {

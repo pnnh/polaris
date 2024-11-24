@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "native/models/articles/Notebook.h"
+#include "calieo/telescope/models/articles/Notebook.h"
 
 namespace polaris::native
 {

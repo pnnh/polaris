@@ -1,8 +1,7 @@
-#include "base/utils/query.h"
+#include "quantum/utils/query.h"
 
-#include <iostream>
-#include <base/types/Exception.h>
-#include <base/types/String.h>
+#include "quantum/types/Exception.h"
+#include "quantum/types/String.h"
 #include <boost/range/algorithm.hpp>
 
 

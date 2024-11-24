@@ -1,5 +1,5 @@
 
-set(EXAMPLE_NAME ${PROJECT_NAME}Example)
+set(EXAMPLE_NAME ${CALIEO_NAME}Example)
 
 file(GLOB_RECURSE EXAMPLE_SOURCES
         sqlite/*.cpp
@@ -12,8 +12,8 @@ add_executable(${EXAMPLE_NAME}
         cases.h
         ${EXAMPLE_SOURCES})
 
-add_dependencies(${EXAMPLE_NAME} ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
-target_link_libraries(${EXAMPLE_NAME} PRIVATE ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
+add_dependencies(${EXAMPLE_NAME} ${LIB_QUANTUM} ${LIB_TELESCOPE})
+target_link_libraries(${EXAMPLE_NAME} PRIVATE ${LIB_QUANTUM} ${LIB_TELESCOPE})
 
 # 查找并引用Boost库
 find_package(Boost COMPONENTS program_options REQUIRED)

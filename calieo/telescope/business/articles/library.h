@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "native/models/articles/Library.h"
+#include "calieo/telescope/models/articles/Library.h"
 
 namespace polaris::native
 {

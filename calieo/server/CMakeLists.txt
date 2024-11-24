@@ -1,5 +1,5 @@
 
-set(EXE_NAME ${PROJECT_NAME}Server)
+set(EXE_NAME ${CALIEO_NAME}Server)
 
 add_executable(${EXE_NAME})
 
@@ -17,8 +17,8 @@ target_sources(${EXE_NAME}
         router.h
         ${EXE_SOURCES})
 
-add_dependencies(${EXE_NAME} ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
-target_link_libraries(${EXE_NAME} PRIVATE ${PROJECT_NAME}Base ${PROJECT_NAME}Native)
+add_dependencies(${EXE_NAME} ${LIB_QUANTUM} ${LIB_TELESCOPE})
+target_link_libraries(${EXE_NAME} PRIVATE ${LIB_QUANTUM} ${LIB_TELESCOPE})
 
 # 查找并引用Boost库
 find_package(Boost COMPONENTS system thread chrono filesystem url REQUIRED)

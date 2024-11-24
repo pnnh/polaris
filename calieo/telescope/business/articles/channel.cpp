@@ -2,11 +2,11 @@
 #include "channel.h"
 #include <string>
 #include <filesystem>
-#include "base/types/Exception.h"
-#include "base/services/filesystem/filesystem.h"
-#include "base/services/yaml/yaml.h"
-#include "base/utils/md5.h"
-#include "base/types//String.h"
+#include "quantum/types/Exception.h"
+#include "quantum/services/filesystem/filesystem.h"
+#include "calieo/telescope/services/yaml/yaml.h"
+#include "quantum/utils/md5.h"
+#include "quantum/types//String.h"
 
 polaris::native::ChannelServerBusiness::ChannelServerBusiness(const std::string& baseUrl)
 {

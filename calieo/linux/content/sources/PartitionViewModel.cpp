@@ -1,7 +1,7 @@
 #include "content/sources/PartitionViewModel.h"
 
 #include "linux/services/LibraryService.h"
-#include "native/models/articles/Notebook.h"
+#include "calieo/telescope/models/articles/Notebook.h"
 
 PartitionViewModel::PartitionViewModel(QObject* parent)
   : QAbstractListModel(parent)
