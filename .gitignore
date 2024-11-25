@@ -37,3 +37,6 @@ Pods/
 
 # Nodejs
 node_modules/
+
+# Rust
+target/

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>注册 - 泛涵</title>
+    {{> headmeta}}
+    {{> analytics}}
+    {{> styles}}
+    {{> scripts }}
+</head>
+<body class="register-page">
+<main>
+    <div class="totp_qrcode">
+        <img src="data:image/png;base64,{{totp_qrcode}}" alt="TOTP二维码"/>
+    </div>
+    <div class="totp_url">
+        <p>{{totp_url}}</p>
+    </div>
+</main>
+{{> footer }}
+</body>
+</html>

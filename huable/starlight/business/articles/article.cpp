@@ -39,11 +39,15 @@ huable::starlight::ArticleServerBusiness::selectArticles(const std::string& chan
         if (quantum::IsFileExist(metadataFilePath))
         {
             auto yamlHandler = quantum::YamlHandler(metadataFilePath);
+            articleModel.URN = yamlHandler.getString("metadata.urn").value_or("");
             articleModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
             articleModel.Description = yamlHandler.getString("metadata.description").value_or("");
             articleModel.Image = yamlHandler.getString("metadata.image").value_or("");
         }
-        articleModel.URN = quantum::encode64(entry.path().string());
+        if (articleModel.URN.empty())
+        {
+            articleModel.URN = quantum::encode64(entry.path().string());
+        }
 
         libraries->emplace_back(articleModel);
     }
@@ -77,11 +81,15 @@ std::shared_ptr<huable::starlight::PSArticleModel> huable::starlight::ArticleSer
         if (quantum::IsFileExist(metadataFilePath))
         {
             auto yamlHandler = quantum::YamlHandler(metadataFilePath);
+            articleModel.URN = yamlHandler.getString("metadata.urn").value_or("");
             articleModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
             articleModel.Description = yamlHandler.getString("metadata.description").value_or("");
             articleModel.Image = yamlHandler.getString("metadata.image").value_or("");
         }
-        articleModel.URN = quantum::encode64(entry.path().string());
+        if (articleModel.URN.empty())
+        {
+            articleModel.URN = quantum::encode64(entry.path().string());
+        }
         articleModel.UpdateTime = quantum::convertFilesystemTime(last_write_time(entry));
         articleModel.CreateTime = quantum::convertFilesystemTime(last_write_time(entry));
 
