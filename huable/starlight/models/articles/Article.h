@@ -2,6 +2,7 @@
 
 #include <string>
 #include <chrono>
+#include <galaxy/quantum/types/datetime.h>
 
 namespace huable::starlight
 {
@@ -18,7 +19,7 @@ namespace huable::starlight
         std::string Keywords;
         std::string Description;
         std::string Image;
-        std::chrono::system_clock::time_point CreateTime;
-        std::chrono::system_clock::time_point UpdateTime;
+        quantum::PSDatetime CreateTime;
+        quantum::PSDatetime UpdateTime;
     };
 }

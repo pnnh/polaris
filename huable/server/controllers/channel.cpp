@@ -6,12 +6,12 @@
 #include "build.h"
 #include <workflow/HttpMessage.h>
 #include "huable/starlight/business/articles/channel.h"
-#include "quantum/services/filesystem/filesystem.h"
-#include "quantum/services/logger/logger.h"
+#include "galaxy/quantum/services/filesystem/filesystem.h"
+#include "galaxy/quantum/services/logger/logger.h"
 
 using json = nlohmann::json;
 
-void polaris::server::HandleChannels(WFHttpTask* httpTask)
+void huable::server::HandleChannels(WFHttpTask* httpTask)
 {
     protocol::HttpRequest* request = httpTask->get_req();
     protocol::HttpResponse* response = httpTask->get_resp();
@@ -51,7 +51,7 @@ void polaris::server::HandleChannels(WFHttpTask* httpTask)
     }
 
     std::ostringstream oss;
-    const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
+    const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "huable", "tests", "data"});
     auto channelServer = std::make_shared<huable::starlight::ChannelServerBusiness>(baseUrl);
     auto channelsPtr = channelServer->selectChannels();
     json range = json::array();

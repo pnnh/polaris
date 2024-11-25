@@ -1,7 +1,7 @@
 #include "yaml.h"
 
 #include <regex>
-#include "quantum/types/String.h"
+#include "galaxy/quantum/types/String.h"
 #include <yaml-cpp/yaml.h>
 
 

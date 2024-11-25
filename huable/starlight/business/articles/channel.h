@@ -12,20 +12,10 @@ namespace huable::starlight
     public:
         explicit ChannelServerBusiness(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<huable::starlight::PSChannelModel>> selectChannels() const;
+        [[nodiscard]] std::shared_ptr<std::vector<PSChannelModel>> selectChannels() const;
 
     private:
         std::string baseUrl;
-    };
-
-    class ChannelClientBusiness
-    {
-    public:
-        ChannelClientBusiness();
-
-        ~ChannelClientBusiness();
-
-        std::shared_ptr<std::vector<huable::starlight::PSChannelModel>> selectChannels();
     };
 }
 

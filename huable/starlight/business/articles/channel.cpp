@@ -2,11 +2,13 @@
 #include "channel.h"
 #include <string>
 #include <filesystem>
-#include "quantum/types/Exception.h"
-#include "quantum/services/filesystem/filesystem.h"
+#include <galaxy/quantum/utils/basex.h>
+
+#include "galaxy/quantum/types/Exception.h"
+#include "galaxy/quantum/services/filesystem/filesystem.h"
 #include "huable/starlight/services/yaml/yaml.h"
-#include "quantum/utils/md5.h"
-#include "quantum/types//String.h"
+#include "galaxy/quantum/utils/md5.h"
+#include "galaxy/quantum/types//String.h"
 
 huable::starlight::ChannelServerBusiness::ChannelServerBusiness(const std::string& baseUrl)
 {
@@ -16,7 +18,7 @@ huable::starlight::ChannelServerBusiness::ChannelServerBusiness(const std::strin
 std::shared_ptr<std::vector<huable::starlight::PSChannelModel>>
 huable::starlight::ChannelServerBusiness::selectChannels() const
 {
-    auto channels = std::make_shared<std::vector<huable::starlight::PSChannelModel>>();
+    auto channels = std::make_shared<std::vector<PSChannelModel>>();
 
     for (const auto& entry : std::filesystem::directory_iterator(this->baseUrl))
     {
@@ -35,15 +37,11 @@ huable::starlight::ChannelServerBusiness::selectChannels() const
         if (quantum::IsFileExist(metadataFilePath))
         {
             auto yamlHandler = quantum::YamlHandler(metadataFilePath);
-            channelModel.URN = yamlHandler.getString("metadata.urn").value_or("");
             channelModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
             channelModel.Description = yamlHandler.getString("metadata.description").value_or("");
             channelModel.Image = yamlHandler.getString("metadata.image").value_or("");
         }
-        if (channelModel.URN.empty())
-        {
-            channelModel.URN = quantum::calcMd5(entry.path().string());
-        }
+        channelModel.URN = quantum::encode64(entry.path().string());
         channels->emplace_back(channelModel);
     }
 

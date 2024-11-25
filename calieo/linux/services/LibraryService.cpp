@@ -8,7 +8,7 @@
 
 #include "calieo/telescope/models/articles/Library.h"
 #include "calieo/telescope/models/articles/Notebook.h"
-#include "quantum/utils/basex.h"
+#include "galaxy/quantum/utils/basex.h"
 
 LibraryService::LibraryService()
 {

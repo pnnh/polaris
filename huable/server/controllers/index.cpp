@@ -6,7 +6,7 @@
 
 using json = nlohmann::json;
 
-void polaris::server::HandleIndex(WFHttpTask* httpTask)
+void huable::server::HandleIndex(WFHttpTask* httpTask)
 {
     protocol::HttpResponse* response = httpTask->get_resp();
 

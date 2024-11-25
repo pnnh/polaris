@@ -7,8 +7,8 @@
 #include <quantum/services/filesystem/filesystem.h>
 
 #include "calieo/telescope/models/pictures/Picture.h"
-#include "quantum/utils/basex.h"
-#include "quantum/utils/mime.h"
+#include "galaxy/quantum/utils/basex.h"
+#include "galaxy/quantum/utils/mime.h"
 
 void SyncService::SyncLibraries()
 {

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace polaris::server
+namespace huable::server
 {
     int runServer(int port);
 }

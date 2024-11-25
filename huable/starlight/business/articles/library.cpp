@@ -2,13 +2,13 @@
 #include "library.h"
 #include <string>
 #include <filesystem>
-#include "quantum/types/String.h"
+#include "galaxy/quantum/types/String.h"
 
-#include "quantum/types/Exception.h"
-#include "quantum/services/filesystem/filesystem.h"
-#include "quantum/services/logger/logger.h"
+#include "galaxy/quantum/types/Exception.h"
+#include "galaxy/quantum/services/filesystem/filesystem.h"
+#include "galaxy/quantum/services/logger/logger.h"
 #include "huable/starlight/services/yaml/yaml.h"
-#include "quantum/utils/md5.h"
+#include "galaxy/quantum/utils/md5.h"
 
 huable::starlight::LibraryServerBusiness::LibraryServerBusiness(const std::string& baseUrl)
 {

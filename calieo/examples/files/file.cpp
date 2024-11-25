@@ -5,7 +5,7 @@
 #include <quantum/services/logger/logger.h>
 
 #include "build.h"
-#include "quantum/services/filesystem/filesystem.h"
+#include "galaxy/quantum/services/filesystem/filesystem.h"
 
 int calieo::telescope::examples::TestSelectFiles()
 {

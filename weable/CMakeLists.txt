@@ -1,0 +1,18 @@
+set(WEABLE_NAME Weable CACHE INTERNAL "WEABLE_NAME")
+
+add_subdirectory(dawn)
+
+if (VCPKG_TARGET_TRIPLET STREQUAL "x64-windows")
+    #    add_subdirectory(windows)
+    #    add_subdirectory(linux)
+    add_subdirectory(server)
+elseif (VCPKG_TARGET_TRIPLET STREQUAL "arm64-osx")
+    #    add_subdirectory(macos)
+    #    add_subdirectory(linux)
+    add_subdirectory(server)
+elseif (EMSCRIPTEN)
+    #    add_subdirectory(web)
+elseif (LINUX)
+    #    add_subdirectory(linux)
+    add_subdirectory(server)
+endif ()

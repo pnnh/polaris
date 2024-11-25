@@ -8,7 +8,7 @@ int main(int argc, char* argv[])
 #endif
   spdlog::info("Server {}", "Started");
 
-  constexpr int PORT = 7501;
+  constexpr int PORT = 7001;
 
   return polaris::server::runServer(PORT);
 }

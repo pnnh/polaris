@@ -1,5 +1,5 @@
 #include <iostream>
-#include "quantum/services/database/SqliteService.h"
+#include "galaxy/quantum/services/database/SqliteService.h"
 #include "sqlite.h"
 
 int calieo::telescope::examples::sqlite::TestSqliteVersion()

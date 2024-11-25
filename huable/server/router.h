@@ -2,7 +2,7 @@
 
 #include <workflow/WFTaskFactory.h>
 
-namespace polaris::server
+namespace huable::server
 {
 	void route_request(WFHttpTask* httpTask);
 }

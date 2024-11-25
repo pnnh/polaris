@@ -1,39 +1,32 @@
 #include "router.h"
 #include <regex>
-#include "quantum/types/String.h"
-
+#include "galaxy/quantum/types/String.h"
 #include "controllers/article.h"
 #include "controllers/channel.h"
 #include "controllers/index.h"
 #include "controllers/sitemap.h"
-#include "controllers/filesystem/filesystem.h"
-
 
 void routeHandleGet(WFHttpTask* httpTask, const std::string& request_uri)
 {
 	if (request_uri == "/")
 	{
-		polaris::server::HandleIndex(httpTask);
+		huable::server::HandleIndex(httpTask);
 	}
 	else if (request_uri == "/server/sitemap")
 	{
-		polaris::server::HandleSitemap(httpTask);
+		huable::server::HandleSitemap(httpTask);
 	}
-	else if (request_uri == "/server/articles")
+	else if (quantum::PSString::StartsWith(request_uri, "/server/articles/get"))
 	{
-		polaris::server::HandleArticles(httpTask);
+		huable::server::HandleArticleGet(httpTask);
 	}
-	else if (request_uri == "/server/channels")
+	else if (quantum::PSString::StartsWith(request_uri, "/server/articles"))
 	{
-		polaris::server::HandleChannels(httpTask);
+		huable::server::HandleArticles(httpTask);
 	}
-	else if (quantum::PSString::StartsWith(request_uri, "/server/files"))
+	else if (quantum::PSString::StartsWith(request_uri, "/server/channels"))
 	{
-		polaris::server::HandleFileList(httpTask);
-	}
-	else if (request_uri == "/server/articles/get")
-	{
-		polaris::server::HandleArticleGet(httpTask);
+		huable::server::HandleChannels(httpTask);
 	}
 	else
 	{
@@ -42,7 +35,7 @@ void routeHandleGet(WFHttpTask* httpTask, const std::string& request_uri)
 	}
 }
 
-void polaris::server::route_request(WFHttpTask* httpTask)
+void huable::server::route_request(WFHttpTask* httpTask)
 {
 	protocol::HttpRequest* request = httpTask->get_req();
 	std::string request_uri = request->get_request_uri();

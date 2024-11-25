@@ -1,6 +1,8 @@
 #include "router.h"
+
+#include <iostream>
 #include <regex>
-#include "quantum/types/String.h"
+#include "galaxy/quantum/types/String.h"
 
 #include "controllers/article.h"
 #include "controllers/channel.h"
@@ -48,13 +50,23 @@ void polaris::server::route_request(WFHttpTask* httpTask)
 	std::string request_uri = request->get_request_uri();
 	std::string request_method = request->get_method();
 
-	if (request_method == "GET")
+	try
 	{
-		routeHandleGet(httpTask, request_uri);
+		if (request_method == "GET")
+		{
+			routeHandleGet(httpTask, request_uri);
+		}
+		else
+		{
+			protocol::HttpResponse* response = httpTask->get_resp();
+			response->set_status_code("404");
+		}
 	}
-	else
+	catch (const std::exception& exception)
 	{
+		std::cerr << "[" << request_method << " " << request_uri << "] server exception: " << exception.what() <<
+			std::endl;
 		protocol::HttpResponse* response = httpTask->get_resp();
-		response->set_status_code("404");
+		response->set_status_code("500");
 	}
 }

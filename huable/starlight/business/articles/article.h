@@ -12,7 +12,9 @@ namespace huable::starlight
     public:
         explicit ArticleServerBusiness(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<huable::starlight::PSArticleModel>> selectArticles() const;
+        [[nodiscard]] std::shared_ptr<std::vector<PSArticleModel>> selectArticles(const std::string& chanURN) const;
+        [[nodiscard]] std::shared_ptr<PSArticleModel> getArticle(const std::string& chanURN,
+                                                                 const std::string& noteURN) const;
 
     private:
         std::string baseUrl;
