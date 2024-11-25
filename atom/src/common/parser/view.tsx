@@ -8,8 +8,8 @@ import {
     SteleNode
 } from '@/common/models/stele'
 import {TocItem} from "@/common/models/toc";
-import {encodeBase64String} from "@pnnh/atom";
 import Prism, {Grammar} from "prismjs";
+import {encodeBase64String} from "@/common/utils/basex";
 
 export function buildNodeView(tocList: Array<TocItem>, node: SteleNode, assetsUrl: string): JSX.Element {
     if (!node) return <></>

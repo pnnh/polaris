@@ -10,8 +10,7 @@ import {
     Transforms
 } from 'slate'
 import {selectNodeLast} from '../helpers'
-import {css} from "@emotion/css";
-
+import './codeblock.scss'
 export const CodeBlockName = 'code-block'
 export const CodeName = 'code'
 
@@ -38,24 +37,10 @@ export function NewCodeBlockNode(language: string, text: string): SFCodeBlockNod
     return block
 }
 
-const styles = {
-    codeBlock: css`
-        background: #f6f6f6;
-        border-radius: 4px;
-        padding: 8px;
-        margin: 8px 0;
-        line-height: 24px;
-    `,
-    selectLanguage: css`
-        float: right;
-        position: relative;
-        top: 4px;
-    `
-}
 
 export function SFCodeBlockView(props: { attributes: any, children: any, node: SFCodeBlockNode }) {
 
-    return <pre data-name={CodeBlockName} className={styles.codeBlock}
+    return <pre data-name={CodeBlockName} className={'codeBlock'}
                 {...props.attributes}>
             <SelectLanguage element={props.node}/>
         {props.children}
@@ -110,7 +95,7 @@ export function SFCodeBlockToolbar(props: { node: SlateNode }) {
 function SelectLanguage(props: { element: SFCodeBlockNode }) {
     const editor = useSlate() as ReactEditor
     const [language, setLanguage] = useState<string>(props.element.language)
-    return <select name="select" value={language} className={styles.selectLanguage}
+    return <select name="select" value={language} className={'selectLanguage'}
                    onChange={(event) => {
                        console.debug('Select Language', editor, event)
                        if (event.target.value) {

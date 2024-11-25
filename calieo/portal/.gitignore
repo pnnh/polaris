@@ -1,9 +1,0 @@
-.idea/
-build/
-gen/
-__debug_bin*
-target/assets/
-go.work
-go.work.sum
-target/bin/
-debug/

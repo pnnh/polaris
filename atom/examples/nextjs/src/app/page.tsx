@@ -1,6 +1,6 @@
 import React from 'react'
-import {calcPagination} from "@pnnh/atom";
-import {PaginationServer} from "@pnnh/atom-react/server";
+import { calcPagination } from 'atom'
+import {PaginationServer} from "atom/server";
 
 export default function Page() {
 

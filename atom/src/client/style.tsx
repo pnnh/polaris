@@ -1,8 +1,9 @@
 import React from 'react'
-import {css} from "@emotion/react";
 
-const styleText = css`
-    .headerOne {
+export function ArticleStyle() {
+    return <style>
+        {`
+        .headerOne {
         margin: 0 0 1.3rem;
         font-weight: 600;
         color: red;
@@ -11,7 +12,7 @@ const styleText = css`
         padding-bottom: 12px;
     }
 
-    .headerTwo {
+        .headerTwo {
         margin: 0 0 1.3rem;
         font-weight: 600;
         color: #252933;
@@ -20,7 +21,7 @@ const styleText = css`
         padding-bottom: 12px;
     }
 
-    .headerThree {
+        .headerThree {
         margin: 0 0 1.3rem;
         font-weight: 600;
         color: #252933;
@@ -29,7 +30,7 @@ const styleText = css`
         padding-bottom: 12px;
     }
 
-    .headerFour {
+        .headerFour {
         margin: 0 0 1.3rem;
         font-weight: 600;
         color: #252933;
@@ -38,7 +39,7 @@ const styleText = css`
         padding-bottom: 12px;
     }
 
-    .headerFive {
+        .headerFive {
         margin: 0 0 1.3rem;
         font-weight: 600;
         color: #252933;
@@ -47,7 +48,7 @@ const styleText = css`
         padding-bottom: 12px;
     }
 
-    .headerSix {
+        .headerSix {
         margin: 0 0 1.3rem;
         font-weight: 600;
         color: #252933;
@@ -56,12 +57,12 @@ const styleText = css`
         padding-bottom: 12px;
     }
 
-    .codeblock {
+        .codeblock {
         font-size: 14px;
         line-height: 1.6;
     }
 
-    .codeblock pre {
+        .codeblock pre {
         margin: 1rem 0;
         background-color: #fafafa;
         padding: 8px;
@@ -70,7 +71,7 @@ const styleText = css`
         overflow: auto;
     }
 
-    .paragraph {
+        .paragraph {
         font-weight: 400;
         font-size: 15px;
         line-height: 1.8;
@@ -78,36 +79,30 @@ const styleText = css`
         margin: 1rem 0;
     }
 
-    .paragraph .link {
+        .paragraph .link {
         color: #3380df;
         text-decoration: none;
     }
 
-    .paragraph .strong {
+        .paragraph .strong {
         font-weight: 600;
     }
 
-    .paragraph .underline {
+        .paragraph .underline {
         text-decoration: underline;
     }
 
-    .paragraph .strikethrough {
+        .paragraph .strikethrough {
         text-decoration: line-through;
     }
 
-    .paragraph .italic {
+        .paragraph .italic {
         font-style: italic;
     }
 
-    .stImg {
+        .stImg {
         max-width: 100%;
     }
-`
-
-export function ArticleStyle() {
-    const rawStyle = styleText.styles;
-    const outputStyle = rawStyle.replace(/\n/g, '');
-    return <style>
-        {outputStyle}
+        `}
     </style>
 }

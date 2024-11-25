@@ -1,5 +1,8 @@
-import {FullPagination} from "@pnnh/atom";
+'use client'
+
+import React from 'react'
 import objToString from 'style-object-to-css-string'
+import {FullPagination} from "@/common/utils/pagination";
 
 const styles = {
     pageList: objToString({
@@ -43,7 +46,6 @@ function PaginationStyle() {
     `}</style>
 }
 
-// @deprecated 使用区分服务器和客户端的版本
 export function PaginationPartial(props: { pagination: FullPagination, calcUrl: (page: number) => string }) {
     const pagination = props.pagination
     return <div>

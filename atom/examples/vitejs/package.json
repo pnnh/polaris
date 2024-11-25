@@ -1,10 +1,11 @@
 {
-  "name": "@pnnh/stele",
+  "name": "vitejs",
   "version": "0.1.7",
   "description": "Loads themed styles.",
   "keywords": [
     "editor"
   ],
+  "private": true,
   "license": "AGPL",
   "type": "module",
   "main": "lib/index.js",
@@ -17,7 +18,7 @@
     "is-hotkey": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@pnnh/atom-react": "file:../.."
+    "atom": "file:../.."
   },
   "devDependencies": {
     "@types/estree": "^1.0.0",

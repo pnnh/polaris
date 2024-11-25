@@ -1,3 +1,5 @@
+'use client'
+
 import React, {ClipboardEvent, useCallback, useMemo, useState} from 'react'
 import {Editable, ReactEditor, RenderElementProps, RenderLeafProps, Slate, withReact} from 'slate-react'
 import {
@@ -37,53 +39,7 @@ import './highlight'
 import {parseDescendant, parseDescendantArray, parseElement, parseText, SFEditorModel, SFText} from './nodes/node'
 import {selectNodeLast} from './helpers'
 import {QuoteBlockName, SFQuoteBlockToolbar, SFQuoteBlockView} from './nodes/quote-block'
-import {css} from "@emotion/css";
-
-
-export const styles = {
-    steleEditor: css`
-        border: 1px solid #edebe9;
-        margin-bottom: 16px;
-        min-height: 400px;
-    `,
-    body: css`
-        margin-bottom: 16px;
-        overflow-x: hidden;
-        margin-top: 0;
-        padding: 16px;
-    `,
-    elementActive: css`
-        background-color: rgba(224, 241, 255, 0.3);
-    `,
-    actions: css`
-        display: flex;
-        justify-content: space-between;
-    `,
-    actionsInvisible: css`
-        display: flex;
-        justify-content: space-between;
-        visibility: hidden;
-    `,
-    left: css`
-        display: flex;
-    `,
-    extra: css`
-        display: inline-block;
-        margin-left: 8px;
-    `,
-    iconButton: css`
-        border: none;
-        background: none;
-        color: #0078d4;
-        padding: 4px;
-        cursor: pointer;
-
-        i {
-            font-size: 16px;
-            vertical-align: middle;
-        }
-    `
-}
+import './editor.scss'
 
 const StorageKey = 'editor-value'
 // 这里是单例的，一个页面只能有一个Editor
@@ -104,8 +60,8 @@ export function SFXEditor(props: { value: SFEditorModel, onChange: (value: SFEdi
                    props.onChange(editorValue)
                }}>
 
-            <div className={styles.steleEditor}>
-                <div className={styles.body}>
+            <div className={'stele-editor'}>
+                <div className={'body'}>
                     <Editable
                         decorate={decorate}
                         renderElement={renElement}
@@ -338,33 +294,33 @@ function Element({attributes, children, element}: { attributes: any, children: a
         view = <SFParagraphView attributes={attributes} node={element as SFParagraphNode}>{children}</SFParagraphView>
         actionsView = <SFParagraphActions node={element as SFParagraphNode}/>
     }
-    return <div className={isActive ? styles.elementActive : ''}
+    return <div className={isActive ? 'element-active' : ''}
                 onMouseEnter={() => setIsActive(true)}
                 onMouseLeave={() => setIsActive(false)}>
-        <div className={isActive ? styles.actions : styles.actionsInvisible} contentEditable={false}>
-            <div className={styles.left}>
+        <div className={isActive ? 'actions' : 'actions-invisible'} contentEditable={false}>
+            <div className={'left'}>
                 <SFParagraphToolbar disabled={false} node={element as SFParagraphNode}/>
                 <SFHeaderToolbar node={element}/>
                 <SFCodeBlockToolbar node={element}/>
                 <SFQuoteBlockToolbar node={element}/>
-                <div className={styles.extra}>
+                <div className={'extra'}>
                     {actionsView}
                 </div>
             </div>
             <div>
-                <button title='上移' className={styles.iconButton}
+                <button title='上移' className={'icon-button'}
                         onMouseDown={() => upOperation(element)} disabled={false}>
                     <i className="ri-arrow-up-line"></i></button>
-                <button title='下移' className={styles.iconButton}
+                <button title='下移' className={'icon-button'}
                         onMouseDown={() => downOperation(element)} disabled={false}>
                     <i className="ri-arrow-down-line"></i></button>
-                <button title='撤销' className={styles.iconButton}
+                <button title='撤销' className={'icon-button'}
                         onMouseDown={undoOperation} disabled={false}>
                     <i className="ri-arrow-go-back-line"></i></button>
-                <button title='重做' className={styles.iconButton}
+                <button title='重做' className={'icon-button'}
                         onMouseDown={redoOperation} disabled={false}>
                     <i className="ri-arrow-go-forward-line"></i></button>
-                <button title='移除块' className={styles.iconButton}
+                <button title='移除块' className={'icon-button'}
                         onMouseDown={() => removeNodes(element)} disabled={false}>
                     <i className="ri-close-line"></i>
                 </button>

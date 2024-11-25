@@ -1,10 +1,11 @@
 {
-  "name": "@pnnh/stele",
+  "name": "nextjs",
   "version": "0.1.7",
   "description": "Loads themed styles.",
   "keywords": [
     "editor"
   ],
+  "private": true,
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -12,8 +13,8 @@
   },
   "resolutions": {},
   "dependencies": {
-    "@pnnh/atom-react": "file:../..",
-    "next": "14.2.8",
+    "atom": "file:../..",
+    "next": "14.2.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

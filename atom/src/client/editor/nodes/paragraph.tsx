@@ -2,6 +2,7 @@ import React, {KeyboardEvent} from 'react'
 import {SFText} from './node'
 import {ReactEditor, useSlate} from 'slate-react'
 import {
+    BaseEditor,
     Editor,
     Element as SlateElement,
     Node as SlateNode,
@@ -11,12 +12,13 @@ import {
 import {NewTextNode, TextName} from './text'
 import isHotkey from 'is-hotkey'
 import {selectNodeLast} from '../helpers'
-import {css} from "@emotion/css";
+import './paragraph.scss'
+import {DOMEditor} from "slate-dom";
 
 export const ParagraphName = 'paragraph'
 
 export function SFParagraphToolbar(props: { disabled: boolean, node: SFParagraphNode }) {
-    const editor = useSlate() as ReactEditor
+    const editor = useSlate()
     const paragraph = NewParagraphNode('')
     const className = 'icon-button size-normal' + (isParagraphBlockActive(editor, isActive) ? ' active' : '')
 
@@ -27,7 +29,7 @@ export function SFParagraphToolbar(props: { disabled: boolean, node: SFParagraph
                     console.debug('SFParagraphToolbar onClick')
                     event.preventDefault()
 
-                    selectNodeLast(editor, props.node)
+                    selectNodeLast(editor as DOMEditor, props.node)
                     Transforms.insertNodes(
                         editor,
                         paragraph
@@ -67,37 +69,14 @@ function isActive(props: any): boolean {
     return node.name === 'paragraph'
 }
 
-const styleParagraph = css`
-    position: relative;
-
-    p {
-        margin-top: 0;
-        margin-bottom: 0;
-        padding: 4px 8px;
-    }
-
-    .show {
-        position: absolute;
-        top: -32px;
-        left: 40%;
-        overflow: hidden;
-        background-color: #fff;
-    }
-
-    .inline-code {
-        background-color: #edebe9;
-        padding: 0 4px;
-        border-radius: 2px;
-    }
-`
 
 export function SFParagraphView(props: { attributes: any, children: any, node: SFParagraphNode }) {
-    return <div className={styleParagraph}>
+    return <div className={'styleParagraph'}>
         <p data-name={ParagraphName} {...props.attributes}>{props.children}</p>
     </div>
 }
 
-export function ParagraphOnKeyDown(editor: ReactEditor, event: KeyboardEvent<HTMLParagraphElement>) {
+export function ParagraphOnKeyDown(editor: BaseEditor, event: KeyboardEvent<HTMLParagraphElement>) {
     if (isHotkey('mod+b', event)) {
         console.debug('加粗')
         Editor.addMark(editor, 'bold', true)
@@ -113,13 +92,13 @@ export function ParagraphOnKeyDown(editor: ReactEditor, event: KeyboardEvent<HTM
     }
 }
 
-function useClearFormats(editor: ReactEditor, node: SFParagraphNode) {
+function useClearFormats(editor: BaseEditor, node: SFParagraphNode) {
     let text = ''
     for (const i in node.children) {
         text += (node.children[i] as { text: string }).text
     }
     return () => {
-        const nodePath = ReactEditor.findPath(editor, node)
+        const nodePath = ReactEditor.findPath(editor as DOMEditor, node)
         Transforms.select(editor, nodePath)
         console.debug('useClearFormats', text)
         const paragraph = NewParagraphNode(text)
@@ -128,7 +107,7 @@ function useClearFormats(editor: ReactEditor, node: SFParagraphNode) {
     }
 }
 
-export function isParagraphBlockActive(editor: ReactEditor, isActive: (node: any) => boolean): boolean {
+export function isParagraphBlockActive(editor: BaseEditor, isActive: (node: any) => boolean): boolean {
     const [match] = Editor.nodes(editor, {
         match: (n: SlateNode) => {
             return !Editor.isEditor(n) && SlateElement.isElement(n) && isActive(n)
@@ -137,13 +116,13 @@ export function isParagraphBlockActive(editor: ReactEditor, isActive: (node: any
     return !!match
 }
 
-function calcSelection(editor: ReactEditor, node: SlateNode) {
+function calcSelection(editor: BaseEditor, node: SlateNode) {
     const selection = editor.selection
     console.debug('toggleMark-selection', selection)
     const [firstNode, firstPath] = SlateNode.first(node, [])
     const [lastNode, lastPath] = SlateNode.last(node, [])
     console.debug('toggleMark-first', firstNode, firstPath, lastNode, lastPath)
-    const nodePath = ReactEditor.findPath(editor, node)
+    const nodePath = ReactEditor.findPath(editor as DOMEditor, node)
     console.debug('toggleMark-nodePath', nodePath)
     if (selection) {
         const parent1 = SlateNode.parent(editor, selection.anchor.path)
@@ -167,8 +146,8 @@ function calcSelection(editor: ReactEditor, node: SlateNode) {
 }
 
 function SFIcon(props: { iconName: string, format: string, node: SFParagraphNode }) {
-    const editor = useSlate() as ReactEditor
-    const isMarkActive = (editor: ReactEditor, isActive: (node: any) => boolean): boolean => {
+    const editor = useSlate()
+    const isMarkActive = (editor: BaseEditor, isActive: (node: any) => boolean): boolean => {
         const marks = Editor.marks(editor) as any
         if (!marks) {
             return false

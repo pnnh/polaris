@@ -1,5 +1,7 @@
 import './page.css'
-import {ARButtonFilled, ARButtonText} from "@pnnh/atom-react";
+import React from "react";
+import {ARButtonFilled} from "atom";
+import {ARButtonText} from "atom";
 
 export default function Page() {
     return <div className={'pageContainer'}>

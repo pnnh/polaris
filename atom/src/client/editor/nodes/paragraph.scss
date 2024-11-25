@@ -1,0 +1,23 @@
+.style-paragraph {
+  position: relative;
+
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 4px 8px;
+  }
+
+  .show {
+    position: absolute;
+    top: -32px;
+    left: 40%;
+    overflow: hidden;
+    background-color: #fff;
+  }
+
+  .inline-code {
+    background-color: #edebe9;
+    padding: 0 4px;
+    border-radius: 2px;
+  }
+}

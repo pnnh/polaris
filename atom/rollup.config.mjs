@@ -1,16 +1,16 @@
 import commonjs from '@rollup/plugin-commonjs'
-import {nodeResolve} from '@rollup/plugin-node-resolve' 
+import {nodeResolve} from '@rollup/plugin-node-resolve'
 import strip from '@rollup/plugin-strip'
 import typescript from '@rollup/plugin-typescript'
-import dts from 'rollup-plugin-dts'
 import del from 'rollup-plugin-delete'
 import json from '@rollup/plugin-json'
-import sass from 'rollup-plugin-sass'; 
+import sass from 'rollup-plugin-sass';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import replace from '@rollup/plugin-replace'
 import preserveDirectives from 'rollup-preserve-directives'
 import pkg from './package.json' with {type: 'json'}
+import alias from "@rollup/plugin-alias";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,6 +18,11 @@ const __dirname = path.dirname(__filename);
 
 const commonPlugins = [
     commonjs(),
+    alias({
+        entries: [
+            {find: '@', replacement: path.resolve(__dirname, 'src')},
+        ]
+    }),
     nodeResolve({
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
         moduleDirectories: ['node_modules', 'src'],
@@ -32,7 +37,6 @@ const commonPlugins = [
         '__PACKAGE_NAME__': pkg.name
     }),
     typescript({
-        tsconfig: 'tsconfig.json',
         sourceMap: true,
     }),
     preserveDirectives(),
@@ -44,6 +48,9 @@ const commonPlugins = [
     }),
     sass({
         output: 'lib/assets/index.css',
+        options: {
+            silenceDeprecations: ["legacy-js-api"],
+        }
     })
 ]
 const commonExternal = [
@@ -74,14 +81,6 @@ let commonConfig = [{
         },
         external: commonExternal,
         plugins: commonPlugins
-    },
-    {
-        input: 'lib/dts/index.common.d.ts',
-        output: [{file: 'lib/index.common.d.ts'}],
-        external: [/\.(css|scss)$/],
-        plugins: [
-            dts()
-        ]
     }
 ]
 
@@ -105,15 +104,7 @@ const serverConfig = [{
     },
     external: commonExternal,
     plugins: commonPlugins
-},
-    {
-        input: 'lib/dts/index.server.d.ts',
-        output: [{file: 'lib/index.server.d.ts'}],
-        external: [/\.(css|scss)$/],
-        plugins: [
-            dts()
-        ]
-    }
+}
 ]
 
 const clientConfig = [{
@@ -136,15 +127,7 @@ const clientConfig = [{
     },
     external: commonExternal,
     plugins: commonPlugins
-},
-    {
-        input: 'lib/dts/index.client.d.ts',
-        output: [{file: 'lib/index.client.d.ts'}],
-        external: [/\.(css|scss)$/],
-        plugins: [
-            dts()
-        ]
-    }
+}
 ]
 
 const exportConfig = commonConfig.concat(serverConfig).concat(clientConfig)
