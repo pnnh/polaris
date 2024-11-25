@@ -1,9 +1,7 @@
 #pragma once
 
-#include <iostream>
-#include <map>
-#include <sqlite3.h>
-#include <string>
+// #include <iostream>
+//#include <string>
 #include <vector>
 #include "galaxy/quantum/services/database/SqliteRow.h"
 
@@ -18,7 +16,7 @@ namespace quantum
 
         void appendRow(const SqliteRow&& row);
         std::optional<SqliteRow> getRow(int index);
-        unsigned int getRowCount() const;
+        [[nodiscard]] unsigned int getRowCount() const;
         std::optional<SqliteColumn> getColumn(int rowIndex, int colIndex);
         std::optional<SqliteColumn> getColumn(int rowIndex, const char* colName);
         std::optional<SqliteColumn> getColumn(int rowIndex, const std::string& colName);

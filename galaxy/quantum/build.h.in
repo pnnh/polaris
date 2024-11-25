@@ -3,4 +3,5 @@
 #else
 // debug
 #define PROJECT_SOURCE_DIR "@PROJECT_SOURCE_DIR@"
+#define PROJECT_BINARY_DIR "@PROJECT_BINARY_DIR@"
 #endif

@@ -2,135 +2,66 @@
 #include "SqliteService.h"
 #include <sqlite3.h>
 
-quantum::SqliteService::SqliteService() : dbHandles()
+quantum::SqliteService::SqliteService(): sqlite3Database(nullptr)
 {
 }
 
-quantum::SqliteService::~SqliteService()
-{
-    for (auto& [handle, db] : dbHandles)
-    {
-        if (db == nullptr) continue;
-        sqlite3_close(db);
-    }
-}
-
-quantum::SqliteHandle quantum::SqliteService::openDatabase(const char* path)
-{
-    return openDatabase(std::string(path));
-}
-
-quantum::SqliteHandle quantum::SqliteService::openDatabase(std::string&& path)
+quantum::SqliteService::SqliteService(const std::string& path)
 {
     sqlite3* db;
-    char* zErrMsg = nullptr;
-
     auto cPath = path.c_str();
     int rc = sqlite3_open(cPath, &db);
     if (rc) throw quantum::PSException("Can't open database", sqlite3_errmsg(db));
 
-    const SqliteHandle handle = dbHandles.size();
-
-    dbHandles[handle] = db;
-
-    return handle;
+    this->sqlite3Database = db;
 }
 
-quantum::QuantumEnum quantum::SqliteService::closeDatabase(quantum::SqliteHandle dbHandle)
+quantum::SqliteService::~SqliteService()
 {
-    auto db = dbHandles[dbHandle];
-    if (db == nullptr) throw quantum::PSException("Database handle not found");
-    auto rc = sqlite3_close(db);
-    if (rc) throw PSException("Can't close database", sqlite3_errmsg(db));
-    return QuantumEnum::OK;
+    auto rc = sqlite3_close(this->sqlite3Database);
+    if (rc)
+    {
+        std::cerr << "Can't close database: " << rc << " " << sqlite3_errmsg(this->sqlite3Database) << std::endl;
+    }
 }
 
-quantum::SqliteResult quantum::SqliteService::runSql(SqliteHandle dbHandle, std::string& text)
+quantum::SqliteResult quantum::SqliteService::runSql(const std::string& sqlText)
 {
-    return runSql(dbHandle, std::move(text));
+    auto command = createCommand(sqlText);
+    auto runResult = command->Run();
+    if (runResult == nullptr) throw PSException("Can't run sql command");
+    return *runResult;
 }
 
-std::string quantum::SqliteService::sqliteVersion(SqliteHandle dbHandle)
+quantum::SqliteResult quantum::SqliteService::runSql(const std::string&& text)
 {
-    auto sqlResult = runSql(dbHandle, "SELECT sqlite_version() as version;");
+    return runSql(text);
+}
+
+std::shared_ptr<quantum::SqliteCommand> quantum::SqliteService::createCommand(const std::string& sqlText)
+{
+    sqlite3_stmt* stmt;
+    auto rc = sqlite3_prepare_v2(this->sqlite3Database, sqlText.c_str(), static_cast<int>(sqlText.length() + 1),
+                                 &stmt, nullptr);
+    if (rc) throw PSException("Can't prepare statement", sqlite3_errmsg(this->sqlite3Database));
+
+    return std::make_shared<SqliteCommand>(this->sqlite3Database, stmt, sqlText);
+}
+
+void quantum::SqliteService::runSqlBatch(const std::vector<std::string>& sqlTextVector)
+{
+    for (const auto& sqlText : sqlTextVector)
+    {
+        runSql(sqlText);
+    }
+}
+
+std::string quantum::SqliteService::sqliteVersion()
+{
+    auto sqlResult = runSql("SELECT sqlite_version() as version;");
     auto verColumn = sqlResult.getColumn(0, 0);
     if (!verColumn.has_value()) throw PSException("Can't get sqlite version");
 
     return verColumn.value().getStringValue();
-}
-
-quantum::SqliteResult quantum::SqliteService::runSql(SqliteHandle dbHandle,
-                                                     std::string&& sqlText)
-{
-    auto db = dbHandles[dbHandle];
-    if (db == nullptr) throw PSException("Database handle not found");
-
-    sqlite3_stmt* stmt;
-    int row = 0;
-
-    auto rc = sqlite3_prepare_v2(db, sqlText.c_str(), static_cast<int>(sqlText.length() + 1), &stmt, nullptr);
-    if (rc) throw PSException("Can't prepare statement", sqlite3_errmsg(db));
-
-    SqliteResult sqlResult;
-    while (true)
-    {
-        int step = sqlite3_step(stmt);
-        if (step == SQLITE_ROW)
-        {
-            SqliteRow sqlRow;
-            // int bytes;
-            // const unsigned char* text;
-            auto count = sqlite3_column_count(stmt);
-            for (int colIndex = 0; colIndex < count; ++colIndex)
-            {
-                //bytes = sqlite3_column_bytes(stmt, 0);
-                auto colType = sqlite3_column_type(stmt, colIndex);
-                auto colName = sqlite3_column_name(stmt, colIndex);
-
-                // auto colNameString = std::string(reinterpret_cast<const char*>(colName));
-                auto sqlColumn = SqliteColumn(colType, colIndex, colName);
-
-                switch (colType)
-                {
-                case SQLITE_TEXT:
-                    {
-                        auto colText = sqlite3_column_text(stmt, colIndex);
-                        auto colTextString = std::string(reinterpret_cast<const char*>(colText));
-                        sqlColumn.setStringValue(std::move(colTextString));
-                        break;
-                    }
-                case SQLITE_INTEGER:
-                    {
-                        sqlColumn.setIntValue(sqlite3_column_int(stmt, colIndex));
-                        break;
-                    }
-                case SQLITE_FLOAT:
-                    {
-                        sqlColumn.setFloatValue(sqlite3_column_double(stmt, colIndex));
-                        break;
-                    }
-                case SQLITE_NULL:
-                    {
-                        sqlColumn.setNull();
-                        break;
-                    }
-                default: { break; }
-                }
-
-                sqlRow.appendColumn(std::move(sqlColumn));
-            }
-            sqlResult.appendRow(std::move(sqlRow));
-            row++;
-        }
-        else if (step == SQLITE_DONE)
-        {
-            break;
-        }
-        else
-        {
-            throw PSException("Can't step statement", sqlite3_errmsg(db));
-        }
-    }
-    return sqlResult;
 }
 

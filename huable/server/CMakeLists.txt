@@ -6,7 +6,8 @@ add_executable(${EXE_NAME})
 file(GLOB_RECURSE EXE_SOURCES
         controllers/*.cpp
         services/*.cpp
-        models/*.cpp)
+        models/*.cpp
+        syncer/*.cpp)
 
 target_sources(${EXE_NAME}
         PUBLIC
