@@ -1,17 +1,17 @@
 #pragma once
 #include <vector>
 
-#include "calieo/telescope/models/files/File.h"
+#include "huable/starlight/models/files/File.h"
 
-namespace calieo::telescope
+namespace huable::starlight
 {
     class FileServerBusiness
     {
     public:
         explicit FileServerBusiness(const std::string &baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<calieo::telescope::PSFileModel>> selectFiles() const;
-        [[nodiscard]] std::shared_ptr<std::vector<calieo::telescope::PSFileModel>> selectFiles(std::string parentPath) const;
+        [[nodiscard]] std::shared_ptr<std::vector<huable::starlight::PSFileModel>> selectFiles() const;
+        [[nodiscard]] std::shared_ptr<std::vector<huable::starlight::PSFileModel>> selectFiles(std::string parentPath) const;
 
     private:
         std::string baseUrl;
@@ -24,6 +24,6 @@ namespace calieo::telescope
 
         ~FileClientBusiness();
 
-        std::shared_ptr<std::vector<calieo::telescope::PSFileModel>> selectFiles();
+        std::shared_ptr<std::vector<huable::starlight::PSFileModel>> selectFiles();
     };
 }

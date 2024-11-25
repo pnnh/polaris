@@ -3,7 +3,7 @@
 #include <string>
 #include <stdint.h>
 
-namespace calieo::telescope
+namespace huable::starlight
 {
     class CommonResult {
     public:

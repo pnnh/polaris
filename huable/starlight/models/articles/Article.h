@@ -3,7 +3,7 @@
 #include <string>
 #include <chrono>
 
-namespace calieo::telescope
+namespace huable::starlight
 {
     class PSArticleModel
     {

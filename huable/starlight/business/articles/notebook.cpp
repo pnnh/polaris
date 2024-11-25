@@ -3,19 +3,19 @@
 #include <string>
 #include <filesystem>
 #include "quantum/services/filesystem/filesystem.h"
-#include "calieo/telescope/services/yaml/yaml.h"
+#include "huable/starlight/services/yaml/yaml.h"
 #include "quantum/utils/md5.h"
 #include "quantum/types/String.h"
 
-calieo::telescope::NotebookServerBusiness::NotebookServerBusiness(const std::string& baseUrl)
+huable::starlight::NotebookServerBusiness::NotebookServerBusiness(const std::string& baseUrl)
 {
     this->baseUrl = baseUrl;
 }
 
-std::shared_ptr<std::vector<calieo::telescope::PSNotebookModel>>
-calieo::telescope::NotebookServerBusiness::selectNotebooks() const
+std::shared_ptr<std::vector<huable::starlight::PSNotebookModel>>
+huable::starlight::NotebookServerBusiness::selectNotebooks() const
 {
-    auto libraries = std::make_shared<std::vector<calieo::telescope::PSNotebookModel>>();
+    auto libraries = std::make_shared<std::vector<huable::starlight::PSNotebookModel>>();
 
     for (const auto& entry : std::filesystem::directory_iterator(this->baseUrl))
     {
@@ -29,7 +29,7 @@ calieo::telescope::NotebookServerBusiness::selectNotebooks() const
         {
             continue;
         }
-        auto notebookModel = calieo::telescope::PSNotebookModel(dirName);
+        auto notebookModel = huable::starlight::PSNotebookModel(dirName);
         auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
         if (quantum::IsFileExist(metadataFilePath))
         {
@@ -49,7 +49,7 @@ calieo::telescope::NotebookServerBusiness::selectNotebooks() const
     return libraries;
 }
 
-bool calieo::telescope::isNotebookDirectory(const std::string& directoryName)
+bool huable::starlight::isNotebookDirectory(const std::string& directoryName)
 {
     return quantum::PSString::EndsWith(directoryName, ".notebook");
 }

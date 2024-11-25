@@ -1,4 +1,4 @@
-#include "calieo/server/controllers/article.h"
+#include "huable/server/controllers/article.h"
 #include <boost/range/algorithm.hpp>
 #include <boost/url.hpp>
 #include <boost/uuid/uuid_io.hpp>
@@ -8,7 +8,7 @@
 
 #include "quantum/utils/query.h"
 
-#include "calieo/telescope/business/articles/article.h"
+#include "huable/starlight/business/articles/article.h"
 
 #include <build.h>
 
@@ -225,7 +225,7 @@ void polaris::server::HandleArticles(WFHttpTask* httpTask)
   const std::string baseUrl = quantum::JoinFilePath({
     PROJECT_SOURCE_DIR, "assets", "data", "CPlus.notelibrary", "CMake笔记本.notebook"
   });
-  auto articleServer = std::make_shared<calieo::telescope::ArticleServerBusiness>(baseUrl);
+  auto articleServer = std::make_shared<huable::starlight::ArticleServerBusiness>(baseUrl);
   auto articlePtr = articleServer->selectArticles();
   json range = json::array();
   for (const auto& model : *articlePtr)

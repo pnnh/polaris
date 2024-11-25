@@ -1,9 +1,9 @@
 #pragma once
 
 #include <vector>
-#include "calieo/telescope/models/articles/Notebook.h"
+#include "huable/starlight/models/articles/Notebook.h"
 
-namespace calieo::telescope
+namespace huable::starlight
 {
     bool isNotebookDirectory(const std::string& directoryName);
 
@@ -12,7 +12,7 @@ namespace calieo::telescope
     public:
         explicit NotebookServerBusiness(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<calieo::telescope::PSNotebookModel>> selectNotebooks() const;
+        [[nodiscard]] std::shared_ptr<std::vector<huable::starlight::PSNotebookModel>> selectNotebooks() const;
 
     private:
         std::string baseUrl;

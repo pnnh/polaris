@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
 
-#include "calieo/telescope/models/articles/Channel.h"
+#include "huable/starlight/models/articles/Channel.h"
 
-namespace calieo::telescope
+namespace huable::starlight
 {
     bool isChannelDirectory(const std::string& directoryName);
 
@@ -12,7 +12,7 @@ namespace calieo::telescope
     public:
         explicit ChannelServerBusiness(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<calieo::telescope::PSChannelModel>> selectChannels() const;
+        [[nodiscard]] std::shared_ptr<std::vector<huable::starlight::PSChannelModel>> selectChannels() const;
 
     private:
         std::string baseUrl;
@@ -25,7 +25,7 @@ namespace calieo::telescope
 
         ~ChannelClientBusiness();
 
-        std::shared_ptr<std::vector<calieo::telescope::PSChannelModel>> selectChannels();
+        std::shared_ptr<std::vector<huable::starlight::PSChannelModel>> selectChannels();
     };
 }
 

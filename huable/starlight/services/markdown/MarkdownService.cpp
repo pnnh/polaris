@@ -1,7 +1,7 @@
 #include "MarkdownService.h"
 #include "cmark.h"
 
-std::string calieo::telescope::markdownToHtml(const std::string& markdownText)
+std::string huable::starlight::markdownToHtml(const std::string& markdownText)
 {
   const auto data = markdownText.c_str();
   const char* md = data;

@@ -1,9 +1,9 @@
 #pragma once
 
 #include <vector>
-#include "calieo/telescope/models/articles/Article.h"
+#include "huable/starlight/models/articles/Article.h"
 
-namespace calieo::telescope
+namespace huable::starlight
 {
     bool isArticleDirectory(const std::string& directoryName);
 
@@ -12,7 +12,7 @@ namespace calieo::telescope
     public:
         explicit ArticleServerBusiness(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<calieo::telescope::PSArticleModel>> selectArticles() const;
+        [[nodiscard]] std::shared_ptr<std::vector<huable::starlight::PSArticleModel>> selectArticles() const;
 
     private:
         std::string baseUrl;

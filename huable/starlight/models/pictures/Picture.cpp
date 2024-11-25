@@ -1,3 +1,3 @@
 #include "Picture.h"
 
-calieo::telescope::PSPictureModel::PSPictureModel() = default;
+huable::starlight::PSPictureModel::PSPictureModel() = default;

@@ -4,19 +4,19 @@
 #include <filesystem>
 #include "quantum/types/Exception.h"
 #include "quantum/services/filesystem/filesystem.h"
-#include "calieo/telescope/services/yaml/yaml.h"
+#include "huable/starlight/services/yaml/yaml.h"
 #include "quantum/utils/md5.h"
 #include "quantum/types//String.h"
 
-calieo::telescope::ChannelServerBusiness::ChannelServerBusiness(const std::string& baseUrl)
+huable::starlight::ChannelServerBusiness::ChannelServerBusiness(const std::string& baseUrl)
 {
     this->baseUrl = baseUrl;
 }
 
-std::shared_ptr<std::vector<calieo::telescope::PSChannelModel>>
-calieo::telescope::ChannelServerBusiness::selectChannels() const
+std::shared_ptr<std::vector<huable::starlight::PSChannelModel>>
+huable::starlight::ChannelServerBusiness::selectChannels() const
 {
-    auto channels = std::make_shared<std::vector<calieo::telescope::PSChannelModel>>();
+    auto channels = std::make_shared<std::vector<huable::starlight::PSChannelModel>>();
 
     for (const auto& entry : std::filesystem::directory_iterator(this->baseUrl))
     {
@@ -30,7 +30,7 @@ calieo::telescope::ChannelServerBusiness::selectChannels() const
         {
             continue;
         }
-        auto channelModel = calieo::telescope::PSChannelModel(dirName);
+        auto channelModel = huable::starlight::PSChannelModel(dirName);
         auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
         if (quantum::IsFileExist(metadataFilePath))
         {
@@ -50,7 +50,7 @@ calieo::telescope::ChannelServerBusiness::selectChannels() const
     return channels;
 }
 
-bool calieo::telescope::isChannelDirectory(const std::string& directoryName)
+bool huable::starlight::isChannelDirectory(const std::string& directoryName)
 {
     return quantum::PSString::EndsWith(directoryName, ".chan") ||
         quantum::PSString::EndsWith(directoryName, ".channel") || quantum::PSString::EndsWith(

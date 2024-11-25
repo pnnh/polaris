@@ -1,9 +1,9 @@
 
 #include "Notebook.h"
 
-calieo::telescope::PSNotebookModel::PSNotebookModel() = default;
+huable::starlight::PSNotebookModel::PSNotebookModel() = default;
 
-calieo::telescope::PSNotebookModel::PSNotebookModel(const std::string& title): Title(title)
+huable::starlight::PSNotebookModel::PSNotebookModel(const std::string& title): Title(title)
 {
 }
 

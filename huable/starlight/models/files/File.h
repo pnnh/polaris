@@ -3,7 +3,7 @@
 #include <chrono>
 #include "quantum/types/datetime.h"
 
-namespace calieo::telescope
+namespace huable::starlight
 {
     class PSFileModel
     {

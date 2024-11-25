@@ -1,8 +1,8 @@
 #include "Article.h"
 
-calieo::telescope::PSArticleModel::PSArticleModel() = default;
+huable::starlight::PSArticleModel::PSArticleModel() = default;
 
-calieo::telescope::PSArticleModel::PSArticleModel(const std::string& title): Title(title)
+huable::starlight::PSArticleModel::PSArticleModel(const std::string& title): Title(title)
 {
 }
 

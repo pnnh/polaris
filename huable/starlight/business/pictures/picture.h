@@ -1,6 +1,6 @@
 #pragma once
 
-namespace calieo::telescope
+namespace huable::starlight
 {
     class article {
 

@@ -7,18 +7,18 @@
 #include "quantum/types/Exception.h"
 #include "quantum/services/filesystem/filesystem.h"
 #include "quantum/services/logger/logger.h"
-#include "calieo/telescope/services/yaml/yaml.h"
+#include "huable/starlight/services/yaml/yaml.h"
 #include "quantum/utils/md5.h"
 
-calieo::telescope::LibraryServerBusiness::LibraryServerBusiness(const std::string& baseUrl)
+huable::starlight::LibraryServerBusiness::LibraryServerBusiness(const std::string& baseUrl)
 {
     this->baseUrl = baseUrl;
 }
 
-std::shared_ptr<std::vector<calieo::telescope::PSLibraryModel>>
-calieo::telescope::LibraryServerBusiness::selectLibraries() const
+std::shared_ptr<std::vector<huable::starlight::PSLibraryModel>>
+huable::starlight::LibraryServerBusiness::selectLibraries() const
 {
-    auto libraries = std::make_shared<std::vector<calieo::telescope::PSLibraryModel>>();
+    auto libraries = std::make_shared<std::vector<huable::starlight::PSLibraryModel>>();
 
     for (const auto& entry : std::filesystem::directory_iterator(this->baseUrl))
     {
@@ -32,7 +32,7 @@ calieo::telescope::LibraryServerBusiness::selectLibraries() const
         {
             continue;
         }
-        auto libraryModel = calieo::telescope::PSLibraryModel(dirName);
+        auto libraryModel = huable::starlight::PSLibraryModel(dirName);
         auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
         if (quantum::IsFileExist(metadataFilePath))
         {
@@ -52,7 +52,7 @@ calieo::telescope::LibraryServerBusiness::selectLibraries() const
     return libraries;
 }
 
-bool calieo::telescope::isLibraryDirectory(const std::string& directoryName)
+bool huable::starlight::isLibraryDirectory(const std::string& directoryName)
 {
     return quantum::PSString::EndsWith(directoryName, ".notelibrary");
 }

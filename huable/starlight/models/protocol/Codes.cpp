@@ -1,13 +1,13 @@
 
 #include "Codes.h"
 
-const char* calieo::telescope::CodeMessage(int code)
+const char* huable::starlight::CodeMessage(int code)
 {
   switch (code)
   {
-  case calieo::telescope::Codes::Ok:
+  case huable::starlight::Codes::Ok:
     return "Ok";
-  case calieo::telescope::Codes::Error:
+  case huable::starlight::Codes::Error:
     return "Error";
   default:
     return "Unknown";

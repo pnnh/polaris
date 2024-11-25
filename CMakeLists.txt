@@ -39,3 +39,4 @@ endif ()
 
 add_subdirectory(quantum)
 add_subdirectory(calieo)
+add_subdirectory(huable)

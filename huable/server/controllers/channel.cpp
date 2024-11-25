@@ -1,11 +1,11 @@
-#include "calieo/server/controllers/channel.h"
+#include "huable/server/controllers/channel.h"
 #include <boost/range/algorithm.hpp>
 #include <boost/url.hpp>
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
 #include "build.h"
 #include <workflow/HttpMessage.h>
-#include "calieo/telescope/business/articles/channel.h"
+#include "huable/starlight/business/articles/channel.h"
 #include "quantum/services/filesystem/filesystem.h"
 #include "quantum/services/logger/logger.h"
 
@@ -52,7 +52,7 @@ void polaris::server::HandleChannels(WFHttpTask* httpTask)
 
     std::ostringstream oss;
     const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "assets", "data"});
-    auto channelServer = std::make_shared<calieo::telescope::ChannelServerBusiness>(baseUrl);
+    auto channelServer = std::make_shared<huable::starlight::ChannelServerBusiness>(baseUrl);
     auto channelsPtr = channelServer->selectChannels();
     json range = json::array();
     for (const auto& model : *channelsPtr)

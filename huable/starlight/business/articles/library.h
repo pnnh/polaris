@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
-#include "calieo/telescope/models/articles/Library.h"
+#include "huable/starlight/models/articles/Library.h"
 
-namespace calieo::telescope
+namespace huable::starlight
 {
     bool isLibraryDirectory(const std::string& directoryName);
 
@@ -11,7 +11,7 @@ namespace calieo::telescope
     public:
         explicit LibraryServerBusiness(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<calieo::telescope::PSLibraryModel>> selectLibraries() const;
+        [[nodiscard]] std::shared_ptr<std::vector<huable::starlight::PSLibraryModel>> selectLibraries() const;
 
     private:
         std::string baseUrl;
