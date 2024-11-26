@@ -40,3 +40,7 @@ node_modules/
 
 # Rust
 target/
+
+# Swift
+.swiftpm/
+.build/

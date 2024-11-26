@@ -4,12 +4,10 @@ import PackageDescription
 let package = Package(
     name: "rudder",
     platforms: [
-       .macOS(.v13)
+       .macOS(.v14)
     ],
     dependencies: [
-        // 💧 A server-side Swift web framework.
         .package(url: "https://github.com/vapor/vapor.git", from: "4.99.3"),
-        // 🔵 Non-blocking, event-driven networking for Swift. Used for custom executors
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
     ],
     targets: [
@@ -19,22 +17,18 @@ let package = Package(
                 .product(name: "Vapor", package: "vapor"),
                 .product(name: "NIOCore", package: "swift-nio"),
                 .product(name: "NIOPosix", package: "swift-nio"),
+                "cpplib"
             ],
+            path: "huable/rudder",
             swiftSettings: swiftSettings
         ),
-        .testTarget(
-            name: "AppTests",
-            dependencies: [
-                .target(name: "App"),
-                .product(name: "XCTVapor", package: "vapor"),
-            ],
-            swiftSettings: swiftSettings
-        )
+        .target(name: "cpplib", dependencies: [], path: "huable/cpplib"),
     ],
-    swiftLanguageModes: [.v5]
+    swiftLanguageModes: [.v6],
+    cLanguageStandard: .c17,
+    cxxLanguageStandard: .cxx20
 )
 
 var swiftSettings: [SwiftSetting] { [
-    .enableUpcomingFeature("DisableOutwardActorInference"),
     .enableExperimentalFeature("StrictConcurrency"),
 ] }
