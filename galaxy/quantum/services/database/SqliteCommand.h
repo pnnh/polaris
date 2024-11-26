@@ -12,6 +12,7 @@ namespace quantum
         explicit SqliteCommand(sqlite3* sqlite3Database, sqlite3_stmt* stmt, std::string sqlText);
         ~SqliteCommand();
 
+        void ChangeSqlText(const std::string& text);
         void BindInt(const std::string& name, int value);
         void BindString(const std::string& name, const std::string& value);
 

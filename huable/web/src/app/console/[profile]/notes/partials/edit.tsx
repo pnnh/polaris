@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import './edit.scss'
-import {NoteModel} from "polaris-business";
+import {NoteModel} from "@/models/personal/note";
 
 export function MarkdownEditorForm(props: { model: NoteModel, onSubmit?: (model: NoteModel) => void }) {
     const model = props.model

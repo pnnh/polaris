@@ -1,8 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import {PSImageServer} from 'atom/server'
-import {PLSelectResult} from 'polaris-business'
-import {PSChannelModel} from "polaris-business"
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import {HtmlLayout} from "@/components/server/layout";
 import ContentLayout from "@/components/server/content/layout";
@@ -10,6 +8,8 @@ import {Metadata} from "next";
 import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
 import './page.scss'
+import {PLSelectResult} from "@/models/common-result";
+import {PSChannelModel} from "@/models/channel";
 
 export default async function Page({params, searchParams}: {
     params: { viewer: string },

@@ -2,9 +2,10 @@ import {useEffect, useState} from 'react'
 import {useRecoilValue, useSetRecoilState} from 'recoil'
 import {libraryAtom, noteAtom, notebookAtom} from './providers/notebook'
 import React from 'react'
-import {PSNoteModel, PLSelectResult} from 'polaris-business'
-import {selectNotes} from "@/services/client/personal/notes";
 import './notebar.scss'
+import {PLSelectResult} from "@/models/common-result";
+import {PSNoteModel} from "@/models/personal/note";
+import {selectNotes} from "@/services/client/console/personal/notes";
 
 export function ConsoleNotebar() {
     const [notesResult, setNotesResult] = useState<PLSelectResult<PSNoteModel>>()

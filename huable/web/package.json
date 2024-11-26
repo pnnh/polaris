@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@next/third-parties": "^14.2.5",
-    "atom": "file:../../atom",
+    "atom": "file:../../galaxy/atom",
     "@scure/base": "^1.1.7",
     "base64url": "^3.0.1",
     "globals": "^15.8.0",

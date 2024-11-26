@@ -42,6 +42,7 @@ huable::starlight::ChannelServerBusiness::selectChannels() const
             channelModel.Description = yamlHandler.getString("metadata.description").value_or("");
             channelModel.Image = yamlHandler.getString("metadata.image").value_or("");
         }
+        channelModel.Path = entry.path().string();
         if (channelModel.URN.empty())
         {
             channelModel.URN = quantum::calcMd5(entry.path().string());

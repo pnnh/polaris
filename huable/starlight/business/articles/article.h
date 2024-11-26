@@ -7,16 +7,30 @@ namespace huable::starlight
 {
     bool isArticleDirectory(const std::string& directoryName);
 
-    class ArticleServerBusiness
+    class ArticleFileService
     {
     public:
-        explicit ArticleServerBusiness(const std::string& baseUrl);
+        explicit ArticleFileService(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<PSArticleModel>> selectArticles(const std::string& chanURN) const;
+        [[nodiscard]] std::shared_ptr<std::vector<PSArticleModel>> scanArticles(
+            const std::string& chanURN, const std::string& chanPath) const;
         [[nodiscard]] std::shared_ptr<PSArticleModel> getArticle(const std::string& chanURN,
                                                                  const std::string& noteURN) const;
+        [[nodiscard]] PSArticleModel ParseArticle(const std::string& chanURN, const std::string& fullPath) const;
 
     private:
         std::string baseUrl;
+    };
+
+    class ArticleSqliteService
+    {
+    public:
+        explicit ArticleSqliteService(std::string dbPath);
+
+        [[nodiscard]] std::shared_ptr<std::vector<PSArticleModel>> selectArticles(const std::string& chanURN) const;
+        [[nodiscard]] std::shared_ptr<PSArticleModel> getArticle(const std::string& noteURN) const;
+
+    private:
+        std::string dbPath;
     };
 }

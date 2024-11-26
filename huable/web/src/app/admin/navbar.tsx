@@ -2,7 +2,7 @@
 
 import styles from './navbar.module.scss'
 import Link from 'next/link'
-import {AccountModel} from "polaris-business";
+import {AccountModel} from "@/models/account";
 
 export function ConsoleNavbar(props: { account?: AccountModel }) {
     return <div className={styles.navHeader}>

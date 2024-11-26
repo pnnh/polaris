@@ -7,10 +7,8 @@ import queryString from 'query-string'
 import {NoData} from 'atom'
 import {PSImageServer} from 'atom/server'
 import {formatRfc3339} from 'atom'
-import {CommonResult, PLSelectResult} from 'polaris-business'
 import {calcPagination} from "atom";
 import {STSubString} from "atom";
-import {channelName, PSArticleModel} from "polaris-business";
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import ContentLayout from '@/components/server/content/layout'
 import {HtmlLayout} from '@/components/server/layout'
@@ -18,6 +16,8 @@ import {getPathname} from "@/services/server/pathname";
 import {IDomain} from "@/services/common/domain";
 import {FaEye} from "react-icons/fa";
 import {CiAlarmOn} from "react-icons/ci";
+import {CommonResult, PLSelectResult} from "@/models/common-result";
+import {channelName, PSArticleModel} from "@/models/article";
 
 export const dynamic = "force-dynamic";
 

@@ -5,9 +5,7 @@ import {replaceSearchParams} from 'atom'
 import queryString from 'query-string'
 import {NoData} from 'atom'
 import {PaginationServer, PSImageServer} from 'atom/server'
-import {PLSelectResult} from 'polaris-business'
 import {calcPagination} from "atom";
-import {PSArticleModel} from "polaris-business";
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import {Metadata} from "next";
 import {pageTitle} from "@/utils/page";
@@ -17,6 +15,8 @@ import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
 import {ArticleCard} from "@/components/server/article/card";
 import {ArticleRankCard} from "@/components/server/article/rank";
+import {PLSelectResult} from "@/models/common-result";
+import {PSArticleModel} from "@/models/article";
 
 export const dynamic = "force-dynamic";
 

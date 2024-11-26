@@ -43,7 +43,7 @@ void huable::server::HandleArticleGet(WFHttpTask* httpTask)
     std::ostringstream oss;
     const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "huable", "tests", "data"});
 
-    auto articleServer = std::make_shared<huable::starlight::ArticleServerBusiness>(baseUrl);
+    auto articleServer = std::make_shared<huable::starlight::ArticleFileService>(baseUrl);
     auto model = articleServer->getArticle(chanURN.value(), noteURN.value());
     if (model == nullptr)
     {
@@ -98,9 +98,10 @@ void huable::server::HandleArticles(WFHttpTask* httpTask)
     }
 
     std::ostringstream oss;
-    const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "huable", "tests", "data"});
+    //const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "huable", "tests", "data"});
 
-    auto articleServer = std::make_shared<huable::starlight::ArticleServerBusiness>(baseUrl);
+    auto database_path = quantum::JoinFilePath({PROJECT_BINARY_DIR, "polaris.sqlite"});
+    auto articleServer = std::make_shared<starlight::ArticleSqliteService>(database_path);
     auto articlePtr = articleServer->selectArticles(chanURN.value());
     json range = json::array();
     for (const auto& model : *articlePtr)

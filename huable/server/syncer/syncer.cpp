@@ -7,13 +7,11 @@
 #include <galaxy/quantum/services/database/SqliteService.h>
 #include <galaxy/quantum/services/filesystem/filesystem.h>
 #include <galaxy/quantum/services/logger/logger.h>
+#include <huable/starlight/business/articles/article.h>
 #include <huable/starlight/business/articles/channel.h>
 
-void initDatabase()
+void initDatabase(quantum::SqliteService& sqliteService)
 {
-    auto database_path = quantum::JoinFilePath({PROJECT_BINARY_DIR, "polaris.sqlite"});
-    auto sqliteService = quantum::SqliteService(database_path);
-
     std::string initChannelsSqlText = R"sql(
         CREATE TABLE IF NOT EXISTS channels
         (
@@ -49,7 +47,7 @@ void initDatabase()
     sqliteService.runSqlBatch(initSqlList);
 }
 
-void syncChannel()
+void syncChannels(quantum::SqliteService& sqliteService)
 {
     const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "huable", "tests", "data"});
     auto channelServer = std::make_shared<huable::starlight::ChannelServerBusiness>(baseUrl);
@@ -64,9 +62,6 @@ void syncChannel()
                 image = excluded.image
             WHERE channels.urn = excluded.urn;
 )sql";
-
-    auto database_path = quantum::JoinFilePath({PROJECT_BINARY_DIR, "polaris.sqlite"});
-    auto sqliteService = quantum::SqliteService(database_path);
 
     auto sqlCommand = sqliteService.createCommand(insertSqlText);
 
@@ -84,13 +79,85 @@ void syncChannel()
     }
 }
 
+void syncArticles(quantum::SqliteService& sqliteService)
+{
+    const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "huable", "tests", "data"});
+
+    auto channelServer = std::make_shared<huable::starlight::ChannelServerBusiness>(baseUrl);
+
+    auto articleServer = std::make_shared<huable::starlight::ArticleFileService>(baseUrl);
+
+    auto insertSqlText = R"sql(
+INSERT INTO articles (urn, title, header, body, create_time, update_time, creator, keywords, description,
+                cover, owner, channel, partition, path)
+            VALUES ($urn, $title, $header, $body, $create_time, $update_time, $creator, $keywords, $description,
+                $cover, $owner, $channel, $partition, $path)
+            ON CONFLICT(urn) DO UPDATE SET
+                title = excluded.title,
+                header = excluded.header,
+                body = excluded.body,
+                create_time = excluded.create_time,
+                update_time = excluded.update_time,
+                creator = excluded.creator,
+                keywords = excluded.keywords,
+                description = excluded.description,
+                cover = excluded.cover,
+                owner = excluded.owner,
+                channel = excluded.channel,
+                partition = excluded.partition,
+                path = excluded.path
+            WHERE articles.urn = excluded.urn;
+)sql";
+
+    auto sqlCommand = sqliteService.createCommand(insertSqlText);
+
+    auto channelsPtr = channelServer->selectChannels();
+    for (const auto& chanModel : *channelsPtr)
+    {
+        auto articlesPtr = articleServer->scanArticles(chanModel.URN, chanModel.Path);
+        for (const auto& noteModel : *articlesPtr)
+        {
+            quantum::Logger::LogInfo({noteModel.URN, noteModel.Title, noteModel.Title});
+
+            sqlCommand->BindString("$urn", noteModel.URN);
+            sqlCommand->BindString("$title", noteModel.Title);
+            sqlCommand->BindString("$header", noteModel.Header);
+            sqlCommand->BindString("$body", noteModel.Body);
+            sqlCommand->BindString("$create_time", noteModel.CreateTime.toString());
+            sqlCommand->BindString("$update_time", noteModel.UpdateTime.toString());
+            sqlCommand->BindString("$creator", "");
+            sqlCommand->BindString("$keywords", noteModel.Keywords);
+            sqlCommand->BindString("$description", noteModel.Description);
+            sqlCommand->BindString("$cover", noteModel.Image);
+            sqlCommand->BindString("$owner", "");
+            sqlCommand->BindString("$channel", noteModel.Channel);
+            sqlCommand->BindString("$partition", "");
+            sqlCommand->BindString("$path", noteModel.Path);
+
+            sqlCommand->Run();
+            sqlCommand->Reset();
+        }
+    }
+}
+
+void syncAllModels()
+{
+    // 重新创建数据库链接以避免超时
+    auto database_path = quantum::JoinFilePath({PROJECT_BINARY_DIR, "polaris.sqlite"});
+    auto sqliteService = quantum::SqliteService(database_path);
+    syncChannels(sqliteService);
+    syncArticles(sqliteService);
+}
+
 void huable::server::runSync()
 {
-    initDatabase();
+    auto database_path = quantum::JoinFilePath({PROJECT_BINARY_DIR, "polaris.sqlite"});
+    auto sqliteService = quantum::SqliteService(database_path);
+    initDatabase(sqliteService);
     while (true)
     {
         std::cout << "runSync" << std::endl;
-        std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-        syncChannel();
+        std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+        syncAllModels();
     }
 }

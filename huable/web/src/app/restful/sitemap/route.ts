@@ -2,9 +2,10 @@ import {NextRequest, NextResponse} from 'next/server'
 import {SitemapStream, streamToPromise} from 'sitemap'
 import {Readable} from 'stream'
 import {SitemapItemLoose} from "sitemap/dist/lib/types";
-import {CommonResult, PLSelectResult, PSArticleModel} from "polaris-business";
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import {useServerConfig} from "@/services/server/config";
+import {CommonResult, PLSelectResult} from "@/models/common-result";
+import {PSArticleModel} from "@/models/article";
 
 export const dynamic = "force-dynamic";
 

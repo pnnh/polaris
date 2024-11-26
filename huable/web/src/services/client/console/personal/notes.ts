@@ -1,9 +1,10 @@
-import {PLSelectResult, PSNoteModel} from "polaris-business";
 import {clientSigninDomain} from "@/services/client/domain";
-import {openDatabase} from "@/services/client/database";
+import {PSNoteModel} from "@/models/personal/note";
+import {PLSelectResult} from "@/models/common-result";
+import {openDatabase} from "@/services/client/console/database";
 
 export async function selectNotes(libraryUrn: string, notebookUrn: string, queryString: string = '') {
-    const domain = await clientSigninDomain()
+    const domain = await clientSigninDomain({} as any)
     const url = `/personal/libraries/${libraryUrn}/notebooks/${notebookUrn}/notes?${queryString}`
     return await domain.makeGet<PLSelectResult<PSNoteModel>>(url)
 }

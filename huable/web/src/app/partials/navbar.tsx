@@ -4,8 +4,8 @@ import Image from 'next/image'
 import React, {CSSProperties} from "react";
 import {UserProfileSelector} from "@/app/partials/profile";
 import {loadSessions2} from "@/services/auth";
-import {SessionModel} from "polaris-business";
 import {SearchAction} from "@/app/partials/search";
+import {SessionModel} from "@/models/session";
 
 export async function PublicNavbar({pathname, searchParams}: {
     pathname: string,

@@ -1,5 +1,4 @@
 // import {serverSigninDomain} from "@/services/server/domain";
-import {SPNoteModel} from "polaris-business";
 
 // export async function serverStoreArticle(event: Electron.Event, article: SPNoteModel) {
 //     // console.log('serverStoreArticle', article)

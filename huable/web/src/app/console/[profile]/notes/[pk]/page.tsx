@@ -1,9 +1,11 @@
+'use client'
+
 import React, {useEffect, useState} from 'react'
 import {clientMakeHttpGet} from '@/services/client/http'
-import {NoteModel} from "polaris-business";
 import {TocItem} from "atom";
 import {generatorRandomString} from "atom";
 import {BuildBodyHtml} from "atom/server";
+import {NoteModel} from "@/models/personal/note";
 
 interface IReadRequest {
     params: { pk: string }

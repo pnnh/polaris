@@ -1,5 +1,7 @@
 import {atom} from 'recoil'
-import {PSLibraryModel, PSNotebookModel, PSNoteModel} from "polaris-business";
+import {PSNoteModel} from "@/models/personal/note";
+import {PSNotebookModel} from "@/models/personal/notebook";
+import {PSLibraryModel} from "@/models/personal/library";
 
 const directoryAtom = atom({
     key: 'directoryAtom',

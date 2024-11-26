@@ -1,7 +1,6 @@
 import parseUri, {URI} from "parse-uri";
 import parseURI from "parse-uri"
 import {IDomain} from "@/services/common/domain";
-import {useServerConfig} from "@/services/server/config";
 import {ClientConfig} from "@/services/client/config";
 
 export class RemoteDomain implements IDomain {

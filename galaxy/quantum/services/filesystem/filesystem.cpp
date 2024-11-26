@@ -21,12 +21,25 @@ std::string quantum::JoinFilePath(std::initializer_list<std::string> pathList)
     return fullPath.string();
 }
 
-std::time_t quantum::convertFilesystemTime(std::filesystem::file_time_type fileTime)
+std::string quantum::PathFileName(const std::string& filePath)
+{
+    std::filesystem::path itemPath(filePath);
+    return itemPath.filename().string();
+}
+
+std::time_t quantum::convertFilesystemTime(const std::filesystem::file_time_type& fileTime)
 {
     auto sctp = std::chrono::time_point_cast<std::chrono::system_clock::duration>(
         fileTime - std::filesystem::file_time_type::clock::now()
         + std::chrono::system_clock::now());
     return std::chrono::system_clock::to_time_t(sctp);
+}
+
+quantum::PSDatetime quantum::fileLastModifyTime(const std::string& filePath)
+{
+    std::filesystem::path itemPath(filePath);
+    quantum::PSDatetime lastTime{quantum::convertFilesystemTime(last_write_time(itemPath))};
+    return lastTime;
 }
 
 std::string quantum::UserHomeDirectory()

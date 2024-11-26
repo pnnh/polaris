@@ -1,16 +1,18 @@
 #pragma once
 
 #include <string>
-#include <chrono>
 #include <filesystem>
+#include <galaxy/quantum/types/datetime.h>
 
 namespace quantum
 {
     bool IsFileExist(const std::string& filePath);
 
     std::string JoinFilePath(std::initializer_list<std::string> pathList);
+    std::string PathFileName(const std::string& filePath);
 
-    std::time_t convertFilesystemTime(std::filesystem::file_time_type fileTime);
+    std::time_t convertFilesystemTime(const std::filesystem::file_time_type& fileTime);
+    PSDatetime fileLastModifyTime(const std::string& filePath);
 
     bool isHidden(const std::string& path);
     bool isIgnore(const std::string& path);

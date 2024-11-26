@@ -18,6 +18,8 @@ namespace huable::starlight
         std::string Body;
         std::string Keywords;
         std::string Description;
+        std::string Path;
+        std::string Channel;
         std::string Image;
         quantum::PSDatetime CreateTime;
         quantum::PSDatetime UpdateTime;

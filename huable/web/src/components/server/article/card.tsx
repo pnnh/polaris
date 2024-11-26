@@ -1,4 +1,3 @@
-import {channelName, PSArticleModel} from "polaris-business";
 import Link from "next/link";
 import {formatRfc3339, STSubString} from "atom";
 import {FaEye} from "react-icons/fa";
@@ -7,6 +6,7 @@ import {PSImageServer} from "atom/server";
 import React from "react";
 import {IDomain} from "@/services/common/domain";
 import './card.scss'
+import {channelName, PSArticleModel} from "@/models/article";
 
 export function ArticleCard({model, domain}: { model: PSArticleModel, domain: IDomain }) {
     const readUrl = `/content/channels/${channelName(model.channel)}/articles/${model.urn}`

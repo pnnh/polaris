@@ -16,6 +16,16 @@ quantum::SqliteCommand::~SqliteCommand()
         sqlite3_finalize(this->stmt);
 }
 
+void quantum::SqliteCommand::ChangeSqlText(const std::string& text)
+{
+    if (this->stmt != nullptr)
+        sqlite3_finalize(this->stmt);
+
+    this->sqlText = text;
+    auto rc = sqlite3_prepare_v2(this->sqlite3Database, text.c_str(), static_cast<int>(text.length() + 1),
+                                 &this->stmt, nullptr);
+    if (rc) throw PSException("Can't prepare statement", sqlite3_errmsg(this->sqlite3Database));
+}
 
 void quantum::SqliteCommand::BindInt(const std::string& name, int value)
 {
@@ -97,7 +107,7 @@ std::shared_ptr<quantum::SqliteResult> quantum::SqliteCommand::Run()
         }
         else
         {
-            throw PSException("Can't step statement", sqlite3_errmsg(this->sqlite3Database));
+            throw PSException("Can't step statement: ", sqlite3_errmsg(this->sqlite3Database));
         }
     }
     return sqlResult;

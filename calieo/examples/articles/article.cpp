@@ -3,6 +3,7 @@
 #include "calieo/telescope/business/articles/article.h"
 
 #include <build.h>
+#include <galaxy/quantum/services/logger/logger.h>
 #include <quantum/services/logger/logger.h>
 #include <spdlog/logger.h>
 
