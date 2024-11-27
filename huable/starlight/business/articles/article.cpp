@@ -25,14 +25,14 @@ huable::starlight::PSArticleModel huable::starlight::ArticleFileService::ParseAr
     if (quantum::IsFileExist(metadataFilePath))
     {
         auto yamlHandler = quantum::YamlHandler(metadataFilePath);
-        articleModel.URN = yamlHandler.getString("metadata.urn").value_or("");
+        articleModel.URN = quantum::PSString::toLower(yamlHandler.getString("metadata.urn").value_or(""));
         articleModel.Title = yamlHandler.getString("metadata.title").value_or("");
         articleModel.Description = yamlHandler.getString("metadata.description").value_or("");
         articleModel.Image = yamlHandler.getString("metadata.image").value_or("");
     }
     if (articleModel.URN.empty())
     {
-        articleModel.URN = quantum::calcMd5(fullPath);
+        articleModel.URN = quantum::PSString::toLower(quantum::calcMd5(fullPath));
     }
     if (articleModel.Title.empty())
     {
@@ -70,29 +70,6 @@ huable::starlight::ArticleFileService::scanArticles(const std::string& chanURN, 
     }
 
     return libraries;
-}
-
-std::shared_ptr<huable::starlight::PSArticleModel> huable::starlight::ArticleFileService::getArticle(
-    const std::string& chanURN, const std::string& noteURN) const
-{
-    auto libraries = std::make_shared<PSArticleModel>();
-
-    auto fullPath = quantum::JoinFilePath({this->baseUrl, chanURN, noteURN});
-    for (const auto& entry : std::filesystem::directory_iterator(fullPath))
-    {
-        auto dirName = entry.path().filename();
-        if (entry.path() == "." || entry.path() == ".." || !entry.is_directory())
-        {
-            continue;
-        }
-
-        auto noteFullPath = quantum::JoinFilePath({this->baseUrl, chanURN, dirName});
-        auto articleModel = ParseArticle(chanURN, noteFullPath);
-
-        return std::make_shared<PSArticleModel>(articleModel);
-    }
-
-    return nullptr;
 }
 
 bool huable::starlight::isArticleDirectory(const std::string& directoryName)
@@ -146,6 +123,29 @@ std::shared_ptr<std::vector<huable::starlight::PSArticleModel>> huable::starligh
 std::shared_ptr<huable::starlight::PSArticleModel> huable::starlight::ArticleSqliteService::getArticle(
     const std::string& noteURN) const
 {
+    auto sqliteService = quantum::SqliteService(this->dbPath);
+
+    std::string sqlText = "SELECT * FROM articles where urn=$urn ";
+    auto sqlCommand = sqliteService.createCommand(sqlText);
+    sqlCommand->BindString("$urn", noteURN);
+    auto sqlResult = sqlCommand->Run();
+    if (sqlResult == nullptr)
+    {
+        std::cout << "sqlResult is empty" << std::endl;
+        return nullptr;
+    }
+    auto rowCount = sqlResult->getRowCount();
+    if (rowCount < 1)
+    {
+        std::cout << "table is empty" << std::endl;
+        return nullptr;
+    }
+
+    auto model = PSArticleModel();
+    model.URN = sqlResult->getColumn(0, "urn").value().getStringValue();
+    model.Title = sqlResult->getColumn(0, "title").value().getStringValue();
+
+    return std::make_shared<PSArticleModel>(model);
 }
 
 

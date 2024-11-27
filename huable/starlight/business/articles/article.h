@@ -14,8 +14,6 @@ namespace huable::starlight
 
         [[nodiscard]] std::shared_ptr<std::vector<PSArticleModel>> scanArticles(
             const std::string& chanURN, const std::string& chanPath) const;
-        [[nodiscard]] std::shared_ptr<PSArticleModel> getArticle(const std::string& chanURN,
-                                                                 const std::string& noteURN) const;
         [[nodiscard]] PSArticleModel ParseArticle(const std::string& chanURN, const std::string& fullPath) const;
 
     private:

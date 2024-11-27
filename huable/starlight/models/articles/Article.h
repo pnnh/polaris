@@ -12,6 +12,8 @@ namespace huable::starlight
         PSArticleModel();
         explicit PSArticleModel(const std::string& title);
 
+        PSArticleModel(const PSArticleModel& other);
+
         std::string URN;
         std::string Title;
         std::string Header;

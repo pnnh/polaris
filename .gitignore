@@ -1,6 +1,7 @@
 
 # JetBrains
 .idea/
+.cache/
 
 # Visual Studio
 *.user
@@ -13,7 +14,6 @@ cmake-build-*
 vcpkg_installed/
 
 # xcode macos and ios
-.idea
 xcuserdata/
 *.xcscmblueprint
 *.xccheckout
@@ -34,13 +34,10 @@ DerivedData/
 !default.perspectivev3
 *.hmap
 Pods/
+.swiftpm/
 
 # Nodejs
 node_modules/
 
 # Rust
 target/
-
-# Swift
-.swiftpm/
-.build/

@@ -37,7 +37,7 @@ huable::starlight::ChannelServerBusiness::selectChannels() const
         if (quantum::IsFileExist(metadataFilePath))
         {
             auto yamlHandler = quantum::YamlHandler(metadataFilePath);
-            channelModel.URN = yamlHandler.getString("metadata.urn").value_or("");
+            channelModel.URN = quantum::PSString::toLower(yamlHandler.getString("metadata.urn").value_or(""));
             channelModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
             channelModel.Description = yamlHandler.getString("metadata.description").value_or("");
             channelModel.Image = yamlHandler.getString("metadata.image").value_or("");
@@ -45,7 +45,7 @@ huable::starlight::ChannelServerBusiness::selectChannels() const
         channelModel.Path = entry.path().string();
         if (channelModel.URN.empty())
         {
-            channelModel.URN = quantum::calcMd5(entry.path().string());
+            channelModel.URN = quantum::PSString::toLower(quantum::calcMd5(entry.path().string()));
         }
         channels->emplace_back(channelModel);
     }

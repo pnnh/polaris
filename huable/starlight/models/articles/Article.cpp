@@ -6,3 +6,5 @@ huable::starlight::PSArticleModel::PSArticleModel(const std::string& title): Tit
 {
 }
 
+huable::starlight::PSArticleModel::PSArticleModel(const PSArticleModel& other)
+= default;

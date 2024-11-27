@@ -2,7 +2,6 @@
 import React from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil'
 import './viewer.scss'
-import {storeArticleToDatabase} from "@/services/client/console/personal/notes";
 import {PSNoteModel} from "@/models/personal/note";
 import {noteAtom} from "@/app/console/providers/notebook";
 import {ArticleContainer} from "@/components/client/article";
@@ -17,9 +16,6 @@ export function ArticleEditorArea() {
     const changeArticle = (article: PSNoteModel) => {
         setSelectedArticle({
             current: article
-        })
-        storeArticleToDatabase(article).then(() => {
-            console.log('ArticleStored', article.urn)
         })
     }
 

@@ -32,19 +32,18 @@ void huable::server::HandleArticleGet(WFHttpTask* httpTask)
 
     quantum::QueryParam queryParam{std::string(request_uri)};
 
-    auto chanURN = queryParam.getString("chan");
     auto noteURN = queryParam.getString("note");
-    if (!chanURN.has_value() || !noteURN.has_value())
+    if (!noteURN.has_value())
     {
         response->set_status_code("400");
         return;
     }
 
     std::ostringstream oss;
-    const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "huable", "tests", "data"});
+    auto database_path = quantum::JoinFilePath({PROJECT_BINARY_DIR, "polaris.sqlite"});
 
-    auto articleServer = std::make_shared<huable::starlight::ArticleFileService>(baseUrl);
-    auto model = articleServer->getArticle(chanURN.value(), noteURN.value());
+    auto articleServer = std::make_shared<huable::starlight::ArticleSqliteService>(database_path);
+    auto model = articleServer->getArticle(noteURN.value());
     if (model == nullptr)
     {
         response->set_status_code("404");
