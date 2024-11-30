@@ -105,6 +105,22 @@
       "environment": {}
     },
     {
+      "name": "wsl2",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/linux",
+      "installDir": "${sourceDir}/install/linux",
+      "toolchainFile": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_COMPILER_LAUNCHER": "ccache",
+        "CMAKE_C_COMPILER_LAUNCHER": "ccache",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
+        "CMAKE_MAKE_PROGRAM": "ninja",
+        "CMAKE_C_COMPILER": "gcc",
+        "CMAKE_CXX_COMPILER": "g++"
+      }
+    },
+    {
       "name": "webassembly",
       "displayName": "WebAssembly Config",
       "generator": "Ninja",
@@ -150,12 +166,6 @@
     {
       "name": "webassembly",
       "configurePreset": "webassembly"
-    }
-  ],
-  "testPresets": [
-    {
-      "name": "linux",
-      "configurePreset": "linux"
     }
   ]
 }

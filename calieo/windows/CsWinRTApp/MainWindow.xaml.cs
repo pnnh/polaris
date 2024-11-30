@@ -13,11 +13,10 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
-
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace CSharpUI
+namespace CsWinRTApp
 {
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
@@ -29,21 +28,12 @@ namespace CSharpUI
             this.InitializeComponent();
         }
 
+        private void Window_Activated(object sender, WindowActivatedEventArgs args)
+        {
+        }
         private void myButton_Click(object sender, RoutedEventArgs e)
         {
             myButton.Content = "Clicked";
-            //// 调用来自C++/CLI的函数
-            //Logger.Info("Hello, World!");
-
-
-
-            //// 调用来自C++/WinRT的函数
-            //// 暂时不能允许，会报错：Class not registered
-            //var x = new SimpleMathComponent.SimpleMath();
-
-            //var addSum = x.add(5.5, 6.5);
-            //Console.WriteLine($"Adding 5.5 + 6.5 = {addSum}");
-
             var cls = new CppWinRTComponent.Class();
             Console.WriteLine($"Adding 5.5 + 6.5 = {cls.Add(5, 6)}");
         }

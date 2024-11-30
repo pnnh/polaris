@@ -33,16 +33,17 @@ calieo::telescope::FileServerBusiness::selectFiles(std::string parentPath) const
             continue;
         }
 
-        auto fileModel = calieo::telescope::PSFileModel(dirName);
+        auto filePath = dirName.string();
+        auto fileModel = calieo::telescope::PSFileModel(filePath);
         if (fileModel.URN.empty())
         {
             fileModel.URN = quantum::calcMd5(entry.path().string());
         }
         fileModel.IsDir = entry.is_directory();
-        fileModel.IsHidden = quantum::isHidden(dirName);
-        fileModel.IsIgnore = quantum::isIgnore(dirName);
-        fileModel.Title = dirName;
-        fileModel.Name = dirName;
+        fileModel.IsHidden = quantum::isHidden(filePath);
+        fileModel.IsIgnore = quantum::isIgnore(filePath);
+        fileModel.Title = filePath;
+        fileModel.Name = filePath;
 
         fileModel.UpdateTime = quantum::convertFilesystemTime(std::filesystem::last_write_time(entry));
         fileModel.CreateTime = fileModel.UpdateTime;

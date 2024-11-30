@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace native {
+namespace calieo::windows {
     class Logger {
     public:
         static void log(const std::string& message);
