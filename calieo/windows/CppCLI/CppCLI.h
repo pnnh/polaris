@@ -7,6 +7,6 @@ namespace CppCLI {
 	public ref class Logger
 	{
 		public:
-		static void Info(String^ message);
+		static int Info(String^ message);
 	};
 }

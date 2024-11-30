@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using CppCLI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -34,8 +35,13 @@ namespace CsWinRTApp
         private void myButton_Click(object sender, RoutedEventArgs e)
         {
             myButton.Content = "Clicked";
+
+            var aaa = Logger.Info("xxxxxx333");
+            Console.WriteLine($"aaa = {aaa}");
+
             var cls = new CppWinRTComponent.Class();
-            Console.WriteLine($"Adding 5.5 + 6.5 = {cls.Add(5, 6)}");
+            var bbb = cls.Add(5, 6);
+            Console.WriteLine($"Adding 5.5 + 6.5 = {bbb}");
         }
     }
 }

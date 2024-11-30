@@ -7,10 +7,12 @@
 
 using namespace System;
 
-void CppCLI::Logger::Info(String^ message)
+int CppCLI::Logger::Info(String^ message)
 {
 	Console::WriteLine(message);
 	std::wcout << L"Hello from C++" << std::endl;
 
-	helper::Helper::Write("Hello from Helper");
+	auto result = helper::Helper::Write("Hello from Helper");
+
+	return result * 10;
 }

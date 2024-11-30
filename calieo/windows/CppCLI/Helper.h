@@ -4,7 +4,7 @@ namespace helper {
 		class Helper
 	{
 	public:
-		static void Write(const char* message);
+		static int Write(const char* message);
 	};
 
 		 }  // namespace helper

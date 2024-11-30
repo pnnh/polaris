@@ -4,9 +4,10 @@
 #pragma managed(push, off)
 #include <iostream>
 
-void helper::Helper::Write(const char* message)
+int helper::Helper::Write(const char* message)
 {
 	std::cout << "Message from CppCLI: " << message << std::endl;
+	return 999;
 }
 
 #pragma managed(pop)
