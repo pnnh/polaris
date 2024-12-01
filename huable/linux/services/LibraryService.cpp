@@ -8,7 +8,7 @@
 
 #include "huable/starlight/models/articles/Library.h"
 #include "huable/starlight/models/articles/Notebook.h"
-#include "galaxy/quantum/utils/basex.h"
+#include "quantum/utils/basex.h"
 
 LibraryService::LibraryService()
 {

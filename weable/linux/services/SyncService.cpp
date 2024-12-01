@@ -4,11 +4,11 @@
 #include <iostream>
 #include <qdir.h>
 #include <qdiriterator.h>
-#include <galaxy/quantum/services/filesystem/filesystem.h>
+#include <quantum/services/filesystem/filesystem.h>
 
 #include "weable/dawn/models/pictures/Picture.h"
-#include "galaxy/quantum/utils/basex.h"
-#include "galaxy/quantum/utils/mime.h"
+#include "quantum/utils/basex.h"
+#include "quantum/utils/mime.h"
 
 int SyncService::SyncImages(const QString& path)
 {

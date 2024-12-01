@@ -5,7 +5,7 @@
 #include <build.h>
 #include <quantum/services/logger/logger.h>
 
-#include "galaxy/quantum/services/filesystem/filesystem.h"
+#include "quantum/services/filesystem/filesystem.h"
 
 int huable::starlight::examples::articles::TestArticleSelectLibraries()
 {

@@ -6,8 +6,8 @@
 #include "build.h"
 #include <workflow/HttpMessage.h>
 #include "weable/dawn/business/articles/channel.h"
-#include "galaxy/quantum/services/filesystem/filesystem.h"
-#include "galaxy/quantum/services/logger/logger.h"
+#include "quantum/services/filesystem/filesystem.h"
+#include "quantum/services/logger/logger.h"
 
 using json = nlohmann::json;
 

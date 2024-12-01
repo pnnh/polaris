@@ -2,7 +2,7 @@
 
 #include <string>
 #include <chrono>
-#include <galaxy/quantum/types/datetime.h>
+#include <quantum/types/datetime.h>
 
 namespace huable::starlight
 {

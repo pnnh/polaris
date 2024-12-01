@@ -2,13 +2,13 @@
 #include "channel.h"
 #include <string>
 #include <filesystem>
-#include <galaxy/quantum/utils/basex.h>
+#include <quantum/utils/basex.h>
 
-#include "galaxy/quantum/types/Exception.h"
-#include "galaxy/quantum/services/filesystem/filesystem.h"
+#include "quantum/types/Exception.h"
+#include "quantum/services/filesystem/filesystem.h"
 #include "huable/starlight/services/yaml/yaml.h"
-#include "galaxy/quantum/utils/md5.h"
-#include "galaxy/quantum/types//String.h"
+#include "quantum/utils/md5.h"
+#include "quantum/types//String.h"
 
 huable::starlight::ChannelServerBusiness::ChannelServerBusiness(const std::string& baseUrl)
 {

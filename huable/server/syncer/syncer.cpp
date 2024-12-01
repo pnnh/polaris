@@ -4,9 +4,9 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
-#include <galaxy/quantum/services/database/SqliteService.h>
-#include <galaxy/quantum/services/filesystem/filesystem.h>
-#include <galaxy/quantum/services/logger/logger.h>
+#include <quantum/services/database/SqliteService.h>
+#include <quantum/services/filesystem/filesystem.h>
+#include <quantum/services/logger/logger.h>
 #include <huable/starlight/business/articles/article.h>
 #include <huable/starlight/business/articles/channel.h>
 

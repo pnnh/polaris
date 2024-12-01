@@ -6,7 +6,7 @@
 #include <quantum/services/logger/logger.h>
 #include <spdlog/logger.h>
 
-#include "galaxy/quantum/services/filesystem/filesystem.h"
+#include "quantum/services/filesystem/filesystem.h"
 
 int huable::starlight::examples::articles::TestArticleSelectArticles()
 {

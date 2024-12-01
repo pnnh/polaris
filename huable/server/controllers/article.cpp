@@ -6,16 +6,16 @@
 #include <spdlog/spdlog.h>
 #include <workflow/HttpMessage.h>
 
-#include "galaxy/quantum/utils/query.h"
+#include "quantum/utils/query.h"
 
 #include "huable/starlight/business/articles/article.h"
 
 #include <build.h>
-#include <galaxy/quantum/types/String.h>
-#include <galaxy/quantum/utils/basex.h>
+#include <quantum/types/String.h>
+#include <quantum/utils/basex.h>
 
-#include "galaxy/quantum/services/filesystem/filesystem.h"
-#include "galaxy/quantum/services/logger/logger.h"
+#include "quantum/services/filesystem/filesystem.h"
+#include "quantum/services/logger/logger.h"
 
 using json = nlohmann::json;
 

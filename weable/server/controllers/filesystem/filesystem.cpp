@@ -7,11 +7,11 @@
 #include "build.h"
 #include <workflow/HttpMessage.h>
 #include "weable/dawn/business/filesystem/file.h"
-#include "galaxy/quantum/services/filesystem/filesystem.h"
+#include "quantum/services/filesystem/filesystem.h"
 #include <iostream>
-#include "galaxy/quantum/types/String.h"
-#include "galaxy/quantum/utils/basex.h"
-#include "galaxy/quantum/utils/query.h"
+#include "quantum/types/String.h"
+#include "quantum/utils/basex.h"
+#include "quantum/utils/query.h"
 
 
 using json = nlohmann::json;

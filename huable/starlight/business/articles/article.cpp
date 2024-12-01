@@ -3,14 +3,14 @@
 #include <string>
 #include <filesystem>
 #include <utility>
-#include <galaxy/quantum/services/database/SqliteService.h>
-#include <galaxy/quantum/utils/basex.h>
+#include <quantum/services/database/SqliteService.h>
+#include <quantum/utils/basex.h>
 
-#include "galaxy/quantum/types/Exception.h"
-#include "galaxy/quantum/services/filesystem/filesystem.h"
+#include "quantum/types/Exception.h"
+#include "quantum/services/filesystem/filesystem.h"
 #include "huable/starlight/services/yaml/yaml.h"
-#include "galaxy/quantum/utils/md5.h"
-#include "galaxy/quantum/types/String.h"
+#include "quantum/utils/md5.h"
+#include "quantum/types/String.h"
 
 huable::starlight::ArticleFileService::ArticleFileService(const std::string& baseUrl)
 {

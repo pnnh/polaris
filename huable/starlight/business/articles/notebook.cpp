@@ -2,10 +2,10 @@
 
 #include <string>
 #include <filesystem>
-#include "galaxy/quantum/services/filesystem/filesystem.h"
+#include "quantum/services/filesystem/filesystem.h"
 #include "huable/starlight/services/yaml/yaml.h"
-#include "galaxy/quantum/utils/md5.h"
-#include "galaxy/quantum/types/String.h"
+#include "quantum/utils/md5.h"
+#include "quantum/types/String.h"
 
 huable::starlight::NotebookServerBusiness::NotebookServerBusiness(const std::string& baseUrl)
 {

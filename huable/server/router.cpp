@@ -1,6 +1,6 @@
 #include "router.h"
 #include <regex>
-#include "galaxy/quantum/types/String.h"
+#include "quantum/types/String.h"
 #include "controllers/article.h"
 #include "controllers/channel.h"
 #include "controllers/index.h"
