@@ -1,8 +1,0 @@
-.idea/
-.eslintrc.js
-tsconfig.json
-rollup.config.js
-src/
-lib/status.html
-lib/dts/
-example/

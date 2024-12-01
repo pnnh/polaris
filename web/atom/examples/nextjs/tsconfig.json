@@ -1,0 +1,51 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "noImplicitAny": true,
+    "sourceMap": false,
+    "allowJs": true,
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "rootDir": "src",
+    "outDir": "dist",
+    "baseUrl": "./",
+    "declaration": true,
+    "emitDeclarationOnly": false,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "incremental": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "src/**/*",
+    "build/types/**/*.ts",
+    ".next/types/**/*.ts"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "packages"
+  ]
+}

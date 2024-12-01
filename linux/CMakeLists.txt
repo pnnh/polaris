@@ -1,5 +1,5 @@
 
-set(APP_NAME ${CALIEO_NAME}Linux)
+set(APP_NAME ${PROJECT_NAME}Linux)
 
 # 查找并引用Qt库
 find_package(
@@ -30,10 +30,12 @@ file(GLOB_RECURSE APP_SOURCES
         services/*.cpp)
 
 qt6_add_executable(${APP_NAME} MANUAL_FINALIZATION)
-target_sources(${APP_NAME} PUBLIC main.cpp ${APP_SOURCES})
+target_sources(${APP_NAME} PUBLIC main.cpp ${APP_SOURCES} ${QUANTUM_SOURCES})
 
-add_dependencies(${APP_NAME} ${LIB_QUANTUM} ${LIB_TELESCOPE})
-target_link_libraries(${APP_NAME} PRIVATE ${LIB_QUANTUM} ${LIB_TELESCOPE})
+# 查找并引用Boost库
+find_package(Boost COMPONENTS system thread chrono filesystem url REQUIRED)
+target_include_directories(${APP_NAME} PRIVATE ${Boost_INCLUDE_DIRS})
+target_link_libraries(${APP_NAME} PRIVATE ${Boost_LIBRARIES})
 
 # 查找并引用日志库
 find_package(spdlog CONFIG REQUIRED)
@@ -46,6 +48,10 @@ target_link_libraries(${APP_NAME} PRIVATE cmark::cmark)
 # 查找并引用Sqlite解析库
 find_package(unofficial-sqlite3 CONFIG REQUIRED)
 target_link_libraries(${APP_NAME} PRIVATE unofficial::sqlite3::sqlite3)
+
+# 查找并引用yaml-cpp解析库
+find_package(yaml-cpp CONFIG REQUIRED)
+target_link_libraries(${APP_NAME} PRIVATE yaml-cpp::yaml-cpp)
 
 target_link_libraries(
         ${APP_NAME}

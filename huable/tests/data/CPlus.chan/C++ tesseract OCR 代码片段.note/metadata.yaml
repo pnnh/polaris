@@ -1,6 +1,0 @@
-version: 1
-metadata:
-  urn: 019362a40097722bb4bb2ac070b23a7c
-  title: C/C++
-  description: 同时使用了qt、tesseract、leptonica和opencv库
-  image: cover.jpg
