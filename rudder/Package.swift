@@ -19,10 +19,10 @@ let package = Package(
                 .product(name: "NIOPosix", package: "swift-nio"),
                 "cpplib"
             ],
-            path: "huable/rudder/App",
+            path: "App",
             swiftSettings: swiftSettings
         ),
-        .target(name: "cpplib", dependencies: [], path: "huable/rudder/cpplib"),
+        .target(name: "cpplib", dependencies: [], path: "cpplib"),
     ],
     swiftLanguageModes: [.v6],
     cLanguageStandard: .c17,
