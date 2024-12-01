@@ -1,5 +1,0 @@
-.rollup.cache/
-dist/
-*.db
-node_modules/
-.idea/
