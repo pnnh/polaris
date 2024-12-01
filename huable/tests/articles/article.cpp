@@ -1,6 +1,6 @@
 
 #include "article.h"
-#include "calieo/telescope/business/articles/article.h"
+#include "huable/starlight/business/articles/article.h"
 
 #include <build.h>
 #include <quantum/services/logger/logger.h>
@@ -8,12 +8,12 @@
 
 #include "galaxy/quantum/services/filesystem/filesystem.h"
 
-int calieo::telescope::examples::articles::TestArticleSelectArticles()
+int huable::starlight::examples::articles::TestArticleSelectArticles()
 {
     const std::string baseUrl = quantum::JoinFilePath({
         PROJECT_SOURCE_DIR, "assets", "data", "CPlus.notelibrary", "CMake笔记本.notebook"
     });
-    auto articleServer = std::make_shared<calieo::telescope::ArticleServerBusiness>(baseUrl);
+    auto articleServer = std::make_shared<huable::starlight::ArticleServerBusiness>(baseUrl);
     auto articlePtr = articleServer->selectArticles();
     for (const auto& model : *articlePtr)
     {

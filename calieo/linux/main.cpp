@@ -1,6 +1,5 @@
 
 #include <spdlog/spdlog.h>
-#include "calieo/linux/services/threads/SyncThread.h"
 #include <QtQuick>
 #include <iostream>
 
@@ -52,17 +51,6 @@ int main(int argc, char* argv[])
     //    if (mainWindow != nullptr) {
     //        QMetaObject::invokeMethod(mainWindow, "sayHello");
     //    }
-
-    // 启动同步服务
-    SyncThread syncThread;
-    syncThread.start();
-
-    QObject::connect(&syncThread, &SyncThread::resultReady,
-                     [&engine, &rootObject](const QString& result)
-                     {
-                         // qDebug() << "同步结果:" << result;
-                         QMetaObject::invokeMethod(rootObject, "sayHello");
-                     });
 
     return QGuiApplication::exec();
 }

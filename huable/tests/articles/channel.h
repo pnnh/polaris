@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace calieo::telescope::examples::articles
+namespace huable::starlight::examples::articles
 {
     int TestArticleSelectChannels();
 }

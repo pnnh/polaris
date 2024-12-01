@@ -1,9 +1,9 @@
-#include "calieo/server/process.h"
+#include "weable/server/process.h"
 
 #include <iostream>
 
-#include "calieo/server/controllers/article.h"
-#include "calieo/server/controllers/sitemap.h"
+#include "weable/server/controllers/article.h"
+#include "weable/server/controllers/sitemap.h"
 #include "router.h"
 #include <workflow/HttpMessage.h>
 #include <workflow/HttpUtil.h>

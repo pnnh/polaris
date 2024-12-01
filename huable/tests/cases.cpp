@@ -11,10 +11,10 @@
 #include "sqlite/sqlite.h"
 #include "files/file.h"
 
-namespace examples = calieo::telescope::examples;
+namespace examples = huable::starlight::examples;
 namespace sqlite = examples::sqlite;
 
-int calieo::telescope::examples::TestHelloWorld()
+int huable::starlight::examples::TestHelloWorld()
 {
     std::cout << "TestHelloWorld: OK" << std::endl;
     return 0;
@@ -30,7 +30,7 @@ const std::unordered_map<std::string, std::function<int()>> caseMap{
     {"TestArticleSelectNotebooks", examples::articles::TestArticleSelectNotebooks},
     {"TestSelectFiles", examples::TestSelectFiles}};
 
-int calieo::telescope::examples::runCase(const std::string &caseName)
+int huable::starlight::examples::runCase(const std::string &caseName)
 {
     const auto end = caseMap.end();
     auto it = caseMap.find(caseName);

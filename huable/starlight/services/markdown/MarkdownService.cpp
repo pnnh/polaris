@@ -1,4 +1,7 @@
 #include "MarkdownService.h"
+
+#include <cstring>
+
 #include "cmark.h"
 
 std::string huable::starlight::markdownToHtml(const std::string& markdownText)

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <sqlite3.h>
-
+#include <memory>
 #include "SqliteCommand.h"
 #include "galaxy/quantum/types/Exception.h"
 #include "galaxy/quantum/services/database/SqliteResult.h"

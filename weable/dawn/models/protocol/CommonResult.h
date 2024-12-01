@@ -3,7 +3,7 @@
 #include <string>
 #include <stdint.h>
 
-namespace calieo::telescope
+namespace weable::dawn
 {
     class CommonResult {
     public:

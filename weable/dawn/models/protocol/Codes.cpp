@@ -1,13 +1,13 @@
 
 #include "Codes.h"
 
-const char* calieo::telescope::CodeMessage(int code)
+const char* weable::dawn::CodeMessage(int code)
 {
   switch (code)
   {
-  case calieo::telescope::Codes::Ok:
+  case weable::dawn::Codes::Ok:
     return "Ok";
-  case calieo::telescope::Codes::Error:
+  case weable::dawn::Codes::Error:
     return "Error";
   default:
     return "Unknown";

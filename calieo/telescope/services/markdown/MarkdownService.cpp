@@ -1,4 +1,7 @@
 #include "MarkdownService.h"
+
+#include <cstring>
+
 #include "cmark.h"
 
 std::string calieo::telescope::markdownToHtml(const std::string& markdownText)

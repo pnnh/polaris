@@ -1,3 +1,3 @@
 #include "Picture.h"
 
-calieo::telescope::PSPictureModel::PSPictureModel() = default;
+weable::dawn::PSPictureModel::PSPictureModel() = default;

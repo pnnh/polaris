@@ -1,7 +1,5 @@
 #include "SqliteService.h"
 
-#include "threads/SyncThread.h"
-
 #include <QDateTime>
 #include <QSqlError>
 #include <QTextStream>
@@ -36,7 +34,7 @@ QString services::SqlIterator::column_name(const int index) const {
 QSqlDatabase getDatabase(const QString &dbPath) {
   QSqlDatabase database;
   auto connectionName = QString("[%1]%2").arg(
-      QString::number(quint64(QThread::currentThread()), sizeof(quint64)),
+      QString::number(quint64(123), sizeof(quint64)),
       dbPath);
   if (QSqlDatabase::contains(connectionName)) {
     database = QSqlDatabase::database(connectionName);

@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace calieo::telescope
+namespace weable::dawn
 {
     std::string markdownToHtml(const std::string& markdownText);
 }

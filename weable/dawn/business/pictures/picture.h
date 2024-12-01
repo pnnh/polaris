@@ -1,6 +1,6 @@
 #pragma once
 
-namespace calieo::telescope
+namespace weable::dawn
 {
     class article {
 

@@ -2,7 +2,7 @@
 #include <string>
 #include <chrono>
 
-namespace calieo::telescope
+namespace weable::dawn
 {
     class PSPictureModel
     {
