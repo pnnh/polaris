@@ -6,8 +6,8 @@
 #include <qdir.h>
 #include <qdiriterator.h>
 
-#include "huable/starlight/models/articles/Library.h"
-#include "huable/starlight/models/articles/Notebook.h"
+#include "quantum/models/articles/Library.h"
+#include "quantum/models/articles/Notebook.h"
 #include "quantum/utils/basex.h"
 
 LibraryService::LibraryService()
@@ -31,7 +31,7 @@ LibraryService::LibraryService()
   }
 }
 
-std::optional<huable::starlight::PSLibraryModel>
+std::optional<quantum::PSLibraryModel>
 LibraryService::FindLibrary(const QString& uid) const
 {
   auto findSql = QString("select * from libraries where uid = :uid");
@@ -47,7 +47,7 @@ LibraryService::FindLibrary(const QString& uid) const
 
   while (sqlIterator->next())
   {
-    auto model = std::make_optional<huable::starlight::PSLibraryModel>();
+    auto model = std::make_optional<quantum::PSLibraryModel>();
     model->URN = sqlIterator->value("uid").toString().toStdString();
     model->Name = sqlIterator->value("name").toString().toStdString();
     model->Path = sqlIterator->value("path").toString().toStdString();
@@ -56,16 +56,16 @@ LibraryService::FindLibrary(const QString& uid) const
   return std::nullopt;
 }
 
-QVector<huable::starlight::PSLibraryModel> LibraryService::SelectLibraries() const
+QVector<quantum::PSLibraryModel> LibraryService::SelectLibraries() const
 {
-  QVector<huable::starlight::PSLibraryModel> libraryList;
+  QVector<quantum::PSLibraryModel> libraryList;
   auto selectSql = QString("select * from libraries");
 
   auto sqlIterator = services::SqliteService::execute_query(dbPath, selectSql);
 
   while (sqlIterator->next())
   {
-    auto model = huable::starlight::PSLibraryModel();
+    auto model = quantum::PSLibraryModel();
     model.URN = sqlIterator->value("uid").toString().toStdString();
     model.Name = sqlIterator->value("name").toString().toStdString();
     model.Path = sqlIterator->value("path").toString().toStdString();
@@ -76,10 +76,10 @@ QVector<huable::starlight::PSLibraryModel> LibraryService::SelectLibraries() con
   return libraryList;
 }
 
-QVector<huable::starlight::PSNotebookModel>
-LibraryService::SelectPartitions(const huable::starlight::PSLibraryModel& libraryModel)
+QVector<quantum::PSNotebookModel>
+LibraryService::SelectPartitions(const quantum::PSLibraryModel& libraryModel)
 {
-  QVector<huable::starlight::PSNotebookModel> partitionList;
+  QVector<quantum::PSNotebookModel> partitionList;
   QDir dir(QString::fromStdString(libraryModel.Path));
   if (!dir.exists())
   {
@@ -101,7 +101,7 @@ LibraryService::SelectPartitions(const huable::starlight::PSLibraryModel& librar
       auto uid = quantum::encode64(stdPathString);
 
       auto model =
-        huable::starlight::PSNotebookModel();
+        quantum::PSNotebookModel();
       model.URN = uid;
       model.Name = fileName.toStdString();
       model.Path = filePath.toStdString();
@@ -112,7 +112,7 @@ LibraryService::SelectPartitions(const huable::starlight::PSLibraryModel& librar
 }
 
 void LibraryService::InsertOrUpdateLibrary(
-  const QVector<huable::starlight::PSLibraryModel>& libraryList)
+  const QVector<quantum::PSLibraryModel>& libraryList)
 {
   // std::cout << "InsertOrUpdateLibrary: " << libraryList.size() << std::endl;
 

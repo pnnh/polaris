@@ -1,6 +1,6 @@
 #pragma once
 
-namespace weable::dawn
+namespace quantum
 {
     class article {
 

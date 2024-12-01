@@ -50,7 +50,7 @@ namespace winrt::Venus::implementation
 
     IAsyncOperation<Venus::ImageFileInfo> MainWindow::LoadImageInfoAsync(StorageFile file)
     {
-		calieo::telescope::Logger::log("i love c++1");
+		quantum::Logger::log("i love c++1");
 
         auto properties = co_await file.Properties().GetImagePropertiesAsync();
         Venus::ImageFileInfo info(properties,

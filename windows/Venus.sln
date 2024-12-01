@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CsWinRTApp", "CsWinRTApp\Cs
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppCLI", "CppCLI\CppCLI.vcxproj", "{FBDF9107-4348-45A3-B4DB-526667655B52}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MultiverseWindows", "..\build\windows\windows\MultiverseWindows.vcxproj", "{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -167,6 +169,30 @@ Global
 		{FBDF9107-4348-45A3-B4DB-526667655B52}.RelWithDebInfo|x64.Build.0 = Release|x64
 		{FBDF9107-4348-45A3-B4DB-526667655B52}.RelWithDebInfo|x86.ActiveCfg = Release|x64
 		{FBDF9107-4348-45A3-B4DB-526667655B52}.RelWithDebInfo|x86.Build.0 = Release|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.Debug|ARM64.ActiveCfg = Debug|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.Debug|ARM64.Build.0 = Debug|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.Debug|x64.ActiveCfg = Debug|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.Debug|x64.Build.0 = Debug|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.Debug|x86.ActiveCfg = Debug|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.Debug|x86.Build.0 = Debug|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.MinSizeRel|ARM64.ActiveCfg = MinSizeRel|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.MinSizeRel|ARM64.Build.0 = MinSizeRel|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.MinSizeRel|x64.ActiveCfg = MinSizeRel|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.MinSizeRel|x64.Build.0 = MinSizeRel|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.MinSizeRel|x86.ActiveCfg = MinSizeRel|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.MinSizeRel|x86.Build.0 = MinSizeRel|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.Release|ARM64.ActiveCfg = Release|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.Release|ARM64.Build.0 = Release|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.Release|x64.ActiveCfg = Release|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.Release|x64.Build.0 = Release|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.Release|x86.ActiveCfg = Release|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.Release|x86.Build.0 = Release|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.RelWithDebInfo|ARM64.ActiveCfg = RelWithDebInfo|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.RelWithDebInfo|ARM64.Build.0 = RelWithDebInfo|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.RelWithDebInfo|x64.ActiveCfg = RelWithDebInfo|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.RelWithDebInfo|x64.Build.0 = RelWithDebInfo|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.RelWithDebInfo|x86.ActiveCfg = RelWithDebInfo|x64
+		{1047B5D5-CF87-3F35-AF23-A5039A37DFEC}.RelWithDebInfo|x86.Build.0 = RelWithDebInfo|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

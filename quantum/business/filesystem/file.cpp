@@ -7,19 +7,19 @@
 #include "quantum/utils/md5.h"
 #include "quantum/types//String.h"
 
-calieo::telescope::FileServerBusiness::FileServerBusiness(const std::string& baseUrl)
+quantum::FileServerBusiness::FileServerBusiness(const std::string& baseUrl)
 {
     this->baseUrl = baseUrl;
 }
 
-std::shared_ptr<std::vector<calieo::telescope::PSFileModel>>
-calieo::telescope::FileServerBusiness::selectFiles() const
+std::shared_ptr<std::vector<quantum::PSFileModel>>
+quantum::FileServerBusiness::selectFiles() const
 {
     return selectFiles("");
 }
 
-std::shared_ptr<std::vector<calieo::telescope::PSFileModel>>
-calieo::telescope::FileServerBusiness::selectFiles(std::string parentPath) const
+std::shared_ptr<std::vector<quantum::PSFileModel>>
+quantum::FileServerBusiness::selectFiles(std::string parentPath) const
 {
     auto files = std::make_shared<std::vector<PSFileModel>>();
 
@@ -34,7 +34,7 @@ calieo::telescope::FileServerBusiness::selectFiles(std::string parentPath) const
         }
 
         auto filePath = dirName.string();
-        auto fileModel = calieo::telescope::PSFileModel(filePath);
+        auto fileModel = quantum::PSFileModel(filePath);
         if (fileModel.URN.empty())
         {
             fileModel.URN = quantum::calcMd5(entry.path().string());

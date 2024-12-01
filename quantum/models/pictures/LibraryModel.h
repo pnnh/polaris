@@ -1,19 +1,19 @@
 #pragma once
 
-#include <QString>
+#include <string>
 
-class LibraryModel {
+class WELibraryModel {
 public:
-  QString uid;
-  QString name;
-  QString path;
+  std::string URN;
+  std::string Name;
+  std::string Path;
 };
 
 
-class PartitionModel {
+class WEPartitionModel {
 public:
-  QString uid;
-  QString name;
-  QString path;
+  std::string URN;
+  std::string Name;
+  std::string Path;
 };
 

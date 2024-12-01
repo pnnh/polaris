@@ -1,6 +1,6 @@
 #include <iostream>
 
-namespace calieo::telescope::examples
+namespace quantum::examples
 {
     int runCase(const std::string& caseName);
 

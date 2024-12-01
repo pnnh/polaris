@@ -3,7 +3,7 @@
 #include <string>
 #include <chrono>
 
-namespace huable::starlight
+namespace quantum
 {
     class PSLibraryModel
     {

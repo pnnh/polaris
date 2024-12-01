@@ -1,6 +1,6 @@
 #include <iostream>
 
-namespace calieo::telescope::examples::sqlite
+namespace quantum::examples::sqlite
 {
     int TestSqliteVersion();
 

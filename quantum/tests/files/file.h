@@ -1,7 +1,7 @@
 #pragma once
 
 
-namespace calieo::telescope::examples
+namespace quantum::examples
 {
     int TestSelectFiles();
 }

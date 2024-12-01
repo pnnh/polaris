@@ -2,7 +2,7 @@
 #include <string>
 #include <chrono>
 
-namespace weable::dawn
+namespace quantum
 {
     class PSPictureModel
     {

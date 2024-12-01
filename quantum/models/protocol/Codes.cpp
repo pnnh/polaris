@@ -1,13 +1,13 @@
 
 #include "Codes.h"
 
-const char* calieo::telescope::CodeMessage(int code)
+const char* quantum::CodeMessage(int code)
 {
   switch (code)
   {
-  case calieo::telescope::Codes::Ok:
+  case quantum::Codes::Ok:
     return "Ok";
-  case calieo::telescope::Codes::Error:
+  case quantum::Codes::Error:
     return "Error";
   default:
     return "Unknown";

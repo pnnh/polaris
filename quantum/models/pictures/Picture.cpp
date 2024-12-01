@@ -1,3 +1,3 @@
 #include "Picture.h"
 
-weable::dawn::PSPictureModel::PSPictureModel() = default;
+quantum::PSPictureModel::PSPictureModel() = default;

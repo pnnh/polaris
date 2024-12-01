@@ -8,19 +8,19 @@
 
 #include "quantum/types/Exception.h"
 #include "quantum/services/filesystem/filesystem.h"
-#include "huable/starlight/services/yaml/yaml.h"
+#include "quantum/services/yaml/yaml.h"
 #include "quantum/utils/md5.h"
 #include "quantum/types/String.h"
 
-huable::starlight::ArticleFileService::ArticleFileService(const std::string& baseUrl)
+quantum::ArticleFileService::ArticleFileService(const std::string& baseUrl)
 {
     this->baseUrl = baseUrl;
 }
 
-huable::starlight::PSArticleModel huable::starlight::ArticleFileService::ParseArticle(
+quantum::PSArticleModel quantum::ArticleFileService::ParseArticle(
     const std::string& chanURN, const std::string& fullPath) const
 {
-    auto articleModel = huable::starlight::PSArticleModel("");
+    auto articleModel = quantum::PSArticleModel("");
     auto metadataFilePath = quantum::JoinFilePath({fullPath, "metadata.yaml"});
     if (quantum::IsFileExist(metadataFilePath))
     {
@@ -45,8 +45,8 @@ huable::starlight::PSArticleModel huable::starlight::ArticleFileService::ParseAr
     return articleModel;
 }
 
-std::shared_ptr<std::vector<huable::starlight::PSArticleModel>>
-huable::starlight::ArticleFileService::scanArticles(const std::string& chanURN, const std::string& chanPath) const
+std::shared_ptr<std::vector<quantum::PSArticleModel>>
+quantum::ArticleFileService::scanArticles(const std::string& chanURN, const std::string& chanPath) const
 {
     auto libraries = std::make_shared<std::vector<PSArticleModel>>();
 
@@ -73,16 +73,16 @@ huable::starlight::ArticleFileService::scanArticles(const std::string& chanURN, 
     return libraries;
 }
 
-bool huable::starlight::isArticleDirectory(const std::string& directoryName)
+bool quantum::isArticleDirectory(const std::string& directoryName)
 {
     return quantum::PSString::EndsWith(directoryName, ".note");
 }
 
-huable::starlight::ArticleSqliteService::ArticleSqliteService(std::string dbPath): dbPath(std::move(dbPath))
+quantum::ArticleSqliteService::ArticleSqliteService(std::string dbPath): dbPath(std::move(dbPath))
 {
 }
 
-std::shared_ptr<std::vector<huable::starlight::PSArticleModel>> huable::starlight::ArticleSqliteService::selectArticles(
+std::shared_ptr<std::vector<quantum::PSArticleModel>> quantum::ArticleSqliteService::selectArticles(
     const std::string& chanURN) const
 {
     auto sqliteService = quantum::SqliteService(this->dbPath);
@@ -121,7 +121,7 @@ std::shared_ptr<std::vector<huable::starlight::PSArticleModel>> huable::starligh
     return libraries;
 }
 
-std::shared_ptr<huable::starlight::PSArticleModel> huable::starlight::ArticleSqliteService::getArticle(
+std::shared_ptr<quantum::PSArticleModel> quantum::ArticleSqliteService::getArticle(
     const std::string& noteURN) const
 {
     auto sqliteService = quantum::SqliteService(this->dbPath);

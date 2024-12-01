@@ -39,7 +39,7 @@ void polaris::server::HandleFileList(WFHttpTask* httpTask)
     }
 
     std::ostringstream oss;
-    auto fileServer = std::make_shared<calieo::telescope::FileServerBusiness>(baseUrl);
+    auto fileServer = std::make_shared<quantum::FileServerBusiness>(baseUrl);
     auto filesPtr = fileServer->selectFiles();
     json range = json::array();
     for (const auto& model : *filesPtr)

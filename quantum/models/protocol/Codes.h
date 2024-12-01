@@ -1,6 +1,6 @@
 #pragma once
 
-namespace calieo::telescope
+namespace quantum
 {
     enum Codes { Ok = 200, Error = 500 };
 

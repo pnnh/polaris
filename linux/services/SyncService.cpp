@@ -21,7 +21,7 @@ void SyncService::SyncLibraries()
   dir.setFilter(QDir::Dirs | QDir::NoDotAndDotDot);
   dir.setSorting(QDir::Name | QDir::IgnoreCase); // 按照名称排序
   QDirIterator iterator(dir);
-  QVector<huable::starlight::PSLibraryModel> libraryList;
+  QVector<quantum::PSLibraryModel> libraryList;
   while (iterator.hasNext())
   {
     QFileInfo info(iterator.next());
@@ -36,7 +36,7 @@ void SyncService::SyncLibraries()
       }
       auto stdPathString = filePath.toStdString();
       auto uid = quantum::encode64(stdPathString);
-      auto model = huable::starlight::PSLibraryModel();
+      auto model = quantum::PSLibraryModel();
       model.URN = uid;
       model.Name = fileName.toStdString();
       model.Path = filePath.toStdString();

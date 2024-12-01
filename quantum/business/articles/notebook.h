@@ -1,9 +1,9 @@
 #pragma once
 
 #include <vector>
-#include "huable/starlight/models/articles/Notebook.h"
+#include "quantum/models/articles/Notebook.h"
 
-namespace huable::starlight
+namespace quantum
 {
     bool isNotebookDirectory(const std::string& directoryName);
 
@@ -12,7 +12,7 @@ namespace huable::starlight
     public:
         explicit NotebookServerBusiness(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<huable::starlight::PSNotebookModel>> selectNotebooks() const;
+        [[nodiscard]] std::shared_ptr<std::vector<quantum::PSNotebookModel>> selectNotebooks() const;
 
     private:
         std::string baseUrl;

@@ -1,7 +1,7 @@
 #include "Library.h"
 
-huable::starlight::PSLibraryModel::PSLibraryModel() = default;
+quantum::PSLibraryModel::PSLibraryModel() = default;
 
-huable::starlight::PSLibraryModel::PSLibraryModel(const std::string& title): Title(title)
+quantum::PSLibraryModel::PSLibraryModel(const std::string& title): Title(title)
 {
 }

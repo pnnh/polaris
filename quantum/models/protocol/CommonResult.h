@@ -3,7 +3,7 @@
 #include <string>
 #include <stdint.h>
 
-namespace calieo::telescope
+namespace quantum
 {
     class CommonResult {
     public:

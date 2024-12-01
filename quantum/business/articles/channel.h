@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
 
-#include "huable/starlight/models/articles/Channel.h"
+#include "quantum/models/articles/Channel.h"
 
-namespace huable::starlight
+namespace quantum
 {
     bool isChannelDirectory(const std::string& directoryName);
 

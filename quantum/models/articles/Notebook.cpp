@@ -1,9 +1,9 @@
 
 #include "Notebook.h"
 
-huable::starlight::PSNotebookModel::PSNotebookModel() = default;
+quantum::PSNotebookModel::PSNotebookModel() = default;
 
-huable::starlight::PSNotebookModel::PSNotebookModel(const std::string& title): Title(title)
+quantum::PSNotebookModel::PSNotebookModel(const std::string& title): Title(title)
 {
 }
 

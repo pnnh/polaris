@@ -6,17 +6,17 @@
 
 #include "quantum/types/Exception.h"
 #include "quantum/services/filesystem/filesystem.h"
-#include "huable/starlight/services/yaml/yaml.h"
+#include "quantum/services/yaml/yaml.h"
 #include "quantum/utils/md5.h"
 #include "quantum/types//String.h"
 
-huable::starlight::ChannelServerBusiness::ChannelServerBusiness(const std::string& baseUrl)
+quantum::ChannelServerBusiness::ChannelServerBusiness(const std::string& baseUrl)
 {
     this->baseUrl = baseUrl;
 }
 
-std::shared_ptr<std::vector<huable::starlight::PSChannelModel>>
-huable::starlight::ChannelServerBusiness::selectChannels() const
+std::shared_ptr<std::vector<quantum::PSChannelModel>>
+quantum::ChannelServerBusiness::selectChannels() const
 {
     auto channels = std::make_shared<std::vector<PSChannelModel>>();
 
@@ -33,7 +33,7 @@ huable::starlight::ChannelServerBusiness::selectChannels() const
         {
             continue;
         }
-        auto channelModel = huable::starlight::PSChannelModel(filePath);
+        auto channelModel = quantum::PSChannelModel(filePath);
         auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, filePath, "metadata.yaml"});
         if (quantum::IsFileExist(metadataFilePath))
         {
@@ -54,7 +54,7 @@ huable::starlight::ChannelServerBusiness::selectChannels() const
     return channels;
 }
 
-bool huable::starlight::isChannelDirectory(const std::string& directoryName)
+bool quantum::isChannelDirectory(const std::string& directoryName)
 {
     return quantum::PSString::EndsWith(directoryName, ".chan") ||
         quantum::PSString::EndsWith(directoryName, ".channel") || quantum::PSString::EndsWith(

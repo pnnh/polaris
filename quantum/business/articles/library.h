@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
-#include "huable/starlight/models/articles/Library.h"
+#include "quantum/models/articles/Library.h"
 
-namespace huable::starlight
+namespace quantum
 {
     bool isLibraryDirectory(const std::string& directoryName);
 
@@ -11,7 +11,7 @@ namespace huable::starlight
     public:
         explicit LibraryServerBusiness(const std::string& baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<huable::starlight::PSLibraryModel>> selectLibraries() const;
+        [[nodiscard]] std::shared_ptr<std::vector<quantum::PSLibraryModel>> selectLibraries() const;
 
     private:
         std::string baseUrl;

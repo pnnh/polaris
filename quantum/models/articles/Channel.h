@@ -3,7 +3,7 @@
 #include <chrono>
 #include <quantum/types/datetime.h>
 
-namespace huable::starlight
+namespace quantum
 {
     class PSChannelModel
     {

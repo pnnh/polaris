@@ -3,15 +3,15 @@
 
 #include "quantum/models/files/File.h"
 
-namespace calieo::telescope
+namespace quantum
 {
     class FileServerBusiness
     {
     public:
         explicit FileServerBusiness(const std::string &baseUrl);
 
-        [[nodiscard]] std::shared_ptr<std::vector<calieo::telescope::PSFileModel>> selectFiles() const;
-        [[nodiscard]] std::shared_ptr<std::vector<calieo::telescope::PSFileModel>> selectFiles(std::string parentPath) const;
+        [[nodiscard]] std::shared_ptr<std::vector<quantum::PSFileModel>> selectFiles() const;
+        [[nodiscard]] std::shared_ptr<std::vector<quantum::PSFileModel>> selectFiles(std::string parentPath) const;
 
     private:
         std::string baseUrl;
@@ -24,6 +24,6 @@ namespace calieo::telescope
 
         ~FileClientBusiness();
 
-        std::shared_ptr<std::vector<calieo::telescope::PSFileModel>> selectFiles();
+        std::shared_ptr<std::vector<quantum::PSFileModel>> selectFiles();
     };
 }
