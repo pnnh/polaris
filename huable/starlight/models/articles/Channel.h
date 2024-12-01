@@ -9,7 +9,7 @@ namespace huable::starlight
     {
     public:
         explicit PSChannelModel();
-        explicit PSChannelModel(const std::string&& name);
+        explicit PSChannelModel(const std::string& name);
 
         std::string URN;
         std::string Name;

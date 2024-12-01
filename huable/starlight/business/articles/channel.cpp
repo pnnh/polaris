@@ -28,17 +28,18 @@ huable::starlight::ChannelServerBusiness::selectChannels() const
             continue;
         }
 
-        if (!isChannelDirectory(dirName))
+        auto filePath = dirName.string();
+        if (!isChannelDirectory(filePath))
         {
             continue;
         }
-        auto channelModel = huable::starlight::PSChannelModel(dirName);
-        auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
+        auto channelModel = huable::starlight::PSChannelModel(filePath);
+        auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, filePath, "metadata.yaml"});
         if (quantum::IsFileExist(metadataFilePath))
         {
             auto yamlHandler = quantum::YamlHandler(metadataFilePath);
             channelModel.URN = quantum::PSString::toLower(yamlHandler.getString("metadata.urn").value_or(""));
-            channelModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
+            channelModel.Title = yamlHandler.getString("metadata.title").value_or(filePath);
             channelModel.Description = yamlHandler.getString("metadata.description").value_or("");
             channelModel.Image = yamlHandler.getString("metadata.image").value_or("");
         }

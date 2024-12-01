@@ -25,17 +25,18 @@ huable::starlight::NotebookServerBusiness::selectNotebooks() const
             continue;
         }
 
-        if (!isNotebookDirectory(dirName))
+        auto filePath = dirName.string();
+        if (!isNotebookDirectory(filePath))
         {
             continue;
         }
-        auto notebookModel = huable::starlight::PSNotebookModel(dirName);
-        auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
+        auto notebookModel = huable::starlight::PSNotebookModel(filePath);
+        auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, filePath, "metadata.yaml"});
         if (quantum::IsFileExist(metadataFilePath))
         {
             auto yamlHandler = quantum::YamlHandler(metadataFilePath);
             notebookModel.URN = yamlHandler.getString("metadata.urn").value_or("");
-            notebookModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
+            notebookModel.Title = yamlHandler.getString("metadata.title").value_or(filePath);
             notebookModel.Description = yamlHandler.getString("metadata.description").value_or("");
             notebookModel.Image = yamlHandler.getString("metadata.image").value_or("");
         }

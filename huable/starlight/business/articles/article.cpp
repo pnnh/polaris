@@ -59,11 +59,12 @@ huable::starlight::ArticleFileService::scanArticles(const std::string& chanURN, 
             continue;
         }
 
-        if (!isArticleDirectory(dirName))
+        auto filePath = dirName.string();
+        if (!isArticleDirectory(filePath))
         {
             continue;
         }
-        auto noteFullPath = quantum::JoinFilePath({this->baseUrl, chanPath, dirName});
+        auto noteFullPath = quantum::JoinFilePath({this->baseUrl, chanPath, filePath});
         auto articleModel = ParseArticle(chanURN, noteFullPath);
 
         libraries->emplace_back(articleModel);

@@ -9,7 +9,7 @@ file(GLOB_RECURSE LIB_SOURCES
 add_library(${LIB_STARLIGHT} ${LIB_SOURCES})
 
 # 查找并引用Boost库
-find_package(Boost COMPONENTS system thread chrono filesystem url program_options REQUIRED)
+find_package(Boost COMPONENTS system thread chrono filesystem url REQUIRED)
 target_include_directories(${LIB_STARLIGHT} PRIVATE ${Boost_INCLUDE_DIRS})
 target_link_libraries(${LIB_STARLIGHT} PRIVATE ${Boost_LIBRARIES})
 

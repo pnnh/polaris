@@ -28,17 +28,18 @@ huable::starlight::LibraryServerBusiness::selectLibraries() const
             continue;
         }
 
-        if (!isLibraryDirectory(dirName))
+        auto filePath = dirName.string();
+        if (!isLibraryDirectory(filePath))
         {
             continue;
         }
-        auto libraryModel = huable::starlight::PSLibraryModel(dirName);
-        auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, dirName, "metadata.yaml"});
+        auto libraryModel = huable::starlight::PSLibraryModel(filePath);
+        auto metadataFilePath = quantum::JoinFilePath({this->baseUrl, filePath, "metadata.yaml"});
         if (quantum::IsFileExist(metadataFilePath))
         {
             auto yamlHandler = quantum::YamlHandler(metadataFilePath);
             libraryModel.URN = yamlHandler.getString("metadata.urn").value_or("");
-            libraryModel.Title = yamlHandler.getString("metadata.title").value_or(dirName);
+            libraryModel.Title = yamlHandler.getString("metadata.title").value_or(filePath);
             libraryModel.Description = yamlHandler.getString("metadata.description").value_or("");
             libraryModel.Image = yamlHandler.getString("metadata.image").value_or("");
         }

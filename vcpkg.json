@@ -50,10 +50,6 @@
       "version>=": "1.86.0"
     },
     {
-      "name": "boost-program-options",
-      "version>=": "1.86.0"
-    },
-    {
       "name": "boost-property-map",
       "version>=": "1.86.0"
     },

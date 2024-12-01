@@ -2,6 +2,6 @@
 
 huable::starlight::PSChannelModel::PSChannelModel() = default;
 
-huable::starlight::PSChannelModel::PSChannelModel(const std::string&& name): Name(name)
+huable::starlight::PSChannelModel::PSChannelModel(const std::string& name): Name(name)
 {
 }

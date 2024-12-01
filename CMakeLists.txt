@@ -36,6 +36,8 @@ endif ()
 if (POLICY CMP0167)
     cmake_policy(SET CMP0167 NEW)
 endif ()
+set(Boost_USE_STATIC_LIBS   ON)
+set(Boost_USE_MULTITHREADED ON)
 
 add_subdirectory(galaxy/quantum)
 add_subdirectory(galaxy/neutron)
