@@ -8,6 +8,6 @@
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
    <FileRef
-      location = "container:../build/macos/PolarisNative.xcodeproj">
+      location = "container:../build/macos/Multiverse.xcodeproj">
    </FileRef>
 </Workspace>

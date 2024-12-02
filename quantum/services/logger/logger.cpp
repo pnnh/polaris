@@ -1,9 +1,13 @@
 #include "logger.h"
 
 #include <iostream>
-#include <hstring.h>
 #include <iostream>
+
+#ifdef WIN32
+#include <hstring.h>
 #include <tchar.h>
+#endif
+
 
 void quantum::Logger::LogInfo(const std::string& message)
 {
@@ -12,9 +16,9 @@ void quantum::Logger::LogInfo(const std::string& message)
 
 void quantum::Logger::LogInfo(std::initializer_list<std::string> messageList)
 {
-
-
+#ifdef WIN32
     OutputDebugString(_T("My output string."));
+#endif
 
 
     std::string fullMessage;

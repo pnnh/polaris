@@ -2,7 +2,7 @@
 
 #include <workflow/WFTaskFactory.h>
 
-namespace polaris::server
+namespace pulsar
 {
     void HandleSitemap(WFHttpTask* httpTask);
 }

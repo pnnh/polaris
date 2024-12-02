@@ -15,27 +15,27 @@ void routeHandleGet(WFHttpTask* httpTask, const std::string& request_uri)
 {
 	if (request_uri == "/")
 	{
-		polaris::server::HandleIndex(httpTask);
+		pulsar::HandleIndex(httpTask);
 	}
 	else if (request_uri == "/server/sitemap")
 	{
-		polaris::server::HandleSitemap(httpTask);
+		pulsar::HandleSitemap(httpTask);
 	}
 	else if (request_uri == "/server/articles")
 	{
-		polaris::server::HandleArticles(httpTask);
+		pulsar::HandleArticles(httpTask);
 	}
 	else if (request_uri == "/server/channels")
 	{
-		polaris::server::HandleChannels(httpTask);
+		pulsar::HandleChannels(httpTask);
 	}
 	else if (quantum::PSString::StartsWith(request_uri, "/server/files"))
 	{
-		polaris::server::HandleFileList(httpTask);
+		pulsar::HandleFileList(httpTask);
 	}
 	else if (request_uri == "/server/articles/get")
 	{
-		polaris::server::HandleArticleGet(httpTask);
+		pulsar::HandleArticleGet(httpTask);
 	}
 	else
 	{
@@ -44,7 +44,7 @@ void routeHandleGet(WFHttpTask* httpTask, const std::string& request_uri)
 	}
 }
 
-void polaris::server::route_request(WFHttpTask* httpTask)
+void pulsar::route_request(WFHttpTask* httpTask)
 {
 	protocol::HttpRequest* request = httpTask->get_req();
 	std::string request_uri = request->get_request_uri();

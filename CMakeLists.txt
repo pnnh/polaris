@@ -36,27 +36,35 @@ endif ()
 if (POLICY CMP0167)
     cmake_policy(SET CMP0167 NEW)
 endif ()
-set(Boost_USE_STATIC_LIBS   ON)
+set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
-
-#add_subdirectory(galaxy/quantum)
-#add_subdirectory(calieo)
-#add_subdirectory(huable)
-#add_subdirectory(weable)
 
 configure_file("build.h.in" "${PROJECT_BINARY_DIR}/build.h")
 
-file(GLOB_RECURSE LIB_SOURCES quantum/*.cpp)
-set(QUANTUM_SOURCES ${LIB_SOURCES} CACHE INTERNAL "QUANTUM_SOURCES")
+file(GLOB_RECURSE QUANTUM_SOURCES
+        quantum/business/*.cpp
+        quantum/models/*.cpp
+        quantum/services/*.cpp
+        quantum/types/*.cpp
+        quantum/utils/*.cpp)
 
+if (APPLE)
+    file(GLOB_RECURSE MODULEMAP_SOURCES quantum/module.modulemap)
+    list(APPEND QUANTUM_SOURCES ${MODULEMAP_SOURCES})
+endif ()
+set(GLOBAL_QUANTUM_SOURCES ${QUANTUM_SOURCES} CACHE INTERNAL "GLOBAL_QUANTUM_SOURCES")
+
+set(GLOBAL_LIB_PREFIX MT CACHE INTERNAL "GLOBAL_LIB_PREFIX")
 
 if (VCPKG_TARGET_TRIPLET STREQUAL "x64-windows")
     add_subdirectory(windows)
 elseif (VCPKG_TARGET_TRIPLET STREQUAL "arm64-osx")
     add_subdirectory(macos)
+    add_subdirectory(linux)
+    add_subdirectory(pulsar)
 elseif (EMSCRIPTEN)
     add_subdirectory(web)
 elseif (LINUX)
     add_subdirectory(linux)
-    add_subdirectory(server)
+    add_subdirectory(pulsar)
 endif ()

@@ -1,5 +1,5 @@
 
-set(APP_NAME ${PROJECT_NAME}Linux)
+set(APP_NAME ${GLOBAL_LIB_PREFIX}Linux)
 
 # 查找并引用Qt库
 find_package(
@@ -30,7 +30,7 @@ file(GLOB_RECURSE APP_SOURCES
         services/*.cpp)
 
 qt6_add_executable(${APP_NAME} MANUAL_FINALIZATION)
-target_sources(${APP_NAME} PUBLIC main.cpp ${APP_SOURCES} ${QUANTUM_SOURCES})
+target_sources(${APP_NAME} PUBLIC main.cpp ${APP_SOURCES} ${GLOBAL_QUANTUM_SOURCES})
 
 # 查找并引用Boost库
 find_package(Boost COMPONENTS system thread chrono filesystem url REQUIRED)

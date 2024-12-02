@@ -1,9 +1,8 @@
-#include "calieo/server/process.h"
+#include "pulsar/process.h"
 
 #include <iostream>
 
-#include "calieo/server/controllers/article.h"
-#include "calieo/server/controllers/sitemap.h"
+#include "pulsar/controllers/sitemap.h"
 #include "router.h"
 #include <workflow/HttpMessage.h>
 #include <workflow/HttpUtil.h>
@@ -11,25 +10,19 @@
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <spdlog/spdlog.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <string>
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include <workflow/WFHttpServer.h>
-
-#include "controllers/index.h"
-#include "controllers/channel.h"
-#include "controllers/filesystem/filesystem.h"
 
 void process(WFHttpTask* httpTask)
 {
   protocol::HttpRequest* request = httpTask->get_req();
   protocol::HttpResponse* response = httpTask->get_resp();
 
-  polaris::server::route_request(httpTask);
+  pulsar::route_request(httpTask);
 
   return;
 
@@ -110,7 +103,7 @@ void loopCmd(const WFHttpServer& httpServer)
   }
 }
 
-int polaris::server::runServer(int port)
+int pulsar::runServer(int port)
 {
   WFHttpServer server(process);
 

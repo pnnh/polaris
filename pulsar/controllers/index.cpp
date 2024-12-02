@@ -1,4 +1,4 @@
-#include "calieo/server/controllers/index.h"
+#include "pulsar/controllers/index.h"
 #include <boost/uuid/uuid_io.hpp>
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
@@ -6,7 +6,7 @@
 
 using json = nlohmann::json;
 
-void polaris::server::HandleIndex(WFHttpTask* httpTask)
+void pulsar::HandleIndex(WFHttpTask* httpTask)
 {
     protocol::HttpResponse* response = httpTask->get_resp();
 

@@ -1,4 +1,4 @@
-#include "calieo/server/controllers/filesystem/filesystem.h"
+#include "pulsar/controllers/filesystem/filesystem.h"
 #include <boost/range/algorithm.hpp>
 #include <boost/url.hpp>
 #include <boost/uuid/uuid_io.hpp>
@@ -16,7 +16,7 @@
 
 using json = nlohmann::json;
 
-void polaris::server::HandleFileList(WFHttpTask* httpTask)
+void pulsar::HandleFileList(WFHttpTask* httpTask)
 {
     protocol::HttpRequest* request = httpTask->get_req();
     protocol::HttpResponse* response = httpTask->get_resp();

@@ -4,7 +4,7 @@
 #include <string>
 #include <libenvpp/env.hpp>
 
-namespace polaris::server
+namespace pulsar
 {
     class AppConfig
     {

@@ -1,4 +1,4 @@
-#include "calieo/server/process.h"
+#include "pulsar/process.h"
 #include <spdlog/spdlog.h>
 
 int main(int argc, char* argv[])
@@ -10,5 +10,5 @@ int main(int argc, char* argv[])
 
   constexpr int PORT = 7001;
 
-  return polaris::server::runServer(PORT);
+  return pulsar::runServer(PORT);
 }

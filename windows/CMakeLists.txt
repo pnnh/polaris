@@ -1,5 +1,5 @@
 
-set(LIB_NAME ${PROJECT_NAME}Windows)
+set(LIB_NAME ${GLOBAL_LIB_PREFIX}Windows)
 
 
 add_library(${LIB_NAME})
@@ -10,7 +10,7 @@ file(GLOB_RECURSE LIB_SOURCES
 
 target_sources(${LIB_NAME}
         PUBLIC
-        ${LIB_SOURCES} ${QUANTUM_SOURCES})
+        ${LIB_SOURCES} ${GLOBAL_QUANTUM_SOURCES})
 
 # 查找并引用日志库
 find_package(spdlog CONFIG REQUIRED)

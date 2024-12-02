@@ -3,7 +3,7 @@
 #include <libenvpp/env.hpp>
 #include <spdlog/spdlog.h>
 
-polaris::server::AppConfig::AppConfig()
+pulsar::AppConfig::AppConfig()
 {
     env::prefix envPrefix("PL");
     auto dsnKey = envPrefix.register_required_variable<std::string>("DSN");
@@ -19,7 +19,7 @@ polaris::server::AppConfig::AppConfig()
     dnsValue = parsedEnvPrefixPtr->get(dsnKey);
 }
 
-std::string polaris::server::AppConfig::GetDSN()
+std::string pulsar::AppConfig::GetDSN()
 {
     return dnsValue;
 }

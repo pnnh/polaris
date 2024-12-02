@@ -4,8 +4,8 @@
 
 //#include "cases.h"
 
-int main(int argc, char* argv[])
-{
+// int main(int argc, char* argv[])
+// {
 //    std::cout << "Hello, World!" << std::endl;
 //    if (argc != 2)
 //    {
@@ -20,4 +20,4 @@ int main(int argc, char* argv[])
 //    std::cout << "current path: " << std::filesystem::current_path() << std::endl;
 //
 //    quantum::examples::runCase(caseName);
-}
+// }

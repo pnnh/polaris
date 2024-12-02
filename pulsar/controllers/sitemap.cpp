@@ -2,7 +2,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 
-void polaris::server::HandleSitemap(WFHttpTask* httpTask)
+void pulsar::HandleSitemap(WFHttpTask* httpTask)
 {
     //protocol::HttpRequest *request = httpTask->get_req();
     protocol::HttpResponse* response = httpTask->get_resp();

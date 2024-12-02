@@ -1,4 +1,4 @@
-#include "calieo/server/controllers/channel.h"
+#include "pulsar/controllers/channel.h"
 #include <boost/range/algorithm.hpp>
 #include <boost/url.hpp>
 #include <nlohmann/json.hpp>
@@ -11,7 +11,7 @@
 
 using json = nlohmann::json;
 
-void polaris::server::HandleChannels(WFHttpTask* httpTask)
+void pulsar::HandleChannels(WFHttpTask* httpTask)
 {
     protocol::HttpRequest* request = httpTask->get_req();
     protocol::HttpResponse* response = httpTask->get_resp();

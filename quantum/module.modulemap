@@ -1,0 +1,5 @@
+module MTMacos {
+    header "services/logger/logger.h"
+
+    export *
+}
