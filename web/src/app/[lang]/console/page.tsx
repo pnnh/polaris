@@ -3,7 +3,6 @@ import './page.scss'
 import {ConsoleLayout} from "@/components/server/console/layout";
 import {NotebookBar} from '@/components/client/console/sidebar';
 import {ConsoleNotebar} from "@/components/client/console/notebar";
-import {ArticleEditorArea} from "@/components/client/console/partials/viewer";
 
 export default async function Page() {
     return (
