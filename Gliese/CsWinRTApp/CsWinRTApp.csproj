@@ -44,7 +44,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CppCLI\CppCLI.vcxproj" />
-    <ProjectReference Include="..\CppWinRTComponent\CppWinRTComponent.vcxproj" />
   </ItemGroup>
 
   <ItemGroup>
