@@ -1,5 +1,5 @@
 
-set(LIB_NAME ${GLOBAL_LIB_PREFIX}Windows)
+set(LIB_NAME ${GLOBAL_LIB_PREFIX}Gilese)
 
 
 add_library(${LIB_NAME})
