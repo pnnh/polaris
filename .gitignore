@@ -7,6 +7,11 @@
 *.user
 .vs/
 *.suo
+obj/
+bin/
+packages/
+_build/
+x64/
 
 # CMake
 build/

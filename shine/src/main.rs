@@ -6,9 +6,7 @@ use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 mod config;
 mod handlers;
 mod helpers;
-mod layers;
 mod models;
-mod service;
 mod utils;
 mod views;
 
@@ -29,9 +27,11 @@ async fn main() {
 
     let addr = SocketAddr::from(([0, 0, 0, 0], port));
     tracing::debug!("listening on {}", addr);
+    
+    let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
 
-    axum::Server::bind(&addr)
-        .serve(handlers::app().await.into_make_service())
+    let app = handlers::app().await;
+    axum::serve(listener, app)
         .await
         .unwrap();
 }

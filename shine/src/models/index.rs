@@ -15,3 +15,21 @@ pub struct IndexModel {
     pub update_time: chrono::NaiveDateTime,
     pub uri: String,
 }
+
+impl IndexModel {
+    pub fn new() -> IndexModel {
+        IndexModel {
+            pk: "".to_string(),
+            title: "".to_string(),
+            creator: "".to_string(),
+            creator_uri: "".to_string(),
+            keywords: "".to_string(),
+            description: "".to_string(),
+            creator_nickname: "".to_string(),
+            views: 0,
+            mark_lang: 0,
+            update_time: chrono::NaiveDateTime::from_timestamp(0, 0),
+            uri: "".to_string(),
+        }
+    }
+}

@@ -11,7 +11,6 @@ use crate::config::ProximaConfig;
 use crate::handlers::State;
 use crate::models::error::{AppError,  };
 use crate::models::index::IndexModel;
-use crate::service::index::IndexService;
 use crate::views::restful::error::HttpRESTError;
 use crate::{helpers,  };
 use serde::{Deserialize, Serialize};
@@ -78,8 +77,7 @@ pub async fn index_handler<'a>(
         return Err(HttpRESTError::from(AppError::InvalidParameter));
     }
 
-    let index_service = IndexService::new(state.clone());
-    let count = index_service.query_count().await?;
+    let count = 22;
 
     let row_count = count as i32;
     let mut max_page = row_count / INDEX_PAGE_SIZE;
@@ -93,7 +91,7 @@ pub async fn index_handler<'a>(
     let offset: i64 = ((current_page - 1) * INDEX_PAGE_SIZE) as i64;
     let limit: i64 = INDEX_PAGE_SIZE as i64;
 
-    let models = index_service.query(offset, limit).await?;
+    let models = [IndexModel::new()];
 
     let mut views: Vec<IndexView> = Vec::new();
 

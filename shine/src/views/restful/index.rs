@@ -7,9 +7,7 @@ use serde::{Deserialize, Serialize};
 use crate::handlers::State;
 use crate::models::error::{AppError, };
 use crate::models::index::IndexModel;
-use crate::service::index::IndexService;
 use crate::views::restful::error::HttpRESTError;
-
 
 const INDEX_PAGE_SIZE: i32 = 10;
 
@@ -45,9 +43,7 @@ pub async fn query(
     let offset: i64 = ((current_page - 1) * INDEX_PAGE_SIZE) as i64;
     let limit: i64 = INDEX_PAGE_SIZE as i64;
 
-    let index_service = IndexService::new(state.clone());
-
-    let models = index_service.query(offset, limit).await?;
+    let models = vec![IndexModel::new()];
 
     let out = IndexOut { models };
 
