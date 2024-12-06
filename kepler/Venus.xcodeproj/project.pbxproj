@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		45CCC881F53994BADE5FA9CE /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 45CCC81B0A89273CCE64129B /* README.md */; };
 		45CCCE220F4FF4D7D92D3115 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 45CCC8B9C25C93AA2BAC1BF9 /* .gitignore */; };
-		4633F6C22D02E0B90009FE83 /* libMTMacos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4633F6C12D02E0B90009FE83 /* libMTMacos.a */; };
+		4633F7242D02FC310009FE83 /* libMTQuantum.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4633F7232D02FC310009FE83 /* libMTQuantum.a */; };
 		463412FF2CDB0F0600EE94E8 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 463412FE2CDB0F0600EE94E8 /* Logging */; };
 		46EE3C17254B142000EC17BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE3C16254B142000EC17BB /* AppDelegate.swift */; };
 		46EE3C1B254B142200EC17BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EE3C1A254B142200EC17BB /* Assets.xcassets */; };
@@ -21,6 +21,7 @@
 		45CCC81B0A89273CCE64129B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45CCC8B9C25C93AA2BAC1BF9 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		4633F6C12D02E0B90009FE83 /* libMTMacos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMTMacos.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4633F7232D02FC310009FE83 /* libMTQuantum.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMTQuantum.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EE3C13254B142000EC17BB /* Venus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Venus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EE3C16254B142000EC17BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46EE3C1A254B142200EC17BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -43,7 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4633F6C22D02E0B90009FE83 /* libMTMacos.a in Frameworks */,
+				4633F7242D02FC310009FE83 /* libMTQuantum.a in Frameworks */,
 				463412FF2CDB0F0600EE94E8 /* Logging in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				4633F6C12D02E0B90009FE83 /* libMTMacos.a */,
+				4633F7232D02FC310009FE83 /* libMTQuantum.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -375,6 +377,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/..\"",
+					"\"$(SRCROOT)/../build/macos/vcpkg_installed/arm64-osx/include\"",
 				);
 				INFOPLIST_FILE = Venus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -385,7 +388,7 @@
 					"\"$(inherited)\"",
 					"\"${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
 					"\"$(SRCROOT)/../build/macos/vcpkg_installed/arm64-osx/lib\"",
-					"\"$(SRCROOT)/../build/macos/kepler/Debug\"",
+					"\"$(SRCROOT)/../build/macos/quantum/Debug\"",
 					/usr/lib/swift,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
@@ -424,6 +427,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/..\"",
+					"\"$(SRCROOT)/../build/macos/vcpkg_installed/arm64-osx/include\"",
 				);
 				INFOPLIST_FILE = Venus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -434,7 +438,7 @@
 					"\"$(inherited)\"",
 					"\"${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
 					"\"$(SRCROOT)/../build/macos/vcpkg_installed/arm64-osx/lib\"",
-					"\"$(SRCROOT)/../build/macos/kepler/Debug\"",
+					"\"$(SRCROOT)/../build/macos/quantum/Debug\"",
 					/usr/lib/swift,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;

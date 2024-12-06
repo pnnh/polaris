@@ -17,8 +17,6 @@ target_sources(${EXE_NAME}
         router.h
         ${EXE_SOURCES} ${GLOBAL_QUANTUM_SOURCES})
 
-message(STATUS "EXE_SOURCES: ${GLOBAL_QUANTUM_SOURCES}")
-
 # 查找并引用Boost库
 find_package(Boost COMPONENTS system thread chrono filesystem url REQUIRED)
 target_include_directories(${EXE_NAME} PRIVATE ${Boost_INCLUDE_DIRS})

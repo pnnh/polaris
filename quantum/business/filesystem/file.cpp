@@ -52,3 +52,15 @@ quantum::FileServerBusiness::selectFiles(std::string parentPath) const
 
     return files;
 }
+#if defined(__clang__)
+std::vector<quantum::PSFileModel> quantum::FileServerBusiness::selectFilesVector() const
+{
+    return *this->selectFiles();
+}
+
+std::vector<quantum::PSFileModel> quantum::FileServerBusiness::selectFilesVector(std::string parentPath) const
+{
+    return *this->selectFiles(std::move(parentPath));
+}
+#endif
+

@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import MTQuantum
 
 struct PSMainView: View {
     @State private var dataFiles: [String] = []
@@ -17,20 +18,12 @@ struct PSMainView: View {
         HStack {
             Spacer()
             Rectangle()
-                .fill(Color(hex: 0x0d98ba))
+                .fill(Color(hex: 0xcccccc))
                 .frame(width: 1)
         }
      }
     var body: some View {
         HStack(spacing: 0) {
-            VStack {
-                DomainImageView()
-                Spacer()
-            }
-            .frame(width: 56)
-                .padding(EdgeInsets.init(top: 8, leading: 0, bottom: 8, trailing: 0))
-                .background(rightBorder)
-        
             VStack {
                 HStack {
                     Text("相册").foregroundColor(Color.gray)
@@ -38,7 +31,6 @@ struct PSMainView: View {
                         .font(Font.system(size: 14, design: .default))
                     Spacer()
                     Button(action: {
-                        
                         print("打开文件")
                         let url = promptForWorkingDirectoryPermission()
                         
@@ -48,32 +40,18 @@ struct PSMainView: View {
                         }
                         
                     } ) {
-                        
                         Image(nsImage: NSImage(systemSymbolName: "plus.circle", accessibilityDescription: nil)!)
                     }.buttonStyle(EmptyButtonStyle())
                 }
                 HStack{
                     Image(nsImage: NSImage(systemSymbolName: "folder", accessibilityDescription: nil)!)
-                    Text("表情")
-                    Spacer()
-                }
-                HStack{
-                    Image(nsImage: NSImage(systemSymbolName: "folder", accessibilityDescription: nil)!)
-                    Text("Videos")
-                    Spacer()
-                }
-                HStack{
-                    Image(nsImage: NSImage(systemSymbolName: "folder", accessibilityDescription: nil)!)
-                    Text("emos")
-                    Spacer()
-                }
-                HStack{
-                    Image(nsImage: NSImage(systemSymbolName: "folder", accessibilityDescription: nil)!)
-                    Text("高清壁纸集合")
+                    Text("主目录").onTapGesture {
+                        tapItem()
+                    }
                     Spacer()
                 }
                 Spacer()
-            }.frame(maxWidth: 256).padding(0)
+            }.frame(maxWidth: 320).padding(0)
                 .background(rightBorder)
             Spacer()
         }.padding(0)
@@ -85,13 +63,27 @@ struct PSMainView: View {
         }
         return ""
     }
+    
+    func tapItem() {
+        print("tapItem")
+        
+        let fileService = MTQuantum.quantum.FileServerBusiness("/Users/Larry/temp")
+        let files = fileService.selectFilesVector()
+        
+        for file in files {
+            print("file name \(file.Name)")
+        }
+        
+        print("selectFiles: \(files)")
+        
+    }
 }
 
-//
-//struct PSMainView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Group {
-//            PSMainView()
-//        }
-//    }
-//}
+
+struct PSMainView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            PSMainView()
+        }
+    }
+}

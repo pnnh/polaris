@@ -2,6 +2,7 @@
 
 #include <string>
 #include <chrono>
+#include <ctime>
 
 namespace quantum
 {

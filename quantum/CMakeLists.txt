@@ -1,7 +1,29 @@
 
-set(LIB_NAME ${GLOBAL_LIB_PREFIX}Macos)
+configure_file("build.h.in" "${PROJECT_BINARY_DIR}/build.h")
 
-# 添加静态库（macOS下不支持动态链接）
+file(GLOB_RECURSE QUANTUM_SOURCES
+        business/*.cpp
+        models/*.cpp
+        services/*.cpp
+        types/*.cpp
+        utils/*.cpp)
+
+file(GLOB_RECURSE QUANTUM_HEADERS
+        business/*.h
+        models/*.h
+        services/*.h
+        types/*.h
+        utils/*.h)
+
+if (APPLE)
+    file(GLOB_RECURSE MODULEMAP_SOURCES module.modulemap)
+    list(APPEND QUANTUM_SOURCES ${MODULEMAP_SOURCES})
+endif ()
+set(GLOBAL_QUANTUM_SOURCES ${QUANTUM_SOURCES} CACHE INTERNAL "GLOBAL_QUANTUM_SOURCES")
+
+
+set(LIB_NAME ${GLOBAL_LIB_PREFIX}Quantum)
+
 add_library(${LIB_NAME} ${LIB_SOURCES} ${GLOBAL_QUANTUM_SOURCES})
 
 # 查找并引用日志库

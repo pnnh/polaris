@@ -39,29 +39,16 @@ endif ()
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
 
-configure_file("build.h.in" "${PROJECT_BINARY_DIR}/build.h")
-
-file(GLOB_RECURSE QUANTUM_SOURCES
-        quantum/business/*.cpp
-        quantum/models/*.cpp
-        quantum/services/*.cpp
-        quantum/types/*.cpp
-        quantum/utils/*.cpp)
-
-if (APPLE)
-    file(GLOB_RECURSE MODULEMAP_SOURCES quantum/module.modulemap)
-    list(APPEND QUANTUM_SOURCES ${MODULEMAP_SOURCES})
-endif ()
-set(GLOBAL_QUANTUM_SOURCES ${QUANTUM_SOURCES} CACHE INTERNAL "GLOBAL_QUANTUM_SOURCES")
-
 set(GLOBAL_LIB_PREFIX MT CACHE INTERNAL "GLOBAL_LIB_PREFIX")
+
+add_subdirectory(quantum)
 
 if (VCPKG_TARGET_TRIPLET STREQUAL "x64-windows")
     add_subdirectory(Gliese)
     add_subdirectory(proxima)
     add_subdirectory(pulsar)
 elseif (VCPKG_TARGET_TRIPLET STREQUAL "arm64-osx")
-    add_subdirectory(kepler)
+    #    add_subdirectory(kepler)
     add_subdirectory(proxima)
     add_subdirectory(pulsar)
 elseif (EMSCRIPTEN)

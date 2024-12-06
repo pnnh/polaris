@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 #include "quantum/models/articles/Article.h"
 
 namespace quantum

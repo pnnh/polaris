@@ -18,7 +18,7 @@ namespace quantum
         bool IsDir{};
         bool IsHidden{};
         bool IsIgnore{};
-        quantum::PSDatetime CreateTime;
-        quantum::PSDatetime UpdateTime;
+        PSDatetime CreateTime;
+        PSDatetime UpdateTime;
     };
 }
