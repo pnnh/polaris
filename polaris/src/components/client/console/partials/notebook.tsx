@@ -21,10 +21,9 @@ export function NotebookList() {
                     <div className={'directoryItem'} onClick={() => {
                         const domain = clientMustSigninDomain()
                         const urlParam = encodeBase64String('filesystem://home')
-                        const rankUrl = `/restful/files?url=${urlParam}`
+                        const rankUrl = `/files/select?url=${urlParam}`
                         domain.makeGet<PLSelectResult<PSFileModel>>(rankUrl).then((selectResult) => {
                             console.log('selectResult', selectResult)
-
                             filesMailbox.sendMail('abc', selectResult)
                         })
                     }}>主目录

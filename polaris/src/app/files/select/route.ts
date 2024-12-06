@@ -18,11 +18,11 @@ export async function GET(request: NextRequest, response: NextResponse) {
     }
     const magicDomain = 'filesystem://home'
     const decodedUrl = decodeBase64String(resUrl)
-    const domainUrl = "http://127.0.0.1:7501"
+    const domainUrl = "http://127.0.0.1:7101"
     const filePath = decodedUrl.replace(magicDomain, '~')
     const domain = serverMustSigninDomain(domainUrl)
     const queryPath = encodeURIComponent(encodeBase64String(filePath, {urlEncode: false}))
-    const requestPath = `/server/files?path=${queryPath}`
+    const requestPath = `/files?path=${queryPath}`
     const result = await domain.makeGet<PLSelectResult<PSFileModel>>(requestPath)
     console.log('result', result)
     if (!result || !result.data || !result.data.range) {

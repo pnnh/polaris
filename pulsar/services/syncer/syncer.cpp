@@ -128,7 +128,7 @@ INSERT INTO articles (urn, title, header, body, create_time, update_time, creato
             sqlCommand->BindString("$creator", "");
             sqlCommand->BindString("$keywords", noteModel.Keywords);
             sqlCommand->BindString("$description", noteModel.Description);
-            sqlCommand->BindString("$cover", noteModel.Image);
+            sqlCommand->BindString("$cover", noteModel.Cover);
             sqlCommand->BindString("$owner", "");
             sqlCommand->BindString("$channel", noteModel.Channel);
             sqlCommand->BindString("$partition", "");

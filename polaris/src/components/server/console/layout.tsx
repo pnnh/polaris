@@ -1,6 +1,5 @@
 import React from 'react'
 import './layout.scss'
-import {ConsoleFeature} from "@/components/client/console/partials/feature";
 import {HtmlLayout} from '../layout';
 import {NavigatorBar} from "@/components/client/console/partials/navigator";
 import {FileToolsBar} from "@/components/client/console/partials/filetools";

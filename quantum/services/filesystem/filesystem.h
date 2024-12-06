@@ -19,4 +19,9 @@ namespace quantum
 
     // 返回不同平台下的用户主目录
     std::string UserHomeDirectory();
+
+    namespace filesystem
+    {
+        std::string ReadAllText(const std::string& filePath);
+    }
 }

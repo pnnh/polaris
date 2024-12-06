@@ -48,7 +48,7 @@ async function loadFiles(path: string) {
     console.log('loadFiles', path)
     const domain = clientMustSigninDomain()
     const urlParam = encodeBase64String(path)
-    const rankUrl = `/restful/files?url=${urlParam}`
+    const rankUrl = `/files/select?url=${urlParam}`
     return await domain.makeGet<PLSelectResult<PSFileModel>>(rankUrl)
 }
 

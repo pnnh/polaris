@@ -4,8 +4,6 @@
 #include <filesystem>
 #include <utility>
 #include <quantum/services/database/SqliteService.h>
-#include <quantum/utils/basex.h>
-
 #include "quantum/types/Exception.h"
 #include "quantum/services/filesystem/filesystem.h"
 #include "quantum/services/yaml/yaml.h"
@@ -28,7 +26,7 @@ quantum::PSArticleModel quantum::ArticleFileService::ParseArticle(
         articleModel.URN = quantum::PSString::toLower(yamlHandler.getString("metadata.urn").value_or(""));
         articleModel.Title = yamlHandler.getString("metadata.title").value_or("");
         articleModel.Description = yamlHandler.getString("metadata.description").value_or("");
-        articleModel.Image = yamlHandler.getString("metadata.image").value_or("");
+        articleModel.Cover = yamlHandler.getString("metadata.cover").value_or("");
     }
     if (articleModel.URN.empty())
     {
@@ -42,6 +40,12 @@ quantum::PSArticleModel quantum::ArticleFileService::ParseArticle(
     articleModel.Path = fullPath;
     articleModel.UpdateTime = quantum::fileLastModifyTime(fullPath);
 
+
+    auto contentFilePath = quantum::JoinFilePath({fullPath, "index.md"});
+    if (IsFileExist(contentFilePath))
+    {
+        articleModel.Body = quantum::filesystem::ReadAllText(contentFilePath);
+    }
     return articleModel;
 }
 
@@ -114,6 +118,12 @@ std::shared_ptr<std::vector<quantum::PSArticleModel>> quantum::ArticleSqliteServ
         auto model = PSArticleModel();
         model.URN = sqlResult->getColumn(rowIndex, "urn").value().getStringValue();
         model.Title = sqlResult->getColumn(rowIndex, "title").value().getStringValue();
+        model.Header = sqlResult->getColumn(rowIndex, "header").value().getStringValue();
+        model.Body = sqlResult->getColumn(rowIndex, "body").value().getStringValue();
+        model.Keywords = sqlResult->getColumn(rowIndex, "keywords").value().getStringValue();
+        model.Description = sqlResult->getColumn(rowIndex, "description").value().getStringValue();
+        model.Channel = sqlResult->getColumn(rowIndex, "channel").value().getStringValue();
+        model.Cover = sqlResult->getColumn(rowIndex, "cover").value().getStringValue();
 
         libraries->emplace_back(model);
     }

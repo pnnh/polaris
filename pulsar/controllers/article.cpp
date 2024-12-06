@@ -94,7 +94,7 @@ void pulsar::HandleArticles(WFHttpTask* httpTask)
     json range = json::array();
     for (const auto& model : *articlePtr)
     {
-        quantum::Logger::LogInfo({model.URN, model.Title, model.Title});
+        //quantum::Logger::LogInfo({model.URN, model.Title, model.Title});
         json item = {
             {"urn", model.URN},
             {"title", model.Title},

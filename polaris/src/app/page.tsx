@@ -41,15 +41,13 @@ export default async function Page({params, searchParams}: {
     return <ContentLayout lang={pageLang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} params={baseParams}>
 
-        <div className={'container'}>
-            <div className={'body'}>
-                <div className={'list'}>
+        <div className={'homeContainer'}>
+                <div className={'contentList'}>
                     {result.data.range.map((model) => {
                         return <Item key={model.urn} model={model} domain={domain} lang={pageLang}/>
                     })
                     }
                 </div>
-            </div>
         </div>
     </ContentLayout>
 }
@@ -64,16 +62,16 @@ function Item(props: { model: PSArticleModel, domain: IDomain, lang: string }) {
         imageUrl = props.domain.assetUrl(`/articles/${props.model.urn}/assets/${props.model.cover}`)
     }
 
-    return < div className={'item'}>
+    return < div className={'contentItem'}>
         <div className={'itemCover'}>
             <PSImageServer src={imageUrl} alt='star' width={256} height={256}/>
         </div>
-        <div className={'content'}>
+        <div className={'itemDetail'}>
             <div className={'title'}>
                 <Link className={'link'} href={readUrl}>{props.model.title}</Link>
             </div>
             <div className={'description'}>
-                {props.model.description}
+                {props.model.description || props.model.body}
             </div>
         </div>
     </div>

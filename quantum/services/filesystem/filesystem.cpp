@@ -52,6 +52,13 @@ std::string quantum::UserHomeDirectory()
     return std::string(hdrive) + hpath;
 }
 
+std::string quantum::filesystem::ReadAllText(const std::string& filePath)
+{
+    std::ifstream inFile(filePath);
+    std::string content((std::istreambuf_iterator<char>(inFile)), std::istreambuf_iterator<char>());
+    return content;
+}
+
 bool quantum::isHidden(const std::string& path)
 {
     if (path.rfind('.', 0) == 0)

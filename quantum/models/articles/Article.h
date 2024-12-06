@@ -22,7 +22,7 @@ namespace quantum
         std::string Description;
         std::string Path;
         std::string Channel;
-        std::string Image;
+        std::string Cover;
         quantum::PSDatetime CreateTime;
         quantum::PSDatetime UpdateTime;
     };
