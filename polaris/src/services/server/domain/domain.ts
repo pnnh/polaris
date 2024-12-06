@@ -17,7 +17,7 @@ export function serverMustSigninDomain(domainUrl: string | undefined = ''): IDom
 
 export function serverSigninDomain(): IDomain {
     const serverConfig = useServerConfig()
-    const initialDomains = serverConfig.INITIAL_DOMAINS
+    const initialDomains = serverConfig.DirectoryList[0]
     const domain = trySigninDomain(initialDomains)
     if (!domain) {
         throw new Error('domain not found')

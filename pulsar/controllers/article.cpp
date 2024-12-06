@@ -85,18 +85,12 @@ void pulsar::HandleArticles(WFHttpTask* httpTask)
     quantum::QueryParam queryParam{std::string(request_uri)};
 
     auto chanURN = queryParam.getString("chan");
-    if (!chanURN.has_value())
-    {
-        response->set_status_code("400");
-        return;
-    }
 
     std::ostringstream oss;
-    //const std::string baseUrl = quantum::JoinFilePath({PROJECT_SOURCE_DIR, "huable", "tests", "data"});
 
     auto database_path = quantum::JoinFilePath({PROJECT_BINARY_DIR, "polaris.sqlite"});
     auto articleServer = std::make_shared<quantum::ArticleSqliteService>(database_path);
-    auto articlePtr = articleServer->selectArticles(chanURN.value());
+    auto articlePtr = articleServer->selectArticles(chanURN.value_or(""));
     json range = json::array();
     for (const auto& model : *articlePtr)
     {

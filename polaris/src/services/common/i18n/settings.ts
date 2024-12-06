@@ -4,6 +4,8 @@ export const defaultNS = 'translation'
 import localeZh from '@/services/common/i18n/locales/zh/translation.json' with {type: 'json'}
 import localeEn from '@/services/common/i18n/locales/en/translation.json' with {type: 'json'}
 
+export const LangCookieName = 'xs-lang'
+
 export function getOptions(lng = fallbackLng, ns = defaultNS) {
     return {
         supportedLngs: languages,

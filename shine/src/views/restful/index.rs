@@ -5,7 +5,7 @@ use axum::{extract::Extension, Json};
 use serde::{Deserialize, Serialize};
 
 use crate::handlers::State;
-use crate::models::error::{AppError, };
+use crate::models::error::AppError;
 use crate::models::index::IndexModel;
 use crate::views::restful::error::HttpRESTError;
 
@@ -18,7 +18,7 @@ pub struct IndexIn {
 
 #[derive(Serialize)]
 pub struct IndexOut {
-    models: Vec<IndexModel>,
+    pub(crate) models: Vec<IndexModel>,
 }
 
 pub async fn query(

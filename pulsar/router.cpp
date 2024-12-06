@@ -13,29 +13,29 @@
 
 void routeHandleGet(WFHttpTask* httpTask, const std::string& request_uri)
 {
-	if (request_uri == "/")
-	{
-		pulsar::HandleIndex(httpTask);
-	}
-	else if (request_uri == "/server/sitemap")
+	if (quantum::PSString::StartsWith(request_uri, "/sitemap"))
 	{
 		pulsar::HandleSitemap(httpTask);
 	}
-	else if (request_uri == "/server/articles")
+	else if (quantum::PSString::StartsWith(request_uri, "/articles"))
 	{
 		pulsar::HandleArticles(httpTask);
 	}
-	else if (request_uri == "/server/channels")
+	else if (quantum::PSString::StartsWith(request_uri, "/channels"))
 	{
 		pulsar::HandleChannels(httpTask);
 	}
-	else if (quantum::PSString::StartsWith(request_uri, "/server/files"))
+	else if (quantum::PSString::StartsWith(request_uri, "/files"))
 	{
 		pulsar::HandleFileList(httpTask);
 	}
-	else if (request_uri == "/server/articles/get")
+	else if (quantum::PSString::StartsWith(request_uri, "/articles/get"))
 	{
 		pulsar::HandleArticleGet(httpTask);
+	}
+	else if (quantum::PSString::StartsWith(request_uri, "/"))
+	{
+		pulsar::HandleIndex(httpTask);
 	}
 	else
 	{

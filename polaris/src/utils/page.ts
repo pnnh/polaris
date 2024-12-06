@@ -1,6 +1,6 @@
 export function pageTitle(title: string) {
     if (!title) {
-        return '加利社区'
+        return '希波社区'
     }
-    return `${title} - 加利社区`
+    return `${title} - 希波社区`
 }

@@ -27,7 +27,7 @@ export function LibrarySelector() {
     return <>
         <div className={'notebookSelector'}>
             <div className={'notebookTitle'}>
-                <span>{defaultLibrary.name}</span>
+                <span>{defaultLibrary.title}</span>
                 <img src='/icons/console/down-arrow.png' alt='选择笔记本' width={24} height={24}
                      onClick={() => setLibraryDropdown(!notebookDropdown)}></img>
             </div>
@@ -48,7 +48,7 @@ export function LibrarySelector() {
                                     current: item
                                 })
                             }}>
-                                <span className={'notebookName'}>{item.name}</span>
+                                <span className={'notebookName'}>{item.title}</span>
                             </div>
                         })
                     }

@@ -1,9 +1,5 @@
 import {NextRequest, NextResponse} from 'next/server'
-import {SitemapStream, streamToPromise} from 'sitemap'
-import {Readable} from 'stream'
-import {SitemapItemLoose} from "sitemap/dist/lib/types";
 import {serverMustSigninDomain,} from "@/services/server/domain/domain";
-import {useServerConfig} from "@/services/server/config";
 import {CommonResult, PLSelectResult} from "@/models/common/common-result";
 
 import {decodeBase64String, encodeBase64String} from "@/utils/basex";

@@ -3,21 +3,7 @@
 import {decodeBase64String} from "@/utils/basex";
 
 export interface ClientConfig {
-    ENV: string,
-    AES_KEY: string,
-    AES_IV: string,
-    NEXT_PUBLIC_SELF_URL: string,
-    CLIENT_ID: string,
-    CLIENT_SECRET: string,
-    INITIAL_DOMAINS: string,
-    PORT: number,
-    WORKER_PORT: number,
-    DATA_PATH: string,
-    DOMAINS: string,
-    defaultDomain: {
-        name: string,
-        baseurl: string
-    }
+    NEXT_PUBLIC_SELF_URL: string
 }
 
 export function useClientConfig() {

@@ -2,7 +2,6 @@ import {PSChannelModel} from "@/models/common/channel";
 
 export interface PSArticleModel {
     urn: string
-    name: string
     title: string
     header: string
     body: string

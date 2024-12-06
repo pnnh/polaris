@@ -1,8 +1,9 @@
 import {createInstance} from 'i18next'
 import resourcesToBackend from 'i18next-resources-to-backend'
 import {initReactI18next} from 'react-i18next/initReactI18next'
-import {fallbackLng, getOptions, languages, localeResource,} from '@/services/common/i18n/settings'
+import {fallbackLng, getOptions, LangCookieName, languages, localeResource,} from '@/services/common/i18n/settings'
 import acceptLanguage from "accept-language";
+import {cookies, headers} from "next/headers";
 
 // 配置语言
 acceptLanguage.languages(languages)
@@ -33,6 +34,19 @@ export function getActualLang(targetLang: string) {
     const findLang = languages.find((l: string) => targetLang === l)
     if (findLang) {
         lang = getAcceptLanguage(findLang)
+    }
+    if (!lang) lang = fallbackLng
+    return lang
+}
+
+// 从请求头或者cookie中获取语言信息
+export async function getLangAnyway() {
+    const headersList = await headers()
+
+    let lang = getAcceptLanguage(headersList.get('Accept-Language') || '')
+    if (!lang) {
+        const cookieStore = await cookies()
+        lang = cookieStore.get(LangCookieName)?.value || ''
     }
     if (!lang) lang = fallbackLng
     return lang
