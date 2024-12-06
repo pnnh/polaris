@@ -44,7 +44,7 @@ set(GLOBAL_LIB_PREFIX MT CACHE INTERNAL "GLOBAL_LIB_PREFIX")
 add_subdirectory(quantum)
 
 if (VCPKG_TARGET_TRIPLET STREQUAL "x64-windows")
-    add_subdirectory(Gliese)
+#    add_subdirectory(Gliese)
     add_subdirectory(proxima)
     add_subdirectory(pulsar)
 elseif (VCPKG_TARGET_TRIPLET STREQUAL "arm64-osx")

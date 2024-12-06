@@ -101,7 +101,8 @@
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "YES",
         "VCPKG_HOST_TRIPLET": "x64-windows",
-        "VCPKG_TARGET_TRIPLET": "x64-windows"
+        "VCPKG_TARGET_TRIPLET": "x64-windows",
+        "CMAKE_PREFIX_PATH": "$env{QTDIR}\\6.8.1\\msvc2022_64\\lib\\cmake"
       },
       "environment": {}
     },

@@ -1,3 +1,5 @@
+#define MTAPI __declspec(dllexport)
+
 #ifdef NDEBUG
 // release
 #else

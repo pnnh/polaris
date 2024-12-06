@@ -11,7 +11,7 @@
     },
     {
       "name": "workflow",
-      "platform": "linux|osx"
+      "version>=": "0.10.9"
     },
     {
       "name": "boost-core",
@@ -85,6 +85,10 @@
     {
       "name": "spdlog",
       "version": "1.14.1"
+    },
+    {
+      "name": "workflow",
+      "version": "0.10.9"
     },
     {
       "name": "boost-core",

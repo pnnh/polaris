@@ -10,6 +10,16 @@ mod models;
 mod utils;
 mod views;
 
+use libc::size_t;
+
+extern crate libc;
+
+#[link(name = "MTQuantum", kind = "dylib")]
+extern {
+    fn list_file(input: libc::c_int) -> libc::c_int;
+}
+
+
 #[tokio::main]
 async fn main() {
     println!("Hello, world from Rust!");
@@ -17,6 +27,9 @@ async fn main() {
     println!("{:?}", args);
     let port = read_env::<u16>("PORT").unwrap_or(8080);
     println!("port: {:?}", port);
+    
+    let new_length = unsafe { list_file(10) };
+    println!("new_length: {:?}", new_length);
 
     tracing_subscriber::registry()
         .with(tracing_subscriber::EnvFilter::new(

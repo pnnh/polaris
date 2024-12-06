@@ -1,24 +1,27 @@
 #pragma once
-#include <string>
-#include <chrono>
-#include "quantum/types/datetime.h"
 
-namespace quantum
-{
-    class PSFileModel
+#include "build.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+    struct PSFileStruct
     {
-    public:
-        explicit PSFileModel(std::string title);
-
-        std::string URN;
-        std::string Title;
-        std::string Name;
-        std::string Keywords;
-        std::string Description;
+        char* URN{};
+        char* Title{};
+        char* Name{};
+        char* Keywords{};
+        char* Description{};
         bool IsDir{};
         bool IsHidden{};
         bool IsIgnore{};
-        PSDatetime CreateTime;
-        PSDatetime UpdateTime;
     };
+
+    PSFileStruct* NewPSFileStruct();
+    void DeletePSFileStruct(PSFileStruct* file);
+    MTAPI int list_file(int input);
+
+#ifdef __cplusplus
 }
+#endif

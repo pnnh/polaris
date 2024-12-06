@@ -1,7 +1,8 @@
 #pragma once
 #include <vector>
 #include <memory>
-#include "quantum/models/files/File.h"
+#include <string>
+#include "quantum/models/files/File.hpp"
 
 namespace quantum
 {
@@ -12,11 +13,8 @@ namespace quantum
 
         [[nodiscard]] std::shared_ptr<std::vector<PSFileModel>> selectFiles() const;
         [[nodiscard]] std::shared_ptr<std::vector<PSFileModel>> selectFiles(std::string parentPath) const;
-
-#if defined(__clang__)
         [[nodiscard]] std::vector<PSFileModel> selectFilesVector() const;
         [[nodiscard]] std::vector<PSFileModel> selectFilesVector(std::string parentPath) const;
-#endif
 
     private:
         std::string baseUrl;
