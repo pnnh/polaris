@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		372B24FCE707164639B5ACB7 /* libPods-Venus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B56613AA8DBCEE8866009F4 /* libPods-Venus.a */; };
 		45CCC881F53994BADE5FA9CE /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 45CCC81B0A89273CCE64129B /* README.md */; };
 		45CCCE220F4FF4D7D92D3115 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 45CCC8B9C25C93AA2BAC1BF9 /* .gitignore */; };
+		4633F6C22D02E0B90009FE83 /* libMTMacos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4633F6C12D02E0B90009FE83 /* libMTMacos.a */; };
 		463412FF2CDB0F0600EE94E8 /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = 463412FE2CDB0F0600EE94E8 /* Logging */; };
-		4681D5AF2CDA1B9B000799DC /* libPolarisMacos.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4681D5AE2CDA1B9B000799DC /* libPolarisMacos.a */; };
 		46EE3C17254B142000EC17BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EE3C16254B142000EC17BB /* AppDelegate.swift */; };
 		46EE3C1B254B142200EC17BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EE3C1A254B142200EC17BB /* Assets.xcassets */; };
 		46EE3C1E254B142200EC17BB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46EE3C1D254B142200EC17BB /* Preview Assets.xcassets */; };
@@ -21,13 +20,7 @@
 /* Begin PBXFileReference section */
 		45CCC81B0A89273CCE64129B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		45CCC8B9C25C93AA2BAC1BF9 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
-		46760A1C2C412843001C2021 /* libNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libNative.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		46760A1E2C413330001C2021 /* libNative.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libNative.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		4681D5AE2CDA1B9B000799DC /* libPolarisMacos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPolarisMacos.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		46B8804F2CD9B9B4006FB352 /* libPolarisMacos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPolarisMacos.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		46B880512CD9C21E006FB352 /* libPolarisMacos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPolarisMacos.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		46B880532CD9C226006FB352 /* libPolarisBase.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPolarisBase.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		46B880552CD9C858006FB352 /* libPolarisMacos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPolarisMacos.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4633F6C12D02E0B90009FE83 /* libMTMacos.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMTMacos.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EE3C13254B142000EC17BB /* Venus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Venus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		46EE3C16254B142000EC17BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46EE3C1A254B142200EC17BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -35,9 +28,6 @@
 		46EE3C20254B142200EC17BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		46EE3C22254B142200EC17BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		46EE3C23254B142200EC17BB /* Venus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Venus.entitlements; sourceTree = "<group>"; };
-		552C9D0993262ECFCE02CC1D /* Pods-Venus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Venus.release.xcconfig"; path = "Target Support Files/Pods-Venus/Pods-Venus.release.xcconfig"; sourceTree = "<group>"; };
-		7B56613AA8DBCEE8866009F4 /* libPods-Venus.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Venus.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		923DCB4D8CF4B15A3C4FC1DC /* Pods-Venus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Venus.debug.xcconfig"; path = "Target Support Files/Pods-Venus/Pods-Venus.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -53,9 +43,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4633F6C22D02E0B90009FE83 /* libMTMacos.a in Frameworks */,
 				463412FF2CDB0F0600EE94E8 /* Logging in Frameworks */,
-				4681D5AF2CDA1B9B000799DC /* libPolarisMacos.a in Frameworks */,
-				372B24FCE707164639B5ACB7 /* libPods-Venus.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,14 +54,7 @@
 		37508AEFE740CC69BDAB8CAC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4681D5AE2CDA1B9B000799DC /* libPolarisMacos.a */,
-				46B880552CD9C858006FB352 /* libPolarisMacos.a */,
-				46B880532CD9C226006FB352 /* libPolarisBase.a */,
-				46B880512CD9C21E006FB352 /* libPolarisMacos.a */,
-				46760A1E2C413330001C2021 /* libNative.a */,
-				46760A1C2C412843001C2021 /* libNative.a */,
-				46B8804F2CD9B9B4006FB352 /* libPolarisMacos.a */,
-				7B56613AA8DBCEE8866009F4 /* libPods-Venus.a */,
+				4633F6C12D02E0B90009FE83 /* libMTMacos.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -84,7 +66,6 @@
 				46EE3C14254B142000EC17BB /* Products */,
 				45CCC8B9C25C93AA2BAC1BF9 /* .gitignore */,
 				45CCC81B0A89273CCE64129B /* README.md */,
-				A90C4B697223D7134BECBB2D /* Pods */,
 				37508AEFE740CC69BDAB8CAC /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -121,15 +102,6 @@
 				46EE3C1D254B142200EC17BB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		A90C4B697223D7134BECBB2D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				923DCB4D8CF4B15A3C4FC1DC /* Pods-Venus.debug.xcconfig */,
-				552C9D0993262ECFCE02CC1D /* Pods-Venus.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,7 +195,6 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
@@ -234,7 +205,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -386,7 +357,6 @@
 		};
 		46EE3C27254B142200EC17BB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 923DCB4D8CF4B15A3C4FC1DC /* Pods-Venus.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -404,7 +374,7 @@
 				GCC_C_LANGUAGE_STANDARD = c17;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../macos/Native\"",
+					"\"$(SRCROOT)/..\"",
 				);
 				INFOPLIST_FILE = Venus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -412,12 +382,11 @@
 					"@executable_path/../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"$(inherited)\"",
 					"\"${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
-					/usr/lib/swift,
-					"\"$(SRCROOT)/../build/macos/macos/Debug\"",
 					"\"$(SRCROOT)/../build/macos/vcpkg_installed/arm64-osx/lib\"",
+					"\"$(SRCROOT)/../build/macos/kepler/Debug\"",
+					/usr/lib/swift,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				OTHER_LDFLAGS = (
@@ -426,7 +395,7 @@
 					"-lfmt",
 				);
 				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = xyz.huable.polaris;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.huable.kepler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OBJC_INTEROP_MODE = objcxx;
@@ -437,7 +406,6 @@
 		};
 		46EE3C28254B142200EC17BB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 552C9D0993262ECFCE02CC1D /* Pods-Venus.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -455,7 +423,7 @@
 				GCC_C_LANGUAGE_STANDARD = c17;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../macos/Native\"",
+					"\"$(SRCROOT)/..\"",
 				);
 				INFOPLIST_FILE = Venus/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -463,12 +431,11 @@
 					"@executable_path/../Frameworks",
 				);
 				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"$(inherited)\"",
 					"\"${TOOLCHAIN_DIR}/usr/lib/swift/${PLATFORM_NAME}\"",
+					"\"$(SRCROOT)/../build/macos/vcpkg_installed/arm64-osx/lib\"",
+					"\"$(SRCROOT)/../build/macos/kepler/Debug\"",
 					/usr/lib/swift,
-					"\"$(SRCROOT)/Native/build/macos/Debug\"",
-					"\"$(SRCROOT)/Native/build/macos/vcpkg_installed/arm64-osx/lib\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				OTHER_LDFLAGS = (
@@ -477,7 +444,7 @@
 					"-lfmt",
 				);
 				OTHER_LIBTOOLFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = xyz.huable.polaris;
+				PRODUCT_BUNDLE_IDENTIFIER = xyz.huable.kepler;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OBJC_INTEROP_MODE = objcxx;

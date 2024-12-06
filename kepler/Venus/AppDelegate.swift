@@ -1,6 +1,6 @@
 import Cocoa
 import SwiftUI
-import PolarisMacos
+import MTMacos
 import Logging
 
 @NSApplicationMain
@@ -25,7 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.makeKeyAndOrderFront(nil)
         
         // 尝试调用C++侧的日志打印
-        PolarisMacos.native.Logger.log("Call From Swift")
+        MTMacos.quantum.Logger.LogInfo("Call From Swift")
         
         // 尝试调用SPM里的Swift-log来打印日志
         let logger = Logger(label: "xyz.huable.venus.main")
