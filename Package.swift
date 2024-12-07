@@ -4,13 +4,13 @@ import PackageDescription
 let package = Package(
     name: "rudder",
     platforms: [
-       .macOS(.v14)
+       .macOS(.v14)  
     ],
     dependencies: [
         .package(url: "https://github.com/vapor/vapor.git", from: "4.99.3"),
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.65.0"),
     ],
-    targets: [
+    targets: [ 
         .executableTarget(
             name: "App",
             dependencies: [
@@ -19,10 +19,10 @@ let package = Package(
                 .product(name: "NIOPosix", package: "swift-nio"),
                 "cpplib"
             ],
-            path: "huable/rudder/App",
+            path: "rudder/App",
             swiftSettings: swiftSettings
         ),
-        .target(name: "cpplib", dependencies: [], path: "huable/rudder/cpplib"),
+        .target(name: "cpplib", dependencies: [], path: "quantum/cpplib")
     ],
     swiftLanguageModes: [.v6],
     cLanguageStandard: .c17,

@@ -2,10 +2,15 @@ import Vapor
 import Logging
 import NIOCore
 import NIOPosix
+import cpplib
 
 @main
 enum Entrypoint {
     static func main() async throws {
+        
+        let cppStr = String(cString: HelloFromCpp())
+        print("cppStr \(cppStr)")    // 调用cpp方法
+
         var env = try Environment.detect()
         try LoggingSystem.bootstrap(from: &env)
         
