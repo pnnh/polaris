@@ -1131,6 +1131,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "quantum"
+version = "0.1.0"
+dependencies = [
+ "cxx",
+ "cxx-build",
+ "libc",
+]
+
+[[package]]
 name = "quote"
 version = "1.0.37"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1350,6 +1359,7 @@ dependencies = [
  "handlebars",
  "html-escape",
  "libc",
+ "quantum",
  "serde",
  "serde_json",
  "string-builder",

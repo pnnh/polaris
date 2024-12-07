@@ -1,0 +1,16 @@
+[package]
+name = "quantum"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+
+[lib]
+name = "quantum"
+path = "crate/lib.rs"
+
+[dependencies]
+libc = "0.2.110"
+cxx = "1.0.133"
+
+[build-dependencies]
+cxx-build = "1.0.133"

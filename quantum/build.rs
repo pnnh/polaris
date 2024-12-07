@@ -4,14 +4,14 @@ use std::path::PathBuf;
 fn main() {
     println!(r"cargo:rustc-link-search=C:\Projects\Multiverse\build\windows\quantum\Debug");
 
-    cxx_build::bridge("src/main.rs")
-        .file("src/blobstore.cc")
-        .file("src/concat.cc")
+    cxx_build::bridge("crate/lib.rs")
+        .file("crate/blobstore.cc")
+        .file("crate/concat.cc")
         .std("c++20")
-        .compile("shine");
+        .compile("quantum");
 
-    println!("cargo:rerun-if-changed=src/main.rs");
-    println!("cargo:rerun-if-changed=src/blobstore.cc");
+    println!("cargo:rerun-if-changed=crate/lib.rs");
+    println!("cargo:rerun-if-changed=crate/blobstore.cc");
     println!("cargo:rerun-if-changed=include/blobstore.h");
 
     // let current_dir = env::current_dir()?;
