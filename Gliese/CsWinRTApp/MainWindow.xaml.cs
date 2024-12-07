@@ -38,10 +38,6 @@ namespace CsWinRTApp
 
             var aaa = Logger.Info("xxxxxx333");
             Console.WriteLine($"aaa = {aaa}");
-
-            var cls = new CppWinRTComponent.Class();
-            var bbb = cls.Add(5, 6);
-            Console.WriteLine($"Adding 5.5 + 6.5 = {bbb}");
         }
     }
 }

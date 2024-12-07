@@ -14,34 +14,50 @@ fn main() {
     println!("cargo:rerun-if-changed=crate/blobstore.cc");
     println!("cargo:rerun-if-changed=include/blobstore.h");
 
-    // let current_dir = env::current_dir()?;
-    // println!(
-    //     "Entries modified in the last 24 hours in {:?}:",
-    //     current_dir
-    // );
-    // let mut current_dir_string = current_dir.clone().into_os_string();
-    // let new_string = current_dir_string.push("../build");
-    // let solardir:PathBuf = new_string.into();
-    // println!(
-    //     "Entries solardir {:?}:",
-    //     solardir
-    // );
-    //
-    // for entry in fs::read_dir(current_dir) {
-    //     let entry = entry?;
-    //     let path = entry.path();
-    //
-    //     let metadata = fs::metadata(&path)?;
-    //     let last_modified = metadata.modified()?.elapsed()?.as_secs();
-    //
-    //     if last_modified < 24 * 3600 && metadata.is_file() {
-    //         println!(
-    //             "Last modified: {:?} seconds, is read only: {:?}, size: {:?} bytes, filename: {:?}",
-    //             last_modified,
-    //             metadata.permissions().readonly(),
-    //             metadata.len(),
-    //             path.file_name().ok_or("No filename")?
-    //         );
-    //     }
-    // }
+    copy_file().unwrap();
+}
+
+// 把Rust依赖的C++动态库文件从CMake生成目录拷贝到rust运行目录，避免运行时找不到动态库
+fn copy_file() -> Result<(), Box<dyn std::error::Error>> {
+
+    let current_dir = env::current_dir()?;
+    println!(
+        "Entries modified in the last 24 hours in {:?}:",
+        current_dir
+    );
+
+    let mut current_dir_string = current_dir.clone().into_os_string();
+    current_dir_string.push("/../build/windows/quantum/Debug");
+    let solardir:PathBuf = std::path::PathBuf::from(current_dir_string);
+    println!(
+        "solardir {:?}", solardir
+    );
+
+    for entry in fs::read_dir(solardir)? {
+        let entry = entry?;
+        let path = entry.path();
+
+        let file_name = path.file_name().unwrap_or_default();
+        let ext = path.extension().unwrap_or_default();
+
+
+        let current_dir_string = path.clone().into_os_string();
+        println!(
+            "current_dir_string {:?} {}", current_dir_string, ext.to_str().unwrap_or_default()
+        );
+
+        let mut target_path_string = current_dir.clone().into_os_string();
+        target_path_string.push("/../target/debug/".to_owned() + file_name.to_str().unwrap_or_default());
+        println!(
+            "target_path_string {}", target_path_string.clone().to_str().unwrap_or_default()
+        );
+        let target_path = PathBuf::from(target_path_string);
+
+        let ext_str = ext.to_str().unwrap_or_default();
+        if (ext_str == "dll" || ext_str == "lib") {
+            fs::copy(path, target_path.clone().into_os_string())?;
+        }
+    }
+
+    Ok(())
 }
