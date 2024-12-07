@@ -19,9 +19,38 @@ extern {
     fn list_file(input: libc::c_int) -> libc::c_int;
 }
 
+#[cxx::bridge]
+mod ffi {
+    struct ConcatRequest {
+        fst: String,
+        snd: String,
+    }
+
+    unsafe extern "C++" {
+        include!("shine/include/blobstore.h");
+        include!("shine/include/concat.h");
+
+        type BlobstoreClient;
+
+        fn new_blobstore_client() -> UniquePtr<BlobstoreClient>;
+        fn concat(r: ConcatRequest) -> String;
+    }
+}
+
 
 #[tokio::main]
 async fn main() {
+
+
+    println!("Hello, world!");
+    let client = ffi::new_blobstore_client();
+    let concatenated = ffi::concat(ffi::ConcatRequest {
+        fst: "fearless".to_owned(),
+        snd: "concurrency".to_owned(),
+    });
+    println!("concatenated: {:?}", concatenated);
+    
+    
     println!("Hello, world from Rust!");
     let args: Vec<String> = env::args().collect();
     println!("{:?}", args);

@@ -3,6 +3,17 @@ use std::path::PathBuf;
 
 fn main() {
     println!(r"cargo:rustc-link-search=C:\Projects\Multiverse\build\windows\quantum\Debug");
+
+    cxx_build::bridge("src/main.rs")
+        .file("src/blobstore.cc")
+        .file("src/concat.cc")
+        .std("c++20")
+        .compile("shine");
+
+    println!("cargo:rerun-if-changed=src/main.rs");
+    println!("cargo:rerun-if-changed=src/blobstore.cc");
+    println!("cargo:rerun-if-changed=include/blobstore.h");
+
     // let current_dir = env::current_dir()?;
     // println!(
     //     "Entries modified in the last 24 hours in {:?}:",
