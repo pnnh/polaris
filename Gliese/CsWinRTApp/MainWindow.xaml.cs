@@ -37,6 +37,19 @@ namespace CsWinRTApp
         {
             myButton.Content = "Clicked";
 
+
+            var stackPanel = new StackPanel();
+            stackPanel.Orientation = Orientation.Horizontal;
+            stackPanel.HorizontalAlignment = HorizontalAlignment.Left;
+            stackPanel.VerticalAlignment = VerticalAlignment.Top;
+
+            var newButton = new Button();
+            newButton.Content = "NewButton";
+
+            stackPanel.Children.Add(newButton);
+
+            FilesStack.Children.Add(stackPanel);
+
             var aaa = Logger.Info("xxxxxx333");
             Console.WriteLine($"aaa = {aaa}");
 

@@ -4,6 +4,8 @@
 #include <chrono>
 #include <ctime>
 
+#ifdef __cplusplus
+
 namespace quantum
 {
     std::chrono::system_clock::time_point makeTimePoint(const std::string& s);
@@ -32,3 +34,12 @@ namespace quantum
 }
 
 
+
+
+extern "C" {
+#endif
+
+
+#ifdef __cplusplus
+}
+#endif

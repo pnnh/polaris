@@ -2,7 +2,7 @@
 name = "shine"
 version = "0.1.0"
 edition = "2021"
-#build = "build.rs"
+build = "build.rs"
 
 [[bin]]
 name = "Shine"
@@ -27,7 +27,6 @@ string-builder = { version = "0.2.0" }
 html-escape = "0.2.13"
 xml-rs = "0.8.24"
 cxx = "1.0.133"
-quantum = { path = "../quantum" }
 
 [build-dependencies]
 cxx-build = "1.0.133"

@@ -1,9 +1,11 @@
-#include "quantum/utils/uuid.h"
+#include "uuid.h"
 
-std::regex quantum::UUIDHelper::uuid_regex = std::regex(
+#include <regex>
+
+std::regex quantum::MTUuid::uuid_regex = std::regex(
     "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$");
 
-bool quantum::UUIDHelper::isUUID(const std::string& uuid_string)
+bool quantum::MTUuid::isUUID(const std::string& uuid_string)
 {
     std::smatch match;
 

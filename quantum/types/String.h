@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#ifdef __cplusplus
+
 namespace quantum
 {
     class PSString
@@ -28,3 +30,12 @@ namespace quantum
         std::string stringValue;
     };
 }
+
+
+extern "C" {
+#endif
+
+
+#ifdef __cplusplus
+}
+#endif

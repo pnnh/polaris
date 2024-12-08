@@ -1,5 +1,3 @@
-
-#include "File.hpp"
 #include "File.h"
 
 quantum::PSFileModel::PSFileModel(std::string title)

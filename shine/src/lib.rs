@@ -16,8 +16,8 @@ mod ffi {
     }
 
     unsafe extern "C++" {
-        include!("quantum/include/blobstore.h");
-        include!("quantum/include/concat.h");
+        include!("shine/include/blobstore.h");
+        include!("shine/include/concat.h");
 
         type BlobstoreClient;
 
@@ -28,8 +28,6 @@ mod ffi {
 
 
 pub fn add(left: u64, right: u64) -> u64 {
-
-
     println!("Hello, world!");
     let client = ffi::new_blobstore_client();
     let concatenated = ffi::concat(ffi::ConcatRequest {

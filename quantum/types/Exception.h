@@ -4,6 +4,9 @@
 #include <optional>
 #include <string>
 
+#ifdef __cplusplus
+
+
 namespace quantum
 {
     enum class QuantumEnum
@@ -53,3 +56,11 @@ namespace quantum
     };
 }
 
+
+extern "C" {
+#endif
+
+
+#ifdef __cplusplus
+}
+#endif

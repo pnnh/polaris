@@ -1,4 +1,4 @@
-#include "quantum/include/blobstore.h"
+#include "shine/include/blobstore.h"
 #include <iostream>
 
 BlobstoreClient::BlobstoreClient() {}

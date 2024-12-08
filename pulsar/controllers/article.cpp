@@ -25,7 +25,7 @@ void pulsar::HandleArticleGet(WFHttpTask* httpTask)
 
     auto request_uri = request->get_request_uri();
 
-    quantum::QueryParam queryParam{std::string(request_uri)};
+    quantum::MTQueryString queryParam{std::string(request_uri)};
 
     auto noteURN = queryParam.getString("note");
     if (!noteURN.has_value())
@@ -82,7 +82,7 @@ void pulsar::HandleArticles(WFHttpTask* httpTask)
 
     auto request_uri = request->get_request_uri();
 
-    quantum::QueryParam queryParam{std::string(request_uri)};
+    quantum::MTQueryString queryParam{std::string(request_uri)};
 
     auto chanURN = queryParam.getString("chan");
 

@@ -3,7 +3,6 @@ use std::{env, fs};
 use std::net::SocketAddr;
 use std::path::PathBuf;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
-use quantum;
 
 mod config;
 mod handlers;
@@ -16,7 +15,7 @@ mod views;
 async fn main() {
 
     let num = 10;
-    println!("Hello, world! {num} plus one is {}!", quantum::add(num, num));
+    println!("Hello, world! {num} plus one is {}!", shine::add(num, num));
 
 
 

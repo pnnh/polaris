@@ -1,11 +1,10 @@
-#include "quantum/utils/query.h"
+#include "query.h"
 
-#include "quantum/types/Exception.h"
-#include "quantum/types/String.h"
+#include "Exception.h"
+#include "String.h"
 #include <boost/range/algorithm.hpp>
 
-
-quantum::QueryParam::QueryParam(const std::string& url_string)
+quantum::MTQueryString::MTQueryString(const std::string& url_string)
 {
   auto fullUrl = std::string(url_string);
   if (!quantum::PSString::StartsWith(fullUrl, "http://") && !quantum::PSString::StartsWith(
@@ -28,7 +27,7 @@ boost::urls::url_view parseUrl(const std::string& fullUrl)
   return parseResult.value();
 }
 
-std::optional<std::string> quantum::QueryParam::getString(const std::string& name) const
+std::optional<std::string> quantum::MTQueryString::getString(const std::string& name) const
 {
   auto parsedUrl = parseUrl(this->_fullUrl);
   const auto it =
@@ -44,7 +43,7 @@ std::optional<std::string> quantum::QueryParam::getString(const std::string& nam
   return std::nullopt;
 }
 
-std::optional<long> quantum::QueryParam::getLong(const std::string& key)
+std::optional<long> quantum::MTQueryString::getLong(const std::string& key)
 {
   auto parsedUrl = parseUrl(this->_fullUrl);
   auto it =

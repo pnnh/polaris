@@ -9,7 +9,34 @@
     mc:Ignorable="d"
     Activated="Window_Activated">
 
-    <StackPanel Name="myStack" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+    <StackPanel Name="MainStack" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <StackPanel Name="LocationStack" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Width="256">
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock>位置</TextBlock>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button x:Name="myButton" Click="myButton_Click">主目录</Button>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button x:Name="myButton2" Click="myButton_Click">图片</Button>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button x:Name="myButton3" Click="myButton_Click">文档</Button>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Button x:Name="myButton4" Click="myButton_Click">下载</Button>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Name="FilesStack" Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Width="256">
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock>文件1</TextBlock>
+            </StackPanel>
+            <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBlock>文件2</TextBlock>
+            </StackPanel>
+        </StackPanel>
+        </StackPanel>
 </Window>

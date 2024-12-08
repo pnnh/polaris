@@ -33,7 +33,7 @@
     <ClInclude Include="Helper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Filesystem.h">
+    <ClInclude Include="Services\Filesystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,7 +50,7 @@
     <ClCompile Include="Helper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Filesystem.cpp">
+    <ClCompile Include="Services\Filesystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

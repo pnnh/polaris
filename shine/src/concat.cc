@@ -1,4 +1,4 @@
-#include "quantum/include/concat.h"
+#include "shine/include/concat.h"
 
 rust::String concat(ConcatRequest r) {
   // The full suite of operator overloads hasn't been added

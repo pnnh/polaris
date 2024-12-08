@@ -27,7 +27,7 @@ void pulsar::HandleFileList(WFHttpTask* httpTask)
 
     auto request_uri = request->get_request_uri();
 
-    quantum::QueryParam queryParam{std::string(request_uri)};
+    quantum::MTQueryString queryParam{std::string(request_uri)};
 
     auto homeDirectory = quantum::UserHomeDirectory();
     auto baseUrl = homeDirectory;
