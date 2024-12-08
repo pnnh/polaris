@@ -7,17 +7,15 @@ if (APPLE)
 endif ()
 
 # 设置语言标准
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 if (WIN32)
-    set(CMAKE_C_STANDARD 17)
-    if (NOT CMAKE_SIZEOF_VOID_P)
+    # if (NOT CMAKE_SIZEOF_VOID_P)
         set(CMAKE_SIZEOF_VOID_P 8) # 不添加的话cmake会配置失败
-    endif ()
-else ()
-    set(CMAKE_C_STANDARD 23)
+    # endif ()
 endif ()
-set(CMAKE_C_STANDARD_REQUIRED ON)
 
 # 设置开启显示详细的构建过程
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -45,8 +43,8 @@ add_subdirectory(quantum)
 
 if (VCPKG_TARGET_TRIPLET STREQUAL "x64-windows")
 #    add_subdirectory(Gliese)
-    add_subdirectory(proxima)
-    add_subdirectory(pulsar)
+#    add_subdirectory(proxima)
+#    add_subdirectory(pulsar)
 elseif (VCPKG_TARGET_TRIPLET STREQUAL "arm64-osx")
     #    add_subdirectory(kepler)
     add_subdirectory(proxima)

@@ -13,6 +13,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using CppCLI;
+using Gliese;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -38,6 +39,13 @@ namespace CsWinRTApp
 
             var aaa = Logger.Info("xxxxxx333");
             Console.WriteLine($"aaa = {aaa}");
+
+            var fileService = new GSFilesystemService();
+            var filesList = fileService.selectFiles();
+            foreach (var file in filesList)
+            {
+                Console.WriteLine($"file name: {file.URN}");
+            }
         }
     }
 }

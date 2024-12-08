@@ -3,7 +3,7 @@
 #include <boost/url.hpp>
 #include <nlohmann/json.hpp>
 #include <spdlog/spdlog.h>
-#include "build.h"
+#include "quantum/build.h"
 #include <workflow/HttpMessage.h>
 #include "quantum/business/articles/channel.h"
 #include "quantum/services/filesystem/filesystem.h"

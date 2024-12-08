@@ -3,10 +3,11 @@
 #include <memory>
 #include <string>
 #include "quantum/models/files/File.hpp"
+#include "quantum/build.h"
 
 namespace quantum
 {
-    class FileServerBusiness
+    class MTAPI_EXPORT FileServerBusiness
     {
     public:
         explicit FileServerBusiness(const std::string& baseUrl);

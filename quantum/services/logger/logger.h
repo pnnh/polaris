@@ -1,10 +1,11 @@
 #pragma once
 
 #include <string>
+#include "quantum/build.h"
 
 namespace quantum
 {
-    class Logger
+    class MTAPI_EXPORT Logger
     {
     public:
         static void LogInfo(const std::string& message);

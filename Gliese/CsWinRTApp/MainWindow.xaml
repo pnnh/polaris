@@ -6,13 +6,10 @@
     xmlns:local="using:CsWinRTApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:cppcomponent="using:CppWinRTComponent"
     mc:Ignorable="d"
     Activated="Window_Activated">
 
     <StackPanel Name="myStack" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <!--<Button x:Name="myButton" Click="myButton_Click">Click Me</Button>-->
-        <cppcomponent:BgLabelControl Background="Blue" Label="C++"/>
         <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
     </StackPanel>
 </Window>

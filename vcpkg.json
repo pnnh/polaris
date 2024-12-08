@@ -11,7 +11,8 @@
     },
     {
       "name": "workflow",
-      "version>=": "0.10.9"
+      "version>=": "0.10.9",
+      "platform": "linux|osx"
     },
     {
       "name": "boost-core",

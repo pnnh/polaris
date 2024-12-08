@@ -2,11 +2,11 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
-    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion>10.0.26100.0</TargetPlatformMinVersion>
     <RootNamespace>CsWinRTApp</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Platforms>x86;x64;ARM64</Platforms>
-    <RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
+    <Platforms>x64</Platforms>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
     <PublishProfile>win-$(Platform).pubxml</PublishProfile>
     <UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
@@ -31,7 +31,6 @@
     <CsWinRTWindowsMetadata>sdk</CsWinRTWindowsMetadata>
     <CsWinRTGenerateProjection>true</CsWinRTGenerateProjection>
     <CsWinRTIncludes>
-      CppWinRTComponent;
       Windows.Foundation;
     </CsWinRTIncludes>
     <CsWinRTExcludes>
@@ -43,14 +42,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CppCLI\CppCLI.vcxproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.0.7" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.4.230913002" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
     <Manifest Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CppCLI\CppCLI.vcxproj" />
   </ItemGroup>
 
   <ItemGroup>

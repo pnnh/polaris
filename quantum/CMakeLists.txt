@@ -1,8 +1,8 @@
 if (MSVC)
-    set(MTAPI __declspec (dllexport))
+    set(MTAPI_EXPORT "__declspec (dllexport)")
 endif ()
 
-configure_file("build.h.in" "${PROJECT_BINARY_DIR}/build.h")
+configure_file("build.h.in" "${PROJECT_BINARY_DIR}/quantum/build.h")
 
 file(GLOB_RECURSE QUANTUM_SOURCES
         business/*.cpp

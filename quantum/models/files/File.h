@@ -1,6 +1,6 @@
 #pragma once
 
-#include "build.h"
+#include "quantum/build.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -20,7 +20,7 @@ extern "C" {
 
     PSFileStruct* NewPSFileStruct();
     void DeletePSFileStruct(PSFileStruct* file);
-    MTAPI int list_file(int input);
+    MTAPI_EXPORT int list_file(int input);
 
 #ifdef __cplusplus
 }

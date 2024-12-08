@@ -1,4 +1,4 @@
-#define MTAPI @MTAPI@
+#define MTAPI_EXPORT @MTAPI_EXPORT@
 
 #ifdef NDEBUG
 // release

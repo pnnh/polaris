@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Handlers">
+      <UniqueIdentifier>{e9c49b6a-209e-458a-9169-869016072ae4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Models">
+      <UniqueIdentifier>{fe1186da-cfc5-4659-9868-e1bb83aa9634}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CppCLI.h">
@@ -27,6 +33,9 @@
     <ClInclude Include="Helper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Filesystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CppCLI.cpp">
@@ -39,6 +48,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Helper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Filesystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
