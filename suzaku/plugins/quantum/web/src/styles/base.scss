@@ -1,0 +1,14 @@
+@charset "UTF-8";
+@import "media";
+
+html, body {
+  width: 100vw;
+  height: 100vh;
+  min-width: $screen-small;
+  margin: 0;
+  padding: 0;
+  background: #F6F6F6;
+  overflow-x: hidden;
+  color: #333;
+  font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;
+}

@@ -1,0 +1,44 @@
+.fx-text-field, .fx-text-area, .fx-input {
+  border: 1px solid #edebe9;
+  padding: 8px;
+  outline: none;
+  font-size: 14px;
+  border-radius: 2px;
+}
+
+.fx-button, .fx-primary-button {
+  border: 1px solid rgb(0, 120, 212);
+  background-color: rgb(0, 120, 212);
+  color: rgb(255, 255, 255);
+  font-size: 14px;
+  font-weight: 600;
+  box-sizing: border-box;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  padding: 0 16px;
+  border-radius: 2px;
+  min-width: 80px;
+  height: 32px;
+}
+
+.fx-card {
+  background: #FFFFFF;
+  padding: 16px;
+  border-radius: 4px;
+
+  .fx-card-title {
+    padding: 8px;
+    border-bottom: 1px solid #e3e3e3;
+  }
+
+  .fx-card-body {
+    padding: 8px;
+  }
+}
+
+.fx-link {
+  color: #0078d4;
+  cursor: pointer;
+  text-decoration: none;
+}

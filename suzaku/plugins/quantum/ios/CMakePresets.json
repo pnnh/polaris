@@ -1,0 +1,46 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+      "major": 3,
+      "minor": 22,
+      "patch": 0
+    },
+    "configurePresets": [
+      {
+        "name": "Default",
+        "displayName": "Default Config",
+        "description": "Default build using Xcode generator",
+        "generator": "Xcode", 
+        "binaryDir": "${sourceDir}/target",
+        "cacheVariables": {
+            "CMAKE_SYSTEM_NAME": {
+                "type": "STRING",
+                "value": "iOS"
+            },
+            "CMAKE_IOS_INSTALL_COMBINED": {
+                "type": "BOOL",
+                "value": "YES"
+            },
+         
+            "CMAKE_OSX_ARCHITECTURES": {
+                "type": "STRING",
+                "value": "arm64;arm64;arm64;arm64;x86_64"
+            },
+            "CMAKE_OSX_DEPLOYMENT_TARGET": {
+                "type": "STRING",
+                "value": "14.0"
+            },
+            "CMAKE_XCODE_ATTRIBUTE_ONLY_ACTIVE_ARCH": "NO",
+            "CMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED": "NO",
+            "CMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED": "NO"
+        },
+        "environment": {}
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "Default",
+        "configurePreset": "Default"
+      }
+    ]
+  }

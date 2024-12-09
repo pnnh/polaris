@@ -1,0 +1,71 @@
+
+.nav-header {
+  background: #FFFFFF;
+  border-bottom: solid 1px #f1f1f1;
+  margin-bottom: 24px; 
+  .header-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 64px;
+    justify-content: space-between;
+    .header-left {
+      display: inline-flex;
+      align-items: center;
+    }
+    .header-right {
+      display: inline-flex;
+      justify-content: flex-end;
+    }
+  }
+  a.link {
+    color: #000;
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none;
+    margin-right: 4px;
+  }
+  .logo {
+    margin-right: 16px;
+    a {
+      font-family: 'Cookie';
+      font-weight: 700;
+      font-size: 36px;
+      text-decoration: none;
+      color: #000;
+      margin-right: 8px;
+      :hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+footer {
+  height: 64px;
+
+  #go-top {
+    position: fixed;
+    right: 36px;
+    bottom: 36px;
+    button {
+      background-color: transparent;
+      border: 0;cursor: pointer;
+      color: #0078d4;
+      i {
+        color: #0078d4;
+        font-size: 32px;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-desktop) {
+  header,footer {
+    .fx-grid {
+      width: 960px;
+      margin: 0 auto;
+    }
+  }
+}
+
