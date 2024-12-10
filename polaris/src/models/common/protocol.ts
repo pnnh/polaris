@@ -27,11 +27,31 @@ export interface PLSelectData<T> {
     range: T[]
 }
 
+export interface PLInsertData<T> {
+    changes: number
+    urn: string
+}
+
+export type PLInsertResult<T> = CommonResult<PLInsertData<T>>
+
 export type PLSelectResult<T> = CommonResult<PLSelectData<T>>
 
-export class CommonResult<T> {
-    code = 0
-    message = ''
-    data: T = {} as T
+export function emptySelectResult() {
+    return {
+        code: CodeOk,
+        message: '',
+        data: {
+            page: 1,
+            size: 0,
+            count: 0,
+            range: []
+        }
+    }
+}
+
+export interface CommonResult<T> {
+    code : number
+    message : string
+    data: T
 }
 

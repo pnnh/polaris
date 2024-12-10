@@ -5,7 +5,7 @@ import ContentLayout from "@/components/server/content/layout";
 import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
 import './page.scss'
-import {PLSelectResult} from "@/models/common/common-result";
+import {PLSelectResult} from "@/models/common/protocol";
 import {PSChannelModel} from "@/models/common/channel";
 import {BaseRouterParams} from '@/models/server/router';
 import {useServerTranslation} from '@/services/server/i18n';

@@ -6,7 +6,7 @@ import {getLangAnyway, useServerTranslation} from '@/services/server/i18n'
 import {BaseRouterParams} from '@/models/server/router'
 import {Metadata} from 'next'
 import {serverSigninDomain} from "@/services/server/domain/domain";
-import {PLSelectResult} from "@/models/common/common-result";
+import {PLSelectResult} from "@/models/common/protocol";
 import {NoData} from "@/components/common/empty";
 import {IDomain} from "@/services/common/domain";
 import {PSImageServer} from "@/components/server/image";

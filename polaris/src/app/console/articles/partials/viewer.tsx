@@ -1,10 +1,10 @@
 import React from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil'
-import {ArticleContainer} from "@/components/console/note";
 import './viewer.scss'
-import {noteAtom} from "@/console/providers/notebook";
-import {storeArticleToDatabase} from "@/services/client/personal/notes";
-import {PSNoteModel} from "@pnnh/polaris-business";
+import {noteAtom} from "@/app/console/articles/providers/notebook";
+import {PSNoteModel} from "@/models/common/personal/note";
+import {storeArticleToDatabase} from "@/services/client/console/personal/notes";
+import {ArticleContainer} from "@/components/client/article";
 
 export function ArticleEditorArea() {
     const [selectedArticle, setSelectedArticle] = useRecoilState(noteAtom)

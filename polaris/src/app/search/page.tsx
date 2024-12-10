@@ -6,7 +6,7 @@ import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/services/server/pathname";
 import {IDomain} from "@/services/common/domain";
 import {ArticleCard} from "@/components/server/content/article/card";
-import {CommonResult, PLSelectResult} from "@/models/common/common-result";
+import {CommonResult, PLSelectResult} from "@/models/common/protocol";
 import {PSArticleModel} from "@/models/common/article";
 import {BaseRouterParams} from '@/models/server/router'
 import {useServerTranslation} from '@/services/server/i18n'

@@ -3,7 +3,7 @@
 import React from 'react'
 import './notebook.scss'
 import {PSNotebookModel} from "@/models/common/personal/notebook";
-import {PLSelectResult} from "@/models/common/common-result";
+import {PLSelectResult} from "@/models/common/protocol";
 import {PSArticleModel} from "@/models/common/article";
 import {clientMustSigninDomain, clientTrySigninDomain} from "@/services/client/domain";
 import {encodeBase64String} from "@/utils/basex";

@@ -1,10 +1,10 @@
 import React from 'react'
 import {useEffect, useState} from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil'
-import {selectNotebooks} from "@/services/client/personal/notebook";
-import {PSNotebookModel} from '@pnnh/polaris-business'
-import {libraryAtom, notebookAtom} from "@/console/providers/notebook";
 import './notebook.scss'
+import {libraryAtom, notebookAtom} from "@/app/console/articles/providers/notebook";
+import {selectNotebooks} from "@/services/client/console/personal/notebook";
+import {PSNotebookModel} from "@/models/common/personal/notebook";
 
 export function NotebookList() {
     const libraryState = useRecoilValue(libraryAtom)
@@ -15,8 +15,8 @@ export function NotebookList() {
         }
         selectNotebooks(libraryState.current.urn).then(selectResult => {
             setNotebookState({
-                models: selectResult.range,
-                current: selectResult.range[0]
+                models: selectResult.data.range,
+                current: selectResult.data.range[0]
             })
         })
     }, [libraryState])

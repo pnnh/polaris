@@ -2,7 +2,7 @@
 
 import './table.scss'
 import React from 'react'
-import {PLSelectResult} from "@/models/common/common-result";
+import {PLSelectResult} from "@/models/common/protocol";
 import {PSChannelModel} from "@/models/common/channel";
 import {formatRfc3339} from "@/utils/datetime";
 

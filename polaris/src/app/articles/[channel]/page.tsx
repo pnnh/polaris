@@ -10,7 +10,7 @@ import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
 import {ArticleCard} from "@/components/server/content/article/card";
 import {ArticleRankCard} from "@/components/server/content/article/rank";
-import {PLSelectResult} from "@/models/common/common-result";
+import {PLSelectResult} from "@/models/common/protocol";
 import {PSArticleModel} from "@/models/common/article";
 import {BaseRouterParams} from '@/models/server/router'
 import {useServerTranslation} from '@/services/server/i18n'

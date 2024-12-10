@@ -59,7 +59,7 @@ export function clientMustSigninDomain(domainUrl: string | undefined = ""): IDom
 }
 
 export function clientSigninDomain(clientConfig: ClientConfig): IDomain {
-    const domain = clientTrySigninDomain(clientConfig.defaultDomain.baseurl)
+    const domain = clientTrySigninDomain(clientConfig.NEXT_PUBLIC_SELF_URL)
     if (!domain) {
         throw new Error('domain not found')
     }

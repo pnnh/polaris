@@ -3,7 +3,7 @@ import React from 'react'
 import {AdminLayout} from "@/components/server/admin/layout";
 import {AdminArticleToolbar} from "@/components/client/admin/articles/toolbar";
 import {AdminArticleTable} from "@/components/client/admin/articles/table";
-import {PLSelectResult} from "@/models/common/common-result";
+import {PLSelectResult} from "@/models/common/protocol";
 import {PSArticleModel} from "@/models/common/article";
 
 export default async function Page({searchParams}: {

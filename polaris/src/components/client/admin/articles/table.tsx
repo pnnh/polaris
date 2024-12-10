@@ -2,7 +2,7 @@
 
 import './table.scss'
 import React from 'react'
-import {PLSelectResult} from "@/models/common/common-result";
+import {PLSelectResult} from "@/models/common/protocol";
 import {channelName, PSArticleModel} from "@/models/common/article";
 import {PaginationPartial} from "@/components/common/pagination";
 import {NoData} from "@/components/common/empty";

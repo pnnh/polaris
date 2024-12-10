@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import './rank.scss'
-import {PLSelectResult} from "@/models/common/common-result";
+import {PLSelectResult} from "@/models/common/protocol";
 import {PSArticleModel} from "@/models/common/article";
 
 export function ArticleRankCard({rankResult, lang}: { rankResult: PLSelectResult<PSArticleModel>, lang: string }) {

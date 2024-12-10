@@ -2,7 +2,7 @@
 
 import React, {useEffect, useState} from 'react'
 import './notebar.scss'
-import {PLSelectResult} from "@/models/common/common-result";
+import {PLSelectResult} from "@/models/common/protocol";
 import {filesMailbox} from "@/services/client/console/mailbox";
 import {registerComponent, unregisterComponent} from "@/services/client/postoffice";
 import {PSFileModel} from "@/models/common/filesystem";

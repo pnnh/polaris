@@ -1,5 +1,3 @@
-import 'server-only'
-
 import {encodeBase64String} from "@/utils/basex";
 
 export interface IServerConfig {
@@ -34,6 +32,15 @@ export function usePublicConfig() {
 }
 
 export function isProd() {
-    const serverConfig = useServerConfig()
     return process.env.NODE_ENV === 'production'
+}
+
+// todo: 临时辅助方法，后续需要优化掉换成别的实现方案
+export function mustGetFirstDir() {
+    const serverConfig = useServerConfig()
+    const syncDir = serverConfig.DirectoryList.find(it=>true);    // 第一个
+    if (!syncDir) {
+        throw new Error("syncDir为空")
+    }
+    return syncDir
 }
