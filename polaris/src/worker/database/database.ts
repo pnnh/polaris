@@ -1,6 +1,6 @@
 import sqlite3 from 'sqlite3'
 import {Database, open} from 'sqlite'
-import * as process from "node:process";
+import * as process from "process";
 
 const databaseMap: Map<string, Database<sqlite3.Database>> = new Map()
 

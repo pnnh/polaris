@@ -20,7 +20,7 @@ export async function ContentPublicNavbar({pathname, searchParams, lang}: {
         <div className={'leftNav'}>
             <div>
                 <Link className={'brandLink'} href={'/'}>
-                    <Image src='/images/logo.png' alt='logo' fill={true} sizes={'48px,48px'}/>
+                    <Image src='/images/logo.png' alt='logo' priority={false} fill={true} sizes={'48px,48px'}/>
                 </Link>
             </div>
             <UserProfileSelector/>

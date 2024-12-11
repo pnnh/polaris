@@ -31,7 +31,7 @@ let nextConfig = {
             return {
                 ...entries,
                 'worker/main': {
-                    import: path.resolve(__dirname, 'src/worker/main.tsx'),
+                    import: path.resolve(__dirname, 'src/worker/main.ts'),
                     dependOn: undefined,
                 },
             };

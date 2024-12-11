@@ -1,10 +1,11 @@
 
-import fs from "node:fs";
+import fs from "fs";
 import frontMatter from "front-matter";
 import path from "path";
 import {decodeBase64String, encodeBase64String, stringToMd5} from "@/utils/basex";
 import {PSChannelModel} from "@/models/common/channel";
 import {getType} from "@/utils/mime";
+import {CodeOk, PLSelectResult} from "@/models/common/protocol";
 
 export class SystemChannelService {
     systemDomain: string
@@ -13,7 +14,7 @@ export class SystemChannelService {
         this.systemDomain = systemDomain.replace('file://', '')
     }
 
-    async selectChannels() {
+    async selectChannels(): Promise<PLSelectResult<PSChannelModel>> {
         const basePath = this.systemDomain
         const channels: PSChannelModel[] = []
         const files = fs.readdirSync(basePath)
@@ -55,10 +56,14 @@ export class SystemChannelService {
             }
         }
         return {
-            range: channels,
-            count: channels.length,
-            page: 1,
-            size: channels.length
+            code: CodeOk,
+            message: '',
+            data: {
+                range: channels,
+                count: channels.length,
+                page: 1,
+                size: channels.length
+            }
         }
     }
 

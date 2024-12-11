@@ -1,5 +1,5 @@
 
-import fs from "node:fs";
+import fs from "fs";
 import path from "path";
 import {fillNoteMetadata} from "@/services/common/article";
 import {CodeOk, emptySelectResult, PLSelectResult} from "@/models/common/protocol";

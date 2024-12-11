@@ -1,8 +1,0 @@
-.pageContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    justify-content: flex-start;
-    align-items: flex-start;
-    height: 100vh;
-}

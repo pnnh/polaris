@@ -1,4 +1,4 @@
-@import '@/styles/theme';
+@use '@/components/common/styles/theme';
 
 .templateContainer {
   display: flex;
@@ -19,7 +19,7 @@
   margin: 0 auto;
 }
 
-@media screen and (min-width: $screenMediumWidth) {
+@media screen and (min-width: theme.$screenMediumWidth) {
   .bodyContainer {
     width: min(100vw, 80rem);
   }

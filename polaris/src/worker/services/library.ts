@@ -1,5 +1,5 @@
 
-import fs from "node:fs";
+import fs from "fs";
 import frontMatter from "front-matter";
 import path from "path";
 import {CodeOk, PLSelectResult} from "@/models/common/protocol";

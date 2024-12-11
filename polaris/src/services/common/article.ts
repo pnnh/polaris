@@ -1,6 +1,6 @@
 
 import path from "path";
-import fs from "node:fs";
+import fs from "fs";
 import frontMatter from "front-matter";
 import {SPNoteModel} from "@/models/common/personal/note";
 import {PSArticleModel} from "@/models/common/article";

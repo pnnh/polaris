@@ -1,6 +1,7 @@
 export function pageTitle(title: string) {
+    const slogan = '希波工具集'
     if (!title) {
-        return '希波社区'
+        return slogan
     }
-    return `${title} - 希波社区`
+    return `${title} - ${slogan}`
 }

@@ -1,74 +1,121 @@
 import React from 'react'
+import './page.scss'
 import Link from 'next/link'
+import queryString from 'query-string'
 import {serverSigninDomain} from "@/services/server/domain/domain";
-import ContentLayout from "@/components/server/content/layout";
+import {Metadata} from "next";
+import {pageTitle} from "@/utils/page";
+import ContentLayout from '@/components/server/content/layout'
 import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
-import './page.scss'
+import {ArticleCard} from "@/components/server/content/article/card";
+import {ArticleRankCard} from "@/components/server/content/article/rank";
 import {PLSelectResult} from "@/models/common/protocol";
-import {PSChannelModel} from "@/models/common/channel";
-import {BaseRouterParams} from '@/models/server/router';
-import {useServerTranslation} from '@/services/server/i18n';
-import {Metadata} from 'next';
-import {PSImageServer} from "@/components/server/image";
+import {PSArticleModel} from "@/models/common/article";
+import {BaseRouterParams} from '@/models/server/router'
+import {useServerTranslation} from '@/services/server/i18n'
+import {PaginationServer} from "@/components/server/pagination";
 import {NoData} from "@/components/common/empty";
+import {calcPagination} from "@/utils/pagination";
+import {replaceSearchParams} from "@/utils/query";
+
+export const dynamic = "force-dynamic";
 
 export default async function Page({params, searchParams}: {
-    params: Promise<{ viewer: string } & BaseRouterParams>,
-    searchParams: Promise<Record<string, string> & { query: string | undefined }>
+    params: Promise<{ channel: string } & BaseRouterParams>,
+    searchParams: Promise<Record<string, string>>
 }) {
-    const domain = serverSigninDomain()
-    const pageSize = 64
-    const url = '/articles?' + `page=1&size=${pageSize}`
-    const result = await domain.makeGet<PLSelectResult<PSChannelModel>>(url)
-
-    if (!result || !result.data) {
-        return <NoData size={'middle'}/>
-    }
     const pathname = await getPathname()
     const baseParams = await params;
     const {t: trans} = await useServerTranslation(baseParams.lang)
-    const metadata: Metadata = {
-        title: trans('codegen.seo.title'),
-        keywords: trans('codegen.seo.keywords'),
-        description: trans('codegen.seo.description'),
-    }
+    const searchParamsValue = await searchParams
 
-    return <ContentLayout lang={baseParams.lang} searchParams={await searchParams} pathname={pathname}
+    let page = Number(searchParamsValue.page)
+    if (isNaN(page)) {
+        page = 1
+    }
+    const pageSize = 10
+    const channelPk = searchParamsValue.channel
+
+    const metadata: Metadata = {}
+    metadata.title = pageTitle('')
+    const rankQuery = queryString.stringify({
+        sort: 'read',
+        filter: 'year',
+        page: '1',
+        direction: 'cta',
+        size: 10
+    })
+    const domain = serverSigninDomain()
+    const rankUrl = `/articles?${rankQuery}`
+    const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)
+
+    const selectQuery = {
+        sort: searchParamsValue.sort,
+        filter: searchParamsValue.filter,
+        page,
+        size: pageSize,
+        channel: channelPk
+    }
+    const rawQuery = queryString.stringify(selectQuery)
+    const url = `/articles?${rawQuery}`
+
+    const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
+
+    const pagination = calcPagination(page, selectResult.data.count, pageSize)
+    const sortClass = (sort: string) => {
+        const querySort = (searchParamsValue.sort ?? 'latest')
+        return ' ' + (querySort === sort ? 'activeLink' : '')
+    }
+    const filterClass = (filter: string) => {
+        const queryFilter = (searchParamsValue.filter ?? 'all')
+        return ' ' + (queryFilter === filter ? 'activeLink' : '')
+    }
+    return <ContentLayout lang={baseParams.lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} params={baseParams}>
-        <div className={'container'}>
-            <div className={'body'}>
-                <div className={'list'}>
-                    {result.data.range.map((model) => {
-                        return <Item key={model.urn} model={model} domain={domain} lang={baseParams.lang}/>
-                    })
-                    }
+        <div className={'contentContainer'}>
+            <div className={'conMiddle'}>
+                <div className={'middleTop'}>
+                    <div className={'topLeft'}>
+                        <Link className={'sortLink' + sortClass('latest')}
+                              href={replaceSearchParams(searchParamsValue, 'sort', 'latest')}>最新</Link>
+                        <Link className={'sortLink' + sortClass('read')}
+                              href={replaceSearchParams(searchParamsValue, 'sort', 'read')}>阅读数</Link>
+                    </div>
+                    <div className={'topRight'}>
+                        <Link className={'filterLink' + filterClass('month')}
+                              href={replaceSearchParams(searchParamsValue, 'filter', 'month')}>一月内</Link>
+                        <Link className={'filterLink' + filterClass('year')}
+                              href={replaceSearchParams(searchParamsValue, 'filter', 'year')}>一年内</Link>
+                        <Link className={'filterLink' + filterClass('all')}
+                              href={replaceSearchParams(searchParamsValue, 'filter', 'all')}>所有</Link>
+                    </div>
                 </div>
+                <div className={'middleBody'}>
+                    <MiddleBody selectResult={selectResult} domain={domain} lang={baseParams.lang}/>
+                </div>
+                <div className={'middlePagination'}>
+                    <PaginationServer pagination={pagination}
+                                      pageLinkFunc={(page) => replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
+                </div>
+            </div>
+            <div className={'conRight'}>
+                <ArticleRankCard rankResult={rankSelectResult} lang={baseParams.lang}/>
             </div>
         </div>
     </ContentLayout>
 }
 
-function Item(props: { model: PSChannelModel, domain: IDomain, lang: string }) {
-    const readUrl = `/${props.lang}/content/articles/${props.model.urn}`
-    let imageUrl = '/images/default/channel.webp'
-    // 针对特定资产类型的图片，返回拼接的URL以进行资源寻址
-    if (props.model.image) {
-        // 拼接资源地址，并截取掉前缀
-        imageUrl = props.domain.assetUrl(`/articles/${props.model.urn}/assets/${props.model.image}`)
+function MiddleBody({selectResult, domain, lang}: {
+    selectResult: PLSelectResult<PSArticleModel>,
+    domain: IDomain,
+    lang: string
+}) {
+    if (!selectResult || !selectResult.data || !selectResult.data.range || selectResult.data.range.length === 0) {
+        return <NoData size='large'/>
     }
-
-    return < div className={'item'}>
-        <div className={'itemCover'}>
-            <PSImageServer src={imageUrl} alt='star' width={256} height={256}/>
-        </div>
-        <div className={'content'}>
-            <div className={'title'}>
-                <Link className={'link'} href={readUrl}>{props.model.name}</Link>
-            </div>
-            <div className={'description'}>
-                {props.model.description}
-            </div>
-        </div>
-    </div>
+    return selectResult.data.range.map((model) => {
+        return <ArticleCard key={model.urn} model={model} domain={domain} lang={lang}/>
+    })
 }
+

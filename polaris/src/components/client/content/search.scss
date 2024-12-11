@@ -1,4 +1,4 @@
-@import "@/styles/theme";
+@use '@/components/common/styles/theme';
 
 .searchContainer {
   display: flex;
@@ -16,7 +16,7 @@
     border: 0;
     outline-color: transparent;
 
-    @media (max-width: $screenMediumWidth) {
+    @media (max-width: theme.$screenMediumWidth) {
       & {
         width: 8rem;
       }

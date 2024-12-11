@@ -1,4 +1,4 @@
-@import '@/styles/theme';
+@use '@/components/common/styles/theme';
 
 .homeContainer {
   margin: 1rem;
@@ -81,7 +81,7 @@
         position: relative;
         margin-right: 1rem;
 
-        @media (min-width: $screenMediumWidth) {
+        @media (min-width: theme.$screenMediumWidth) {
           width: 6rem;
           height: 6rem;
         }

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@import '@/styles/theme';
+@use '@/components/common/styles/theme';
 
 html,
 body {
@@ -21,7 +21,7 @@ body {
   box-sizing: border-box;
 }
 
-@media (min-width: $screenMediumWidth) {
+@media (min-width: theme.$screenMediumWidth) {
   html,
   body {
     font-size: 16px;
