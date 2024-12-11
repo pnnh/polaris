@@ -1,3 +1,5 @@
+import {Request} from 'express'
+
 export interface Pagination {
     offset: number
     limit: number
@@ -68,3 +70,12 @@ export function createPaginationByPage(page: number, limit: number): Pagination 
         size: limit
     }
 }
+
+export function fromExpressRequest(request: Request) {
+    const queryPage = request.get('page')
+    const querySize = request.get('size')
+    const page = isNaN(Number(queryPage)) ? 1 : Number(queryPage)
+    const size = isNaN(Number(querySize)) ? 10 : Number(querySize)
+    return createPaginationByPage(page, size)
+}
+

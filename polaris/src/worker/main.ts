@@ -18,6 +18,7 @@ import {selectLibraries} from "@/worker/handlers/personal/libraries/libraries";
 import {selectNotebooks} from "@/worker/handlers/personal/notebook";
 import {selectNotes, updateNote} from "@/worker/handlers/personal/note";
 import * as dotenv from 'dotenv'
+import {commentInsertHandler, commentsHandler} from "@/worker/handlers/comments";
 
 
 function handleErrors(
@@ -77,6 +78,8 @@ async function runMain() {
     server.get("/personal/libraries/:library/notebooks", handleErrors(selectNotebooks));
     server.get("/personal/libraries/:library/notebooks/:notebook/notes", handleErrors(selectNotes));
     server.put("/personal/libraries/:library/notebooks/:notebook/notes/:note", handleErrors(updateNote));
+    server.get("/comments", handleErrors(commentsHandler));
+    server.post("/comments", handleErrors(commentInsertHandler));
 
     server.use((err: Error, req: Request, res: Response, next: NextFunction) => {
         const message = stripAnsi(err.stack || err.message || 'Unknown error')

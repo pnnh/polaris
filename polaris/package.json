@@ -25,7 +25,9 @@
     "url": false,
     "async_hooks": false,
     "assert": false,
-    "querystring": false
+    "querystring": false,
+    "dns": false,
+    "pg-native": false
   },
   "dependencies": {
     "@cmss/check-password-strength": "^2.1.6",
@@ -47,6 +49,7 @@
     "jsbarcode": "^3.11.6",
     "lodash": "^4.17.21",
     "marked": "^15.0.1",
+    "pg": "^8.13.0",
     "material-file-icons": "^2.4.0",
     "md5": "^2.3.0",
     "mime": "^4.0.4",
@@ -83,6 +86,7 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/html": "^1.0.4",
+    "@types/pg": "^8.11.10",
     "@types/lodash": "^4.17.7",
     "@types/marked": "^5.0.2",
     "@types/md5": "^2.3.5",

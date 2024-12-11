@@ -3,7 +3,8 @@ import {encodeBase64String} from "@/utils/basex";
 export interface IServerConfig {
     NEXT_PUBLIC_SELF_URL: string
     NEXT_PUBLIC_WORKER_URL: string
-    DirectoryList: string[]
+    DirectoryList: string[],
+    PGDATABASE: string
 }
 
 export function useServerConfig(): IServerConfig {
@@ -16,13 +17,17 @@ export function useServerConfig(): IServerConfig {
     if (!process.env.DIRECTORIES) {
         throw new Error('DOMAINS is required')
     }
+    if (!process.env.PGDATABASE) {
+        throw new Error('PGDATABASE is required')
+    }
     const directories = process.env.DIRECTORIES.trim()
     const directoryList = JSON.parse(directories)
 
     return {
         NEXT_PUBLIC_SELF_URL: process.env.NEXT_PUBLIC_SELF_URL || '',
         NEXT_PUBLIC_WORKER_URL: process.env.NEXT_PUBLIC_WORKER_URL || '',
-        DirectoryList: directoryList
+        DirectoryList: directoryList,
+        PGDATABASE: process.env.PGDATABASE || ''
     }
 }
 
