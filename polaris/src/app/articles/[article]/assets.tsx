@@ -1,6 +1,6 @@
 'use client'
 
-import styles from './assets.module.css'
+import './assets.scss'
 import React, {useEffect, useState} from "react";
 import {getIcon} from "material-file-icons";
 // import {useRecoilState, useRecoilValue} from "recoil";
@@ -33,12 +33,12 @@ export function ArticleAssets({channelUrn, articleUrn}: { channelUrn: string, ar
         return <></>
     }
 
-    return <div className={styles.tocCard} id={'assetsCard'}>
+    return <div className={'tocCard'} id={'assetsCard'}>
         <ArticleAssertPreview/>
-        <div className={styles.tocHeader}>
+        <div className={'tocHeader'}>
             附件信息
         </div>
-        <div className={styles.tocBody} id={'assetsBody'}>
+        <div className={'tocBody'} id={'assetsBody'}>
             {
                 files.map((model, index) => {
                     return <FileGroup key={`assets-${0}-${index}`} domain={domain}
@@ -83,11 +83,11 @@ function FileGroup({domain, channelUrn, articleUrn, model, level}:
         </i>
     }
     return <>
-        <div key={`assets-${level}`} className={styles.tocItem}>
-            <div className={styles.assetItem} style={{paddingLeft: `${(level + 1) * 0.3}rem`}}>
+        <div key={`assets-${level}`} className={'tocItem'}>
+            <div className={'assetItem'} style={{paddingLeft: `${(level + 1) * 0.3}rem`}}>
                 {openIcon()}
                 <FileIcon filename={model.name}/>
-                <span title={model.name} className={styles.assertItemText}
+                <span title={model.name} className={'assertItemText'}
                       onClick={(event) => {
                           if (model.type === 'directory') {
                               return
@@ -125,7 +125,7 @@ function FileGroup({domain, channelUrn, articleUrn, model, level}:
 
 function FileIcon({filename}: { filename: string }) {
     return <div
-        className={styles.fileIcon}
+        className={'fileIcon'}
         dangerouslySetInnerHTML={{__html: getIcon(filename).svg}}
     />;
 }

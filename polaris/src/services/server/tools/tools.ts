@@ -18,67 +18,32 @@ export function selectApps(expectLang: string): ApplicationModel[] {
     return [
         {
             urn: passwordUrn,
-            url: isProd() ? 'https://password.calieo.xyz' : 'http://127.0.0.1:8003',
+            url: '/tools/password',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/password.webp',
             ...selectAppLangProfile(passwordUrn, expectLang)
         },
         {
             urn: uuidUrn,
-            url: isProd() ? 'https://uuid.calieo.xyz' : 'http://127.0.0.1:8002',
+            url: '/tools/uuid',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/uuid.webp',
             ...selectAppLangProfile(uuidUrn, expectLang)
         },
         {
             urn: qrcodeUrn,
-            url: isProd() ? 'https://uuid.calieo.xyz' : 'http://127.0.0.1:8002',
+            url: '/tools/qrcode',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/qrcode.webp',
             ...selectAppLangProfile(qrcodeUrn, expectLang)
         },
         {
             urn: datetimeUrn,
-            url: isProd() ? 'https://uuid.calieo.xyz' : 'http://127.0.0.1:8002',
+            url: '/tools/datetime',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/datetime.webp',
             ...selectAppLangProfile(datetimeUrn, expectLang)
         },
-        {
-            urn: highlightUrn,
-            url: isProd() ? 'https://uuid.calieo.xyz' : 'http://127.0.0.1:8002',
-            update_time: '2024-10-30T12:00:00.000Z',
-            image: '/images/application/highlight.webp',
-            ...selectAppLangProfile(highlightUrn, expectLang)
-        },
-        {
-            urn: codegenUrn,
-            url: isProd() ? 'https://uuid.calieo.xyz' : 'http://127.0.0.1:8002',
-            update_time: '2024-10-30T12:00:00.000Z',
-            image: '/images/application/codegen.webp',
-            ...selectAppLangProfile(codegenUrn, expectLang)
-        },
-        {
-            urn: svgtoolUrn,
-            url: isProd() ? 'https://uuid.calieo.xyz' : 'http://127.0.0.1:8002',
-            update_time: '2024-10-30T12:00:00.000Z',
-            image: '/images/application/svgtool.webp',
-            ...selectAppLangProfile(svgtoolUrn, expectLang)
-        },
-        {
-            urn: barcodeUrn,
-            url: isProd() ? 'https://uuid.calieo.xyz' : 'http://127.0.0.1:8002',
-            update_time: '2024-10-30T12:00:00.000Z',
-            image: '/images/application/barcode.webp',
-            ...selectAppLangProfile(barcodeUrn, expectLang)
-        },
-        {
-            urn: basexUrn,
-            url: isProd() ? 'https://uuid.calieo.xyz' : 'http://127.0.0.1:8002',
-            update_time: '2024-10-30T12:00:00.000Z',
-            image: '/images/application/basex.webp',
-            ...selectAppLangProfile(basexUrn, expectLang)
-        }
     ]
 }
 
@@ -124,56 +89,6 @@ function selectAppLangProfile(appUrn: string, expectLang: string): ApplicationLa
                 lang: actualLang,
                 name: 'Date Time Tool',
                 description: 'Convenient and fast date and time tool, including timestamp conversion, date calculation, date formatting and other functions.'
-            }
-        case highlightUrn:
-            return isZh(actualLang) ? {
-                lang: actualLang,
-                name: '源代码高亮',
-                description: '支持对常见编程语言代码高亮显示、代码格式化、选择高亮风格并导出图片等。'
-            } : {
-                lang: actualLang,
-                name: 'Source Code Highlight',
-                description: 'Supports highlighting common programming language code, code formatting, selecting highlight styles and exporting images.'
-            }
-        case codegenUrn:
-            return isZh(actualLang) ? {
-                lang: actualLang,
-                name: '代码生成器',
-                description: '自定义业务模型，根据业务模型快速生成各个编程语言模型代码，和常规校验逻辑。'
-            } : {
-                lang: actualLang,
-                name: 'Code Generator',
-                description: 'Customize the business model, quickly generate various programming language model codes and regular verification logic according to the business model.'
-            }
-        case svgtoolUrn:
-            return isZh(actualLang) ? {
-                lang: actualLang,
-                name: 'SVG预览工具',
-                description: '支持预览SVG代码，调整SVG大小、颜色、背景色等，支持导出SVG图片。'
-            } : {
-                lang: actualLang,
-                name: 'SVG Preview Tool',
-                description: 'Support preview of SVG code, adjust SVG size, color, background color, etc., support export of SVG images.'
-            }
-        case barcodeUrn:
-            return isZh(actualLang) ? {
-                lang: actualLang,
-                name: '条形码工具',
-                description: '基于文本生成条形码并导出图片。'
-            } : {
-                lang: actualLang,
-                name: 'Barcode Tool',
-                description: 'Generate barcodes based on text and export images.'
-            }
-        case basexUrn:
-            return isZh(actualLang) ? {
-                lang: actualLang,
-                name: 'Base64系列工具',
-                description: '支持Base32、Base64等常见Base家族系列的编码与解码，支持文件编码与解码，支持不同的文本编码。'
-            } : {
-                lang: actualLang,
-                name: 'Base64 Series Tool',
-                description: 'Support encoding and decoding of common Base family series such as Base32, Base64, support file encoding and decoding, and support different text encoding.'
             }
         default:
             return isZh(actualLang) ? {
