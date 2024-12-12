@@ -7,7 +7,7 @@ export async function UserProfileSelector() {
     const pathname = await getPathname()
 
     const siteLinks = [
-        {name: '希波工具集', href: `/`},
+        {name: '希波万象', href: `/`},
     ]
 
     return <>

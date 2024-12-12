@@ -1,5 +1,5 @@
 export function pageTitle(title: string) {
-    const slogan = '希波工具集'
+    const slogan = '希波万象'
     if (!title) {
         return slogan
     }

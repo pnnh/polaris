@@ -9,6 +9,7 @@ import {CodeOk, PLSelectResult} from "@/models/common/protocol";
 import {openMainDatabase} from "@/worker/database/database";
 import {bulkInsertOrUpdateArticles} from "@/worker/database/article";
 import {getType} from "@/utils/mime";
+import {encodeMD5, encodeSHA256} from "@/utils/crypto";
 
 const assetsIgnore = ignore().add(['.*', 'node_modules', 'dist', 'build', 'out', 'target', 'logs', 'logs/*', 'logs/**/*'])
 
@@ -22,9 +23,9 @@ export class SystemArticleService {
     async #parseArticleInfo(channelPath: string, articleFullPath: string) {
         const extName = path.extname(articleFullPath)
         const noteName = path.basename(articleFullPath, extName)
-        const channelUrn = encodeBase64String(channelPath)
+        const channelUrn = encodeMD5(channelPath)
         const articlePath = noteName + extName
-        const articleUrn = encodeBase64String(articlePath)
+        const articleUrn = encodeMD5(articlePath)
 
         const model: PSArticleModel = {
             discover: 0,

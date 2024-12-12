@@ -30,7 +30,7 @@ export default async function Home({params, searchParams}: {
     const {t: trans} = await useServerTranslation(baseParams.lang)
     const metadata: Metadata = {}
     const domain = serverSigninDomain()
-    const url = `/articles/${baseParams.channel}/articles/${baseParams.article}`
+    const url = `/articles/${baseParams.article}`
     const model = await domain.makeGet<PSArticleModel | undefined>(url)
 
     if (model == null) {

@@ -10,7 +10,7 @@ import {STSubString} from "@/utils/string";
 import {formatRfc3339} from "@/utils/datetime";
 
 export function ArticleCard({model, domain, lang}: { model: PSArticleModel, domain: IDomain, lang: string }) {
-    const readUrl = `/${lang}/content/articles/${channelName(model.channel)}/articles/${model.urn}`
+    const readUrl = `/articles/${model.urn}`
     let imageUrl = '/images/default.png'
     if (model.cover) {
         imageUrl = domain.assetUrl(`/articles/${model.channel}/articles/${model.urn}/assets/${model.cover}`)
