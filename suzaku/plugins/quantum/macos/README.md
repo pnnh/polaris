@@ -1,3 +1,0 @@
-似乎podspec文件里s.vendored_frameworks只能引用同级目录
-通过../或者软链接的形式都不行
-另外，fromework的名称不能也叫quantum，因为会和插件的名称冲突，导致ffi找不到符号

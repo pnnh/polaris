@@ -1,6 +1,0 @@
-module MTQuantum {
-	header "business/filesystem/file.h"
-	header "services/logger/logger.h"
-
-    export *
-}
