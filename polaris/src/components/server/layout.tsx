@@ -26,8 +26,8 @@ export function HtmlLayout({
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
         <meta name="apple-mobile-web-app-title" content="MyWebSite"/>
         <link rel="manifest" href="/site.webmanifest"/>
-
         <title>{pageTitle(metadata.title as string)}</title>
+        {metadata.keywords && <meta name="keywords" content={metadata.keywords as string}></meta>}
         {metadata.description && <meta name="description" content={metadata.description as string}></meta>}
         {isProd() && <GoogleAnalytics gaId="G-Z98PEGYB12"/>}
     </head>

@@ -33,10 +33,6 @@ export function binaryToBase58String(data: Uint8Array): string {
     return base58xrp.encode(data)
 }
 
-export function generateUuid(): string {
-    return uuidv4();
-}
-
 export function stringToUuid(uuidString: string) {
     return uuidParse(uuidString).toString();
 }
@@ -47,6 +43,28 @@ export function uuidToBase58(uuidString: string) {
     return base58xrp.encode(data);
 }
 
+function hexToBytes(hex: string) {
+    let bytes = [];
+    for (let c = 0; c < hex.length; c += 2)
+        bytes.push(parseInt(hex.substr(c, 2), 16));
+    return bytes;
+}
+
+function bytesToHex(bytes: Uint8Array) {
+    let hex = [];
+    for (let i = 0; i < bytes.length; i++) {
+        let current = bytes[i] < 0 ? bytes[i] + 256 : bytes[i];
+        hex.push((current >>> 4).toString(16));
+        hex.push((current & 0xF).toString(16));
+    }
+    return hex.join("");
+}
+
+export function hexToBase58(hex: string) {
+    const bytes = hexToBytes(hex);
+    return base58xrp.encode(new Uint8Array(bytes));
+}
+
 /**
  * 将字符串转换为base58编码的字符串
  * @param data - 待编码的字符串
@@ -54,7 +72,8 @@ export function uuidToBase58(uuidString: string) {
  */
 export function stringToBase58(data: string): string {
     const enc = new TextEncoder()
-    return base58xrp.encode(enc.encode(data))
+    const bytes = enc.encode(data)
+    return base58xrp.encode(bytes)
 }
 
 /**

@@ -12,6 +12,8 @@ import {IDomain} from "@/services/common/domain";
 import {PSImageServer} from "@/components/server/image";
 import Link from "next/link";
 import {PSArticleModel} from "@/models/common/article";
+import {pageTitle} from "@/utils/page";
+import {hexToBase58, md5ToBase58, stringToBase58, uuidToBase58} from "@/utils/basex";
 
 export const dynamic = "force-dynamic";
 
@@ -24,9 +26,9 @@ export default async function Page({params, searchParams}: {
     const searchParamsValue = await searchParams
     const {t: trans} = await useServerTranslation(baseParams.lang)
     const metadata: Metadata = {
-        title: trans('codegen.seo.title'),
-        keywords: trans('codegen.seo.keywords'),
-        description: trans('codegen.seo.description'),
+        title: '',
+        keywords: 'tools,notes,工具,笔记',
+        description: '',
     }
     const domain = serverSigninDomain()
     const pageSize = 64
@@ -54,7 +56,7 @@ export default async function Page({params, searchParams}: {
 
 
 function Item(props: { model: PSArticleModel, domain: IDomain, lang: string }) {
-    const readUrl = `/${props.lang}/content/articles/${props.model.urn}`
+    const readUrl = `/articles/${hexToBase58(props.model.urn)}`
     let imageUrl = '/images/default/channel.webp'
     // 针对特定资产类型的图片，返回拼接的URL以进行资源寻址
     if (props.model.cover) {
