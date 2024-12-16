@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Random Password Generator",
+  "description": "Generate random passwords, combining uppercase letters, lowercase letters, numbers, and special characters.",
+  "version": "0.1",
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "password.png"
+  }
+}

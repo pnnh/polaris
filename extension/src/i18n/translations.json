@@ -1,0 +1,86 @@
+{
+  "en": {
+    "translation": {
+      "ProductTitle": "Random Password Generator",
+      "ToolDesc": "The generated password on this page will not be saved and will disappear after refreshing or closing the page",
+      "UppercaseLetter": "Uppercase Letter",
+      "LowercaseLetter": "Lowercase Letter",
+      "Number": "Number",
+      "SpecialCharacter": "Special Character",
+      "PasswordLength": "Password Length",
+      "GeneratePassword": "Generate Password",
+      "GeneratorResult": "Generated Password",
+      "GenerateHistory": "Generate History"
+    }
+  },
+  "zh": {
+    "translation": {
+      "ProductTitle": "随机密码生成器",
+      "ToolDesc": "本页生成的密码不会保持，刷新或关闭页面后消失",
+      "UppercaseLetter": "大写字母",
+      "LowercaseLetter": "小写字母",
+      "Number": "数字",
+      "SpecialCharacter": "特殊字符",
+      "PasswordLength": "密码长度",
+      "GeneratePassword": "生成密码",
+      "GeneratorResult": "生成的密码",
+      "GenerateHistory": "生成历史"
+    }
+  },
+  "ar": {
+    "translation": {
+      "ProductTitle": "مولد كلمة المرور العشوائية",
+      "ToolDesc": "لن يتم حفظ كلمة المرور المولدة على هذه الصفحة وستختفي بعد تحديث الصفحة أو إغلاقها",
+      "UppercaseLetter": "حرف كبير",
+      "LowercaseLetter": "حرف صغير",
+      "Number": "رقم",
+      "SpecialCharacter": "حرف خاص",
+      "PasswordLength": "طول كلمة المرور",
+      "GeneratePassword": "إنشاء كلمة مرور",
+      "GeneratorResult": "كلمة المرور المولدة",
+      "GenerateHistory": "تاريخ الإنشاء"
+    }
+  },
+  "fr": {
+    "translation": {
+      "ProductTitle": "Générateur de mots de passe aléatoires",
+      "ToolDesc": "Le mot de passe généré sur cette page ne sera pas enregistré et disparaîtra après le rafraîchissement ou la fermeture de la page",
+      "UppercaseLetter": "Lettre majuscule",
+      "LowercaseLetter": "Lettre minuscule",
+      "Number": "Nombre",
+      "SpecialCharacter": "Caractère spécial",
+      "PasswordLength": "Longueur du mot de passe",
+      "GeneratePassword": "Générer un mot de passe",
+      "GeneratorResult": "Mot de passe généré",
+      "GenerateHistory": "Historique de génération"
+    }
+  },
+  "es": {
+    "translation": {
+      "ProductTitle": "Generador de contraseñas aleatorias",
+      "ToolDesc": "La contraseña generada en esta página no se guardará y desaparecerá después de actualizar o cerrar la página",
+      "UppercaseLetter": "Letra mayúscula",
+      "LowercaseLetter": "Letra minúscula",
+      "Number": "Número",
+      "SpecialCharacter": "Carácter especial",
+      "PasswordLength": "Longitud de la contraseña",
+      "GeneratePassword": "Generar contraseña",
+      "GeneratorResult": "Contraseña generada",
+      "GenerateHistory": "Historial de generación"
+    }
+  },
+  "ru": {
+    "translation": {
+      "ProductTitle": "Генератор случайных паролей",
+      "ToolDesc": "Сгенерированный пароль на этой странице не будет сохранен и исчезнет после обновления или закрытия страницы",
+      "UppercaseLetter": "Прописная буква",
+      "LowercaseLetter": "Строчная буква",
+      "Number": "Число",
+      "SpecialCharacter": "Специальный символ",
+      "PasswordLength": "Длина пароля",
+      "GeneratePassword": "Сгенерировать пароль",
+      "GeneratorResult": "Сгенерированный пароль",
+      "GenerateHistory": "История генерации"
+    }
+  }
+}

@@ -27,5 +27,4 @@ coverage/
 .swc/
 dist/
 .rollup.cache/
-cache/
 /*.db
