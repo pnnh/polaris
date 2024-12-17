@@ -4,6 +4,10 @@ import {PSNoteModel} from "@pnnh/polaris-business";
 contextBridge.exposeInMainWorld('serverAPI', {
     getAppConfig: () => ipcRenderer.invoke('getAppConfig'),
     storeArticle: (article: PSNoteModel) => ipcRenderer.invoke('storeArticle', article),
+    selectLibraries: () => ipcRenderer.invoke('selectLibraries'),
+    selectNotebooks: (libraryUrn: string, notebookUrn: string) => ipcRenderer.invoke('selectNotebooks', libraryUrn, notebookUrn),
+    selectNotes: (libraryUrn: string, notebookUrn: string, queryString: string)  => ipcRenderer.invoke('selectNotebooks',
+        libraryUrn, notebookUrn, queryString),
 })
 
 window.addEventListener('DOMContentLoaded', () => {

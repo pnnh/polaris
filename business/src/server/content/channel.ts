@@ -2,8 +2,9 @@
 import fs from "node:fs";
 import frontMatter from "front-matter";
 import path from "path";
-import {decodeBase64String, encodeBase64String, getType} from "@pnnh/atom";
+import {decodeBase64String, encodeBase64String,} from "@pnnh/atom";
 import {PSChannelModel} from "@/common/models/channel";
+import {getMimeType} from "@/common/mime";
 
 export class SystemChannelService {
     systemDomain: string
@@ -68,7 +69,7 @@ export class SystemChannelService {
 
         const stat = fs.statSync(fullPath)
         if (stat && stat.isFile() && stat.size < 4096000) {
-            const mimeType = getType(assetsPath)
+            const mimeType = getMimeType(assetsPath)
             return {
                 mime: mimeType,
                 buffer: fs.readFileSync(fullPath)

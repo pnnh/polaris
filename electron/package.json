@@ -19,7 +19,7 @@
     "@fontsource/roboto": "^5.0.13",
     "@mui/icons-material": "^6.0.2",
     "@mui/material": "^6.0.2",
-    "@pnnh/atom": "0.5.0",
+    "@pnnh/atom": "file:../../pnnh/atom",
     "@pnnh/atom-react": "0.3.0",
     "@pnnh/polaris-business": "file:../business",
     "@pnnh/stele": "0.3.0",

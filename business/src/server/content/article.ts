@@ -1,13 +1,14 @@
 import fs from "node:fs";
 import path from "path";
 import ignore from 'ignore'
-import {createPaginationByPage, decodeBase64String, encodeBase64String, getType} from "@pnnh/atom";
+import {createPaginationByPage, decodeBase64String, encodeBase64String,} from "@pnnh/atom";
 import {encodeMD5} from "@/common/crypto";
 import {PSArticleFileModel, PSArticleModel} from "@/common/models/article";
 import {fillNoteMetadata} from "@/common/article";
 import {CodeOk, PLSelectResult} from "@/common/models/common-result";
 import {ISqliteClient} from "@/server/sqlite/database";
 import {bulkInsertOrUpdateArticles} from "@/server/sqlite/article";
+import {getMimeType} from "@/common/mime";
 
 const assetsIgnore = ignore().add(['.*', 'node_modules', 'dist', 'build', 'out', 'target', 'logs', 'logs/*', 'logs/**/*'])
 
@@ -193,7 +194,7 @@ export class SystemArticleService {
 
         const stat = fs.statSync(fullPath)
         if (stat && stat.isFile() && stat.size < 4096000) {
-            const mimeType = getType(assetsPath)
+            const mimeType = getMimeType(assetsPath)
             return {
                 mime: mimeType,
                 buffer: fs.readFileSync(fullPath)

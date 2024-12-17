@@ -13,10 +13,10 @@ export function ConsolePage() {
             </div>
             <div className={'notesContainer'}>
                 <div className={'notebarContainer'}>
-                    <ConsoleNotebar></ConsoleNotebar>
+                    {/*<ConsoleNotebar></ConsoleNotebar>*/}
                 </div>
                 <div className={'noteViewer'}>
-                    <ArticleEditorArea></ArticleEditorArea>
+                    {/*<ArticleEditorArea></ArticleEditorArea>*/}
                 </div>
             </div>
         </ConsoleLayout>

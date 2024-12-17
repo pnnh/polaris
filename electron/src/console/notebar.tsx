@@ -3,7 +3,6 @@ import {useRecoilValue, useSetRecoilState} from 'recoil'
 import {libraryAtom, noteAtom, notebookAtom} from './providers/notebook'
 import React from 'react'
 import {PSNoteModel, PLSelectResult} from '@pnnh/polaris-business'
-import {selectNotes} from "@/services/client/personal/notes";
 import './notebar.scss'
 
 export function ConsoleNotebar() {
@@ -15,17 +14,17 @@ export function ConsoleNotebar() {
             !notebookState.current || !notebookState.current.urn) {
             return
         }
-        selectNotes(libraryState.current.urn, notebookState.current.urn).then(selectResult => {
+        window.serverAPI.selectNotes(libraryState.current.urn, notebookState.current.urn, '').then(selectResult => {
             setNotesResult(selectResult)
         })
     }, [notebookState])
 
-    if (!notesResult || !notesResult.range || notesResult.range.length <= 0) {
+    if (!notesResult || !notesResult.data || !notesResult.data.range || notesResult.data.range.length <= 0) {
         return <div>Empty</div>
     }
     return <div className={'noteList'}>
         {
-            notesResult.range.map(item => {
+            notesResult.data.range.map(item => {
                 return <NoteCard key={item.urn} item={item}/>
             })
         }

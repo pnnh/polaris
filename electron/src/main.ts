@@ -2,6 +2,9 @@ import {app, BrowserWindow, ipcMain} from 'electron';
 import path from 'path';
 import {serverGetAppConfig} from "@/services/server/config";
 import {serverStoreArticle} from "@/services/server/article";
+import {serverSelectLibraries} from "@/services/server/library";
+import {serverSelectNotebooks} from "@/services/server/notebook";
+import {serverSelectNotes} from "@/services/server/notes";
 
 if (require('electron-squirrel-startup')) {
     app.quit();
@@ -30,6 +33,9 @@ const createWindow = () => {
 app.on('ready', () => {
     ipcMain.handle('getAppConfig', serverGetAppConfig)
     ipcMain.handle('storeArticle', serverStoreArticle)
+    ipcMain.handle('selectLibraries', serverSelectLibraries)
+    ipcMain.handle('selectNotebooks', serverSelectNotebooks)
+    ipcMain.handle('selectNotes', serverSelectNotes)
     createWindow()
 });
 

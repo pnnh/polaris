@@ -1,7 +1,6 @@
 import React from 'react'
 import {useEffect, useState} from 'react'
 import {useRecoilState, useRecoilValue} from 'recoil'
-import {selectLibraries} from '@/services/client/personal/library'
 import './library.scss'
 import {libraryAtom} from "@/console/providers/notebook";
 
@@ -10,11 +9,11 @@ export function LibrarySelector() {
     const [libraryState, setLibraryState] = useRecoilState(libraryAtom)
 
     useEffect(() => {
-        selectLibraries().then(selectResult => {
-            if (selectResult && selectResult.range && selectResult.range.length > 0) {
+        window.serverAPI.selectLibraries().then(selectResult => {
+            if (selectResult && selectResult.data && selectResult.data.range && selectResult.data.range.length > 0) {
                 setLibraryState({
-                    models: selectResult.range,
-                    current: selectResult.range[0]
+                    models: selectResult.data.range,
+                    current: selectResult.data.range[0]
                 })
             }
         })
