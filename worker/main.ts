@@ -19,6 +19,7 @@ import cors from 'cors'
 import stripAnsi from "strip-ansi";
 import {accountInformation} from "@/handlers/account/information";
 import {selectTagsFromDatabase} from "@/handlers/tags/tags";
+import {commentInsertHandler, commentsHandler} from "@/handlers/comments/comments";
 
 const workerPort = serverConfig.PORT;
 
@@ -76,6 +77,8 @@ function runMain() {
     server.get("/personal/libraries/:library/notebooks", handleErrors(selectNotebooks));
     server.get("/personal/libraries/:library/notebooks/:notebook/notes", handleErrors(selectNotes));
     server.put("/personal/libraries/:library/notebooks/:notebook/notes/:note", handleErrors(updateNote));
+    server.get("/comments", handleErrors(commentsHandler));
+    server.post("/comments", handleErrors(commentInsertHandler));
 
     server.use((err: Error, req: Request, res: Response, next: NextFunction) => {
         const message = stripAnsi(err.stack || err.message || 'Unknown error')

@@ -10,6 +10,8 @@ export * from './common/models/common-result'
 export * from './common/models/relation'
 export * from './common/models/session'
 export * from './common/models/tag'
+export * from './common/models/comment'
+export * from './common/crypto'
 
 export function sayHelloCommon(word: string) {
     return "Hello from SteleCommon!" + word

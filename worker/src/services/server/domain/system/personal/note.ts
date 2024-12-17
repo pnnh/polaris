@@ -1,6 +1,5 @@
-import {PLSelectResult, SPNoteModel} from "@pnnh/polaris-business";
+import {CodeOk, PLSelectResult, SPNoteModel} from "@pnnh/polaris-business";
 import fs from "node:fs";
-import frontMatter from "front-matter";
 import {decodeBase64String, encodeBase64String} from "@pnnh/atom";
 import path from "path";
 import {emptySelectResult} from "@pnnh/polaris-business";
@@ -46,7 +45,7 @@ export class SystemNoteService {
                     urn: noteUniqueName,
                     name: noteName,
                     description: '',
-                    owner: '', 
+                    owner: '',
                     library: libraryUrn,
                     notebook: notebookUrn
                 }
@@ -56,10 +55,14 @@ export class SystemNoteService {
             }
         }
         return {
-            range: notes,
-            count: notes.length,
-            page: 1,
-            size: notes.length
+            code: CodeOk,
+            message: '',
+            data: {
+                range: notes,
+                count: notes.length,
+                page: 1,
+                size: notes.length
+            }
         }
     }
 

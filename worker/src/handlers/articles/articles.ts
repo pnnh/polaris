@@ -78,7 +78,7 @@ export async function selectArticlesFromDatabase(
         selectSql, selectParams,
     );
 
-    const selectResult: CommonResult<PLSelectResult<PSArticleModel>> = {
+    const selectResult: PLSelectResult<PSArticleModel> = {
         code: CodeOk,
         message: "",
         data: {
@@ -130,11 +130,11 @@ export async function updateArticleViewer(
 
     articleViewerCache.set(cacheKey, 1, 60 * 60 * 24);
 
-    const selectResult: CommonResult<PLInsertResult> = {
+    const selectResult: PLInsertResult<PSArticleModel> = {
         code: CodeOk,
         message: "",
         data: {
-            pk: article,
+            urn: article,
             changes: result.changes || 0,
         }
     };

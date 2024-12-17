@@ -2,7 +2,6 @@ import {PSChannelModel} from "@pnnh/polaris-business";
 import fs from "node:fs";
 import frontMatter from "front-matter";
 import path from "path";
-import {stringToMd5} from "@/utils/basex";
 import {decodeBase64String, encodeBase64String, getType} from "@pnnh/atom";
 
 export class SystemChannelService {
@@ -23,7 +22,7 @@ export class SystemChannelService {
                 const channelName = file.replace(extName, '')
                 const channelUrn = encodeBase64String(file)
                 const model: PSChannelModel = {
-                    create_time: "", creator: "", profile: "", update_time: "", 
+                    create_time: "", creator: "", profile: "", update_time: "",
                     image: '',
                     name: channelName,
                     description: '',

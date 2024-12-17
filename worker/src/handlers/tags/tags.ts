@@ -44,7 +44,7 @@ export async function selectTagsFromDatabase(
         selectSql, selectParams,
     );
 
-    const selectResult: CommonResult<PLSelectResult<PSTagModel>> = {
+    const selectResult: PLSelectResult<PSTagModel> = {
         code: CodeOk,
         message: "",
         data: {

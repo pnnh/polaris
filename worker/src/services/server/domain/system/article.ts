@@ -1,10 +1,9 @@
 import fs from "node:fs";
 import path from "path";
-import {stringToMd5} from "@/utils/basex";
 import {bulkInsertOrUpdateArticles} from "@/services/server/domain/system/database";
 import {openMainDatabase} from "@/services/server/database";
 import {createPaginationByPage} from "@/utils/pagination";
-import {PLSelectResult, PSArticleModel, PSArticleFileModel} from "@pnnh/polaris-business";
+import {PLSelectResult, PSArticleModel, PSArticleFileModel, CodeOk, encodeMD5} from "@pnnh/polaris-business";
 import ignore from 'ignore'
 import {decodeBase64String, encodeBase64String, getType} from "@pnnh/atom";
 import {fillNoteMetadata} from "@/services/common/article";
@@ -23,12 +22,12 @@ export class SystemArticleService {
         const noteName = path.basename(articleFullPath, extName)
         const channelUrn = encodeBase64String(channelPath)
         const articlePath = noteName + extName
-        const articleUrn = encodeBase64String(articlePath)
+        const articleUrn = encodeMD5(articlePath)
 
         const model: PSArticleModel = {
             discover: 0,
             create_time: "", creator: "",
-            update_time: "", 
+            update_time: "",
             description: '',
             urn: articleUrn,
             name: noteName,
@@ -90,10 +89,14 @@ export class SystemArticleService {
             throw new Error('查询count失败')
         }
         return {
-            range: result,
-            count: count.total,
-            page: page,
-            size: result.length
+            code: CodeOk,
+            message: '',
+            data: {
+                range: result,
+                count: count.total,
+                page: page,
+                size: result.length
+            }
         }
     }
 
@@ -145,11 +148,14 @@ export class SystemArticleService {
 
         const files = this.#scanFiles(channelUrn, articleUrn, parentUrn)
         return {
-            range: files,
-            count: files.length,
-            page: 1,
-            size: files.length
-        } as PLSelectResult<PSArticleFileModel>
+            code: CodeOk, message: '',
+            data: {
+                range: files,
+                count: files.length,
+                page: 1,
+                size: files.length
+            }
+        }
     }
 
     #scanFiles(channelUrn: string, articleUrn: string, parentUrn: string): PSArticleFileModel[] {

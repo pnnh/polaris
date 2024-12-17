@@ -1,4 +1,4 @@
-import {PLSelectResult, PSLibraryModel} from "@pnnh/polaris-business";
+import {CodeOk, PLSelectResult, PSLibraryModel} from "@pnnh/polaris-business";
 import fs from "node:fs";
 import frontMatter from "front-matter";
 import {encodeBase64String} from "@pnnh/atom";
@@ -21,10 +21,10 @@ export class SystemLibraryService {
                 const libraryName = path.basename(file, path.extname(file))
                 const uniqueName = encodeBase64String(file)
                 const model: PSLibraryModel = {
-                    create_time: "", update_time: "", 
+                    create_time: "", update_time: "",
                     urn: uniqueName,
                     name: libraryName,
-                    description: '', 
+                    description: '',
                     owner: ''
                 }
                 const metadataFile = path.join(basePath, file, 'metadata.md')
@@ -45,10 +45,14 @@ export class SystemLibraryService {
             }
         }
         return {
-            range: librarys,
-            count: librarys.length,
-            page: 1,
-            size: librarys.length
+            code: CodeOk,
+            message: '',
+            data: {
+                range: librarys,
+                count: librarys.length,
+                page: 1,
+                size: librarys.length
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ import path from "path";
 import {stringToMd5} from "@pnnh/atom";
 import {PSArticleFileModel, PSArticleModel} from "@/common/models/article";
 import {createPaginationByPage} from "@pnnh/atom";
-import {PLSelectResult} from "@/common/models/common-result";
+import {CodeOk, PLSelectResult} from "@/common/models/common-result";
 import ignore from 'ignore'
 import {getType} from "@pnnh/atom";
 
@@ -148,11 +148,15 @@ export class SystemArticleService {
         }
         const files = this.#scanFiles(channelName, articleName, parentPath)
         return {
-            range: files,
-            count: files.length,
-            page: 1,
-            size: files.length
-        } as PLSelectResult<PSArticleFileModel>
+            code: CodeOk,
+            message: 'OK',
+            data: {
+                range: files,
+                count: files.length,
+                page: 1,
+                size: files.length
+            }
+        }
     }
 
     #scanFiles(channelName: string, articleName: string, parentPath: string): PSArticleFileModel[] {

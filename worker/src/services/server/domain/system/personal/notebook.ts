@@ -1,4 +1,4 @@
-import { PLSelectResult, PSNotebookModel} from "@pnnh/polaris-business";
+import {CodeOk, PLSelectResult, PSNotebookModel} from "@pnnh/polaris-business";
 import fs from "node:fs";
 import frontMatter from "front-matter";
 import {decodeBase64String, encodeBase64String} from "@pnnh/atom";
@@ -52,10 +52,14 @@ export class SystemNotebookService {
             }
         }
         return {
-            range: notebooks,
-            count: notebooks.length,
-            page: 1,
-            size: notebooks.length
+            code: CodeOk,
+            message: '',
+            data: {
+                range: notebooks,
+                count: notebooks.length,
+                page: 1,
+                size: notebooks.length
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ interface IServerConfig {
     INITIAL_DOMAINS: string,
     PORT: number,
     DATA_PATH: string,
+    PGDATABASE: string,
 }
 
 function parseConfig(): IServerConfig {
@@ -21,6 +22,7 @@ function parseConfig(): IServerConfig {
         INITIAL_DOMAINS: process.env.INITIAL_DOMAINS || '',
         PORT: parseInt(process.env.PORT || '8100'),
         DATA_PATH: process.env.DATA_PATH || '.',
+        PGDATABASE: process.env.PGDATABASE || '',
     }
     if (!config.ENV) {
         throw new Error('ENV is required')
@@ -36,6 +38,9 @@ function parseConfig(): IServerConfig {
     }
     if (!config.DATA_PATH) {
         throw new Error('DATA_PATH is required')
+    }
+    if (!config.PGDATABASE) {
+        throw new Error('PGDATABASE is required')
     }
 
     return config

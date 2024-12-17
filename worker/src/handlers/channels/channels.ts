@@ -1,8 +1,6 @@
 import {SystemChannelService} from "@/services/server/domain/system/channel";
 import {serverConfig} from "@/services/server/config";
 import {Request, Response} from "express";
-import {SystemArticleService} from "@/services/server/domain/system/article";
-import {getType} from "@pnnh/atom";
 
 // 查询频道列表
 export async function selectChannels(request: Request, response: Response) {
