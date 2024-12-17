@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import {serverConfig} from "@/services/server/config";
-import {SystemArticleService} from "@/services/server/domain/system/article";
+import {SystemArticleService} from "@pnnh/polaris-business/server";
 
 export async function GET(request: Request, response: Response, {params}: {
     params: { channel: string, article: string, path: string[] }

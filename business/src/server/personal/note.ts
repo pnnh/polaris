@@ -1,9 +1,10 @@
-import {CodeOk, PLSelectResult, SPNoteModel} from "@pnnh/polaris-business";
+
 import fs from "node:fs";
 import {decodeBase64String, encodeBase64String} from "@pnnh/atom";
 import path from "path";
-import {emptySelectResult} from "@pnnh/polaris-business";
-import {fillNoteMetadata} from "@/services/common/article";
+import {SPNoteModel} from "@/common/models/personal/note";
+import {CodeOk, emptySelectResult, PLSelectResult} from "@/common/models/common-result";
+import {fillNoteMetadata} from "@/common/article";
 
 export class SystemNoteService {
     systemDomain: string

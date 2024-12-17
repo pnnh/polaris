@@ -1,4 +1,5 @@
-import {openDatabase, openMainDatabase} from "@/services/server/database";
+import {openMainDatabase} from "@/services/server/localdb/sqlite";
+
 
 export async function initDatabase() {
     const database = await openMainDatabase()

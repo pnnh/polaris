@@ -1,11 +1,11 @@
 import {PLInsertResult, PSArticleModel} from "@pnnh/polaris-business";
-import {openMainDatabase} from "@/services/server/database";
 import {createPaginationByPage} from "@/utils/pagination";
 import {CodeOk, CommonResult, PLSelectResult} from "@pnnh/polaris-business";
 import {Request, Response} from "express";
-import {SystemArticleService} from "@/services/server/domain/system/article";
+import {SystemArticleService} from "@pnnh/polaris-business/server";
 import {serverConfig} from "@/services/server/config";
 import {articleViewerCache} from "@/services/server/cache";
+import {openMainDatabase} from "@/services/server/localdb/sqlite";
 
 // 查找单个文章
 export async function findArticle(request: Request, response: Response) {
@@ -74,7 +74,7 @@ export async function selectArticlesFromDatabase(
     selectSql += ` ORDER BY ${sort === 'latest' ? 'update_time' : 'discover'} DESC LIMIT :limit OFFSET :offset`;
     selectParams[":limit"] = limit;
     selectParams[":offset"] = offset;
-    const result = await db.all<PSArticleModel[]>(
+    const result = await db.select<PSArticleModel>(
         selectSql, selectParams,
     );
 
@@ -124,7 +124,7 @@ export async function updateArticleViewer(
         ":urn": article,
     }
 
-    const result = await db.run(
+    await db.exec(
         selectSql, selectParams,
     );
 
@@ -135,7 +135,7 @@ export async function updateArticleViewer(
         message: "",
         data: {
             urn: article,
-            changes: result.changes || 0,
+            changes: 0,
         }
     };
     response.json(selectResult);

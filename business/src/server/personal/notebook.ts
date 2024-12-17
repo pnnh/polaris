@@ -1,9 +1,11 @@
-import {CodeOk, PLSelectResult, PSNotebookModel} from "@pnnh/polaris-business";
+
 import fs from "node:fs";
 import frontMatter from "front-matter";
 import {decodeBase64String, encodeBase64String} from "@pnnh/atom";
 import path from "path";
-import {emptySelectResult} from "@pnnh/polaris-business";
+import {emptySelectResult, PLSelectResult} from "@/common/models/common-result";
+import {PSNotebookModel} from "@/common/models/personal/notebook";
+import {CodeOk} from "@/common/models/common-result";
 
 export class SystemNotebookService {
     systemDomain: string

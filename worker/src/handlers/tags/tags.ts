@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
-import {openMainDatabase} from "@/services/server/database";
 import {createPaginationByPage} from "@/utils/pagination";
 import {CodeOk, CommonResult, PLSelectResult, PSTagModel} from "@pnnh/polaris-business";
+import {openMainDatabase} from "@/services/server/localdb/sqlite";
 
 export async function selectTagsFromDatabase(
     request: Request,
@@ -40,7 +40,7 @@ export async function selectTagsFromDatabase(
     selectSql += ` ORDER BY 'update_time' DESC LIMIT :limit OFFSET :offset`;
     selectParams[":limit"] = limit;
     selectParams[":offset"] = offset;
-    const result = await db.all<PSTagModel[]>(
+    const result = await db.select<PSTagModel>(
         selectSql, selectParams,
     );
 

@@ -1,4 +1,4 @@
-import {SystemChannelService} from "@/services/server/domain/system/channel";
+import {SystemChannelService} from "@pnnh/polaris-business/server";
 import {serverConfig} from "@/services/server/config";
 import {Request, Response} from "express";
 

@@ -1,12 +1,13 @@
 import fs from "node:fs";
 import path from "path";
-import {bulkInsertOrUpdateArticles} from "@/services/server/domain/system/database";
-import {openMainDatabase} from "@/services/server/database";
-import {createPaginationByPage} from "@/utils/pagination";
-import {PLSelectResult, PSArticleModel, PSArticleFileModel, CodeOk, encodeMD5} from "@pnnh/polaris-business";
 import ignore from 'ignore'
-import {decodeBase64String, encodeBase64String, getType} from "@pnnh/atom";
-import {fillNoteMetadata} from "@/services/common/article";
+import {createPaginationByPage, decodeBase64String, encodeBase64String, getType} from "@pnnh/atom";
+import {encodeMD5} from "@/common/crypto";
+import {PSArticleFileModel, PSArticleModel} from "@/common/models/article";
+import {fillNoteMetadata} from "@/common/article";
+import {CodeOk, PLSelectResult} from "@/common/models/common-result";
+import {ISqliteClient} from "@/server/sqlite/database";
+import {bulkInsertOrUpdateArticles} from "@/server/sqlite/article";
 
 const assetsIgnore = ignore().add(['.*', 'node_modules', 'dist', 'build', 'out', 'target', 'logs', 'logs/*', 'logs/**/*'])
 
@@ -76,15 +77,14 @@ export class SystemArticleService {
         return articles
     }
 
-    async selectArticlesFromDatabase(page: number, size: number): Promise<PLSelectResult<PSArticleModel>> {
-        const db = await openMainDatabase()
+    async selectArticlesFromDatabase(sqliteClient: ISqliteClient, page: number, size: number): Promise<PLSelectResult<PSArticleModel>> {
         const {limit, offset} = createPaginationByPage(page, size)
-        const result = await db.all<PSArticleModel[]>(
+        const result = await sqliteClient.select<PSArticleModel>(
             `SELECT * FROM articles ORDER BY update_time DESC LIMIT :limit OFFSET :offset`, {
                 ':limit': limit,
                 ':offset': offset
             })
-        const count = await db.get<{ total: number }>('SELECT COUNT(*) AS total FROM articles')
+        const count = await sqliteClient.get<{ total: number }>('SELECT COUNT(*) AS total FROM articles')
         if (!count) {
             throw new Error('查询count失败')
         }
@@ -113,9 +113,9 @@ export class SystemArticleService {
     }
 
     // 由定时任务调用
-    async runtimeSyncArticles() {
+    async runtimeSyncArticles(sqliteClient: ISqliteClient) {
         const articles: PSArticleModel[] = await this.#scanArticles()
-        await bulkInsertOrUpdateArticles(articles)
+        await bulkInsertOrUpdateArticles(sqliteClient, articles)
     }
 
     async selectArticles() {

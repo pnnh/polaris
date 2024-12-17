@@ -1,12 +1,11 @@
-import {PSArticleModel} from "@pnnh/polaris-business";
-import {openMainDatabase} from "@/services/server/database";
-import {encodeBase64String} from "@pnnh/atom";
-import {Database} from "sqlite";
+import {PSArticleModel} from "@/common/models/article";
+import {bulkInsertOrUpdateTags} from "@/server/sqlite/tags";
+import {ISqliteClient} from "@/server/sqlite/database";
 
-export async function bulkInsertOrUpdateArticles(articles: PSArticleModel[]) {
-    const db = await openMainDatabase()
-    await db.exec('BEGIN TRANSACTION;')
-    const stmt = await db.prepare(`INSERT 
+export async function bulkInsertOrUpdateArticles(sqliteClient: ISqliteClient, articles: PSArticleModel[]) {
+
+    await sqliteClient.exec('BEGIN TRANSACTION;')
+    const stmt = await sqliteClient.prepare(`INSERT 
             INTO articles (urn, title, header, body, create_time, update_time, creator, keywords, description, 
                 cover, owner, channel, partition, path)
             VALUES ($urn, $title, $header, $body, $create_time, $update_time, $creator, $keywords, $description, 
@@ -43,41 +42,9 @@ export async function bulkInsertOrUpdateArticles(articles: PSArticleModel[]) {
             $channel: channelUrn,
             $partition: article.partition,
         });
-        await bulkInsertOrUpdateTags(db, channelUrn, article.urn, article.keywords)
+        await bulkInsertOrUpdateTags(sqliteClient, channelUrn, article.urn, article.keywords)
     }
     await stmt.finalize()
-    await db.exec('COMMIT;')
-}
-
-
-export async function bulkInsertOrUpdateTags(db: Database, channelUrn: string, articleUrn: string, tags: string) {
-    const stmt = await db.prepare(`INSERT 
-            INTO tags (urn, name, description, article, create_time, update_time, channel)
-            VALUES ($urn, $name, $description, $article, $create_time, $update_time, $channel)
-            ON CONFLICT(urn) DO UPDATE SET
-                name = excluded.name,
-                description = excluded.description,
-                article = excluded.article,
-                update_time = excluded.update_time,
-                channel = excluded.channel
-            WHERE tags.urn = excluded.urn;`)
-    const now = new Date().toISOString()
-    const tagList = tags.trim().split(',')
-    for (let tag of tagList) {
-        tag = tag.trim()
-        if (!tag) {
-            continue
-        }
-        await stmt.run({
-            $urn: encodeBase64String(tag),
-            $name: tag,
-            $description: '',
-            $article: articleUrn,
-            $create_time: now,
-            $update_time: now,
-            $channel: channelUrn
-        });
-    }
-    await stmt.finalize()
+    await sqliteClient.exec('COMMIT;')
 }
 

@@ -1,8 +1,10 @@
-import {CodeOk, PLSelectResult, PSLibraryModel} from "@pnnh/polaris-business";
+
 import fs from "node:fs";
 import frontMatter from "front-matter";
 import {encodeBase64String} from "@pnnh/atom";
 import path from "path";
+import {CodeOk, PLSelectResult} from "@/common/models/common-result";
+import {PSLibraryModel} from "@/common/models/personal/library";
 
 export class SystemLibraryService {
     systemDomain: string

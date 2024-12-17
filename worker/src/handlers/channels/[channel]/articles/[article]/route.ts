@@ -1,5 +1,5 @@
 import {Request, Response} from "express";
-import {SystemArticleService} from "@/services/server/domain/system/article";
+import {SystemArticleService} from "@pnnh/polaris-business/server";
 import {serverConfig} from "@/services/server/config";
 
 export async function GET(request: Request, response: Response, {params}: {

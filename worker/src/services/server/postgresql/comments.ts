@@ -1,8 +1,8 @@
 import {CommentModel} from "@pnnh/polaris-business";
 import {validateEmail} from "@pnnh/atom";
 import {uuidV7} from '@pnnh/atom'
-import {openMainPGDatabase} from "@/services/server/postgresql";
-import {ensureAccount} from "@/services/server/account";
+import {openMainPGDatabase} from "@/services/server/postgresql/postgresql";
+import {ensureAccount} from "@/services/server/postgresql/account";
 
 export async function selectComments(): Promise<CommentModel[]> {
     const client = await openMainPGDatabase()
