@@ -2,7 +2,7 @@ import {PLInsertResult, PSArticleModel} from "@pnnh/polaris-business";
 import {createPaginationByPage} from "@/utils/pagination";
 import {CodeOk, CommonResult, PLSelectResult} from "@pnnh/polaris-business";
 import {Request, Response} from "express";
-import {SystemArticleService} from "@pnnh/polaris-business/server";
+import {SystemArticleService} from "@pnnh/polaris-business";
 import {serverConfig} from "@/services/server/config";
 import {articleViewerCache} from "@/services/server/cache";
 import {openMainDatabase} from "@/services/server/localdb/sqlite";

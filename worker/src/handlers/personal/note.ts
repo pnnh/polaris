@@ -1,6 +1,6 @@
 import {serverConfig} from "@/services/server/config";
 import {Request, Response} from "express";
-import {SystemNoteService} from "@pnnh/polaris-business/server";
+import {SystemNoteService} from "@pnnh/polaris-business";
 import {SPNoteModel} from "@pnnh/polaris-business";
 
 // 查询频道列表

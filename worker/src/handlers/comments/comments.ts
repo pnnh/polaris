@@ -1,6 +1,6 @@
 import {Request, Response} from "express";
 import {CodeFailed, CodeOk, CommonResult, PLInsertResult, PLSelectResult} from "@pnnh/polaris-business";
-import {CommentModel} from "@pnnh/polaris-business/common";
+import {CommentModel} from "@pnnh/polaris-business";
 import {verifyCache} from "@/services/server/cache";
 import {getIpAddress} from "@/utils/express";
 import {insertComment, selectComments} from "@/services/server/postgresql/comments";

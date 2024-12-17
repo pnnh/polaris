@@ -1,5 +1,5 @@
 import {serverConfig} from "@/services/server/config";
-import {SystemArticleService} from "@pnnh/polaris-business/server";
+import {SystemArticleService} from "@pnnh/polaris-business";
 import {openMainDatabase} from "@/services/server/localdb/sqlite";
 
 // 由定时任务调用，同步文章数据到本地数据库

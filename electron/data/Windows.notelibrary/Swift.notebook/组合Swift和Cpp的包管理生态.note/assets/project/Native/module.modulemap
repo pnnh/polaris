@@ -1,0 +1,5 @@
+module Native {
+    header "logger/logger.h"
+
+    export *
+}

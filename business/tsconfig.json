@@ -14,9 +14,9 @@
     "allowSyntheticDefaultImports": true,
     "rootDir": "src",
     "baseUrl": ".",
-    "outDir": "dts",
+    "outDir": "lib",
     "declaration": true,
-    "declarationDir": "dts",
+    "declarationDir": "lib",
     "emitDeclarationOnly": false,
     "paths": {
       "@/*": [

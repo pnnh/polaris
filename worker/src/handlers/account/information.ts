@@ -1,4 +1,4 @@
-import {SystemAccountService} from "@pnnh/polaris-business/server";
+import {SystemAccountService} from "@pnnh/polaris-business";
 import {Request, Response} from "express";
 
 export async function accountInformation(request: Request, response: Response) {
