@@ -1,26 +1,24 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useEffect} from 'react'
-import {useRecoilState} from 'recoil'
 import './library.scss'
-import {libraryAtom, libraryListAtom} from "@/console/providers/notebook";
+import {PLSelectResult, PSFileModel} from "@pnnh/polaris-business";
+import {filesMailbox} from "@/console/providers/notebook";
 
 export function LibrarySelector() {
-    const [libraryListState, setLibraryListState] = useRecoilState(libraryListAtom)
-    const [libraryState, setLibraryState] = useRecoilState(libraryAtom)
+    const [libraryListState, setLibraryListState] = useState<PLSelectResult<PSFileModel>>()
 
     useEffect(() => {
         window.serverAPI.selectFiles('', {
             directory: true
         }).then(selectResult => {
             if (selectResult && selectResult.data && selectResult.data.range && selectResult.data.range.length > 0) {
-                setLibraryListState({
-                    models: selectResult.data.range
-                })
+                setLibraryListState(selectResult)
             }
         })
     }, [])
 
-    if (!libraryListState || !libraryListState.models || libraryListState.models.length <= 0) {
+    if (!libraryListState || !libraryListState?.data ||
+        !libraryListState.data.range || libraryListState.data.range.length <= 0) {
         return <div>暂无笔记本</div>
     }
     return <>
@@ -33,11 +31,9 @@ export function LibrarySelector() {
             <div className={'libraryContainer'}>
                 <div className={'libraryList'}>
                     {
-                        libraryListState.models.map(item => {
+                        libraryListState.data.range.map(item => {
                             return <div key={item.URN} className={'notebookItem'} onClick={() => {
-                                setLibraryState({
-                                    current: item
-                                })
+                                filesMailbox.sendMail('abc', item)
                             }}>
                                 <span className={'notebookName'}>{item.Name}</span>
                             </div>

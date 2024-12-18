@@ -9,7 +9,6 @@ import {
     Link,
 } from "react-router-dom";
 import {ConsolePage} from "./console/page";
-import {RecoilRoot} from "recoil";
 import {NewPage} from "@/welcome/new";
 import {OpenPage} from "@/welcome/open";
 
@@ -42,7 +41,5 @@ if (!rootElement) {
 }
 
 createRoot(rootElement).render(
-    <RecoilRoot>
         <RouterProvider router={router}/>
-    </RecoilRoot>
 );

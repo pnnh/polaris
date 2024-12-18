@@ -2,7 +2,7 @@ import {NotebookBar} from './sidebar'
 import React from 'react'
 import {ConsoleLayout} from "@/console/layout";
 import './page.scss'
-import {FileList} from "@/console/partials/files";
+import {FileListContainer} from "@/console/partials/files";
 
 export function ConsolePage() {
     return (
@@ -12,7 +12,7 @@ export function ConsolePage() {
             </div>
             <div className={'notesContainer'}>
                 <div className={'notebarContainer'}>
-                    <FileList></FileList>
+                    <FileListContainer></FileListContainer>
                 </div>
             </div>
         </ConsoleLayout>

@@ -1,48 +1,72 @@
 import React from 'react'
 import {useEffect, useState} from 'react'
-import {useRecoilState, useRecoilValue} from 'recoil'
-import {PSFileModel, PSNotebookModel} from '@pnnh/polaris-business'
+import {PLSelectResult, PSFileModel, PSNotebookModel} from '@pnnh/polaris-business'
 import './files.scss'
-import {filesAtom, libraryAtom, libraryListAtom, noteAtom} from "@/console/providers/notebook";
+import {filesMailbox} from "@/console/providers/notebook";
 
-export function FileList() {
-    const libraryState = useRecoilValue(libraryAtom)
-    const [filesState, setFilesState] = useRecoilState(filesAtom)
+export function FileListContainer() {
+    const [filesState, setFilesState] = useState<PLSelectResult<PSFileModel>>()
     useEffect(() => {
-        if (!libraryState.current) {
-            return
-        }
-        window.serverAPI.selectFiles(libraryState.current.Path).then(selectResult => {
-            setFilesState({
-                models: selectResult.data.range
+        const stub = filesMailbox.subscribe<PSFileModel>('abc', (mail) => {
+            console.log('subscribe22', mail)
+            const fileModel = mail.content as PSFileModel
+            window.serverAPI.selectFiles(fileModel.Path, undefined).then(selectResult => {
+                setFilesState(selectResult)
             })
         })
-    }, [libraryState])
+        console.log('registerComponent')
+        return () => {
+            console.log('unregisterComponent')
+            filesMailbox.unsubscribe(stub)
+        }
+    }, [])
 
-    if (!filesState || !filesState.models || filesState.models.length <= 0) {
+    if (!filesState || !filesState.data || !filesState.data.range || filesState.data.range.length <= 0) {
         return <div>Empty</div>
     }
-    return <div className={'notebookContainer'}>
-        <div className={'notebookList'}>
+    return <div className={'fileListContainer'}>
             {
-                filesState.models.map(item => {
-                    return <FileCard key={item.URN} item={item}/>
+                filesState.data.range.map(item => {
+                    return <FileList key={item.URN} item={item} filesResult={filesState} level={0}/>
                 })
             }
-        </div>
     </div>
 }
 
-function FileCard({item}: { item: PSFileModel }) {
-    const [noteState, setNoteState] = useRecoilState(noteAtom)
-    return <div>
-        <div className={'directorySelf'} onClick={() => {
-            setNoteState({
-                current: item
-            })
-        }}>
+function FileList({item, filesResult, level}: { item: PSFileModel,
+    filesResult: PLSelectResult<PSFileModel>, level: number }) {
+
+    const [childrenFilesState, setChildrenFilesState] = useState<PLSelectResult<PSFileModel>>()
+
+    return <div className={'fileList'}>
+        <div className={'directorySelf'} style={{paddingLeft: level.toString() + 'rem'}}>
+            <div className={'openIcon'}>
+                {
+                    item.IsDir &&
+                    <img src={!childrenFilesState ? '/icons/console/triangle-right-fill.png' :
+                        '/icons/console/triangle-down-fill.png'} alt={'open'}
+                    onClick={() => {
+                        if (!childrenFilesState) {
+                            window.serverAPI.selectFiles(item.Path, undefined).then(selectResult => {
+                                setChildrenFilesState(selectResult)
+                            })
+                        } else {
+                            setChildrenFilesState(undefined)
+                        }
+                    }}/>
+                }
+            </div>
             <div className={'directoryName'}>
-                {item.Name}</div>
+                {item.Name}
+            </div>
+        </div>
+        <div className={'childrenFileList'}>
+            { childrenFilesState && childrenFilesState.data && childrenFilesState.data.range && childrenFilesState.data.range.length > 0 &&
+                childrenFilesState.data.range.map(item => {
+                    return <FileList key={item.URN} item={item} filesResult={childrenFilesState}
+                        level={level + 1}/>
+                })
+            }
         </div>
     </div>
 }

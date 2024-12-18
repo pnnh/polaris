@@ -9,16 +9,13 @@
   position: relative;
 }
 
-.notebookContainer {
-  height: calc(100vh - 3rem);
-}
-
-.notebookList {
+.fileListContainer {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   overflow-y: auto;
-  height: calc(100vh - 6rem);
+  scrollbar-width: thin;
 }
 
 .notebookSelector {
@@ -93,6 +90,16 @@
 
   &:hover {
     background-color: #DFDFDF;
+  }
+
+  .openIcon {
+    margin-right: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    img {
+        width: 100%;
+        height: 100%;
+    }
   }
 }
 

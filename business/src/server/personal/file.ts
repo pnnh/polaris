@@ -27,8 +27,8 @@ export class SystemFileService {
         }
         const files = fs.readdirSync(path.join(basePath, parentPath))
         for (const file of files) {
+            const stat = fs.statSync(path.join(basePath, parentPath, file))
             if (options && options.directory) {
-                const stat = fs.statSync(path.join(basePath, parentPath, file))
                 if (!stat.isDirectory()) {
                     continue
                 }
@@ -40,7 +40,7 @@ export class SystemFileService {
                 CreateTime: "", UpdateTime: "",
                 URN: fileUniqueName,
                 Description: '',
-                IsDir: true,
+                IsDir: stat.isDirectory(),
                 IsHidden: false,
                 IsIgnore: false,
                 Keywords: '',
