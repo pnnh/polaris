@@ -3,8 +3,8 @@ import {useRecoilState, useRecoilValue} from 'recoil'
 import {ArticleContainer} from "@/components/console/note";
 import {css} from "@emotion/css";
 import {noteAtom} from "@/console/providers/notebook";
-import {storeArticleToDatabase} from "@/services/client/personal/notes";
 import {PSNoteModel} from "@pnnh/polaris-business";
+import {storeArticleToDatabase} from "@/services/server/notes";
 
 const styles = {
     editorArea: css`

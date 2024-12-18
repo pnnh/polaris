@@ -23,19 +23,19 @@ let nextConfig = {
         //     }),
         // )
 
-        const originalEntry = config.entry;
-
-        config.entry = async () => {
-            const entries = await originalEntry();
-
-            return {
-                ...entries,
-                'worker/main': {
-                    import: path.resolve(__dirname, 'src/worker/main.ts'),
-                    dependOn: undefined,
-                },
-            };
-        };
+        // const originalEntry = config.entry;
+        //
+        // config.entry = async () => {
+        //     const entries = await originalEntry();
+        //
+        //     return {
+        //         ...entries,
+        //         'worker/main': {
+        //             import: path.resolve(__dirname, 'src/worker/main.ts'),
+        //             dependOn: undefined,
+        //         },
+        //     };
+        // };
         return config;
 
     },

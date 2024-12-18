@@ -2,17 +2,9 @@
   background: #FFFFFF;
   height: 100vh;
 
-  .leftNav {
-    width: 3rem;
-    position: absolute;
-    left: 0;
-    height: 100%;
-  }
-
   .rightBody {
     position: absolute;
-    left: 3rem;
-    width: calc(100vw - 3rem);
+    width: 100vw;
     height: 100vh;
     background: #FFFFFF;
   }

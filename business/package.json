@@ -4,7 +4,8 @@
   "description": "哈宝笔记公共业务库",
   "license": "MIT",
   "scripts": {
-    "build": "rollup --config rollup.config.mjs"
+    "build": "rollup --config rollup.config.mjs",
+    "tests": "tsx tests/main.ts"
   },
   "exports": {
     ".": {

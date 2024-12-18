@@ -1,13 +1,8 @@
 import {atom} from 'recoil'
-import {PSLibraryModel, PSNotebookModel, PSNoteModel} from "@pnnh/polaris-business";
+import {PSFileModel, PSLibraryModel} from "@pnnh/polaris-business";
 
-const directoryAtom = atom({
-    key: 'directoryAtom',
-    default: ''
-})
-
-const noteAtom = atom<{
-    current: PSNoteModel | undefined,
+export const noteAtom = atom<{
+    current: PSFileModel | undefined,
 }>({
     key: 'noteAtom',
     default: {
@@ -15,26 +10,30 @@ const noteAtom = atom<{
     }
 })
 
-const notebookAtom = atom<{
-    models: PSNotebookModel[],
-    current: PSNotebookModel | undefined,
+export const filesAtom = atom<{
+    models: PSFileModel[],
 }>({
-    key: 'notebookAtom',
+    key: 'filesAtom',
     default: {
         models: [],
-        current: undefined,
     }
 })
 
-const libraryAtom = atom<{
-    models: PSLibraryModel[],
-    current: PSLibraryModel | undefined,
+export const libraryListAtom = atom<{
+    models: PSFileModel[]
+}>({
+    key: 'libraryListAtom',
+    default: {
+        models: [],
+    }
+})
+
+export const libraryAtom = atom<{
+    current: PSFileModel | undefined,
 }>({
     key: 'libraryAtom',
     default: {
-        models: [],
         current: undefined,
     }
 })
 
-export {noteAtom, directoryAtom, notebookAtom, libraryAtom}

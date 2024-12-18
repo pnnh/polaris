@@ -1,5 +1,5 @@
 import {IAppConfig} from "@/services/common/config";
-import {PLSelectResult, PSLibraryModel, PSNotebookModel, PSNoteModel} from "@pnnh/polaris-business";
+import {PLSelectResult, PSLibraryModel, PSFileModel, PSNoteModel, ISelectFilesOptions} from "@pnnh/polaris-business";
 
 export {} // 该行不能去掉，否则会提示类型不存在
 
@@ -8,9 +8,7 @@ declare global {
         serverAPI: {
             getAppConfig: () => Promise<IAppConfig>
             storeArticle: (article: PSNoteModel) => Promise<void>
-            selectLibraries: () =>  Promise<PLSelectResult<PSLibraryModel>>
-            selectNotebooks: (libraryUrn: string, notebookUrn: string) => Promise<PLSelectResult<PSNotebookModel>>
-            selectNotes: (libraryUrn: string, notebookUrn: string, queryString: string) => Promise<PLSelectResult<PSNote>>
+            selectFiles: (parentPath: string, options: ISelectFilesOptions | undefined) => Promise<PLSelectResult<PSFileModel>>
         }
     }
 }

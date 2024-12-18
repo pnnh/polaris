@@ -1,9 +1,8 @@
 import {NotebookBar} from './sidebar'
-import {ConsoleNotebar} from './notebar'
 import React from 'react'
 import {ConsoleLayout} from "@/console/layout";
 import './page.scss'
-import {ArticleEditorArea} from "@/console/partials/viewer";
+import {FileList} from "@/console/partials/files";
 
 export function ConsolePage() {
     return (
@@ -13,10 +12,7 @@ export function ConsolePage() {
             </div>
             <div className={'notesContainer'}>
                 <div className={'notebarContainer'}>
-                    {/*<ConsoleNotebar></ConsoleNotebar>*/}
-                </div>
-                <div className={'noteViewer'}>
-                    {/*<ArticleEditorArea></ArticleEditorArea>*/}
+                    <FileList></FileList>
                 </div>
             </div>
         </ConsoleLayout>

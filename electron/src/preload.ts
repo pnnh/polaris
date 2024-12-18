@@ -1,13 +1,11 @@
 import {contextBridge, ipcRenderer} from 'electron'
-import {PSNoteModel} from "@pnnh/polaris-business";
+import {ISelectFilesOptions, PSNoteModel} from "@pnnh/polaris-business";
 
 contextBridge.exposeInMainWorld('serverAPI', {
     getAppConfig: () => ipcRenderer.invoke('getAppConfig'),
     storeArticle: (article: PSNoteModel) => ipcRenderer.invoke('storeArticle', article),
-    selectLibraries: () => ipcRenderer.invoke('selectLibraries'),
-    selectNotebooks: (libraryUrn: string, notebookUrn: string) => ipcRenderer.invoke('selectNotebooks', libraryUrn, notebookUrn),
-    selectNotes: (libraryUrn: string, notebookUrn: string, queryString: string)  => ipcRenderer.invoke('selectNotebooks',
-        libraryUrn, notebookUrn, queryString),
+    selectFiles: (parentPath: string, options: ISelectFilesOptions | undefined) => ipcRenderer.invoke('selectFiles',
+        parentPath, options),
 })
 
 window.addEventListener('DOMContentLoaded', () => {

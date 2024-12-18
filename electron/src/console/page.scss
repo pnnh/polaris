@@ -1,23 +1,15 @@
 .notesContainer {
   position: absolute;
   left: 15rem;
-  width: calc(100vw - 18rem);
+  width: calc(100vw - 15rem);
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
 
-
-  .noteViewer {
-    position: absolute;
-    left: 20rem;
-    width: calc(100% - 20rem);
-    height: 100%;
-  }
-
   .notebarContainer {
     position: absolute;
     left: 0;
-    width: 20rem;
+    width: 100%;
     overflow-y: auto;
     overflow-x: hidden;
     border-right: solid 1px #e3e3e3;
