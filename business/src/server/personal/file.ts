@@ -14,8 +14,10 @@ export interface ISelectFilesOptions {
 
 export class SystemFileService {
     systemDomain: string
+    systemUrl: string
 
     constructor(systemDomain: string) {
+        this.systemUrl = systemDomain
         this.systemDomain = systemDomain.replace('file://', '')
     }
 
@@ -46,6 +48,7 @@ export class SystemFileService {
                 Keywords: '',
                 Title: fileName,
                 Size: 0,
+                Url: this.systemUrl + '/' + path.join(parentPath, file),
                 Path: path.join(parentPath, file),
             }
             const metadataFile = basePath + '/' + file + '/metadata.md'

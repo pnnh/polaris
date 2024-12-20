@@ -32,8 +32,14 @@ export function LibrarySelector() {
                 <div className={'libraryList'}>
                     {
                         libraryListState.data.range.map(item => {
-                            return <div key={item.URN} className={'notebookItem'} onClick={() => {
+                            return <div key={item.URN} className={'notebookItem'} onClick={async () => {
                                 filesMailbox.sendMail('abc', item)
+                                // const currentDomainPath = await window.serverAPI.getDomainPath()
+                                // const newPath = currentDomainPath + '/' + item.Path
+                                window.serverAPI.setDomainPath(item.Url).then(() => {
+                                    console.debug('Set Domain Path', item.Path)
+                                    filesMailbox.sendMail('domainPath', item)
+                                })
                             }}>
                                 <span className={'notebookName'}>{item.Name}</span>
                             </div>

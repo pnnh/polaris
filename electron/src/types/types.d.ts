@@ -9,6 +9,8 @@ declare global {
             getAppConfig: () => Promise<IAppConfig>
             storeArticle: (article: PSNoteModel) => Promise<void>
             selectFiles: (parentPath: string, options: ISelectFilesOptions | undefined) => Promise<PLSelectResult<PSFileModel>>
+            getDomainPath: () => Promise<string>
+            setDomainPath: (path: string) => Promise<void>
         }
     }
 }

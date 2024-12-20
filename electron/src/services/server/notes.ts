@@ -1,9 +1,10 @@
 import {PLSelectResult, PSNoteModel, SPNoteModel, SystemNoteService} from "@pnnh/polaris-business";
 import {openDatabase} from "@/services/client/database";
 import {serverConfig} from "@/services/server/config";
+import {serverGetDomainPath} from "@/services/server/domain";
 
 export async function serverSelectNotes(event: Electron.Event, libraryUrn: string, notebookUrn: string, queryString: string = '') {
-    const domainUrl = serverConfig.INITIAL_DOMAINS
+    const domainUrl = serverGetDomainPath()
 
     const {library, notebook} = {library: libraryUrn, notebook: notebookUrn}
     const service = new SystemNoteService(domainUrl)

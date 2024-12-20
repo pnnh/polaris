@@ -5,6 +5,7 @@ import {serverStoreArticle} from "@/services/server/article";
 import {serverSelectLibraries} from "@/services/server/library";
 import {serverSelectFiles} from "@/services/server/notebook";
 import {serverSelectNotes} from "@/services/server/notes";
+import {serverGetDomainPath, serverSetDomainPath} from "@/services/server/domain";
 
 if (require('electron-squirrel-startup')) {
     app.quit();
@@ -34,6 +35,8 @@ app.on('ready', () => {
     ipcMain.handle('getAppConfig', serverGetAppConfig)
     ipcMain.handle('storeArticle', serverStoreArticle)
     ipcMain.handle('selectFiles', serverSelectFiles)
+    ipcMain.handle('getDomainPath', serverGetDomainPath)
+    ipcMain.handle('setDomainPath', serverSetDomainPath)
     createWindow()
 });
 

@@ -6,6 +6,8 @@ contextBridge.exposeInMainWorld('serverAPI', {
     storeArticle: (article: PSNoteModel) => ipcRenderer.invoke('storeArticle', article),
     selectFiles: (parentPath: string, options: ISelectFilesOptions | undefined) => ipcRenderer.invoke('selectFiles',
         parentPath, options),
+    getDomainPath: () => ipcRenderer.invoke('getDomainPath'),
+    setDomainPath: (path: string) => ipcRenderer.invoke('setDomainPath', path)
 })
 
 window.addEventListener('DOMContentLoaded', () => {

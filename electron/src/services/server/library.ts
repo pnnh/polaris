@@ -1,11 +1,10 @@
-
 import {SystemLibraryService} from "@pnnh/polaris-business";
-import {serverConfig} from "@/services/server/config";
+import {serverGetDomainPath} from "@/services/server/domain";
 
 export async function serverSelectLibraries() {
-    const domainUrl = serverConfig.INITIAL_DOMAINS
+    const domainUrl = serverGetDomainPath()
 
     const service = new SystemLibraryService(domainUrl)
 
-    return  await service.selectLibraries()
+    return await service.selectLibraries()
 }
