@@ -8,12 +8,14 @@ export function LibrarySelector() {
     const [libraryListState, setLibraryListState] = useState<PLSelectResult<PSFileModel>>()
 
     useEffect(() => {
-        window.serverAPI.selectFiles('', {
-            directory: true
-        }).then(selectResult => {
-            if (selectResult && selectResult.data && selectResult.data.range && selectResult.data.range.length > 0) {
-                setLibraryListState(selectResult)
-            }
+        window.serverAPI.getDomainPath().then((path) => {
+            window.serverAPI.selectFiles(path, {
+                directory: true
+            }).then(selectResult => {
+                if (selectResult && selectResult.data && selectResult.data.range && selectResult.data.range.length > 0) {
+                    setLibraryListState(selectResult)
+                }
+            })
         })
     }, [])
 

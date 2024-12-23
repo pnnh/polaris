@@ -11,25 +11,16 @@ export interface ISelectFilesOptions {
     directory: boolean
 }
 
-
 export class SystemFileService {
-    systemDomain: string
-    systemUrl: string
-
-    constructor(systemDomain: string) {
-        this.systemUrl = systemDomain
-        this.systemDomain = systemDomain.replace('file://', '')
-    }
-
-    async selectFiles(parentPath: string, options: ISelectFilesOptions | undefined): Promise<PLSelectResult<PSFileModel>> {
-        const basePath = this.systemDomain
+    async selectFiles(pathUrl: string, options: ISelectFilesOptions | undefined): Promise<PLSelectResult<PSFileModel>> {
+        const basePath = pathUrl.replace('file://', '')
         const fileList: PSFileModel[] = []
-        if (!fs.existsSync(path.join(basePath, parentPath))) {
+        if (!fs.existsSync(path.join(basePath, pathUrl))) {
             return emptySelectResult()
         }
-        const files = fs.readdirSync(path.join(basePath, parentPath))
+        const files = fs.readdirSync(path.join(basePath, pathUrl))
         for (const file of files) {
-            const stat = fs.statSync(path.join(basePath, parentPath, file))
+            const stat = fs.statSync(path.join(basePath, pathUrl, file))
             if (options && options.directory) {
                 if (!stat.isDirectory()) {
                     continue
@@ -48,8 +39,8 @@ export class SystemFileService {
                 Keywords: '',
                 Title: fileName,
                 Size: 0,
-                Url: this.systemUrl + '/' + path.join(parentPath, file),
-                Path: path.join(parentPath, file),
+                Url: pathUrl.replace('file://', '') + '/' + path.join(pathUrl, file),
+                Path: path.join(pathUrl, file),
             }
             const metadataFile = basePath + '/' + file + '/metadata.md'
             if (fs.existsSync(metadataFile)) {
