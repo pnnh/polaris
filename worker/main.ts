@@ -20,6 +20,7 @@ import stripAnsi from "strip-ansi";
 import {accountInformation} from "@/handlers/account/information";
 import {selectTagsFromDatabase} from "@/handlers/tags/tags";
 import {commentInsertHandler, commentsHandler} from "@/handlers/comments/comments";
+import {selectFiles} from "@/handlers/files/files";
 
 const workerPort = serverConfig.PORT;
 
@@ -65,6 +66,7 @@ function runMain() {
     server.get("/", handleErrors(sayHello));
     server.get("/account/information", handleErrors(accountInformation));
     server.get("/articles", handleErrors(selectArticlesFromDatabase));
+    server.get("/files", handleErrors(selectFiles));
     server.get("/tags", handleErrors(selectTagsFromDatabase));
     server.post("/articles/:article/viewer", handleErrors(updateArticleViewer));
     server.get("/channels/:channel/articles/:article", handleErrors(findArticle));

@@ -1,13 +1,12 @@
-
 import {SystemFileService} from "../src/server/personal/file";
-import path from "path";
 
 async function main() {
-    const currentDir = 'file://data'
-    console.log('Current directory:', currentDir)
-    const service = new SystemFileService(currentDir)
-    const result = await service.selectFiles('', undefined)
-    console.log('selectFiles', result)
+    const pathUrl = 'file://~'
+    const service = new SystemFileService()
+    const result = await service.selectFiles(pathUrl, undefined)
+    for (const file of result.data.range) {
+        console.log('selectFile', file)
+    }
 }
 
 main().then(() => {

@@ -1,0 +1,37 @@
+{
+  "name": "polaris-progressive",
+  "private": "true",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "version": "1.0.0",
+  "dependencies": {
+    "@pnnh/atom": "file:../../pnnh/atom",
+    "@pnnh/polaris-business": "file:../business",
+    "base64url": "^3.0.1",
+    "form-data": "^4.0.0",
+    "front-matter": "^4.0.2",
+    "globals": "^15.8.0",
+    "idb": "^8.0.0",
+    "jotai": "^2.11.0",
+    "parse-uri": "^1.0.9",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.0.2",
+    "uuid": "^11.0.3"
+  },
+  "devDependencies": {
+    "@types/md5": "^2.3.5",
+    "@types/parse-uri": "^1.0.2",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "@vitejs/plugin-react": "^4.3.1",
+    "electron": "^33.2.1",
+    "sass-embedded": "^1.80.6",
+    "ts-node": "^10.9.2",
+    "typescript": "5.7.2",
+    "vite": "6.0.3",
+    "vite-tsconfig-paths": "^5.0.1"
+  }
+}

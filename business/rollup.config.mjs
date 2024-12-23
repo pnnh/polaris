@@ -39,10 +39,10 @@ const commonExternal = [
 
 let commonConfig = [{
     strictDeprecations: true,
-    input: 'src/index.common.tsx',
+    input: 'src/client.tsx',
     output: {
-        file: 'lib/index.common.mjs',
-        format: 'esm',
+        file: 'lib/client.cjs',
+        format: 'cjs',
         sourcemap: true,
         assetFileNames: '[name][extname]'
     },
@@ -50,9 +50,9 @@ let commonConfig = [{
     plugins: commonPlugins
 },
     {
-        input: 'src/index.common.tsx',
+        input: 'src/server.tsx',
         output: {
-            file: 'lib/index.common.cjs',
+            file: 'lib/server.cjs',
             format: 'cjs',
             sourcemap: true,
             assetFileNames: '[name][extname]'

@@ -7,18 +7,23 @@
     "build": "rollup --config rollup.config.mjs",
     "tests": "tsx tests/main.ts"
   },
-  "exports": {
-    ".": {
-      "import": "./lib/index.common.mjs",
-      "require": "./lib/index.common.cjs"
-    }
-  },
   "files": [
     "lib"
   ],
-  "main": "./lib/index.common.cjs",
-  "module": "./lib/index.common.mjs",
-  "types": "./lib/index.common.d.ts",
+  "exports": {
+    ".": {
+      "require": "./lib/client.cjs"
+    }
+  },
+  "main": "./lib/client.cjs",
+  "types": "./lib/client.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./lib/client.d.ts"
+      ]
+    }
+  },
   "dependencies": {
     "@pnnh/atom": "file:../../pnnh/atom",
     "@pnnh/atom-react": "0.2.1",
