@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import {serverConfig} from "@/services/server/config";
-import {SystemArticleService} from "@pnnh/polaris-business";
-import {CodeOk} from "@pnnh/polaris-business";
+import {SystemArticleService} from "@/business/server/content/article";
+import {CodeOk} from "@/business/common/models/common-result";
 
 export async function GET(request: Request, response: Response, {params}: {
     params: {

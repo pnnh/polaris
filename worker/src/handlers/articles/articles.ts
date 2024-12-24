@@ -1,11 +1,12 @@
-import {PLInsertResult, PSArticleModel} from "@pnnh/polaris-business";
+
 import {createPaginationByPage} from "@/utils/pagination";
-import {CodeOk, CommonResult, PLSelectResult} from "@pnnh/polaris-business";
 import {Request, Response} from "express";
-import {SystemArticleService} from "@pnnh/polaris-business";
 import {serverConfig} from "@/services/server/config";
 import {articleViewerCache} from "@/services/server/cache";
 import {openMainDatabase} from "@/services/server/localdb/sqlite";
+import {SystemArticleService} from "@/business/server/content/article";
+import {PSArticleModel} from "@/business/common/models/article";
+import {CodeOk, PLInsertResult, PLSelectResult} from "@/business/common/models/common-result";
 
 // 查找单个文章
 export async function findArticle(request: Request, response: Response) {

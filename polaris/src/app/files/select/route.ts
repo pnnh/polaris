@@ -16,7 +16,7 @@ export async function GET(request: NextRequest, response: NextResponse) {
             code: 500
         })
     }
-    const magicDomain = 'filesystem://home'
+    const magicDomain = 'file://home'
     const decodedUrl = decodeBase64String(resUrl)
     const domainUrl = "http://127.0.0.1:7100"
     const filePath = decodedUrl.replace(magicDomain, '~')

@@ -1,6 +1,7 @@
-import {SystemChannelService} from "@pnnh/polaris-business";
+
 import {serverConfig} from "@/services/server/config";
 import {Request, Response} from "express";
+import {SystemChannelService} from "@/business/server/content/channel";
 
 // 查询频道列表
 export async function selectChannels(request: Request, response: Response) {

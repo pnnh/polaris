@@ -1,6 +1,6 @@
 import {serverConfig} from "@/services/server/config";
 import {Request, Response} from "express";
-import {SystemNotebookService} from "@pnnh/polaris-business";
+import {SystemNotebookService} from "@/business/server/personal/notebook";
 
 // 查询频道列表
 export async function selectNotebooks(request: Request, response: Response) {

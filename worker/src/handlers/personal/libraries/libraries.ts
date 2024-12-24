@@ -1,6 +1,6 @@
 import {serverConfig} from "@/services/server/config";
 import {Request, Response} from "express";
-import {SystemLibraryService} from "@pnnh/polaris-business";
+import {SystemLibraryService} from "@/business/server/personal/library";
 
 // 查询频道列表
 export async function selectLibraries(request: Request, response: Response) {

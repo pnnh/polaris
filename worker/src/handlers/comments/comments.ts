@@ -1,9 +1,9 @@
 import {Request, Response} from "express";
-import {CodeFailed, CodeOk, CommonResult, PLInsertResult, PLSelectResult} from "@pnnh/polaris-business";
-import {CommentModel} from "@pnnh/polaris-business";
 import {verifyCache} from "@/services/server/cache";
 import {getIpAddress} from "@/utils/express";
 import {insertComment, selectComments} from "@/services/server/postgresql/comments";
+import {CodeFailed, CodeOk, CommonResult, PLInsertResult, PLSelectResult} from "@/business/common/models/common-result";
+import {CommentModel} from "@/business/common/models/comment";
 
 // 查询评论列表
 export async function commentsHandler(request: Request, response: Response) {

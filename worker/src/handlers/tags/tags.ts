@@ -1,7 +1,8 @@
 import {Request, Response} from "express";
 import {createPaginationByPage} from "@/utils/pagination";
-import {CodeOk, CommonResult, PLSelectResult, PSTagModel} from "@pnnh/polaris-business";
 import {openMainDatabase} from "@/services/server/localdb/sqlite";
+import {PSTagModel} from "@/business/common/models/tag";
+import {CodeOk, PLSelectResult} from "@/business/common/models/common-result";
 
 export async function selectTagsFromDatabase(
     request: Request,

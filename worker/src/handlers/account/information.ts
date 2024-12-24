@@ -1,5 +1,6 @@
-import {SystemAccountService} from "@pnnh/polaris-business";
+
 import {Request, Response} from "express";
+import {SystemAccountService} from "@/business/server/content/account";
 
 export async function accountInformation(request: Request, response: Response) {
     const accountService = new SystemAccountService()

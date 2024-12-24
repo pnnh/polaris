@@ -1,7 +1,7 @@
 
 // 查询频道列表
 import {Request, Response} from "express";
-import {SystemFileService} from "@pnnh/polaris-business";
+import {SystemFileService} from "@/business/server/personal/file";
 
 export async function selectFiles(request: Request, response: Response) {
 

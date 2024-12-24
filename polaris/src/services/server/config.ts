@@ -4,6 +4,7 @@ export interface IServerConfig {
     NEXT_PUBLIC_SELF_URL: string
     NEXT_PUBLIC_WORKER_URL: string
     DirectoryList: string[],
+    DATA_PATH: string,
     PGDATABASE: string
 }
 
@@ -17,6 +18,9 @@ export function useServerConfig(): IServerConfig {
     if (!process.env.DIRECTORIES) {
         throw new Error('DOMAINS is required')
     }
+    if (!process.env.DATA_PATH) {
+        throw new Error('DATA_PATH is required')
+    }
     if (!process.env.PGDATABASE) {
         throw new Error('PGDATABASE is required')
     }
@@ -27,6 +31,7 @@ export function useServerConfig(): IServerConfig {
         NEXT_PUBLIC_SELF_URL: process.env.NEXT_PUBLIC_SELF_URL || '',
         NEXT_PUBLIC_WORKER_URL: process.env.NEXT_PUBLIC_WORKER_URL || '',
         DirectoryList: directoryList,
+        DATA_PATH: process.env.DATA_PATH || '.',
         PGDATABASE: process.env.PGDATABASE || ''
     }
 }
