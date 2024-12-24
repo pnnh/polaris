@@ -15,8 +15,6 @@ textFileList.push('lock');
 
 mime.define({ 'text/plain': textFileList });
 
-export function getType(path: string) {
+export function getMimeType(path: string) {
     return mime.getType(path) || 'application/octet-stream'
 }
-
-export type getMimeType = typeof getType

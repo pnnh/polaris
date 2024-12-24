@@ -19,7 +19,7 @@ export default async function Page({params, searchParams}: {
 }) {
     const domain = serverSigninDomain()
     const pageSize = 64
-    const url = '/channels?' + `page=1&size=${pageSize}`
+    const url = '/channels/restful/select?' + `page=1&size=${pageSize}`
     const result = await domain.makeGet<PLSelectResult<PSChannelModel>>(url)
 
     if (!result || !result.data) {

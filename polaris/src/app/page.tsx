@@ -31,7 +31,7 @@ export default async function Page({params, searchParams}: {
     }
     const domain = serverSigninDomain()
     const pageSize = 64
-    const url = '/articles?' + `page=1&size=${pageSize}`
+    const url = '/articles/restful/select?' + `page=1&size=${pageSize}`
     const result = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
 
     if (!result || !result.data) {

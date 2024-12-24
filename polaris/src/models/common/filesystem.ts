@@ -8,6 +8,7 @@ export interface PSFileModel {
     IsHidden: boolean;
     IsIgnore: boolean;
     Size: number;
+    Url: string;
     Path: string;
     CreateTime: string;
     UpdateTime: string;

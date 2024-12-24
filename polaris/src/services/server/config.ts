@@ -2,7 +2,6 @@ import {encodeBase64String} from "@/utils/basex";
 
 export interface IServerConfig {
     NEXT_PUBLIC_SELF_URL: string
-    NEXT_PUBLIC_WORKER_URL: string
     DirectoryList: string[],
     DATA_PATH: string,
     PGDATABASE: string
@@ -11,9 +10,6 @@ export interface IServerConfig {
 export function useServerConfig(): IServerConfig {
     if (!process.env.NEXT_PUBLIC_SELF_URL) {
         throw new Error('NEXT_PUBLIC_SELF_URL is required')
-    }
-    if (!process.env.NEXT_PUBLIC_WORKER_URL) {
-        throw new Error('NEXT_PUBLIC_WORKER_URL is required')
     }
     if (!process.env.DIRECTORIES) {
         throw new Error('DOMAINS is required')
@@ -29,7 +25,6 @@ export function useServerConfig(): IServerConfig {
 
     return {
         NEXT_PUBLIC_SELF_URL: process.env.NEXT_PUBLIC_SELF_URL || '',
-        NEXT_PUBLIC_WORKER_URL: process.env.NEXT_PUBLIC_WORKER_URL || '',
         DirectoryList: directoryList,
         DATA_PATH: process.env.DATA_PATH || '.',
         PGDATABASE: process.env.PGDATABASE || ''

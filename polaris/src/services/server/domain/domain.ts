@@ -1,6 +1,6 @@
 import {RemoteDomain} from "@/services/server/domain/remote";
 import {IDomain} from "@/services/common/domain";
-import {mustGetFirstDir, useServerConfig} from "@/services/server/config";
+import {useServerConfig} from "@/services/server/config";
 
 function trySigninDomain(domainUrl: string | undefined = ""): IDomain | undefined {
     const systemDomain = new RemoteDomain(domainUrl)
@@ -17,9 +17,7 @@ export function serverMustSigninDomain(domainUrl: string | undefined = ''): IDom
 
 export function serverSigninDomain(): IDomain {
     const serverConfig = useServerConfig()
-
-    const domainUrl = serverConfig.NEXT_PUBLIC_WORKER_URL
-    const domain = trySigninDomain(domainUrl)
+    const domain = trySigninDomain(serverConfig.NEXT_PUBLIC_SELF_URL)
     if (!domain) {
         throw new Error('domain not found')
     }
