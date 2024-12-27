@@ -1,11 +1,10 @@
 
 import fs from "node:fs";
 import frontMatter from "front-matter";
-import {decodeBase64String, encodeBase64String} from "@pnnh/atom";
 import path from "path";
-import {emptySelectResult, PLSelectResult} from "@/business/common/models/common-result";
-import {PSNotebookModel} from "@/business/common/models/personal/notebook";
-import {CodeOk} from "@/business/common/models/common-result";
+import {CodeOk, emptySelectResult, PLSelectResult} from "@/models/common/protocol";
+import {PSNotebookModel} from "@/models/common/personal/notebook";
+import {decodeBase64String, encodeBase64String} from "@/utils/basex";
 
 export class SystemNotebookService {
     systemDomain: string

@@ -1,13 +1,13 @@
 
-import {validateEmail} from "@pnnh/atom";
-import {uuidV7} from '@pnnh/atom'
 import {openMainPGDatabase} from "@/services/server/postgresql/postgresql";
 import {ensureAccount} from "@/services/server/postgresql/account";
-import {CommentModel} from "@/business/common/models/comment";
+import {PSCommentModel} from "@/models/common/comment";
+import {validateEmail} from "@/utils/email";
+import {uuidV7} from "@/utils/uuid";
 
-export async function selectComments(): Promise<CommentModel[]> {
+export async function selectComments(): Promise<PSCommentModel[]> {
     const client = await openMainPGDatabase()
-    const queryResult = await client.query<CommentModel>('SELECT * FROM comments where status = 1 order by create_time desc')
+    const queryResult = await client.query<PSCommentModel>('SELECT * FROM comments where status = 1 order by create_time desc')
 
     return queryResult.rows
 }

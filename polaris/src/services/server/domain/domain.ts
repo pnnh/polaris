@@ -16,8 +16,8 @@ export function serverMustSigninDomain(domainUrl: string | undefined = ''): IDom
 }
 
 export function serverSigninDomain(): IDomain {
-    const serverConfig = useServerConfig()
-    const domain = trySigninDomain(serverConfig.NEXT_PUBLIC_SELF_URL)
+    const workerUrl = "http://127.0.0.1:7101"
+    const domain = trySigninDomain(workerUrl)
     if (!domain) {
         throw new Error('domain not found')
     }

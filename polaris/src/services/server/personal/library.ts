@@ -1,10 +1,10 @@
 
 import fs from "node:fs";
 import frontMatter from "front-matter";
-import {encodeBase64String} from "@pnnh/atom";
 import path from "path";
-import {CodeOk, PLSelectResult} from "@/business/common/models/common-result";
-import {PSLibraryModel} from "@/business/common/models/personal/library";
+import {CodeOk, PLSelectResult} from "@/models/common/protocol";
+import {PSLibraryModel} from "@/models/common/personal/library";
+import {encodeBase64String} from "@/utils/basex";
 
 export class SystemLibraryService {
     systemDomain: string

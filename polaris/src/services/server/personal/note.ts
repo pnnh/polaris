@@ -1,10 +1,10 @@
 
 import fs from "node:fs";
-import {decodeBase64String, encodeBase64String} from "@pnnh/atom";
 import path from "path";
-import {SPNoteModel} from "@/business/common/models/personal/note";
-import {CodeOk, emptySelectResult, PLSelectResult} from "@/business/common/models/common-result";
-import {fillNoteMetadata} from "@/business/common/article";
+import {CodeOk, emptySelectResult, PLSelectResult} from "@/models/common/protocol";
+import {SPNoteModel} from "@/models/common/personal/note";
+import {decodeBase64String, encodeBase64String} from "@/utils/basex";
+import {fillNoteMetadata} from "@/services/common/article";
 
 export class SystemNoteService {
     systemDomain: string
