@@ -18,6 +18,7 @@ import {PaginationServer} from "@/components/server/pagination";
 import {NoData} from "@/components/common/empty";
 import {calcPagination} from "@/utils/pagination";
 import {replaceSearchParams} from "@/utils/query";
+import {base58ToUuid} from "@/utils/basex";
 
 export const dynamic = "force-dynamic";
 
@@ -27,7 +28,6 @@ export default async function Page({params, searchParams}: {
 }) {
     const pathname = await getPathname()
     const baseParams = await params;
-    const {t: trans} = await useServerTranslation(baseParams.lang)
     const searchParamsValue = await searchParams
 
     let page = Number(searchParamsValue.page)
@@ -47,7 +47,8 @@ export default async function Page({params, searchParams}: {
         size: 10
     })
     const domain = serverSigninDomain()
-    const rankUrl = `/articles/${baseParams.channel}/articles?${rankQuery}`
+    const channelUrn = base58ToUuid(baseParams.channel)
+    const rankUrl = `/channels/${channelUrn}/articles?${rankQuery}`
     const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)
 
     const selectQuery = {
@@ -58,7 +59,7 @@ export default async function Page({params, searchParams}: {
         channel: channelPk
     }
     const rawQuery = queryString.stringify(selectQuery)
-    const url = `/articles/${baseParams.channel}/articles?${rawQuery}`
+    const url = `/channels/${channelUrn}/articles?${rawQuery}`
 
     const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
 

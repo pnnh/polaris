@@ -96,7 +96,8 @@ export default async function Page({params, searchParams}: {
                 </div>
                 <div className={'middlePagination'}>
                     <PaginationServer pagination={pagination}
-                                      pageLinkFunc={(page) => replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
+                                      pageLinkFunc={(page) =>
+                                          '/articles' + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                 </div>
             </div>
             <div className={'conRight'}>

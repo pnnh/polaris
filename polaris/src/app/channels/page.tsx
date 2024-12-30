@@ -10,8 +10,8 @@ import {PSChannelModel} from "@/models/common/channel";
 import {BaseRouterParams} from '@/models/server/router';
 import {useServerTranslation} from '@/services/server/i18n';
 import {Metadata} from 'next';
-import {PSImageServer} from "@/components/server/image";
 import {NoData} from "@/components/common/empty";
+import {uuidToBase58} from "@/utils/basex";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ viewer: string } & BaseRouterParams>,
@@ -50,18 +50,12 @@ export default async function Page({params, searchParams}: {
 }
 
 function Item(props: { model: PSChannelModel, domain: IDomain, lang: string }) {
-    const readUrl = `/${props.lang}/content/articles/${props.model.urn}`
-    let imageUrl = '/images/default/channel.webp'
-    // 针对特定资产类型的图片，返回拼接的URL以进行资源寻址
-    if (props.model.image) {
-        // 拼接资源地址，并截取掉前缀
-        imageUrl = props.domain.assetUrl(`/articles/${props.model.urn}/assets/${props.model.image}`)
-    }
+    const readUrl = `/channels/${uuidToBase58(props.model.urn)}`
 
     return < div className={'item'}>
-        <div className={'itemCover'}>
-            <PSImageServer src={imageUrl} alt='star' width={256} height={256}/>
-        </div>
+        {/*<div className={'itemCover'}>*/}
+        {/*    <PSImageServer src={imageUrl} alt='star' width={256} height={256}/>*/}
+        {/*</div>*/}
         <div className={'content'}>
             <div className={'title'}>
                 <Link className={'link'} href={readUrl}>{props.model.name}</Link>

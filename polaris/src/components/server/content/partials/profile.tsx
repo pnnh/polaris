@@ -36,8 +36,8 @@ function ArticleNavbar({pathname}: { pathname: string }) {
     const navLinks = [
         {name: '频道', href: `/channels`},
         {name: '笔记', href: `/articles`},
-        {name: '图片', href: `/pictures`},
-        {name: '文件', href: `/files`},
+        // {name: '图片', href: `/pictures`},
+        // {name: '文件', href: `/files`},
         {name: '工具', href: `/tools`},
     ]
     return <>

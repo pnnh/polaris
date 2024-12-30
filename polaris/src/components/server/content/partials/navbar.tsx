@@ -26,12 +26,12 @@ export async function ContentPublicNavbar({pathname, searchParams, lang}: {
             <UserProfileSelector/>
         </div>
         <div className={'rightNav'}>
-            <div className={'languages'}>
-                <a href={`/en`} className={activeClass('en')}>English</a>
-                <a href={`/zh`} className={activeClass('zh')}>中文</a>
-            </div>
-            <ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword}/>
-            <UserAction sessionList={sessionList}/>
+            {/*<div className={'languages'}>*/}
+            {/*    <a href={`/en`} className={activeClass('en')}>English</a>*/}
+            {/*    <a href={`/zh`} className={activeClass('zh')}>中文</a>*/}
+            {/*</div>*/}
+            {/*<ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword}/>*/}
+            {/*<UserAction sessionList={sessionList}/>*/}
         </div>
     </div>
 }
@@ -61,9 +61,5 @@ async function UserAction({sessionList}: { sessionList: SessionModel[] }) {
             //     </Link>
             //})
         }
-        <Link
-            href={clientAuthUrl} rel='nofollow' className={'plusLink'}>
-            <Image src='/icons/navbar/plus.svg' alt='login' height={32} width={32}/>
-        </Link>
     </>
 }

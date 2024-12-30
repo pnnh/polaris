@@ -9,10 +9,9 @@ import {serverSigninDomain} from "@/services/server/domain/domain";
 import {PLSelectResult} from "@/models/common/protocol";
 import {NoData} from "@/components/common/empty";
 import {IDomain} from "@/services/common/domain";
-import {PSImageServer} from "@/components/server/image";
 import Link from "next/link";
 import {PSArticleModel} from "@/models/common/article";
-import {hexToBase58 } from "@/utils/basex";
+import { uuidToBase58} from "@/utils/basex";
 
 export const dynamic = "force-dynamic";
 
@@ -55,7 +54,7 @@ export default async function Page({params, searchParams}: {
 
 
 function Item(props: { model: PSArticleModel, domain: IDomain, lang: string }) {
-    const readUrl = `/articles/${hexToBase58(props.model.urn)}`
+    const readUrl = `/articles/${uuidToBase58(props.model.urn)}`
     let imageUrl = '/images/default/channel.webp'
     // 针对特定资产类型的图片，返回拼接的URL以进行资源寻址
     if (props.model.cover) {
@@ -64,9 +63,6 @@ function Item(props: { model: PSArticleModel, domain: IDomain, lang: string }) {
     }
 
     return < div className={'contentItem'}>
-        <div className={'itemCover'}>
-            <PSImageServer src={imageUrl} alt='star' width={256} height={256}/>
-        </div>
         <div className={'itemDetail'}>
             <div className={'title'}>
                 <Link className={'link'} href={readUrl}>{props.model.title}</Link>
