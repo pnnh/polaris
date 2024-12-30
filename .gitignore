@@ -1,48 +1,30 @@
-
-# JetBrains
-.idea/
-.cache/
-
-# Visual Studio
-*.user
-.vs/
-*.suo
-obj/
+.idea
+*.iml
+bin
+.svn
+pkg
+*.log
+.DS_Store
+vendor
 bin/
-packages/
-_build/
-x64/
-
-# CMake
-build/
-cmake-build-*
-vcpkg_installed/
-
-# xcode macos and ios
-xcuserdata/
-*.xcscmblueprint
-*.xccheckout
-*.ipa
-*.dSYM.zip
-*.dSYM
-.build/
-Packages/
-DerivedData/
-*.moved-aside
-*.pbxuser
-!default.pbxuser
-*.mode1v3
-!default.mode1v3
-*.mode2v3
-!default.mode2v3
-*.perspectivev3
-!default.perspectivev3
-*.hmap
-Pods/
-.swiftpm/
-
-# Nodejs
 node_modules/
-
-# Rust
-target/
+/static
+build/
+gen/
+.next/
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+npm-debug.log*
+/out/
+.aspect/
+.env.local
+coverage/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+.swc/
+dist/
+.rollup.cache/
+/*.db
