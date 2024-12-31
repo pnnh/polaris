@@ -4,11 +4,10 @@ import {PLSelectResult} from "@/atom/common/models/protocol";
 import {fetchComments} from "@/services/client/comments/comment";
 import {PSCommentModel} from "@/atom/common/models/comment";
 
-export function ListArea({mode, lang, assetsUrl}: { mode?: string, lang?: string, assetsUrl: string }) {
+export function ListArea() {
     const [list, setList] = useState<PLSelectResult<PSCommentModel>>()
     useEffect(() => {
-        const context = {env: mode}
-        fetchComments(context).then(result => {
+        fetchComments().then(result => {
             setList(result)
         })
     }, [])

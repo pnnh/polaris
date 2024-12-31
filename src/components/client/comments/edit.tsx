@@ -6,7 +6,7 @@ import {validateEmail} from "@/atom/common/utils/email";
 import {submitComment} from "@/services/client/comments/comment";
 import {isValidUrl} from "@/atom/common/utils/uri";
 
-export function EditArea({mode, lang, assetsUrl}: { mode?: string, lang?: string, assetsUrl: string }) {
+export function EditArea() {
     const [email, setEmail] = useState('')
     const [nickname, setNickname] = useState('')
     const [website, setWebsite] = useState('')
@@ -37,7 +37,6 @@ export function EditArea({mode, lang, assetsUrl}: { mode?: string, lang?: string
             {'client.title'}
         </div>
         <div className={'editRow'}>
-            <UserPhoto assetsUrl={assetsUrl}/>
             <div className={'infoColumn'}>
                 <div className={'fieldsRow'}>
                     <div className={'infoField'}>
@@ -66,15 +65,10 @@ export function EditArea({mode, lang, assetsUrl}: { mode?: string, lang?: string
                     <textarea placeholder={"输入评论内容"} onChange={(e) => setContent(e.target.value)}/>
                 </div>
                 <div className={'actionsRow'}>
-                    <div className={'emotionArea'}>
-                        <button>表情</button>
-                        <button>附件</button>
-                    </div>
                     <div className={'errMsg'}>
                         {errMsg}
                     </div>
                     <div className={'submitArea'}>
-                        <button>预览</button>
                         <button onClick={() => submitForm().then()}>发布</button>
                     </div>
                 </div>
@@ -83,8 +77,8 @@ export function EditArea({mode, lang, assetsUrl}: { mode?: string, lang?: string
     </div>
 }
 
-function UserPhoto({assetsUrl}: { assetsUrl: string }) {
+function UserPhoto() {
     return <div className={'photoContainer'}>
-        <img src={`${assetsUrl}/public/default/photo.png`} alt="头像"/>
+        <img src={`/default/photo.png`} alt="头像"/>
     </div>
 }

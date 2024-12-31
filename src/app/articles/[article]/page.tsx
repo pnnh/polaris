@@ -16,6 +16,7 @@ import { base58ToUuid} from "@/atom/common/utils/basex";
 import {CodeOk, CommonResult} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/atom/common/models/article";
 import {TocItem} from "@/atom/common/models/toc";
+import {CommentsClient} from "@/components/client/comments/comments";
 
 export const dynamic = "force-dynamic";
 
@@ -70,9 +71,13 @@ export default async function Home({params, searchParams}: {
                     </div>
                     <div className={'articleInfo'}>
                         <div className={'articleBody'}>
-                            <ArticleContainer tocList={tocList} header={getResult.data.header} body={getResult.data.body}
+                            <ArticleContainer tocList={tocList} header={getResult.data.header}
+                                              body={getResult.data.body}
                                               assetsUrl={assetsUrl}/>
                         </div>
+                    </div>
+                    <div className={'commentsClient'}>
+                        <CommentsClient/>
                     </div>
                 </div>
                 <div className={'rightArea'}>
