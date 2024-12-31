@@ -1,15 +1,15 @@
 import fs from "node:fs";
 import path from "path";
 import ignore from 'ignore'
-import {decodeBase64String, encodeBase64String} from "@/utils/basex";
-import {encodeMD5} from "@/utils/crypto";
+import {decodeBase64String, encodeBase64String} from "@/atom/common/utils/basex";
 import {PSArticleFileModel, PSArticleModel} from "@/models/common/article";
 import {fillNoteMetadata} from "@/services/common/article";
 import {ISqliteClient} from "@/services/server/sqlite/database";
 import {CodeOk, PLSelectResult} from "@/models/common/protocol";
-import {createPaginationByPage} from "@/utils/pagination";
 import {bulkInsertOrUpdateArticles} from "@/services/server/sqlite/article";
-import {getMimeType} from "@/utils/mime";
+import {getMimeType} from "@/atom/common/utils/mime";
+import {encodeMD5} from "@/atom/common/utils/crypto";
+import {createPaginationByPage} from "@/atom/common/utils/pagination";
 
 const assetsIgnore = ignore().add(['.*', 'node_modules', 'dist', 'build', 'out', 'target', 'logs', 'logs/*', 'logs/**/*'])
 

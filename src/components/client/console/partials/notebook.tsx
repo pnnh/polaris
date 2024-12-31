@@ -6,10 +6,9 @@ import {PSNotebookModel} from "@/models/common/personal/notebook";
 import {PLSelectResult} from "@/models/common/protocol";
 import {PSArticleModel} from "@/models/common/article";
 import {clientMustSigninDomain, clientTrySigninDomain} from "@/services/client/domain";
-import {encodeBase64String} from "@/utils/basex";
+import {encodeBase64String} from "@/atom/common/utils/basex";
 import {PSFileModel} from "@/models/common/filesystem";
 import {filesMailbox} from "@/services/client/console/mailbox";
-import {IMail} from "@/services/client/postoffice";
 
 export function NotebookList() {
     return <div className={'notebookContainer'}>
@@ -30,21 +29,6 @@ export function NotebookList() {
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-}
-
-function NotebookCard({item}: { item: PSNotebookModel }) {
-    // const [notebookState, setNotebookState] = useRecoilState(notebookAtom)
-    return <div>
-        <div className={'directorySelf'} onClick={() => {
-            // setNotebookState({
-            //     models: notebookState.models,
-            //     current: item
-            // })
-        }}>
-            <div className={'directoryName'}>
-                {item.title}</div>
         </div>
     </div>
 }

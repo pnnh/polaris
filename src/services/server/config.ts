@@ -1,4 +1,4 @@
-import {encodeBase64String} from "@/utils/basex";
+import {encodeBase64String} from "@/atom/common/utils/basex";
 
 export interface IServerConfig {
     NEXT_PUBLIC_SELF_URL: string

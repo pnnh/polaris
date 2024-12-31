@@ -3,8 +3,8 @@ import fs from "node:fs";
 import frontMatter from "front-matter";
 import path from "path";
 import {PSChannelModel} from "@/models/common/channel";
-import {decodeBase64String, encodeBase64String} from "@/utils/basex";
-import {getMimeType} from "@/utils/mime";
+import {decodeBase64String, encodeBase64String} from "@/atom/common/utils/basex";
+import {getMimeType} from "@/atom/common/utils/mime";
 
 export class SystemChannelService {
     systemDomain: string

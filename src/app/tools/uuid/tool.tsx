@@ -7,7 +7,6 @@ import {
     v6 as uuidv6, v7 as uuidv7, validate
 } from 'uuid';
 
-import {copyToClipboard} from "@/utils/clipboard";
 import {
     dnsNamespace,
     NormalUUIDItem,
@@ -18,6 +17,7 @@ import {
 } from "./state";
 import {useTranslation} from "next-i18next";
 import {useClientTranslation} from "@/services/client/i18n/client";
+import {copyToClipboard} from "@/atom/client/clipboard";
 
 function generateUUID(version: number, options?: {
     type: OptionType

@@ -17,7 +17,7 @@ import {useServerTranslation} from '@/services/server/i18n'
 import {PaginationServer} from "@/components/server/pagination";
 import {NoData} from "@/components/common/empty";
 import {calcPagination} from "@/utils/pagination";
-import {replaceSearchParams} from "@/utils/query";
+import {replaceSearchParams} from "@/atom/common/utils/query";
 
 export const dynamic = "force-dynamic";
 

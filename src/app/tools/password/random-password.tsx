@@ -1,10 +1,10 @@
 'use client'
 
-import {randomPassword} from '@/utils/rand'
+import {randomPassword} from '@/atom/common/utils/rand'
 import React, {useState} from 'react'
 import './random-password.scss'
 import {passwordStrength} from '@cmss/check-password-strength'
-import {copyToClipboard} from "@/utils/clipboard";
+import {copyToClipboard} from "@/atom/client/clipboard";
 
 export default function RandomPasswordPage() {
     const [password, setPassword] = useState<string>('')

@@ -7,7 +7,7 @@ import {filesMailbox} from "@/services/client/console/mailbox";
 import {registerComponent, unregisterComponent} from "@/services/client/postoffice";
 import {PSFileModel} from "@/models/common/filesystem";
 import {clientMustSigninDomain} from "@/services/client/domain";
-import {encodeBase64String} from "@/utils/basex";
+import {encodeBase64String} from "@/atom/common/utils/basex";
 
 export function ConsoleNotebar() {
     const [notesResult, setNotesResult] = useState<PLSelectResult<PSFileModel>>()

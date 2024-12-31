@@ -11,7 +11,7 @@ import {NoData} from "@/components/common/empty";
 import {IDomain} from "@/services/common/domain";
 import Link from "next/link";
 import {PSArticleModel} from "@/models/common/article";
-import { uuidToBase58} from "@/utils/basex";
+import { uuidToBase58} from "@/atom/common/utils/basex";
 
 export const dynamic = "force-dynamic";
 

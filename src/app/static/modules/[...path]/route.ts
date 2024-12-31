@@ -3,7 +3,7 @@ import {NextRequest, NextResponse} from 'next/server'
 import {isProd, useServerConfig} from "@/services/server/config";
 import path from "path";
 import * as fs from "fs";
-import {getType} from "@/utils/mime";
+import {getType} from "@/atom/common/utils/mime";
 
 export const dynamic = "force-dynamic";
 

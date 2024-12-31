@@ -4,7 +4,7 @@ import {Metadata} from "next";
 import {pageTitle} from "@/utils/page";
 import {isProd, usePublicConfig} from "@/services/server/config";
 import React from "react";
-import {encodeBase64String} from "@/utils/basex";
+import {encodeBase64String} from "@/atom/common/utils/basex";
 
 export function HtmlLayout({
                                metadata,

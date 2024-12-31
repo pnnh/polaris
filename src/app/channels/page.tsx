@@ -11,7 +11,7 @@ import {BaseRouterParams} from '@/models/server/router';
 import {useServerTranslation} from '@/services/server/i18n';
 import {Metadata} from 'next';
 import {NoData} from "@/components/common/empty";
-import {uuidToBase58} from "@/utils/basex";
+import {uuidToBase58} from "@/atom/common/utils/basex";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ viewer: string } & BaseRouterParams>,

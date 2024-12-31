@@ -1,0 +1,4 @@
+[submodule "src/atom"]
+	path = src/atom
+	url = git@github.com:pnnh/atom.git
+	branch = main

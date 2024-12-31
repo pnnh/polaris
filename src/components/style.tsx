@@ -1,4 +1,4 @@
-import {stringToMd5} from "@/utils/basex";
+import {stringToMd5} from "@/atom/common/utils/basex";
 
 export function GlobalStyleTag() {
     const rawStyle = styleGroup.renderToString();

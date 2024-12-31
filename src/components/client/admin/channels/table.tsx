@@ -4,7 +4,7 @@ import './table.scss'
 import React from 'react'
 import {PLSelectResult} from "@/models/common/protocol";
 import {PSChannelModel} from "@/models/common/channel";
-import {formatRfc3339} from "@/utils/datetime";
+import {formatRfc3339} from "@/atom/common/utils/datetime";
 
 export function AdminChannelTable({data: selectResult}: { data: PLSelectResult<PSChannelModel> }) {
     return <div>

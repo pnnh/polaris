@@ -14,7 +14,7 @@ import {Metadata} from 'next'
 import {NoData} from "@/components/common/empty";
 import {PaginationServer} from "@/components/server/pagination";
 import {calcPagination} from "@/utils/pagination";
-import {replaceSearchParams} from "@/utils/query";
+import {replaceSearchParams} from "@/atom/common/utils/query";
 
 export const dynamic = "force-dynamic";
 

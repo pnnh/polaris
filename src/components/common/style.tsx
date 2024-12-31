@@ -1,5 +1,5 @@
 // 只能叫css这个名字，因为IDE会有识别进行语法高亮
-import {generatorRandomString} from "@/utils/string";
+import {generatorRandomString} from "@/atom/common/utils/string";
 
 export function css(text: TemplateStringsArray, ...values: any[]) {
     let str = '';

@@ -1,4 +1,4 @@
-import {stringToBase58, stringToMd5} from "@/utils/basex";
+import {stringToBase58, stringToMd5} from "@/atom/common/utils/basex";
 import {AccountModel} from "@/models/common/account";
 
 export class SystemAccountService {

@@ -3,9 +3,9 @@
 import './edit.scss'
 import {FormEvent, useState} from "react";
 import {useClientTranslation} from "@/services/client/i18n/client";
-import {isValidUrl} from "@/utils/uri";
-import {validateEmail} from "@/utils/email";
+import {validateEmail} from "@/atom/common/utils/email";
 import {submitComment} from "@/services/client/comments/comment";
+import {isValidUrl} from "@/atom/common/utils/uri";
 
 export function EditArea({mode, lang, assetsUrl}: { mode?: string, lang?: string, assetsUrl: string }) {
     const [email, setEmail] = useState('')

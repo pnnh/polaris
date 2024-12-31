@@ -4,7 +4,7 @@ import React from "react";
 
 import './article.scss'
 import {TocItem} from "@/models/common/toc";
-import {BuildBodyHtml} from "@/components/server/article";
+import {BuildBodyHtml} from "@/atom/server/article";
 
 export function ArticleComponent({children}: {
     children: React.ReactNode

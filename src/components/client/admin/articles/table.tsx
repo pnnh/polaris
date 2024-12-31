@@ -6,9 +6,9 @@ import {PLSelectResult} from "@/models/common/protocol";
 import {channelName, PSArticleModel} from "@/models/common/article";
 import {PaginationPartial} from "@/components/common/pagination";
 import {NoData} from "@/components/common/empty";
-import {calcPagination} from "@/utils/pagination";
-import {formatRfc3339} from "@/utils/datetime";
-import {replaceSearchParams} from "@/utils/query";
+import {formatRfc3339} from "@/atom/common/utils/datetime";
+import {replaceSearchParams} from "@/atom/common/utils/query";
+import {calcPagination} from "@/atom/common/utils/pagination";
 
 export function AdminArticleTable(props: {
     result: PLSelectResult<PSArticleModel>,

@@ -1,4 +1,4 @@
-import parseUri, {URI} from "parse-uri";
+
 import {IDomain} from "@/services/common/domain";
 import {ClientConfig} from "@/services/client/config";
 

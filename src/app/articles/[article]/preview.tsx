@@ -5,7 +5,7 @@
 import "./preview.scss";
 import React, {useEffect, useState} from "react";
 import {IoClose} from "react-icons/io5";
-import {encodeBase64String} from "@/utils/basex";
+import {encodeBase64String} from "@/atom/common/utils/basex";
 
 function isTextContent(mimeType: string) {
     if (mimeType.startsWith('text/')) {

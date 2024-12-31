@@ -15,10 +15,10 @@ import {PSArticleModel} from "@/models/common/article";
 import {BaseRouterParams} from '@/models/server/router'
 import {useServerTranslation} from '@/services/server/i18n'
 import {ArticleAssets} from './assets'
-import {generatorRandomString} from "@/utils/string";
-import {formatRfc3339} from "@/utils/datetime";
+import {generatorRandomString} from "@/atom/common/utils/string";
+import {formatRfc3339} from "@/atom/common/utils/datetime";
 import {TocItem} from "@/models/common/toc";
-import { base58ToUuid} from "@/utils/basex";
+import { base58ToUuid} from "@/atom/common/utils/basex";
 import {CodeOk, CommonResult} from "@/models/common/protocol";
 
 export const dynamic = "force-dynamic";

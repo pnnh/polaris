@@ -1,6 +1,6 @@
 'use client'
 
-import {decodeBase64String} from "@/utils/basex";
+import {decodeBase64String} from "@/atom/common/utils/basex";
 
 export interface ClientConfig {
     NEXT_PUBLIC_SELF_URL: string

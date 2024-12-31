@@ -5,9 +5,9 @@ import React from "react";
 import {IDomain} from "@/services/common/domain";
 import './card.scss'
 import { PSArticleModel} from "@/models/common/article";
-import {STSubString} from "@/utils/string";
-import {formatRfc3339} from "@/utils/datetime";
-import { uuidToBase58} from "@/utils/basex";
+import {STSubString} from "@/atom/common/utils/string";
+import {formatRfc3339} from "@/atom/common/utils/datetime";
+import { uuidToBase58} from "@/atom/common/utils/basex";
 
 export function ArticleCard({model, domain, lang}: { model: PSArticleModel, domain: IDomain, lang: string }) {
     const readUrl = `/articles/${uuidToBase58(model.urn)}`

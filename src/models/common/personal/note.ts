@@ -23,5 +23,4 @@ export interface NoteModel {
     children: number
 }
 
-export type PSNoteModel = NoteModel
 export type SPNoteModel = NoteModel

@@ -1,15 +1,4 @@
-export class NotebookModel {
-    title = ''
-    create_time = ''
-    update_time = ''
-    description = ''
-    name = ''
-    image = ''
-    profile = ''
-    profile_name = ''
-    owner = ''
-    owner_name = ''
-}
+
 
 export interface PSNotebookModel {
     urn: string

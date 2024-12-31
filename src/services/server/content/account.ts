@@ -1,5 +1,5 @@
 import {AccountModel} from "@/models/common/account";
-import {stringToBase58} from "@/utils/basex";
+import {stringToBase58} from "@/atom/common/utils/basex";
 
 export class SystemAccountService {
     async accountInformation() {
