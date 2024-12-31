@@ -1,5 +1,6 @@
-import {TocItem} from "@/models/common/toc";
+
 import './toc.scss'
+import {TocItem} from "@/atom/common/models/toc";
 
 export function TocInfo(props: { readurl: string, model: TocItem[] }) {
 

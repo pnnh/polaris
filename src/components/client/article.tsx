@@ -3,8 +3,8 @@
 import React from "react";
 
 import './article.scss'
-import {TocItem} from "@/models/common/toc";
 import {BuildBodyHtml} from "@/atom/server/article";
+import {TocItem} from "@/atom/common/models/toc";
 
 export function ArticleComponent({children}: {
     children: React.ReactNode
@@ -23,7 +23,7 @@ export function ArticleContainer({tocList, header, body, assetsUrl}: {
     return (
         <ArticleComponent>
             <BuildBodyHtml tocList={tocList} header={header} body={body}
-                           assetsUrl={assetsUrl} libUrl={'/static/modules'}/>
+                           assetsUrl={assetsUrl} libUrl={'/abc'}/>
         </ArticleComponent>
     )
 }

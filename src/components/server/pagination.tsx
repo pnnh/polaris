@@ -1,5 +1,5 @@
 import {css, StyleItem} from "@/components/common/style";
-import {FullPagination} from "@/utils/pagination";
+import {FullPagination} from "@/atom/common/utils/pagination";
 
 const pageList = css`
     width: 100%;

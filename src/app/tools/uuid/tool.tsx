@@ -15,8 +15,6 @@ import {
     urlNamespace,
     x500Namespace
 } from "./state";
-import {useTranslation} from "next-i18next";
-import {useClientTranslation} from "@/services/client/i18n/client";
 import {copyToClipboard} from "@/atom/client/clipboard";
 
 function generateUUID(version: number, options?: {
@@ -90,19 +88,18 @@ export function ToolBody({lang}: { lang: string }) {
             return newList
         })
     }
-    const {t} = useClientTranslation(lang)
     return <div className={'toolComponent'}>
         <div className={'toolBody'}>
             <div className={'titleContainer'}>
                 <h1 className={'toolTitle'}>
-                    {t('product.name')}
+                    {'product.name'}
                 </h1>
             </div>
-            <p className={'toolDescription'}>{t('product.description')}</p>
-            <p className={'tip'}>{t('tool.tips')}</p>
+            <p className={'toolDescription'}>{'product.description'}</p>
+            <p className={'tip'}>{'tool.tips'}</p>
 
             <div className={'actionRow'}>
-                <div className={'w-24 inline-block font-bold'}>{t('tool.uuidVersion')}</div>
+                <div className={'w-24 inline-block font-bold'}>{'tool.uuidVersion'}</div>
                 <button onClick={() => {
                             setState(generateUUID(0))
                         }}>NIL</button>
@@ -164,12 +161,9 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
             }
         setHistory(newList)
     }
-    const {i18n} = useTranslation(lang)
-    const t = i18n.getFixedT(lang)
-
     return <>
         <div className={'optionRow'}>
-            <div className={'w-24 inline-block'}>{t('tool.options.namespace')}</div>
+            <div className={'w-24 inline-block'}>{'tool.options.namespace'}</div>
             <div className={'namespaceForm'}>
                 <div className={'namespaceSwitch'}>
                     <button onClick={() => {
@@ -180,7 +174,7 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
                         })
                         setState(newItem)
                         appendHistory(newItem)
-                    }}>{t('tool.type.random')}</button>
+                    }}>{'tool.type.random'}</button>
                     <button onClick={() => {
                         const newItem = generateUUID(state.version, {
                             type: OptionType.DNS, namespace: dnsNamespace,
@@ -220,14 +214,14 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
                         })
                         setState(newItem)
                         appendHistory(newItem)
-                    }}>{t('tool.type.custom')}</button>
+                    }}>{'tool.type.custom'}</button>
                 </div>
                 <div className={'namespaceText'}>
                     <div >
                         <div>
                             <input
                                 disabled={state?.options?.type !== OptionType.Custom}
-                                placeholder={t('tool.options.namespace')}
+                                placeholder={'tool.options.namespace'}
                                 value={state?.options?.namespace || ''}
                                 onChange={(event) => {
                                     const valid = validate(event.target.value)
@@ -252,17 +246,17 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
                             />
                         </div>
                     </div>
-                    <div title={t('tool.options.helpText')}>
+                    <div title={'tool.options.helpText'}>
                         ?
                     </div>
                 </div>
             </div>
         </div>
         <div className={'optionRow'}>
-            <div className={'w-24 inline-block'}>{t('tool.options.name')}</div>
+            <div className={'w-24 inline-block'}>{'tool.options.name'}</div>
             <div>
                 <input
-                    placeholder={t('tool.options.name')}
+                    placeholder={'tool.options.name'}
                     value={state?.options?.name || ''}
                     onChange={(event) => {
                         const newItem = generateUUID(state?.version, {
@@ -281,10 +275,8 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
 
 function GenHistoryTable({lang, history}: { lang: string, history: NormalUUIDItem[] }) {
 
-    const {i18n} = useTranslation(lang)
-    const t = i18n.getFixedT(lang)
     return <div>
-        <h2>{t('tool.history.title')}</h2>
+        <h2>{'tool.history.title'}</h2>
         {history.map((item, index) => {
             return <div key={index}>
                 <UUIDItemCard uuidItem={item} lang={lang}/>
@@ -294,11 +286,10 @@ function GenHistoryTable({lang, history}: { lang: string, history: NormalUUIDIte
 }
 
 function UUIDItemCard({uuidItem, lang}: { uuidItem: NormalUUIDItem, lang: string }) {
-    const {i18n} = useTranslation(lang)
-    const t = i18n.getFixedT(lang)
+
     return <div className={'uuidItemCard'}>
         <div className={'dataRow'}>
-            <div className={'headerCell'}>{t('tool.format.long')}</div>
+            <div className={'headerCell'}>{'tool.format.long'}</div>
             <div className={'dataCell'}>
                 <div className={'uuidItem'}>
                     <CopyItem uuidText={uuidItem.long.toUpperCase()}/>
@@ -309,7 +300,7 @@ function UUIDItemCard({uuidItem, lang}: { uuidItem: NormalUUIDItem, lang: string
             </div>
         </div>
         <div className={'dataRow'}>
-            <div className={'headerCell'}>{t('tool.format.short')}</div>
+            <div className={'headerCell'}>{'tool.format.short'}</div>
             <div className={'dataCell'}>
                 <div className={'uuidItem'}>
                     <CopyItem uuidText={uuidItem.short.toUpperCase()}/>
@@ -320,7 +311,7 @@ function UUIDItemCard({uuidItem, lang}: { uuidItem: NormalUUIDItem, lang: string
             </div>
         </div>
         {(uuidItem.version === 3 || uuidItem.version === 5) && <div className={'dataRow'}>
-            <div className={'headerCell'}>{t('tool.format.options')}</div>
+            <div className={'headerCell'}>{'tool.format.options'}</div>
             <div className={'dataCell'}>
                 {uuidItem.options && <div>
                     <div>{JSON.stringify(uuidItem.options)}</div>

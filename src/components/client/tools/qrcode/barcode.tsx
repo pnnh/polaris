@@ -3,12 +3,10 @@
 import React, {useState} from "react"
 import JsBarcode from "jsbarcode";
 import './barcode.scss'
-import {useClientTranslation} from "@/services/client/i18n/client";
 
 export function BarCodeComponent({lang}: { lang: string }) {
     const [text, setText] = useState('')
     const [error, setError] = useState('')
-    const {t: trans} = useClientTranslation(lang)
     return <div className={'barCodeComponent'}>
         <div className={'textContainer'}>
                 <textarea value={text}
@@ -18,17 +16,17 @@ export function BarCodeComponent({lang}: { lang: string }) {
         <div className={'actionContainer'}>
             <button onClick={() => {
                 if (!text) {
-                    setError(trans('barcode.emptyText'))
+                    setError('barcode.emptyText')
                     return
                 }
                 try {
                     setError('')
                     textToBarCode('#resultContainer', text)
                 } catch (e) {
-                    setError(`${trans('barcode.errorTip')}${e}`)
+                    setError(`${'barcode.errorTip'}${e}`)
                 }
             }}>
-                {trans('barcode.generate')}
+                {'barcode.generate'}
             </button>
         </div>
         <div className={'errorContainer'}>

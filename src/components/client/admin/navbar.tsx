@@ -2,7 +2,7 @@
 
 import styles from './navbar.module.scss'
 import Link from 'next/link'
-import {AccountModel} from "@/models/common/account";
+import {AccountModel} from "@/atom/common/models/account";
 
 export function AdminNavbar(props: { account?: AccountModel }) {
     return <div className={styles.navHeader}>

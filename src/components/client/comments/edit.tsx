@@ -2,7 +2,6 @@
 
 import './edit.scss'
 import {FormEvent, useState} from "react";
-import {useClientTranslation} from "@/services/client/i18n/client";
 import {validateEmail} from "@/atom/common/utils/email";
 import {submitComment} from "@/services/client/comments/comment";
 import {isValidUrl} from "@/atom/common/utils/uri";
@@ -15,19 +14,18 @@ export function EditArea({mode, lang, assetsUrl}: { mode?: string, lang?: string
     const [photo, setPhoto] = useState('')
     const [errMsg, setErrMsg] = useState('')
 
-    const {t} = useClientTranslation(lang || 'zh')
     const submitForm = async () => {
         const validEmail = validateEmail(email)
         if (email && !validEmail) {
-            setErrMsg(t('client.invalidEmail'))
+            setErrMsg('client.invalidEmail')
             return
         }
         if (website && !isValidUrl(website)) {
-            setErrMsg(t('client.invalidWebsite'))
+            setErrMsg('client.invalidWebsite')
             return
         }
         if (!content) {
-            setErrMsg(t('client.invalidContent'))
+            setErrMsg('client.invalidContent')
             return
         }
         const submitResult = await submitComment(email, nickname, website, photo, content)
@@ -36,30 +34,30 @@ export function EditArea({mode, lang, assetsUrl}: { mode?: string, lang?: string
 
     return <div className={'editContainer'}>
         <div className={'areaTitle'}>
-            {t('client.title')}
+            {'client.title'}
         </div>
         <div className={'editRow'}>
             <UserPhoto assetsUrl={assetsUrl}/>
             <div className={'infoColumn'}>
                 <div className={'fieldsRow'}>
                     <div className={'infoField'}>
-                        <div className={'fieldKey'}>{t('nickname')}</div>
+                        <div className={'fieldKey'}>{'nickname'}</div>
                         <div className={'fieldValue'}>
-                            <input type={'text'} title={t('optional')} placeholder={t('nickname')}
+                            <input type={'text'} title={'optional'} placeholder={'nickname'}
                                    onChange={(e) => setNickname(e.target.value)}/>
                         </div>
                     </div>
                     <div className={'infoField'}>
-                        <div className={'fieldKey'}>{t('email')}</div>
+                        <div className={'fieldKey'}>{'email'}</div>
                         <div className={'fieldValue'}>
-                            <input type={'email'} title={t('optional')} placeholder={t('email')}
+                            <input type={'email'} title={'optional'} placeholder={'email'}
                                    onChange={(e) => setEmail(e.target.value)}/>
                         </div>
                     </div>
                     <div className={'infoField'}>
-                        <div className={'fieldKey'}>{t('website')}</div>
+                        <div className={'fieldKey'}>{'website'}</div>
                         <div className={'fieldValue'}>
-                            <input type={'text'} title={t('optional')} placeholder={t('website')}
+                            <input type={'text'} title={'optional'} placeholder={'website'}
                                    onChange={(e) => setWebsite(e.target.value)}/>
                         </div>
                     </div>

@@ -4,32 +4,27 @@ import {TocInfo} from '@/components/common/toc'
 import {Metadata} from 'next'
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import {pageTitle} from "@/utils/page";
-import Image from "next/image";
 import ContentLayout, {templateBodyId} from '@/components/server/content/layout'
 import {ArticleContainer} from "@/components/client/article";
 import {getClientIp, getPathname} from "@/services/server/pathname";
 import {GoTop} from "@/components/client/gotop";
 import {CiAlarmOn} from "react-icons/ci";
 import {FaEye} from "react-icons/fa";
-import {PSArticleModel} from "@/models/common/article";
-import {BaseRouterParams} from '@/models/server/router'
-import {useServerTranslation} from '@/services/server/i18n'
-import {ArticleAssets} from './assets'
 import {generatorRandomString} from "@/atom/common/utils/string";
 import {formatRfc3339} from "@/atom/common/utils/datetime";
-import {TocItem} from "@/models/common/toc";
 import { base58ToUuid} from "@/atom/common/utils/basex";
-import {CodeOk, CommonResult} from "@/models/common/protocol";
+import {CodeOk, CommonResult} from "@/atom/common/models/protocol";
+import {PSArticleModel} from "@/atom/common/models/article";
+import {TocItem} from "@/atom/common/models/toc";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home({params, searchParams}: {
-    params: Promise<{ channel: string, article: string } & BaseRouterParams>,
+    params: Promise<{ channel: string, article: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
     const baseParams = await params;
-    const {t: trans} = await useServerTranslation(baseParams.lang)
     const metadata: Metadata = {}
     const domain = serverSigninDomain()
     const articleUrn = base58ToUuid(baseParams.article)
@@ -55,14 +50,11 @@ export default async function Home({params, searchParams}: {
     if (clientIp) {
         await domain.makePost(`/articles/${baseParams.article}/viewer`, {clientIp})
     }
-    const readUrl = `/${baseParams.lang}/content/articles/${baseParams.channel}/articles/${baseParams.article}`
+    const readUrl = `/${'zh'}/content/articles/${baseParams.channel}/articles/${baseParams.article}`
     const assetsUrl = domain.assetUrl(`/articles/${baseParams.channel}/articles/${baseParams.article}/assets`)
-    let imageUrl = '/images/default/cover.png'
-    if (getResult.data.cover) {
-        imageUrl = domain.assetUrl(`/articles/${getResult.data.channel}/articles/${getResult.data.urn}/assets/${getResult.data.cover}`)
-    }
-    return <ContentLayout lang={baseParams.lang} searchParams={await searchParams} pathname={pathname}
-                          metadata={metadata} params={baseParams}>
+
+    return <ContentLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
+                          metadata={metadata} >
         <div>
             <div className={'articleContainer'}>
                 <div className={'leftArea'} id={'articleReadBody'}>

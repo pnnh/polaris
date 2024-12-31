@@ -4,9 +4,7 @@ import RandomPasswordPage from './random-password'
 import {Metadata} from "next";
 import {pageTitle} from "@/utils/page";
 import ContentLayout from "@/components/server/content/layout";
-import {BaseRouterParams} from "@/models/server/router";
 import {getPathname} from "@/services/server/pathname";
-import {useServerTranslation} from "@/services/server/i18n";
 
 export const metadata: Metadata = {
     title: pageTitle('随机密码生成器'),
@@ -15,20 +13,18 @@ export const metadata: Metadata = {
 };
 
 export default async function Home({params, searchParams}: {
-    params: Promise<{ channel: string } & BaseRouterParams>,
+    params: Promise<{ channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
     const baseParams = await params;
-    const searchParamsValue = await searchParams
-    const {t: trans} = await useServerTranslation(baseParams.lang)
     const metadata: Metadata = {
-        title: trans('codegen.seo.title'),
-        keywords: trans('codegen.seo.keywords'),
-        description: trans('codegen.seo.description'),
+        title: 'codegen.seo.title',
+        keywords: 'codegen.seo.keywords',
+        description: 'codegen.seo.description',
     }
-    return <ContentLayout lang={baseParams.lang} searchParams={await searchParams} pathname={pathname}
-                          metadata={metadata} params={baseParams}>
+    return <ContentLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
+                          metadata={metadata}>
         <div className={'indexPage'}>
         <RandomPasswordPage/>
     </div>

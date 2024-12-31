@@ -6,29 +6,26 @@ import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/services/server/pathname";
 import {IDomain} from "@/services/common/domain";
 import {ArticleCard} from "@/components/server/content/article/card";
-import {CommonResult, PLSelectResult} from "@/models/common/protocol";
-import {PSArticleModel} from "@/models/common/article";
-import {BaseRouterParams} from '@/models/server/router'
-import {useServerTranslation} from '@/services/server/i18n'
+import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
 import {Metadata} from 'next'
 import {NoData} from "@/components/common/empty";
 import {PaginationServer} from "@/components/server/pagination";
-import {calcPagination} from "@/utils/pagination";
 import {replaceSearchParams} from "@/atom/common/utils/query";
+import {PSArticleModel} from "@/atom/common/models/article";
+import {calcPagination} from "@/atom/common/utils/pagination";
 
 export const dynamic = "force-dynamic";
 
 export default async function Page({params, searchParams}: {
-    params: Promise<{ channel: string } & BaseRouterParams>,
+    params: Promise<{ channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
     const baseParams = await params;
-    const {t: trans} = await useServerTranslation(baseParams.lang)
     const metadata: Metadata = {
-        title: trans('codegen.seo.title'),
-        keywords: trans('codegen.seo.keywords'),
-        description: trans('codegen.seo.description'),
+        title: 'codegen.seo.title',
+        keywords: 'codegen.seo.keywords',
+        description: 'codegen.seo.description',
     }
     const searchParamsValue = await searchParams
     let page = Number(searchParamsValue.page)
@@ -55,8 +52,8 @@ export default async function Page({params, searchParams}: {
         return <NoData size={'large'}/>
     }
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
-    return <ContentLayout lang={baseParams.lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata} params={baseParams}>
+    return <ContentLayout lang={'en'} searchParams={searchParamsValue} pathname={pathname}
+                          metadata={metadata}>
         <div className={'searchPage'}>
             <div className={'pageContainer'}>
                 搜索关键词: {searchParamsValue.keyword}
@@ -64,7 +61,7 @@ export default async function Page({params, searchParams}: {
             <div className={'contentContainer'}>
                 <div className={'conMiddle'}>
                     <div className={'middleBody'}>
-                        <MiddleBody selectResult={selectResult} domain={domain} lang={baseParams.lang}/>
+                        <MiddleBody selectResult={selectResult} domain={domain} lang={'zh'}/>
                     </div>
                     <div className={'middlePagination'}>
                         <PaginationServer pagination={pagination}

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import './rank.scss'
-import {PLSelectResult} from "@/models/common/protocol";
-import {PSArticleModel} from "@/models/common/article";
+import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PSArticleModel} from "@/atom/common/models/article";
 
 export function ArticleRankCard({rankResult, lang}: { rankResult: PLSelectResult<PSArticleModel>, lang: string }) {
     return <div className={'rankCard'}>

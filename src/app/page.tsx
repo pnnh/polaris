@@ -2,27 +2,24 @@ import React from 'react'
 import './page.scss'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/services/server/pathname";
-import {getLangAnyway, useServerTranslation} from '@/services/server/i18n'
-import {BaseRouterParams} from '@/models/server/router'
 import {Metadata} from 'next'
 import {serverSigninDomain} from "@/services/server/domain/domain";
-import {PLSelectResult} from "@/models/common/protocol";
+import {PLSelectResult} from "@/atom/common/models/protocol";
 import {NoData} from "@/components/common/empty";
 import {IDomain} from "@/services/common/domain";
 import Link from "next/link";
-import {PSArticleModel} from "@/models/common/article";
 import { uuidToBase58} from "@/atom/common/utils/basex";
+import { PSArticleModel } from '@/atom/common/models/article';
 
 export const dynamic = "force-dynamic";
 
 export default async function Page({params, searchParams}: {
-    params: Promise<{ channel: string } & BaseRouterParams>,
+    params: Promise<{ channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
     const baseParams = await params;
     const searchParamsValue = await searchParams
-    const {t: trans} = await useServerTranslation(baseParams.lang)
     const metadata: Metadata = {
         title: '',
         keywords: 'tools,notes,工具,笔记',
@@ -36,15 +33,13 @@ export default async function Page({params, searchParams}: {
     if (!result || !result.data) {
         return <NoData size={'middle'}/>
     }
-    const pageLang = await getLangAnyway()
-
-    return <ContentLayout lang={pageLang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata} params={baseParams}>
+    return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
+                          metadata={metadata}>
 
         <div className={'homeContainer'}>
                 <div className={'contentList'}>
                     {result.data.range.map((model) => {
-                        return <Item key={model.urn} model={model} domain={domain} lang={pageLang}/>
+                        return <Item key={model.urn} model={model} domain={domain} lang={'zh'}/>
                     })
                     }
                 </div>

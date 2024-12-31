@@ -4,8 +4,8 @@ import {Readable} from 'stream'
 import {SitemapItemLoose} from "sitemap/dist/lib/types";
 import {serverSigninDomain} from "@/services/server/domain/domain";
 import {useServerConfig} from "@/services/server/config";
-import {CommonResult, PLSelectResult} from "@/models/common/protocol";
-import {PSArticleModel} from "@/models/common/article";
+import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
+import {PSArticleModel} from "@/atom/common/models/article";
 
 export const dynamic = "force-dynamic";
 

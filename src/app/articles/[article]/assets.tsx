@@ -8,8 +8,8 @@ import {clientSigninDomain} from "@/services/client/domain";
 import {ClientConfig, useClientConfig} from "@/services/client/config";
 import {IDomain} from "@/services/common/domain";
 import {FaAngleRight, FaAngleDown} from "react-icons/fa6";
-import {CommonResult, PLSelectResult} from "@/models/common/protocol";
-import {PSArticleFileModel} from "@/models/common/article";
+import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
+import {PSArticleFileModel} from "@/atom/common/models/article";
 import {ArticleAssertPreview} from './preview';
 import {encodeBase64String} from "@/atom/common/utils/basex";
 

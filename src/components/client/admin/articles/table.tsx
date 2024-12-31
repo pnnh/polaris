@@ -2,8 +2,8 @@
 
 import './table.scss'
 import React from 'react'
-import {PLSelectResult} from "@/models/common/protocol";
-import {channelName, PSArticleModel} from "@/models/common/article";
+import {PLSelectResult} from "@/atom/common/models/protocol";
+import {channelName, PSArticleModel} from "@/atom/common/models/article";
 import {PaginationPartial} from "@/components/common/pagination";
 import {NoData} from "@/components/common/empty";
 import {formatRfc3339} from "@/atom/common/utils/datetime";

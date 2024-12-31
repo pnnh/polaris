@@ -2,7 +2,6 @@
 
 import React from "react";
 import './timestamp.scss'
-import {useClientTranslation} from "@/services/client/i18n/client";
 
 enum Tab {
     GenTimestamp,
@@ -12,22 +11,21 @@ enum Tab {
 
 export function TimestampHelper({lang}: { lang: string }) {
     const [tab, setTab] = React.useState<Tab>(Tab.GenTimestamp)
-    const {t: trans} = useClientTranslation(lang)
     return <div className={'timestampHelper'}>
         <div className={"helperContainer"}>
             <div className={
                 "tabContainer"}>
                 <div className={`tabItem ${tab === Tab.GenTimestamp ? 'active' : ''}`}
                      onClick={() => setTab(Tab.GenTimestamp)}>
-                    {trans('timestamp.tab.genTimestamp')}
+                    {'timestamp.tab.genTimestamp'}
                 </div>
                 <div className={`tabItem ${tab === Tab.TimestampToDatetime ? 'active' : ''}`}
                      onClick={() => setTab(Tab.TimestampToDatetime)}>
-                    {trans("timestamp.tab.timestampToDatetime")}
+                    {"timestamp.tab.timestampToDatetime"}
                 </div>
                 <div className={`tabItem ${tab === Tab.DatetimeToTimestamp ? 'active' : ''}`}
                      onClick={() => setTab(Tab.DatetimeToTimestamp)}>
-                    {trans("timestamp.tab.datetimeToTimestamp")}
+                    {"timestamp.tab.datetimeToTimestamp"}
                 </div>
             </div>
             <div className={

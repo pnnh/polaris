@@ -10,24 +10,21 @@ import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
 import {ArticleCard} from "@/components/server/content/article/card";
 import {ArticleRankCard} from "@/components/server/content/article/rank";
-import {PLSelectResult} from "@/models/common/protocol";
-import {PSArticleModel} from "@/models/common/article";
-import {BaseRouterParams} from '@/models/server/router'
-import {useServerTranslation} from '@/services/server/i18n'
+import {PLSelectResult} from "@/atom/common/models/protocol";
 import {PaginationServer} from "@/components/server/pagination";
 import {NoData} from "@/components/common/empty";
-import {calcPagination} from "@/utils/pagination";
 import {replaceSearchParams} from "@/atom/common/utils/query";
+import {calcPagination} from "@/atom/common/utils/pagination";
+import {PSArticleModel} from "@/atom/common/models/article";
 
 export const dynamic = "force-dynamic";
 
 export default async function Page({params, searchParams}: {
-    params: Promise<{ channel: string } & BaseRouterParams>,
+    params: Promise<{ channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
     const baseParams = await params;
-    const {t: trans} = await useServerTranslation(baseParams.lang)
     const searchParamsValue = await searchParams
 
     let page = Number(searchParamsValue.page)
@@ -71,8 +68,8 @@ export default async function Page({params, searchParams}: {
         const queryFilter = (searchParamsValue.filter ?? 'all')
         return ' ' + (queryFilter === filter ? 'activeLink' : '')
     }
-    return <ContentLayout lang={baseParams.lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata} params={baseParams}>
+    return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
+                          metadata={metadata}>
         <div className={'contentContainer'}>
             <div className={'conMiddle'}>
                 <div className={'middleTop'}>
@@ -92,7 +89,7 @@ export default async function Page({params, searchParams}: {
                     </div>
                 </div>
                 <div className={'middleBody'}>
-                    <MiddleBody selectResult={selectResult} domain={domain} lang={baseParams.lang}/>
+                    <MiddleBody selectResult={selectResult} domain={domain} lang={'zh'}/>
                 </div>
                 <div className={'middlePagination'}>
                     <PaginationServer pagination={pagination}
@@ -101,7 +98,7 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
             <div className={'conRight'}>
-                <ArticleRankCard rankResult={rankSelectResult} lang={baseParams.lang}/>
+                <ArticleRankCard rankResult={rankSelectResult} lang={'zh'}/>
             </div>
         </div>
     </ContentLayout>

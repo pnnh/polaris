@@ -2,14 +2,12 @@
 
 import {useState} from "react";
 import './qrcode.scss'
-import {useClientTranslation} from "@/services/client/i18n/client";
 import QRCode from 'qrcode'
 
 export function QRCodeComponent({lang}: { lang: string }) {
     const [text, setText] = useState('')
     const [downloadUrl, setDownloadUrl] = useState('')
     const [error, setError] = useState('')
-    const {t: trans} = useClientTranslation(lang)
     return <div className={'qrCodeComponent'}>
         <div className={'textContainer'}>
                 <textarea value={text}
@@ -19,7 +17,7 @@ export function QRCodeComponent({lang}: { lang: string }) {
         <div className={'actionContainer'}>
             <button onClick={() => {
                 if (!text) {
-                    setError(trans('qrcode.emptyText'))
+                    setError('qrcode.emptyText')
                     return
                 }
                 try {
@@ -28,10 +26,10 @@ export function QRCodeComponent({lang}: { lang: string }) {
                         setDownloadUrl(downloadUrl)
                     })
                 } catch (e) {
-                    setError(`${trans('qrcode.errorTip')}${e}`)
+                    setError(`${'qrcode.errorTip'}${e}`)
                 }
             }}>
-                {trans('qrcode.generate')}
+                {'qrcode.generate'}
             </button>
         </div>
         <div className={'errorContainer'}>

@@ -5,16 +5,14 @@ import ContentLayout from "@/components/server/content/layout";
 import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
 import './page.scss'
-import {PLSelectResult} from "@/models/common/protocol";
-import {PSChannelModel} from "@/models/common/channel";
-import {BaseRouterParams} from '@/models/server/router';
-import {useServerTranslation} from '@/services/server/i18n';
+import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PSChannelModel} from "@/atom/common/models/channel";
 import {Metadata} from 'next';
 import {NoData} from "@/components/common/empty";
 import {uuidToBase58} from "@/atom/common/utils/basex";
 
 export default async function Page({params, searchParams}: {
-    params: Promise<{ viewer: string } & BaseRouterParams>,
+    params: Promise<{ viewer: string }>,
     searchParams: Promise<Record<string, string> & { query: string | undefined }>
 }) {
     const domain = serverSigninDomain()
@@ -27,20 +25,19 @@ export default async function Page({params, searchParams}: {
     }
     const pathname = await getPathname()
     const baseParams = await params;
-    const {t: trans} = await useServerTranslation(baseParams.lang)
     const metadata: Metadata = {
-        title: trans('codegen.seo.title'),
-        keywords: trans('codegen.seo.keywords'),
-        description: trans('codegen.seo.description'),
+        title: 'codegen.seo.title',
+        keywords: 'codegen.seo.keywords',
+        description: 'codegen.seo.description',
     }
 
-    return <ContentLayout lang={baseParams.lang} searchParams={await searchParams} pathname={pathname}
-                          metadata={metadata} params={baseParams}>
+    return <ContentLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
+                          metadata={metadata}>
         <div className={'container'}>
             <div className={'body'}>
                 <div className={'list'}>
                     {result.data.range.map((model) => {
-                        return <Item key={model.urn} model={model} domain={domain} lang={baseParams.lang}/>
+                        return <Item key={model.urn} model={model} domain={domain} lang={'zh'}/>
                     })
                     }
                 </div>

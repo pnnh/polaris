@@ -1,7 +1,5 @@
-import {getVisitorId} from "@/services/client/fingerprint";
-import {makeGet, makePost} from "@/services/client/http";
-import {LTSelectResult} from "@/models/common_result";
-import {CommentModel} from "@/models/comment";
+import {getVisitorId} from "@/services/client/comments/fingerprint";
+
 
 export async function submitComment(email: string | undefined,
                                     nickname: string | undefined, website: string | undefined,
