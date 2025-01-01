@@ -12,19 +12,18 @@ export function ListArea() {
         })
     }, [])
     if (!list) {
-        return <div>Loading</div>
+        return <div>暂无评论</div>
     }
     if (!list.data || list.data.count === 0) {
         return <div>Empty</div>
     }
     return <div className={'listContainer'}>
-        <div className={'areaTitle'}>评论列表</div>
         <div>
             {
                 list.data.range.map((comment, index) => {
                     return <div key={index} className={'commentItem'}>
                         <div className={'commentHeader'}>
-                            <div className={'commentAuthor'}>{comment.creator}</div>
+                            <div className={'commentAuthor'}>{comment.nickname || '匿名'}</div>
                             <div className={'commentTime'}>{comment.create_time}</div>
                         </div>
                         <div className={'commentContent'}>{comment.content}</div>

@@ -38,7 +38,10 @@ function ArticleNavbar({pathname}: { pathname: string }) {
         {name: '笔记', href: `/articles`},
         // {name: '图片', href: `/pictures`},
         // {name: '文件', href: `/files`},
-        {name: '工具', href: `/tools`},
+        {name: '随机密码', href: `/tools/password`},
+        {name: 'UUID', href: `/tools/uuid`},
+        {name: '二维码', href: `/tools/qrcode`},
+        {name: '条形码', href: `/tools/qrcode/barcode`},
     ]
     return <>
         {navLinks.map((link) => {

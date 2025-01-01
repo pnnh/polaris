@@ -34,29 +34,29 @@ export function EditArea() {
 
     return <div className={'editContainer'}>
         <div className={'areaTitle'}>
-            {'client.title'}
+            {'评论列表'}
         </div>
         <div className={'editRow'}>
             <div className={'infoColumn'}>
                 <div className={'fieldsRow'}>
                     <div className={'infoField'}>
-                        <div className={'fieldKey'}>{'nickname'}</div>
+                        <div className={'fieldKey'}>{'昵称'}</div>
                         <div className={'fieldValue'}>
-                            <input type={'text'} title={'optional'} placeholder={'nickname'}
+                            <input type={'text'} title={'optional'} placeholder={'可选输入'}
                                    onChange={(e) => setNickname(e.target.value)}/>
                         </div>
                     </div>
                     <div className={'infoField'}>
-                        <div className={'fieldKey'}>{'email'}</div>
+                        <div className={'fieldKey'}>{'邮箱'}</div>
                         <div className={'fieldValue'}>
-                            <input type={'email'} title={'optional'} placeholder={'email'}
+                            <input type={'email'} title={'optional'} placeholder={'可选输入'}
                                    onChange={(e) => setEmail(e.target.value)}/>
                         </div>
                     </div>
                     <div className={'infoField'}>
-                        <div className={'fieldKey'}>{'website'}</div>
+                        <div className={'fieldKey'}>{'网站'}</div>
                         <div className={'fieldValue'}>
-                            <input type={'text'} title={'optional'} placeholder={'website'}
+                            <input type={'text'} title={'optional'} placeholder={'可选输入'}
                                    onChange={(e) => setWebsite(e.target.value)}/>
                         </div>
                     </div>
@@ -65,11 +65,11 @@ export function EditArea() {
                     <textarea placeholder={"输入评论内容"} onChange={(e) => setContent(e.target.value)}/>
                 </div>
                 <div className={'actionsRow'}>
-                    <div className={'errMsg'}>
-                        {errMsg}
-                    </div>
                     <div className={'submitArea'}>
                         <button onClick={() => submitForm().then()}>发布</button>
+                    </div>
+                    <div className={'errMsg'}>
+                        {errMsg}
                     </div>
                 </div>
             </div>
