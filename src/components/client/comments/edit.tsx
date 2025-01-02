@@ -5,6 +5,7 @@ import {FormEvent, useState} from "react";
 import {validateEmail} from "@/atom/common/utils/email";
 import {submitComment} from "@/services/client/comments/comment";
 import {isValidUrl} from "@/atom/common/utils/uri";
+import {getTurnstileToken} from "@/components/client/cloudflare/turnstile";
 
 export function EditArea() {
     const [email, setEmail] = useState('')
@@ -12,20 +13,20 @@ export function EditArea() {
     const [website, setWebsite] = useState('')
     const [content, setContent] = useState('')
     const [photo, setPhoto] = useState('')
-    const [errMsg, setErrMsg] = useState('')
+    const [infoMsg, setInfoMsg] = useState('')
 
     const submitForm = async () => {
         const validEmail = validateEmail(email)
         if (email && !validEmail) {
-            setErrMsg('client.invalidEmail')
+            setInfoMsg('无效邮箱')
             return
         }
         if (website && !isValidUrl(website)) {
-            setErrMsg('client.invalidWebsite')
+            setInfoMsg('无效网址')
             return
         }
         if (!content) {
-            setErrMsg('client.invalidContent')
+            setInfoMsg('无效内容')
             return
         }
         const submitResult = await submitComment(email, nickname, website, photo, content)
@@ -53,23 +54,30 @@ export function EditArea() {
                                    onChange={(e) => setEmail(e.target.value)}/>
                         </div>
                     </div>
-                    <div className={'infoField'}>
-                        <div className={'fieldKey'}>{'网站'}</div>
-                        <div className={'fieldValue'}>
-                            <input type={'text'} title={'optional'} placeholder={'可选输入'}
-                                   onChange={(e) => setWebsite(e.target.value)}/>
-                        </div>
-                    </div>
                 </div>
                 <div className={'editorRow'}>
                     <textarea placeholder={"输入评论内容"} onChange={(e) => setContent(e.target.value)}/>
                 </div>
                 <div className={'actionsRow'}>
                     <div className={'submitArea'}>
-                        <button onClick={() => submitForm().then()}>发布</button>
+                        <button onClick={() => {
+                            getTurnstileToken((token) => {
+                                console.log('turnstile token', token)
+                                if (!token) {
+                                    setInfoMsg('未通过验证')
+                                    return
+                                }
+                                submitForm().then(() => {
+                                    setInfoMsg('评论已提交，审核后可见')
+                                }).catch(() => {
+                                    setInfoMsg('评论提交失败')
+                                })
+                            })
+                        }}>发布
+                        </button>
                     </div>
-                    <div className={'errMsg'}>
-                        {errMsg}
+                    <div className={'infoMsg'}>
+                        {infoMsg}
                     </div>
                 </div>
             </div>
@@ -77,8 +85,3 @@ export function EditArea() {
     </div>
 }
 
-function UserPhoto() {
-    return <div className={'photoContainer'}>
-        <img src={`/default/photo.png`} alt="头像"/>
-    </div>
-}

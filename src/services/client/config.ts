@@ -4,6 +4,7 @@ import {decodeBase64String} from "@/atom/common/utils/basex";
 
 export interface ClientConfig {
     NEXT_PUBLIC_SELF_URL: string
+    PUBLIC_TURNSTILE: string
 }
 
 export function useClientConfig() {
