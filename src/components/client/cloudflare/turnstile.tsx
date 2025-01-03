@@ -40,17 +40,21 @@ function turnstileScript() {
     });
 }
 
-export function getTurnstileToken(callback: (token: string) => void) {
+export async function getTurnstileToken(): Promise<string> {
     const token = window.turnstile.getResponse()
     if (token && !window.turnstile.isExpired()) {
-        callback(token)
-        return
+        return Promise.resolve(token)
     }
-    window.turnstileCallback = callback
     const turnstileContainer = document.getElementById('turnstile-container')
     if (turnstileContainer) {
         turnstileContainer.style.display = 'flex'
     }
+    return await new Promise((resolve, reject) => {
+        window.turnstileCallback = resolve
+        setTimeout(() => {
+            reject('Timeout')
+        }, 50000)
+    })
 }
 
 export function TurnstileClient() {

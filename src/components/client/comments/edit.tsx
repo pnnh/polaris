@@ -6,8 +6,12 @@ import {validateEmail} from "@/atom/common/utils/email";
 import {submitComment} from "@/services/client/comments/comment";
 import {isValidUrl} from "@/atom/common/utils/uri";
 import {getTurnstileToken} from "@/components/client/cloudflare/turnstile";
+import {CodeOk} from "@/atom/common/models/protocol";
+import {ButtonThrottle} from "@/atom/client/button/throttle";
 
-export function EditArea() {
+const buttonThrottle = new ButtonThrottle(5000)
+
+export function EditArea({resource}: { resource: string }) {
     const [email, setEmail] = useState('')
     const [nickname, setNickname] = useState('')
     const [website, setWebsite] = useState('')
@@ -16,8 +20,11 @@ export function EditArea() {
     const [infoMsg, setInfoMsg] = useState('')
 
     const submitForm = async () => {
-        const validEmail = validateEmail(email)
-        if (email && !validEmail) {
+        if (!await buttonThrottle.throttle()) {
+            setInfoMsg('操作过于频繁')
+            return
+        }
+        if (email && !validateEmail(email)) {
             setInfoMsg('无效邮箱')
             return
         }
@@ -29,8 +36,23 @@ export function EditArea() {
             setInfoMsg('无效内容')
             return
         }
-        const submitResult = await submitComment(email, nickname, website, photo, content)
+        const turnstileToken = await getTurnstileToken()
+        console.log('turnstile token', turnstileToken)
+        if (!turnstileToken) {
+            setInfoMsg('未通过验证')
+            return
+        }
+        const submitRequest = {
+            email, nickname, photo, website, content, turnstile_token: turnstileToken,
+            resource,
+        }
+        const submitResult = await submitComment(submitRequest)
         console.log('submitResult', submitResult)
+        if (submitResult.code !== CodeOk) {
+            setInfoMsg('评论提交失败')
+            return
+        }
+        setInfoMsg('评论已提交审核后可见')
     }
 
     return <div className={'editContainer'}>
@@ -60,18 +82,9 @@ export function EditArea() {
                 </div>
                 <div className={'actionsRow'}>
                     <div className={'submitArea'}>
-                        <button onClick={() => {
-                            getTurnstileToken((token) => {
-                                console.log('turnstile token', token)
-                                if (!token) {
-                                    setInfoMsg('未通过验证')
-                                    return
-                                }
-                                submitForm().then(() => {
-                                    setInfoMsg('评论已提交，审核后可见')
-                                }).catch(() => {
-                                    setInfoMsg('评论提交失败')
-                                })
+                        <button className={'submitButton'} onClick={() => {
+                            submitForm().catch(() => {
+                                setInfoMsg('评论提交失败')
                             })
                         }}>发布
                         </button>

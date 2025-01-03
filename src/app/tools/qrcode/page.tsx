@@ -5,7 +5,7 @@ import ContentLayout from '@/components/server/content/layout';
 import {getPathname} from "@/services/server/pathname";
 import {Metadata} from "next";
 
-export default async function Home( {params, searchParams}: {
+export default async function Home({params, searchParams}: {
     params: Promise<{ channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
@@ -20,7 +20,7 @@ export default async function Home( {params, searchParams}: {
     return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={'qrCodePage'}>
-            <h1 className={'productTitle'}>{'qrcode.title'}</h1>
+            <h1 className={'productTitle'}>{'二维码生成器'}</h1>
             <QRCodeComponent lang={'zh'}/>
         </div>
     </ContentLayout>

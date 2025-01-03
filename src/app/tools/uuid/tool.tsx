@@ -76,7 +76,7 @@ function generateUUID(version: number, options?: {
 }
 
 export function ToolBody({lang}: { lang: string }) {
-    const [state, setState] = useState<NormalUUIDItem|undefined>()
+    const [state, setState] = useState<NormalUUIDItem | undefined>()
     const [history, setHistory] = useState<NormalUUIDItem[]>([])
 
     const appendHistory = (newItem: NormalUUIDItem) => {
@@ -92,7 +92,7 @@ export function ToolBody({lang}: { lang: string }) {
         <div className={'toolBody'}>
             <div className={'titleContainer'}>
                 <h1 className={'toolTitle'}>
-                    {'product.name'}
+                    {'UUID生成器'}
                 </h1>
             </div>
             <p className={'toolDescription'}>{'product.description'}</p>
@@ -101,42 +101,49 @@ export function ToolBody({lang}: { lang: string }) {
             <div className={'actionRow'}>
                 <div className={'w-24 inline-block font-bold'}>{'tool.uuidVersion'}</div>
                 <button onClick={() => {
-                            setState(generateUUID(0))
-                        }}>NIL</button>
+                    setState(generateUUID(0))
+                }}>NIL
+                </button>
                 <button onClick={() => {
-                            const newItem = generateUUID(1)
-                            setState(newItem)
-                            appendHistory(newItem)
-                        }}>v1</button>
+                    const newItem = generateUUID(1)
+                    setState(newItem)
+                    appendHistory(newItem)
+                }}>v1
+                </button>
                 <button onClick={() => {
-                            const newItem = generateUUID(3, {type: OptionType.Random, namespace: uuidv4(), name: ''})
-                            setState(newItem)
-                            appendHistory(newItem)
-                        }}>v3</button>
+                    const newItem = generateUUID(3, {type: OptionType.Random, namespace: uuidv4(), name: ''})
+                    setState(newItem)
+                    appendHistory(newItem)
+                }}>v3
+                </button>
                 <button onClick={() => {
-                            const newItem = generateUUID(4)
-                            setState(newItem)
-                            appendHistory(newItem)
-                        }}>v4</button>
+                    const newItem = generateUUID(4)
+                    setState(newItem)
+                    appendHistory(newItem)
+                }}>v4
+                </button>
                 <button onClick={() => {
-                            const newItem = generateUUID(5, {type: OptionType.Random, namespace: uuidv4(), name: ''})
-                            setState(newItem)
-                            appendHistory(newItem)
-                        }}>v5</button>
+                    const newItem = generateUUID(5, {type: OptionType.Random, namespace: uuidv4(), name: ''})
+                    setState(newItem)
+                    appendHistory(newItem)
+                }}>v5
+                </button>
                 <button onClick={() => {
-                            const newItem = generateUUID(6)
-                            setState(newItem)
-                            appendHistory(newItem)
-                        }}>v6</button>
+                    const newItem = generateUUID(6)
+                    setState(newItem)
+                    appendHistory(newItem)
+                }}>v6
+                </button>
                 <button onClick={() => {
-                            const newItem = generateUUID(7)
-                            setState(newItem)
-                            appendHistory(newItem)
-                        }}>v7</button>
+                    const newItem = generateUUID(7)
+                    setState(newItem)
+                    appendHistory(newItem)
+                }}>v7
+                </button>
             </div>
             {(state?.version === 3 || state?.version === 5) &&
                 <GenOptionTable lang={lang} state={state} setState={setState}
-                    history={history} setHistory={setHistory}/>}
+                                history={history} setHistory={setHistory}/>}
         </div>
         {state && <UUIDItemCard uuidItem={state} lang={lang}/>}
         {state && <GenHistoryTable lang={lang} history={history}/>}
@@ -144,21 +151,23 @@ export function ToolBody({lang}: { lang: string }) {
 }
 
 function GenOptionTable({lang, state, setState, history, setHistory}:
-                        { lang: string,
-                          state: NormalUUIDItem|undefined,
-                          setState: (item: NormalUUIDItem) => void,
+                        {
+                            lang: string,
+                            state: NormalUUIDItem | undefined,
+                            setState: (item: NormalUUIDItem) => void,
                             history: NormalUUIDItem[],
-                          setHistory: (items: NormalUUIDItem[]) => void }) {
+                            setHistory: (items: NormalUUIDItem[]) => void
+                        }) {
     if (!state || !state.options || (state.version !== 3 && state.version !== 5)) {
         return <></>
     }
     const validateNamespace = validate(state.options.namespace)
     const appendHistory = (newItem: NormalUUIDItem) => {
 
-            const newList = [newItem, ...history]
-            if (newList.length >= 10) {
-                newList.pop()
-            }
+        const newList = [newItem, ...history]
+        if (newList.length >= 10) {
+            newList.pop()
+        }
         setHistory(newList)
     }
     return <>
@@ -182,7 +191,8 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
                         })
                         setState(newItem)
                         appendHistory(newItem)
-                    }}>DNS</button>
+                    }}>DNS
+                    </button>
                     <button onClick={() => {
                         const newItem = generateUUID(state.version, {
                             type: OptionType.URL, namespace: urlNamespace,
@@ -190,7 +200,8 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
                         })
                         setState(newItem)
                         appendHistory(newItem)
-                    }}>URL</button>
+                    }}>URL
+                    </button>
                     <button onClick={() => {
                         const newItem = generateUUID(state.version, {
                             type: OptionType.OID, namespace: oidNamespace,
@@ -198,7 +209,8 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
                         })
                         setState(newItem)
                         appendHistory(newItem)
-                    }}>OID</button>
+                    }}>OID
+                    </button>
                     <button onClick={() => {
                         const newItem = generateUUID(state.version, {
                             type: OptionType.X500, namespace: x500Namespace,
@@ -206,7 +218,8 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
                         })
                         setState(newItem)
                         appendHistory(newItem)
-                    }}>X500</button>
+                    }}>X500
+                    </button>
                     <button onClick={() => {
                         const newItem = generateUUID(state.version, {
                             type: OptionType.Custom, namespace: state?.options?.namespace || uuidv4(),
@@ -217,7 +230,7 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
                     }}>{'tool.type.custom'}</button>
                 </div>
                 <div className={'namespaceText'}>
-                    <div >
+                    <div>
                         <div>
                             <input
                                 disabled={state?.options?.type !== OptionType.Custom}
@@ -328,8 +341,8 @@ function CopyItem({uuidText}: { uuidText: string }) {
         return <></>
     }
     return <div className={'styleCopyItem'}>
-        <div title={message} >
-            <div  onClick={() => {
+        <div title={message}>
+            <div onClick={() => {
                 copyToClipboard(uuidText).then(() => {
                     setMessage('success')
                 }).catch(() => {

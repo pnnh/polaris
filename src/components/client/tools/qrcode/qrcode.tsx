@@ -12,7 +12,8 @@ export function QRCodeComponent({lang}: { lang: string }) {
         <div className={'textContainer'}>
                 <textarea value={text}
                           onChange={(event) => setText(event.target.value)}
-                          maxLength={2048}></textarea>
+                          maxLength={1024}
+                          placeholder={'请输入文本内容'}></textarea>
         </div>
         <div className={'actionContainer'}>
             <button onClick={() => {
@@ -29,7 +30,7 @@ export function QRCodeComponent({lang}: { lang: string }) {
                     setError(`${'qrcode.errorTip'}${e}`)
                 }
             }}>
-                {'qrcode.generate'}
+                {'点击生成'}
             </button>
         </div>
         <div className={'errorContainer'}>

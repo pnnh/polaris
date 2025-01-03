@@ -5,9 +5,9 @@ import {EditArea} from "./edit";
 import {ListArea} from "./list";
 import * as React from "react";
 
-export function CommentsClient() {
+export function CommentsClient({resource}: { resource: string }) {
     return <div className={'commentsContainer'}>
-        <EditArea />
-        <ListArea />
+        <EditArea resource={resource}/>
+        <ListArea resource={resource}/>
     </div>
 }

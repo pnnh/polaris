@@ -1,6 +1,6 @@
 import {getVisitorId} from "@/services/client/comments/fingerprint";
 import {PSCommentModel} from "@/atom/common/models/comment";
-import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PLInsertResult, PLSelectResult} from "@/atom/common/models/protocol";
 
 export async function makePost<T>(url: string, params: unknown): Promise<T> {
     const response = await fetch(url, {
@@ -27,23 +27,16 @@ export async function makeGet<T>(url: string): Promise<T> {
     return response.json()
 }
 
-export async function submitComment(email: string | undefined,
-                                    nickname: string | undefined, website: string | undefined,
-                                    photo: string | undefined,
-                                    content: string | undefined,) {
-    const fingerprint = await getVisitorId()
+export async function submitComment(submitRequest: any) {
+    submitRequest.fingerprint = await getVisitorId()
     const url = getBackendUrl() + '/comments'
-    const postResult = makePost(url, {
-        email, nickname, photo, website, fingerprint, content
-    })
-    return postResult
+    return await makePost(url, submitRequest) as PLInsertResult<PSCommentModel>
 }
 
-export async function fetchComments() {
+export async function fetchComments({resource}: { resource: string }) {
     const fingerprint = await getVisitorId()
-    const url = getBackendUrl() + '/comments'
-    const postResult = await makeGet<PLSelectResult<PSCommentModel>>(url)
-    return postResult
+    const url = getBackendUrl() + '/comments?resource=' + resource + '&fingerprint=' + fingerprint
+    return await makeGet<PLSelectResult<PSCommentModel>>(url)
 }
 
 function getBackendUrl() {
