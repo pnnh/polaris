@@ -2,8 +2,6 @@
 
 import React, {useEffect} from "react";
 import {useClientConfig} from "@/services/client/config";
-import CloseIcon from '@mui/icons-material/Close';
-import './turnstile.scss'
 
 function turnstileScript() {
     let turnstileContent = document.getElementById('turnstile-content')
@@ -23,38 +21,21 @@ function turnstileScript() {
         if (!sitekey) {
             return
         }
-        console.log('Turnstile Sitekey', sitekey)
         window.turnstile.render("#turnstile-content", {
             sitekey: sitekey,
             callback: function (token: string) {
                 console.log('Challenge Success', token);
-                if (window.turnstileCallback) {
-                    window.turnstileCallback(token)
-                }
-                const turnstileContainer = document.getElementById('turnstile-container')
-                if (turnstileContainer) {
-                    turnstileContainer.style.display = 'none'
-                }
             },
         });
     });
 }
 
-export async function getTurnstileToken(): Promise<string> {
+export function getTurnstileToken(): string | undefined {
     const token = window.turnstile.getResponse()
     if (token && !window.turnstile.isExpired()) {
-        return Promise.resolve(token)
+        return token
     }
-    const turnstileContainer = document.getElementById('turnstile-container')
-    if (turnstileContainer) {
-        turnstileContainer.style.display = 'flex'
-    }
-    return await new Promise((resolve, reject) => {
-        window.turnstileCallback = resolve
-        setTimeout(() => {
-            reject('Timeout')
-        }, 50000)
-    })
+    return undefined
 }
 
 export function TurnstileClient() {
@@ -62,18 +43,6 @@ export function TurnstileClient() {
         turnstileScript()
     }, []);
 
-    return <div id={'turnstile-container'} className={'turnstileContainer'}>
-        <div className={'turnstileOverlay'}></div>
-        <div id={'turnstile-body'} className={'turnstileBody'}>
-            <div className={'turnstileToolbar'}>
-                <div className={'turnstileTitle'}>请点击验证</div>
-                <CloseIcon onClick={() => {
-                    const turnstileContainer = document.getElementById('turnstile-container')
-                    if (turnstileContainer) {
-                        turnstileContainer.style.display = 'none'
-                    }
-                }}/>
-            </div>
-        </div>
+    return <div id={'turnstile-body'} className={'turnstileBody'}>
     </div>
 }

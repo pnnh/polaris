@@ -1,0 +1,36 @@
+.signinForm {
+  .formRow {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+
+    .fieldLabel {
+      font-size: 1.0rem;
+      font-weight: 400;
+      width: 6rem;
+      text-align: right;
+    }
+
+    .inputField {
+      padding: 8px;
+      border: solid 1px #e0e0e0;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      width: 284px;
+    }
+
+  }
+
+  .submitButton {
+    padding: 0.5rem 1rem;
+    border: solid 1px #e0e0e0;
+    border-radius: 4px;
+    background-color: dodgerblue;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+}

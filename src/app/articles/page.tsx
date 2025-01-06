@@ -24,7 +24,6 @@ export default async function Page({params, searchParams}: {
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
-    const baseParams = await params;
     const searchParamsValue = await searchParams
 
     let page = Number(searchParamsValue.page)

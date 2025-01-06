@@ -3,6 +3,7 @@ import './navbar.scss'
 import Image from 'next/image'
 import React, {CSSProperties} from "react";
 import {UserProfileSelector} from "@/components/server/content/partials/profile";
+import {UserAction} from "@/components/server/content/partials/userinfo";
 
 export async function ContentPublicNavbar({pathname, searchParams, lang}: {
     pathname: string,
@@ -24,8 +25,9 @@ export async function ContentPublicNavbar({pathname, searchParams, lang}: {
             {/*    <a href={`/zh`} className={activeClass('zh')}>中文</a>*/}
             {/*</div>*/}
             {/*<ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword}/>*/}
-            {/*<UserAction sessionList={sessionList}/>*/}
+            <UserAction/>
         </div>
     </div>
 }
+
 

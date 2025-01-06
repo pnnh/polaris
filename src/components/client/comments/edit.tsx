@@ -5,7 +5,6 @@ import {FormEvent, useState} from "react";
 import {validateEmail} from "@/atom/common/utils/email";
 import {submitComment} from "@/services/client/comments/comment";
 import {isValidUrl} from "@/atom/common/utils/uri";
-import {getTurnstileToken} from "@/components/client/cloudflare/turnstile";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
 
@@ -36,14 +35,14 @@ export function EditArea({resource}: { resource: string }) {
             setInfoMsg('无效内容')
             return
         }
-        const turnstileToken = await getTurnstileToken()
-        console.log('turnstile token', turnstileToken)
-        if (!turnstileToken) {
-            setInfoMsg('未通过验证')
-            return
-        }
+        // const turnstileToken = await getTurnstileToken()
+        // console.log('turnstile token', turnstileToken)
+        // if (!turnstileToken) {
+        //     setInfoMsg('未通过验证')
+        //     return
+        // }
         const submitRequest = {
-            email, nickname, photo, website, content, turnstile_token: turnstileToken,
+            email, nickname, photo, website, content, turnstile_token: '',
             resource,
         }
         const submitResult = await submitComment(submitRequest)

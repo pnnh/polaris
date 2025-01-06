@@ -8,16 +8,16 @@ import {encodeBase64String} from "@/atom/common/utils/basex";
 import {JotaiProvider} from "@/components/client/content/provider";
 import {TurnstileClient} from "@/components/client/cloudflare/turnstile";
 import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter";
-import { Roboto } from 'next/font/google';
-import { ThemeProvider } from '@mui/material/styles';
+import {Roboto} from 'next/font/google';
+import {ThemeProvider} from '@mui/material/styles';
 import theme from '@/components/client/theme';
 
 const roboto = Roboto({
-      weight: ['300', '400', '500', '700'],
-      subsets: ['latin'],
-      display: 'swap',
-      variable: '--font-roboto',
-    });
+    weight: ['300', '400', '500', '700'],
+    subsets: ['latin'],
+    display: 'swap',
+    variable: '--font-roboto',
+});
 
 export function HtmlLayout({
                                metadata,
@@ -36,6 +36,7 @@ export function HtmlLayout({
         <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
         <link rel="shortcut icon" href="/favicon.ico"/>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
         <meta name="apple-mobile-web-app-title" content="MyWebSite"/>
         <link rel="manifest" href="/site.webmanifest"/>
         <title>{pageTitle(metadata.title as string)}</title>
@@ -43,12 +44,12 @@ export function HtmlLayout({
         {metadata.description && <meta name="description" content={metadata.description as string}></meta>}
         {isProd() && <GoogleAnalytics gaId="G-Z98PEGYB12"/>}
     </head>
-    <body  className={roboto.variable}>
+    <body className={roboto.variable}>
     <ServerData/>
     <JotaiProvider>
-        <AppRouterCacheProvider  options={{ key: 'css' ,enableCssLayer: true }}>
+        <AppRouterCacheProvider options={{key: 'css', enableCssLayer: true}}>
             <ThemeProvider theme={theme}>
-        {children}
+                {children}
             </ThemeProvider>
         </AppRouterCacheProvider>
     </JotaiProvider>
@@ -57,8 +58,6 @@ if('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js', {scope: '/'});
 }
     `}</script>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
-    <TurnstileClient/>
     </body>
     </html>
 }
