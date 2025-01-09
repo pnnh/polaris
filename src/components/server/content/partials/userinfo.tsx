@@ -5,12 +5,13 @@ import React, {useEffect} from "react";
 import './userinfo.scss'
 import {AccountModel} from "@/atom/common/models/account";
 import {accountSignout, getUserinfo} from "@/services/client/account/account";
+import {CodeOk} from "@/atom/common/models/protocol";
 
 export function UserAction() {
     const [userinfo, setUserinfo] = React.useState<AccountModel | undefined>(undefined)
     useEffect(() => {
         getUserinfo().then((result) => {
-            if (!result || !result.data) {
+            if (!result || result.code != CodeOk || !result.data) {
                 return
             }
             setUserinfo(result.data)

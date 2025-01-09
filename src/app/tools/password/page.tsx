@@ -5,6 +5,7 @@ import {Metadata} from "next";
 import {pageTitle} from "@/utils/page";
 import ContentLayout from "@/components/server/content/layout";
 import {getPathname} from "@/services/server/pathname";
+import {CommentsClient} from "@/components/client/comments/comments";
 
 export const metadata: Metadata = {
     title: pageTitle('随机密码生成器'),
@@ -17,7 +18,6 @@ export default async function Home({params, searchParams}: {
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
-    const baseParams = await params;
     const metadata: Metadata = {
         title: 'codegen.seo.title',
         keywords: 'codegen.seo.keywords',
@@ -26,7 +26,10 @@ export default async function Home({params, searchParams}: {
     return <ContentLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
                           metadata={metadata}>
         <div className={'indexPage'}>
-        <RandomPasswordPage/>
-    </div>
+            <RandomPasswordPage/>
+            <div className={'commentsClient'}>
+                <CommentsClient resource={'c26b810d-92c6-5632-a546-3e509e585b96'}/>
+            </div>
+        </div>
     </ContentLayout>
 }

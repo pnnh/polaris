@@ -4,6 +4,7 @@ import './page.scss'
 import {getPathname} from "@/services/server/pathname";
 import {Metadata} from "next";
 import ContentLayout from "@/components/server/content/layout";
+import {CommentsClient} from "@/components/client/comments/comments";
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ channel: string }>,
@@ -18,10 +19,14 @@ export default async function Home({params, searchParams}: {
         description: 'codegen.seo.description',
     }
     return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata}><div className={'fullPage'}>
-        <div className={'pageContent'}>
-            <ToolBody lang={'zh'}/>
+                          metadata={metadata}>
+        <div className={'uuidPage'}>
+            <div className={'pageContent'}>
+                <ToolBody lang={'zh'}/>
+            </div>
+            <div className={'commentsClient'}>
+                <CommentsClient resource={'1efce644-be3b-6380-8e9f-473511aecbe1'}/>
+            </div>
         </div>
-    </div>
     </ContentLayout>
 }

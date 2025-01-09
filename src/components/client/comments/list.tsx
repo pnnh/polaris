@@ -7,7 +7,7 @@ import {PSCommentModel} from "@/atom/common/models/comment";
 export function ListArea({resource}: { resource: string }) {
     const [list, setList] = useState<PLSelectResult<PSCommentModel>>()
     useEffect(() => {
-        fetchComments(resource).then(result => {
+        fetchComments({resource}).then(result => {
             setList(result)
         })
     }, [])
@@ -15,7 +15,7 @@ export function ListArea({resource}: { resource: string }) {
         return <div>暂无评论</div>
     }
     if (!list.data || list.data.count === 0) {
-        return <div>Empty</div>
+        return <div></div>
     }
     return <div className={'listContainer'}>
         <div>

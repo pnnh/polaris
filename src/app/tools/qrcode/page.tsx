@@ -4,6 +4,7 @@ import {QRCodeComponent} from "@/components/client/tools/qrcode/qrcode";
 import ContentLayout from '@/components/server/content/layout';
 import {getPathname} from "@/services/server/pathname";
 import {Metadata} from "next";
+import {CommentsClient} from "@/components/client/comments/comments";
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ channel: string }>,
@@ -22,6 +23,9 @@ export default async function Home({params, searchParams}: {
         <div className={'qrCodePage'}>
             <h1 className={'productTitle'}>{'二维码生成器'}</h1>
             <QRCodeComponent lang={'zh'}/>
+            <div className={'commentsClient'}>
+                <CommentsClient resource={'a28fc8db-482c-37ea-bcb2-e4543d7c6457'}/>
+            </div>
         </div>
     </ContentLayout>
 }

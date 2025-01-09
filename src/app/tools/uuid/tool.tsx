@@ -95,11 +95,10 @@ export function ToolBody({lang}: { lang: string }) {
                     {'UUID生成器'}
                 </h1>
             </div>
-            <p className={'toolDescription'}>{'product.description'}</p>
-            <p className={'tip'}>{'tool.tips'}</p>
+            <p className={'toolDescription'}>{'快速生成各个版本的UUID'}</p>
 
             <div className={'actionRow'}>
-                <div className={'w-24 inline-block font-bold'}>{'tool.uuidVersion'}</div>
+                <div className={'w-24 inline-block font-bold'}>{'版本选择'}</div>
                 <button onClick={() => {
                     setState(generateUUID(0))
                 }}>NIL
