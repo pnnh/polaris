@@ -17,7 +17,7 @@ export async function ContentPublicNavbar({pathname, searchParams, lang}: {
                     <Image src='/images/logo.png' alt='logo' priority={false} fill={true} sizes={'48px,48px'}/>
                 </Link>
             </div>
-            <UserProfileSelector/>
+            <UserProfileSelector searchParams={searchParams}/>
         </div>
         <div className={'rightNav'}>
             {/*<div className={'languages'}>*/}

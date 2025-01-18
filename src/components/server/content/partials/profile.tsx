@@ -3,7 +3,7 @@ import './profile.scss'
 import Link from "next/link";
 import {getPathname} from "@/services/server/pathname";
 
-export async function UserProfileSelector() {
+export async function UserProfileSelector({searchParams}:{searchParams: Record<string, string>}) {
     const pathname = await getPathname()
 
     const siteLinks = [
@@ -29,6 +29,7 @@ export async function UserProfileSelector() {
             <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>
         </svg>
         <ArticleNavbar pathname={pathname}/>
+        {pathname.startsWith('/articles') && <ArticleSubNavbar pathname={pathname} searchParams={searchParams}/>}
     </>
 }
 
@@ -44,6 +45,28 @@ function ArticleNavbar({pathname}: { pathname: string }) {
         {navLinks.map((link) => {
             let style: CSSProperties = {}
             if (pathname.startsWith(link.href)) {
+                style = {
+                    color: '#4A95DD',
+                }
+            }
+            return <Link key={link.name} className={'navLink'} style={style} href={link.href}>{link.name}</Link>
+        })}
+    </>
+}
+
+function ArticleSubNavbar({pathname, searchParams}: { pathname: string, searchParams: Record<string, string> }) {
+    const navLinks = [
+        {name: '目录一', href: `/articles?path=dir1`},
+        {name: '目录二', href: `/articles?path=dir2`},
+    ]
+    const path= searchParams['path'] || 'dir1'
+    return <>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#C6C6C6">
+            <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>
+        </svg>
+        {navLinks.map((link) => {
+            let style: CSSProperties = {}
+            if (link.href.indexOf(`path=${path}`) > 0) {
                 style = {
                     color: '#4A95DD',
                 }

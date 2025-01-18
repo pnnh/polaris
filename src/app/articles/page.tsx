@@ -2,7 +2,7 @@ import React from 'react'
 import './page.scss'
 import Link from 'next/link'
 import queryString from 'query-string'
-import {serverSigninDomain} from "@/services/server/domain/domain";
+import {serverSigninDomain, serverSigninDomain2} from "@/services/server/domain/domain";
 import {Metadata} from "next";
 import {pageTitle} from "@/utils/page";
 import ContentLayout from '@/components/server/content/layout'
@@ -15,7 +15,7 @@ import {PaginationServer} from "@/components/server/pagination";
 import {NoData} from "@/components/common/empty";
 import {replaceSearchParams} from "@/atom/common/utils/query";
 import {calcPagination} from "@/atom/common/utils/pagination";
-import {PSArticleModel} from "@/atom/common/models/article";
+import {MTNoteModel} from "@/atom/common/models/article";
 
 export const dynamic = "force-dynamic";
 
@@ -42,9 +42,13 @@ export default async function Page({params, searchParams}: {
         direction: 'cta',
         size: 10
     })
-    const domain = serverSigninDomain()
+    let domain = serverSigninDomain()
+    const path = searchParamsValue.path || 'dir1'
+    if (path === 'dir2') {
+        domain = serverSigninDomain2()
+    }
     const rankUrl = `/articles?${rankQuery}`
-    const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)
+    const rankSelectResult = await domain.makeGet<PLSelectResult<MTNoteModel>>(rankUrl)
 
     const selectQuery = {
         sort: searchParamsValue.sort,
@@ -56,7 +60,7 @@ export default async function Page({params, searchParams}: {
     const rawQuery = queryString.stringify(selectQuery)
     const url = `/articles?${rawQuery}`
 
-    const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
+    const selectResult = await domain.makeGet<PLSelectResult<MTNoteModel>>(url)
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
     const sortClass = (sort: string) => {
@@ -104,15 +108,15 @@ export default async function Page({params, searchParams}: {
 }
 
 function MiddleBody({selectResult, domain, lang}: {
-    selectResult: PLSelectResult<PSArticleModel>,
+    selectResult: PLSelectResult<MTNoteModel>,
     domain: IDomain,
     lang: string
 }) {
     if (!selectResult || !selectResult.data || !selectResult.data.range || selectResult.data.range.length === 0) {
         return <NoData size='large'/>
     }
-    return selectResult.data.range.map((model) => {
-        return <ArticleCard key={model.urn} model={model} domain={domain} lang={lang}/>
+    return selectResult.data.range.map((model, index) => {
+        return <ArticleCard key={index} model={model} domain={domain} lang={lang}/>
     })
 }
 

@@ -23,8 +23,6 @@ export async function getPathname(): Promise<string> {
 }
 
 export async function getClientIp(): Promise<string> {
-
     const headersList = await headers()
     return  headersList.get('x-ip') || 'unknown'
-    
 }

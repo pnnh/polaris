@@ -22,3 +22,12 @@ export function serverSigninDomain(): IDomain {
     }
     return domain
 }
+
+export function serverSigninDomain2(): IDomain {
+    const serverUrl = "http://127.0.0.1:8001"
+    const domain = trySigninDomain(serverUrl)
+    if (!domain) {
+        throw new Error('domain not found')
+    }
+    return domain
+}
