@@ -1,7 +1,8 @@
 export function pageTitle(title: string) {
     const slogan = '希波万象'
-    if (!title) {
+    if (!title || title.startsWith(slogan)) {
         return slogan
     }
-    return `${title} - ${slogan}`
+    const suffix = ` - ${slogan}`
+    return `${title.trim().replace(suffix, '')}${suffix}`
 }

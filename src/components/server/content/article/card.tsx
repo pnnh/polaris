@@ -9,8 +9,9 @@ import {STSubString} from "@/atom/common/utils/string";
 import {formatRfc3339} from "@/atom/common/utils/datetime";
 import { uuidToBase58} from "@/atom/common/utils/basex";
 
-export function ArticleCard({model, domain, lang}: { model: MTNoteModel, domain: IDomain, lang: string }) {
-    const readUrl = `/articles/${uuidToBase58(model.uid || model.urn)}`
+export function ArticleCard({model, domain, lang, dir}: { model: MTNoteModel,
+    domain: IDomain, lang: string, dir: string }) {
+    const readUrl = `/articles/${dir}/${uuidToBase58(model.uid || model.urn)}`
     // let imageUrl = '/images/default.png'
     // if (model.cover) {
     //     imageUrl = domain.assetUrl(`/articles/${model.channel}/articles/${model.urn}/assets/${model.cover}`)

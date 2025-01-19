@@ -56,17 +56,20 @@ function ArticleNavbar({pathname}: { pathname: string }) {
 
 function ArticleSubNavbar({pathname, searchParams}: { pathname: string, searchParams: Record<string, string> }) {
     const navLinks = [
-        {name: '目录一', href: `/articles?path=dir1`},
-        {name: '目录二', href: `/articles?path=dir2`},
+        {name: '目录一', href: `/articles/dir1`},
+        {name: '目录二', href: `/articles/dir2`},
     ]
-    const path= searchParams['path'] || 'dir1'
+    let currentPathname = pathname
+    if (currentPathname === '/articles') {
+        currentPathname = navLinks[0].href
+    }
     return <>
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#C6C6C6">
             <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>
         </svg>
         {navLinks.map((link) => {
             let style: CSSProperties = {}
-            if (link.href.indexOf(`path=${path}`) > 0) {
+            if (currentPathname === link.href || currentPathname.startsWith(link.href)) {
                 style = {
                     color: '#4A95DD',
                 }

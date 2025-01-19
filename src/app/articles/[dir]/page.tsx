@@ -20,10 +20,11 @@ import {MTNoteModel} from "@/atom/common/models/article";
 export const dynamic = "force-dynamic";
 
 export default async function Page({params, searchParams}: {
-    params: Promise<{ channel: string }>,
+    params: Promise<{ dir: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
+    const paramsValue = await params
     const searchParamsValue = await searchParams
 
     let page = Number(searchParamsValue.page)
@@ -43,7 +44,10 @@ export default async function Page({params, searchParams}: {
         size: 10
     })
     let domain = serverSigninDomain()
-    const currentDir = 'dir1'
+    const currentDir = paramsValue.dir || 'dir1'
+    if (currentDir === 'dir2') {
+        domain = serverSigninDomain2()
+    }
     const rankUrl = `/articles?${rankQuery}`
     const rankSelectResult = await domain.makeGet<PLSelectResult<MTNoteModel>>(rankUrl)
 
