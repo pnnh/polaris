@@ -1,15 +1,9 @@
 import React from 'react'
-import './page.scss'
+import styles from './page.module.scss'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/services/server/pathname";
 import {Metadata} from 'next'
-import {serverSigninDomain} from "@/services/server/domain/domain";
-import {PLSelectResult} from "@/atom/common/models/protocol";
-import {NoData} from "@/components/common/empty";
-import {IDomain} from "@/services/common/domain";
 import Link from "next/link";
-import { uuidToBase58} from "@/atom/common/utils/basex";
-import { PSArticleModel } from '@/atom/common/models/article';
 
 export const dynamic = "force-dynamic";
 
@@ -25,45 +19,86 @@ export default async function Page({params, searchParams}: {
         keywords: 'tools,notes,工具,笔记',
         description: '',
     }
-    const domain = serverSigninDomain()
-    const pageSize = 64
-    const url = '/articles?' + `page=1&size=${pageSize}`
-    const result = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
-
-    if (!result || !result.data) {
-        return <NoData size={'middle'}/>
-    }
     return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
-
-        <div className={'homeContainer'}>
-                <div className={'contentList'}>
-                    {result.data.range.map((model) => {
-                        return <Item key={model.urn} model={model} domain={domain} lang={'zh'}/>
-                    })
-                    }
-                </div>
+        <div className={styles.homeContainer}>
+            <div className={styles.contentList}>
+                <ChannelItem lang={'zh'}/>
+                <ArticleItem lang={'zh'}/>
+                <PasswordItem lang={'zh'}/>
+                <UuidItem lang={'zh'}/>
+                <QrcodeItem lang={'zh'}/>
+            </div>
         </div>
     </ContentLayout>
 }
 
 
-function Item(props: { model: PSArticleModel, domain: IDomain, lang: string }) {
-    const readUrl = `/articles/${uuidToBase58(props.model.urn)}`
-    let imageUrl = '/images/default/channel.webp'
-    // 针对特定资产类型的图片，返回拼接的URL以进行资源寻址
-    if (props.model.cover) {
-        // 拼接资源地址，并截取掉前缀
-        imageUrl = props.domain.assetUrl(`/articles/${props.model.urn}/assets/${props.model.cover}`)
-    }
+function ChannelItem(props: { lang: string }) {
 
-    return < div className={'contentItem'}>
-        <div className={'itemDetail'}>
-            <div className={'title'}>
-                <Link className={'link'} href={readUrl}>{props.model.title}</Link>
+    return < div className={styles.contentItem}>
+        <div className={styles.itemDetail}>
+            <div className={styles.itemTitle}>
+                <Link className={'link'} href={'/channels'}>频道列表</Link>
             </div>
-            <div className={'description'}>
-                {props.model.description || props.model.body}
+            <div className={styles.itemDescription}>
+                频道列表
+            </div>
+        </div>
+    </div>
+}
+
+function ArticleItem(props: { lang: string }) {
+
+    return < div className={styles.contentItem}>
+        <div className={styles.itemDetail}>
+            <div className={styles.itemTitle}>
+                <Link className={'link'} href={'/channels'}>文章列表</Link>
+            </div>
+            <div className={styles.itemDescription}>
+                频道列表
+            </div>
+        </div>
+    </div>
+}
+
+function PasswordItem(props: { lang: string }) {
+
+    return < div className={styles.contentItem}>
+        <div className={styles.itemDetail}>
+            <div className={styles.itemTitle}>
+                <Link className={'link'} href={'/channels'}>随机密码生成器</Link>
+            </div>
+            <div className={styles.itemDescription}>
+                频道列表
+            </div>
+        </div>
+    </div>
+}
+
+function UuidItem(props: { lang: string }) {
+
+    return < div className={styles.contentItem}>
+        <div className={styles.itemDetail}>
+            <div className={styles.itemTitle}>
+                <Link className={'link'} href={'/channels'}>UUID生成器</Link>
+            </div>
+            <div className={styles.itemDescription}>
+                频道列表
+            </div>
+        </div>
+    </div>
+}
+
+function QrcodeItem(props: { lang: string }) {
+
+    return < div className={styles.contentItem}>
+        <div className={styles.itemDetail}>
+            <div className={styles.itemTitle}>
+                <Link className={'link'} href={'/channels'}>二维码生成器</Link>
+            </div>
+            <div className={styles.itemDescription}>
+                频道列表
             </div>
         </div>
     </div>

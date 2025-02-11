@@ -7,19 +7,24 @@ import './card.scss'
 import {MTNoteModel, PSArticleModel} from "@/atom/common/models/article";
 import {STSubString} from "@/atom/common/utils/string";
 import {formatRfc3339} from "@/atom/common/utils/datetime";
-import { uuidToBase58} from "@/atom/common/utils/basex";
+import {uuidToBase58} from "@/atom/common/utils/basex";
+import {PSImageServer} from "@/components/server/image";
+import {getDefaultNoteImageByUid} from "@/services/common/note";
+import {isValidUUID} from "@/atom/common/utils/uuid";
 
-export function ArticleCard({model, domain, lang, dir}: { model: MTNoteModel,
-    domain: IDomain, lang: string, dir: string }) {
-    const readUrl = `/articles/${dir}/${uuidToBase58(model.uid || model.urn)}`
-    // let imageUrl = '/images/default.png'
-    // if (model.cover) {
-    //     imageUrl = domain.assetUrl(`/articles/${model.channel}/articles/${model.urn}/assets/${model.cover}`)
-    // }
-    return <div className={'middleItem'} key={model.urn}>
+export function ArticleCard({model, domain, lang, dir}: {
+    model: MTNoteModel,
+    domain: IDomain, lang: string, dir: string
+}) {
+    const readUrl = `/articles/${dir}/${uuidToBase58(model.uid || model.uid)}`
+    let imageUrl = getDefaultNoteImageByUid(model.uid)
+    if (model.cover && isValidUUID(model.cover)) {
+        imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)
+    }
+    return <div className={'middleItem'} key={model.uid}>
         <div className={'itemDetail'}>
             <div className={'itemTitle'}>
-                <Link href={readUrl} title={model.urn}>{model.title}</Link></div>
+                <Link href={readUrl} title={model.uid}>{model.title}</Link></div>
             <div className={'description'} title={model.description}>
                 {STSubString(model.description || model.body, 100)}
             </div>
@@ -28,8 +33,8 @@ export function ArticleCard({model, domain, lang, dir}: { model: MTNoteModel,
                 <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(model.update_time)}</span>
             </div>
         </div>
-        {/*<div className={'itemCover'}>*/}
-        {/*    <PSImageServer src={imageUrl} alt={model.title} fill={true}/>*/}
-        {/*</div>*/}
+        <div className={'itemCover'}>
+            <PSImageServer src={imageUrl} alt={model.title} fill={true}/>
+        </div>
     </div>
 }

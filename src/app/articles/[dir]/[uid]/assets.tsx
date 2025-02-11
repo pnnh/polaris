@@ -36,7 +36,7 @@ export function ArticleAssets({channelUrn, articleUrn}: { channelUrn: string, ar
     return <div className={'tocCard'} id={'assetsCard'}>
         <ArticleAssertPreview/>
         <div className={'tocHeader'}>
-            附件信息
+            文件信息
         </div>
         <div className={'tocBody'} id={'assetsBody'}>
             {

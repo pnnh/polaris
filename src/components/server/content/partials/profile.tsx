@@ -3,7 +3,7 @@ import './profile.scss'
 import Link from "next/link";
 import {getPathname} from "@/services/server/pathname";
 
-export async function UserProfileSelector({searchParams}:{searchParams: Record<string, string>}) {
+export async function UserProfileSelector({searchParams}: { searchParams: Record<string, string> }) {
     const pathname = await getPathname()
 
     const siteLinks = [
@@ -56,8 +56,8 @@ function ArticleNavbar({pathname}: { pathname: string }) {
 
 function ArticleSubNavbar({pathname, searchParams}: { pathname: string, searchParams: Record<string, string> }) {
     const navLinks = [
-        {name: '目录一', href: `/articles/dir1`},
-        {name: '目录二', href: `/articles/dir2`},
+        {name: '手书笔记', href: `/articles/dir1`},
+        {name: '源码笔记', href: `/articles/dir2`},
     ]
     let currentPathname = pathname
     if (currentPathname === '/articles') {

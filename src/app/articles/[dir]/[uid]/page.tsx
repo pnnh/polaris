@@ -10,13 +10,17 @@ import {getClientIp, getPathname} from "@/services/server/pathname";
 import {GoTop} from "@/components/client/gotop";
 import {CiAlarmOn} from "react-icons/ci";
 import {FaEye} from "react-icons/fa";
-import {generatorRandomString} from "@/atom/common/utils/string";
+import {generatorRandomString, STSubString} from "@/atom/common/utils/string";
 import {formatRfc3339} from "@/atom/common/utils/datetime";
 import {base58ToUuid} from "@/atom/common/utils/basex";
 import {CodeOk, CommonResult} from "@/atom/common/models/protocol";
 import {MTNoteModel, PSArticleModel} from "@/atom/common/models/article";
 import {TocItem} from "@/atom/common/models/toc";
 import {CommentsClient} from "@/components/client/comments/comments";
+import {getDefaultNoteImageByUid} from "@/services/common/note";
+import {isValidUUID} from "@/atom/common/utils/uuid";
+import ArticleReadLayout from "@/components/server/content/article/layout";
+import {ArticleAssets} from "@/app/articles/[dir]/[uid]/assets";
 
 export const dynamic = "force-dynamic";
 
@@ -39,6 +43,7 @@ export default async function Home({params, searchParams}: {
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {
         return <div>遇到错误</div>
     }
+    const model = getResult.data
     metadata.title = pageTitle(getResult.data.title)
 
     metadata.description = getResult.data.description
@@ -56,23 +61,28 @@ export default async function Home({params, searchParams}: {
         await domain.makePost(`/articles/${baseParams.uid}/viewer`, {clientIp})
     }
     const readUrl = `/articles/${currentDir}/articles/${baseParams.uid}`
-    //const assetsUrl = domain.assetUrl(`/articles/${baseParams.channel}/articles/${baseParams.article}/assets`)
-
-    return <ContentLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
-                          metadata={metadata}>
+    let imageUrl = getDefaultNoteImageByUid(model.uid)
+    if (model.cover && isValidUUID(model.cover)) {
+        imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)
+    }
+    return <ArticleReadLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
+                              metadata={metadata}>
         <div>
+            <div className={'articleCover'}>
+                <div className={'articleHeader'}>
+                    <h1 className={'articleTitle'} id={titleId}>{getResult.data.title}</h1>
+                    <div className={'articleDescription'}>
+                        {STSubString(model.description || model.body, 80)}
+                    </div>
+                    <div className={'action'}>
+                        <FaEye size={'1rem'}/><span>{getResult.data.discover}</span>&nbsp;
+                        <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(getResult.data.update_time)}</span>
+                    </div>
+                </div>
+                <img className={'coverImage'} src={imageUrl} alt={model.title}/>
+            </div>
             <div className={'articleContainer'}>
                 <div className={'leftArea'} id={'articleReadBody'}>
-                    <div className={'articleHeader'}>
-                        <h1 className={'articleTitle'} id={titleId}>{getResult.data.title}</h1>
-                        <div className={'articleDescription'}>
-                            {getResult.data.description}
-                        </div>
-                        <div className={'action'}>
-                            <FaEye size={'1rem'}/><span>{getResult.data.discover}</span>&nbsp;
-                            <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(getResult.data.update_time)}</span>
-                        </div>
-                    </div>
                     <div className={'articleInfo'}>
                         <div className={'articleBody'}>
                             <ArticleContainer tocList={tocList} header={getResult.data.header}
@@ -81,15 +91,15 @@ export default async function Home({params, searchParams}: {
                         </div>
                     </div>
                     <div className={'commentsClient'}>
-                        <CommentsClient resource={getResult.data.urn || getResult.data.uid}/>
+                        <CommentsClient resource={getResult.data.uid}/>
                     </div>
                 </div>
                 <div className={'rightArea'}>
+                    <ArticleAssets channelUrn={''} articleUrn={''}/>
                     <TocInfo readurl={readUrl} model={tocList}/>
-                    {/*<ArticleAssets channelUrn={baseParams.channel} articleUrn={baseParams.article}/>*/}
                 </div>
             </div>
             <GoTop anchor={templateBodyId}/>
         </div>
-    </ContentLayout>
+    </ArticleReadLayout>
 }

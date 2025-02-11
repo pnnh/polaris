@@ -59,15 +59,10 @@
 
   .itemCover {
     flex-shrink: 0;
-    width: 4rem;
-    height: 4rem;
+    width: 12rem;
+    height: 8rem;
     position: relative;
     margin-right: 1rem;
-
-    @media (min-width: theme.$screenMediumWidth) {
-      width: 6rem;
-      height: 6rem;
-    }
 
     img {
       width: 100%;

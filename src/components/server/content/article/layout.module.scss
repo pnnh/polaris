@@ -1,0 +1,26 @@
+@use '@/components/common/styles/theme';
+
+.templateContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  scrollbar-width: thin;
+}
+
+.templateBody {
+  scrollbar-width: thin;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.bodyContainer {
+  margin: 0 auto;
+}
+
+@media screen and (min-width: theme.$screenMediumWidth) {
+  .bodyContainer {
+    width: min(100vw, 80rem);
+  }
+}
