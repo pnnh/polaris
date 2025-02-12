@@ -95,8 +95,8 @@ export default async function Home({params, searchParams}: {
                     </div>
                 </div>
                 <div className={'rightArea'}>
-                    <ArticleAssets channelUrn={''} articleUrn={''}/>
                     <TocInfo readurl={readUrl} model={tocList}/>
+                    {/*<ArticleAssets channelUrn={''} articleUrn={''}/>*/}
                 </div>
             </div>
             <GoTop anchor={templateBodyId}/>
