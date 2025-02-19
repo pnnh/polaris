@@ -2,7 +2,7 @@ import {NextRequest, NextResponse} from 'next/server'
 import {SitemapStream, streamToPromise} from 'sitemap'
 import {Readable} from 'stream'
 import {SitemapItemLoose} from "sitemap/dist/lib/types";
-import {serverSigninDomain} from "@/services/server/domain/domain";
+import {serverPhoenixSignin} from "@/services/server/domain/domain";
 import {useServerConfig} from "@/services/server/config";
 import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/atom/common/models/article";
@@ -10,7 +10,7 @@ import {PSArticleModel} from "@/atom/common/models/article";
 export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
-    const domain = serverSigninDomain()
+    const domain = serverPhoenixSignin()
     const url = `/articles?` + `page=1&size=${100}`
     const result = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
     const serverConfig = useServerConfig()

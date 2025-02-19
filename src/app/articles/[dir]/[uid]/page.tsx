@@ -2,7 +2,7 @@ import './page.scss'
 import React from 'react'
 import {TocInfo} from '@/components/common/toc'
 import {Metadata} from 'next'
-import {serverSigninDomain, serverSigninDomain2} from "@/services/server/domain/domain";
+import {serverPhoenixSignin, serverPortalSignin} from "@/services/server/domain/domain";
 import {pageTitle} from "@/utils/page";
 import ContentLayout, {templateBodyId} from '@/components/server/content/layout'
 import {ArticleContainer} from "@/components/client/article";
@@ -32,9 +32,9 @@ export default async function Home({params, searchParams}: {
     const baseParams = await params;
     const metadata: Metadata = {}
     const currentDir = baseParams.dir
-    let domain = serverSigninDomain()
+    let domain = serverPhoenixSignin()
     if (currentDir === 'dir2') {
-        domain = serverSigninDomain2()
+        domain = serverPortalSignin()
     }
     const articleUrn = base58ToUuid(baseParams.uid)
     const url = `/articles/${articleUrn}`

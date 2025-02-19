@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import {serverSigninDomain} from "@/services/server/domain/domain";
+import {serverPhoenixSignin} from "@/services/server/domain/domain";
 import ContentLayout from "@/components/server/content/layout";
 import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
@@ -15,7 +15,7 @@ export default async function Page({params, searchParams}: {
     params: Promise<{ viewer: string }>,
     searchParams: Promise<Record<string, string> & { query: string | undefined }>
 }) {
-    const domain = serverSigninDomain()
+    const domain = serverPhoenixSignin()
     const pageSize = 64
     const url = '/channels?' + `page=1&size=${pageSize}`
     const result = await domain.makeGet<PLSelectResult<PSChannelModel>>(url)

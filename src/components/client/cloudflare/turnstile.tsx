@@ -24,7 +24,7 @@ function turnstileScript() {
         window.turnstile.render("#turnstile-content", {
             sitekey: sitekey,
             callback: function (token: string) {
-                console.log('Challenge Success', token);
+                //console.log('Challenge Success', token);
             },
         });
     });

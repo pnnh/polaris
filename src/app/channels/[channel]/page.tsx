@@ -2,7 +2,7 @@ import React from 'react'
 import './page.scss'
 import Link from 'next/link'
 import queryString from 'query-string'
-import {serverSigninDomain} from "@/services/server/domain/domain";
+import {serverPhoenixSignin} from "@/services/server/domain/domain";
 import {Metadata} from "next";
 import {pageTitle} from "@/utils/page";
 import ContentLayout from '@/components/server/content/layout'
@@ -44,7 +44,7 @@ export default async function Page({params, searchParams}: {
         direction: 'cta',
         size: 10
     })
-    const domain = serverSigninDomain()
+    const domain = serverPhoenixSignin()
     const channelUrn = base58ToUuid(baseParams.channel)
     const rankUrl = `/channels/${channelUrn}/articles?${rankQuery}`
     const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)

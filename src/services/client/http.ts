@@ -1,3 +1,5 @@
+import {useClientConfig} from "@/services/client/config";
+
 export async function makePost<T>(url: string, params: unknown): Promise<T> {
     const response = await fetch(url, {
         credentials: 'include',
@@ -23,6 +25,8 @@ export async function makeGet<T>(url: string): Promise<T> {
     return response.json()
 }
 
-export function getBackendUrl() {
-    return 'http://127.0.0.1:8001'
+// 获取评论和账户服务地址
+export function getPortalPublicUrl() {
+    const clientConfig = useClientConfig()
+    return clientConfig.NEXT_PUBLIC_PORTAL_URL
 }

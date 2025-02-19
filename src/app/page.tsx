@@ -53,7 +53,7 @@ function ArticleItem(props: { lang: string }) {
     return < div className={styles.contentItem}>
         <div className={styles.itemDetail}>
             <div className={styles.itemTitle}>
-                <Link className={'link'} href={'/channels'}>文章列表</Link>
+                <Link className={'link'} href={'/articles'}>文章列表</Link>
             </div>
             <div className={styles.itemDescription}>
                 频道列表
@@ -67,7 +67,7 @@ function PasswordItem(props: { lang: string }) {
     return < div className={styles.contentItem}>
         <div className={styles.itemDetail}>
             <div className={styles.itemTitle}>
-                <Link className={'link'} href={'/channels'}>随机密码生成器</Link>
+                <Link className={'link'} href={'/tools/password'}>随机密码生成器</Link>
             </div>
             <div className={styles.itemDescription}>
                 频道列表
@@ -81,7 +81,7 @@ function UuidItem(props: { lang: string }) {
     return < div className={styles.contentItem}>
         <div className={styles.itemDetail}>
             <div className={styles.itemTitle}>
-                <Link className={'link'} href={'/channels'}>UUID生成器</Link>
+                <Link className={'link'} href={'/tools/uuid'}>UUID生成器</Link>
             </div>
             <div className={styles.itemDescription}>
                 频道列表
@@ -95,7 +95,7 @@ function QrcodeItem(props: { lang: string }) {
     return < div className={styles.contentItem}>
         <div className={styles.itemDetail}>
             <div className={styles.itemTitle}>
-                <Link className={'link'} href={'/channels'}>二维码生成器</Link>
+                <Link className={'link'} href={'/tools/uuid'}>二维码生成器</Link>
             </div>
             <div className={styles.itemDescription}>
                 频道列表

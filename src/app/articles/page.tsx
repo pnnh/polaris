@@ -2,7 +2,7 @@ import React from 'react'
 import './page.scss'
 import Link from 'next/link'
 import queryString from 'query-string'
-import {serverSigninDomain, serverSigninDomain2} from "@/services/server/domain/domain";
+import {serverPhoenixSignin, serverPortalSignin} from "@/services/server/domain/domain";
 import {Metadata} from "next";
 import {pageTitle} from "@/utils/page";
 import ContentLayout from '@/components/server/content/layout'
@@ -42,7 +42,7 @@ export default async function Page({params, searchParams}: {
         direction: 'cta',
         size: 10
     })
-    let domain = serverSigninDomain()
+    let domain = serverPhoenixSignin()
     const currentDir = 'dir1'
     const rankUrl = `/articles?${rankQuery}`
     const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)

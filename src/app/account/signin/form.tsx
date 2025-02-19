@@ -28,7 +28,7 @@ export function SigninForm() {
             return
         }
         const turnstileToken = getTurnstileToken()
-        console.log('turnstile token', turnstileToken)
+        // console.log('turnstile token', turnstileToken)
         if (!turnstileToken) {
             setInfoMsg('未通过验证')
             return

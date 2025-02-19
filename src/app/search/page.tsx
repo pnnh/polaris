@@ -1,7 +1,7 @@
 import React from 'react'
 import './page.scss'
 import queryString from 'query-string'
-import {serverSigninDomain} from "@/services/server/domain/domain";
+import {serverPhoenixSignin} from "@/services/server/domain/domain";
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/services/server/pathname";
 import {IDomain} from "@/services/common/domain";
@@ -35,7 +35,7 @@ export default async function Page({params, searchParams}: {
     const pageSize = 10
     const channelPk = searchParamsValue.channel
 
-    const domain = serverSigninDomain()
+    const domain = serverPhoenixSignin()
     const selectQuery = {
         sort: searchParamsValue.sort,
         filter: searchParamsValue.filter,
