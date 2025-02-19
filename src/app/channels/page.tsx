@@ -37,7 +37,7 @@ export default async function Page({params, searchParams}: {
             <div className={'body'}>
                 <div className={'list'}>
                     {result.data.range.map((model) => {
-                        return <Item key={model.urn} model={model} domain={domain} lang={'zh'}/>
+                        return <Item key={model.uid} model={model} domain={domain} lang={'zh'}/>
                     })
                     }
                 </div>
@@ -47,7 +47,7 @@ export default async function Page({params, searchParams}: {
 }
 
 function Item(props: { model: PSChannelModel, domain: IDomain, lang: string }) {
-    const readUrl = `/channels/${uuidToBase58(props.model.urn)}`
+    const readUrl = `/channels/${uuidToBase58(props.model.uid)}`
 
     return < div className={'item'}>
         {/*<div className={'itemCover'}>*/}

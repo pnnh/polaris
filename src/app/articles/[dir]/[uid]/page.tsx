@@ -14,7 +14,7 @@ import {generatorRandomString, STSubString} from "@/atom/common/utils/string";
 import {formatRfc3339} from "@/atom/common/utils/datetime";
 import {base58ToUuid} from "@/atom/common/utils/basex";
 import {CodeOk, CommonResult} from "@/atom/common/models/protocol";
-import {MTNoteModel, PSArticleModel} from "@/atom/common/models/article";
+import {PSArticleModel} from "@/atom/common/models/article";
 import {TocItem} from "@/atom/common/models/toc";
 import {CommentsClient} from "@/components/client/comments/comments";
 import {getDefaultNoteImageByUid} from "@/services/common/note";
@@ -38,7 +38,7 @@ export default async function Home({params, searchParams}: {
     }
     const articleUrn = base58ToUuid(baseParams.uid)
     const url = `/articles/${articleUrn}`
-    const getResult = await domain.makeGet<CommonResult<MTNoteModel | undefined>>(url)
+    const getResult = await domain.makeGet<CommonResult<PSArticleModel | undefined>>(url)
 
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {
         return <div>遇到错误</div>

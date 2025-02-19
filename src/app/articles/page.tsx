@@ -15,7 +15,7 @@ import {PaginationServer} from "@/components/server/pagination";
 import {NoData} from "@/components/common/empty";
 import {replaceSearchParams} from "@/atom/common/utils/query";
 import {calcPagination} from "@/atom/common/utils/pagination";
-import {MTNoteModel} from "@/atom/common/models/article";
+import {PSArticleModel} from "@/atom/common/models/article";
 
 export const dynamic = "force-dynamic";
 
@@ -45,7 +45,7 @@ export default async function Page({params, searchParams}: {
     let domain = serverSigninDomain()
     const currentDir = 'dir1'
     const rankUrl = `/articles?${rankQuery}`
-    const rankSelectResult = await domain.makeGet<PLSelectResult<MTNoteModel>>(rankUrl)
+    const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)
 
     const selectQuery = {
         sort: searchParamsValue.sort,
@@ -57,7 +57,7 @@ export default async function Page({params, searchParams}: {
     const rawQuery = queryString.stringify(selectQuery)
     const url = `/articles?${rawQuery}`
 
-    const selectResult = await domain.makeGet<PLSelectResult<MTNoteModel>>(url)
+    const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
     const sortClass = (sort: string) => {
@@ -105,7 +105,7 @@ export default async function Page({params, searchParams}: {
 }
 
 function MiddleBody({selectResult, domain, lang, dir}: {
-    selectResult: PLSelectResult<MTNoteModel>,
+    selectResult: PLSelectResult<PSArticleModel>,
     domain: IDomain,
     lang: string,
     dir: string

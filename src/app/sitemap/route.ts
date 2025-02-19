@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
     if (result && result.data && result.data.range) {
         links = result.data.range.map((article) => {
             return {
-                url: `/content/articles/${article.channel}/articles/${article.urn}`,
+                url: `/content/articles/${article.channel}/articles/${article.uid}`,
                 lastmod: article.update_time,
             }
         })

@@ -45,7 +45,7 @@ function ChannelTableRow(props: { model: PSChannelModel }) {
             </label>
         </td>
         <td>
-            <a href={'/console/channel/update?pk=' + props.model.urn}
+            <a href={'/console/channel/update?pk=' + props.model.uid}
                title={props.model.name}>{props.model.name}</a>
         </td>
         <td>

@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev -p 7100",
     "build": "next build",
-    "analyze": "ENV=production ANALYZE=true next build",
-    "worker": "tsx src/worker/main.ts"
+    "analyze": "ENV=production ANALYZE=true next build"
   },
   "dependencies": {
     "@cmss/check-password-strength": "^2.1.6",

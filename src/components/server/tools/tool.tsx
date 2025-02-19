@@ -8,7 +8,7 @@ export async function ToolBody({lang}: { lang: string }) {
         <div className={'appGrid'}>
             {
                 appList.map(app => {
-                    return <div className={'appCard'} key={app.urn}>
+                    return <div className={'appCard'} key={app.uid}>
                         <img className={'appImage'} src={app.image} alt={app.name}/>
                         <div className={'appTitle'}>
                             <a style={{color: '#333', textDecoration: 'none'}} href={app.url}>{app.name}</a>

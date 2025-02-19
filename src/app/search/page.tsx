@@ -82,7 +82,7 @@ function MiddleBody({selectResult, domain, lang}: {
         return <NoData size='large'/>
     }
     return selectResult.data.range.map((model) => {
-        return <ArticleCard model={model} domain={domain} lang={lang}/>
+        return <ArticleCard dir={'dir1'} model={model} domain={domain} lang={lang}/>
     })
 }
 

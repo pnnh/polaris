@@ -1,4 +1,3 @@
-
 // 该文件中的代码是在模拟从数据库中获取数据，实际项目中应该从数据库中获取数据
 
 import {ApplicationLanguageProfile, ApplicationModel} from "@/atom/common/models/tools/application";
@@ -16,28 +15,28 @@ const basexUrn = '0192e097-be97-7aa4-8aa9-d0bacf336da7'
 export function selectApps(expectLang: string): ApplicationModel[] {
     return [
         {
-            urn: passwordUrn,
+            uid: passwordUrn,
             url: '/tools/password',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/password.webp',
             ...selectAppLangProfile(passwordUrn, expectLang)
         },
         {
-            urn: uuidUrn,
+            uid: uuidUrn,
             url: '/tools/uuid',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/uuid.webp',
             ...selectAppLangProfile(uuidUrn, expectLang)
         },
         {
-            urn: qrcodeUrn,
+            uid: qrcodeUrn,
             url: '/tools/qrcode',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/qrcode.webp',
             ...selectAppLangProfile(qrcodeUrn, expectLang)
         },
         {
-            urn: datetimeUrn,
+            uid: datetimeUrn,
             url: '/tools/datetime',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/datetime.webp',

@@ -114,7 +114,7 @@ function MiddleBody({selectResult, domain, lang}: {
         return <NoData size='large'/>
     }
     return selectResult.data.range.map((model) => {
-        return <ArticleCard key={model.urn} model={model} domain={domain} lang={lang}/>
+        return <ArticleCard dir={'dir1'} key={model.uid} model={model} domain={domain} lang={lang}/>
     })
 }
 
