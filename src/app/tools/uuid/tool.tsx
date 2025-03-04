@@ -1,5 +1,6 @@
 'use client'
-
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import React, {useState} from 'react'
 import './tool.scss'
 import {
@@ -16,6 +17,7 @@ import {
     x500Namespace
 } from "./state";
 import {copyToClipboard} from "@/atom/client/clipboard";
+import {TextField} from "@mui/material";
 
 function generateUUID(version: number, options?: {
     type: OptionType
@@ -171,7 +173,7 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
     }
     return <>
         <div className={'optionRow'}>
-            <div className={'w-24 inline-block'}>{'tool.options.namespace'}</div>
+            <div className={'w-24 inline-block'}>{'命名空间'}</div>
             <div className={'namespaceForm'}>
                 <div className={'namespaceSwitch'}>
                     <button onClick={() => {
@@ -182,7 +184,7 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
                         })
                         setState(newItem)
                         appendHistory(newItem)
-                    }}>{'tool.type.random'}</button>
+                    }}>{'随机'}</button>
                     <button onClick={() => {
                         const newItem = generateUUID(state.version, {
                             type: OptionType.DNS, namespace: dnsNamespace,
@@ -226,14 +228,15 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
                         })
                         setState(newItem)
                         appendHistory(newItem)
-                    }}>{'tool.type.custom'}</button>
+                    }}>{'自定义'}</button>
                 </div>
                 <div className={'namespaceText'}>
                     <div>
                         <div>
-                            <input
+                            <TextField
+                                size={'small'}
                                 disabled={state?.options?.type !== OptionType.Custom}
-                                placeholder={'tool.options.namespace'}
+                                placeholder={'命名空间'}
                                 value={state?.options?.namespace || ''}
                                 onChange={(event) => {
                                     const valid = validate(event.target.value)
@@ -259,16 +262,17 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
                         </div>
                     </div>
                     <div title={'tool.options.helpText'}>
-                        ?
+                        <QuestionMarkIcon fontSize={'small'}/>
                     </div>
                 </div>
             </div>
         </div>
         <div className={'optionRow'}>
-            <div className={'w-24 inline-block'}>{'tool.options.name'}</div>
+            <div className={'w-24 inline-block'}>{'名称'}</div>
             <div>
-                <input
-                    placeholder={'tool.options.name'}
+                <TextField
+                    size={'small'}
+                    placeholder={'名称'}
                     value={state?.options?.name || ''}
                     onChange={(event) => {
                         const newItem = generateUUID(state?.version, {
@@ -288,7 +292,7 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
 function GenHistoryTable({lang, history}: { lang: string, history: NormalUUIDItem[] }) {
 
     return <div>
-        <h2>{'tool.history.title'}</h2>
+        <h2>{'生成历史'}</h2>
         {history.map((item, index) => {
             return <div key={index}>
                 <UUIDItemCard uuidItem={item} lang={lang}/>
@@ -301,7 +305,7 @@ function UUIDItemCard({uuidItem, lang}: { uuidItem: NormalUUIDItem, lang: string
 
     return <div className={'uuidItemCard'}>
         <div className={'dataRow'}>
-            <div className={'headerCell'}>{'tool.format.long'}</div>
+            <div className={'headerCell'}>{'长格式'}</div>
             <div className={'dataCell'}>
                 <div className={'uuidItem'}>
                     <CopyItem uuidText={uuidItem.long.toUpperCase()}/>
@@ -312,7 +316,7 @@ function UUIDItemCard({uuidItem, lang}: { uuidItem: NormalUUIDItem, lang: string
             </div>
         </div>
         <div className={'dataRow'}>
-            <div className={'headerCell'}>{'tool.format.short'}</div>
+            <div className={'headerCell'}>{'短格式'}</div>
             <div className={'dataCell'}>
                 <div className={'uuidItem'}>
                     <CopyItem uuidText={uuidItem.short.toUpperCase()}/>
@@ -323,7 +327,7 @@ function UUIDItemCard({uuidItem, lang}: { uuidItem: NormalUUIDItem, lang: string
             </div>
         </div>
         {(uuidItem.version === 3 || uuidItem.version === 5) && <div className={'dataRow'}>
-            <div className={'headerCell'}>{'tool.format.options'}</div>
+            <div className={'headerCell'}>{'生成选项'}</div>
             <div className={'dataCell'}>
                 {uuidItem.options && <div>
                     <div>{JSON.stringify(uuidItem.options)}</div>
@@ -351,7 +355,9 @@ function CopyItem({uuidText}: { uuidText: string }) {
                 setTimeout(() => {
                     setOpen(false)
                 }, 3000)
-            }}/>
+            }}>
+                <ContentCopyIcon fontSize={'small'}/>
+            </div>
         </div>
         <span>{uuidText}</span>
     </div>

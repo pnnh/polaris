@@ -10,6 +10,11 @@ import {PSChannelModel} from "@/atom/common/models/channel";
 import {Metadata} from 'next';
 import {NoData} from "@/components/common/empty";
 import {uuidToBase58} from "@/atom/common/utils/basex";
+import {getDefaultNoteImageByUid} from "@/services/common/note";
+import {isValidUUID} from "@/atom/common/utils/uuid";
+import {PSImageServer} from "@/components/server/image";
+import {STSubString} from "@/atom/common/utils/string";
+import {getDefaultChanImageByUid} from "@/services/common/channel";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ viewer: string }>,
@@ -47,18 +52,23 @@ export default async function Page({params, searchParams}: {
 }
 
 function Item(props: { model: PSChannelModel, domain: IDomain, lang: string }) {
+    const model = props.model
     const readUrl = `/channels/${uuidToBase58(props.model.uid)}`
+    let imageUrl = getDefaultChanImageByUid(model.uid)
+    if (model.image && isValidUUID(model.image)) {
+        imageUrl = props.domain.assetUrl(`/channels/${model.uid}/assets/${model.image}`)
+    }
 
     return < div className={'item'}>
-        {/*<div className={'itemCover'}>*/}
-        {/*    <PSImageServer src={imageUrl} alt='star' width={256} height={256}/>*/}
-        {/*</div>*/}
+        <div className={'itemCover'}>
+            <PSImageServer src={imageUrl} alt='star' width={256} height={256}/>
+        </div>
         <div className={'content'}>
             <div className={'title'}>
                 <Link className={'link'} href={readUrl}>{props.model.name}</Link>
             </div>
             <div className={'description'}>
-                {props.model.description}
+                {STSubString(props.model.description, 140)}
             </div>
         </div>
     </div>
