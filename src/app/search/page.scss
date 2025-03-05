@@ -3,14 +3,37 @@
 
   .pageContainer {
     flex-grow: 1;
-    flex-direction: row;
+    flex-direction: column;
     display: flex;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 0.5rem;
     margin: 1rem auto;
     background: #ffffff;
     border-radius: 4px;
     padding: 1rem;
+
+    .condLabel {
+      display: inline-block;
+      width: 100px;
+      text-align: right;
+      margin-right: 16px;
+    }
+
+    .dataDir {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      a {
+        color: #5b6679;
+        text-decoration: none;
+        margin-right: 0.5rem;
+      }
+
+      a.active {
+        color: #0078d4;
+      }
+    }
   }
 
   .contentContainer {

@@ -1,7 +1,7 @@
 import React from 'react'
 import './page.scss'
 import queryString from 'query-string'
-import {serverPhoenixSignin} from "@/services/server/domain/domain";
+import {serverPhoenixSignin, serverPortalSignin} from "@/services/server/domain/domain";
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/services/server/pathname";
 import {IDomain} from "@/services/common/domain";
@@ -21,7 +21,7 @@ export default async function Page({params, searchParams}: {
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
-    const baseParams = await params;
+    const paramsValue = await params;
     const metadata: Metadata = {
         title: 'codegen.seo.title',
         keywords: 'codegen.seo.keywords',
@@ -35,7 +35,11 @@ export default async function Page({params, searchParams}: {
     const pageSize = 10
     const channelPk = searchParamsValue.channel
 
-    const domain = serverPhoenixSignin()
+    let domain = serverPhoenixSignin()
+    const currentDir = searchParamsValue.dir || 'dir1'
+    if (currentDir === 'dir2') {
+        domain = serverPortalSignin()
+    }
     const selectQuery = {
         sort: searchParamsValue.sort,
         filter: searchParamsValue.filter,
@@ -56,16 +60,26 @@ export default async function Page({params, searchParams}: {
                           metadata={metadata}>
         <div className={'searchPage'}>
             <div className={'pageContainer'}>
-                搜索关键词: {searchParamsValue.keyword}
+                <div>
+                    <div className={'condLabel'}>搜索关键词:</div>
+                    {searchParamsValue.keyword}
+                </div>
+                <div className={'dataDir'}>
+                    <div className={'condLabel'}>数据目录:</div>
+                    <a href={'/search' + replaceSearchParams(searchParamsValue, 'dir', 'dir1')}
+                       className={currentDir === 'dir1' ? 'active' : ''}>dir1</a>
+                    <a href={'/search' + replaceSearchParams(searchParamsValue, 'dir', 'dir2')}
+                       className={currentDir === 'dir2' ? 'active' : ''}>dir2</a>
+                </div>
             </div>
             <div className={'contentContainer'}>
                 <div className={'conMiddle'}>
                     <div className={'middleBody'}>
-                        <MiddleBody selectResult={selectResult} domain={domain} lang={'zh'}/>
+                        <MiddleBody selectResult={selectResult} domain={domain} lang={'zh'} dir={currentDir}/>
                     </div>
                     <div className={'middlePagination'}>
                         <PaginationServer pagination={pagination}
-                                          pageLinkFunc={(page) => replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
+                                          pageLinkFunc={(page) => '/search' + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                     </div>
                 </div>
             </div>
@@ -73,16 +87,17 @@ export default async function Page({params, searchParams}: {
     </ContentLayout>
 }
 
-function MiddleBody({selectResult, domain, lang}: {
+function MiddleBody({selectResult, domain, lang, dir}: {
     selectResult: PLSelectResult<PSArticleModel>,
     domain: IDomain,
-    lang: string
+    lang: string,
+    dir: string
 }) {
     if (!selectResult || !selectResult.data || !selectResult.data.range || selectResult.data.range.length === 0) {
         return <NoData size='large'/>
     }
     return selectResult.data.range.map((model) => {
-        return <ArticleCard dir={'dir1'} model={model} domain={domain} lang={lang}/>
+        return <ArticleCard dir={dir} model={model} domain={domain} lang={lang}/>
     })
 }
 

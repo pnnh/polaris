@@ -18,11 +18,6 @@ export default async function Home({params, searchParams}: {
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
-    const metadata: Metadata = {
-        title: 'codegen.seo.title',
-        keywords: 'codegen.seo.keywords',
-        description: 'codegen.seo.description',
-    }
     return <ContentLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
                           metadata={metadata}>
         <div className={'indexPage'}>

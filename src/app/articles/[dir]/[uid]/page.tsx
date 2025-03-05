@@ -58,7 +58,7 @@ export default async function Home({params, searchParams}: {
     const clientIp = await getClientIp()
     // 更新文章阅读次数
     if (clientIp) {
-        await domain.makePost(`/articles/${baseParams.uid}/viewer`, {clientIp})
+        await domain.makePost(`/articles/${articleUrn}/viewer`, {clientIp})
     }
     const readUrl = `/articles/${currentDir}/articles/${baseParams.uid}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)

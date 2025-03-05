@@ -14,9 +14,9 @@ export default async function Home({params, searchParams}: {
     const baseParams = await params;
     const searchParamsValue = await searchParams
     const metadata: Metadata = {
-        title: 'codegen.seo.title',
-        keywords: 'codegen.seo.keywords',
-        description: 'codegen.seo.description',
+        title: 'UUID生成器',
+        keywords: 'UUID生成器',
+        description: '各版本UUID生成器',
     }
     return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
