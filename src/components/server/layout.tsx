@@ -6,7 +6,6 @@ import {isProd, usePublicConfig} from "@/services/server/config";
 import React from "react";
 import {encodeBase64String} from "@/atom/common/utils/basex";
 import {JotaiProvider} from "@/components/client/content/provider";
-import {TurnstileClient} from "@/components/client/cloudflare/turnstile";
 import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter";
 import {Roboto} from 'next/font/google';
 import {ThemeProvider} from '@mui/material/styles';

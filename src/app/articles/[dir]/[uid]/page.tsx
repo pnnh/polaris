@@ -16,11 +16,10 @@ import {base58ToUuid} from "@/atom/common/utils/basex";
 import {CodeOk, CommonResult} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/atom/common/models/article";
 import {TocItem} from "@/atom/common/models/toc";
-import {CommentsClient} from "@/components/client/comments/comments";
 import {getDefaultNoteImageByUid} from "@/services/common/note";
 import {isValidUUID} from "@/atom/common/utils/uuid";
 import ArticleReadLayout from "@/components/server/content/article/layout";
-import {ArticleAssets} from "@/app/articles/[dir]/[uid]/assets";
+import {CommentsClient} from "@/atom/client/components/comments/comments";
 
 export const dynamic = "force-dynamic";
 

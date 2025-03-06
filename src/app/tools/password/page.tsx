@@ -1,11 +1,11 @@
 import React from 'react'
 import './page.scss'
-import RandomPasswordPage from './random-password'
 import {Metadata} from "next";
 import {pageTitle} from "@/utils/page";
 import ContentLayout from "@/components/server/content/layout";
 import {getPathname} from "@/services/server/pathname";
-import {CommentsClient} from "@/components/client/comments/comments";
+import RandomPasswordPage from "@/atom/client/components/tools/password/random-password";
+import {CommentsClient} from "@/atom/client/components/comments/comments";
 
 export const metadata: Metadata = {
     title: pageTitle('随机密码生成器'),

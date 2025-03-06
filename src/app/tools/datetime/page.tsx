@@ -1,9 +1,9 @@
 import React from 'react'
 import './page.scss'
-import DatetimeComponent from "@/components/client/tools/datetime/datetime";
 import {getPathname} from "@/services/server/pathname";
 import {Metadata} from "next";
 import ContentLayout from "@/components/server/content/layout";
+import DatetimeComponent from '@/atom/client/components/tools/datetime/datetime';
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ channel: string }>,

@@ -1,13 +1,12 @@
 'use client'
 
 import styles from './form.module.scss'
-import {getTurnstileToken, TurnstileClient} from "@/components/client/cloudflare/turnstile";
 import React, {useState} from "react";
 import {validateEmail} from "@/atom/common/utils/email";
-import {isValidUrl} from "@/atom/common/utils/uri";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {submitSignup} from "@/services/client/account/account";
+import {getTurnstileToken, TurnstileClient} from "@/atom/client/components/cloudflare/turnstile";
 
 const buttonThrottle = new ButtonThrottle(5000)
 

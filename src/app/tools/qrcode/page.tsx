@@ -1,10 +1,10 @@
 import React from 'react'
 import './page.scss'
-import {QRCodeComponent} from "@/components/client/tools/qrcode/qrcode";
 import ContentLayout from '@/components/server/content/layout';
 import {getPathname} from "@/services/server/pathname";
 import {Metadata} from "next";
-import {CommentsClient} from "@/components/client/comments/comments";
+import {CommentsClient} from "@/atom/client/components/comments/comments";
+import {QRCodeComponent} from "@/atom/client/components/tools/qrcode/qrcode";
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ channel: string }>,

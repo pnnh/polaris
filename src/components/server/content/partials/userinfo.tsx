@@ -17,7 +17,7 @@ export function UserAction() {
             setUserinfo(result.data)
         })
     }, []);
-    if (userinfo) {
+    if (userinfo && userinfo.uid !== '00000000-0000-0000-0000-000000000000') {
         return <div className={'userAction'}>
             <Link className={'loginLink'} href={'/account/profile'}>{userinfo.nickname || userinfo.username}</Link>
             <a className={'logoutLink'} href={'javascript:void(0)'} onClick={() => {

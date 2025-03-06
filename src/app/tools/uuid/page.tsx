@@ -1,10 +1,10 @@
 import React from 'react'
-import {ToolBody} from "./tool";
 import './page.scss'
 import {getPathname} from "@/services/server/pathname";
 import {Metadata} from "next";
 import ContentLayout from "@/components/server/content/layout";
-import {CommentsClient} from "@/components/client/comments/comments";
+import {ToolBody} from "@/atom/client/components/tools/uuid/tool";
+import {CommentsClient} from "@/atom/client/components/comments/comments";
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ channel: string }>,
