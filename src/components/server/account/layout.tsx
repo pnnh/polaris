@@ -17,9 +17,7 @@ export default async function AccountLayout({
     metadata: Metadata,
     lang: string
 }) {
-    return (<HtmlLayout metadata={metadata}>
-        <div className={styles.accountLayout}>
+    return <div className={styles.accountLayout}>
             {children}
         </div>
-    </HtmlLayout>)
 }

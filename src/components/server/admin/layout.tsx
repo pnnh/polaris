@@ -21,8 +21,7 @@ export async function AdminLayout({
                 href={clientAuthUrl} className={styles.loginLink}>前往登陆</Link>
         </div>
     }
-    return (<HtmlLayout metadata={{}}>
-        <div className={styles.childrenContainer}>
+    return <div className={styles.childrenContainer}>
             <div className={styles.navbar}>
                 <AdminNavbar account={undefined}></AdminNavbar>
             </div>
@@ -33,5 +32,4 @@ export async function AdminLayout({
                 </div>
             </div>
         </div>
-    </HtmlLayout>)
 }

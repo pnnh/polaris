@@ -19,8 +19,7 @@ export default async function ArticleReadLayout({
     metadata: Metadata,
     lang: string
 }) {
-    return (<HtmlLayout metadata={metadata}>
-        <div className={styles.templateContainer}>
+    return <div className={styles.templateContainer}>
             <div>
                 <ContentPublicNavbar pathname={pathname} searchParams={searchParams} lang={lang}/>
             </div>
@@ -30,5 +29,4 @@ export default async function ArticleReadLayout({
                 </div>
             </div>
         </div>
-    </HtmlLayout>)
 }

@@ -19,8 +19,7 @@ export default async function ContentLayout({
     metadata: Metadata,
     lang: string
 }) {
-    return (<HtmlLayout metadata={metadata}>
-        <div className={'templateContainer'}>
+    return <div className={'templateContainer'}>
             <div className={'templateNavbar'}>
                 <ContentPublicNavbar pathname={pathname} searchParams={searchParams} lang={lang}/>
             </div>
@@ -30,5 +29,4 @@ export default async function ContentLayout({
                 </div>
             </div>
         </div>
-    </HtmlLayout>)
 }

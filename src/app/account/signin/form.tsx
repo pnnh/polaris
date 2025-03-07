@@ -27,8 +27,8 @@ export function SigninForm() {
             setInfoMsg('无效密码')
             return
         }
-        const turnstileToken = getTurnstileToken()
-        // console.log('turnstile token', turnstileToken)
+        const turnstileToken = await getTurnstileToken()
+        console.log('turnstile token', turnstileToken)
         if (!turnstileToken) {
             setInfoMsg('未通过验证')
             return
@@ -61,10 +61,6 @@ export function SigninForm() {
                 <input type="password" name="password" className={styles.inputField}
                        placeholder={'字母数字及特殊字符'}
                        value={password} onChange={(event) => setPassword(event.target.value)}/>
-            </div>
-            <div className={styles.formRow}>
-                <label className={styles.fieldLabel}>行为验证</label>
-                <TurnstileClient/>
             </div>
             <div className={styles.formRow}>
                 <button type="button" className={styles.submitButton}

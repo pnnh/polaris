@@ -39,7 +39,7 @@ export function SignupForm() {
             setInfoMsg('无效邮箱')
             return
         }
-        const turnstileToken = getTurnstileToken()
+        const turnstileToken = await getTurnstileToken()
         // console.log('turnstile token', turnstileToken)
         if (!turnstileToken) {
             setInfoMsg('未通过验证')
@@ -92,10 +92,6 @@ export function SignupForm() {
                 <input type="text" name="email" className={styles.inputField}
                        placeholder={'可选输入'}
                        value={email} onChange={(event) => setEmail(event.target.value)}/>
-            </div>
-            <div className={styles.formRow}>
-                <label className={styles.fieldLabel}>行为验证</label>
-                <TurnstileClient/>
             </div>
             <div className={styles.formRow}>
                 <button type="button" className={styles.submitButton}
