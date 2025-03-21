@@ -1,7 +1,6 @@
 import React from 'react'
 import {ContentPublicNavbar} from "@/components/server/content/partials/navbar";
 import './layout.scss'
-import {HtmlLayout} from '../layout';
 import {Metadata} from "next";
 
 export const templateBodyId = 'globalTemplateBody'
@@ -20,13 +19,13 @@ export default async function ContentLayout({
     lang: string
 }) {
     return <div className={'templateContainer'}>
-            <div className={'templateNavbar'}>
-                <ContentPublicNavbar pathname={pathname} searchParams={searchParams} lang={lang}/>
-            </div>
-            <div id={templateBodyId} className={'templateBody'}>
-                <div className={'bodyContainer'}>
-                    {children}
-                </div>
+        <div className={'templateNavbar'}>
+            <ContentPublicNavbar pathname={pathname} searchParams={searchParams} lang={lang}/>
+        </div>
+        <div id={templateBodyId} className={'templateBody'}>
+            <div className={'bodyContainer'}>
+                {children}
             </div>
         </div>
+    </div>
 }

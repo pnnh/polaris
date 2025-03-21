@@ -11,6 +11,7 @@ let nextConfig = {
     pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
     experimental: {
         esmExternals: true,
+        reactCompiler: true,
     },
     webpack: function (config) {
         return config;

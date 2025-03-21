@@ -2,7 +2,6 @@ import React from 'react'
 import {ContentPublicNavbar} from "@/components/server/content/partials/navbar";
 import styles from './layout.module.scss'
 import {Metadata} from "next";
-import {HtmlLayout} from "@/components/server/layout";
 
 export const templateBodyId = 'globalTemplateBody'
 
@@ -20,13 +19,13 @@ export default async function ArticleReadLayout({
     lang: string
 }) {
     return <div className={styles.templateContainer}>
-            <div>
-                <ContentPublicNavbar pathname={pathname} searchParams={searchParams} lang={lang}/>
-            </div>
-            <div id={templateBodyId} className={styles.templateBody}>
-                <div className={styles.bodyContainer}>
-                    {children}
-                </div>
+        <div>
+            <ContentPublicNavbar pathname={pathname} searchParams={searchParams} lang={lang}/>
+        </div>
+        <div id={templateBodyId} className={styles.templateBody}>
+            <div className={styles.bodyContainer}>
+                {children}
             </div>
         </div>
+    </div>
 }

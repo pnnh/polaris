@@ -1,5 +1,4 @@
 import React from 'react'
-import {HtmlLayout} from '../layout';
 import {Metadata} from "next";
 import styles from './layout.module.scss'
 
@@ -18,6 +17,6 @@ export default async function AccountLayout({
     lang: string
 }) {
     return <div className={styles.accountLayout}>
-            {children}
-        </div>
+        {children}
+    </div>
 }
