@@ -28,5 +28,5 @@ export async function makeGet<T>(url: string): Promise<T> {
 // 获取评论和账户服务地址
 export function getPortalPublicUrl() {
     const clientConfig = useClientConfig()
-    return clientConfig.NEXT_PUBLIC_PORTAL_URL
+    return clientConfig.PORTAL_URL
 }

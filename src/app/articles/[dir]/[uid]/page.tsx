@@ -20,6 +20,7 @@ import {getDefaultNoteImageByUid} from "@/services/common/note";
 import {isValidUUID} from "@/atom/common/utils/uuid";
 import ArticleReadLayout from "@/components/server/content/article/layout";
 import {CommentsClient} from "@/atom/client/components/comments/comments";
+import {getPortalPublicUrl} from "@/services/client/http";
 
 export const dynamic = "force-dynamic";
 
@@ -64,6 +65,7 @@ export default async function Home({params, searchParams}: {
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)
     }
+    const portalUrl = getPortalPublicUrl()
     return <ArticleReadLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
                               metadata={metadata}>
         <div>
@@ -90,7 +92,7 @@ export default async function Home({params, searchParams}: {
                         </div>
                     </div>
                     <div className={'commentsClient'}>
-                        <CommentsClient resource={getResult.data.uid}/>
+                        <CommentsClient portalUrl={portalUrl} resource={getResult.data.uid}/>
                     </div>
                 </div>
                 <div className={'rightArea'}>

@@ -1,23 +1,24 @@
 'use client'
 
-import {decodeBase64String} from "@/atom/common/utils/basex";
-
 export interface ClientConfig {
-    NEXT_PUBLIC_SELF_URL: string
-    PUBLIC_TURNSTILE: string
-    NEXT_PUBLIC_PORTAL_URL: string
+    ENV: string
+    SELF_URL: string
+    TURNSTILE_PUBLIC_KEY: string
+    PORTAL_URL: string
 }
 
+let parsedClientConfig: ClientConfig | null = null
+
 export function useClientConfig() {
-    let serverData: string
-    if (typeof window !== 'undefined') {
-        serverData = document.getElementById('serverData')?.innerText || ''
-        if (!serverData) {
-            throw new Error('serverData is required')
-        }
-    } else {
-        serverData = process.env.publicConfig || ''
+    if (parsedClientConfig) {
+        return parsedClientConfig
     }
-    const configText = decodeBase64String(serverData)
-    return JSON.parse(configText) as ClientConfig;
+    const clientConfig: ClientConfig = {
+        ENV: process.env.NEXT_PUBLIC_NODE_ENV || '',
+        SELF_URL: process.env.NEXT_PUBLIC_SELF_URL || '',
+        TURNSTILE_PUBLIC_KEY: process.env.NEXT_PUBLIC_TURNSTILE_PUBLIC_KEY || '',
+        PORTAL_URL: process.env.NEXT_PUBLIC_PORTAL_URL || '',
+    }
+    parsedClientConfig = clientConfig
+    return clientConfig
 }

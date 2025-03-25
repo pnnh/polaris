@@ -17,6 +17,9 @@ let nextConfig = {
         return config;
 
     },
+    env: {
+        NEXT_PUBLIC_NODE_ENV: process.env.NODE_ENV,
+    },
     images: {
         remotePatterns: [
             {
@@ -34,6 +37,14 @@ let nextConfig = {
     sassOptions: {
         includePaths: [path.join(__dirname, 'styles')],
         silenceDeprecations: ['legacy-js-api'],
+    },
+    async rewrites() {
+        return [
+            {
+                source: '/lightning/:path*',
+                destination: 'http://localhost:5173/lightning/:path*' // Proxy to Backend
+            }
+        ]
     }
 }
 

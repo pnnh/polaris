@@ -6,6 +6,7 @@ import ContentLayout from "@/components/server/content/layout";
 import {getPathname} from "@/services/server/pathname";
 import RandomPasswordPage from "@/atom/client/components/tools/password/random-password";
 import {CommentsClient} from "@/atom/client/components/comments/comments";
+import {getPortalPublicUrl} from "@/services/client/http";
 
 export const metadata: Metadata = {
     title: pageTitle('随机密码生成器'),
@@ -18,12 +19,13 @@ export default async function Home({params, searchParams}: {
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
+    const portalUrl = getPortalPublicUrl()
     return <ContentLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
                           metadata={metadata}>
         <div className={'indexPage'}>
             <RandomPasswordPage/>
             <div className={'commentsClient'}>
-                <CommentsClient resource={'c26b810d-92c6-5632-a546-3e509e585b96'}/>
+                <CommentsClient portalUrl={portalUrl} resource={'c26b810d-92c6-5632-a546-3e509e585b96'}/>
             </div>
         </div>
     </ContentLayout>

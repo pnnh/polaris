@@ -34,19 +34,14 @@ export function useServerConfig(): IServerConfig {
     }
 }
 
-// 该方法仅能在server端调用
-export function usePublicConfig() {
-    const publicConfig = {
-        ENV: process.env.NODE_ENV || '',
-        NEXT_PUBLIC_SELF_URL: process.env.NEXT_PUBLIC_SELF_URL || '',
-        PUBLIC_TURNSTILE: process.env.PUBLIC_TURNSTILE || '',
-        NEXT_PUBLIC_PORTAL_URL: process.env.NEXT_PUBLIC_PORTAL_URL || '',
-        NEXT_PUBLIC_PHOENIX_URL: process.env.NEXT_PUBLIC_PHOENIX_URL || '',
-    }
-    process.env.publicConfig = encodeBase64String(JSON.stringify(publicConfig))
-    return publicConfig
-}
-
 export function isProd() {
     return process.env.NODE_ENV === 'production'
+}
+
+// 获取Lightning资源URL
+export function getLightningUrl(): string {
+    if (isProd()) {
+        return '/lightning/cloud.js'
+    }
+    return '/lightning/src/cloud.tsx'
 }

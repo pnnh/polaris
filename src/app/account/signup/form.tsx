@@ -6,7 +6,7 @@ import {validateEmail} from "@/atom/common/utils/email";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {submitSignup} from "@/services/client/account/account";
-import {getTurnstileToken, TurnstileClient} from "@/atom/client/components/cloudflare/turnstile";
+import {getTurnstileToken} from "@/atom/client/components/cloudflare/turnstile";
 
 const buttonThrottle = new ButtonThrottle(5000)
 
