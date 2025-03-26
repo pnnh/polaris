@@ -3,45 +3,45 @@
 import './assets.scss'
 import React, {useEffect, useState} from "react";
 import {getIcon} from "material-file-icons";
-import {clientSigninDomain} from "@/services/client/domain";
-import {ClientConfig, useClientConfig} from "@/services/client/config";
-import {IDomain} from "@/services/common/domain";
 import {FaAngleRight, FaAngleDown} from "react-icons/fa6";
 import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
 import {PSArticleFileModel} from "@/atom/common/models/article";
-import {ArticleAssertPreview} from './preview';
 import {encodeBase64String} from "@/atom/common/utils/basex";
+import {makeGet} from "@/atom/client/http";
+import {useAtom} from "jotai";
+import {articleAssetsPreviewAtom} from "@/app/articles/[dir]/[uid]/state";
 
-async function selectFiles(domain: IDomain, channelUrn: string, articleUrn: string, parentPath: string = '') {
-    const assetsUrl = `/articles/${channelUrn}/articles/${articleUrn}/assets?parent=${encodeURIComponent(parentPath)}`
-    return await domain.makeGet<PLSelectResult<PSArticleFileModel>>(assetsUrl)
+async function selectFiles(portalUrl: string, channelUrn: string, articleUid: string, parentPath: string = '') {
+    const assetsUrl = `${portalUrl}/articles/${articleUid}/assets?parent=${encodeURIComponent(parentPath)}`
+    return await makeGet<PLSelectResult<PSArticleFileModel>>(assetsUrl)
 }
 
-export function ArticleAssets({channelUrn, articleUrn}: { channelUrn: string, articleUrn: string }) {
+export function ArticleAssets({portalUrl, channelUid, articleUid}: {
+    portalUrl: string,
+    channelUid: string,
+    articleUid: string
+}) {
     const [files, setFiles] = useState<PSArticleFileModel[]>([])
-    const clientConfig = useClientConfig()
-    const domain = clientSigninDomain(clientConfig)
 
     useEffect(() => {
-        selectFiles(domain, channelUrn, articleUrn).then((result) => {
+        selectFiles(portalUrl, channelUid, articleUid).then((result) => {
             setFiles(result.data.range)
         })
-    }, [channelUrn, articleUrn])
+    }, [channelUid, articleUid])
 
     if (!files || files.length === 0) {
         return <></>
     }
 
     return <div className={'tocCard'} id={'assetsCard'}>
-        <ArticleAssertPreview/>
         <div className={'tocHeader'}>
             文件信息
         </div>
         <div className={'tocBody'} id={'assetsBody'}>
             {
                 files.map((model, index) => {
-                    return <FileGroup key={`assets-${0}-${index}`} domain={domain}
-                                      channelUrn={channelUrn} articleUrn={articleUrn}
+                    return <FileGroup key={`assets-${0}-${index}`} portalUrl={portalUrl}
+                                      channelUrn={channelUid} articleUrn={articleUid}
                                       model={model} level={0}/>
                 })
             }
@@ -49,9 +49,9 @@ export function ArticleAssets({channelUrn, articleUrn}: { channelUrn: string, ar
     </div>
 }
 
-function FileGroup({domain, channelUrn, articleUrn, model, level}:
+function FileGroup({portalUrl, channelUrn, articleUrn, model, level}:
                    {
-                       domain: IDomain,
+                       portalUrl: string,
                        channelUrn: string,
                        articleUrn: string,
                        model: PSArticleFileModel,
@@ -59,10 +59,10 @@ function FileGroup({domain, channelUrn, articleUrn, model, level}:
                    }) {
     const [files, setFiles] = useState<PSArticleFileModel[]>([])
     const [open, setOpen] = useState(false)
-    // const [previewState, setPreviewState] = useRecoilState(articleAssetsPreviewAtom)
+    const [previewState, setPreviewState] = useAtom(articleAssetsPreviewAtom)
 
     const openIcon = () => {
-        if (model.type != 'directory') {
+        if (!model.is_dir) {
             return <div className={'w-8'}></div>
         }
         return <i onClick={() => {
@@ -71,7 +71,7 @@ function FileGroup({domain, channelUrn, articleUrn, model, level}:
                 return
             }
             const assetUrn = encodeBase64String(model.path)
-            selectFiles(domain, channelUrn, articleUrn, assetUrn)
+            selectFiles(portalUrl, channelUrn, articleUrn, assetUrn)
                 .then((result) => {
                     console.log('assets:', result)
                     setFiles(result.data.range)
@@ -85,10 +85,10 @@ function FileGroup({domain, channelUrn, articleUrn, model, level}:
         <div key={`assets-${level}`} className={'tocItem'}>
             <div className={'assetItem'} style={{paddingLeft: `${(level + 1) * 0.3}rem`}}>
                 {openIcon()}
-                <FileIcon filename={model.name}/>
-                <span title={model.name} className={'assertItemText'}
+                <FileIcon filename={model.title}/>
+                <span title={model.title} className={'assertItemText'}
                       onClick={(event) => {
-                          if (model.type === 'directory') {
+                          if (model.is_dir) {
                               return
                           }
                           const articleReadBody = document.getElementById('articleReadBody')
@@ -97,23 +97,12 @@ function FileGroup({domain, channelUrn, articleUrn, model, level}:
                           if (!articleReadBody || !assetsCardElement || !assetsBodyElement) {
                               return
                           }
-                          const currentTarget = event.currentTarget as HTMLSpanElement
-                          const itemTop = currentTarget.offsetTop - assetsBodyElement.scrollTop - 6 // 大概减去点击元素所在父级的上边距
-                          const assetsUrl = domain.assetUrl(`/articles/${channelUrn}/articles/${articleUrn}/assets`)
-                          // setPreviewState({
-                          //     show: previewState.path === model.path ? !previewState.show : true,
-                          //     assetsUrl: assetsUrl,
-                          //     path: model.path,
-                          //     left: -1 * (articleReadBody.clientWidth + 32),
-                          //     top: itemTop + 2,
-                          //     position: {x: articleReadBody.clientLeft, y: event.clientY},
-                          //     size: {width: articleReadBody.clientWidth + 32, height: 200}
-                          // })
-                      }}>{model.name}</span>
+                          setPreviewState(model)
+                      }}>{model.title}</span>
             </div>
             {
                 open && files.map((model, index) => {
-                    return <FileGroup key={`assets-${level}-${index}`} domain={domain}
+                    return <FileGroup key={`assets-${level}-${index}`} portalUrl={portalUrl}
                                       channelUrn={channelUrn} articleUrn={articleUrn}
                                       model={model} level={level + 1}/>
                 })

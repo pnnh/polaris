@@ -5,7 +5,6 @@ import {Metadata} from 'next'
 import {serverPhoenixSignin, serverPortalSignin} from "@/services/server/domain/domain";
 import {pageTitle} from "@/utils/page";
 import ContentLayout, {templateBodyId} from '@/components/server/content/layout'
-import {ArticleContainer} from "@/components/client/article";
 import {getClientIp, getPathname} from "@/services/server/pathname";
 import {GoTop} from "@/components/client/gotop";
 import {CiAlarmOn} from "react-icons/ci";
@@ -21,6 +20,8 @@ import {isValidUUID} from "@/atom/common/utils/uuid";
 import ArticleReadLayout from "@/components/server/content/article/layout";
 import {CommentsClient} from "@/atom/client/components/comments/comments";
 import {useServerConfig} from "@/services/server/config";
+import {ArticleAssets} from "./assets";
+import {ArticleAssertPreview} from "@/app/articles/[dir]/[uid]/preview";
 
 export const dynamic = "force-dynamic";
 
@@ -87,9 +88,9 @@ export default async function Home({params, searchParams}: {
                 <div className={'leftArea'} id={'articleReadBody'}>
                     <div className={'articleInfo'}>
                         <div className={'articleBody'}>
-                            <ArticleContainer tocList={tocList} header={getResult.data.header}
-                                              body={getResult.data.body}
-                                              assetsUrl={'assetsUrl'}/>
+                            <ArticleAssertPreview tocList={tocList} header={getResult.data.header}
+                                                  body={getResult.data.body}
+                                                  assetsUrl={'assetsUrl'} portalUrl={portalUrl}/>
                         </div>
                     </div>
                     <div className={'commentsClient'}>
@@ -98,7 +99,7 @@ export default async function Home({params, searchParams}: {
                 </div>
                 <div className={'rightArea'}>
                     <TocInfo readurl={readUrl} model={tocList}/>
-                    {/*<ArticleAssets channelUrn={''} articleUrn={''}/>*/}
+                    <ArticleAssets portalUrl={portalUrl} channelUid={''} articleUid={getResult.data.uid}/>
                 </div>
             </div>
             <GoTop anchor={templateBodyId}/>

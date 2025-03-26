@@ -121,12 +121,13 @@
 .articleInfo {
   display: block;
   background-color: #FFFFFF;
-  padding: 16px;
   border-radius: 4px;
 
   .articleBody {
+    padding: 16px;
     background: #FFFFFF;
     border-radius: 4px;
+    position: relative; /*为了准确定位文章附件预览组件*/
   }
 
 }

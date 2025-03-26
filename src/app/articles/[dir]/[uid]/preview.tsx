@@ -1,110 +1,94 @@
 'use client'
 
-// import {useRecoilState, useRecoilValue} from "recoil";
-// import {articleAssetsPreviewAtom} from "./state";
 import "./preview.scss";
 import React, {useEffect, useState} from "react";
 import {IoClose} from "react-icons/io5";
-import {encodeBase64String} from "@/atom/common/utils/basex";
+import {articleAssetsPreviewAtom} from "./state";
+import {useAtom} from "jotai";
+import {PSArticleFileModel} from "@/atom/common/models/article";
 
-function isTextContent(mimeType: string) {
-    if (mimeType.startsWith('text/')) {
-        return true
-    }
-    if (mimeType.startsWith('application/json')) {
-        return true
-    }
-    return false
+import {BuildBodyHtml} from "@/atom/server/article";
+import {TocItem} from "@/atom/common/models/toc";
+
+export function ArticleComponent({children}: {
+    children: React.ReactNode
+}) {
+    return <div>
+        {children}
+    </div>
 }
 
-export function ArticleAssertPreview() {
-    // const [previewState, setPreviewState] = useRecoilState(articleAssetsPreviewAtom)
-    // const assetUrn = encodeBase64String(previewState.path)
-    // const assetsUrl = `${previewState.assetsUrl}/${assetUrn}`
-    // const [assertData, setAssertData] = useState<{
-    //     mime: string,
-    //     data: ArrayBuffer | string
-    // }>({
-    //     mime: '',
-    //     data: ''
-    // })
+export function ArticleAssertPreview({
+                                         portalUrl, tocList, header, body, assetsUrl
+                                     }: {
+    portalUrl: string,
+    tocList: Array<TocItem>,
+    header: string,
+    body: unknown,
+    assetsUrl: string
+}) {
+    const [previewState, setPreviewState] = useAtom(articleAssetsPreviewAtom)
+    if (!previewState) {
+        return <ArticleComponent>
+            <BuildBodyHtml tocList={tocList} header={header} body={body}
+                           assetsUrl={assetsUrl} libUrl={'/abc'}/>
+        </ArticleComponent>
+    }
 
-    // useEffect(() => {
-    //     if (!previewState.show || !previewState.path) {
-    //         return
-    //     }
-    //     fetch(assetsUrl).then(async (response) => {
-    //         const contentType = response.headers.get('Content-Type')
-    //         console.log('response:', contentType, response)
-    //         if (isTextContent(contentType || '')) {
-    //             const bodyText = await response.text()
-    //             setAssertData({
-    //                 mime: contentType || 'text/plain',
-    //                 data: bodyText
-    //             })
-    //         } else {
-    //             setAssertData({
-    //                 mime: contentType || 'application/octet-stream',
-    //                 data: assetsUrl
-    //             })
-    //         }
-    //     })
-    // }, [previewState])
-
-    // if (!previewState.show) {
-    //     return <></>
-    // }
-    return <div className={'assertPreview'} style={{
-        // top: previewState.top,
-        // left: previewState.left,
-        // width: previewState.size.width
-    }}>
+    return <div className={'assertPreview'}>
         <div className={'previewHeader'}>
             <div className={'pathTitle'}>
-                {/*{previewState.path}*/}
+                {previewState.title}
             </div>
-            <div className={'closeContainer'}>
+            <div>
                 <i onClick={() => {
-                    // setPreviewState({
-                    //     ...previewState,
-                    //     show: false
-                    // })
+                    setPreviewState(undefined)
                 }}>
                     <IoClose size={'1rem'}/>
                 </i>
             </div>
         </div>
         <div className={'previewBody'}>
-            {/*<PreviewBody mime={assertData.mime} data={assertData.data}/>*/}
+            <PreviewBody portalUrl={portalUrl} model={previewState}/>
         </div>
     </div>
 }
 
-function PreviewBody({mime, data}: { mime: string, data: ArrayBuffer | string }) {
-    if (mime.startsWith('text/') || mime.startsWith('application/json')) {
-        return <TextPreview text={data as string}/>
+function PreviewBody({portalUrl, model}: { portalUrl: string, model: PSArticleFileModel }) {
+    if (model.is_text) {
+        return <TextPreview portalUrl={portalUrl} model={model}/>
     }
-    if (mime.startsWith('image/')) {
-        return <ImagePreview url={data as string}/>
+    if (model.is_image) {
+        return <ImagePreview portalUrl={portalUrl} model={model}/>
     }
     return <div>
-        暂无预览
+        暂不支持预览
     </div>
 }
 
-function TextPreview({text}: { text: string }) {
-    return <div className={'textPreview'}>
+function TextPreview({portalUrl, model}: { portalUrl: string, model: PSArticleFileModel }) {
+    const fileUrl = `${portalUrl}/storage${model.storage_path}`
+    const [content, setContent] = useState<string | undefined>(undefined)
+    useEffect(() => {
+        fetch(fileUrl).then(response => {
+            return response.text()
+        }).then(text => {
+            setContent(text)
+        })
+    }, [fileUrl])
+    return <div>
         <code>
             <pre>
-                {text}
+                {content}
             </pre>
         </code>
     </div>
 }
 
 
-function ImagePreview({url}: { url: string }) {
+function ImagePreview({portalUrl, model}: { portalUrl: string, model: PSArticleFileModel }) {
+    const imageUrl = `${portalUrl}/storage/${model.storage_path}`
     return <div>
-        <img src={url}/>
+        <img src={imageUrl}/>
     </div>
 }
