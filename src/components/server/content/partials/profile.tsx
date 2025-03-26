@@ -37,6 +37,7 @@ function ArticleNavbar({pathname}: { pathname: string }) {
     const navLinks = [
         {name: '频道', href: `/channels`},
         {name: '笔记', href: `/articles`},
+        {name: '图片', href: `/images`},
         {name: '随机密码', href: `/tools/password`},
         {name: 'UUID', href: `/tools/uuid`},
         {name: '二维码', href: `/tools/qrcode`},

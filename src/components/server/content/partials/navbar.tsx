@@ -5,12 +5,14 @@ import React, {CSSProperties} from "react";
 import {UserProfileSelector} from "@/components/server/content/partials/profile";
 import {UserAction} from "@/components/server/content/partials/userinfo";
 import {ContentSearchAction} from "@/components/server/content/partials/search";
+import {useServerConfig} from "@/services/server/config";
 
 export async function ContentPublicNavbar({pathname, searchParams, lang}: {
     pathname: string,
     searchParams: Record<string, string>,
     lang: string
 }) {
+    const serverConfig = useServerConfig()
     return <div className={'navHeader'}>
         <div className={'leftNav'}>
             <div>
@@ -26,7 +28,7 @@ export async function ContentPublicNavbar({pathname, searchParams, lang}: {
             {/*    <a href={`/zh`} className={activeClass('zh')}>中文</a>*/}
             {/*</div>*/}
             <ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword}/>
-            <UserAction/>
+            <UserAction portalUrl={serverConfig.NEXT_PUBLIC_PORTAL_URL}/>
         </div>
     </div>
 }

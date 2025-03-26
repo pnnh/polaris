@@ -5,12 +5,12 @@ import React, {useState} from "react";
 import {validateEmail} from "@/atom/common/utils/email";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
-import {submitSignup} from "@/services/client/account/account";
 import {getTurnstileToken} from "@/atom/client/components/cloudflare/turnstile";
+import {submitSignup} from "@/atom/client/account/account";
 
 const buttonThrottle = new ButtonThrottle(5000)
 
-export function SignupForm() {
+export function SignupForm({portalUrl}: { portalUrl: string }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -49,7 +49,7 @@ export function SignupForm() {
             username, password, confirm_password: confirmPassword,
             email, nickname, turnstile_token: turnstileToken,
         }
-        const submitResult = await submitSignup(submitRequest)
+        const submitResult = await submitSignup(portalUrl, submitRequest)
         console.log('submitResult', submitResult)
         if (submitResult.code !== CodeOk) {
             setInfoMsg('注册失败')

@@ -1,5 +1,3 @@
-import {useClientConfig} from "@/services/client/config";
-
 export async function makePost<T>(url: string, params: unknown): Promise<T> {
     const response = await fetch(url, {
         credentials: 'include',
@@ -25,8 +23,3 @@ export async function makeGet<T>(url: string): Promise<T> {
     return response.json()
 }
 
-// 获取评论和账户服务地址
-export function getPortalPublicUrl() {
-    const clientConfig = useClientConfig()
-    return clientConfig.PORTAL_URL
-}

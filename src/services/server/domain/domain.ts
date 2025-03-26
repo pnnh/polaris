@@ -9,7 +9,7 @@ function trySigninDomain(domainUrl: string | undefined = ""): IDomain | undefine
 
 export function serverPhoenixSignin(): IDomain {
     const serverConfig = useServerConfig()
-    const workerUrl = serverConfig.PHOENIX_URL
+    const workerUrl = serverConfig.NEXT_PUBLIC_PHOENIX_URL
     const domain = trySigninDomain(workerUrl)
     if (!domain) {
         throw new Error('domain not found')
@@ -19,7 +19,7 @@ export function serverPhoenixSignin(): IDomain {
 
 export function serverPortalSignin(): IDomain {
     const serverConfig = useServerConfig()
-    const serverUrl = serverConfig.PORTAL_URL
+    const serverUrl = serverConfig.NEXT_PUBLIC_PORTAL_URL
     const domain = trySigninDomain(serverUrl)
     if (!domain) {
         throw new Error('domain not found')

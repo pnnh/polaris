@@ -5,11 +5,11 @@ import {getTurnstileToken} from "@/atom/client/components/cloudflare/turnstile";
 import React, {useState} from "react";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
-import {accountSignin} from "@/services/client/account/account";
+import {accountSignin} from "@/atom/client/account/account";
 
 const buttonThrottle = new ButtonThrottle(1000)
 
-export function SigninForm() {
+export function SigninForm({portalUrl}: { portalUrl: string }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [infoMsg, setInfoMsg] = useState('')
@@ -36,7 +36,7 @@ export function SigninForm() {
         const submitRequest = {
             username, password, turnstile_token: turnstileToken,
         }
-        const submitResult = await accountSignin(submitRequest)
+        const submitResult = await accountSignin(portalUrl, submitRequest)
         console.log('submitResult', submitResult)
         if (submitResult.code !== CodeOk) {
             setInfoMsg('登录失败')

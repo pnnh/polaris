@@ -5,7 +5,7 @@ import {Metadata} from "next";
 import ContentLayout from "@/components/server/content/layout";
 import {ToolBody} from "@/atom/client/components/tools/uuid/tool";
 import {CommentsClient} from "@/atom/client/components/comments/comments";
-import {getPortalPublicUrl} from "@/services/client/http";
+import {useServerConfig} from "@/services/server/config";
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ channel: string }>,
@@ -19,7 +19,8 @@ export default async function Home({params, searchParams}: {
         keywords: 'UUID生成器',
         description: '各版本UUID生成器',
     }
-    const portalUrl = getPortalPublicUrl()
+    const serverConfig = useServerConfig()
+    const portalUrl = serverConfig.NEXT_PUBLIC_PORTAL_URL
     return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={'uuidPage'}>

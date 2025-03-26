@@ -1,6 +1,0 @@
-{
-  "name": "polaris-wasm-server",
-  "version": "0.1.0",
-  "main": "./PolarisWasmServer.js",
-  "types": "./PolarisWasmServer.d.ts"
-}
