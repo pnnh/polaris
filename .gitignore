@@ -28,3 +28,5 @@ coverage/
 dist/
 .rollup.cache/
 /*.db
+.env
+.env.*
