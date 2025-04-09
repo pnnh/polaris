@@ -29,7 +29,7 @@ export const revalidate = 1
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-    title: '希波万象',
+    title: '希波万象 - 实用工具集',
     description: '实用工具集',
 }
 
@@ -50,7 +50,7 @@ export default async function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
         <link rel="shortcut icon" href="/favicon.ico"/>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
-        <meta name="apple-mobile-web-app-title" content="MyWebSite"/>
+        <meta name="apple-mobile-web-app-title" content="希波万象"/>
         {/*<link rel="manifest" href="/site.webmanifest"/>*/}
         <title>{pageTitle(metadata.title as string)}</title>
         {metadata.keywords && <meta name="keywords" content={metadata.keywords as string}></meta>}

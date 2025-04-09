@@ -38,14 +38,6 @@ let nextConfig = {
         includePaths: [path.join(__dirname, 'styles')],
         silenceDeprecations: ['legacy-js-api'],
     },
-    async rewrites() {
-        return [
-            {
-                source: '/lightning/:path*',
-                destination: 'http://localhost:5173/lightning/:path*' // Proxy to Backend
-            }
-        ]
-    }
 }
 
 export default nextConfig
