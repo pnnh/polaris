@@ -19,7 +19,7 @@ export function serverPhoenixSignin(): IDomain {
 
 export function serverPortalSignin(): IDomain {
     const serverConfig = useServerConfig()
-    const serverUrl = serverConfig.NEXT_PUBLIC_PORTAL_URL
+    const serverUrl = serverConfig.NEXT_PUBLIC_PORTAL_URL + "/portal"
     const domain = trySigninDomain(serverUrl)
     if (!domain) {
         throw new Error('domain not found')
