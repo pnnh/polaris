@@ -29,7 +29,7 @@ export default async function Page({params, searchParams}: {
         keywords: 'codegen.seo.keywords',
         description: 'codegen.seo.description',
     }
-    
+
     let page = Number(searchParamsValue.page)
     if (isNaN(page)) {
         page = 1
@@ -99,7 +99,7 @@ function ImageItemCard({itemModel}: { itemModel: MTPictureModel }) {
     </div>
 }
 
-export function ImageFilterCard({lang}: { lang: string }) {
+function ImageFilterCard({lang}: { lang: string }) {
     return <div className={styles.filterCard}>
         <div className={styles.filterHeader}>
             图片过滤
