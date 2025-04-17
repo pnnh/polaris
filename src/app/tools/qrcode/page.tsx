@@ -20,7 +20,7 @@ export default async function Home({params, searchParams}: {
         description: '二维码生成器',
     }
     const serverConfig = useServerConfig()
-    const portalUrl = serverConfig.NEXT_PUBLIC_PORTAL_URL
+    const portalUrl = serverConfig.PUBLIC_PORTAL_URL
     return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={'qrCodePage'}>

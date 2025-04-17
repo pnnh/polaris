@@ -21,7 +21,7 @@ export default async function Page({params, searchParams}: {
         <div className={styles.signinCard}>
             <div className={styles.signinTitle}>登录页面</div>
             <div className={styles.signinBody}>
-                <SigninForm portalUrl={serverConfig.NEXT_PUBLIC_PORTAL_URL}/>
+                <SigninForm portalUrl={serverConfig.PUBLIC_PORTAL_URL}/>
             </div>
         </div>
     </AccountLayout>

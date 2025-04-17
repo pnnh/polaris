@@ -90,7 +90,7 @@ function MiddleBody({selectResult, domain, lang, dir}: {
 
 function ImageItemCard({itemModel}: { itemModel: MTPictureModel }) {
     const serverConfig = useServerConfig()
-    const serverUrl = serverConfig.NEXT_PUBLIC_PORTAL_URL
+    const serverUrl = serverConfig.PUBLIC_PORTAL_URL
     const imageUrl = `${serverUrl}/storage/images/${itemModel.uid}${itemModel.ext_name}`
     return <div className={styles.imageCard}>
         <div className={styles.imageIcon}>

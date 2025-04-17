@@ -67,7 +67,7 @@ export default async function Home({params, searchParams}: {
         imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)
     }
     const serverConfig = useServerConfig()
-    const portalUrl = serverConfig.NEXT_PUBLIC_PORTAL_URL
+    const portalUrl = serverConfig.PUBLIC_PORTAL_URL
     return <ArticleReadLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
                               metadata={metadata}>
         <div>

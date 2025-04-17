@@ -20,7 +20,7 @@ export default async function Home({params, searchParams}: {
 }) {
     const pathname = await getPathname()
     const serverConfig = useServerConfig()
-    const portalUrl = serverConfig.NEXT_PUBLIC_PORTAL_URL
+    const portalUrl = serverConfig.PUBLIC_PORTAL_URL
     return <ContentLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
                           metadata={metadata}>
         <div className={'indexPage'}>

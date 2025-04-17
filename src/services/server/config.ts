@@ -1,24 +1,24 @@
 export interface IServerConfig {
-    NEXT_PUBLIC_SELF_URL: string
-    NEXT_PUBLIC_PORTAL_URL: string
-    NEXT_PUBLIC_PHOENIX_URL: string
+    PUBLIC_SELF_URL: string
+    PUBLIC_PORTAL_URL: string
+    PUBLIC_PHOENIX_URL: string
 }
 
 export function useServerConfig(): IServerConfig {
-    if (!process.env.NEXT_PUBLIC_SELF_URL) {
-        throw new Error('NEXT_PUBLIC_SELF_URL is required')
+    if (!process.env.PUBLIC_SELF_URL) {
+        throw new Error('PUBLIC_SELF_URL is required')
     }
-    if (!process.env.NEXT_PUBLIC_PORTAL_URL) {
-        throw new Error('NEXT_PUBLIC_PORTAL_URL is required')
+    if (!process.env.PUBLIC_PORTAL_URL) {
+        throw new Error('PUBLIC_PORTAL_URL is required')
     }
-    if (!process.env.NEXT_PUBLIC_PHOENIX_URL) {
-        throw new Error('NEXT_PUBLIC_PHOENIX_URL is required')
+    if (!process.env.PUBLIC_PHOENIX_URL) {
+        throw new Error('PUBLIC_PHOENIX_URL is required')
     }
 
     return {
-        NEXT_PUBLIC_SELF_URL: process.env.NEXT_PUBLIC_SELF_URL || '',
-        NEXT_PUBLIC_PORTAL_URL: process.env.NEXT_PUBLIC_PORTAL_URL + '/portal',
-        NEXT_PUBLIC_PHOENIX_URL: process.env.NEXT_PUBLIC_PHOENIX_URL || '',
+        PUBLIC_SELF_URL: process.env.PUBLIC_SELF_URL || '',
+        PUBLIC_PORTAL_URL: process.env.PUBLIC_PORTAL_URL + '/portal',
+        PUBLIC_PHOENIX_URL: process.env.PUBLIC_PHOENIX_URL || '',
     }
 }
 

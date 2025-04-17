@@ -14,10 +14,10 @@ export function useClientConfig() {
         return parsedClientConfig
     }
     const clientConfig: ClientConfig = {
-        ENV: process.env.NEXT_PUBLIC_NODE_ENV || '',
-        SELF_URL: process.env.NEXT_PUBLIC_SELF_URL || '',
-        TURNSTILE_PUBLIC_KEY: process.env.NEXT_PUBLIC_TURNSTILE_PUBLIC_KEY || '',
-        PORTAL_URL: process.env.NEXT_PUBLIC_PORTAL_URL || '',
+        ENV: process.env.PUBLIC_NODE_ENV || '',
+        SELF_URL: process.env.PUBLIC_SELF_URL || '',
+        TURNSTILE_PUBLIC_KEY: process.env.PUBLIC_TURNSTILE_PUBLIC_KEY || '',
+        PORTAL_URL: process.env.PUBLIC_PORTAL_URL || '',
     }
     parsedClientConfig = clientConfig
     return clientConfig

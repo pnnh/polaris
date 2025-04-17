@@ -28,7 +28,7 @@ export async function ContentPublicNavbar({pathname, searchParams, lang}: {
             {/*    <a href={`/zh`} className={activeClass('zh')}>中文</a>*/}
             {/*</div>*/}
             <ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword}/>
-            <UserAction portalUrl={serverConfig.NEXT_PUBLIC_PORTAL_URL}/>
+            <UserAction portalUrl={serverConfig.PUBLIC_PORTAL_URL}/>
         </div>
     </div>
 }

@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     const url = `/articles?` + `page=1&size=${100}`
     const result = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
     const serverConfig = useServerConfig()
-    const selfUrl = serverConfig.NEXT_PUBLIC_SELF_URL
+    const selfUrl = serverConfig.PUBLIC_SELF_URL
     let links: SitemapItemLoose[] = []
 
     if (result && result.data && result.data.range) {

@@ -23,7 +23,7 @@ export default async function Page({params, searchParams}: {
         <div className={styles.signupCard}>
             <div className={styles.signupTitle}>注册页面</div>
             <div className={styles.signupBody}>
-                <SignupForm portalUrl={serverConfig.NEXT_PUBLIC_PORTAL_URL}/>
+                <SignupForm portalUrl={serverConfig.PUBLIC_PORTAL_URL}/>
             </div>
         </div>
     </AccountLayout>
