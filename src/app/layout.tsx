@@ -10,12 +10,13 @@ import React from "react";
 import {GoogleAnalytics} from "@next/third-parties/google";
 import {Metadata} from "next";
 import {pageTitle} from "@/utils/page";
-import {getLightningUrl, isProd} from "@/services/server/config";
+import {getLightningUrl, isProd, usePublicConfig} from "@/services/server/config";
 import {JotaiProvider} from "@/components/client/content/provider";
 import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter";
 import {Roboto} from 'next/font/google';
 import {ThemeProvider} from '@mui/material/styles';
 import theme from '@/components/client/theme';
+import {encodeBase58String} from "@/atom/common/utils/basex";
 
 const roboto = Roboto({
     weight: ['300', '400', '500', '700'],
@@ -37,6 +38,9 @@ export default async function RootLayout({
                                              children
                                          }: { children: React.ReactNode }) {
     const lightningUrl = getLightningUrl()
+
+    const browserConfigString = JSON.stringify(usePublicConfig())
+    const encodedBrowserConfig = encodeBase58String(browserConfigString)
     return <html lang='zh'>
     <head>
         <base href="/"/>
@@ -65,8 +69,9 @@ export default async function RootLayout({
             </ThemeProvider>
         </AppRouterCacheProvider>
     </JotaiProvider>
+    <input id="LGEnv" type="hidden" value={encodedBrowserConfig}/>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
-    <script type={'module'} async={true} src={lightningUrl}/>
+    <script type={'module'} src={lightningUrl}/>
     </body>
     </html>
 }

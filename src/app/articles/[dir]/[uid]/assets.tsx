@@ -25,6 +25,9 @@ export function ArticleAssets({portalUrl, channelUid, articleUid}: {
 
     useEffect(() => {
         selectFiles(portalUrl, channelUid, articleUid).then((result) => {
+            if (!result || !result.data || !result.data.range) {
+                return
+            }
             setFiles(result.data.range)
         })
     }, [channelUid, articleUid])
@@ -73,7 +76,9 @@ function FileGroup({portalUrl, channelUrn, articleUrn, model, level}:
             const assetUrn = encodeBase64String(model.path)
             selectFiles(portalUrl, channelUrn, articleUrn, assetUrn)
                 .then((result) => {
-                    console.log('assets:', result)
+                    if (!result || !result.data || !result.data.range) {
+                        return
+                    }
                     setFiles(result.data.range)
                     setOpen(true)
                 })

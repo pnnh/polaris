@@ -6,6 +6,7 @@ import {serverPhoenixSignin} from "@/services/server/domain/domain";
 import {useServerConfig} from "@/services/server/config";
 import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/atom/common/models/article";
+import {uuidToBase58} from "@/atom/common/utils/basex";
 
 export const dynamic = "force-dynamic";
 
@@ -17,10 +18,12 @@ export async function GET(request: NextRequest) {
     const selfUrl = serverConfig.PUBLIC_SELF_URL
     let links: SitemapItemLoose[] = []
 
+    const dir = 'dir1'  // 暂时只返回phoenix的文章
     if (result && result.data && result.data.range) {
         links = result.data.range.map((article) => {
+            const readUrl = `/articles/${dir}/${uuidToBase58(article.uid || article.uid)}`
             return {
-                url: `/content/articles/${article.channel}/articles/${article.uid}`,
+                url: readUrl,
                 lastmod: article.update_time,
             }
         })
