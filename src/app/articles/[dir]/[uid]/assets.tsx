@@ -12,7 +12,7 @@ import {useAtom} from "jotai";
 import {articleAssetsPreviewAtom} from "@/app/articles/[dir]/[uid]/state";
 
 async function selectFiles(portalUrl: string, channelUrn: string, articleUid: string, parentPath: string = '') {
-    const assetsUrl = `${portalUrl}/articles/${articleUid}/assets?parent=${encodeURIComponent(parentPath)}`
+    const assetsUrl = `${portalUrl}/portal/articles/${articleUid}/assets?parent=${encodeURIComponent(parentPath)}`
     return await makeGet<PLSelectResult<PSArticleFileModel>>(assetsUrl)
 }
 

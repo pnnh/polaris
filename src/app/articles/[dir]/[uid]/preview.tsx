@@ -67,7 +67,7 @@ function PreviewBody({portalUrl, model}: { portalUrl: string, model: PSArticleFi
 }
 
 function TextPreview({portalUrl, model}: { portalUrl: string, model: PSArticleFileModel }) {
-    const fileUrl = `${portalUrl}/storage${model.storage_path}`
+    const fileUrl = `${portalUrl}/portal/storage${model.storage_path}`
     const [content, setContent] = useState<string | undefined>(undefined)
     useEffect(() => {
         fetch(fileUrl).then(response => {
@@ -87,7 +87,7 @@ function TextPreview({portalUrl, model}: { portalUrl: string, model: PSArticleFi
 
 
 function ImagePreview({portalUrl, model}: { portalUrl: string, model: PSArticleFileModel }) {
-    const imageUrl = `${portalUrl}/storage/${model.storage_path}`
+    const imageUrl = `${portalUrl}/portal/storage/${model.storage_path}`
     return <div>
         <img src={imageUrl}/>
     </div>

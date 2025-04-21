@@ -23,7 +23,7 @@ export function useServerConfig(): IServerConfig {
 
     return {
         PUBLIC_SELF_URL: process.env.PUBLIC_SELF_URL || '',
-        PUBLIC_PORTAL_URL: process.env.PUBLIC_PORTAL_URL + '/portal',
+        PUBLIC_PORTAL_URL: process.env.PUBLIC_PORTAL_URL,
         PUBLIC_PHOENIX_URL: process.env.PUBLIC_PHOENIX_URL || '',
         PUBLIC_TURNSTILE: process.env.PUBLIC_TURNSTILE || '',
     }
