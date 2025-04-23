@@ -17,9 +17,6 @@ let nextConfig = {
         return config;
 
     },
-    env: {
-        PUBLIC_NODE_ENV: process.env.NODE_ENV,
-    },
     images: {
         remotePatterns: [
             {
@@ -33,7 +30,7 @@ let nextConfig = {
             }
         ]
     },
-    compress: process.env.NODE_ENV === 'production',
+    compress: process.env.NODE_ENV === 'production',    // 构建时会压缩
     sassOptions: {
         includePaths: [path.join(__dirname, 'styles')],
         silenceDeprecations: ['legacy-js-api'],

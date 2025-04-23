@@ -28,7 +28,7 @@ export function SigninForm({portalUrl}: { portalUrl: string }) {
             return
         }
         const turnstileToken = await getTurnstileToken()
-        console.log('turnstile token', turnstileToken)
+        console.debug('turnstile token', turnstileToken)
         if (!turnstileToken) {
             setInfoMsg('未通过验证')
             return

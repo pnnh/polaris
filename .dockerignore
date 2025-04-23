@@ -7,3 +7,5 @@ README.md
 .git
 *.db
 cache/
+playwright-report/
+test-results/

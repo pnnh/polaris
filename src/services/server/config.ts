@@ -1,4 +1,18 @@
+import dotenv from "dotenv";
+
 import {IBrowserConfig} from "@/services/common/config";
+
+console.log('process.env.RUN_MODE', process.env.RUN_MODE)
+
+function loadConfig() {
+    // 根据环境从不同的文件加载配置
+    const envPath = `.env.${runMode()}`
+    console.log('当前配置环境', envPath)
+    const result = dotenv.config({path: envPath})
+    if (result.error) {
+        throw new Error(`解析配置出错: ${result.error}`)
+    }
+}
 
 export interface IServerConfig {
     PUBLIC_SELF_URL: string
@@ -8,6 +22,7 @@ export interface IServerConfig {
 }
 
 export function useServerConfig(): IServerConfig {
+    loadConfig()
     if (!process.env.PUBLIC_SELF_URL) {
         throw new Error('PUBLIC_SELF_URL is required')
     }
@@ -29,15 +44,27 @@ export function useServerConfig(): IServerConfig {
     }
 }
 
+export function runMode() {
+    return process.env.RUN_MODE || 'development'
+}
+
+export function isDev() {
+    return process.env.RUN_MODE === 'development'
+}
+
+export function isTest() {
+    return process.env.RUN_MODE === 'test'
+}
+
 export function isProd() {
-    return process.env.NODE_ENV === 'production'
+    return process.env.RUN_MODE === 'production'
 }
 
 export function usePublicConfig(): IBrowserConfig {
     const serverConfig = useServerConfig()
     return {
         PUBLIC_SELF_URL: serverConfig.PUBLIC_SELF_URL,
-        PUBLIC_MODE: isProd() ? 'production' : 'development',
+        PUBLIC_MODE: runMode(),
         PUBLIC_TURNSTILE: serverConfig.PUBLIC_TURNSTILE,
         PUBLIC_PORTAL_URL: serverConfig.PUBLIC_PORTAL_URL,
     }
@@ -46,8 +73,8 @@ export function usePublicConfig(): IBrowserConfig {
 // 获取Lightning资源URL
 export function getLightningUrl(): string {
     const serverConfig = useServerConfig()
-    if (isProd()) {
-        return `${serverConfig.PUBLIC_PHOENIX_URL}/lightning/assets/cloud.mjs`
+    if (isDev()) {
+        return '/lightning/src/client/cloud.tsx'
     }
-    return '/lightning/src/client/cloud.tsx'
+    return `${serverConfig.PUBLIC_PHOENIX_URL}/lightning/assets/cloud.mjs`
 }

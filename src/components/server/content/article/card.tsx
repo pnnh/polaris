@@ -22,7 +22,7 @@ export function ArticleCard({model, domain, lang, dir}: {
         imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)
     }
     return <div className={'middleItem'} key={model.uid}>
-        <div className={'itemDetail'}>
+        <div className={'itemDetail'} data-article={model.uid}>
             <div className={'itemTitle'}>
                 <Link href={readUrl} title={model.uid}>{model.title}</Link></div>
             <div className={'description'} title={model.description}>
