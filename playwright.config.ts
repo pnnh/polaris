@@ -10,7 +10,8 @@ export default defineConfig({
     workers: isTest ? 1 : undefined,
     reporter: [
         ['list'],
-        isTest ? ['json', {outputFile: 'test-results.json'}] : ['dot'],
+        ['json', {outputFile: 'test-results.json'}],
+        ['html', {host: '0.0.0.0', port: 9323, open: 'always'}],
     ],
     use: {
         trace: 'on-first-retry',
