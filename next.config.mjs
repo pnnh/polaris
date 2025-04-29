@@ -4,6 +4,8 @@ import {fileURLToPath} from 'url'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const isProd = process.env.NODE_ENV === 'production'
+
 /** @type {import('next').NextConfig} */
 let nextConfig = {
     output: 'standalone',
@@ -30,13 +32,13 @@ let nextConfig = {
             }
         ]
     },
-    compress: process.env.NODE_ENV === 'production',    // 构建时会压缩
+    compress: isProd,    // 构建时会压缩
     sassOptions: {
         includePaths: [path.join(__dirname, 'styles')],
         silenceDeprecations: ['legacy-js-api'],
     },
     async rewrites() {
-        return [
+        return isProd ? [] : [
             {
                 source: '/lightning/:path*',
                 destination: 'http://localhost:5173/lightning/:path*' // Proxy to Backend

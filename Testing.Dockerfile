@@ -12,4 +12,4 @@ FROM deps AS builder
 WORKDIR /app
 COPY . .
 
-CMD ["npx", "playwright", "test"]
+CMD ["sleep", "10", "&&", "npx", "playwright", "test"]
