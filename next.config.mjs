@@ -14,10 +14,13 @@ let nextConfig = {
     experimental: {
         esmExternals: true,
         reactCompiler: true,
+        serverActions: {
+            allowedOrigins: ['huable.local', "*.huable.local"],
+        },
     },
+    allowedDevOrigins: ['huable.local', '*.huable.local'],
     webpack: function (config) {
         return config;
-
     },
     images: {
         remotePatterns: [
@@ -37,14 +40,14 @@ let nextConfig = {
         includePaths: [path.join(__dirname, 'styles')],
         silenceDeprecations: ['legacy-js-api'],
     },
-    async rewrites() {
-        return isProd ? [] : [
-            {
-                source: '/lightning/:path*',
-                destination: 'http://localhost:5173/lightning/:path*' // Proxy to Backend
-            }
-        ]
-    }
+    // async rewrites() {
+    //     return isProd ? [] : [
+    //         {
+    //             source: '/lightning/:path*',
+    //             destination: 'http://localhost:5173/lightning/:path*' // Proxy to Backend
+    //         }
+    //     ]
+    // }
 }
 
 export default nextConfig
