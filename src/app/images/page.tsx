@@ -5,7 +5,7 @@ import {getPathname} from "@/services/server/pathname";
 import {Metadata} from 'next'
 import queryString from "query-string";
 import {serverPortalSignin} from "@/services/server/domain/domain";
-import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {PaginationServer} from "@/components/server/pagination";
 import {replaceSearchParams} from "@/atom/common/utils/query";
@@ -52,7 +52,7 @@ export default async function Page({params, searchParams}: {
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
 
-    return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout userInfo={SymbolUnknown} lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={styles.contentContainer}>
 

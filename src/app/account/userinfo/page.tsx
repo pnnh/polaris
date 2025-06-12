@@ -28,7 +28,7 @@ export default async function Page({params, searchParams}: {
     }
 
     return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata}>
+                          metadata={metadata} userInfo={userInfo}>
         <div className={styles.userInfoContainer}>
             <div className={styles.userInfoCard}>
                 <div className={styles.avatar}>

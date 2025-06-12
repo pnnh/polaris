@@ -1,5 +1,6 @@
 import path from 'path'
 import {fileURLToPath} from 'url'
+import bundleAnalyzer from '@next/bundle-analyzer'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,10 +19,17 @@ let nextConfig = {
             allowedOrigins: ['huable.local', "*.huable.local"],
         },
     },
-    allowedDevOrigins: ['huable.local', '*.huable.local'],
-    webpack: function (config) {
-        return config;
+
+    eslint: {
+        ignoreDuringBuilds: true,
     },
+    allowedDevOrigins: ['huable.local', '*.huable.local'],
+    // webpack: (config, {dev}) => {
+    //     if (dev) {
+    //         config.devtool = false; // Disable source maps
+    //     }
+    //     return config;
+    // },
     images: {
         remotePatterns: [
             {
@@ -49,5 +57,9 @@ let nextConfig = {
     //     ]
     // }
 }
+const withBundleAnalyzer = bundleAnalyzer({
+    enabled: process.env.ANALYZE === 'true',
+    openAnalyzer: false,
+})
 
-export default nextConfig
+export default withBundleAnalyzer(nextConfig)

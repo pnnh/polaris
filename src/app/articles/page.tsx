@@ -10,7 +10,7 @@ import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
 import {ArticleCard} from "@/components/server/content/article/card";
 import {ArticleRankCard} from "@/components/server/content/article/rank";
-import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PaginationServer} from "@/components/server/pagination";
 import {NoData} from "@/components/common/empty";
 import {replaceSearchParams} from "@/atom/common/utils/query";
@@ -68,7 +68,7 @@ export default async function Page({params, searchParams}: {
         const queryFilter = (searchParamsValue.filter ?? 'all')
         return ' ' + (queryFilter === filter ? 'activeLink' : '')
     }
-    return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout userInfo={SymbolUnknown} lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={'contentContainer'}>
             <div className={'conMiddle'}>

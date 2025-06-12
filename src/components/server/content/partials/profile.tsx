@@ -25,22 +25,22 @@ export async function UserProfileSelector({searchParams}: { searchParams: Record
                 })
             }
         </div>
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#C6C6C6">
-            <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>
-        </svg>
-        <ArticleNavbar pathname={pathname}/>
-        {pathname.startsWith('/articles') && <ArticleSubNavbar pathname={pathname} searchParams={searchParams}/>}
+        {/*<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#C6C6C6">*/}
+        {/*    <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>*/}
+        {/*</svg>*/}
+        {/*<ArticleNavbar pathname={pathname}/>*/}
+        <ArticleSubNavbar pathname={pathname} searchParams={searchParams}/>
     </>
 }
 
 function ArticleNavbar({pathname}: { pathname: string }) {
     const navLinks = [
-        {name: '频道', href: `/channels`},
+        // {name: '频道', href: `/channels`},
         {name: '笔记', href: `/articles`},
-        {name: '图片', href: `/images`},
-        {name: '随机密码', href: `/tools/password`},
-        {name: 'UUID', href: `/tools/uuid`},
-        {name: '二维码', href: `/tools/qrcode`},
+        // {name: '图片', href: `/images`},
+        // {name: '随机密码', href: `/tools/password`},
+        // {name: 'UUID', href: `/tools/uuid`},
+        // {name: '二维码', href: `/tools/qrcode`},
     ]
     return <>
         {navLinks.map((link) => {

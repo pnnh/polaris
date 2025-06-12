@@ -6,7 +6,7 @@ import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/services/server/pathname";
 import {IDomain} from "@/services/common/domain";
 import {ArticleCard} from "@/components/server/content/article/card";
-import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
+import {CommonResult, PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {Metadata} from 'next'
 import {NoData} from "@/components/common/empty";
 import {PaginationServer} from "@/components/server/pagination";
@@ -56,7 +56,7 @@ export default async function Page({params, searchParams}: {
         return <NoData size={'large'}/>
     }
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
-    return <ContentLayout lang={'en'} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout userInfo={SymbolUnknown} lang={'en'} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={'searchPage'}>
             <div className={'pageContainer'}>

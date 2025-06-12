@@ -6,6 +6,7 @@ import ContentLayout from "@/components/server/content/layout";
 import {ToolBody} from "@/atom/client/components/tools/uuid/tool";
 import {CommentsClient} from "@/atom/client/components/comments/comments";
 import {useServerConfig} from "@/services/server/config";
+import {SymbolUnknown} from "@/atom/common/models/protocol";
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ channel: string }>,
@@ -21,7 +22,7 @@ export default async function Home({params, searchParams}: {
     }
     const serverConfig = useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
-    return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout userInfo={SymbolUnknown} lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={'uuidPage'}>
             <div className={'pageContent'}>

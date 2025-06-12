@@ -7,6 +7,7 @@ import {getPathname} from "@/services/server/pathname";
 import RandomPasswordPage from "@/atom/client/components/tools/password/random-password";
 import {CommentsClient} from "@/atom/client/components/comments/comments";
 import {useServerConfig} from "@/services/server/config";
+import {SymbolUnknown} from "@/atom/common/models/protocol";
 
 export const metadata: Metadata = {
     title: pageTitle('随机密码生成器'),
@@ -21,7 +22,7 @@ export default async function Home({params, searchParams}: {
     const pathname = await getPathname()
     const serverConfig = useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
-    return <ContentLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
+    return <ContentLayout userInfo={SymbolUnknown} lang={'zh'} searchParams={await searchParams} pathname={pathname}
                           metadata={metadata}>
         <div className={'indexPage'}>
             <RandomPasswordPage/>

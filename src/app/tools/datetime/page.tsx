@@ -4,6 +4,7 @@ import {getPathname} from "@/services/server/pathname";
 import {Metadata} from "next";
 import ContentLayout from "@/components/server/content/layout";
 import DatetimeComponent from '@/atom/client/components/tools/datetime/datetime';
+import {SymbolUnknown} from "@/atom/common/models/protocol";
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ channel: string }>,
@@ -17,7 +18,7 @@ export default async function Home({params, searchParams}: {
         keywords: 'codegen.seo.keywords',
         description: 'codegen.seo.description',
     }
-    return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout userInfo={SymbolUnknown} lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={'qrCodePage'}>
             <DatetimeComponent lang={'zh'}/>

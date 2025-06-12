@@ -4,7 +4,7 @@ import {TocInfo} from '@/components/common/toc'
 import {Metadata} from 'next'
 import {serverPhoenixSignin, serverPortalSignin} from "@/services/server/domain/domain";
 import {pageTitle} from "@/utils/page";
-import ContentLayout, {templateBodyId} from '@/components/server/content/layout'
+import {templateBodyId} from '@/components/server/content/layout'
 import {getClientIp, getPathname} from "@/services/server/pathname";
 import {GoTop} from "@/components/client/gotop";
 import {CiAlarmOn} from "react-icons/ci";
@@ -12,7 +12,7 @@ import {FaEye} from "react-icons/fa";
 import {generatorRandomString, STSubString} from "@/atom/common/utils/string";
 import {formatRfc3339} from "@/atom/common/utils/datetime";
 import {base58ToUuid} from "@/atom/common/utils/basex";
-import {CodeOk, CommonResult} from "@/atom/common/models/protocol";
+import {CodeOk, CommonResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/atom/common/models/article";
 import {TocItem} from "@/atom/common/models/toc";
 import {getDefaultNoteImageByUid} from "@/services/common/note";
@@ -69,7 +69,7 @@ export default async function Home({params, searchParams}: {
     const serverConfig = useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
     return <ArticleReadLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
-                              metadata={metadata}>
+                              metadata={metadata} userInfo={SymbolUnknown}>
         <div>
             <div className={'articleCover'}>
                 <div className={'articleHeader'}>

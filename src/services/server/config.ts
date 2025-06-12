@@ -4,7 +4,12 @@ import {IBrowserConfig} from "@/services/common/config";
 
 console.log('process.env.RUN_MODE', process.env.RUN_MODE)
 
+let isConfigLoaded = false
+
 function loadConfig() {
+    if (isConfigLoaded) {
+        return
+    }
     // 根据环境从不同的文件加载配置
     const envPath = `.env.${runMode()}`
     console.log('当前配置环境', envPath)
@@ -12,6 +17,7 @@ function loadConfig() {
     if (result.error) {
         throw new Error(`解析配置出错: ${result.error}`)
     }
+    isConfigLoaded = true
 }
 
 export interface IServerConfig {

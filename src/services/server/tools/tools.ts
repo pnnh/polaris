@@ -35,13 +35,13 @@ export function selectApps(expectLang: string): ApplicationModel[] {
             image: '/images/application/qrcode.webp',
             ...selectAppLangProfile(qrcodeUrn, expectLang)
         },
-        {
-            uid: datetimeUrn,
-            url: '/tools/datetime',
-            update_time: '2024-10-30T12:00:00.000Z',
-            image: '/images/application/datetime.webp',
-            ...selectAppLangProfile(datetimeUrn, expectLang)
-        },
+        // {
+        //     uid: datetimeUrn,
+        //     url: '/tools/datetime',
+        //     update_time: '2024-10-30T12:00:00.000Z',
+        //     image: '/images/application/datetime.webp',
+        //     ...selectAppLangProfile(datetimeUrn, expectLang)
+        // },
     ]
 }
 

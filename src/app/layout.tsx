@@ -29,9 +29,9 @@ const roboto = Roboto({
 export const revalidate = 1
 export const dynamic = 'force-dynamic'
 
+const rootPageTitle = pageTitle()
 export const metadata: Metadata = {
-    title: '希波万象 - 实用工具集',
-    description: '实用工具集',
+    title: rootPageTitle
 }
 
 export default async function RootLayout({
@@ -54,8 +54,7 @@ export default async function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
         <link rel="shortcut icon" href="/favicon.ico"/>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
-        <meta name="apple-mobile-web-app-title" content="希波万象"/>
-        {/*<link rel="manifest" href="/site.webmanifest"/>*/}
+        <meta name="apple-mobile-web-app-title" content={rootPageTitle}/>
         <title>{pageTitle(metadata.title as string)}</title>
         {metadata.keywords && <meta name="keywords" content={metadata.keywords as string}></meta>}
         {metadata.description && <meta name="description" content={metadata.description as string}></meta>}

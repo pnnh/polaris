@@ -3,6 +3,7 @@ import './page.scss'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/services/server/pathname";
 import {Metadata} from 'next'
+import {SymbolUnknown} from "@/atom/common/models/protocol";
 
 export const dynamic = "force-dynamic";
 
@@ -18,7 +19,7 @@ export default async function Page({params, searchParams}: {
         keywords: 'codegen.seo.keywords',
         description: 'codegen.seo.description',
     }
-    return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout userInfo={SymbolUnknown} lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={'aboutContainer'}>
             文件页面

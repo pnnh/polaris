@@ -1,4 +1,4 @@
-export function pageTitle(title: string) {
+export function pageTitle(title?: string | null | undefined): string {
     const slogan = '希波万象'
     if (!title || title.startsWith(slogan)) {
         return slogan

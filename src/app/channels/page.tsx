@@ -5,7 +5,7 @@ import ContentLayout from "@/components/server/content/layout";
 import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
 import './page.scss'
-import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PSChannelModel} from "@/atom/common/models/channel";
 import {Metadata} from 'next';
 import {NoData} from "@/components/common/empty";
@@ -36,7 +36,7 @@ export default async function Page({params, searchParams}: {
         description: 'codegen.seo.description',
     }
 
-    return <ContentLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
+    return <ContentLayout userInfo={SymbolUnknown} lang={'zh'} searchParams={await searchParams} pathname={pathname}
                           metadata={metadata}>
         <div className={'container'}>
             <div className={'body'}>
