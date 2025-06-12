@@ -8,6 +8,7 @@ import {ContentSearchAction} from "@/components/server/content/partials/search";
 import {useServerConfig} from "@/services/server/config";
 import {AccountModel} from "@/atom/common/models/account";
 import AppsIcon from '@mui/icons-material/Apps';
+import {PSLanguageSelector} from "@/components/common/language";
 
 export async function ContentPublicNavbar({pathname, searchParams, lang, userInfo}: {
     pathname: string,
@@ -19,9 +20,9 @@ export async function ContentPublicNavbar({pathname, searchParams, lang, userInf
     return <div className={styles.navHeader}>
         <div className={styles.leftNav}>
             <div>
-                <Link className={styles.brandLink} href={'/'}>
+                <a className={styles.brandLink} href={'/'}>
                     <Image src='/images/logo.png' alt='logo' priority={false} fill={true} sizes={'48px,48px'}/>
-                </Link>
+                </a>
             </div>
             <UserProfileSelector searchParams={searchParams}/>
         </div>
@@ -30,6 +31,7 @@ export async function ContentPublicNavbar({pathname, searchParams, lang, userInf
             {/*    <a href={`/en`} className={activeClass('en')}>English</a>*/}
             {/*    <a href={`/zh`} className={activeClass('zh')}>中文</a>*/}
             {/*</div>*/}
+            <PSLanguageSelector lang={lang}/>
             <ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword}/>
             <a className={styles.toolsLink} href={'/tools'}><AppsIcon/></a>
             <UserAction portalUrl={serverConfig.PUBLIC_PORTAL_URL} userInfo={userInfo}/>

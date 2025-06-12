@@ -16,7 +16,7 @@ export function ArticleCard({model, domain, lang, dir}: {
     model: PSArticleModel,
     domain: IDomain, lang: string, dir: string
 }) {
-    const readUrl = `/articles/${dir}/${uuidToBase58(model.uid || model.uid)}`
+    const readUrl = `${lang}/articles/${dir}/${uuidToBase58(model.uid || model.uid)}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)
@@ -24,7 +24,7 @@ export function ArticleCard({model, domain, lang, dir}: {
     return <div className={'middleItem'} key={model.uid}>
         <div className={'itemDetail'} data-article={model.uid}>
             <div className={'itemTitle'}>
-                <Link href={readUrl} title={model.uid}>{model.title}</Link></div>
+                <a href={readUrl} title={model.uid}>{model.title}</a></div>
             <div className={'description'} title={model.description}>
                 {STSubString(model.description || model.body, 100)}
             </div>

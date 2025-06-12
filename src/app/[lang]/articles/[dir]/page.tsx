@@ -16,11 +16,13 @@ import {NoData} from "@/components/common/empty";
 import {replaceSearchParams} from "@/atom/common/utils/query";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {PSArticleModel} from "@/atom/common/models/article";
+import {ArticleMiddleBody} from "@/components/server/content/article/article";
+import {langEn} from "@/atom/common/language";
 
 export const dynamic = "force-dynamic";
 
 export default async function Page({params, searchParams}: {
-    params: Promise<{ channel: string }>,
+    params: Promise<{ lang: string, dir: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
@@ -32,6 +34,8 @@ export default async function Page({params, searchParams}: {
     }
     const pageSize = 10
     const channelPk = searchParamsValue.channel
+    const paramsValue = await params;
+    const lang = paramsValue.lang || langEn
 
     const metadata: Metadata = {}
     metadata.title = pageTitle('')
@@ -43,7 +47,10 @@ export default async function Page({params, searchParams}: {
         size: 10
     })
     let domain = serverPhoenixSignin()
-    const currentDir = 'dir1'
+    const currentDir = paramsValue.dir || 'dir1'
+    if (currentDir === 'dir2') {
+        domain = serverPortalSignin()
+    }
     const rankUrl = `/articles?${rankQuery}`
     const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)
 
@@ -68,28 +75,28 @@ export default async function Page({params, searchParams}: {
         const queryFilter = (searchParamsValue.filter ?? 'all')
         return ' ' + (queryFilter === filter ? 'activeLink' : '')
     }
-    return <ContentLayout userInfo={SymbolUnknown} lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={'contentContainer'}>
             <div className={'conMiddle'}>
                 <div className={'middleTop'}>
                     <div className={'topLeft'}>
-                        <Link className={'sortLink' + sortClass('latest')}
-                              href={replaceSearchParams(searchParamsValue, 'sort', 'latest')}>最新</Link>
-                        <Link className={'sortLink' + sortClass('read')}
-                              href={replaceSearchParams(searchParamsValue, 'sort', 'read')}>阅读数</Link>
+                        <a className={'sortLink' + sortClass('latest')}
+                           href={replaceSearchParams(searchParamsValue, 'sort', 'latest')}>最新</a>
+                        <a className={'sortLink' + sortClass('read')}
+                           href={replaceSearchParams(searchParamsValue, 'sort', 'read')}>阅读数</a>
                     </div>
                     <div className={'topRight'}>
-                        <Link className={'filterLink' + filterClass('month')}
-                              href={replaceSearchParams(searchParamsValue, 'filter', 'month')}>一月内</Link>
-                        <Link className={'filterLink' + filterClass('year')}
-                              href={replaceSearchParams(searchParamsValue, 'filter', 'year')}>一年内</Link>
-                        <Link className={'filterLink' + filterClass('all')}
-                              href={replaceSearchParams(searchParamsValue, 'filter', 'all')}>所有</Link>
+                        <a className={'filterLink' + filterClass('month')}
+                           href={replaceSearchParams(searchParamsValue, 'filter', 'month')}>一月内</a>
+                        <a className={'filterLink' + filterClass('year')}
+                           href={replaceSearchParams(searchParamsValue, 'filter', 'year')}>一年内</a>
+                        <a className={'filterLink' + filterClass('all')}
+                           href={replaceSearchParams(searchParamsValue, 'filter', 'all')}>所有</a>
                     </div>
                 </div>
                 <div className={'middleBody'}>
-                    <MiddleBody selectResult={selectResult} domain={domain} lang={'zh'} dir={currentDir}/>
+                    <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang} dir={currentDir}/>
                 </div>
                 <div className={'middlePagination'}>
                     <PaginationServer pagination={pagination}
@@ -98,23 +105,8 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
             <div className={'conRight'}>
-                <ArticleRankCard rankResult={rankSelectResult} lang={'zh'}/>
+                <ArticleRankCard rankResult={rankSelectResult} lang={lang}/>
             </div>
         </div>
     </ContentLayout>
 }
-
-function MiddleBody({selectResult, domain, lang, dir}: {
-    selectResult: PLSelectResult<PSArticleModel>,
-    domain: IDomain,
-    lang: string,
-    dir: string
-}) {
-    if (!selectResult || !selectResult.data || !selectResult.data.range || selectResult.data.range.length === 0) {
-        return <NoData size='large'/>
-    }
-    return selectResult.data.range.map((model, index) => {
-        return <ArticleCard key={index} model={model} domain={domain} lang={lang} dir={dir}/>
-    })
-}
-

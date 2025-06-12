@@ -20,8 +20,8 @@ export async function UserProfileSelector({searchParams}: { searchParams: Record
                             color: '#4A95DD',
                         }
                     }
-                    return <Link key={link.name} className={'siteLink'} style={style} href={link
-                        .href}>{link.name}</Link>
+                    return <a key={link.name} className={'siteLink'} style={style} href={link
+                        .href}>{link.name}</a>
                 })
             }
         </div>
@@ -50,7 +50,7 @@ function ArticleNavbar({pathname}: { pathname: string }) {
                     color: '#4A95DD',
                 }
             }
-            return <Link key={link.name} className={'navLink'} style={style} href={link.href}>{link.name}</Link>
+            return <a key={link.name} className={'navLink'} style={style} href={link.href}>{link.name}</a>
         })}
     </>
 }
@@ -75,7 +75,7 @@ function ArticleSubNavbar({pathname, searchParams}: { pathname: string, searchPa
                     color: '#4A95DD',
                 }
             }
-            return <Link key={link.name} className={'navLink'} style={style} href={link.href}>{link.name}</Link>
+            return <a key={link.name} className={'navLink'} style={style} href={link.href}>{link.name}</a>
         })}
     </>
 }

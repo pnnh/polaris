@@ -4,18 +4,18 @@ import {pageTitle} from "@/utils/page";
 import styles from './page.module.scss'
 import {useServerConfig} from "@/services/server/config";
 import ContentLayout from "@/components/server/content/layout";
-import {getDefaultNoteImageByUid} from "@/services/common/note";
-import {getUserinfo} from "@/atom/client/account/account";
-import {CodeOk} from "@/atom/common/models/protocol";
 import {getAccountUrn} from "@/atom/common/models/account";
 import {serverGetUserinfo} from "@/atom/server/account/account";
+import {langEn} from "@/atom/common/language";
 
 export default async function Page({params, searchParams}: {
-    params: Promise<{ channel: string }>,
+    params: Promise<{ lang: string, channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
     const searchParamsValue = await searchParams
+    const paramsValue = await params;
+    const lang = paramsValue.lang || langEn
 
     const metadata: Metadata = {}
     metadata.title = pageTitle('')
@@ -27,7 +27,7 @@ export default async function Page({params, searchParams}: {
         return <div>遇到错误</div>
     }
 
-    return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} userInfo={userInfo}>
         <div className={styles.userInfoContainer}>
             <div className={styles.userInfoCard}>

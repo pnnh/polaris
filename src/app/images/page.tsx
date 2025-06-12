@@ -14,15 +14,17 @@ import {NoData} from "@/components/common/empty";
 import {MTPictureModel} from "@/atom/common/models/images/image";
 import {getDefaultNoteImageByUid} from "@/services/common/note";
 import {useServerConfig} from "@/services/server/config";
+import {langEn} from "@/atom/common/language";
 
 export const dynamic = "force-dynamic";
 
 export default async function Page({params, searchParams}: {
-    params: Promise<{ channel: string }>,
+    params: Promise<{ lang: string, channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
-    const baseParams = await params;
+    const paramsValue = await params;
+    const lang = paramsValue.lang || langEn
     const searchParamsValue = await searchParams
     const metadata: Metadata = {
         title: 'codegen.seo.title',
@@ -52,14 +54,14 @@ export default async function Page({params, searchParams}: {
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
 
-    return <ContentLayout userInfo={SymbolUnknown} lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={styles.contentContainer}>
 
             <div className={styles.conMiddle}>
 
                 <div className={styles.imageGrid}>
-                    <MiddleBody selectResult={selectResult} domain={domain} lang={'zh'} dir={''}/>
+                    <MiddleBody selectResult={selectResult} domain={domain} lang={lang} dir={''}/>
                 </div>
                 <div className={styles.middlePagination}>
                     <PaginationServer pagination={pagination}
@@ -68,7 +70,7 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
             <div className={styles.conRight}>
-                <ImageFilterCard lang={'zh'}/>
+                <ImageFilterCard lang={lang}/>
             </div>
         </div>
     </ContentLayout>

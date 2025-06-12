@@ -8,6 +8,7 @@ import RandomPasswordPage from "@/atom/client/components/tools/password/random-p
 import {CommentsClient} from "@/atom/client/components/comments/comments";
 import {useServerConfig} from "@/services/server/config";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
+import {langEn} from "@/atom/common/language";
 
 export const metadata: Metadata = {
     title: pageTitle('随机密码生成器'),
@@ -16,13 +17,15 @@ export const metadata: Metadata = {
 };
 
 export default async function Home({params, searchParams}: {
-    params: Promise<{ channel: string }>,
+    params: Promise<{ lang: string, channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
+    const paramsValue = await params;
+    const lang = paramsValue.lang || langEn
     const serverConfig = useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
-    return <ContentLayout userInfo={SymbolUnknown} lang={'zh'} searchParams={await searchParams} pathname={pathname}
+    return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={await searchParams} pathname={pathname}
                           metadata={metadata}>
         <div className={'indexPage'}>
             <RandomPasswordPage/>

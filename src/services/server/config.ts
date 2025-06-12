@@ -71,8 +71,10 @@ export function isProd() {
     return process.env.RUN_MODE === 'production'
 }
 
-export function usePublicConfig(): IBrowserConfig {
-    const serverConfig = useServerConfig()
+export function usePublicConfig(serverConfig?: IServerConfig): IBrowserConfig {
+    if (!serverConfig) {
+        serverConfig = useServerConfig()
+    }
     return {
         PUBLIC_SELF_URL: serverConfig.PUBLIC_SELF_URL,
         PUBLIC_MODE: runMode(),

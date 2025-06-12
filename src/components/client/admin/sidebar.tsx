@@ -6,24 +6,24 @@ import styles from './sidebar.module.scss'
 export function AdminSidebar() {
     return <div className={styles.sidebar}>
         <div className={styles.sidebarItem}>
-            <Link
+            <a
                 href="/admin"
             >
                 管理首页
-            </Link>
+            </a>
         </div>
         <div className={styles.sidebarItem}>
-            <Link
+            <a
                 href="/admin/articles">
                 频道列表
-            </Link>
+            </a>
         </div>
         <div className={styles.sidebarItem}>
-            <Link
+            <a
                 href="/admin/articles"
             >
                 文章列表
-            </Link>
+            </a>
         </div>
     </div>
 }

@@ -16,8 +16,8 @@ export async function AdminLayout({
 
         return <div>
             <h1>您尚未登陆或已过期</h1>
-            <Link
-                href={clientAuthUrl}>前往登陆</Link>
+            <a
+                href={clientAuthUrl}>前往登陆</a>
         </div>
     }
     return <div className={styles.childrenContainer}>

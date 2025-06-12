@@ -22,22 +22,25 @@ import {CommentsClient} from "@/atom/client/components/comments/comments";
 import {useServerConfig} from "@/services/server/config";
 import {ArticleAssets} from "./assets";
 import {ArticleAssertPreview} from "@/app/articles/[dir]/[uid]/preview";
+import {langEn} from "@/atom/common/language";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home({params, searchParams}: {
-    params: Promise<{ dir: string, uid: string }>,
+    params: Promise<{ lang: string, dir: string, uid: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
-    const baseParams = await params;
     const metadata: Metadata = {}
-    const currentDir = baseParams.dir
+    const paramsValue = await params;
+    const lang = paramsValue.lang || langEn
+    const currentDir = paramsValue.dir
+    const searchParamsValue = await searchParams
     let domain = serverPhoenixSignin()
     if (currentDir === 'dir2') {
         domain = serverPortalSignin()
     }
-    const articleUrn = base58ToUuid(baseParams.uid)
+    const articleUrn = base58ToUuid(paramsValue.uid)
     const url = `/articles/${articleUrn}`
     const getResult = await domain.makeGet<CommonResult<PSArticleModel | undefined>>(url)
 
@@ -61,14 +64,14 @@ export default async function Home({params, searchParams}: {
     if (clientIp) {
         await domain.makePost(`/articles/${articleUrn}/viewer`, {clientIp})
     }
-    const readUrl = `/articles/${currentDir}/articles/${baseParams.uid}`
+    const readUrl = `/articles/${currentDir}/articles/${paramsValue.uid}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)
     }
     const serverConfig = useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
-    return <ArticleReadLayout lang={'zh'} searchParams={await searchParams} pathname={pathname}
+    return <ArticleReadLayout lang={lang} searchParams={await searchParams} pathname={pathname}
                               metadata={metadata} userInfo={SymbolUnknown}>
         <div>
             <div className={'articleCover'}>

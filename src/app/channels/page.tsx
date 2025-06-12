@@ -15,13 +15,16 @@ import {isValidUUID} from "@/atom/common/utils/uuid";
 import {PSImageServer} from "@/components/server/image";
 import {STSubString} from "@/atom/common/utils/string";
 import {getDefaultChanImageByUid} from "@/services/common/channel";
+import {langEn} from "@/atom/common/language";
 
 export default async function Page({params, searchParams}: {
-    params: Promise<{ viewer: string }>,
+    params: Promise<{ lang: string, viewer: string }>,
     searchParams: Promise<Record<string, string> & { query: string | undefined }>
 }) {
     const domain = serverPhoenixSignin()
     const pageSize = 64
+    const paramsValue = await params;
+    const lang = paramsValue.lang || langEn
     const url = '/channels?' + `page=1&size=${pageSize}`
     const result = await domain.makeGet<PLSelectResult<PSChannelModel>>(url)
 
@@ -36,13 +39,13 @@ export default async function Page({params, searchParams}: {
         description: 'codegen.seo.description',
     }
 
-    return <ContentLayout userInfo={SymbolUnknown} lang={'zh'} searchParams={await searchParams} pathname={pathname}
+    return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={await searchParams} pathname={pathname}
                           metadata={metadata}>
         <div className={'container'}>
             <div className={'body'}>
                 <div className={'list'}>
                     {result.data.range.map((model) => {
-                        return <Item key={model.uid} model={model} domain={domain} lang={'zh'}/>
+                        return <Item key={model.uid} model={model} domain={domain} lang={lang}/>
                     })
                     }
                 </div>
@@ -65,7 +68,7 @@ function Item(props: { model: PSChannelModel, domain: IDomain, lang: string }) {
         </div>
         <div className={'content'}>
             <div className={'title'}>
-                <Link className={'link'} href={readUrl}>{props.model.name}</Link>
+                <a className={'link'} href={readUrl}>{props.model.name}</a>
             </div>
             <div className={'description'}>
                 {STSubString(props.model.description, 140)}

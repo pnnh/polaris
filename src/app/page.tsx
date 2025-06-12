@@ -13,14 +13,13 @@ import queryString from "query-string";
 import {serverPhoenixSignin} from "@/services/server/domain/domain";
 import {PSArticleModel} from "@/atom/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
-import {IDomain} from "@/services/common/domain";
-import {NoData} from "@/components/common/empty";
-import {ArticleCard} from "@/components/server/content/article/card";
+import {ArticleMiddleBody} from "@/components/server/content/article/article";
+import {langEn} from "@/atom/common/language";
 
 export const dynamic = "force-dynamic";
 
 export default async function Page({params, searchParams}: {
-    params: Promise<{ channel: string }>,
+    params: Promise<{ lang: string, channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
@@ -32,6 +31,8 @@ export default async function Page({params, searchParams}: {
     }
     const pageSize = 10
     const channelPk = searchParamsValue.channel
+    const paramsValue = await params;
+    const lang = paramsValue.lang || langEn
 
     const metadata: Metadata = {}
     metadata.title = pageTitle('')
@@ -68,29 +69,29 @@ export default async function Page({params, searchParams}: {
         const queryFilter = (searchParamsValue.filter ?? 'all')
         return ' ' + (queryFilter === filter ? styles.activeLink : '')
     }
-    return <ContentLayout lang={'zh'} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
 
         <div className={styles.contentContainer}>
             <div className={styles.conMiddle}>
                 <div className={styles.middleTop}>
                     <div className={styles.topLeft}>
-                        <Link className={styles.sortLink + sortClass('read')}
-                              href={replaceSearchParams(searchParamsValue, 'sort', 'latest')}>最新</Link>
-                        <Link className={styles.sortLink + sortClass('read')}
-                              href={replaceSearchParams(searchParamsValue, 'sort', 'read')}>阅读数</Link>
+                        <a className={styles.sortLink + sortClass('read')}
+                           href={replaceSearchParams(searchParamsValue, 'sort', 'latest')}>最新</a>
+                        <a className={styles.sortLink + sortClass('read')}
+                           href={replaceSearchParams(searchParamsValue, 'sort', 'read')}>阅读数</a>
                     </div>
                     <div className={styles.topRight}>
-                        <Link className={styles.filterLink + filterClass('month')}
-                              href={replaceSearchParams(searchParamsValue, 'filter', 'month')}>一月内</Link>
-                        <Link className={styles.filterLink + filterClass('year')}
-                              href={replaceSearchParams(searchParamsValue, 'filter', 'year')}>一年内</Link>
-                        <Link className={styles.filterLink + filterClass('all')}
-                              href={replaceSearchParams(searchParamsValue, 'filter', 'all')}>所有</Link>
+                        <a className={styles.filterLink + filterClass('month')}
+                           href={replaceSearchParams(searchParamsValue, 'filter', 'month')}>一月内</a>
+                        <a className={styles.filterLink + filterClass('year')}
+                           href={replaceSearchParams(searchParamsValue, 'filter', 'year')}>一年内</a>
+                        <a className={styles.filterLink + filterClass('all')}
+                           href={replaceSearchParams(searchParamsValue, 'filter', 'all')}>所有</a>
                     </div>
                 </div>
                 <div className={styles.middleBody}>
-                    <MiddleBody selectResult={selectResult} domain={domain} lang={'zh'} dir={currentDir}/>
+                    <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang} dir={currentDir}/>
                 </div>
                 <div className={styles.middlePagination}>
                     <PaginationServer pagination={pagination}
@@ -99,24 +100,10 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
             <div className={styles.conRight}>
-                <ArticleRankCard rankResult={rankSelectResult} lang={'zh'}/>
+                <ArticleRankCard rankResult={rankSelectResult} lang={lang}/>
             </div>
         </div>
     </ContentLayout>
 }
 
-
-function MiddleBody({selectResult, domain, lang, dir}: {
-    selectResult: PLSelectResult<PSArticleModel>,
-    domain: IDomain,
-    lang: string,
-    dir: string
-}) {
-    if (!selectResult || !selectResult.data || !selectResult.data.range || selectResult.data.range.length === 0) {
-        return <NoData size='large'/>
-    }
-    return selectResult.data.range.map((model, index) => {
-        return <ArticleCard key={index} model={model} domain={domain} lang={lang} dir={dir}/>
-    })
-}
 

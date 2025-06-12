@@ -18,7 +18,7 @@ export function UserAction({portalUrl, userInfo}: { portalUrl: string, userInfo:
         </div>
     }
     return <div className={styles.userAction}>
-        <Link className={styles.loginLink} href={'/account/signin'}>登录</Link>
-        <Link className={styles.loginLink} href={'/account/signup'}>注册</Link>
+        <a className={styles.loginLink} href={'/account/signin'}>登录</a>
+        <a className={styles.loginLink} href={'/account/signup'}>注册</a>
     </div>
 }

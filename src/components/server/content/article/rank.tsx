@@ -18,9 +18,7 @@ export function ArticleRankCard({rankResult, lang}: { rankResult: PLSelectResult
                             <div
                                 className={'rankIndex' + (index <= 2 ? ' rankTop' : '')}>{index + 1}</div>
                             <div className={'rankTitle'}>
-                                <Link
-                                    href={readUrl}
-                                    title={model.title}>{model.title}</Link>
+                                <a href={readUrl} title={model.title}>{model.title}</a>
                             </div>
                         </div>
                     })

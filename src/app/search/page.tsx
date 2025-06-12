@@ -13,15 +13,18 @@ import {PaginationServer} from "@/components/server/pagination";
 import {replaceSearchParams} from "@/atom/common/utils/query";
 import {PSArticleModel} from "@/atom/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
+import {ArticleMiddleBody} from "@/components/server/content/article/article";
+import {langEn} from "@/atom/common/language";
 
 export const dynamic = "force-dynamic";
 
 export default async function Page({params, searchParams}: {
-    params: Promise<{ channel: string }>,
+    params: Promise<{ lang: string, channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
     const paramsValue = await params;
+    const lang = paramsValue.lang || langEn
     const metadata: Metadata = {
         title: 'codegen.seo.title',
         keywords: 'codegen.seo.keywords',
@@ -56,7 +59,7 @@ export default async function Page({params, searchParams}: {
         return <NoData size={'large'}/>
     }
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
-    return <ContentLayout userInfo={SymbolUnknown} lang={'en'} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={'searchPage'}>
             <div className={'pageContainer'}>
@@ -75,7 +78,7 @@ export default async function Page({params, searchParams}: {
             <div className={'contentContainer'}>
                 <div className={'conMiddle'}>
                     <div className={'middleBody'}>
-                        <MiddleBody selectResult={selectResult} domain={domain} lang={'zh'} dir={currentDir}/>
+                        <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang} dir={currentDir}/>
                     </div>
                     <div className={'middlePagination'}>
                         <PaginationServer pagination={pagination}
@@ -85,19 +88,5 @@ export default async function Page({params, searchParams}: {
             </div>
         </div>
     </ContentLayout>
-}
-
-function MiddleBody({selectResult, domain, lang, dir}: {
-    selectResult: PLSelectResult<PSArticleModel>,
-    domain: IDomain,
-    lang: string,
-    dir: string
-}) {
-    if (!selectResult || !selectResult.data || !selectResult.data.range || selectResult.data.range.length === 0) {
-        return <NoData size='large'/>
-    }
-    return selectResult.data.range.map((model) => {
-        return <ArticleCard dir={dir} model={model} domain={domain} lang={lang}/>
-    })
 }
 
