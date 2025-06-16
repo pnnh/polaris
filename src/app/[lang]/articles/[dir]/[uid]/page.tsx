@@ -1,9 +1,9 @@
 import './page.scss'
 import React from 'react'
 import {TocInfo} from '@/components/common/toc'
-import {Metadata} from 'next'
+
 import {serverPhoenixSignin, serverPortalSignin} from "@/services/server/domain/domain";
-import {pageTitle} from "@/utils/page";
+import {PageMetadata, pageTitle} from "@/utils/page";
 import {templateBodyId} from '@/components/server/content/layout'
 import {getClientIp, getPathname} from "@/services/server/pathname";
 import {GoTop} from "@/components/client/gotop";
@@ -21,7 +21,7 @@ import ArticleReadLayout from "@/components/server/content/article/layout";
 import {CommentsClient} from "@/atom/client/components/comments/comments";
 import {useServerConfig} from "@/services/server/config";
 import {ArticleAssets} from "./assets";
-import {ArticleAssertPreview} from "@/app/articles/[dir]/[uid]/preview";
+import {ArticleAssertPreview} from "./preview";
 import {langEn} from "@/atom/common/language";
 
 export const dynamic = "force-dynamic";
@@ -31,9 +31,9 @@ export default async function Home({params, searchParams}: {
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
-    const metadata: Metadata = {}
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
+    const metadata = new PageMetadata(lang)
     const currentDir = paramsValue.dir
     const searchParamsValue = await searchParams
     let domain = serverPhoenixSignin()
@@ -48,7 +48,7 @@ export default async function Home({params, searchParams}: {
         return <div>遇到错误</div>
     }
     const model = getResult.data
-    metadata.title = pageTitle(getResult.data.title)
+    metadata.title = pageTitle(lang, getResult.data.title)
 
     metadata.description = getResult.data.description
     metadata.keywords = getResult.data.keywords
@@ -64,7 +64,7 @@ export default async function Home({params, searchParams}: {
     if (clientIp) {
         await domain.makePost(`/articles/${articleUrn}/viewer`, {clientIp})
     }
-    const readUrl = `/articles/${currentDir}/articles/${paramsValue.uid}`
+    const readUrl = `/${lang}/articles/${currentDir}/articles/${paramsValue.uid}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)

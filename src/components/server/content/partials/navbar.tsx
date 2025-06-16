@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import styles from './navbar.module.scss'
 import Image from 'next/image'
 import React, {CSSProperties} from "react";
@@ -9,6 +8,7 @@ import {useServerConfig} from "@/services/server/config";
 import {AccountModel} from "@/atom/common/models/account";
 import AppsIcon from '@mui/icons-material/Apps';
 import {PSLanguageSelector} from "@/components/common/language";
+import {getPathname, getSearchString} from "@/services/server/pathname";
 
 export async function ContentPublicNavbar({pathname, searchParams, lang, userInfo}: {
     pathname: string,
@@ -17,6 +17,10 @@ export async function ContentPublicNavbar({pathname, searchParams, lang, userInf
     userInfo: AccountModel
 }) {
     const serverConfig = useServerConfig()
+
+    const searchString = await getSearchString()
+    const currentUrl = `${pathname}${searchString}`
+
     return <div className={styles.navHeader}>
         <div className={styles.leftNav}>
             <div>
@@ -24,17 +28,17 @@ export async function ContentPublicNavbar({pathname, searchParams, lang, userInf
                     <Image src='/images/logo.png' alt='logo' priority={false} fill={true} sizes={'48px,48px'}/>
                 </a>
             </div>
-            <UserProfileSelector searchParams={searchParams}/>
+            <UserProfileSelector lang={lang} searchParams={searchParams}/>
         </div>
         <div className={styles.rightNav}>
             {/*<div className={'languages'}>*/}
             {/*    <a href={`/en`} className={activeClass('en')}>English</a>*/}
             {/*    <a href={`/zh`} className={activeClass('zh')}>中文</a>*/}
             {/*</div>*/}
-            <PSLanguageSelector lang={lang}/>
+            <PSLanguageSelector lang={lang} currentUrl={currentUrl}/>
             <ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword}/>
             <a className={styles.toolsLink} href={'/tools'}><AppsIcon/></a>
-            <UserAction portalUrl={serverConfig.PUBLIC_PORTAL_URL} userInfo={userInfo}/>
+            <UserAction lang={lang} portalUrl={serverConfig.PUBLIC_PORTAL_URL} userInfo={userInfo}/>
         </div>
     </div>
 }

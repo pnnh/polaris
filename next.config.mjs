@@ -19,7 +19,6 @@ let nextConfig = {
             allowedOrigins: ['huable.local', "*.huable.local"],
         },
     },
-
     eslint: {
         ignoreDuringBuilds: true,
     },

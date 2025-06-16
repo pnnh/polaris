@@ -1,13 +1,17 @@
 import React, {CSSProperties} from "react";
 import './profile.scss'
-import Link from "next/link";
-import {getPathname} from "@/services/server/pathname";
 
-export async function UserProfileSelector({searchParams}: { searchParams: Record<string, string> }) {
+import {getPathname} from "@/services/server/pathname";
+import {pageTitle} from "@/utils/page";
+
+export async function UserProfileSelector({lang, searchParams}: {
+    lang: string,
+    searchParams: Record<string, string>
+}) {
     const pathname = await getPathname()
 
     const siteLinks = [
-        {name: '希波万象', href: `/`},
+        {name: pageTitle(lang), href: `/`},
     ]
 
     return <>

@@ -1,5 +1,6 @@
 import {cookies} from "next/headers";
 import {IDomain} from "@/services/common/domain";
+import axios from "axios";
 
 export class RemoteDomain implements IDomain {
     baseUrl: string
@@ -14,15 +15,30 @@ export class RemoteDomain implements IDomain {
         const cookieStore = await cookies()
         const authHeader = cookieStore.toString()
 
-        const response = await fetch(urlString, {
-            credentials: 'include',
+        // const response = await fetch(urlString, {
+        //     credentials: 'include',
+        //     method: 'GET',
+        //     cache: 'force-cache',
+        //     next: {
+        //         revalidate: 30, // Revalidate every xx seconds
+        //     },
+        //     headers: {
+        //         Cookie: authHeader,
+        //         Accept: 'application/json',
+        //     },
+        // })
+        // return response.json()
+
+        const response = await axios<T>({
+            url: urlString,
             method: 'GET',
             headers: {
                 Cookie: authHeader,
                 Accept: 'application/json',
             },
+            withCredentials: true,
         })
-        return response.json()
+        return response.data
     }
 
     async makePost<T>(url: string, params: unknown): Promise<T> {

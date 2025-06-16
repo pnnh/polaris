@@ -9,7 +9,7 @@ import {PSArticleFileModel} from "@/atom/common/models/article";
 import {encodeBase64String} from "@/atom/common/utils/basex";
 import {makeGet} from "@/atom/client/http";
 import {useAtom} from "jotai";
-import {articleAssetsPreviewAtom} from "@/app/articles/[dir]/[uid]/state";
+import {articleAssetsPreviewAtom} from "./state";
 
 async function selectFiles(portalUrl: string, channelUrn: string, articleUid: string, parentPath: string = '') {
     const assetsUrl = `${portalUrl}/articles/${articleUid}/assets?parent=${encodeURIComponent(parentPath)}`

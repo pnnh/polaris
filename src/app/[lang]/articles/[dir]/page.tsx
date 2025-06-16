@@ -1,18 +1,13 @@
 import React from 'react'
 import './page.scss'
-import Link from 'next/link'
 import queryString from 'query-string'
 import {serverPhoenixSignin, serverPortalSignin} from "@/services/server/domain/domain";
-import {Metadata} from "next";
-import {pageTitle} from "@/utils/page";
+import {PageMetadata, pageTitle} from "@/utils/page";
 import ContentLayout from '@/components/server/content/layout'
-import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
-import {ArticleCard} from "@/components/server/content/article/card";
 import {ArticleRankCard} from "@/components/server/content/article/rank";
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PaginationServer} from "@/components/server/pagination";
-import {NoData} from "@/components/common/empty";
 import {replaceSearchParams} from "@/atom/common/utils/query";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {PSArticleModel} from "@/atom/common/models/article";
@@ -37,8 +32,8 @@ export default async function Page({params, searchParams}: {
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
 
-    const metadata: Metadata = {}
-    metadata.title = pageTitle('')
+    const metadata = new PageMetadata(lang)
+    metadata.title = pageTitle(lang, '')
     const rankQuery = queryString.stringify({
         sort: 'read',
         filter: 'year',
@@ -101,7 +96,7 @@ export default async function Page({params, searchParams}: {
                 <div className={'middlePagination'}>
                     <PaginationServer pagination={pagination}
                                       pageLinkFunc={(page) =>
-                                          '/articles' + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
+                                          `/${lang}/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                 </div>
             </div>
             <div className={'conRight'}>

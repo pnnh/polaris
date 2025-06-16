@@ -3,7 +3,7 @@
   "version": "0.1.5",
   "private": true,
   "scripts": {
-    "dev": "NEXT_DISABLE_HOT_RELOAD=true next dev -p 7100 --turbo",
+    "dev": "NODE_OPTIONS=--inspect NEXT_DISABLE_HOT_RELOAD=true next dev -p 7100 --turbo",
     "build": "next build",
     "analyze": "ENV=production ANALYZE=true next build"
   },
@@ -21,6 +21,7 @@
     "@next/third-parties": "^15.1.0",
     "@scure/base": "^1.1.7",
     "accept-language": "^3.0.20",
+    "axios": "^1.9.0",
     "base64url": "^3.0.1",
     "cors": "^2.8.5",
     "crypto-js": "^4.2.0",

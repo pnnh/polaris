@@ -7,6 +7,7 @@ import {useServerConfig} from "@/services/server/config";
 import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/atom/common/models/article";
 import {uuidToBase58} from "@/atom/common/utils/basex";
+import {langEn} from "@/atom/common/language";
 
 export const dynamic = "force-dynamic";
 
@@ -23,8 +24,13 @@ export async function GET(request: NextRequest) {
         links = result.data.range.map((article) => {
             const readUrl = `/articles/${dir}/${uuidToBase58(article.uid || article.uid)}`
             return {
-                url: readUrl,
+                url: `/${langEn}${readUrl}`,
                 lastmod: article.update_time,
+                links: [
+                    {lang: 'x-default', url: `/${langEn}${readUrl}`},
+                    {lang: 'en', url: `/${langEn}${readUrl}`},
+                    {lang: 'zh', url: `/zh${readUrl}`},
+                ]
             }
         })
     }

@@ -22,7 +22,12 @@ export async function getPathname(): Promise<string> {
     return headersList.get('next-url') ?? ""
 }
 
+export async function getSearchString(): Promise<string> {
+    const headersList = await headers();
+    return headersList.get('x-search') || "";
+}
+
 export async function getClientIp(): Promise<string> {
     const headersList = await headers()
-    return  headersList.get('x-ip') || 'unknown'
+    return headersList.get('x-ip') || 'unknown'
 }

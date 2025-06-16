@@ -6,6 +6,8 @@ import {AccountModel} from "@/atom/common/models/account";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
 import {useServerConfig} from "@/services/server/config";
 import {serverGetUserinfo} from "@/atom/server/account/account";
+import GlobalLayout from "@/components/server/global";
+import {PageMetadata} from "@/utils/page";
 
 export const templateBodyId = 'globalTemplateBody'
 
@@ -20,7 +22,7 @@ export default async function ArticleReadLayout({
     children: React.ReactNode,
     pathname: string,
     searchParams: Record<string, string>,
-    metadata: Metadata,
+    metadata: PageMetadata,
     lang: string,
     userInfo: AccountModel | typeof SymbolUnknown
 }) {
@@ -32,15 +34,17 @@ export default async function ArticleReadLayout({
     } else {
         currentUserInfo = userInfo;
     }
-    return <div className={styles.templateContainer}>
-        <div>
-            <ContentPublicNavbar pathname={pathname} searchParams={searchParams} lang={lang}
-                                 userInfo={currentUserInfo}/>
-        </div>
-        <div id={templateBodyId} className={styles.templateBody}>
-            <div className={styles.bodyContainer}>
-                {children}
+    return <GlobalLayout lang={lang} metadata={metadata}>
+        <div className={styles.templateContainer}>
+            <div>
+                <ContentPublicNavbar pathname={pathname} searchParams={searchParams} lang={lang}
+                                     userInfo={currentUserInfo}/>
+            </div>
+            <div id={templateBodyId} className={styles.templateBody}>
+                <div className={styles.bodyContainer}>
+                    {children}
+                </div>
             </div>
         </div>
-    </div>
+    </GlobalLayout>
 }

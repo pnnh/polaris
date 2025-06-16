@@ -1,6 +1,6 @@
 import React from 'react'
-import {Metadata} from "next";
 import styles from './layout.module.scss'
+import {PageMetadata} from "@/utils/page";
 
 
 export default async function AccountLayout({
@@ -13,7 +13,7 @@ export default async function AccountLayout({
     children: React.ReactNode,
     pathname: string,
     searchParams: Record<string, string>,
-    metadata: Metadata,
+    metadata: PageMetadata,
     lang: string
 }) {
     return <div className={styles.accountLayout}>

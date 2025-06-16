@@ -2,20 +2,15 @@ import React from 'react'
 import styles from './page.module.scss'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/services/server/pathname";
-import {Metadata} from 'next'
-import Link from "next/link";
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {replaceSearchParams} from "@/atom/common/utils/query";
 import {PaginationServer} from "@/components/server/pagination";
 import {ArticleRankCard} from "@/components/server/content/article/rank";
-import {pageTitle} from "@/utils/page";
+import {PageMetadata, pageTitle} from "@/utils/page";
 import queryString from "query-string";
 import {serverPhoenixSignin} from "@/services/server/domain/domain";
 import {PSArticleModel} from "@/atom/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
-import {IDomain} from "@/services/common/domain";
-import {NoData} from "@/components/common/empty";
-import {ArticleCard} from "@/components/server/content/article/card";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
 import {langEn} from "@/atom/common/language";
 
@@ -36,8 +31,8 @@ export default async function Page({params, searchParams}: {
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
 
-    const metadata: Metadata = {}
-    metadata.title = pageTitle('')
+    const metadata = new PageMetadata(lang)
+    metadata.title = pageTitle(lang, '')
     const rankQuery = queryString.stringify({
         sort: 'read',
         filter: 'year',
@@ -97,7 +92,7 @@ export default async function Page({params, searchParams}: {
                 <div className={styles.middlePagination}>
                     <PaginationServer pagination={pagination}
                                       pageLinkFunc={(page) =>
-                                          '/articles' + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
+                                          `${lang}/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                 </div>
             </div>
             <div className={styles.conRight}>
