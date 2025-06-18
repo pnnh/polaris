@@ -2,19 +2,17 @@
 
 .articleCover {
   width: 100%;
-  height: 180px;
+  height: 12rem;
   position: relative;
-  margin: 0 auto;
-  margin-top: 1rem;
+  margin: 1rem auto 0;
   border-radius: 6px;
   overflow: hidden;
   opacity: 0.9;
   background: #FFFFFF;
 
-  @media (max-width: theme.$screenMediumWidth) {
-    & {
-      height: 200px;
-    }
+  @media screen and (min-width: theme.$screenLargeWidth) {
+    width: theme.$screenLargeWidth;
+    margin: 1rem auto 0 auto;
   }
 
   .articleHeader {
@@ -58,10 +56,16 @@
 .articleContainer {
   display: flex;
   flex-direction: row;
-  margin: 0 auto;
   margin-top: 1rem;
   margin-bottom: 2rem;
+  width: 100%;
+  //padding: 0 1rem 0 1rem;
   gap: 1rem;
+
+  @media screen and (min-width: theme.$screenLargeWidth) {
+    width: theme.$screenLargeWidth;
+    margin: 1rem auto 0 auto;
+  }
 
   .leftArea {
     flex-grow: 1;
@@ -73,11 +77,15 @@
   }
 
   .rightArea {
-    display: flex;
     flex-direction: column;
     gap: 1rem;
     width: 20rem;
     flex-shrink: 0;
+    display: none;
+
+    @media screen and (min-width: theme.$screenLargeWidth) {
+      display: flex;
+    }
 
     .channelCard {
       border-radius: 4px;
@@ -97,25 +105,6 @@
   }
 }
 
-@media screen and (max-width: 48rem) {
-  .articleContainer {
-    flex-direction: column;
-    width: 100%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    gap: 1rem;
-    padding: 0 1rem 0 1rem;
-
-    .leftArea {
-      width: 100%;
-    }
-
-    .rightArea {
-      display: none;
-    }
-  }
-
-}
 
 .articleInfo {
   display: block;

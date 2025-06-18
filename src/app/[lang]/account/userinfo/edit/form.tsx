@@ -2,7 +2,6 @@
 
 import styles from "./form.module.scss";
 import {AccountModel, getAccountUrn} from "@/atom/common/models/account";
-import {getDefaultImageUrl, getDefaultNoteImageByUid} from "@/services/common/note";
 import {useState} from "react";
 
 export function UserinfoEditForm({portalUrl, userInfo}: { portalUrl: string, userInfo: AccountModel }) {

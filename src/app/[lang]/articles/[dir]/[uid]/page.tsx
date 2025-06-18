@@ -1,4 +1,4 @@
-import './page.scss'
+import styles from './page.module.scss'
 import React from 'react'
 import {TocInfo} from '@/components/common/toc'
 
@@ -23,6 +23,7 @@ import {useServerConfig} from "@/services/server/config";
 import {ArticleAssets} from "./assets";
 import {ArticleAssertPreview} from "./preview";
 import {langEn} from "@/atom/common/language";
+import {getLanguageProvider} from "@/services/common/language";
 
 export const dynamic = "force-dynamic";
 
@@ -71,41 +72,42 @@ export default async function Home({params, searchParams}: {
     }
     const serverConfig = useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
+    const langProvider = getLanguageProvider(lang)
     return <ArticleReadLayout lang={lang} searchParams={await searchParams} pathname={pathname}
                               metadata={metadata} userInfo={SymbolUnknown}>
-        <div>
-            <div className={'articleCover'}>
-                <div className={'articleHeader'}>
-                    <h1 className={'articleTitle'} id={titleId}>{getResult.data.title}</h1>
-                    <div className={'articleDescription'}>
-                        {STSubString(model.description || model.body, 80)}
-                    </div>
-                    <div className={'action'}>
-                        <FaEye size={'1rem'}/><span>{getResult.data.discover}</span>&nbsp;
-                        <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(getResult.data.update_time)}</span>
-                    </div>
+
+        <div className={styles.articleCover}>
+            <div className={styles.articleHeader}>
+                <h1 className={styles.articleTitle} id={titleId}>{getResult.data.title}</h1>
+                <div className={styles.articleDescription}>
+                    {STSubString(model.description || model.body, 80)}
                 </div>
-                <img className={'coverImage'} src={imageUrl} alt={model.title}/>
-            </div>
-            <div className={'articleContainer'}>
-                <div className={'leftArea'} id={'articleReadBody'}>
-                    <div className={'articleInfo'}>
-                        <div className={'articleBody'}>
-                            <ArticleAssertPreview tocList={tocList} header={getResult.data.header}
-                                                  body={getResult.data.body}
-                                                  assetsUrl={'assetsUrl'} portalUrl={portalUrl}/>
-                        </div>
-                    </div>
-                    <div className={'commentsClient'}>
-                        <CommentsClient portalUrl={portalUrl} resource={getResult.data.uid}/>
-                    </div>
-                </div>
-                <div className={'rightArea'}>
-                    <TocInfo readurl={readUrl} model={tocList}/>
-                    <ArticleAssets portalUrl={portalUrl} channelUid={''} articleUid={getResult.data.uid}/>
+                <div className={styles.action}>
+                    <FaEye size={'1rem'}/><span>{getResult.data.discover}</span>&nbsp;
+                    <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(getResult.data.update_time)}</span>
                 </div>
             </div>
-            <GoTop anchor={templateBodyId}/>
+            <img className={styles.coverImage} src={imageUrl} alt={model.title}/>
         </div>
+        <div className={styles.articleContainer}>
+            <div className={styles.leftArea} id={'articleReadBody'}>
+                <div className={styles.articleInfo}>
+                    <div className={styles.articleBody}>
+                        <ArticleAssertPreview tocList={tocList} header={getResult.data.header}
+                                              body={getResult.data.body}
+                                              assetsUrl={'assetsUrl'} portalUrl={portalUrl}/>
+                    </div>
+                </div>
+                <div className={styles.commentsClient}>
+                    <CommentsClient portalUrl={portalUrl} resource={getResult.data.uid}
+                                    lang={lang}/>
+                </div>
+            </div>
+            <div className={styles.rightArea}>
+                <TocInfo readurl={readUrl} model={tocList}/>
+                <ArticleAssets portalUrl={portalUrl} channelUid={''} articleUid={getResult.data.uid}/>
+            </div>
+        </div>
+        <GoTop anchor={templateBodyId}/>
     </ArticleReadLayout>
 }

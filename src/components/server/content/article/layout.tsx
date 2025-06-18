@@ -8,6 +8,7 @@ import {useServerConfig} from "@/services/server/config";
 import {serverGetUserinfo} from "@/atom/server/account/account";
 import GlobalLayout from "@/components/server/global";
 import {PageMetadata} from "@/utils/page";
+import {getLanguageProvider} from "@/services/common/language";
 
 export const templateBodyId = 'globalTemplateBody'
 
@@ -34,10 +35,11 @@ export default async function ArticleReadLayout({
     } else {
         currentUserInfo = userInfo;
     }
+    const langProvider = getLanguageProvider(lang)
     return <GlobalLayout lang={lang} metadata={metadata}>
         <div className={styles.templateContainer}>
-            <div>
-                <ContentPublicNavbar pathname={pathname} searchParams={searchParams} lang={lang}
+            <div className={styles.templateNavbar}>
+                <ContentPublicNavbar pathname={pathname} searchParams={searchParams} langProvider={langProvider}
                                      userInfo={currentUserInfo}/>
             </div>
             <div id={templateBodyId} className={styles.templateBody}>

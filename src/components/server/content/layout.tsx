@@ -1,13 +1,13 @@
 import React from 'react'
 import {ContentPublicNavbar} from "@/components/server/content/partials/navbar";
-import './layout.scss'
-import {Metadata} from "next";
+import styles from './layout.module.scss'
 import {AccountModel} from "@/atom/common/models/account";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
 import {serverGetUserinfo} from "@/atom/server/account/account";
 import {useServerConfig} from "@/services/server/config";
 import GlobalLayout from "@/components/server/global";
 import {PageMetadata} from "@/utils/page";
+import {getLanguageProvider} from "@/services/common/language";
 
 export const templateBodyId = 'globalTemplateBody'
 
@@ -34,14 +34,15 @@ export default async function ContentLayout({
     } else {
         currentUserInfo = userInfo;
     }
+    const langProvider = getLanguageProvider(lang)
     return <GlobalLayout lang={lang} metadata={metadata}>
-        <div className={'templateContainer'}>
-            <div className={'templateNavbar'}>
-                <ContentPublicNavbar pathname={pathname} searchParams={searchParams} lang={lang}
+        <div className={styles.templateContainer}>
+            <div className={styles.templateNavbar}>
+                <ContentPublicNavbar pathname={pathname} searchParams={searchParams} langProvider={langProvider}
                                      userInfo={currentUserInfo}/>
             </div>
-            <div id={templateBodyId} className={'templateBody'}>
-                <div className={'bodyContainer'}>
+            <div id={templateBodyId} className={styles.templateBody}>
+                <div className={styles.bodyContainer}>
                     {children}
                 </div>
             </div>

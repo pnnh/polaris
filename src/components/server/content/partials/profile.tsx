@@ -1,10 +1,11 @@
 import React, {CSSProperties} from "react";
-import './profile.scss'
+import styles from './profile.module.scss'
 
 import {getPathname} from "@/services/server/pathname";
 import {pageTitle} from "@/utils/page";
+import {getLanguageProvider, ILanguageProvider} from "@/services/common/language";
 
-export async function UserProfileSelector({lang, searchParams}: {
+export async function SiteNavMenu({lang, searchParams}: {
     lang: string,
     searchParams: Record<string, string>
 }) {
@@ -13,9 +14,9 @@ export async function UserProfileSelector({lang, searchParams}: {
     const siteLinks = [
         {name: pageTitle(lang), href: `/`},
     ]
-
-    return <>
-        <div className={'roleButtonContainer'}>
+    const langProvider = getLanguageProvider(lang)
+    return <div className={styles.siteNavMenu}>
+        <div className={styles.roleButtonContainer}>
             {
                 siteLinks.map((link) => {
                     let style: CSSProperties = {}
@@ -24,7 +25,7 @@ export async function UserProfileSelector({lang, searchParams}: {
                             color: '#4A95DD',
                         }
                     }
-                    return <a key={link.name} className={'siteLink'} style={style} href={link
+                    return <a key={link.name} className={styles.siteLink} style={style} href={link
                         .href}>{link.name}</a>
                 })
             }
@@ -33,8 +34,8 @@ export async function UserProfileSelector({lang, searchParams}: {
         {/*    <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>*/}
         {/*</svg>*/}
         {/*<ArticleNavbar pathname={pathname}/>*/}
-        <ArticleSubNavbar pathname={pathname} searchParams={searchParams}/>
-    </>
+        <ArticleSubNavbar langProvider={langProvider} pathname={pathname} searchParams={searchParams}/>
+    </div>
 }
 
 function ArticleNavbar({pathname}: { pathname: string }) {
@@ -54,15 +55,18 @@ function ArticleNavbar({pathname}: { pathname: string }) {
                     color: '#4A95DD',
                 }
             }
-            return <a key={link.name} className={'navLink'} style={style} href={link.href}>{link.name}</a>
+            return <a key={link.name} className={styles.navLink} style={style} href={link.href}>{link.name}</a>
         })}
     </>
 }
 
-function ArticleSubNavbar({pathname, searchParams}: { pathname: string, searchParams: Record<string, string> }) {
+function ArticleSubNavbar({langProvider, pathname, searchParams}: {
+    langProvider: ILanguageProvider, pathname: string,
+    searchParams: Record<string, string>
+}) {
     const navLinks = [
-        {name: '手书笔记', href: `/articles/dir1`},
-        {name: '源码笔记', href: `/articles/dir2`},
+        {name: langProvider.handwrittenNotes, href: `/articles/dir1`},
+        {name: langProvider.codeNotes, href: `/articles/dir2`},
     ]
     let currentPathname = pathname
     if (currentPathname === '/articles') {
@@ -79,7 +83,7 @@ function ArticleSubNavbar({pathname, searchParams}: { pathname: string, searchPa
                     color: '#4A95DD',
                 }
             }
-            return <a key={link.name} className={'navLink'} style={style} href={link.href}>{link.name}</a>
+            return <a key={link.name} className={styles.navLink} style={style} href={link.href}>{link.name}</a>
         })}
     </>
 }

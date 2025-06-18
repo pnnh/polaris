@@ -6,17 +6,19 @@ import React, {useState} from "react";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {accountSignin} from "@/atom/client/account/account";
+import {getLanguageProvider, ILanguageProvider} from "@/services/common/language";
 
 const buttonThrottle = new ButtonThrottle(1000)
 
-export function SigninForm({portalUrl}: { portalUrl: string }) {
+export function SigninForm({lang, portalUrl}: { lang: string, portalUrl: string }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [infoMsg, setInfoMsg] = useState('')
+    const langProvider = getLanguageProvider(lang)
 
     const submitForm = async () => {
         if (!await buttonThrottle.throttle()) {
-            setInfoMsg('操作过于频繁')
+            setInfoMsg(langProvider.frequentOperation)
             return
         }
         if (!username || username.length < 1) {
@@ -66,9 +68,9 @@ export function SigninForm({portalUrl}: { portalUrl: string }) {
                 <button type="button" className={styles.submitButton}
                         onClick={() => {
                             submitForm().then()
-                        }}>登录
+                        }}>{langProvider.signin}
                 </button>
-                <div>还没有账号？前往<a href={'/account/signup'}>注册</a></div>
+                <div>还没有账号？前往<a href={'/account/signup'}>{langProvider.signup}</a></div>
             </div>
             <div className={styles.formRow}>
                 <div className={'infoMsg'}>

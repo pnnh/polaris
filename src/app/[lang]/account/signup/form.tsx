@@ -7,10 +7,11 @@ import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {getTurnstileToken} from "@/atom/client/components/cloudflare/turnstile";
 import {submitSignup} from "@/atom/client/account/account";
+import {getLanguageProvider, ILanguageProvider} from "@/services/common/language";
 
 const buttonThrottle = new ButtonThrottle(5000)
 
-export function SignupForm({portalUrl}: { portalUrl: string }) {
+export function SignupForm({lang, portalUrl}: { lang: string, portalUrl: string }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -18,9 +19,11 @@ export function SignupForm({portalUrl}: { portalUrl: string }) {
     const [email, setEmail] = useState('')
     const [infoMsg, setInfoMsg] = useState('')
 
+    const langProvider = getLanguageProvider(lang)
+
     const submitForm = async () => {
         if (!await buttonThrottle.throttle()) {
-            setInfoMsg('操作过于频繁')
+            setInfoMsg(langProvider.frequentOperation)
             return
         }
         if (!username || username.length < 1) {
@@ -97,9 +100,9 @@ export function SignupForm({portalUrl}: { portalUrl: string }) {
                 <button type="button" className={styles.submitButton}
                         onClick={() => {
                             submitForm().then()
-                        }}>注册
+                        }}>{langProvider.signup}
                 </button>
-                <div>已有账号？前往<a href={'/account/signin'}>登录</a></div>
+                <div>已有账号？前往<a href={'/account/signin'}>{langProvider.signin}</a></div>
             </div>
             <div className={styles.formRow}>
                 <div className={'infoMsg'}>

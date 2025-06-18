@@ -9,6 +9,7 @@ import {CommentsClient} from "@/atom/client/components/comments/comments";
 import {useServerConfig} from "@/services/server/config";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
 import {langEn} from "@/atom/common/language";
+import {getLanguageProvider} from "@/services/common/language";
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -24,12 +25,14 @@ export default async function Home({params, searchParams}: {
 
     const serverConfig = useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
+    const langProvider = getLanguageProvider(lang)
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={await searchParams} pathname={pathname}
                           metadata={metadata}>
         <div className={'indexPage'}>
             <RandomPasswordPage/>
             <div className={'commentsClient'}>
-                <CommentsClient portalUrl={portalUrl} resource={'c26b810d-92c6-5632-a546-3e509e585b96'}/>
+                <CommentsClient portalUrl={portalUrl} resource={'c26b810d-92c6-5632-a546-3e509e585b96'}
+                                lang={lang}/>
             </div>
         </div>
     </ContentLayout>

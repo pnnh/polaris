@@ -2,7 +2,7 @@ import {getLanguageProvider} from "@/services/common/language";
 
 export function pageTitle(lang: string, title?: string | null | undefined): string {
     const langProvider = getLanguageProvider(lang)
-    const slogan = langProvider.slogan
+    const slogan = langProvider.siteName
     if (!title || title.startsWith(slogan)) {
         return slogan
     }

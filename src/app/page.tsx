@@ -66,7 +66,6 @@ export default async function Page({params, searchParams}: {
     }
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
-
         <div className={styles.contentContainer}>
             <div className={styles.conMiddle}>
                 <div className={styles.middleTop}>
@@ -95,7 +94,7 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
             <div className={styles.conRight}>
-                <ArticleRankCard rankResult={selectResult} lang={lang}/>
+                <ArticleRankCard rankResult={rankSelectResult} lang={lang}/>
             </div>
         </div>
     </ContentLayout>

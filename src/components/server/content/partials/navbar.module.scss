@@ -1,19 +1,24 @@
+@use '@/components/common/styles/theme';
+
 .navHeader {
   display: flex;
   flex-direction: row;
-  height: 56px;
+  height: 3rem;
   justify-content: space-between;
   align-items: center;
-  border-bottom: solid 1px #d3d3d3;
   font-size: 1rem;
   font-weight: 400;
-  background-color: #FFF;
+
+  @media screen and (min-width: theme.$screenExtraLargeWidth) {
+    width: theme.$screenExtraLargeWidth;
+    margin: 0 auto;
+  }
 
   .leftNav {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: 2rem;
+    margin-left: 1rem;
     gap: 1rem;
 
     .brandLink {
@@ -22,18 +27,22 @@
       font-size: 1rem;
       display: inline-block;
       position: relative;
-      height: 40px;
-      width: 40px;
+      height: 2.2rem;
+      width: 2.2rem;
     }
   }
 
   .rightNav {
     margin-right: 2rem;
-    display: flex;
+    display: none;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 0.9rem;
+    @media screen and (min-width: theme.$screenMediumWidth) {
+      display: flex;
+      margin-right: 1rem;
+    }
 
     .toolsLink {
       text-decoration: none;
@@ -66,19 +75,29 @@
         }
       }
     }
-
   }
 
-}
+  .rightNavMobile {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    margin-right: 1rem;
 
-@media screen and (max-width: 48rem) {
-  .navHeader {
-    .leftNav {
-      margin-left: 1rem;
+    .mobileMenu {
+      display: inline-block;
+      height: 1.8rem;
+      width: 1.8rem;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
     }
 
-    .rightNav {
-      margin-right: 1rem;
+    @media screen and (min-width: theme.$screenMediumWidth) {
+      display: none;
     }
   }
 }
+

@@ -6,9 +6,8 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import React from "react";
+import React, {Suspense} from "react";
 import {GoogleAnalytics} from "@next/third-parties/google";
-import {Metadata} from "next";
 import {PageMetadata, pageTitle} from "@/utils/page";
 import {getLightningUrl, isProd, usePublicConfig, useServerConfig} from "@/services/server/config";
 import {JotaiProvider} from "@/components/client/content/provider";
@@ -50,6 +49,10 @@ export default async function GlobalLayout({
     const pathname = await getPathname()
     const langEnUrl = `${selfUrl}${replaceLanguageInPathname(pathname, langEn)}`
     const langZhUrl = `${selfUrl}${replaceLanguageInPathname(pathname, langZh)}`
+    let langDefaultUrl = langEnUrl;
+    if (pathname === '/') {
+        langDefaultUrl = selfUrl
+    }
     return <html lang={lang}>
     <head lang={lang}>
         <base href="/"/>
@@ -65,7 +68,7 @@ export default async function GlobalLayout({
         <link rel="shortcut icon" href="/favicon.ico"/>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
         <meta name="apple-mobile-web-app-title" content={rootPageTitle}/>
-        <link rel="alternate" hrefLang="x-default" href={langEnUrl}/>
+        <link rel="alternate" hrefLang="x-default" href={langDefaultUrl}/>
         <link rel="alternate" hrefLang="en" href={langEnUrl}/>
         <link rel="alternate" hrefLang="zh" href={langZhUrl}/>
         <title>{pageTitle(lang, metadata.title as string)}</title>
