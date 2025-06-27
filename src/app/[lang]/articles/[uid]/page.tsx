@@ -2,7 +2,7 @@ import styles from './page.module.scss'
 import React from 'react'
 import {TocInfo} from '@/components/common/toc'
 
-import {serverPhoenixSignin, serverPortalSignin} from "@/services/server/domain/domain";
+import {serverPortalSignin} from "@/services/server/domain/domain";
 import {PageMetadata, pageTitle} from "@/utils/page";
 import {templateBodyId} from '@/components/server/content/layout'
 import {getClientIp, getPathname} from "@/services/server/pathname";
@@ -24,24 +24,24 @@ import {ArticleAssets} from "./assets";
 import {ArticleAssertPreview} from "./preview";
 import {langEn} from "@/atom/common/language";
 import {getLanguageProvider} from "@/services/common/language";
+import {notFound} from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home({params, searchParams}: {
-    params: Promise<{ lang: string, dir: string, uid: string }>,
+    params: Promise<{ lang: string, uid: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
     const metadata = new PageMetadata(lang)
-    const currentDir = paramsValue.dir
     const searchParamsValue = await searchParams
-    let domain = serverPhoenixSignin()
-    if (currentDir === 'dir2') {
-        domain = serverPortalSignin()
-    }
+    let domain = serverPortalSignin()
     const articleUrn = base58ToUuid(paramsValue.uid)
+    if (!articleUrn) {
+        notFound();
+    }
     const url = `/articles/${articleUrn}`
     const getResult = await domain.makeGet<CommonResult<PSArticleModel | undefined>>(url)
 
@@ -65,7 +65,7 @@ export default async function Home({params, searchParams}: {
     if (clientIp) {
         await domain.makePost(`/articles/${articleUrn}/viewer`, {clientIp})
     }
-    const readUrl = `/${lang}/articles/${currentDir}/articles/${paramsValue.uid}`
+    const readUrl = `/${lang}/articles/articles/${paramsValue.uid}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)

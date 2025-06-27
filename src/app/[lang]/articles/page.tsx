@@ -1,8 +1,7 @@
 import React from 'react'
 import './page.scss'
-import Link from 'next/link'
 import queryString from 'query-string'
-import {serverPhoenixSignin, serverPortalSignin} from "@/services/server/domain/domain";
+import {serverPortalSignin} from "@/services/server/domain/domain";
 import {PageMetadata, pageTitle} from "@/utils/page";
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/services/server/pathname";
@@ -14,6 +13,8 @@ import {calcPagination} from "@/atom/common/utils/pagination";
 import {PSArticleModel} from "@/atom/common/models/article";
 import {langEn} from "@/atom/common/language";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
+import {ArticleFilterBar} from "@/components/server/content/article/filter";
+import {getLanguageProvider} from "@/services/common/language";
 
 export const dynamic = "force-dynamic";
 
@@ -42,8 +43,7 @@ export default async function Page({params, searchParams}: {
         direction: 'cta',
         size: 10
     })
-    let domain = serverPhoenixSignin()
-    const currentDir = 'dir1'
+    let domain = serverPortalSignin()
     const rankUrl = `/articles?${rankQuery}`
     const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)
 
@@ -60,37 +60,13 @@ export default async function Page({params, searchParams}: {
     const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
-    const sortClass = (sort: string) => {
-        const querySort = (searchParamsValue.sort ?? 'latest')
-        return ' ' + (querySort === sort ? 'activeLink' : '')
-    }
-    const filterClass = (filter: string) => {
-        const queryFilter = (searchParamsValue.filter ?? 'all')
-        return ' ' + (queryFilter === filter ? 'activeLink' : '')
-    }
+    const langProvider = getLanguageProvider(lang)
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={'contentContainer'}>
             <div className={'conMiddle'}>
-                <div className={'middleTop'}>
-                    <div className={'topLeft'}>
-                        <Link className={'sortLink' + sortClass('latest')}
-                              href={replaceSearchParams(searchParamsValue, 'sort', 'latest')}>最新</Link>
-                        <Link className={'sortLink' + sortClass('read')}
-                              href={replaceSearchParams(searchParamsValue, 'sort', 'read')}>阅读数</Link>
-                    </div>
-                    <div className={'topRight'}>
-                        <Link className={'filterLink' + filterClass('month')}
-                              href={replaceSearchParams(searchParamsValue, 'filter', 'month')}>一月内</Link>
-                        <Link className={'filterLink' + filterClass('year')}
-                              href={replaceSearchParams(searchParamsValue, 'filter', 'year')}>一年内</Link>
-                        <Link className={'filterLink' + filterClass('all')}
-                              href={replaceSearchParams(searchParamsValue, 'filter', 'all')}>所有</Link>
-                    </div>
-                </div>
-                <div className={'middleBody'}>
-                    <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang} dir={currentDir}/>
-                </div>
+                <ArticleFilterBar langProvider={langProvider} searchParamsValue={searchParamsValue}/>
+                <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang}/>
                 <div className={'middlePagination'}>
                     <PaginationServer pagination={pagination}
                                       pageLinkFunc={(page) =>
@@ -98,7 +74,7 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
             <div className={'conRight'}>
-                <ArticleRankCard rankResult={rankSelectResult} lang={'zh'}/>
+                <ArticleRankCard rankResult={rankSelectResult} lang={lang}/>
             </div>
         </div>
     </ContentLayout>

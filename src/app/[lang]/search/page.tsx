@@ -1,11 +1,9 @@
 import React from 'react'
 import './page.scss'
 import queryString from 'query-string'
-import {serverPhoenixSignin, serverPortalSignin} from "@/services/server/domain/domain";
+import {serverPortalSignin} from "@/services/server/domain/domain";
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/services/server/pathname";
-import {IDomain} from "@/services/common/domain";
-import {ArticleCard} from "@/components/server/content/article/card";
 import {CommonResult, PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 
 import {NoData} from "@/components/common/empty";
@@ -36,11 +34,7 @@ export default async function Page({params, searchParams}: {
     const pageSize = 10
     const channelPk = searchParamsValue.channel
 
-    let domain = serverPhoenixSignin()
-    const currentDir = searchParamsValue.dir || 'dir1'
-    if (currentDir === 'dir2') {
-        domain = serverPortalSignin()
-    }
+    let domain = serverPortalSignin()
     const selectQuery = {
         sort: searchParamsValue.sort,
         filter: searchParamsValue.filter,
@@ -65,19 +59,11 @@ export default async function Page({params, searchParams}: {
                     <div className={'condLabel'}>搜索关键词:</div>
                     {searchParamsValue.keyword}
                 </div>
-                <div className={'dataDir'}>
-                    <div className={'condLabel'}>数据目录:</div>
-                    <a href={'/search' + replaceSearchParams(searchParamsValue, 'dir', 'dir1')}
-                       className={currentDir === 'dir1' ? 'active' : ''}>dir1</a>
-                    <a href={'/search' + replaceSearchParams(searchParamsValue, 'dir', 'dir2')}
-                       className={currentDir === 'dir2' ? 'active' : ''}>dir2</a>
-                </div>
             </div>
             <div className={'contentContainer'}>
                 <div className={'conMiddle'}>
-                    <div className={'middleBody'}>
-                        <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang} dir={currentDir}/>
-                    </div>
+                    <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang}/>
+
                     <div className={'middlePagination'}>
                         <PaginationServer pagination={pagination}
                                           pageLinkFunc={(page) => '/search' + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>

@@ -5,16 +5,16 @@ import {getPathname} from "@/services/server/pathname";
 import {pageTitle} from "@/utils/page";
 import {getLanguageProvider, ILanguageProvider} from "@/services/common/language";
 
-export async function SiteNavMenu({lang, searchParams}: {
+export async function SiteNavMenu({lang, langProvider, searchParams}: {
     lang: string,
+    langProvider: ILanguageProvider,
     searchParams: Record<string, string>
 }) {
     const pathname = await getPathname()
 
     const siteLinks = [
-        {name: pageTitle(lang), href: `/`},
+        {name: pageTitle(lang), href: `/${langProvider.lang}`},
     ]
-    const langProvider = getLanguageProvider(lang)
     return <div className={styles.siteNavMenu}>
         <div className={styles.roleButtonContainer}>
             {
@@ -30,18 +30,21 @@ export async function SiteNavMenu({lang, searchParams}: {
                 })
             }
         </div>
-        {/*<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#C6C6C6">*/}
-        {/*    <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>*/}
-        {/*</svg>*/}
-        {/*<ArticleNavbar pathname={pathname}/>*/}
-        <ArticleSubNavbar langProvider={langProvider} pathname={pathname} searchParams={searchParams}/>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#C6C6C6">
+            <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>
+        </svg>
+        <ArticleNavbar pathname={pathname} lang={lang} langProvider={langProvider}/>
+        {/*<ArticleSubNavbar langProvider={langProvider} pathname={pathname} searchParams={searchParams}/>*/}
     </div>
 }
 
-function ArticleNavbar({pathname}: { pathname: string }) {
+function ArticleNavbar({lang, pathname, langProvider}: {
+    lang: string,
+    langProvider: ILanguageProvider, pathname: string
+}) {
     const navLinks = [
-        // {name: '频道', href: `/channels`},
-        {name: '笔记', href: `/articles`},
+        {name: langProvider.navArticles, href: `/${lang}/articles`},
+        {name: langProvider.navChannels, href: `/${lang}/channels`},
         // {name: '图片', href: `/images`},
         // {name: '随机密码', href: `/tools/password`},
         // {name: 'UUID', href: `/tools/uuid`},

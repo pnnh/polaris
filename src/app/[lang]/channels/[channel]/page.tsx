@@ -1,46 +1,58 @@
 import React from 'react'
-import styles from './page.module.scss'
-import ContentLayout from '@/components/server/content/layout'
-import {getPathname} from "@/services/server/pathname";
-import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
-import {replaceSearchParams} from "@/atom/common/utils/query";
-import {PaginationServer} from "@/components/server/pagination";
-import {ArticleRankCard} from "@/components/server/content/article/rank";
-import {PageMetadata, pageTitle} from "@/utils/page";
-import queryString from "query-string";
+import './page.scss'
+import queryString from 'query-string'
 import {serverPortalSignin} from "@/services/server/domain/domain";
+
+import {PageMetadata, pageTitle} from "@/utils/page";
+import ContentLayout from '@/components/server/content/layout'
+import {IDomain} from "@/services/common/domain";
+import {getPathname} from "@/services/server/pathname";
+import {ArticleRankCard} from "@/components/server/content/article/rank";
+import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
+import {PaginationServer} from "@/components/server/pagination";
+import {NoData} from "@/components/common/empty";
+import {replaceSearchParams} from "@/atom/common/utils/query";
+import {base58ToUuid} from "@/atom/common/utils/basex";
 import {PSArticleModel} from "@/atom/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
-import {ArticleMiddleBody} from "@/components/server/content/article/article";
 import {langEn} from "@/atom/common/language";
+import {notFound} from "next/navigation";
 import {ArticleFilterBar} from "@/components/server/content/article/filter";
+import {ArticleMiddleBody} from "@/components/server/content/article/article";
 import {getLanguageProvider} from "@/services/common/language";
+
+export const dynamic = "force-dynamic";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
+    const paramsValue = await params;
     const searchParamsValue = await searchParams
+    const lang = paramsValue.lang || langEn
 
     let page = Number(searchParamsValue.page)
     if (isNaN(page)) {
         page = 1
     }
     const pageSize = 10
-    const channelPk = searchParamsValue.channel
-    const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
 
+    const channelUrn = base58ToUuid(paramsValue.channel)
+    if (!channelUrn) {
+        notFound();
+    }
     const metadata = new PageMetadata(lang)
+    metadata.title = pageTitle('')
     const rankQuery = queryString.stringify({
         sort: 'read',
         filter: 'year',
         page: '1',
         direction: 'cta',
-        size: 10
+        size: 10,
+        channel: channelUrn
     })
-    let domain = serverPortalSignin()
+    const domain = serverPortalSignin()
     const rankUrl = `/articles?${rankQuery}`
     const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)
 
@@ -49,7 +61,7 @@ export default async function Page({params, searchParams}: {
         filter: searchParamsValue.filter,
         page,
         size: pageSize,
-        channel: channelPk
+        channel: channelUrn
     }
     const rawQuery = queryString.stringify(selectQuery)
     const url = `/articles?${rawQuery}`
@@ -57,20 +69,20 @@ export default async function Page({params, searchParams}: {
     const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
+
     const langProvider = getLanguageProvider(lang)
-    return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata} userInfo={SymbolUnknown}>
-        <div className={styles.contentContainer}>
-            <div className={styles.conMiddle}>
+    return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
+                          metadata={metadata}>
+        <div className={'contentContainer'}>
+            <div className={'conMiddle'}>
                 <ArticleFilterBar langProvider={langProvider} searchParamsValue={searchParamsValue}/>
                 <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang}/>
-                <div className={styles.middlePagination}>
+                <div className={'middlePagination'}>
                     <PaginationServer pagination={pagination}
-                                      pageLinkFunc={(page) =>
-                                          `/${lang}/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
+                                      pageLinkFunc={(page) => replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                 </div>
             </div>
-            <div className={styles.conRight}>
+            <div className={'conRight'}>
                 <ArticleRankCard rankResult={rankSelectResult} lang={lang}/>
             </div>
         </div>

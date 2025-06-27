@@ -1,0 +1,31 @@
+
+.middleTop {
+  border-bottom: solid 1px #e1e1e280;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+
+  .topLeft,
+  .topRight {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .sortLink,
+  .filterLink {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    color: #5b6679;
+    text-decoration: none;
+  }
+
+  .activeLink {
+    background-color: #e6e6e6;
+  }
+}

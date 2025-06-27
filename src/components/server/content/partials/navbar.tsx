@@ -25,14 +25,14 @@ export async function ContentPublicNavbar({pathname, searchParams, langProvider,
 
     return <div className={styles.navHeader}>
         <div className={styles.leftNav}>
-            <a className={styles.brandLink} href={'/'}>
+            <a className={styles.brandLink} href={`/${langProvider.lang}`}>
                 <Image src='/images/logo.png' alt='logo' priority={false} fill={true} sizes={'48px,48px'}/>
             </a>
-            <SiteNavMenu lang={langProvider.lang} searchParams={searchParams}/>
+            <SiteNavMenu lang={langProvider.lang} langProvider={langProvider} searchParams={searchParams}/>
         </div>
         <div className={styles.rightNav}>
-            <PSLanguageSelector lang={langProvider.lang} currentUrl={currentUrl}/>
             <ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword}/>
+            <PSLanguageSelector lang={langProvider.lang} currentUrl={currentUrl}/>
             <UserAction lang={langProvider.lang} langProvider={langProvider} portalUrl={serverConfig.PUBLIC_PORTAL_URL}
                         userInfo={userInfo}/>
             <a className={styles.toolsLink} href={'/tools'}><AppsIcon/></a>

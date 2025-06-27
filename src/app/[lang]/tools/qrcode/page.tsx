@@ -29,7 +29,7 @@ export default async function Home({params, searchParams}: {
                           metadata={metadata}>
         <div className={'qrCodePage'}>
             <h1 className={'productTitle'}>{'二维码生成器'}</h1>
-            <QRCodeComponent lang={'zh'}/>
+            <QRCodeComponent lang={lang}/>
             <div className={'commentsClient'}>
                 <CommentsClient portalUrl={portalUrl} resource={'a28fc8db-482c-37ea-bcb2-e4543d7c6457'}
                                 lang={lang}/>

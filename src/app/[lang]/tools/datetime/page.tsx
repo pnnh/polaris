@@ -21,7 +21,7 @@ export default async function Home({params, searchParams}: {
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={'qrCodePage'}>
-            <DatetimeComponent lang={'zh'}/>
+            <DatetimeComponent lang={lang}/>
         </div>
     </ContentLayout>
 }

@@ -21,7 +21,7 @@ export default async function Page({params, searchParams}: {
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={'aboutContainer'}>
-            <ToolBody lang={'zh'}/>
+            <ToolBody lang={lang}/>
         </div>
     </ContentLayout>
 }

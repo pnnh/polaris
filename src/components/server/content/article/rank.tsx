@@ -1,4 +1,3 @@
-import Link from "next/link";
 import React from "react";
 import './rank.scss'
 import {PLSelectResult} from "@/atom/common/models/protocol";

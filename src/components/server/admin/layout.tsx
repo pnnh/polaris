@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from './layout.module.scss'
-import Link from 'next/link'
 import {AdminNavbar,} from "@/components/client/admin/navbar";
 import {AdminSidebar} from "@/components/client/admin/sidebar";
 

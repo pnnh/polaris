@@ -1,7 +1,6 @@
 'use client'
 
 import styles from './navbar.module.scss'
-import Link from 'next/link'
 import {AccountModel} from "@/atom/common/models/account";
 
 export function AdminNavbar(props: { account?: AccountModel }) {
