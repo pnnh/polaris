@@ -82,7 +82,7 @@ export function usePublicConfig(serverConfig?: IServerConfig): IBrowserConfig {
 export function getLightningUrl(): string {
     const serverConfig = useServerConfig()
     if (isDev()) {
-        return `${serverConfig.PUBLIC_LIGHTNING_URL}/src/client/cloud.tsx`
+        return `${serverConfig.PUBLIC_LIGHTNING_URL}/src/cloud.tsx`
     }
     return `${serverConfig.PUBLIC_LIGHTNING_URL}/assets/cloud.mjs`
 }

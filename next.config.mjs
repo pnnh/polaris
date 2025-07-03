@@ -23,12 +23,6 @@ let nextConfig = {
         ignoreDuringBuilds: true,
     },
     allowedDevOrigins: ['huable.local', '*.huable.local'],
-    // webpack: (config, {dev}) => {
-    //     if (dev) {
-    //         config.devtool = false; // Disable source maps
-    //     }
-    //     return config;
-    // },
     images: {
         remotePatterns: [
             {
@@ -46,15 +40,7 @@ let nextConfig = {
     sassOptions: {
         includePaths: [path.join(__dirname, 'styles')],
         silenceDeprecations: ['legacy-js-api'],
-    },
-    // async rewrites() {
-    //     return isProd ? [] : [
-    //         {
-    //             source: '/lightning/:path*',
-    //             destination: 'http://localhost:5173/lightning/:path*' // Proxy to Backend
-    //         }
-    //     ]
-    // }
+    }
 }
 const withBundleAnalyzer = bundleAnalyzer({
     enabled: process.env.ANALYZE === 'true',

@@ -9,7 +9,7 @@ import {ArticleRankCard} from "@/components/server/content/article/rank";
 import {PageMetadata, pageTitle} from "@/utils/page";
 import queryString from "query-string";
 import {serverPortalSignin} from "@/services/server/domain/domain";
-import {PSArticleModel} from "@/atom/common/models/article";
+import {PSArticleModel} from "@/photon/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
 import {langEn} from "@/atom/common/language";

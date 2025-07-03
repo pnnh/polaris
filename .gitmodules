@@ -2,3 +2,6 @@
 	path = src/atom
 	url = git@github.com:pnnh/atom.git
 	branch = main
+[submodule "src/photon"]
+	path = src/photon
+	url = git@github.com:pnnh/photon.git

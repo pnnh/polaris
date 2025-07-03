@@ -13,7 +13,7 @@ import {PaginationServer} from "@/components/server/pagination";
 import {NoData} from "@/components/common/empty";
 import {replaceSearchParams} from "@/atom/common/utils/query";
 import {base58ToUuid} from "@/atom/common/utils/basex";
-import {PSArticleModel} from "@/atom/common/models/article";
+import {PSArticleModel} from "@/photon/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {langEn} from "@/atom/common/language";
 import {notFound} from "next/navigation";

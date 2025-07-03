@@ -5,7 +5,7 @@ import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
 import './page.scss'
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
-import {PSChannelModel} from "@/atom/common/models/channel";
+import {PSChannelModel} from "@/photon/common/models/channel";
 import {NoData} from "@/components/common/empty";
 import {uuidToBase58} from "@/atom/common/utils/basex";
 import {isValidUUID} from "@/atom/common/utils/uuid";

@@ -3,7 +3,7 @@
 import './table.scss'
 import React from 'react'
 import {PLSelectResult} from "@/atom/common/models/protocol";
-import {channelName, PSArticleModel} from "@/atom/common/models/article";
+import {channelName, PSArticleModel} from "@/photon/common/models/article";
 import {PaginationPartial} from "@/components/common/pagination";
 import {NoData} from "@/components/common/empty";
 import {formatRfc3339} from "@/atom/common/utils/datetime";

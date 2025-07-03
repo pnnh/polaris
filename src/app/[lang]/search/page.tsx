@@ -9,7 +9,7 @@ import {CommonResult, PLSelectResult, SymbolUnknown} from "@/atom/common/models/
 import {NoData} from "@/components/common/empty";
 import {PaginationServer} from "@/components/server/pagination";
 import {replaceSearchParams} from "@/atom/common/utils/query";
-import {PSArticleModel} from "@/atom/common/models/article";
+import {PSArticleModel} from "@/photon/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
 import {langEn} from "@/atom/common/language";

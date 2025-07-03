@@ -5,7 +5,7 @@ import {SitemapItemLoose} from "sitemap/dist/lib/types";
 import {serverPortalSignin} from "@/services/server/domain/domain";
 import {useServerConfig} from "@/services/server/config";
 import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
-import {PSArticleModel} from "@/atom/common/models/article";
+import {PSArticleModel} from "@/photon/common/models/article";
 import {uuidToBase58} from "@/atom/common/utils/basex";
 import {langEn} from "@/atom/common/language";
 

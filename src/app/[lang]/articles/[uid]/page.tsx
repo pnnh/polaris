@@ -13,7 +13,7 @@ import {generatorRandomString, STSubString} from "@/atom/common/utils/string";
 import {formatRfc3339} from "@/atom/common/utils/datetime";
 import {base58ToUuid} from "@/atom/common/utils/basex";
 import {CodeOk, CommonResult, SymbolUnknown} from "@/atom/common/models/protocol";
-import {PSArticleModel} from "@/atom/common/models/article";
+import {PSArticleModel} from "@/photon/common/models/article";
 import {TocItem} from "@/atom/common/models/toc";
 import {getDefaultNoteImageByUid} from "@/services/common/note";
 import {isValidUUID} from "@/atom/common/utils/uuid";

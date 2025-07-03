@@ -5,7 +5,7 @@ import React, {useEffect, useState} from "react";
 import {IoClose} from "react-icons/io5";
 import {articleAssetsPreviewAtom} from "./state";
 import {useAtom} from "jotai";
-import {PSArticleFileModel} from "@/atom/common/models/article";
+import {PSArticleFileModel} from "@/photon/common/models/article";
 
 import {BuildBodyHtml} from "@/atom/server/article";
 import {TocItem} from "@/atom/common/models/toc";
