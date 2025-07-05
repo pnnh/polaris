@@ -12,7 +12,6 @@ import {replaceSearchParams} from "@/atom/common/utils/query";
 import {IDomain} from "@/services/common/domain";
 import {NoData} from "@/components/common/empty";
 import {MTPictureModel} from "@/atom/common/models/images/image";
-import {getDefaultNoteImageByUid} from "@/services/common/note";
 import {useServerConfig} from "@/services/server/config";
 import {langEn} from "@/atom/common/language";
 import {PageMetadata} from "@/utils/page";
