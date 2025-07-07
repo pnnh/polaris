@@ -10,7 +10,10 @@ import {getLanguageProvider, ILanguageProvider} from "@/services/common/language
 
 const buttonThrottle = new ButtonThrottle(1000)
 
-export function SigninForm({lang, portalUrl}: { lang: string, portalUrl: string }) {
+export function SigninForm({lang, portalUrl, signinLink, linkApp}: {
+    lang: string, portalUrl: string,
+    signinLink: string, linkApp: string
+}) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [infoMsg, setInfoMsg] = useState('')
@@ -36,7 +39,7 @@ export function SigninForm({lang, portalUrl}: { lang: string, portalUrl: string 
             return
         }
         const submitRequest = {
-            username, password, turnstile_token: turnstileToken,
+            username, password, turnstile_token: turnstileToken, link: signinLink
         }
         const submitResult = await accountSignin(portalUrl, submitRequest)
         console.log('submitResult', submitResult)
@@ -44,10 +47,17 @@ export function SigninForm({lang, portalUrl}: { lang: string, portalUrl: string 
             setInfoMsg('登录失败')
             return
         }
-        setInfoMsg('登录成功，前往首页...')
-        setTimeout(() => {
-            window.location.href = '/'
-        }, 1500)
+        if (signinLink && linkApp) {
+            setInfoMsg('登录成功，前往授权页面...')
+            setTimeout(() => {
+                window.location.href = `/${lang}/account/signin?app=${encodeURIComponent(linkApp)}&link=${encodeURIComponent(signinLink)}`
+            }, 1500)
+        } else {
+            setInfoMsg('登录成功，前往首页...')
+            setTimeout(() => {
+                window.location.href = '/'
+            }, 1500)
+        }
     }
 
     return (
