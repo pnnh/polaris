@@ -4,7 +4,7 @@ import styles from './page.module.scss'
 import {useServerConfig} from "@/services/server/config";
 import ContentLayout from "@/components/server/content/layout";
 import {getAccountUrn} from "@/atom/common/models/account";
-import {serverGetUserinfo} from "@/atom/server/account/account";
+import {serverGetUserinfo} from "@/photon/server/account/account";
 import {langEn} from "@/atom/common/language";
 
 export default async function Page({params, searchParams}: {
