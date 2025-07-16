@@ -4,6 +4,7 @@ import {AccountModel} from "@/atom/common/models/account";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
 import GlobalLayout from "@/components/server/global";
 import {PageMetadata} from "@/utils/page";
+import {ConsoleSidebar} from "@/components/server/console/sidebar";
 
 export default async function ConsoleLayout({
                                                 children,
@@ -22,6 +23,7 @@ export default async function ConsoleLayout({
 }) {
     return <GlobalLayout lang={lang} metadata={metadata}>
         <div className={styles.consoleContainer}>
+            <ConsoleSidebar lang={lang}/>
             {children}
         </div>
     </GlobalLayout>

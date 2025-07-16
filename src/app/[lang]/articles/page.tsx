@@ -1,5 +1,5 @@
 import React from 'react'
-import './page.scss'
+import styles from './page.module.scss'
 import queryString from 'query-string'
 import {serverPortalSignin} from "@/services/server/domain/domain";
 import {PageMetadata, pageTitle} from "@/utils/page";
@@ -41,7 +41,8 @@ export default async function Page({params, searchParams}: {
         filter: 'year',
         page: '1',
         direction: 'cta',
-        size: 10
+        size: 10,
+        lang: lang
     })
     let domain = serverPortalSignin()
     const rankUrl = `/articles?${rankQuery}`
@@ -52,7 +53,8 @@ export default async function Page({params, searchParams}: {
         filter: searchParamsValue.filter,
         page,
         size: pageSize,
-        channel: channelPk
+        channel: channelPk,
+        lang: lang
     }
     const rawQuery = queryString.stringify(selectQuery)
     const url = `/articles?${rawQuery}`
@@ -63,17 +65,17 @@ export default async function Page({params, searchParams}: {
     const langProvider = getLanguageProvider(lang)
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
-        <div className={'contentContainer'}>
-            <div className={'conMiddle'}>
+        <div className={styles.contentContainer}>
+            <div className={styles.conMiddle}>
                 <ArticleFilterBar langProvider={langProvider} searchParamsValue={searchParamsValue}/>
                 <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang}/>
-                <div className={'middlePagination'}>
+                <div className={styles.middlePagination}>
                     <PaginationServer pagination={pagination}
                                       pageLinkFunc={(page) =>
                                           `/${lang}/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                 </div>
             </div>
-            <div className={'conRight'}>
+            <div className={styles.conRight}>
                 <ArticleRankCard rankResult={rankSelectResult} lang={lang}/>
             </div>
         </div>

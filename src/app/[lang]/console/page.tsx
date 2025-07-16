@@ -4,7 +4,8 @@ import {getPathname} from "@/services/server/pathname";
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {langEn} from "@/atom/common/language";
 import styles from './page.module.scss'
-import ConsoleLayout from "@/components/server/content/console/layout";
+import ConsoleLayout from "@/components/server/console/layout";
+import {ConsoleSidebar} from "@/components/server/console/sidebar";
 
 
 export default async function Page({params, searchParams}: {
@@ -22,8 +23,7 @@ export default async function Page({params, searchParams}: {
     return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={styles.consolePage}>
-            <a href={`/${lang}/console/articles`}>文章</a>
-            <a href={`/${lang}/console/channels`}>频道</a>
+            点击左侧菜单
         </div>
     </ConsoleLayout>
 }

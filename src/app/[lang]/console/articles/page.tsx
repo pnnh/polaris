@@ -10,10 +10,8 @@ import {replaceSearchParams} from "@/atom/common/utils/query";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {langEn} from "@/atom/common/language";
-import {ArticleMiddleBody} from "@/components/server/content/article/article";
-import {ArticleFilterBar} from "@/components/server/content/article/filter";
 import {getLanguageProvider} from "@/services/common/language";
-import ConsoleLayout from "@/components/server/content/console/layout";
+import ConsoleLayout from "@/components/server/console/layout";
 import {ConsoleArticleFilterBar} from "@/app/[lang]/console/articles/filter";
 import {ConsoleArticleMiddleBody} from "@/app/[lang]/console/articles/article";
 
@@ -42,7 +40,8 @@ export default async function Page({params, searchParams}: {
         filter: 'year',
         page: '1',
         direction: 'cta',
-        size: 10
+        size: 10,
+        lang: lang
     })
     let domain = serverPortalSignin()
 
@@ -69,7 +68,7 @@ export default async function Page({params, searchParams}: {
                 <div className={styles.middlePagination}>
                     <PaginationServer pagination={pagination}
                                       pageLinkFunc={(page) =>
-                                          `/${lang}/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
+                                          `/${lang}/console/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                 </div>
             </div>
         </div>

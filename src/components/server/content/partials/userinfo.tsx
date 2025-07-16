@@ -10,7 +10,7 @@ export function UserAction({lang, langProvider, portalUrl, userInfo}: {
 
     if (userInfo && !isAnonymousAccount(userInfo)) {
         return <div className={styles.userAction}>
-            <a className={styles.userPhoto} title={userInfo.nickname} href={'/account/userinfo'}>
+            <a className={styles.userPhoto} title={userInfo.nickname} href={`/${lang}/console`}>
                 <img src={userInfo.photoUrl} alt="User Avatar"/>
             </a>
 

@@ -12,7 +12,6 @@ import {PSImageServer} from "@/components/server/image";
 import React from "react";
 import styles from './article.module.scss';
 import {STSubString} from "@/atom/common/utils/string";
-import Link from "next/link";
 
 export function ConsoleArticleMiddleBody({selectResult, domain, lang}: {
     selectResult: PLSelectResult<PSArticleModel>,
@@ -38,18 +37,16 @@ export function ArticleCard({model, domain, lang}: {
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)
     }
-    return <div className={styles.middleItem} key={model.uid}>
-        <div className={styles.itemDetail} data-article={model.uid}>
-            <div className={styles.itemTitle}>
-                <a href={readUrl} title={model.uid}>{model.title}</a>
-            </div>
-            <div className={styles.description} title={model.description}>
-                {STSubString(model.description || model.body, 100)}
-            </div>
-            <div className={styles.action}>
-                <FaEye size={'1rem'}/><span>{model.discover}</span>
-                <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(model.update_time)}</span>
-            </div>
+    return <div className={styles.middleItem} key={model.uid} data-article={model.uid}>
+        <div className={styles.itemTitle}>
+            <a href={readUrl} title={model.uid}>{model.title}</a>
+        </div>
+        <div className={styles.description} title={model.description}>
+            {STSubString(model.description || model.body, 100)}
+        </div>
+        <div className={styles.action}>
+            <FaEye size={'1rem'}/><span>{model.discover}</span>
+            <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(model.update_time)}</span>
         </div>
         <div className={styles.itemCover}>
             <PSImageServer src={imageUrl} alt={model.title} fill={true}/>

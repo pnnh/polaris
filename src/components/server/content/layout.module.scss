@@ -21,6 +21,10 @@
 
     .bodyContainer {
       margin: 0 auto;
+      @media screen and (min-width: theme.$screenExtraLargeWidth) {
+        width: theme.$screenExtraLargeWidth - 24rem;
+        margin: 0 auto;
+      }
     }
 
   }

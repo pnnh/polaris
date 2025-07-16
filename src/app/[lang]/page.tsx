@@ -40,7 +40,8 @@ export default async function Page({params, searchParams}: {
         filter: 'year',
         page: '1',
         direction: 'cta',
-        size: 10
+        size: 10,
+        lang: lang
     })
     let domain = serverPortalSignin()
     const rankUrl = `/articles?${rankQuery}`
@@ -51,6 +52,7 @@ export default async function Page({params, searchParams}: {
         filter: searchParamsValue.filter,
         page,
         size: pageSize,
+        lang: lang
     }
     const rawQuery = queryString.stringify(selectQuery)
     const url = `/articles?${rawQuery}`

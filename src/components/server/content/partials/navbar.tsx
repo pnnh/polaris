@@ -35,11 +35,11 @@ export async function ContentPublicNavbar({pathname, searchParams, langProvider,
             <PSLanguageSelector lang={langProvider.lang} currentUrl={currentUrl}/>
             <UserAction lang={langProvider.lang} langProvider={langProvider} portalUrl={serverConfig.PUBLIC_PORTAL_URL}
                         userInfo={userInfo}/>
-            <a className={styles.toolsLink} href={'/tools'}><AppsIcon/></a>
+            <a className={styles.toolsLink} href={`${langProvider.lang}/tools`}><AppsIcon/></a>
         </div>
         <div className={styles.rightNavMobile}>
             <PSLanguageSelector lang={langProvider.lang} currentUrl={currentUrl}/>
-            <a className={styles.mobileMenu}><MenuIcon/></a>
+            <a className={styles.mobileMenu} href={`${langProvider.lang}/tools`}><MenuIcon/></a>
         </div>
     </div>
 }

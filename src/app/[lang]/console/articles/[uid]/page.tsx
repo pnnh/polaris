@@ -15,7 +15,7 @@ import {useServerConfig} from "@/services/server/config";
 import {langEn} from "@/atom/common/language";
 import {getLanguageProvider} from "@/services/common/language";
 import {notFound} from "next/navigation";
-import ConsoleLayout from "@/components/server/content/console/layout";
+import ConsoleLayout from "@/components/server/console/layout";
 import {ConsoleArticleEditor} from "@/app/[lang]/console/articles/[uid]/editor";
 import Button from "@mui/material/Button";
 
@@ -71,9 +71,9 @@ export default async function Home({params, searchParams}: {
         <div className={styles.bodyContainer}>
             <div className={styles.articleCover}>
                 <div className={styles.articleHeader}>
-                    <h1 className={styles.articleTitle} id={titleId}>
+                    <div className={styles.articleTitle} data-id={titleId}>
                         <input value={getResult.data.title}/>
-                    </h1>
+                    </div>
                     <div className={styles.articleDescription}>
                         <textarea
                             name={'articleDescription'}>{STSubString(model.description || model.body, 80)}</textarea>

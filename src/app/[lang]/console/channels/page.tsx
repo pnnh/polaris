@@ -1,9 +1,8 @@
 import React from 'react'
 import {serverPortalSignin} from "@/services/server/domain/domain";
-import ContentLayout from "@/components/server/content/layout";
 import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
-import './page.scss'
+import styles from './page.module.scss'
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PSChannelModel} from "@/photon/common/models/channel";
 import {NoData} from "@/components/common/empty";
@@ -14,6 +13,7 @@ import {STSubString} from "@/atom/common/utils/string";
 import {getDefaultChanImageByUid} from "@/services/common/channel";
 import {PageMetadata} from "@/utils/page";
 import {langEn} from "@/atom/common/language";
+import ConsoleLayout from "@/components/server/console/layout";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, viewer: string }>,
@@ -22,6 +22,7 @@ export default async function Page({params, searchParams}: {
     const domain = serverPortalSignin()
     const paramsValue = await params;
     const pageSize = 64
+    const lang = paramsValue.lang || langEn
     const url = '/channels?' + `page=1&size=${pageSize}`
     const result = await domain.makeGet<PLSelectResult<PSChannelModel>>(url)
 
@@ -29,22 +30,18 @@ export default async function Page({params, searchParams}: {
         return <NoData size={'middle'}/>
     }
     const pathname = await getPathname()
-    const lang = paramsValue.lang || langEn
     const metadata = new PageMetadata(lang)
 
-    return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={await searchParams} pathname={pathname}
+    return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={await searchParams} pathname={pathname}
                           metadata={metadata}>
-        <div className={'container'}>
-            <div className={'body'}>
-                <div className={'list'}>
-                    {result.data.range.map((model) => {
-                        return <Item key={model.uid} model={model} domain={domain} lang={lang}/>
-                    })
-                    }
-                </div>
+        <div className={styles.channelsContainer}>
+            <div className={styles.list}>
+                {result.data.range.map((model) => {
+                    return <Item key={model.uid} model={model} domain={domain} lang={lang}/>
+                })}
             </div>
         </div>
-    </ContentLayout>
+    </ConsoleLayout>
 }
 
 function Item(props: { model: PSChannelModel, domain: IDomain, lang: string }) {
@@ -55,17 +52,15 @@ function Item(props: { model: PSChannelModel, domain: IDomain, lang: string }) {
         imageUrl = props.domain.assetUrl(`/channels/${model.uid}/assets/${model.image}`)
     }
 
-    return < div className={'item'}>
-        <div className={'itemCover'}>
-            <PSImageServer src={imageUrl} alt='star' width={256} height={256}/>
+    return < div className={styles.item}>
+        <div className={styles.title}>
+            <a className={styles.link} href={readUrl}>{props.model.name}</a>
         </div>
-        <div className={'content'}>
-            <div className={'title'}>
-                <a className={'link'} href={readUrl}>{props.model.name}</a>
-            </div>
-            <div className={'description'}>
-                {STSubString(props.model.description, 140)}
-            </div>
+        <div className={styles.description}>
+            {STSubString(props.model.description, 140)}
+        </div>
+        <div className={styles.itemCover}>
+            <PSImageServer src={imageUrl} alt='star' width={256} height={256}/>
         </div>
     </div>
 }

@@ -6,7 +6,6 @@ import {useEffect, useState} from "react";
 import {accountSignin, permitAppLogin, queryAuthApp} from "@/atom/client/account/account";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {Loading} from "@/components/common/loading";
-import {getTurnstileToken} from "@/atom/client/components/cloudflare/turnstile";
 
 export function LinkSession({lang, portalUrl, signinLink, linkApp}: {
     lang: string, portalUrl: string, signinLink: string, linkApp: string

@@ -1,12 +1,10 @@
 import React from 'react'
-import './page.scss'
-import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/services/server/pathname";
 
 import {ToolBody} from "@/components/server/tools/tool";
-import {SymbolUnknown} from "@/atom/common/models/protocol";
 import {langEn} from "@/atom/common/language";
 import {PageMetadata} from "@/utils/page";
+import ToolsLayout from "@/components/server/tools/layout";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -18,10 +16,8 @@ export default async function Page({params, searchParams}: {
     const searchParamsValue = await searchParams
 
     const metadata = new PageMetadata(lang)
-    return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata}>
-        <div className={'aboutContainer'}>
-            <ToolBody lang={lang}/>
-        </div>
-    </ContentLayout>
+    return <ToolsLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
+                        metadata={metadata}>
+        <ToolBody lang={lang}/>
+    </ToolsLayout>
 }

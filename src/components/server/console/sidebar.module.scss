@@ -1,0 +1,29 @@
+@use 'styles';
+
+.consoleSidebar {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  width: styles.$consoleSidebarWidth;
+  border-right: solid 1px #E0E0E0;
+  flex-shrink: 0;
+
+  a {
+    text-decoration: none;
+    color: #000000;
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: solid 1px #E0E0E0;
+
+    &:hover {
+      background-color: #F0F0F0;
+    }
+
+    &.active {
+      background-color: #E0E0E0;
+      font-weight: bold;
+    }
+  }
+}
