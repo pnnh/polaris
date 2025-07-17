@@ -54,7 +54,7 @@ export default async function Page({params, searchParams}: {
 
 function Item(props: { model: PSChannelModel, domain: IDomain, lang: string }) {
     const model = props.model
-    const readUrl = `/${props.lang}/channels/${uuidToBase58(props.model.uid)}`
+    const readUrl = `/${props.lang}/channels/${uuidToBase58(props.model.cid)}`
     let imageUrl = getDefaultChanImageByUid(model.uid)
     if (model.image && isValidUUID(model.image)) {
         imageUrl = props.domain.assetUrl(`/channels/${model.uid}/assets/${model.image}`)

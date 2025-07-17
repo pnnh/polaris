@@ -5,7 +5,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export function UserAction({lang, langProvider, portalUrl, userInfo}: {
     lang: string, langProvider: ILanguageProvider
-    portalUrl: string, userInfo: AccountModel
+    portalUrl: string, userInfo: AccountModel | undefined
 }) {
 
     if (userInfo && !isAnonymousAccount(userInfo)) {

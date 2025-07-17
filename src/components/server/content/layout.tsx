@@ -3,7 +3,7 @@ import {ContentPublicNavbar} from "@/components/server/content/partials/navbar";
 import styles from './layout.module.scss'
 import {AccountModel} from "@/atom/common/models/account";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
-import {serverGetUserinfo} from "@/photon/server/account/account";
+import {serverGetUserinfo} from "@/services/server/account/account";
 import {useServerConfig} from "@/services/server/config";
 import GlobalLayout from "@/components/server/global";
 import {PageMetadata} from "@/utils/page";
@@ -26,7 +26,7 @@ export default async function ContentLayout({
     lang: string,
     userInfo: AccountModel | typeof SymbolUnknown
 }) {
-    let currentUserInfo: AccountModel;
+    let currentUserInfo: AccountModel | undefined;
     if (userInfo === SymbolUnknown) {
         const serverConfig = useServerConfig()
         const portalUrl = serverConfig.PUBLIC_PORTAL_URL

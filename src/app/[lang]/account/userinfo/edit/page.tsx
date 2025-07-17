@@ -4,7 +4,7 @@ import {useServerConfig} from "@/services/server/config";
 import ContentLayout from "@/components/server/content/layout";
 import {CodeOk, SymbolUnknown} from "@/atom/common/models/protocol";
 import {UserinfoEditForm} from "./form";
-import {serverGetUserinfo} from "@/photon/server/account/account";
+import {serverGetUserinfo} from "@/services/server/account/account";
 import {langEn} from "@/atom/common/language";
 
 export default async function Page({params, searchParams}: {

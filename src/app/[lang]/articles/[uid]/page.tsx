@@ -42,7 +42,7 @@ export default async function Home({params, searchParams}: {
     if (!articleUrn) {
         notFound();
     }
-    const url = `/articles/${articleUrn}`
+    const url = `/articles/${articleUrn}?lang=${lang}`
     const getResult = await domain.makeGet<CommonResult<PSArticleModel | undefined>>(url)
 
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {

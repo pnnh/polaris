@@ -4,7 +4,7 @@ import styles from './layout.module.scss'
 import {AccountModel} from "@/atom/common/models/account";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
 import {useServerConfig} from "@/services/server/config";
-import {serverGetUserinfo} from "@/photon/server/account/account";
+import {serverGetUserinfo} from "@/services/server/account/account";
 import GlobalLayout from "@/components/server/global";
 import {PageMetadata} from "@/utils/page";
 import {getLanguageProvider} from "@/services/common/language";
@@ -26,7 +26,7 @@ export default async function ArticleReadLayout({
     lang: string,
     userInfo: AccountModel | typeof SymbolUnknown
 }) {
-    let currentUserInfo: AccountModel;
+    let currentUserInfo: AccountModel | undefined;
     if (userInfo === SymbolUnknown) {
         const serverConfig = useServerConfig()
         const portalUrl = serverConfig.PUBLIC_PORTAL_URL
