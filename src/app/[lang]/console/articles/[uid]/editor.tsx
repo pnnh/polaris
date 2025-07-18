@@ -2,90 +2,30 @@
 
 import styles from "./editor.module.scss";
 import React, {useEffect, useState} from "react";
-import {IoClose} from "react-icons/io5";
-import {articleAssetsPreviewAtom} from "./state";
-import {useAtom} from "jotai";
-import {PSArticleFileModel} from "@/photon/common/models/article";
 
-import {BuildBodyHtml} from "@/atom/server/article";
 import {TocItem} from "@/atom/common/models/toc";
 
 export function ConsoleArticleEditor({
-                                         portalUrl, tocList, header, body, assetsUrl
+                                         portalUrl, tocList, header, body, assetsUrl, onChange
                                      }: {
     portalUrl: string,
     tocList: Array<TocItem>,
     header: string,
     body: unknown,
-    assetsUrl: string
+    assetsUrl: string,
+    onChange: (body: string) => void
 }) {
-    const [previewState, setPreviewState] = useAtom(articleAssetsPreviewAtom)
-    if (!previewState) {
-        return <div className={styles.articleEditorContainer}>
-            <div className={styles.sourceArea}>
-                <textarea className={styles.sourceTextarea}>{body as string}</textarea>
-            </div>
-            <div className={styles.viewArea}>
-                <BuildBodyHtml tocList={tocList} header={header} body={body}
-                               assetsUrl={assetsUrl} libUrl={'/abc'}/>
-            </div>
+    // const [bodyText, setBodyText] = useState<string>(body as string || '');
+    return <div className={styles.articleEditorContainer}>
+        <div className={styles.sourceArea}>
+            <textarea className={styles.sourceTextarea} value={body as string || ''}
+                      onChange={(event) => onChange(event.target.value)}></textarea>
         </div>
-    }
-
-    return <div className={styles.assertPreview}>
-        <div className={styles.previewHeader}>
-            <div className={styles.pathTitle}>
-                {previewState.title}
-            </div>
-            <div>
-                <i onClick={() => {
-                    setPreviewState(undefined)
-                }}>
-                    <IoClose size={'1rem'}/>
-                </i>
-            </div>
-        </div>
-        <div className={styles.previewBody}>
-            <PreviewBody portalUrl={portalUrl} model={previewState}/>
+        <div className={styles.viewArea}>
+            {/*<BuildBodyHtml tocList={tocList} header={header} body={body}*/}
+            {/*               assetsUrl={assetsUrl} libUrl={'/abc'}/>*/}
+            预览区域，暂不支持预览
         </div>
     </div>
 }
 
-function PreviewBody({portalUrl, model}: { portalUrl: string, model: PSArticleFileModel }) {
-    if (model.is_text) {
-        return <TextPreview portalUrl={portalUrl} model={model}/>
-    }
-    if (model.is_image) {
-        return <ImagePreview portalUrl={portalUrl} model={model}/>
-    }
-    return <div>
-        暂不支持预览
-    </div>
-}
-
-function TextPreview({portalUrl, model}: { portalUrl: string, model: PSArticleFileModel }) {
-    const fileUrl = `${portalUrl}/storage${model.storage_path}`
-    const [content, setContent] = useState<string | undefined>(undefined)
-    useEffect(() => {
-        fetch(fileUrl).then(response => {
-            return response.text()
-        }).then(text => {
-            setContent(text)
-        })
-    }, [fileUrl])
-    return <div>
-        <code>
-            <pre>
-                {content}
-            </pre>
-        </code>
-    </div>
-}
-
-
-function ImagePreview({portalUrl, model}: { portalUrl: string, model: PSArticleFileModel }) {
-    const imageUrl = `${portalUrl}/storage/${model.storage_path}`
-    return <div>
-        <img src={imageUrl}/>
-    </div>
-}

@@ -1,34 +1,40 @@
-import styles from "./filter.module.scss";
-import {replaceSearchParams} from "@/atom/common/utils/query";
-import React from "react";
-import {ILanguageProvider} from "@/services/common/language";
+'use client'
 
-export function ConsoleArticleFilterBar({langProvider, searchParamsValue}: {
-    langProvider: ILanguageProvider,
-    searchParamsValue: Record<string, string>
+import styles from "./filter.module.scss";
+import React from "react";
+import {getLanguageProvider, ILanguageProvider} from "@/services/common/language";
+import Button from "@mui/material/Button";
+import SearchIcon from "@mui/icons-material/Search";
+import {uuidToBase58} from "@/atom/common/utils/basex";
+import {EmptyUUID} from "@/atom/common/utils/uuid";
+
+export function ConsoleArticleFilterBar({lang, keyword}: {
+    lang: string,
+    keyword: string
 }) {
-    const sortClass = (sort: string) => {
-        const querySort = (searchParamsValue.sort ?? 'latest')
-        return ' ' + (querySort === sort ? styles.activeLink : '')
+    const [searchText, setSearchText] = React.useState(keyword || '');
+    const goSearch = () => {
+        console.debug('go search', searchText);
     }
-    const filterClass = (filter: string) => {
-        const queryFilter = (searchParamsValue.filter ?? 'all')
-        return ' ' + (queryFilter === filter ? styles.activeLink : '')
+    const goCreateArticle = () => {
+        window.location.href = `/${lang}/console/articles/${uuidToBase58(EmptyUUID)}`
     }
+    const langProvider = getLanguageProvider(lang);
     return <div className={styles.middleTop}>
         <div className={styles.topLeft}>
-            <a className={styles.sortLink + sortClass('latest')}
-               href={replaceSearchParams(searchParamsValue, 'sort', 'latest')}>{langProvider.latest}</a>
-            <a className={styles.sortLink + sortClass('read')}
-               href={replaceSearchParams(searchParamsValue, 'sort', 'read')}>{langProvider.readCount}</a>
+            <Button size={'small'} variant={'contained'} onClick={goCreateArticle}>写文章</Button>
         </div>
         <div className={styles.topRight}>
-            <a className={styles.filterLink + filterClass('month')}
-               href={replaceSearchParams(searchParamsValue, 'filter', 'month')}>{langProvider.lastMonth}</a>
-            <a className={styles.filterLink + filterClass('year')}
-               href={replaceSearchParams(searchParamsValue, 'filter', 'year')}>{langProvider.lastYear}</a>
-            <a className={styles.filterLink + filterClass('all')}
-               href={replaceSearchParams(searchParamsValue, 'filter', 'all')}>{langProvider.all}</a>
+            <div className={styles.searchBox}>
+                <input placeholder={langProvider.searchPlaceholder} maxLength={128} value={searchText}
+                       onChange={(event) => setSearchText(event.target.value)}
+                       onKeyDown={(event) => {
+                           if (event.key === 'Enter') {
+                               goSearch()
+                           }
+                       }}/>
+                <SearchIcon fontSize={'small'} onClick={goSearch}/>
+            </div>
         </div>
     </div>
 }

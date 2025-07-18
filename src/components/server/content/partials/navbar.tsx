@@ -31,7 +31,7 @@ export async function ContentPublicNavbar({pathname, searchParams, langProvider,
             <SiteNavMenu lang={langProvider.lang} langProvider={langProvider} searchParams={searchParams}/>
         </div>
         <div className={styles.rightNav}>
-            <ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword}/>
+            <ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword} lang={langProvider.lang}/>
             <PSLanguageSelector lang={langProvider.lang} currentUrl={currentUrl}/>
             <UserAction lang={langProvider.lang} langProvider={langProvider} portalUrl={serverConfig.PUBLIC_PORTAL_URL}
                         userInfo={userInfo}/>

@@ -16,24 +16,7 @@ export interface ILanguageProvider {
     lastYear: string
     all: string
     readRank: string
-}
-
-class EnglishLanguageProvider implements ILanguageProvider {
-    lang = langEn;
-    siteName = 'HUABLE';
-    navArticles = 'Articles';
-    navChannels = 'Channels';
-    frequentOperation = 'Too frequent operation';
-    handwrittenNotes = 'Handwritten Notes';
-    codeNotes = 'Code Notes';
-    signin = 'Signin';
-    signup = 'Signup';
-    latest = 'Latest';
-    readCount = 'Read Count';
-    lastMonth = 'Last Month';
-    lastYear = 'Last Year';
-    all = 'All';
-    readRank = 'Read Rank';
+    searchPlaceholder: string
 }
 
 class ChineseLanguageProvider implements ILanguageProvider {
@@ -52,6 +35,26 @@ class ChineseLanguageProvider implements ILanguageProvider {
     lastYear = '近一年';
     all = '全部';
     readRank = '阅读排行';
+    searchPlaceholder = '搜索';
+}
+
+class EnglishLanguageProvider implements ILanguageProvider {
+    lang = langEn;
+    siteName = 'HUABLE';
+    navArticles = 'Articles';
+    navChannels = 'Channels';
+    frequentOperation = 'Too frequent operation';
+    handwrittenNotes = 'Handwritten Notes';
+    codeNotes = 'Code Notes';
+    signin = 'Signin';
+    signup = 'Signup';
+    latest = 'Latest';
+    readCount = 'Read Count';
+    lastMonth = 'Last Month';
+    lastYear = 'Last Year';
+    all = 'All';
+    readRank = 'Read Rank';
+    searchPlaceholder = 'Search';
 }
 
 export const englishLanguageProvider = new EnglishLanguageProvider();

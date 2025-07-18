@@ -7,13 +7,13 @@ import {FaAngleRight, FaAngleDown} from "react-icons/fa6";
 import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
 import {PSArticleFileModel} from "@/photon/common/models/article";
 import {encodeBase64String} from "@/atom/common/utils/basex";
-import {makeGet} from "@/atom/client/http";
+import {clientMakeGet} from "@/atom/client/http";
 import {useAtom} from "jotai";
 import {articleAssetsPreviewAtom} from "./state";
 
 async function selectFiles(portalUrl: string, channelUrn: string, articleUid: string, parentPath: string = '') {
     const assetsUrl = `${portalUrl}/articles/${articleUid}/assets?parent=${encodeURIComponent(parentPath)}`
-    return await makeGet<PLSelectResult<PSArticleFileModel>>(assetsUrl)
+    return await clientMakeGet<PLSelectResult<PSArticleFileModel>>(assetsUrl)
 }
 
 export function ArticleAssets({portalUrl, channelUid, articleUid}: {
