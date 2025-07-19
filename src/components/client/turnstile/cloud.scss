@@ -1,0 +1,25 @@
+
+#cfTurnstileOverlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  filter: alpha(opacity=50);
+  opacity: 0.99;
+  z-index: 10000;
+
+  .overlayBody {
+    width: 500px;
+    margin: 200px auto;
+
+    .turnstileTip {
+      font-size: 1.5rem;
+      color: #000;
+      margin-bottom: 1rem;
+    }
+  }
+
+}

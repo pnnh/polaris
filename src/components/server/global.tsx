@@ -9,7 +9,7 @@ import '@fontsource/roboto/700.css';
 import React, {Suspense} from "react";
 import {GoogleAnalytics} from "@next/third-parties/google";
 import {PageMetadata, pageTitle} from "@/utils/page";
-import {getLightningUrl, isProd, usePublicConfig, useServerConfig} from "@/services/server/config";
+import {isProd, usePublicConfig, useServerConfig} from "@/services/server/config";
 import {JotaiProvider} from "@/components/client/content/provider";
 import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter";
 import {Roboto} from 'next/font/google';
@@ -18,6 +18,7 @@ import theme from '@/components/client/theme';
 import {encodeBase58String} from "@/atom/common/utils/basex";
 import {getPathname} from "@/services/server/pathname";
 import {langEn, langZh, replaceLanguageInPathname} from "@/atom/common/language";
+import {CFTurnstile} from "@/components/client/turnstile/cloud";
 
 const roboto = Roboto({
     weight: ['300', '400', '500', '700'],
@@ -39,8 +40,6 @@ export default async function GlobalLayout({
     children: React.ReactNode
 }) {
     const rootPageTitle = pageTitle(lang,)
-
-    const lightningUrl = getLightningUrl()
 
     const serverConfig = useServerConfig()
     const selfUrl = serverConfig.PUBLIC_SELF_URL
@@ -86,7 +85,7 @@ export default async function GlobalLayout({
     </JotaiProvider>
     <input id="LGEnv" type="hidden" value={encodedBrowserConfig}/>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
-    <script type={'module'} src={lightningUrl}/>
+    <CFTurnstile/>
     </body>
     </html>
 }

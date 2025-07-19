@@ -1,11 +1,11 @@
 'use client'
 
 import styles from './form.module.scss'
-import {getTurnstileToken} from "@/atom/client/components/cloudflare/turnstile";
+import {getTurnstileToken} from "@/photon/client/cloudflare/turnstile";
 import React, {useState} from "react";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
-import {accountSignin} from "@/atom/client/account/account";
+import {accountSignin} from "@/photon/client/account/account";
 import {getLanguageProvider, ILanguageProvider} from "@/services/common/language";
 
 const buttonThrottle = new ButtonThrottle(1000)

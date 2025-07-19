@@ -18,7 +18,7 @@ import {TocItem} from "@/atom/common/models/toc";
 import {getDefaultNoteImageByUid} from "@/services/common/note";
 import {isValidUUID} from "@/atom/common/utils/uuid";
 import ArticleReadLayout from "@/components/server/content/article/layout";
-import {CommentsClient} from "@/atom/client/components/comments/comments";
+import {CommentsClient} from "@/photon/client/comments/comments";
 import {useServerConfig} from "@/services/server/config";
 import {ArticleAssets} from "./assets";
 import {ArticleAssertPreview} from "./preview";

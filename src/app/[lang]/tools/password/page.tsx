@@ -5,7 +5,7 @@ import {PageMetadata, pageTitle} from "@/utils/page";
 import ContentLayout from "@/components/server/content/layout";
 import {getPathname} from "@/services/server/pathname";
 import RandomPasswordPage from "@/atom/client/components/tools/password/random-password";
-import {CommentsClient} from "@/atom/client/components/comments/comments";
+import {CommentsClient} from "@/photon/client/comments/comments";
 import {useServerConfig} from "@/services/server/config";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
 import {langEn} from "@/atom/common/language";

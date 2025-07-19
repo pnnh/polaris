@@ -1,10 +1,9 @@
 import React from 'react'
 import './page.scss'
 import {getPathname} from "@/services/server/pathname";
-import {Metadata} from "next";
 import ContentLayout from "@/components/server/content/layout";
 import {ToolBody} from "@/atom/client/components/tools/uuid/tool";
-import {CommentsClient} from "@/atom/client/components/comments/comments";
+import {CommentsClient} from "@/photon/client/comments/comments";
 import {useServerConfig} from "@/services/server/config";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
 import {langEn} from "@/atom/common/language";

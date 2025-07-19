@@ -5,8 +5,8 @@ import React, {useState} from "react";
 import {validateEmail} from "@/atom/common/utils/email";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
-import {getTurnstileToken} from "@/atom/client/components/cloudflare/turnstile";
-import {submitSignup} from "@/atom/client/account/account";
+import {getTurnstileToken} from "@/photon/client/cloudflare/turnstile";
+import {submitSignup} from "@/photon/client/account/account";
 import {getLanguageProvider, ILanguageProvider} from "@/services/common/language";
 
 const buttonThrottle = new ButtonThrottle(5000)
