@@ -1,3 +1,5 @@
+'use client'
+
 import {CSSProperties, useState} from 'react'
 
 export function PSImage(props: {
@@ -14,7 +16,7 @@ export function PSImage(props: {
     }
     const width = props.width ? props.width : 256
     const height = props.height ? props.height : 256
-    return <img onError={() => setSrc(defaultImage)} src={src} alt={alt} width={width}
+    return <img aria-label={''} onError={() => setSrc(defaultImage)} src={src} alt={alt} width={width}
                 height={height}
                 sizes={props.sizes} style={props.style}></img>
 }
