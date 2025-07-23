@@ -41,7 +41,7 @@ export default async function GlobalLayout({
 }) {
     const rootPageTitle = pageTitle(lang,)
 
-    const serverConfig = useServerConfig()
+    const serverConfig = await useServerConfig()
     const selfUrl = serverConfig.PUBLIC_SELF_URL
     const browserConfigString = JSON.stringify(usePublicConfig(serverConfig))
     const encodedBrowserConfig = encodeBase58String(browserConfigString)
@@ -52,6 +52,7 @@ export default async function GlobalLayout({
     if (pathname === '/') {
         langDefaultUrl = selfUrl
     }
+    const turnstileKey = serverConfig.CLOUDFLARE_PUBLIC_TURNSTILE
     return <html lang={lang}>
     <head lang={lang}>
         <base href="/"/>
@@ -85,7 +86,7 @@ export default async function GlobalLayout({
     </JotaiProvider>
     <input id="LGEnv" type="hidden" value={encodedBrowserConfig}/>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
-    <CFTurnstile/>
+    <CFTurnstile turnstileKey={turnstileKey}/>
     </body>
     </html>
 }

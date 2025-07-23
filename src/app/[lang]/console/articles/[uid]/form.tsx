@@ -82,7 +82,7 @@ export function ConsoleArticleForm({portalUrl, modelString}: { portalUrl: string
                 <FormControlLabel value="en" control={<Radio/>} label="English" disabled={!isNew}/>
                 <FormControlLabel value="zh" control={<Radio/>} label="中文" disabled={!isNew}/>
             </RadioGroup>
-            <ChannelSelector channel={oldModel.channel} lang={lang} onChange={setChannel}/>
+            <ChannelSelector channel={oldModel.channel} lang={lang} portalUrl={portalUrl} onChange={setChannel}/>
             <Button variant={'contained'} size={'small'} onClick={onSubmit}>保存</Button>
             <Button variant={'contained'} size={'small'}>创建多语言副本</Button>
         </div>

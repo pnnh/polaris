@@ -28,7 +28,7 @@ export default async function ArticleReadLayout({
 }) {
     let currentUserInfo: AccountModel | undefined;
     if (userInfo === SymbolUnknown) {
-        const serverConfig = useServerConfig()
+        const serverConfig = await useServerConfig()
         const portalUrl = serverConfig.PUBLIC_PORTAL_URL
         currentUserInfo = await serverGetUserinfo(portalUrl);
     } else {

@@ -34,7 +34,7 @@ export default async function Page({params, searchParams}: {
     const pageSize = 10
     const channelPk = searchParamsValue.channel
 
-    let domain = serverPortalSignin()
+    let domain = await serverPortalSignin()
     const selectQuery = {
         sort: searchParamsValue.sort,
         filter: searchParamsValue.filter,

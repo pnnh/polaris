@@ -19,7 +19,7 @@ export default async function Page({params, searchParams}: {
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
 
-    const serverConfig = useServerConfig()
+    const serverConfig = await useServerConfig()
     const langProvider = getLanguageProvider(lang)
     return <AccountLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>

@@ -18,7 +18,7 @@ export async function ContentPublicNavbar({pathname, searchParams, langProvider,
     langProvider: ILanguageProvider,
     userInfo: AccountModel | undefined
 }) {
-    const serverConfig = useServerConfig()
+    const serverConfig = await useServerConfig()
 
     const searchString = await getSearchString()
     const currentUrl = `${pathname}${searchString}`

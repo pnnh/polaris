@@ -22,7 +22,7 @@ export default async function Home({params, searchParams}: {
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
     const metadata = new PageMetadata(lang)
-    const serverConfig = useServerConfig()
+    const serverConfig = await useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
     const articleUrn = base58ToUuid(paramsValue.uid)
     const isNew = articleUrn === EmptyUUID;

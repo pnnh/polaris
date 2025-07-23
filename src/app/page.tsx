@@ -40,7 +40,7 @@ export default async function Page({params, searchParams}: {
         direction: 'cta',
         size: 10
     })
-    let domain = serverPortalSignin()
+    let domain = await serverPortalSignin()
     const rankUrl = `/articles?${rankQuery}`
     const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)
 

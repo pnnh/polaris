@@ -52,7 +52,7 @@ export default async function Page({params, searchParams}: {
         size: 10,
         channel: channelUrn
     })
-    const domain = serverPortalSignin()
+    const domain = await serverPortalSignin()
     const rankUrl = `/articles?${rankQuery}`
     const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)
 

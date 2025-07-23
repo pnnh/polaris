@@ -3,15 +3,14 @@
 import {TextField} from "@mui/material";
 import React, {useEffect} from "react";
 import {clientChannelsComplete} from "@/services/client/channels/channels";
-import {useClientConfig} from "@/services/client/config";
 import styles from './channel.module.scss';
 
-export function ChannelSelector({channel, lang, onChange}: {
+export function ChannelSelector({channel, lang, portalUrl, onChange}: {
     channel: string,
     lang: string,
+    portalUrl: string
     onChange: (channel: string) => void
 }) {
-    const clientConfig = useClientConfig()
     const [channelKeyword, setChannelKeyword] = React.useState<string>(channel);
     const [channelName, setChannelName] = React.useState<string>('无效频道');
     const doComplete = (keyword: string) => {
@@ -24,7 +23,7 @@ export function ChannelSelector({channel, lang, onChange}: {
             lang: lang,
             keyword: keyword,
         }
-        clientChannelsComplete(clientConfig.PUBLIC_PORTAL_URL, selectQuery).then((selectResult) => {
+        clientChannelsComplete(portalUrl, selectQuery).then((selectResult) => {
             if (!selectResult || !selectResult.range || selectResult.range.length === 0) {
                 console.warn('频道查询结果为空', selectResult);
                 return;

@@ -12,10 +12,10 @@ import {langEn} from "@/atom/common/language";
 export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
-    const domain = serverPortalSignin()
+    const domain = await serverPortalSignin()
     const url = `/articles?` + `page=1&size=${100}`
     const result = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
-    const serverConfig = useServerConfig()
+    const serverConfig = await useServerConfig()
     const selfUrl = serverConfig.PUBLIC_SELF_URL
     let links: SitemapItemLoose[] = []
 

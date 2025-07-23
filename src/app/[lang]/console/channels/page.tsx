@@ -19,7 +19,7 @@ export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, viewer: string }>,
     searchParams: Promise<Record<string, string> & { query: string | undefined }>
 }) {
-    const domain = serverPortalSignin()
+    const domain = await serverPortalSignin()
     const paramsValue = await params;
     const pageSize = 64
     const lang = paramsValue.lang || langEn

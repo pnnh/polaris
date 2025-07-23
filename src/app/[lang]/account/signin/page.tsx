@@ -23,7 +23,7 @@ export default async function Page({params, searchParams}: {
     const signinLink = searchParamsValue.link
     const linkApp = searchParamsValue.app
 
-    const serverConfig = useServerConfig()
+    const serverConfig = await useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
 
     const userInfo = await serverGetUserinfo(portalUrl)

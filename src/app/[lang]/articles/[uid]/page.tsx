@@ -37,7 +37,7 @@ export default async function Home({params, searchParams}: {
     const lang = paramsValue.lang || langEn
     const metadata = new PageMetadata(lang)
     const searchParamsValue = await searchParams
-    let domain = serverPortalSignin()
+    let domain = await serverPortalSignin()
     const articleUrn = base58ToUuid(paramsValue.uid)
     if (!articleUrn) {
         notFound();
@@ -70,7 +70,7 @@ export default async function Home({params, searchParams}: {
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)
     }
-    const serverConfig = useServerConfig()
+    const serverConfig = await useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
     const langProvider = getLanguageProvider(lang)
     return <ArticleReadLayout lang={lang} searchParams={await searchParams} pathname={pathname}

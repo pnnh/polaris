@@ -34,7 +34,7 @@ export default async function Page({params, searchParams}: {
 
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
-    let domain = serverPortalSignin()
+    let domain = await serverPortalSignin()
 
     const selectQuery = {
         sort: searchParamsValue.sort,

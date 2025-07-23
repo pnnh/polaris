@@ -7,8 +7,8 @@ function trySigninDomain(domainUrl: string | undefined = ""): IDomain | undefine
     return systemDomain as IDomain
 }
 
-export function serverPortalSignin(): IDomain {
-    const serverConfig = useServerConfig()
+export async function serverPortalSignin(): Promise<IDomain> {
+    const serverConfig = await useServerConfig()
     const serverUrl = serverConfig.PUBLIC_PORTAL_URL
     const domain = trySigninDomain(serverUrl)
     if (!domain) {

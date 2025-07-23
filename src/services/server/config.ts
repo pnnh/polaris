@@ -1,56 +1,54 @@
-import dotenv from "dotenv";
-
 import {IBrowserConfig} from "@/services/common/config";
-
-console.log('process.env.RUN_MODE', process.env.RUN_MODE)
-
-let isConfigLoaded = false
-
-function loadConfig() {
-    if (isConfigLoaded) {
-        return
-    }
-    // 根据环境从不同的文件加载配置
-    const envPath = `.env.${runMode()}`
-    console.log('当前配置环境', envPath)
-    const result = dotenv.config({path: envPath})
-    if (result.error) {
-        throw new Error(`解析配置出错: ${result.error}`)
-    }
-    isConfigLoaded = true
-}
+import {ConfigOptions, initAppConfig} from "@/atom/server/config/config";
 
 export interface IServerConfig {
+    RUN_MODE: string
     PUBLIC_SELF_URL: string
     PUBLIC_PORTAL_URL: string
-    PUBLIC_LIGHTNING_URL: string
-    PUBLIC_TURNSTILE: string
+    CLOUDFLARE_PUBLIC_TURNSTILE: string
 }
 
-export function useServerConfig(): IServerConfig {
-    loadConfig()
-    if (!process.env.PUBLIC_SELF_URL) {
+let serverConfigInstance: IServerConfig | undefined;
+
+export async function useServerConfig(): Promise<IServerConfig> {
+    if (serverConfigInstance) {
+        return serverConfigInstance
+    }
+    const configUrl = process.env.CONFIG;
+    if (!configUrl) {
+        throw new Error('CONFIG environment variable is required')
+    }
+    const runMode = getRunMode();
+    const configOptions: ConfigOptions = {
+        project: "huable",
+        app: "polaris",
+        env: runMode,
+        svc: "polaris"
+    }
+    const appConfig = initAppConfig(configUrl, configOptions)
+    const selfUrl = await appConfig.GetString('PUBLIC_SELF_URL');
+    const portalUrl = await appConfig.GetString('app.PUBLIC_PORTAL_URL');
+    const turnstile = await appConfig.GetString('project.CLOUDFLARE_PUBLIC_TURNSTILE');
+
+    if (!selfUrl) {
         throw new Error('PUBLIC_SELF_URL is required')
     }
-    if (!process.env.PUBLIC_PORTAL_URL) {
+    if (!portalUrl) {
         throw new Error('PUBLIC_PORTAL_URL is required')
     }
-    if (!process.env.PUBLIC_LIGHTNING_URL) {
-        throw new Error('PUBLIC_LIGHTNING_URL is required')
-    }
-    if (!process.env.PUBLIC_TURNSTILE) {
+    if (!turnstile) {
         throw new Error('PUBLIC_TURNSTILE is required')
     }
-
-    return {
-        PUBLIC_SELF_URL: process.env.PUBLIC_SELF_URL || '',
-        PUBLIC_PORTAL_URL: process.env.PUBLIC_PORTAL_URL,
-        PUBLIC_TURNSTILE: process.env.PUBLIC_TURNSTILE || '',
-        PUBLIC_LIGHTNING_URL: process.env.PUBLIC_LIGHTNING_URL || '',
-    }
+    serverConfigInstance = {
+        RUN_MODE: runMode,
+        PUBLIC_SELF_URL: selfUrl,
+        PUBLIC_PORTAL_URL: portalUrl,
+        CLOUDFLARE_PUBLIC_TURNSTILE: turnstile,
+    };
+    return serverConfigInstance;
 }
 
-export function runMode() {
+export function getRunMode() {
     return process.env.RUN_MODE || 'development'
 }
 
@@ -66,14 +64,11 @@ export function isProd() {
     return process.env.RUN_MODE === 'production'
 }
 
-export function usePublicConfig(serverConfig?: IServerConfig): IBrowserConfig {
-    if (!serverConfig) {
-        serverConfig = useServerConfig()
-    }
+export function usePublicConfig(serverConfig: IServerConfig): IBrowserConfig {
     return {
+        PUBLIC_MODE: serverConfig.RUN_MODE,
         PUBLIC_SELF_URL: serverConfig.PUBLIC_SELF_URL,
-        PUBLIC_MODE: runMode(),
-        PUBLIC_TURNSTILE: serverConfig.PUBLIC_TURNSTILE,
+        PUBLIC_TURNSTILE: serverConfig.CLOUDFLARE_PUBLIC_TURNSTILE,
         PUBLIC_PORTAL_URL: serverConfig.PUBLIC_PORTAL_URL,
     }
 }
