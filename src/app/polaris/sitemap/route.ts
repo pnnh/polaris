@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
 
     if (result && result.data && result.data.range) {
         links = result.data.range.map((article) => {
-            const readUrl = `/articles/${uuidToBase58(article.uid || article.uid)}`
+            const readUrl = `/articles/${uuidToBase58(article.uid)}`
             return {
                 url: `/${langEn}${readUrl}`,
                 lastmod: article.update_time,

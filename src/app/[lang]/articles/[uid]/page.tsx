@@ -46,7 +46,7 @@ export default async function Home({params, searchParams}: {
     const getResult = await domain.makeGet<CommonResult<PSArticleModel | undefined>>(url)
 
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {
-        return <div>遇到错误</div>
+        return <div>遇到错误2</div>
     }
     const model = getResult.data
     metadata.title = pageTitle(lang, getResult.data.title)

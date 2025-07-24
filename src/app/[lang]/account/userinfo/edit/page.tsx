@@ -24,7 +24,7 @@ export default async function Page({params, searchParams}: {
 
     const userInfo = await serverGetUserinfo(portalUrl)
     if (!userInfo) {
-        return <div>遇到错误</div>
+        return <div>遇到错误3</div>
     }
 
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
