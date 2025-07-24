@@ -45,6 +45,9 @@ export async function useServerConfig(): Promise<IServerConfig> {
         PUBLIC_PORTAL_URL: portalUrl,
         CLOUDFLARE_PUBLIC_TURNSTILE: turnstile,
     };
+    // Todo 临时打印，后续去除
+    console.error('Server config initialized:', serverConfigInstance);
+
     return serverConfigInstance;
 }
 
