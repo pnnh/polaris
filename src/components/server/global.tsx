@@ -48,7 +48,7 @@ export default async function GlobalLayout({
     const pathname = await getPathname()
     const langEnUrl = `${selfUrl}${replaceLanguageInPathname(pathname, langEn)}`
     const langZhUrl = `${selfUrl}${replaceLanguageInPathname(pathname, langZh)}`
-    let langDefaultUrl = langZhUrl;
+    let langDefaultUrl = langEnUrl;
     if (pathname === '/') {
         langDefaultUrl = selfUrl
     }
@@ -85,8 +85,9 @@ export default async function GlobalLayout({
         </AppRouterCacheProvider>
     </JotaiProvider>
     <input id="LGEnv" type="hidden" value={encodedBrowserConfig}/>
-    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
-    <CFTurnstile turnstileKey={turnstileKey}/>
+    <CFTurnstile turnstileKey={turnstileKey} lang={lang}/>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback"
+            defer={true}></script>
     </body>
     </html>
 }

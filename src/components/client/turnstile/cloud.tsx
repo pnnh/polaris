@@ -1,33 +1,32 @@
 'use client'
 
-import $ from 'jquery';
-import {turnstileScript} from "@/photon/client/cloudflare/turnstile";
+import $ from "jquery";
+import {CFTurnstileBody, CFTurnstileOverlay, turnstileScript} from "@/photon/client/cloudflare/turnstile";
 
 import './cloud.scss'
 import {useEffect, useState} from "react";
+import {localText} from "@/atom/common/language";
 
-function cfTurnstileSetup(turnstileKey: string) {
-    const overlayEl = $('<div/>', {id: 'cfTurnstileOverlay'});
+function cfTurnstileSetup(turnstileKey: string, lang: string) {
+    console.info('cfTurnstileSetup')
+    const overlayEl = $('<div/>', {id: CFTurnstileOverlay});
     const overlayBodyEl = $('<div/>', {class: 'overlayBody'}).appendTo(overlayEl);
-    $('<div/>', {class: 'turnstileTip'}).text('请点击验证').appendTo(overlayBodyEl);
-    $('<div/>', {id: 'turnstile-body', class: 'turnstileBody'}).appendTo(overlayBodyEl);
+    $('<div/>', {class: 'turnstileTip'}).text(localText(lang, '请点击验证', 'Please Click')).appendTo(overlayBodyEl);
+    $('<div/>', {id: CFTurnstileBody, class: 'turnstileBody'}).appendTo(overlayBodyEl);
     overlayEl.appendTo('body');
-    turnstileScript(turnstileKey);
+    turnstileScript(turnstileKey, lang);
 }
 
-export function CFTurnstile({turnstileKey}: { turnstileKey: string }) {
-    // const [show, setShow] = useState(false)
+export function CFTurnstile({turnstileKey, lang}: { turnstileKey: string, lang: string }) {
     useEffect(() => {
-        const anchorElement = document.getElementById('cfTurnstileOverlay')
-        if (anchorElement) {
-            return
+        window.onloadTurnstileCallback = () => {
+            console.info('onloadTurnstileCallback')
+            cfTurnstileSetup(turnstileKey, lang);
         }
-        if (window.turnstile) {
-            cfTurnstileSetup(turnstileKey);
-        } else {
-            console.warn('Cloudflare Turnstile is not available, skipping setup.');
+        return () => {
+            window.onloadTurnstileCallback = undefined;
         }
-    })
-    return <div id={'CFTurnstile'}>
-    </div>
+    }, [turnstileKey]);
+    return <div id={'CFTurnstilePlaceholder'}></div>
 }
+

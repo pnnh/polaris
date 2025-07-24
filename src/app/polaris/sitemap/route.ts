@@ -7,7 +7,7 @@ import {useServerConfig} from "@/services/server/config";
 import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {uuidToBase58} from "@/atom/common/utils/basex";
-import {langEn} from "@/atom/common/language";
+import {langEn, langZh} from "@/atom/common/language";
 
 export const dynamic = "force-dynamic";
 
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
                 links: [
                     {lang: 'x-default', url: `/${langEn}${readUrl}`},
                     {lang: 'en', url: `/${langEn}${readUrl}`},
-                    {lang: 'zh', url: `/zh${readUrl}`},
+                    {lang: 'zh', url: `/${langZh}${readUrl}`},
                 ]
             }
         })

@@ -30,7 +30,7 @@ export default async function Page({params, searchParams}: {
     const pageSize = 10
     const channelPk = searchParamsValue.channel
     const paramsValue = await params;
-    const lang = paramsValue.lang || langZh
+    const lang = paramsValue.lang || langEn
 
     const metadata = new PageMetadata(lang)
     const rankQuery = queryString.stringify({
