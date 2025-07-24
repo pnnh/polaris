@@ -4,7 +4,7 @@ import AccountLayout from "@/components/server/account/layout";
 import styles from "./page.module.scss";
 import {SigninForm} from "./form";
 import {useServerConfig} from "@/services/server/config";
-import {langEn} from "@/atom/common/language";
+import {langEn, localText} from "@/atom/common/language";
 import GlobalLayout from "@/components/server/global";
 import {getLanguageProvider} from "@/services/common/language";
 import {serverGetUserinfo} from "@/services/server/account/account";
@@ -31,7 +31,7 @@ export default async function Page({params, searchParams}: {
         if (signinLink && linkApp) {
             return <LinkSession lang={lang} portalUrl={portalUrl} signinLink={signinLink} linkApp={linkApp}/>
         }
-        return <div>您已成功登录，点此<a href={'/'}>前往首页</a></div>
+        return <div><a href={'/'}>{localText(lang, '前往首页', 'Go home page')}</a></div>
     }
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
@@ -40,7 +40,7 @@ export default async function Page({params, searchParams}: {
         <AccountLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                        metadata={metadata}>
             <div className={styles.signinCard}>
-                <div className={styles.signinTitle}>登录页面</div>
+                <div className={styles.signinTitle}>{localText(lang, '登录页面', 'Login Page')}</div>
                 <div className={styles.signinBody}>
                     <SigninForm portalUrl={serverConfig.PUBLIC_PORTAL_URL} lang={lang} signinLink={signinLink}
                                 linkApp={linkApp}/>

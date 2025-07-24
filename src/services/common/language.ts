@@ -17,13 +17,16 @@ export interface ILanguageProvider {
     all: string
     readRank: string
     searchPlaceholder: string
+    invalidUsername: string
+    invalidPassword: string;
+    unauthorized: string;
 }
 
 class ChineseLanguageProvider implements ILanguageProvider {
     lang = langZh;
     navArticles = '文章';
     navChannels = '频道';
-    siteName = '希波万象';
+    siteName = '希波';
     frequentOperation = '操作过于频繁';
     handwrittenNotes = '手写笔记';
     codeNotes = '代码笔记';
@@ -36,6 +39,9 @@ class ChineseLanguageProvider implements ILanguageProvider {
     all = '全部';
     readRank = '阅读排行';
     searchPlaceholder = '搜索';
+    invalidUsername = '无效账户名称';
+    invalidPassword = '无效密码';
+    unauthorized = '未授权';
 }
 
 class EnglishLanguageProvider implements ILanguageProvider {
@@ -55,6 +61,9 @@ class EnglishLanguageProvider implements ILanguageProvider {
     all = 'All';
     readRank = 'Read Rank';
     searchPlaceholder = 'Search';
+    invalidUsername = 'Invalid Account Name';
+    invalidPassword = 'Invalid Password';
+    unauthorized = 'Unauthorized';
 }
 
 export const englishLanguageProvider = new EnglishLanguageProvider();

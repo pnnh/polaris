@@ -8,6 +8,7 @@ import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {getTurnstileToken} from "@/photon/client/cloudflare/turnstile";
 import {submitSignup} from "@/photon/client/account/account";
 import {getLanguageProvider, ILanguageProvider} from "@/services/common/language";
+import {localText} from "@/atom/common/language";
 
 const buttonThrottle = new ButtonThrottle(5000)
 
@@ -27,25 +28,24 @@ export function SignupForm({lang, portalUrl}: { lang: string, portalUrl: string 
             return
         }
         if (!username || username.length < 1) {
-            setInfoMsg('无效账号名称')
+            setInfoMsg(localText(lang, '无效账号名称', 'Invalid username'))
             return
         }
         if (!password || password.length < 1) {
-            setInfoMsg('无效密码')
+            setInfoMsg(localText(lang, '无效账号密码', 'Invalid password'))
             return
         }
         if (confirmPassword !== password) {
-            setInfoMsg('密码不一致')
+            setInfoMsg(localText(lang, '两次输入的密码不一致', 'Passwords do not match'))
             return
         }
         if (email && !validateEmail(email)) {
-            setInfoMsg('无效邮箱')
+            setInfoMsg(localText(lang, '无效电子邮箱', 'Invalid email address'))
             return
         }
         const turnstileToken = await getTurnstileToken()
-        // console.log('turnstile token', turnstileToken)
         if (!turnstileToken) {
-            setInfoMsg('未通过验证')
+            setInfoMsg(localText(lang, '未通过验证', 'Verification failed'))
             return
         }
         const submitRequest = {
@@ -55,10 +55,10 @@ export function SignupForm({lang, portalUrl}: { lang: string, portalUrl: string 
         const submitResult = await submitSignup(portalUrl, submitRequest)
         console.log('submitResult', submitResult)
         if (submitResult.code !== CodeOk) {
-            setInfoMsg('注册失败')
+            setInfoMsg(localText(lang, '注册失败', 'Signup failed'))
             return
         }
-        setInfoMsg('注册成功，前往首页...')
+        setInfoMsg(localText(lang, '注册成功，前往首页...', 'Signup successful, redirecting to homepage...'))
         setTimeout(() => {
             window.location.href = '/'
         }, 1500)
@@ -69,31 +69,32 @@ export function SignupForm({lang, portalUrl}: { lang: string, portalUrl: string 
             <div className={styles.formRow}>
                 <label htmlFor="username" className={styles.fieldLabel}>账号名称</label>
                 <input type="text" name="username" className={styles.inputField}
-                       placeholder={'字母或数字'}
+                       placeholder={localText(lang, '字母或数字', 'Letters or numbers')}
                        value={username} onChange={(event) => setUsername(event.target.value)}/>
             </div>
             <div className={styles.formRow}>
                 <label htmlFor="password" className={styles.fieldLabel}>账号密码</label>
                 <input type="password" name="password" className={styles.inputField}
-                       placeholder={'字母数字及特殊字符'}
+                       placeholder={localText(lang, '字母数字及特殊字符', 'Letters, numbers and special characters')}
                        value={password} onChange={(event) => setPassword(event.target.value)}/>
             </div>
             <div className={styles.formRow}>
                 <label htmlFor="confirmPassword" className={styles.fieldLabel}>确认密码</label>
                 <input type="password" name="confirmPassword" className={styles.inputField}
-                       placeholder={'字母数字及特殊字符'}
+                       placeholder={localText(lang, '字母数字及特殊字符', 'Letters, numbers and special characters')}
                        value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)}/>
             </div>
             <div className={styles.formRow}>
-                <label htmlFor="nickname" className={styles.fieldLabel}>账号昵称</label>
+                <label htmlFor="nickname"
+                       className={styles.fieldLabel}>{localText(lang, '账号昵称', 'Nickname')}</label>
                 <input type="text" name="nickname" className={styles.inputField}
-                       placeholder={'可选输入'}
+                       placeholder={localText(lang, '可选输入', 'Optional')}
                        value={nickname} onChange={(event) => setNickname(event.target.value)}/>
             </div>
             <div className={styles.formRow}>
-                <label htmlFor="email" className={styles.fieldLabel}>电子邮箱</label>
+                <label htmlFor="email" className={styles.fieldLabel}>{localText(lang, '电子邮箱', 'Email')}</label>
                 <input type="text" name="email" className={styles.inputField}
-                       placeholder={'可选输入'}
+                       placeholder={localText(lang, '可选输入', 'Optional')}
                        value={email} onChange={(event) => setEmail(event.target.value)}/>
             </div>
             <div className={styles.formRow}>
@@ -102,7 +103,8 @@ export function SignupForm({lang, portalUrl}: { lang: string, portalUrl: string 
                             submitForm().then()
                         }}>{langProvider.signup}
                 </button>
-                <div>已有账号？前往<a href={'/account/signin'}>{langProvider.signin}</a></div>
+                <div>{localText(lang, '已有账号？', 'Already have an account?')}
+                    <a href={'/account/signin'}>{langProvider.signin}</a></div>
             </div>
             <div className={styles.formRow}>
                 <div className={'infoMsg'}>

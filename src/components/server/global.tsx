@@ -48,7 +48,7 @@ export default async function GlobalLayout({
     const pathname = await getPathname()
     const langEnUrl = `${selfUrl}${replaceLanguageInPathname(pathname, langEn)}`
     const langZhUrl = `${selfUrl}${replaceLanguageInPathname(pathname, langZh)}`
-    let langDefaultUrl = langEnUrl;
+    let langDefaultUrl = langZhUrl;
     if (pathname === '/') {
         langDefaultUrl = selfUrl
     }

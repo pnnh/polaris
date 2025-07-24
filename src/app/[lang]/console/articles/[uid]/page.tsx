@@ -4,7 +4,7 @@ import {getClientIp, getPathname} from "@/services/server/pathname";
 import {base58ToUuid} from "@/atom/common/utils/basex";
 import {CodeOk, CommonResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {useServerConfig} from "@/services/server/config";
-import {langEn} from "@/atom/common/language";
+import {langEn, langZh} from "@/atom/common/language";
 import {notFound} from "next/navigation";
 import ConsoleLayout from "@/components/server/console/layout";
 import {ConsoleArticleForm} from "@/app/[lang]/console/articles/[uid]/form";
@@ -20,7 +20,7 @@ export default async function Home({params, searchParams}: {
 }) {
     const pathname = await getPathname()
     const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
+    const lang = paramsValue.lang || langZh
     const metadata = new PageMetadata(lang)
     const serverConfig = await useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL

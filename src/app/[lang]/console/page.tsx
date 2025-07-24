@@ -2,10 +2,12 @@ import React from 'react'
 import {PageMetadata, pageTitle} from "@/utils/page";
 import {getPathname} from "@/services/server/pathname";
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
-import {langEn} from "@/atom/common/language";
+import {langEn, localText} from "@/atom/common/language";
 import styles from './page.module.scss'
 import ConsoleLayout from "@/components/server/console/layout";
-import {ConsoleSidebar} from "@/components/server/console/sidebar";
+import {useServerConfig} from "@/services/server/config";
+import {serverGetUserinfo} from "@/services/server/account/account";
+import {isAnonymousAccount} from "@/atom/common/models/account";
 
 
 export default async function Page({params, searchParams}: {
@@ -17,13 +19,25 @@ export default async function Page({params, searchParams}: {
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
 
+    const serverConfig = await useServerConfig()
+    const portalUrl = serverConfig.PUBLIC_PORTAL_URL
+    const currentUserInfo = await serverGetUserinfo(portalUrl);
+    if (!currentUserInfo || isAnonymousAccount(currentUserInfo)) {
+        return <div className={styles.consolePage}>
+            请先登录
+        </div>
+    }
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
 
     return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={styles.consolePage}>
-            点击左侧菜单
+            {localText(lang, '欢迎使用控制台', 'Welcome to the console')}
+            <br/>
+            {localText(lang, '请在左侧菜单中选择功能', 'Please select a function from the left menu')}
+            <br/>
+            {currentUserInfo.nickname}
         </div>
     </ConsoleLayout>
 }

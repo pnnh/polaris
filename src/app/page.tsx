@@ -12,7 +12,7 @@ import {serverPortalSignin} from "@/services/server/domain/domain";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
-import {langEn} from "@/atom/common/language";
+import {langEn, langZh} from "@/atom/common/language";
 import {ArticleFilterBar} from "@/components/server/content/article/filter";
 import {getLanguageProvider} from "@/services/common/language";
 
@@ -30,7 +30,7 @@ export default async function Page({params, searchParams}: {
     const pageSize = 10
     const channelPk = searchParamsValue.channel
     const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
+    const lang = paramsValue.lang || langZh
 
     const metadata = new PageMetadata(lang)
     const rankQuery = queryString.stringify({

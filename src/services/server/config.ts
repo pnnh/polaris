@@ -26,9 +26,9 @@ export async function useServerConfig(): Promise<IServerConfig> {
         svc: "polaris"
     }
     const appConfig = initAppConfig(configUrl, configOptions)
-    const selfUrl = await appConfig.GetString('PUBLIC_SELF_URL');
+    const selfUrl = await appConfig.GetString('app.PUBLIC_POLARIS_URL');
     const portalUrl = await appConfig.GetString('app.PUBLIC_PORTAL_URL');
-    const turnstile = await appConfig.GetString('project.CLOUDFLARE_PUBLIC_TURNSTILE');
+    const turnstile = await appConfig.GetString('app.CLOUDFLARE_PUBLIC_TURNSTILE');
 
     if (!selfUrl) {
         throw new Error('PUBLIC_SELF_URL is required')

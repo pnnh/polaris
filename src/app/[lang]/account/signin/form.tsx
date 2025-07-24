@@ -7,6 +7,7 @@ import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {accountSignin} from "@/photon/client/account/account";
 import {getLanguageProvider, ILanguageProvider} from "@/services/common/language";
+import {localText} from "@/atom/common/language";
 
 const buttonThrottle = new ButtonThrottle(1000)
 
@@ -25,35 +26,34 @@ export function SigninForm({lang, portalUrl, signinLink, linkApp}: {
             return
         }
         if (!username || username.length < 1) {
-            setInfoMsg('无效账号名称')
+            setInfoMsg(langProvider.invalidUsername)
             return
         }
         if (!password || password.length < 1) {
-            setInfoMsg('无效密码')
+            setInfoMsg(langProvider.invalidPassword)
             return
         }
         const turnstileToken = await getTurnstileToken()
         console.debug('turnstile token', turnstileToken)
         if (!turnstileToken) {
-            setInfoMsg('未通过验证')
+            setInfoMsg(langProvider.unauthorized)
             return
         }
         const submitRequest = {
             username, password, turnstile_token: turnstileToken, link: signinLink
         }
         const submitResult = await accountSignin(portalUrl, submitRequest)
-        console.log('submitResult', submitResult)
         if (submitResult.code !== CodeOk) {
-            setInfoMsg('登录失败')
+            setInfoMsg(localText(lang, '登录失败', 'Login failed'))
             return
         }
         if (signinLink && linkApp) {
-            setInfoMsg('登录成功，前往授权页面...')
+            setInfoMsg(localText(lang, '登录成功，前往授权页面...', 'Login successful, redirecting to authorization page...'))
             setTimeout(() => {
                 window.location.href = `/${lang}/account/signin?app=${encodeURIComponent(linkApp)}&link=${encodeURIComponent(signinLink)}`
             }, 1500)
         } else {
-            setInfoMsg('登录成功，前往首页...')
+            setInfoMsg(localText(lang, '登录成功，前往首页...', 'Login successful, redirecting to homepage...'))
             setTimeout(() => {
                 window.location.href = '/'
             }, 1500)
@@ -65,13 +65,13 @@ export function SigninForm({lang, portalUrl, signinLink, linkApp}: {
             <div className={styles.formRow}>
                 <label htmlFor="username" className={styles.fieldLabel}>账号名称</label>
                 <input type="text" name="username" className={styles.inputField}
-                       placeholder={'字母或数字'}
+                       placeholder={localText(lang, '字母或数字', 'Letters or numbers')}
                        value={username} onChange={(event) => setUsername(event.target.value)}/>
             </div>
             <div className={styles.formRow}>
                 <label htmlFor="password" className={styles.fieldLabel}>账号密码</label>
                 <input type="password" name="password" className={styles.inputField}
-                       placeholder={'字母数字及特殊字符'}
+                       placeholder={localText(lang, '字母数字及特殊字符', 'Letters, numbers and special characters')}
                        value={password} onChange={(event) => setPassword(event.target.value)}/>
             </div>
             <div className={styles.formRow}>
@@ -80,7 +80,8 @@ export function SigninForm({lang, portalUrl, signinLink, linkApp}: {
                             submitForm().then()
                         }}>{langProvider.signin}
                 </button>
-                <div>还没有账号？前往<a href={'/account/signup'}>{langProvider.signup}</a></div>
+                <div>{localText(lang, '还没有账号？', 'No account yet?')}<a
+                    href={'/account/signup'}>{langProvider.signup}</a></div>
             </div>
             <div className={styles.formRow}>
                 <div className={'infoMsg'}>

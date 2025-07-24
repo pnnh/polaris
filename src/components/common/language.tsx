@@ -21,7 +21,7 @@ export function PSLanguageSelector({lang, currentUrl}: { lang: string, currentUr
     const linkTip = lang === langZh ? '访问英文页面' : 'Switch to Chinese page';
     return <div className={styles.langSelector}>
         <a href={targetUrl} title={linkTip}>
-            <img src={lang === 'en' ? '/icons/language/langEn.svg' : '/icons/language/langZh.svg'} alt={'lang'}/>
+            <img src={lang === langEn ? '/icons/language/langEn.svg' : '/icons/language/langZh.svg'} alt={'lang'}/>
         </a>
     </div>
 }

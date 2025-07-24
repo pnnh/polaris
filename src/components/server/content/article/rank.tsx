@@ -2,6 +2,7 @@ import React from "react";
 import './rank.scss'
 import {PLSelectResult} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/photon/common/models/article";
+import {uuidToBase58} from "@/atom/common/utils/basex";
 
 export function ArticleRankCard({rankResult, lang}: { rankResult: PLSelectResult<PSArticleModel>, lang: string }) {
     return <div className={'rankCard'}>
@@ -12,7 +13,7 @@ export function ArticleRankCard({rankResult, lang}: { rankResult: PLSelectResult
             {
                 rankResult && rankResult.data && rankResult.data.range && rankResult.data.range.length > 0
                     ? rankResult.data.range.map((model, index) => {
-                        const readUrl = `/${lang}/content/articles/${model.channel}/articles/${model.uid}`
+                        const readUrl = `${lang}/articles/${uuidToBase58(model.cid)}`
                         return <div key={index} className={'rankItem'}>
                             <div
                                 className={'rankIndex' + (index <= 2 ? ' rankTop' : '')}>{index + 1}</div>

@@ -10,8 +10,10 @@ import {TocItem} from "@/atom/common/models/toc";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {clientInsertArticle, clientUpdateArticle} from "@/services/client/articles/articles";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
-import {ChannelSelector} from "@/app/[lang]/console/articles/[uid]/channel";
 import {getDefaultImageUrl} from "@/services/common/note";
+import {base58ToUuid, mustBase58ToUuid, uuidToBase58} from "@/atom/common/utils/basex";
+import {localText} from "@/atom/common/language";
+import {isUUID} from "validator";
 
 export function ConsoleArticleForm({portalUrl, modelString}: { portalUrl: string, modelString: string }) {
     const oldModel = JSON.parse(modelString) as PSArticleModel;
@@ -19,7 +21,7 @@ export function ConsoleArticleForm({portalUrl, modelString}: { portalUrl: string
     const [title, setTitle] = React.useState(oldModel.title);
     const [description, setDescription] = React.useState(oldModel.description);
     const [bodyText, setBodyText] = React.useState(oldModel.body || '');
-    const [channel, setChannel] = React.useState(oldModel.channel || '');
+    const [channel, setChannel] = React.useState(oldModel.channel);
 
     const tocList: TocItem[] = []
     const titleId = generatorRandomString(8)
@@ -35,6 +37,19 @@ export function ConsoleArticleForm({portalUrl, modelString}: { portalUrl: string
             coverUrl: oldModel.coverUrl,
             header: oldModel.header,
             lang: oldModel.lang,
+            channel: oldModel.channel
+        }
+        if (!channel) {
+            console.error(localText(lang, '频道不能为空', 'Channel cannot be empty'))
+            return
+        }
+        if (channel.startsWith('base58:')) {
+            newModel.channel = mustBase58ToUuid(channel.substring(7))
+        } else if (isUUID(channel)) {
+            newModel.channel = channel
+        } else {
+            console.error(localText(lang, '频道格式错误', 'Channel format error'))
+            return;
         }
         if (isNew) {
             clientInsertArticle(portalUrl, newModel).then((newArticleId) => {
@@ -79,10 +94,12 @@ export function ConsoleArticleForm({portalUrl, modelString}: { portalUrl: string
             <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label"
                         name="row-radio-buttons-group" value={lang}
                         onChange={(event) => setLang(event.target.value)}>
-                <FormControlLabel value="en" control={<Radio/>} label="English" disabled={!isNew}/>
-                <FormControlLabel value="zh" control={<Radio/>} label="中文" disabled={!isNew}/>
+                <FormControlLabel value="zh" control={<Radio/>} label="中文"/>
+                <FormControlLabel value="en" control={<Radio/>} label="English"/>
             </RadioGroup>
-            <ChannelSelector channel={oldModel.channel} lang={lang} portalUrl={portalUrl} onChange={setChannel}/>
+            {/*<ChannelSelector channel={oldModel.channel} lang={lang} portalUrl={portalUrl} onChange={setChannel}/>*/}
+            <TextField label="Outlined" variant="outlined" size={'small'} value={channel}
+                       onChange={event => setChannel(event.target.value)}/>
             <Button variant={'contained'} size={'small'} onClick={onSubmit}>保存</Button>
             <Button variant={'contained'} size={'small'}>创建多语言副本</Button>
         </div>
