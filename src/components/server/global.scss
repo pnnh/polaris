@@ -1,6 +1,9 @@
 @charset "UTF-8";
 
 @use '@/components/common/styles/theme';
+@import "tailwindcss";
+
+@plugin "daisyui";
 
 html,
 body {
