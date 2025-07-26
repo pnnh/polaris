@@ -8,8 +8,8 @@ import {CodeOk} from "@/atom/common/models/protocol";
 import {Loading} from "@/components/common/loading";
 import {localText} from "@/atom/common/language";
 
-export function LinkSession({lang, portalUrl, signinLink, linkApp}: {
-    lang: string, portalUrl: string, signinLink: string, linkApp: string
+export function LinkSession({lang, portalUrl, signinLink, linkApp, signinCallback}: {
+    lang: string, portalUrl: string, signinLink: string, linkApp: string, signinCallback: string
 }) {
     const [appInfo, setAppInfo] = useState<IAuthApp | null>(null);
     const [errorMsg, setErrorMsg] = useState('');
@@ -35,14 +35,27 @@ export function LinkSession({lang, portalUrl, signinLink, linkApp}: {
         }
         const submitResult = await permitAppLogin(portalUrl, submitRequest)
         console.log('submitResult', submitResult)
-        if (submitResult.code !== CodeOk) {
+        if (submitResult.code !== CodeOk || !submitResult.data || !submitResult.data.uid) {
             setErrorMsg(localText(lang, '授权失败', 'Authorization failed'));
             return
         }
-        setPermitResult(localText(lang, '授权完成，可以关闭该页面', 'Authorization completed, you can close this page'));
+        if (signinCallback && signinCallback.startsWith("https://")) {
+            // 如果有回调地址，跳转到回调地址
+            const parsedUrl = new URL(signinCallback);
+            parsedUrl.searchParams.set('app', linkApp);
+            parsedUrl.searchParams.set('link', signinLink);
+            parsedUrl.searchParams.set('session', submitResult.data.uid);
+            // 使用新的URL进行跳转
+            window.location.href = parsedUrl.toString();
+        } else {
+            setPermitResult(localText(lang, '授权完成，可以关闭该页面', 'Authorization completed, you can close this page'));
+        }
     }
     if (!appInfo) {
-        return <Loading/>
+        return <div>
+            <Loading/>
+            {errorMsg ?? <div>{errorMsg}</div>}
+        </div>
     }
     return <div className={styles.linkSession}>
         <div>{localText(lang, '是否授权？', 'Authorization?')}<b>{appInfo.name}</b></div>

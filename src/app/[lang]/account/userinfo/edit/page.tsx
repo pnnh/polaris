@@ -5,7 +5,7 @@ import ContentLayout from "@/components/server/content/layout";
 import {CodeOk, SymbolUnknown} from "@/atom/common/models/protocol";
 import {UserinfoEditForm} from "./form";
 import {serverGetUserinfo} from "@/services/server/account/account";
-import {langEn} from "@/atom/common/language";
+import {langEn, localText} from "@/atom/common/language";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -24,7 +24,7 @@ export default async function Page({params, searchParams}: {
 
     const userInfo = await serverGetUserinfo(portalUrl)
     if (!userInfo) {
-        return <div>遇到错误3</div>
+        return <div>{localText(lang, '出错了', 'Failed')}</div>
     }
 
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}

@@ -6,6 +6,7 @@ export interface IServerConfig {
     PUBLIC_SELF_URL: string
     PUBLIC_PORTAL_URL: string
     CLOUDFLARE_PUBLIC_TURNSTILE: string
+    PUBLIC_PANDORA_URL: string
 }
 
 let serverConfigInstance: IServerConfig | undefined;
@@ -29,6 +30,7 @@ export async function useServerConfig(): Promise<IServerConfig> {
     const selfUrl = await appConfig.GetString('app.PUBLIC_POLARIS_URL');
     const portalUrl = await appConfig.GetString('app.PUBLIC_PORTAL_URL');
     const turnstile = await appConfig.GetString('app.CLOUDFLARE_PUBLIC_TURNSTILE');
+    const pandoraUrl = await appConfig.GetString('app.PUBLIC_PANDORA_URL');
 
     if (!selfUrl) {
         throw new Error('PUBLIC_SELF_URL is required')
@@ -39,11 +41,15 @@ export async function useServerConfig(): Promise<IServerConfig> {
     if (!turnstile) {
         throw new Error('PUBLIC_TURNSTILE is required')
     }
+    if (!pandoraUrl) {
+        throw new Error('PUBLIC_PANDORA_URL is required')
+    }
     serverConfigInstance = {
         RUN_MODE: runMode,
         PUBLIC_SELF_URL: selfUrl,
         PUBLIC_PORTAL_URL: portalUrl,
         CLOUDFLARE_PUBLIC_TURNSTILE: turnstile,
+        PUBLIC_PANDORA_URL: pandoraUrl,
     };
 
     return serverConfigInstance;

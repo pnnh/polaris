@@ -12,11 +12,12 @@ import {getPathname, getSearchString} from "@/services/server/pathname";
 import {ILanguageProvider} from "@/services/common/language";
 import MenuIcon from '@mui/icons-material/Menu';
 
-export async function ContentPublicNavbar({pathname, searchParams, langProvider, userInfo}: {
+export async function ContentPublicNavbar({pathname, searchParams, langProvider, userInfo, pandoraUrl}: {
     pathname: string,
     searchParams: Record<string, string>,
     langProvider: ILanguageProvider,
-    userInfo: AccountModel | undefined
+    userInfo: AccountModel | undefined,
+    pandoraUrl: string
 }) {
     const serverConfig = await useServerConfig()
 
@@ -35,11 +36,11 @@ export async function ContentPublicNavbar({pathname, searchParams, langProvider,
             <PSLanguageSelector lang={langProvider.lang} currentUrl={currentUrl}/>
             <UserAction lang={langProvider.lang} langProvider={langProvider} portalUrl={serverConfig.PUBLIC_PORTAL_URL}
                         userInfo={userInfo}/>
-            <a className={styles.toolsLink} href={`${langProvider.lang}/tools`}><AppsIcon/></a>
+            <a className={styles.toolsLink} href={pandoraUrl}><AppsIcon/></a>
         </div>
         <div className={styles.rightNavMobile}>
             <PSLanguageSelector lang={langProvider.lang} currentUrl={currentUrl}/>
-            <a className={styles.mobileMenu} href={`${langProvider.lang}/tools`}><MenuIcon/></a>
+            <a className={styles.mobileMenu} href={`${langProvider.lang}`}><MenuIcon/></a>
         </div>
     </div>
 }

@@ -27,19 +27,20 @@ export default async function ArticleReadLayout({
     userInfo: AccountModel | typeof SymbolUnknown
 }) {
     let currentUserInfo: AccountModel | undefined;
+    const serverConfig = await useServerConfig()
     if (userInfo === SymbolUnknown) {
-        const serverConfig = await useServerConfig()
         const portalUrl = serverConfig.PUBLIC_PORTAL_URL
         currentUserInfo = await serverGetUserinfo(portalUrl);
     } else {
         currentUserInfo = userInfo;
     }
+    const pandoraUrl = serverConfig.PUBLIC_PORTAL_URL
     const langProvider = getLanguageProvider(lang)
     return <GlobalLayout lang={lang} metadata={metadata}>
         <div className={styles.templateContainer}>
             <div className={styles.templateNavbar}>
                 <ContentPublicNavbar pathname={pathname} searchParams={searchParams} langProvider={langProvider}
-                                     userInfo={currentUserInfo}/>
+                                     userInfo={currentUserInfo} pandoraUrl={pandoraUrl}/>
             </div>
             <div id={templateBodyId} className={styles.templateBody}>
                 <div className={styles.bodyContainer}>

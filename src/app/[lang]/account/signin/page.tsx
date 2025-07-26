@@ -22,6 +22,7 @@ export default async function Page({params, searchParams}: {
     const lang = paramsValue.lang || langEn
     const signinLink = searchParamsValue.link
     const linkApp = searchParamsValue.app
+    const signinCallback = searchParamsValue.redirect
 
     const serverConfig = await useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
@@ -29,7 +30,8 @@ export default async function Page({params, searchParams}: {
     const userInfo = await serverGetUserinfo(portalUrl)
     if (userInfo && !isAnonymousAccount(userInfo)) {
         if (signinLink && linkApp) {
-            return <LinkSession lang={lang} portalUrl={portalUrl} signinLink={signinLink} linkApp={linkApp}/>
+            return <LinkSession lang={lang} portalUrl={portalUrl} signinLink={signinLink} linkApp={linkApp}
+                                signinCallback={signinCallback}/>
         }
         return <div><a href={'/'}>{localText(lang, '前往首页', 'Go home page')}</a></div>
     }
