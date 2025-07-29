@@ -1,14 +1,14 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/utils/page";
 import {getClientIp, getPathname} from "@/services/server/pathname";
-import {base58ToUuid} from "@/atom/common/utils/basex";
+import {base58ToUuid, mustBase58ToUuid} from "@/atom/common/utils/basex";
 import {CodeOk, CommonResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {useServerConfig} from "@/services/server/config";
-import {langEn, langZh} from "@/atom/common/language";
+import {langEn, langZh, localText} from "@/atom/common/language";
 import {notFound} from "next/navigation";
 import ConsoleLayout from "@/components/server/console/layout";
 import {ConsoleArticleForm} from "@/app/[lang]/console/articles/[uid]/form";
-import {serverGetArticle} from "@/services/server/articles/articles";
+import {serverConsoleGetArticle, serverGetArticle} from "@/services/server/articles/articles";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
 
@@ -20,16 +20,23 @@ export default async function Home({params, searchParams}: {
 }) {
     const pathname = await getPathname()
     const paramsValue = await params;
+    const searchValue = await searchParams;
     const lang = paramsValue.lang || langZh
     const metadata = new PageMetadata(lang)
     const serverConfig = await useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
-    const articleUrn = base58ToUuid(paramsValue.uid)
-    const isNew = articleUrn === EmptyUUID;
+    const articleUid = base58ToUuid(paramsValue.uid)
+    const isNew = articleUid === EmptyUUID;
     let model: PSArticleModel | undefined = undefined;
     if (isNew) {
+        let channelUid = '';
+        if (searchValue.channel) {
+            channelUid = mustBase58ToUuid(searchValue.channel);
+        }
         model = {
-            channel: "",
+            name: "",
+            channel_name: "",
+            channel: channelUid,
             cid: "",
             cover: "",
             coverUrl: "",
@@ -45,14 +52,14 @@ export default async function Home({params, searchParams}: {
             keywords: '',
             body: '',
             lang,
-            create_time: new Date().toISOString(),
-            update_time: new Date().toISOString()
+            create_time: '',
+            update_time: ''
         }
     } else {
-        if (!articleUrn) {
+        if (!articleUid) {
             notFound();
         }
-        model = await serverGetArticle(portalUrl, articleUrn)
+        model = await serverConsoleGetArticle(portalUrl, articleUid)
         if (!model || !model.uid) {
             notFound();
         }
@@ -62,7 +69,7 @@ export default async function Home({params, searchParams}: {
         metadata.keywords = model.keywords
 
         if (!model.body) {
-            return <div>暂不支持的文章类型</div>
+            return <div>{localText(lang, '暂不支持的文章类型', 'Unsupported article type')}</div>
         }
     }
     const modelString = JSON.stringify(model)

@@ -2,10 +2,9 @@
 
 .channelsContainer {
   flex-grow: 1;
-  flex-direction: row;
+  flex-direction: column;
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: thin;

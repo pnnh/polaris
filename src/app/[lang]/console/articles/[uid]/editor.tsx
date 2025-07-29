@@ -21,11 +21,11 @@ export function ConsoleArticleEditor({
             <textarea className={styles.sourceTextarea} value={body as string || ''}
                       onChange={(event) => onChange(event.target.value)}></textarea>
         </div>
-        <div className={styles.viewArea}>
-            {/*<BuildBodyHtml tocList={tocList} header={header} body={body}*/}
-            {/*               assetsUrl={assetsUrl} libUrl={'/abc'}/>*/}
-            预览区域，暂不支持预览
-        </div>
+        {/*<div className={styles.viewArea}>*/}
+        {/*    /!*<BuildBodyHtml tocList={tocList} header={header} body={body}*!/*/}
+        {/*    /!*               assetsUrl={assetsUrl} libUrl={'/abc'}/>*!/*/}
+        {/*    预览区域，暂不支持预览*/}
+        {/*</div>*/}
     </div>
 }
 

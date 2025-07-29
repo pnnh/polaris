@@ -8,8 +8,8 @@ import Button from "@mui/material/Button";
 import React from "react";
 import {TocItem} from "@/atom/common/models/toc";
 import {PSArticleModel} from "@/photon/common/models/article";
-import {clientInsertArticle, clientUpdateArticle} from "@/services/client/articles/articles";
-import {EmptyUUID} from "@/atom/common/utils/uuid";
+import {clientConsoleInsertArticle, clientConsoleUpdateArticle} from "@/services/client/articles/articles";
+import {EmptyUUID, isEmptyUUID} from "@/atom/common/utils/uuid";
 import {getDefaultImageUrl} from "@/services/common/note";
 import {base58ToUuid, mustBase58ToUuid, uuidToBase58} from "@/atom/common/utils/basex";
 import {localText} from "@/atom/common/language";
@@ -39,7 +39,7 @@ export function ConsoleArticleForm({portalUrl, modelString}: { portalUrl: string
             lang: oldModel.lang,
             channel: oldModel.channel
         }
-        if (!channel) {
+        if (!channel || isEmptyUUID(channel)) {
             console.error(localText(lang, '频道不能为空', 'Channel cannot be empty'))
             return
         }
@@ -52,21 +52,19 @@ export function ConsoleArticleForm({portalUrl, modelString}: { portalUrl: string
             return;
         }
         if (isNew) {
-            clientInsertArticle(portalUrl, newModel).then((newArticleId) => {
+            clientConsoleInsertArticle(portalUrl, newModel).then((newArticleId) => {
                 if (!newArticleId) {
-                    console.error('文章插入失败')
+                    console.error(localText(lang, '文章插入失败', 'Article insert failed'))
                     return
                 }
-                console.debug('文章插入成功', newArticleId)
                 window.location.href = `/${lang}/console/articles`
             })
         } else {
-            clientUpdateArticle(portalUrl, oldModel.uid, newModel).then((articleId) => {
+            clientConsoleUpdateArticle(portalUrl, oldModel.uid, newModel).then((articleId) => {
                 if (!articleId) {
-                    console.error('文章更新失败')
+                    console.error(localText(lang, '文章更新失败', 'Article update failed'))
                     return
                 }
-                console.debug('文章更新成功', articleId)
                 window.location.href = `/${lang}/console/articles`
             })
         }
@@ -100,8 +98,12 @@ export function ConsoleArticleForm({portalUrl, modelString}: { portalUrl: string
             {/*<ChannelSelector channel={oldModel.channel} lang={lang} portalUrl={portalUrl} onChange={setChannel}/>*/}
             <TextField label="Outlined" variant="outlined" size={'small'} value={channel}
                        onChange={event => setChannel(event.target.value)}/>
-            <Button variant={'contained'} size={'small'} onClick={onSubmit}>保存</Button>
-            <Button variant={'contained'} size={'small'}>创建多语言副本</Button>
+            <Button variant={'contained'} size={'small'} onClick={onSubmit}>{
+                localText(lang, '保存文章', 'Save Article')
+            }</Button>
+            <Button variant={'contained'} size={'small'}>{
+                localText(lang, '创建多语言副本', 'Create Multilingual Copy')
+            }</Button>
         </div>
     </div>
 }

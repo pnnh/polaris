@@ -1,0 +1,73 @@
+'use client';
+
+import * as React from 'react';
+import {styled} from '@mui/material/styles';
+import Button, {ButtonProps} from '@mui/material/Button';
+import {red} from '@mui/material/colors';
+import {Dialog, DialogTitle, Stack} from '@mui/material';
+import {localText} from "@/atom/common/language";
+import {CodeOk, PLDeleteResult} from "@/atom/common/models/protocol";
+import {clientMakeDelete} from "@/atom/client/http";
+
+
+const ColorButton = styled(Button)<ButtonProps>(({theme}) => ({
+    color: theme.palette.getContrastText(red[500]),
+    backgroundColor: red[500],
+    '&:hover': {
+        backgroundColor: red[700],
+    },
+}));
+
+export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
+    children: React.ReactNode,
+    deleteUrl: string,
+    lang: string,
+    resTitle: string
+}) {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        console.debug('handleClose');
+        setOpen(false);
+    };
+
+
+    const handleSubmit = (value: string) => {
+        console.debug('handleSubmit', value);
+        clientMakeDelete<PLDeleteResult>(deleteUrl).then((deleteResult) => {
+            if (deleteResult && deleteResult.code === CodeOk) {
+                console.debug('Delete successful', deleteResult);
+                handleClose();
+                window.location.reload(); // Refresh the page to reflect changes
+                return
+            }
+            console.error('Delete failed', deleteResult);
+            alert(localText(lang, '删除失败', 'Delete failed'));
+
+        })
+    };
+    return (
+        <div>
+            <ColorButton variant="contained" size={'small'} onClick={handleClickOpen}>{children}</ColorButton>
+            <Dialog onClose={handleClose} open={open}>
+                <DialogTitle>
+                    {localText(lang, '是否要删除?', 'Do you want to delete?')}
+                    <br/>
+                    {resTitle}
+                </DialogTitle>
+                <Stack direction={'row'}>
+                    <Button variant={'contained'} size={'small'} onClick={() => handleSubmit('ok')}>
+                        {localText(lang, '确定', 'OK')}
+                    </Button>
+                    <Button variant={'contained'} size={'small'} onClick={() => handleClose()}>
+                        {localText(lang, '取消', 'Cancel')}
+                    </Button>
+                </Stack>
+            </Dialog>
+        </div>
+    );
+}
