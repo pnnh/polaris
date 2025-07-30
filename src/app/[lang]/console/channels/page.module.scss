@@ -4,14 +4,15 @@
   flex-grow: 1;
   flex-direction: column;
   display: flex;
-  justify-content: space-between;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: thin;
+  gap: 0;
 }
 
 .list {
   padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  flex-grow: 1;
 }
 
 @media (max-width: theme.$screenMediumWidth) {

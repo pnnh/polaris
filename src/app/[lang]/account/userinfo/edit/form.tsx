@@ -5,7 +5,11 @@ import {AccountModel, getAccountUrn} from "@/atom/common/models/account";
 import {useState} from "react";
 import {localText} from "@/atom/common/language";
 
-export function UserinfoEditForm({portalUrl, userInfo}: { portalUrl: string, userInfo: AccountModel }) {
+export function UserinfoEditForm({portalUrl, userInfo, lang}: {
+    portalUrl: string,
+    userInfo: AccountModel,
+    lang: string
+}) {
     const accountUrn = getAccountUrn(userInfo.uid);
     const [username, setUsername] = useState(userInfo.username || accountUrn);
     const [nickname, setNickname] = useState(userInfo.nickname || '');

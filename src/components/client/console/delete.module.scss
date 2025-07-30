@@ -1,0 +1,23 @@
+.deleteDialog {
+  min-height: 8rem;
+  min-width: 10rem;
+
+  .dialogTitle {
+    font-size: 1.1rem;
+    font-weight: bolder;
+    border-bottom: solid 1px #e1e1e280;
+    padding: 0.5rem 1rem;
+  }
+
+  .resTitle {
+    padding: 0.5rem 1rem;
+  }
+
+  .dialogActions {
+    border-top: solid 1px #e1e1e280;
+    padding: 0.5rem 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+}

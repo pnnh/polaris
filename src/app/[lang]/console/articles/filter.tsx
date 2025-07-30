@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import {uuidToBase58} from "@/atom/common/utils/basex";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
+import {localText} from "@/atom/common/language";
 
 export function ConsoleArticleFilterBar({lang, keyword}: {
     lang: string,
@@ -22,7 +23,9 @@ export function ConsoleArticleFilterBar({lang, keyword}: {
     const langProvider = getLanguageProvider(lang);
     return <div className={styles.middleTop}>
         <div className={styles.topLeft}>
-            <Button size={'small'} variant={'contained'} onClick={goCreateArticle}>写文章</Button>
+            <Button size={'small'} variant={'contained'} onClick={goCreateArticle}>
+                {localText(lang, '新增笔记', 'Create Article')}
+            </Button>
         </div>
         <div className={styles.topRight}>
             <div className={styles.searchBox}>

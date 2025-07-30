@@ -4,6 +4,28 @@
   width: 100%;
   background: #FFFFFF;
 
+  .tableHeader {
+    width: 100%;
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: solid 1px #e4e6eb80;
+    padding: 0 1rem;
+    background: #F7F8FA;
+    color: #8a919f;
+
+    .headerLabel {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      display: inline-block;
+    }
+
+  }
+
   .middleItem {
     width: 100%;
     height: 4rem;
@@ -13,6 +35,7 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: solid 1px #e4e6eb80;
+    padding: 0 1rem;
 
     .itemTitle {
       flex-shrink: 0;

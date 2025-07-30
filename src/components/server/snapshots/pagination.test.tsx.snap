@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`PaginationServer renders correctly 1`] = `
+<div>
+  <div
+    class="pageList"
+  >
+    <div
+      class="pageContent"
+    >
+      <a
+        class="stylePageItem"
+        href="/articles?page=2"
+      >
+        Previous Page
+      </a>
+      <a
+        class="stylePageItem"
+        href="/articles?page=1"
+      >
+        1
+      </a>
+      <a
+        class="stylePageItem"
+        href="/articles?page=2"
+      >
+        2
+      </a>
+      <a
+        class="stylePageItemActive"
+        href="/articles?page=3"
+      >
+        3
+      </a>
+      <a
+        class="stylePageItem"
+        href="/articles?page=4"
+      >
+        4
+      </a>
+      <a
+        class="stylePageItem"
+        href="/articles?page=5"
+      >
+        5
+      </a>
+      <a
+        class="stylePageItem"
+        href="/articles?page=6"
+      >
+        6
+      </a>
+      <a
+        class="stylePageItem"
+        href="/articles?page=7"
+      >
+        7
+      </a>
+      <a
+        class="stylePageItem"
+        href="/articles?page=8"
+      >
+        8
+      </a>
+      <a
+        class="stylePageItem"
+        href="/articles?page=4"
+      >
+        Next Page
+      </a>
+    </div>
+  </div>
+</div>
+`;

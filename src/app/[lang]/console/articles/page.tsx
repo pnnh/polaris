@@ -51,12 +51,12 @@ export default async function Page({params, searchParams}: {
     return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={styles.contentContainer}>
+            <ConsoleArticleFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
             <div className={styles.conMiddle}>
-                <ConsoleArticleFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
                 <ConsoleArticleMiddleBody selectData={selectData} lang={lang}
                                           portalUrl={serverConfig.PUBLIC_PORTAL_URL}/>
                 <div className={styles.middlePagination}>
-                    <PaginationServer pagination={pagination}
+                    <PaginationServer lang={lang} pagination={pagination}
                                       pageLinkFunc={(page) =>
                                           `/${lang}/console/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                 </div>

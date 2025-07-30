@@ -30,7 +30,7 @@ export default async function Page({params, searchParams}: {
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div>
-            <UserinfoEditForm portalUrl={portalUrl} userInfo={userInfo}/>
+            <UserinfoEditForm portalUrl={portalUrl} userInfo={userInfo} lang={lang}/>
         </div>
     </ContentLayout>
 }

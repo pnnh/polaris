@@ -23,9 +23,36 @@ export function ConsoleArticleMiddleBody({selectData, lang, portalUrl}: {
         return <NoData size='large'/>
     }
     return <div className={styles.middleBody}>
+        <ArticleHeader lang={lang} portalUrl={portalUrl}/>
         {selectData.range.map((model, index) => {
             return <ArticleCard key={index} model={model} lang={lang} portalUrl={portalUrl}/>
         })}
+    </div>
+}
+
+export function ArticleHeader({lang, portalUrl}: {
+    lang: string,
+    portalUrl: string
+}) {
+    return <div className={styles.tableHeader}>
+        <div className={styles.headerLabel}>
+            {localText(lang, '封面', 'Cover')}
+        </div>
+        <div className={styles.headerLabel}>
+            {localText(lang, '标题', 'Title')}
+        </div>
+        <div className={styles.headerLabel}>
+            {localText(lang, '描述', 'Description')}
+        </div>
+        <div className={styles.headerLabel}>
+            {localText(lang, '扩展信息', 'Extended Info')}
+        </div>
+        <div className={styles.headerLabel}>
+            {localText(lang, '频道', 'Channel')}
+        </div>
+        <div className={styles.headerLabel}>
+            {localText(lang, '操作', 'Action')}
+        </div>
     </div>
 }
 
@@ -39,7 +66,7 @@ export function ArticleCard({model, lang, portalUrl}: {
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = `${portalUrl}/articles/${model.uid}/assets/${model.cover}`
     }
-    const chanUrl = `/${lang}/console/channels/${uuidToBase58(model.channel)}`
+    const chanUrl = `/${lang}/channels/${uuidToBase58(model.channel)}`
     const deleteUrl = `${portalUrl}/console/articles/${model.uid}`
     return <div className={styles.middleItem} key={model.uid} data-article={model.uid}>
         <div className={styles.itemCover}>

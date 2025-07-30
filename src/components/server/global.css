@@ -1,11 +1,12 @@
 @charset "UTF-8";
 
+@layer theme, base, mui, components, utilities;
+@import 'tailwindcss';
+
 @import '@fontsource/roboto/300.css';
 @import '@fontsource/roboto/400.css';
 @import '@fontsource/roboto/500.css';
 @import '@fontsource/roboto/700.css';
-
-@import "tailwindcss";
 
 @plugin "daisyui";
 

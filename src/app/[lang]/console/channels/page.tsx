@@ -1,6 +1,4 @@
 import React from 'react'
-import {serverPortalSignin} from "@/services/server/domain/domain";
-import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
 import styles from './page.module.scss'
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
@@ -14,7 +12,7 @@ import {getDefaultChanImageByUid} from "@/services/common/channel";
 import {PageMetadata} from "@/utils/page";
 import {langEn, localText} from "@/atom/common/language";
 import ConsoleLayout from "@/components/server/console/layout";
-import Button from "@mui/material/Button";
+import Button, {ButtonProps} from "@mui/material/Button";
 import {ConsoleChannelFilterBar} from "@/app/[lang]/console/channels/filter";
 import {serverConsoleSelectChannels} from "@/services/server/channels/channels";
 import {useServerConfig} from "@/services/server/config";
@@ -70,7 +68,9 @@ function Item(props: { model: PSChannelModel, portalUrl: string, lang: string })
             {STSubString(props.model.description, 140)}
         </div>
         <div className={styles.operation}>
-            <Button size={'small'} variant={'text'} href={newUrl}>写文章</Button>
+            <Button size={'small'} variant={'text'} href={newUrl}>
+                {localText(props.lang, '新增笔记', 'Create Article')}
+            </Button>
         </div>
         <div>
             <PSDeleteButton lang={props.lang} deleteUrl={deleteUrl} resTitle={model.title || model.name}>

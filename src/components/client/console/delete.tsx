@@ -8,7 +8,7 @@ import {Dialog, DialogTitle, Stack} from '@mui/material';
 import {localText} from "@/atom/common/language";
 import {CodeOk, PLDeleteResult} from "@/atom/common/models/protocol";
 import {clientMakeDelete} from "@/atom/client/http";
-
+import styles from './delete.module.scss';
 
 const ColorButton = styled(Button)<ButtonProps>(({theme}) => ({
     color: theme.palette.getContrastText(red[500]),
@@ -52,21 +52,26 @@ export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
     };
     return (
         <div>
-            <ColorButton variant="contained" size={'small'} onClick={handleClickOpen}>{children}</ColorButton>
+            <ColorButton variant="text" size={'small'} onClick={handleClickOpen}>{children}</ColorButton>
             <Dialog onClose={handleClose} open={open}>
-                <DialogTitle>
-                    {localText(lang, '是否要删除?', 'Do you want to delete?')}
-                    <br/>
-                    {resTitle}
-                </DialogTitle>
-                <Stack direction={'row'}>
-                    <Button variant={'contained'} size={'small'} onClick={() => handleSubmit('ok')}>
-                        {localText(lang, '确定', 'OK')}
-                    </Button>
-                    <Button variant={'contained'} size={'small'} onClick={() => handleClose()}>
-                        {localText(lang, '取消', 'Cancel')}
-                    </Button>
-                </Stack>
+                <div className={styles.deleteDialog}>
+
+                    <div className={styles.dialogTitle}>
+                        {localText(lang, '是否要删除?', 'Do you want to delete?')}
+                    </div>
+                    <div className={styles.resTitle}>
+                        {resTitle}
+                    </div>
+                    <div className={styles.dialogActions}>
+                        <Button variant={'contained'} size={'small'} onClick={() => handleSubmit('ok')}>
+                            {localText(lang, '确定', 'OK')}
+                        </Button>
+                        <Button variant={'contained'} size={'small'} onClick={() => handleClose()}>
+                            {localText(lang, '取消', 'Cancel')}
+                        </Button>
+
+                    </div>
+                </div>
             </Dialog>
         </div>
     );

@@ -130,6 +130,7 @@ const config: Config = {
     // A path to a custom resolver
     // resolver: undefined,
 
+
     // Automatically restore mock state and implementation before every test
     // restoreMocks: false,
 
@@ -155,6 +156,7 @@ const config: Config = {
 
     // A list of paths to snapshot serializer modules Jest should use for snapshot testing
     // snapshotSerializers: [],
+    snapshotResolver: '<rootDir>/src/testing/snapshotResolver.ts',
 
     // The test environment that will be used for testing
     testEnvironment: "jsdom",

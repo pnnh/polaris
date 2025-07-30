@@ -65,7 +65,7 @@ export default async function Page({params, searchParams}: {
                     <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang}/>
 
                     <div className={'middlePagination'}>
-                        <PaginationServer pagination={pagination}
+                        <PaginationServer lang={lang} pagination={pagination}
                                           pageLinkFunc={(page) => '/search' + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                     </div>
                 </div>
