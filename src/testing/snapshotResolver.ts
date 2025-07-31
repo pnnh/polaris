@@ -3,7 +3,6 @@ import path from 'path'
 export default {
     resolveSnapshotPath: (testPath: string, snapshotExtension: string) => {
         // Customize the path where snapshots are stored
-        // For example, to store them in a 'custom-snapshots' directory:
         return path.join(
             path.dirname(testPath),
             'snapshots', // Your custom folder name

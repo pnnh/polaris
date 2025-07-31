@@ -62,7 +62,7 @@ function Item(props: { model: PSChannelModel, domain: IDomain, lang: string }) {
 
     return < div className={styles.item}>
         <div className={styles.itemCover}>
-            <PSImageServer src={imageUrl} alt='star' width={256} height={256}/>
+            <PSImageServer lang={props.lang} src={imageUrl} alt='star' width={256} height={256}/>
         </div>
         <div className={styles.content}>
             <div className={styles.title}>

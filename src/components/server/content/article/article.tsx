@@ -50,7 +50,7 @@ export function ArticleCard({model, domain, lang}: {
             </div>
         </div>
         <div className={styles.itemCover}>
-            <PSImageServer src={imageUrl} alt={model.title} fill={true}/>
+            <PSImageServer lang={lang} src={imageUrl} alt={model.title} fill={true}/>
         </div>
     </div>
 }

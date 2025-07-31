@@ -24,7 +24,7 @@ export default async function ContentLayout({
     searchParams: Record<string, string>,
     metadata: PageMetadata,
     lang: string,
-    userInfo: AccountModel | typeof SymbolUnknown
+    userInfo: AccountModel | typeof SymbolUnknown,
 }) {
     let currentUserInfo: AccountModel | undefined;
     const serverConfig = await useServerConfig()

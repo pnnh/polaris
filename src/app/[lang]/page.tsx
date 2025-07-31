@@ -64,7 +64,6 @@ export default async function Page({params, searchParams}: {
     const langProvider = getLanguageProvider(lang)
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
-
         <div className={styles.contentContainer}>
             <div className={styles.conMiddle}>
                 <ArticleFilterBar langProvider={langProvider} searchParamsValue={searchParamsValue}/>

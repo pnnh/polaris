@@ -59,7 +59,7 @@ function Item(props: { model: PSChannelModel, portalUrl: string, lang: string })
     const deleteUrl = `${props.portalUrl}/console/channels/${model.uid}`
     return < div className={styles.item}>
         <div className={styles.itemCover}>
-            <PSImageServer src={imageUrl} alt='star' width={256} height={256}/>
+            <PSImageServer lang={props.lang} src={imageUrl} alt='star' width={256} height={256}/>
         </div>
         <div className={styles.title}>
             <a className={styles.link} href={readUrl}>{props.model.name}</a>

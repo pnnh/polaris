@@ -1,28 +1,35 @@
-// 只能叫css这个名字，因为IDE会有识别进行语法高亮
-import {generatorRandomString} from "@/atom/common/utils/string";
+'use client';
 
-export function css(text: TemplateStringsArray, ...values: any[]) {
-    let str = '';
-    text.forEach((string, i) => {
-        str += string + (values[i] || '');
-    });
-    return new StyleItem(str);
-}
+import {useEffect} from "react";
 
-export class StyleItem {
-    private text: string;
-    private class: string;
+export function StyleTag({comId, styleText, inline}: { comId: string, styleText: string, inline: boolean }) {
+    const styleId = `style-${comId}`;
+    useEffect(() => {
+        if (inline) {
+            // If inline styles are used, we don't need to create a style tag
+            return;
+        }
+        if (!styleText || !comId) {
+            console.warn('StyleTag: styleText or comId is empty');
+            return
+        }
+        const styleEl = document.getElementById(styleId)
+        if (styleEl) {
+            return
+        }
+        const style = document.createElement('style');
+        style.id = styleId;
+        style.innerHTML = styleText;
+        document.head.appendChild(style);
+        return () => {
+            const styleEl = document.getElementById(styleId);
+            if (styleEl) {
+                styleEl.remove();
+            }
+        }
 
-    constructor(text: string) {
-        this.text = text;
-        this.class = 'atom-' + generatorRandomString(8)
-    }
-
-    get className() {
-        return this.class
-    }
-
-    get contentText() {
-        return this.text;
-    }
+    }, [styleText])
+    return (
+        inline && styleText ? <style id={styleId}>{styleText}</style> : null
+    );
 }

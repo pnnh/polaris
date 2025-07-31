@@ -70,7 +70,7 @@ export function ArticleCard({model, lang, portalUrl}: {
     const deleteUrl = `${portalUrl}/console/articles/${model.uid}`
     return <div className={styles.middleItem} key={model.uid} data-article={model.uid}>
         <div className={styles.itemCover}>
-            <PSImageServer src={imageUrl} alt={model.title} fill={true}/>
+            <PSImageServer lang={lang} src={imageUrl} alt={model.title} fill={true}/>
         </div>
         <div className={styles.itemTitle}>
             <a href={readUrl} title={model.uid}>{model.title}</a>
