@@ -34,7 +34,7 @@ export default async function ArticleReadLayout({
     } else {
         currentUserInfo = userInfo;
     }
-    const pandoraUrl = serverConfig.PUBLIC_PORTAL_URL
+    const pandoraUrl = serverConfig.PUBLIC_PANDORA_URL
     const langProvider = getLanguageProvider(lang)
     return <GlobalLayout lang={lang} metadata={metadata}>
         <div className={styles.templateContainer}>
