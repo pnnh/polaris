@@ -11,7 +11,7 @@ import {CiAlarmOn} from "react-icons/ci";
 import {FaEye} from "react-icons/fa";
 import {generatorRandomString, STSubString} from "@/atom/common/utils/string";
 import {formatRfc3339} from "@/atom/common/utils/datetime";
-import {base58ToUuid} from "@/atom/common/utils/basex";
+import {tryBase58ToUuid} from "@/atom/common/utils/basex";
 import {CodeOk, CommonResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {TocItem} from "@/atom/common/models/toc";
@@ -38,7 +38,7 @@ export default async function Home({params, searchParams}: {
     const metadata = new PageMetadata(lang)
     const searchParamsValue = await searchParams
     let domain = await serverPortalSignin()
-    const articleUrn = base58ToUuid(paramsValue.uid)
+    const articleUrn = tryBase58ToUuid(paramsValue.uid)
     if (!articleUrn) {
         notFound();
     }

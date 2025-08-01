@@ -3,7 +3,7 @@ import styles from './page.module.scss'
 import {PageMetadata, pageTitle} from "@/utils/page";
 import {getPathname} from "@/services/server/pathname";
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
-import {base58ToUuid, mustBase58ToUuid} from "@/atom/common/utils/basex";
+import {tryBase58ToUuid, mustBase58ToUuid} from "@/atom/common/utils/basex";
 import {langEn, langZh, localText} from "@/atom/common/language";
 import {notFound} from "next/navigation";
 import ConsoleLayout from "@/components/server/console/layout";
@@ -24,7 +24,7 @@ export default async function Page({params, searchParams}: {
     const searchValue = await searchParams
     const lang = paramsValue.lang
 
-    const channelUid = base58ToUuid(paramsValue.channel)
+    const channelUid = tryBase58ToUuid(paramsValue.channel)
     if (!channelUid) {
         notFound();
     }

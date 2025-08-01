@@ -12,7 +12,7 @@ import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PaginationServer} from "@/components/server/pagination";
 import {NoData} from "@/components/common/empty";
 import {replaceSearchParams} from "@/atom/common/utils/query";
-import {base58ToUuid} from "@/atom/common/utils/basex";
+import {tryBase58ToUuid} from "@/atom/common/utils/basex";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {langEn} from "@/atom/common/language";
@@ -38,7 +38,7 @@ export default async function Page({params, searchParams}: {
     }
     const pageSize = 10
 
-    const channelUrn = base58ToUuid(paramsValue.channel)
+    const channelUrn = tryBase58ToUuid(paramsValue.channel)
     if (!channelUrn) {
         notFound();
     }

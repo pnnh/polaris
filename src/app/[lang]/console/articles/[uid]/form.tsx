@@ -11,7 +11,7 @@ import {PSArticleModel} from "@/photon/common/models/article";
 import {clientConsoleInsertArticle, clientConsoleUpdateArticle} from "@/services/client/articles/articles";
 import {EmptyUUID, isEmptyUUID} from "@/atom/common/utils/uuid";
 import {getDefaultImageUrl} from "@/services/common/note";
-import {base58ToUuid, mustBase58ToUuid, uuidToBase58} from "@/atom/common/utils/basex";
+import {tryBase58ToUuid, mustBase58ToUuid, uuidToBase58} from "@/atom/common/utils/basex";
 import {localText} from "@/atom/common/language";
 import {isUUID} from "validator";
 

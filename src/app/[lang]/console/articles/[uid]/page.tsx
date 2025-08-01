@@ -1,7 +1,7 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/utils/page";
 import {getClientIp, getPathname} from "@/services/server/pathname";
-import {base58ToUuid, mustBase58ToUuid} from "@/atom/common/utils/basex";
+import {tryBase58ToUuid, mustBase58ToUuid} from "@/atom/common/utils/basex";
 import {CodeOk, CommonResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {useServerConfig} from "@/services/server/config";
 import {langEn, langZh, localText} from "@/atom/common/language";
@@ -25,7 +25,7 @@ export default async function Home({params, searchParams}: {
     const metadata = new PageMetadata(lang)
     const serverConfig = await useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
-    const articleUid = base58ToUuid(paramsValue.uid)
+    const articleUid = tryBase58ToUuid(paramsValue.uid)
     const isNew = articleUid === EmptyUUID;
     let model: PSArticleModel | undefined = undefined;
     if (isNew) {
