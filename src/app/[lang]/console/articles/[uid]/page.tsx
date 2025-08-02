@@ -1,11 +1,11 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/utils/page";
 import {getClientIp, getPathname} from "@/services/server/pathname";
-import {tryBase58ToUuid, mustBase58ToUuid} from "@/atom/common/utils/basex";
+import {tryBase58ToUuid, mustBase58ToUuid, uuidToBase58} from "@/atom/common/utils/basex";
 import {CodeOk, CommonResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {useServerConfig} from "@/services/server/config";
-import {langEn, langZh, localText} from "@/atom/common/language";
-import {notFound} from "next/navigation";
+import {getLangDefault, langEn, langZh, localText} from "@/atom/common/language";
+import {notFound, redirect} from "next/navigation";
 import ConsoleLayout from "@/components/server/console/layout";
 import {ConsoleArticleForm} from "@/app/[lang]/console/articles/[uid]/form";
 import {serverConsoleGetArticle, serverGetArticle} from "@/services/server/articles/articles";
@@ -28,6 +28,8 @@ export default async function Home({params, searchParams}: {
     const articleUid = tryBase58ToUuid(paramsValue.uid)
     const isNew = articleUid === EmptyUUID;
     let model: PSArticleModel | undefined = undefined;
+    const wantLang = searchValue.wantLang;
+    const copyFrom = searchValue.copyFrom
     if (isNew) {
         let channelUid = '';
         if (searchValue.channel) {
@@ -51,17 +53,39 @@ export default async function Home({params, searchParams}: {
             description: '',
             keywords: '',
             body: '',
-            lang,
+            lang: wantLang,
             create_time: '',
             update_time: ''
+        }
+        if (copyFrom) {
+            const copyFromUid = mustBase58ToUuid(copyFrom);
+            const originModel = await serverConsoleGetArticle(lang, portalUrl, copyFromUid)
+            if (!originModel) {
+                throw new Error(localText(lang, '无法找到要复制的文章', 'Cannot find the article to copy'));
+            }
+            model.name = originModel.name;
+            model.channel = originModel.channel;
+            model.cid = originModel.cid;
+            model.cover = originModel.cover;
+            model.header = originModel.header;
+            model.title = originModel.title;
+            model.description = originModel.description;
+            model.keywords = originModel.keywords;
+            model.body = originModel.body;
         }
     } else {
         if (!articleUid) {
             notFound();
         }
-        model = await serverConsoleGetArticle(portalUrl, articleUid)
+        model = await serverConsoleGetArticle(lang, portalUrl, articleUid, wantLang)
         if (!model || !model.uid) {
-            notFound();
+            if (wantLang) {
+                const createUrl = `/${lang}/console/articles/${uuidToBase58(EmptyUUID)}?wantLang=${wantLang}&copyFrom=${uuidToBase58(articleUid)}`;
+                redirect(createUrl)
+            } else {
+                notFound();
+            }
+            return
         }
         metadata.title = pageTitle(lang, model.title)
 
@@ -75,6 +99,6 @@ export default async function Home({params, searchParams}: {
     const modelString = JSON.stringify(model)
     return <ConsoleLayout lang={lang} searchParams={await searchParams} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
-        <ConsoleArticleForm portalUrl={portalUrl} modelString={modelString}/>
+        <ConsoleArticleForm portalUrl={portalUrl} modelString={modelString} lang={lang} copyFrom={copyFrom}/>
     </ConsoleLayout>
 }

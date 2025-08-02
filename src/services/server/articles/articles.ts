@@ -3,7 +3,7 @@ import {PSArticleModel} from "@/photon/common/models/article";
 import {serverMakeGet} from "@/atom/server/http";
 import {cookies} from "next/headers";
 import {getDefaultImageUrl} from "@/services/common/note";
-import {localText} from "@/atom/common/language";
+import {getLangDefault, isSupportedLanguage, langEn, localText} from "@/atom/common/language";
 import queryString from "query-string";
 
 export async function serverGetArticle(portalUrl: string, uid: string): Promise<PSArticleModel | undefined> {
@@ -31,11 +31,17 @@ export async function serverGetArticle(portalUrl: string, uid: string): Promise<
     return getResult.data;
 }
 
-export async function serverConsoleGetArticle(portalUrl: string, uid: string): Promise<PSArticleModel | undefined> {
+export async function serverConsoleGetArticle(lang: string, portalUrl: string, uid: string, wantLang: string = ''): Promise<PSArticleModel | undefined> {
     if (!uid) {
         return undefined
     }
-    const url = `${portalUrl}/console/articles/${uid}`
+    let url = `${portalUrl}/${lang}/console/articles/${uid}`
+    if (wantLang && isSupportedLanguage(wantLang)) {
+        if (!isSupportedLanguage(wantLang)) {
+            throw new Error(`serverConsoleGetArticle unsupported language: ${wantLang}`);
+        }
+        url += `?wantLang=${wantLang}`
+    }
     const cookieStore = await cookies()
     const authHeader = cookieStore.toString()
     const getResult = await serverMakeGet<CommonResult<PSArticleModel | undefined>>(url, authHeader);

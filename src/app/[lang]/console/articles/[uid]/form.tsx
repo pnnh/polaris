@@ -12,12 +12,16 @@ import {clientConsoleInsertArticle, clientConsoleUpdateArticle} from "@/services
 import {EmptyUUID, isEmptyUUID} from "@/atom/common/utils/uuid";
 import {getDefaultImageUrl} from "@/services/common/note";
 import {tryBase58ToUuid, mustBase58ToUuid, uuidToBase58} from "@/atom/common/utils/basex";
-import {localText} from "@/atom/common/language";
+import {isLangEn, langEn, langZh, localText} from "@/atom/common/language";
 import {isUUID} from "validator";
 
-export function ConsoleArticleForm({portalUrl, modelString}: { portalUrl: string, modelString: string }) {
+export function ConsoleArticleForm({portalUrl, modelString, lang, copyFrom}: {
+    portalUrl: string,
+    modelString: string,
+    lang: string, copyFrom: string
+}) {
     const oldModel = JSON.parse(modelString) as PSArticleModel;
-    const [lang, setLang] = React.useState(oldModel.lang);
+    const [wangLang, setWantLang] = React.useState(oldModel.lang);
     const [title, setTitle] = React.useState(oldModel.title);
     const [description, setDescription] = React.useState(oldModel.description);
     const [bodyText, setBodyText] = React.useState(oldModel.body || '');
@@ -70,6 +74,7 @@ export function ConsoleArticleForm({portalUrl, modelString}: { portalUrl: string
         }
     }
     const coverUrl = oldModel.coverUrl || getDefaultImageUrl();
+    const createUrl = `/${lang}/console/articles/${uuidToBase58(oldModel.cid)}?wantLang=${isLangEn(oldModel.lang) ? langZh : langEn}&copyFrom=${uuidToBase58(oldModel.uid)}`
     return <div className={styles.bodyContainer}>
         <div className={styles.articleCover}>
             <div className={styles.articleHeader}>
@@ -90,20 +95,24 @@ export function ConsoleArticleForm({portalUrl, modelString}: { portalUrl: string
         </div>
         <div className={styles.bottomBar}>
             <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label"
-                        name="row-radio-buttons-group" value={lang}
-                        onChange={(event) => setLang(event.target.value)}>
-                <FormControlLabel value="zh" control={<Radio/>} label="中文"/>
-                <FormControlLabel value="en" control={<Radio/>} label="English"/>
+                        name="row-radio-buttons-group" value={wangLang}
+                        onChange={(event) => setWantLang(event.target.value)}>
+                <FormControlLabel value="zh" control={<Radio/>} label="中文" disabled={!isNew || wangLang !== langZh}/>
+                <FormControlLabel value="en" control={<Radio/>} label="English"
+                                  disabled={!isNew || wangLang !== langEn}/>
             </RadioGroup>
             {/*<ChannelSelector channel={oldModel.channel} lang={lang} portalUrl={portalUrl} onChange={setChannel}/>*/}
             <TextField label="Outlined" variant="outlined" size={'small'} value={channel}
-                       onChange={event => setChannel(event.target.value)}/>
+                       onChange={event => setChannel(event.target.value)}
+                       disabled={!isNew || copyFrom}/>
             <Button variant={'contained'} size={'small'} onClick={onSubmit}>{
                 localText(lang, '保存文章', 'Save Article')
             }</Button>
-            <Button variant={'contained'} size={'small'}>{
-                localText(lang, '创建多语言副本', 'Create Multilingual Copy')
-            }</Button>
+            {!isNew &&
+                <Button variant={'contained'} size={'small'} href={createUrl}>{
+                    localText(lang, `查看英文副本`, 'View Chinese Copy')
+                }</Button>
+            }
         </div>
     </div>
 }

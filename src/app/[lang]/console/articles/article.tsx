@@ -13,6 +13,7 @@ import styles from './article.module.scss';
 import {STSubString} from "@/atom/common/utils/string";
 import PSDeleteButton from "@/components/client/console/delete";
 import {localText} from "@/atom/common/language";
+import PublicIcon from '@mui/icons-material/Public';
 
 export function ConsoleArticleMiddleBody({selectData, lang, portalUrl}: {
     selectData: PLSelectData<PSArticleModel>,
@@ -61,7 +62,7 @@ export function ArticleCard({model, lang, portalUrl}: {
     lang: string,
     portalUrl: string
 }) {
-    const readUrl = `${lang}/console/articles/${uuidToBase58(model.uid || model.uid)}`
+    const readUrl = `${lang}/console/articles/${uuidToBase58(model.uid)}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = `${portalUrl}/articles/${model.uid}/assets/${model.cover}`
@@ -81,6 +82,7 @@ export function ArticleCard({model, lang, portalUrl}: {
         <div className={styles.action}>
             <FaEye size={'1rem'}/><span>{model.discover}</span>
             <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(model.update_time)}</span>
+            <PublicIcon/><span>{model.lang}</span>
         </div>
         <div>
             <a href={chanUrl}>{model.channel_name}</a>
