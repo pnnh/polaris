@@ -104,7 +104,7 @@ export function ConsoleArticleForm({portalUrl, modelString, lang, copyFrom}: {
             {/*<ChannelSelector channel={oldModel.channel} lang={lang} portalUrl={portalUrl} onChange={setChannel}/>*/}
             <TextField label="Outlined" variant="outlined" size={'small'} value={channel}
                        onChange={event => setChannel(event.target.value)}
-                       disabled={!isNew || copyFrom}/>
+                       disabled={!isNew || Boolean(copyFrom)}/>
             <Button variant={'contained'} size={'small'} onClick={onSubmit}>{
                 localText(lang, '保存文章', 'Save Article')
             }</Button>
