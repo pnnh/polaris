@@ -23,8 +23,8 @@ import {useServerConfig} from "@/services/server/config";
 import {ArticleAssets} from "./assets";
 import {ArticleAssertPreview} from "./preview";
 import {langEn} from "@/atom/common/language";
-import {getLanguageProvider} from "@/services/common/language";
 import {notFound} from "next/navigation";
+import {serverInsertArticleViewer} from "@/services/server/viewers/viewers";
 
 export const dynamic = "force-dynamic";
 
@@ -36,13 +36,12 @@ export default async function Home({params, searchParams}: {
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
     const metadata = new PageMetadata(lang)
-    const searchParamsValue = await searchParams
     let domain = await serverPortalSignin()
-    const articleUrn = tryBase58ToUuid(paramsValue.uid)
-    if (!articleUrn) {
+    const articleUid = tryBase58ToUuid(paramsValue.uid)
+    if (!articleUid) {
         notFound();
     }
-    const url = `/articles/${articleUrn}?lang=${lang}`
+    const url = `/articles/${articleUid}?lang=${lang}`
     const getResult = await domain.makeGet<CommonResult<PSArticleModel | undefined>>(url)
 
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {
@@ -60,19 +59,18 @@ export default async function Home({params, searchParams}: {
     if (!getResult.data.body) {
         return <div>暂不支持的文章类型</div>
     }
+    const serverConfig = await useServerConfig()
+    const portalUrl = serverConfig.PUBLIC_PORTAL_URL
     const clientIp = await getClientIp()
-    // 更新文章阅读次数
+    // update article discover count
     if (clientIp) {
-        await domain.makePost(`/articles/${articleUrn}/viewer`, {clientIp})
+        await serverInsertArticleViewer(portalUrl, articleUid, clientIp)
     }
     const readUrl = `/${lang}/articles/articles/${paramsValue.uid}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)
     }
-    const serverConfig = await useServerConfig()
-    const portalUrl = serverConfig.PUBLIC_PORTAL_URL
-    const langProvider = getLanguageProvider(lang)
     return <ArticleReadLayout lang={lang} searchParams={await searchParams} pathname={pathname}
                               metadata={metadata} userInfo={SymbolUnknown}>
 
