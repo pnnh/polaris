@@ -11,9 +11,9 @@ import {localText} from "@/atom/common/language";
 
 const buttonThrottle = new ButtonThrottle(1000)
 
-export function SigninForm({lang, portalUrl, signinLink, linkApp}: {
+export function SigninForm({lang, portalUrl, signinLink, linkApp, signinCallback}: {
     lang: string, portalUrl: string,
-    signinLink: string, linkApp: string
+    signinLink: string, linkApp: string, signinCallback: string
 }) {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -50,7 +50,7 @@ export function SigninForm({lang, portalUrl, signinLink, linkApp}: {
         if (signinLink && linkApp) {
             setInfoMsg(localText(lang, '登录成功，前往授权页面...', 'Login successful, redirecting to authorization page...'))
             setTimeout(() => {
-                window.location.href = `/${lang}/account/signin?app=${encodeURIComponent(linkApp)}&link=${encodeURIComponent(signinLink)}`
+                window.location.href = `/${lang}/account/signin?app=${encodeURIComponent(linkApp)}&link=${encodeURIComponent(signinLink)}&redirect=${signinCallback}`
             }, 1500)
         } else {
             setInfoMsg(localText(lang, '登录成功，前往首页...', 'Login successful, redirecting to homepage...'))

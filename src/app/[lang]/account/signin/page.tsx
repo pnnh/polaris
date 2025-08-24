@@ -37,7 +37,6 @@ export default async function Page({params, searchParams}: {
     }
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
-    const langProvider = getLanguageProvider(lang)
     return <GlobalLayout lang={lang} metadata={metadata}>
         <AccountLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                        metadata={metadata}>
@@ -45,7 +44,7 @@ export default async function Page({params, searchParams}: {
                 <div className={styles.signinTitle}>{localText(lang, '登录页面', 'Login Page')}</div>
                 <div className={styles.signinBody}>
                     <SigninForm portalUrl={serverConfig.PUBLIC_PORTAL_URL} lang={lang} signinLink={signinLink}
-                                linkApp={linkApp}/>
+                                linkApp={linkApp} signinCallback={signinCallback}/>
                 </div>
             </div>
         </AccountLayout>
