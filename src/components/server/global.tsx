@@ -64,7 +64,6 @@ export default async function GlobalLayout({
         <link rel="shortcut icon" href="/favicon.ico"/>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
         <meta name="apple-mobile-web-app-title" content={rootPageTitle}/>
-        <link rel="alternate" hrefLang="x-default" href={langDefaultUrl}/>
         <link rel="alternate" hrefLang="en" href={langEnUrl}/>
         <link rel="alternate" hrefLang="zh" href={langZhUrl}/>
         <title>{pageTitle(lang, metadata.title as string)}</title>
