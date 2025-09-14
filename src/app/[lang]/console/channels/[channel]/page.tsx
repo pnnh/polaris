@@ -43,7 +43,6 @@ export default async function Page({params, searchParams}: {
         model = {
             match: "", profile: "",
             name: "",
-            cid: "",
             image: "",
             creator: "",
             owner: "",

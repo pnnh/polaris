@@ -10,14 +10,15 @@ const noDataStyle: CSSProperties = {
     alignItems: 'center',
 }
 
-export function NoData(props: { size: 'small' | 'middle' | 'large' }) {
+export function NoData({size, message}: { size: 'small' | 'middle' | 'large', message?: string }) {
     let width = 100
-    if (props.size === 'middle') {
+    if (size === 'middle') {
         width = 200
-    } else if (props.size === 'large') {
+    } else if (size === 'large') {
         width = 300
     }
     return <div style={noDataStyle}>
         <img src='/images/interface/nodata.jpeg' alt='empty' width={width} height={width}></img>
+        {message && <div style={{marginLeft: '16px', fontSize: '1.2rem', color: '#888888'}}>{message}</div>}
     </div>
 }

@@ -4,7 +4,7 @@ import ContentLayout from "@/components/server/content/layout";
 import {IDomain} from "@/services/common/domain";
 import {getPathname} from "@/services/server/pathname";
 import styles from './page.module.scss'
-import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
+import {CodeOk, PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PSChannelModel} from "@/photon/common/models/channel";
 import {NoData} from "@/components/common/empty";
 import {uuidToBase58} from "@/atom/common/utils/basex";
@@ -37,6 +37,9 @@ export default async function Page({params, searchParams}: {
     if (!result || !result.data) {
         return <NoData size={'middle'}/>
     }
+    if (result.code !== CodeOk) {
+        return <NoData size={'middle'} message={result.message}/>
+    }
     const pathname = await getPathname()
     const metadata = new PageMetadata(lang)
 
@@ -54,7 +57,7 @@ export default async function Page({params, searchParams}: {
 
 function Item(props: { model: PSChannelModel, domain: IDomain, lang: string }) {
     const model = props.model
-    const readUrl = `/${props.lang}/channels/${uuidToBase58(props.model.cid)}`
+    const readUrl = `/${props.lang}/channels/${uuidToBase58(props.model.uid)}`
     let imageUrl = getDefaultChanImageByUid(model.uid)
     if (model.image && isValidUUID(model.image)) {
         imageUrl = props.domain.assetUrl(`/channels/${model.uid}/assets/${model.image}`)

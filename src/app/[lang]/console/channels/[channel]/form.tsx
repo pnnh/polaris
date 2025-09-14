@@ -23,7 +23,6 @@ export function ConsoleChannelForm({portalUrl, modelString}: { portalUrl: string
     const onSubmit = () => {
         const newModel = {
             uid: oldModel.uid,
-            cid: oldModel.cid,
             title: title,
             description: description,
             lang: oldModel.lang,

@@ -39,7 +39,6 @@ export default async function Home({params, searchParams}: {
             name: "",
             channel_name: "",
             channel: channelUid,
-            cid: "",
             cover: "",
             coverUrl: "",
             creator: "",
@@ -65,7 +64,6 @@ export default async function Home({params, searchParams}: {
             }
             model.name = originModel.name;
             model.channel = originModel.channel;
-            model.cid = originModel.cid;
             model.cover = originModel.cover;
             model.header = originModel.header;
             model.title = originModel.title;

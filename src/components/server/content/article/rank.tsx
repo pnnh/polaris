@@ -13,7 +13,7 @@ export function ArticleRankCard({rankResult, lang}: { rankResult: PLSelectResult
             {
                 rankResult && rankResult.data && rankResult.data.range && rankResult.data.range.length > 0
                     ? rankResult.data.range.map((model, index) => {
-                        const readUrl = `${lang}/articles/${uuidToBase58(model.cid)}`
+                        const readUrl = `${lang}/articles/${uuidToBase58(model.uid)}`
                         return <div key={index} className={'rankItem'}>
                             <div
                                 className={'rankIndex' + (index <= 2 ? ' rankTop' : '')}>{index + 1}</div>

@@ -34,7 +34,6 @@ export function ConsoleArticleForm({portalUrl, modelString, lang, copyFrom}: {
     const onSubmit = () => {
         const newModel = {
             uid: oldModel.uid,
-            cid: oldModel.cid,
             title: title,
             description: description,
             body: bodyText,
@@ -74,7 +73,7 @@ export function ConsoleArticleForm({portalUrl, modelString, lang, copyFrom}: {
         }
     }
     const coverUrl = oldModel.coverUrl || getDefaultImageUrl();
-    const createUrl = `/${lang}/console/articles/${uuidToBase58(oldModel.cid)}?wantLang=${isLangEn(oldModel.lang) ? langZh : langEn}&copyFrom=${uuidToBase58(oldModel.uid)}`
+    const createUrl = `/${lang}/console/articles/${uuidToBase58(oldModel.uid)}?wantLang=${isLangEn(oldModel.lang) ? langZh : langEn}&copyFrom=${uuidToBase58(oldModel.uid)}`
     return <div className={styles.bodyContainer}>
         <div className={styles.articleCover}>
             <div className={styles.articleHeader}>

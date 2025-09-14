@@ -32,7 +32,7 @@ export function ArticleCard({model, domain, lang}: {
     model: PSArticleModel,
     domain: IDomain, lang: string
 }) {
-    const readUrl = `${lang}/articles/${uuidToBase58(model.cid)}`
+    const readUrl = `${lang}/articles/${uuidToBase58(model.uid)}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)
