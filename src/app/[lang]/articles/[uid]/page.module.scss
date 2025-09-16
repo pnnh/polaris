@@ -1,5 +1,7 @@
 @use '@/components/common/styles/theme';
 
+$rightAreaWidth: 20rem;
+
 .articleCover {
   width: 100%;
   height: 12rem;
@@ -68,8 +70,9 @@
   }
 
   .leftArea {
-    flex-grow: 1;
+    //flex-grow: 1;
     border-radius: 2px;
+    width: calc(100% - $rightAreaWidth - 1rem);
 
     .commentsClient {
       margin-top: 1rem;
@@ -79,7 +82,7 @@
   .rightArea {
     flex-direction: column;
     gap: 1rem;
-    width: 20rem;
+    width: $rightAreaWidth;
     flex-shrink: 0;
     display: none;
 
@@ -104,7 +107,6 @@
     }
   }
 }
-
 
 .articleInfo {
   display: block;

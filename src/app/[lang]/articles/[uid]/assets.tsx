@@ -33,7 +33,7 @@ export function ArticleAssets({portalUrl, channelUid, articleUid}: {
     }, [channelUid, articleUid])
 
     if (!files || files.length === 0) {
-        return <></>
+        return <div></div>
     }
 
     return <div className={'tocCard'} id={'assetsCard'}>
@@ -66,7 +66,7 @@ function FileGroup({portalUrl, channelUrn, articleUrn, model, level}:
 
     const openIcon = () => {
         if (!model.is_dir) {
-            return <div className={'w-8'}></div>
+            return <div className={'w-6'}></div>
         }
         return <i onClick={() => {
             if (open) {

@@ -1,26 +1,18 @@
 'use client'
 
-import "./preview.scss";
+import styles from "./preview.module.scss";
 import React, {useEffect, useState} from "react";
 import {IoClose} from "react-icons/io5";
 import {articleAssetsPreviewAtom} from "./state";
 import {useAtom} from "jotai";
 import {PSArticleFileModel} from "@/photon/common/models/article";
 
-import {BuildBodyHtml} from "@/atom/server/article";
+import {ServerBuildBodyHtml} from "@/atom/server/article";
 import {TocItem} from "@/atom/common/models/toc";
 
-export function ArticleComponent({children}: {
-    children: React.ReactNode
-}) {
-    return <div>
-        {children}
-    </div>
-}
-
-export function ArticleAssertPreview({
-                                         portalUrl, tocList, header, body, assetsUrl
-                                     }: {
+export function ArticlePreview({
+                                   portalUrl, tocList, header, body, assetsUrl
+                               }: {
     portalUrl: string,
     tocList: Array<TocItem>,
     header: string,
@@ -29,15 +21,13 @@ export function ArticleAssertPreview({
 }) {
     const [previewState, setPreviewState] = useAtom(articleAssetsPreviewAtom)
     if (!previewState) {
-        return <ArticleComponent>
-            <BuildBodyHtml tocList={tocList} header={header} body={body}
-                           assetsUrl={assetsUrl} libUrl={'/abc'}/>
-        </ArticleComponent>
+        return <ServerBuildBodyHtml tocList={tocList} header={header} body={body}
+                                    assetsUrl={assetsUrl} libUrl={'/abc'}/>
     }
 
-    return <div className={'assertPreview'}>
-        <div className={'previewHeader'}>
-            <div className={'pathTitle'}>
+    return <div className={styles.assertPreview}>
+        <div className={styles.previewHeader}>
+            <div className={styles.pathTitle}>
                 {previewState.title}
             </div>
             <div>
@@ -48,7 +38,7 @@ export function ArticleAssertPreview({
                 </i>
             </div>
         </div>
-        <div className={'previewBody'}>
+        <div className={styles.previewBody}>
             <PreviewBody portalUrl={portalUrl} model={previewState}/>
         </div>
     </div>
@@ -76,12 +66,8 @@ function TextPreview({portalUrl, model}: { portalUrl: string, model: PSArticleFi
             setContent(text)
         })
     }, [fileUrl])
-    return <div>
-        <code>
-            <pre>
-                {content}
-            </pre>
-        </code>
+    return <div className={styles.textPreview}>
+        {content}
     </div>
 }
 

@@ -21,10 +21,12 @@ import ArticleReadLayout from "@/components/server/content/article/layout";
 import {CommentsClient} from "@/photon/client/comments/comments";
 import {useServerConfig} from "@/services/server/config";
 import {ArticleAssets} from "./assets";
-import {ArticleAssertPreview} from "./preview";
+import {ArticlePreview} from "./preview";
 import {langEn} from "@/atom/common/language";
 import {notFound} from "next/navigation";
 import {serverInsertArticleViewer} from "@/services/server/viewers/viewers";
+import '@/atom/client/editor/editor.scss';
+import "~/prismjs/themes/prism.min.css";
 
 export const dynamic = "force-dynamic";
 
@@ -91,9 +93,9 @@ export default async function Home({params, searchParams}: {
             <div className={styles.leftArea} id={'articleReadBody'}>
                 <div className={styles.articleInfo}>
                     <div className={styles.articleBody}>
-                        <ArticleAssertPreview tocList={tocList} header={getResult.data.header}
-                                              body={getResult.data.body}
-                                              assetsUrl={'assetsUrl'} portalUrl={portalUrl}/>
+                        <ArticlePreview tocList={tocList} header={getResult.data.header}
+                                        body={getResult.data.body}
+                                        assetsUrl={'assetsUrl'} portalUrl={portalUrl}/>
                     </div>
                 </div>
                 <div className={styles.commentsClient}>
