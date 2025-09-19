@@ -9,6 +9,8 @@ import {PSArticleFileModel} from "@/photon/common/models/article";
 
 import {ServerBuildBodyHtml} from "@/atom/server/article";
 import {TocItem} from "@/atom/common/models/toc";
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import {renderCodeBlock} from "@/app/[lang]/articles/[uid]/codeblock";
 
 export function ArticlePreview({
                                    portalUrl, tocList, header, body, assetsUrl
@@ -24,17 +26,20 @@ export function ArticlePreview({
         return <ServerBuildBodyHtml tocList={tocList} header={header} body={body}
                                     assetsUrl={assetsUrl} libUrl={'/abc'}/>
     }
-
+    const fileRepoPath = previewState.full_repo_path
     return <div className={styles.assertPreview}>
         <div className={styles.previewHeader}>
             <div className={styles.pathTitle}>
                 {previewState.title}
             </div>
-            <div>
+            <div className={styles.fileActions}>
+                <a href={fileRepoPath} target={'_blank'}>
+                    <OpenInNewIcon/>
+                </a>
                 <i onClick={() => {
                     setPreviewState(undefined)
                 }}>
-                    <IoClose size={'1rem'}/>
+                    <IoClose size={'1.2rem'}/>
                 </i>
             </div>
         </div>
@@ -58,16 +63,19 @@ function PreviewBody({portalUrl, model}: { portalUrl: string, model: PSArticleFi
 
 function TextPreview({portalUrl, model}: { portalUrl: string, model: PSArticleFileModel }) {
     const fileUrl = `${portalUrl}/storage${model.storage_path}`
-    const [content, setContent] = useState<string | undefined>(undefined)
+    const [contentHtml, setContentHtml] = useState<string | undefined>(undefined)
     useEffect(() => {
         fetch(fileUrl).then(response => {
             return response.text()
         }).then(text => {
-            setContent(text)
+            const contentHtml = renderCodeBlock(text, model.storage_path)
+            setContentHtml(contentHtml)
         })
     }, [fileUrl])
-    return <div className={styles.textPreview}>
-        {content}
+    if (!contentHtml) {
+        return <div className={styles.textPreview}></div>
+    }
+    return <div className={styles.textPreview} dangerouslySetInnerHTML={{__html: contentHtml}}>
     </div>
 }
 

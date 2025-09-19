@@ -14,7 +14,6 @@ import theme from '@/components/client/theme';
 import {encodeBase58String} from "@/atom/common/utils/basex";
 import {getPathname} from "@/services/server/pathname";
 import {langEn, langZh, replaceLanguageInPathname} from "@/atom/common/language";
-import {CFTurnstile} from "@/components/client/turnstile/cloud";
 
 const roboto = Roboto({
     weight: ['300', '400', '500', '700'],
@@ -48,7 +47,8 @@ export default async function GlobalLayout({
     if (pathname === '/') {
         langDefaultUrl = selfUrl
     }
-    const turnstileKey = serverConfig.CLOUDFLARE_PUBLIC_TURNSTILE
+    // const turnstileKey = serverConfig.CLOUDFLARE_PUBLIC_TURNSTILE
+    const lightningUrl = serverConfig.PUBLIC_LIGHTNING_URL
     return <html lang={lang}>
     <head lang={lang}>
         <base href="/"/>
@@ -80,7 +80,7 @@ export default async function GlobalLayout({
         </AppRouterCacheProvider>
     </JotaiProvider>
     <input id="LGEnv" type="hidden" value={encodedBrowserConfig}/>
-    <CFTurnstile turnstileKey={turnstileKey} lang={lang}/>
+    <script type="module" src={lightningUrl} defer={true}></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback"
             defer={true}></script>
     </body>

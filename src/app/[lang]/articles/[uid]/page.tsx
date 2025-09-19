@@ -73,6 +73,7 @@ export default async function Home({params, searchParams}: {
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)
     }
+    const fullRepoPath = model.full_repo_path
     return <ArticleReadLayout lang={lang} searchParams={await searchParams} pathname={pathname}
                               metadata={metadata} userInfo={SymbolUnknown}>
 
@@ -105,7 +106,7 @@ export default async function Home({params, searchParams}: {
             </div>
             <div className={styles.rightArea}>
                 <TocInfo readurl={readUrl} model={tocList}/>
-                <ArticleAssets portalUrl={portalUrl} channelUid={''} articleUid={getResult.data.uid}/>
+                <ArticleAssets portalUrl={portalUrl} fullRepoPath={fullRepoPath} articleUid={getResult.data.uid}/>
             </div>
         </div>
         <GoTop anchor={templateBodyId}/>

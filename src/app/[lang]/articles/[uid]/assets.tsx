@@ -1,6 +1,6 @@
 'use client'
 
-import './assets.scss'
+import styles from './assets.module.scss'
 import React, {useEffect, useState} from "react";
 import {getIcon} from "material-file-icons";
 import {FaAngleRight, FaAngleDown} from "react-icons/fa6";
@@ -10,41 +10,42 @@ import {encodeBase64String} from "@/atom/common/utils/basex";
 import {clientMakeGet} from "@/atom/client/http";
 import {useAtom} from "jotai";
 import {articleAssetsPreviewAtom} from "./state";
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
-async function selectFiles(portalUrl: string, channelUrn: string, articleUid: string, parentPath: string = '') {
+async function selectFiles(portalUrl: string, articleUid: string, parentPath: string = '') {
     const assetsUrl = `${portalUrl}/articles/${articleUid}/assets?parent=${encodeURIComponent(parentPath)}`
     return await clientMakeGet<PLSelectResult<PSArticleFileModel>>(assetsUrl)
 }
 
-export function ArticleAssets({portalUrl, channelUid, articleUid}: {
+export function ArticleAssets({portalUrl, fullRepoPath, articleUid}: {
     portalUrl: string,
-    channelUid: string,
+    fullRepoPath: string,
     articleUid: string
 }) {
     const [files, setFiles] = useState<PSArticleFileModel[]>([])
 
     useEffect(() => {
-        selectFiles(portalUrl, channelUid, articleUid).then((result) => {
+        selectFiles(portalUrl, articleUid).then((result) => {
             if (!result || !result.data || !result.data.range) {
                 return
             }
             setFiles(result.data.range)
         })
-    }, [channelUid, articleUid])
+    }, [articleUid])
 
     if (!files || files.length === 0) {
         return <div></div>
     }
 
-    return <div className={'tocCard'} id={'assetsCard'}>
-        <div className={'tocHeader'}>
-            文件信息
+    return <div className={styles.tocCard} id={'assetsCard'}>
+        <div className={styles.tocHeader}>
+            <span>文件信息</span><a href={fullRepoPath} target={'_blank'}><OpenInNewIcon/></a>
         </div>
-        <div className={'tocBody'} id={'assetsBody'}>
+        <div className={styles.tocBody} id={'assetsBody'}>
             {
                 files.map((model, index) => {
                     return <FileGroup key={`assets-${0}-${index}`} portalUrl={portalUrl}
-                                      channelUrn={channelUid} articleUrn={articleUid}
+                                      articleUrn={articleUid}
                                       model={model} level={0}/>
                 })
             }
@@ -52,10 +53,9 @@ export function ArticleAssets({portalUrl, channelUid, articleUid}: {
     </div>
 }
 
-function FileGroup({portalUrl, channelUrn, articleUrn, model, level}:
+function FileGroup({portalUrl, articleUrn, model, level}:
                    {
                        portalUrl: string,
-                       channelUrn: string,
                        articleUrn: string,
                        model: PSArticleFileModel,
                        level: number
@@ -66,15 +66,15 @@ function FileGroup({portalUrl, channelUrn, articleUrn, model, level}:
 
     const openIcon = () => {
         if (!model.is_dir) {
-            return <div className={'w-6'}></div>
+            return <div className={'w-4'}></div>
         }
-        return <i onClick={() => {
+        return <i className={styles.dirOpenIcon} onClick={() => {
             if (open) {
                 setOpen(false)
                 return
             }
             const assetUrn = encodeBase64String(model.path)
-            selectFiles(portalUrl, channelUrn, articleUrn, assetUrn)
+            selectFiles(portalUrl, articleUrn, assetUrn)
                 .then((result) => {
                     if (!result || !result.data || !result.data.range) {
                         return
@@ -87,11 +87,11 @@ function FileGroup({portalUrl, channelUrn, articleUrn, model, level}:
         </i>
     }
     return <>
-        <div key={`assets-${level}`} className={'tocItem'}>
-            <div className={'assetItem'} style={{paddingLeft: `${(level + 1) * 0.3}rem`}}>
+        <div key={`assets-${level}`} className={styles.tocItem}>
+            <div className={styles.assetItem} style={{paddingLeft: `${(level + 1) * 0.3}rem`}}>
                 {openIcon()}
                 <FileIcon filename={model.title}/>
-                <span title={model.title} className={'assertItemText'}
+                <span title={model.title} className={styles.assertItemText}
                       onClick={(event) => {
                           if (model.is_dir) {
                               return
@@ -108,7 +108,7 @@ function FileGroup({portalUrl, channelUrn, articleUrn, model, level}:
             {
                 open && files.map((model, index) => {
                     return <FileGroup key={`assets-${level}-${index}`} portalUrl={portalUrl}
-                                      channelUrn={channelUrn} articleUrn={articleUrn}
+                                      articleUrn={articleUrn}
                                       model={model} level={level + 1}/>
                 })
             }
@@ -118,7 +118,7 @@ function FileGroup({portalUrl, channelUrn, articleUrn, model, level}:
 
 function FileIcon({filename}: { filename: string }) {
     return <div
-        className={'fileIcon'}
+        className={styles.fileIcon}
         dangerouslySetInnerHTML={{__html: getIcon(filename).svg}}
     />;
 }
