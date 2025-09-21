@@ -36,6 +36,7 @@ export default async function Home({params, searchParams}: {
             channelUid = mustBase58ToUuid(searchValue.channel);
         }
         model = {
+            full_repo_path: "", full_repo_url: "", repo_url: "", url: "",
             name: "",
             channel_name: "",
             channel: channelUid,
