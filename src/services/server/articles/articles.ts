@@ -73,7 +73,7 @@ export async function serverConsoleSelectArticles(portalUrl: string, lang: strin
     }
     const selectData = getResult.data
     if (!selectData || !selectData.range) {
-        throw new Error(localText(lang, '获取文章列表失败', 'Failed to get article list'));
+        throw new Error(localText(lang, '获取文章列表失败2', 'Failed to get article list'));
     }
     return selectData;
 }

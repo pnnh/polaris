@@ -14,7 +14,7 @@ export function ContentSearchAction({pathname, queryKeyword, lang}: {
         if (!searchText || !searchText.trim()) {
             return
         }
-        window.location.href = `/search?keyword=${searchText}`
+        window.location.href = `/${lang}/search?keyword=${searchText}`
     }
     const langProvider = getLanguageProvider(lang)
     return <div className={styles.globalSearchBox}>
