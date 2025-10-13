@@ -12,12 +12,12 @@ import {serverPortalSignin} from "@/services/server/domain/domain";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
-import {langEn, langZh} from "@/atom/common/language";
 import {ArticleFilterBar} from "@/components/server/content/article/filter";
-import {getLanguageProvider} from "@/services/common/language";
+import {headers} from "next/headers";
+import {getTargetLang, langEnUS} from "@/services/common/language";
+import {filterAcceptLanguage} from "@/services/server/language";
 
-export default async function Page({params, searchParams}: {
-    params: Promise<{ lang: string, channel: string }>,
+export default async function Page({searchParams}: {
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
@@ -29,8 +29,9 @@ export default async function Page({params, searchParams}: {
     }
     const pageSize = 10
     const channelPk = searchParamsValue.channel
-    const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
+    const headersList = await headers()
+    const acceptLang = headersList.get('Accept-Language') || langEnUS
+    const lang = filterAcceptLanguage(acceptLang)
 
     const metadata = new PageMetadata(lang)
     const rankQuery = queryString.stringify({
@@ -57,12 +58,11 @@ export default async function Page({params, searchParams}: {
     const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
-    const langProvider = getLanguageProvider(lang)
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
         <div className={styles.contentContainer}>
             <div className={styles.conMiddle}>
-                <ArticleFilterBar langProvider={langProvider} searchParamsValue={searchParamsValue}/>
+                <ArticleFilterBar lang={lang} searchParamsValue={searchParamsValue}/>
                 <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang}/>
                 <div className={styles.middlePagination}>
                     <PaginationServer lang={lang} pagination={pagination}

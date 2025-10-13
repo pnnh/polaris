@@ -1,0 +1,65 @@
+{
+  "siteName": {
+    "message": "HUABLE"
+  },
+  "navArticles": {
+    "message": "Articles"
+  },
+  "navChannels": {
+    "message": "Channels"
+  },
+  "frequentOperation": {
+    "message": "Too frequent operation"
+  },
+  "handwrittenNotes": {
+    "message": "Handwritten Notes"
+  },
+  "codeNotes": {
+    "message": "Code Notes"
+  },
+  "signin": {
+    "message": "Signin"
+  },
+  "signup": {
+    "message": "Signup"
+  },
+  "latest": {
+    "message": "Latest"
+  },
+  "readCount": {
+    "message": "Read Count"
+  },
+  "lastMonth": {
+    "message": "Last Month"
+  },
+  "lastYear": {
+    "message": "Last Year"
+  },
+  "all": {
+    "message": "All"
+  },
+  "readRank": {
+    "message": "Read Rank"
+  },
+  "searchPlaceholder": {
+    "message": "Search"
+  },
+  "invalidUsername": {
+    "message": "Invalid Account Name"
+  },
+  "invalidPassword": {
+    "message": "Invalid Password"
+  },
+  "unauthorized": {
+    "message": "Unauthorized"
+  },
+  "AutoTheme": {
+    "message": "Auto"
+  },
+  "LightTheme": {
+    "message": "Light"
+  },
+  "DarkTheme": {
+    "message": "Dark"
+  }
+}

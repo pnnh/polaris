@@ -1,0 +1,38 @@
+@use '@/components/common/styles/theme' as *;
+
+.langSelector {
+  display: inline-flex;
+  height: 1.5rem;
+  flex-direction: row;
+  gap: 0.3rem;
+  justify-items: center;
+  cursor: pointer;
+
+  svg {
+    height: 20px;
+    width: 20px;
+    color: $textColor;
+    fill: $textColor;
+    stroke: $textColor;
+  }
+}
+
+.langItem {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  height: 1.5rem;
+  gap: 0.3rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: $textColor;
+  background-color: $backgroundColor;
+
+  svg {
+    height: 24px;
+    width: 24px;
+    color: $textColor;
+    fill: $textColor;
+    stroke: $textColor;
+  }
+}

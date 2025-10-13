@@ -1,8 +1,7 @@
-import {getLanguageProvider} from "@/services/common/language";
+import {langText} from "@/services/common/language";
 
 export function pageTitle(lang: string, title?: string | null | undefined): string {
-    const langProvider = getLanguageProvider(lang)
-    const slogan = langProvider.siteName
+    const slogan = langText(lang, "siteName")
     if (!title || title.startsWith(slogan)) {
         return slogan
     }

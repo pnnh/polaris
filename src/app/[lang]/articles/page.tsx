@@ -14,7 +14,7 @@ import {PSArticleModel} from "@/photon/common/models/article";
 import {langEn} from "@/atom/common/language";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
 import {ArticleFilterBar} from "@/components/server/content/article/filter";
-import {getLanguageProvider} from "@/services/common/language";
+
 
 export const dynamic = "force-dynamic";
 
@@ -58,16 +58,14 @@ export default async function Page({params, searchParams}: {
     }
     const rawQuery = queryString.stringify(selectQuery)
     const url = `/articles?${rawQuery}`
-
     const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
-    const langProvider = getLanguageProvider(lang)
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={styles.contentContainer}>
             <div className={styles.conMiddle}>
-                <ArticleFilterBar langProvider={langProvider} searchParamsValue={searchParamsValue}/>
+                <ArticleFilterBar lang={lang} searchParamsValue={searchParamsValue}/>
                 <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang}/>
                 <div className={styles.middlePagination}>
                     <PaginationServer lang={lang} pagination={pagination}

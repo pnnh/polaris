@@ -6,7 +6,7 @@ import {SigninForm} from "./form";
 import {useServerConfig} from "@/services/server/config";
 import {langEn, localText} from "@/atom/common/language";
 import GlobalLayout from "@/components/server/global";
-import {getLanguageProvider} from "@/services/common/language";
+
 import {serverGetUserinfo} from "@/services/server/account/account";
 import {LinkSession} from "@/app/[lang]/account/signin/link";
 import {isAnonymousAccount} from "@/atom/common/models/account";

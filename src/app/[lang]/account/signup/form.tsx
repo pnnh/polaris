@@ -7,8 +7,8 @@ import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {getTurnstileToken} from "@/photon/client/cloudflare/turnstile";
 import {submitSignup} from "@/photon/client/account/account";
-import {getLanguageProvider, ILanguageProvider} from "@/services/common/language";
 import {localText} from "@/atom/common/language";
+import {langText} from "@/services/common/language";
 
 const buttonThrottle = new ButtonThrottle(5000)
 
@@ -20,11 +20,9 @@ export function SignupForm({lang, portalUrl}: { lang: string, portalUrl: string 
     const [email, setEmail] = useState('')
     const [infoMsg, setInfoMsg] = useState('')
 
-    const langProvider = getLanguageProvider(lang)
-
     const submitForm = async () => {
         if (!await buttonThrottle.throttle()) {
-            setInfoMsg(langProvider.frequentOperation)
+            setInfoMsg(langText(lang, "frequentOperation"))
             return
         }
         if (!username || username.length < 1) {
@@ -101,10 +99,10 @@ export function SignupForm({lang, portalUrl}: { lang: string, portalUrl: string 
                 <button type="button" className={styles.submitButton}
                         onClick={() => {
                             submitForm().then()
-                        }}>{langProvider.signup}
+                        }}>{langText(lang, "signup")}
                 </button>
                 <div>{localText(lang, '已有账号？', 'Already have an account?')}
-                    <a href={'/account/signin'}>{langProvider.signin}</a></div>
+                    <a href={'/account/signin'}>{langText(lang, "signin")}</a></div>
             </div>
             <div className={styles.formRow}>
                 <div className={'infoMsg'}>

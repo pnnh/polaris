@@ -2,7 +2,7 @@
 
 import styles from "./filter.module.scss";
 import React from "react";
-import {getLanguageProvider, ILanguageProvider} from "@/services/common/language";
+import {langText} from "@/services/common/language";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import {uuidToBase58} from "@/atom/common/utils/basex";
@@ -20,7 +20,6 @@ export function ConsoleChannelFilterBar({lang, keyword}: {
     const goCreateChannel = () => {
         window.location.href = `/${lang}/console/channels/${uuidToBase58(EmptyUUID)}`
     }
-    const langProvider = getLanguageProvider(lang);
     return <div className={styles.middleTop}>
         <div className={styles.topLeft}>
             <Button size={'small'} variant={'contained'} onClick={goCreateChannel}>
@@ -29,7 +28,7 @@ export function ConsoleChannelFilterBar({lang, keyword}: {
         </div>
         <div className={styles.topRight}>
             <div className={styles.searchBox}>
-                <input placeholder={langProvider.searchPlaceholder} maxLength={128} value={searchText}
+                <input placeholder={langText(lang, "searchPlaceholder")} maxLength={128} value={searchText}
                        onChange={(event) => setSearchText(event.target.value)}
                        onKeyDown={(event) => {
                            if (event.key === 'Enter') {

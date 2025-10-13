@@ -7,15 +7,15 @@ import {ContentSearchAction} from "@/components/server/content/partials/search";
 import {useServerConfig} from "@/services/server/config";
 import {AccountModel} from "@/atom/common/models/account";
 import AppsIcon from '@mui/icons-material/Apps';
-import {PSLanguageSelector} from "@/components/common/language";
+import {PSLanguageSelector} from "./language";
 import {getPathname, getSearchString} from "@/services/server/pathname";
-import {ILanguageProvider} from "@/services/common/language";
 import MenuIcon from '@mui/icons-material/Menu';
+import {ThemeSwitch} from "@/components/server/content/partials/theme";
 
-export async function ContentPublicNavbar({pathname, searchParams, langProvider, userInfo, pandoraUrl}: {
+export async function ContentPublicNavbar({pathname, searchParams, lang, userInfo, pandoraUrl}: {
     pathname: string,
     searchParams: Record<string, string>,
-    langProvider: ILanguageProvider,
+    lang: string,
     userInfo: AccountModel | undefined,
     pandoraUrl: string
 }) {
@@ -26,21 +26,22 @@ export async function ContentPublicNavbar({pathname, searchParams, langProvider,
 
     return <div className={styles.navHeader}>
         <div className={styles.leftNav}>
-            <a className={styles.brandLink} href={`/${langProvider.lang}`}>
+            <a className={styles.brandLink} href={`/`}>
                 <Image src='/images/logo.png' alt='logo' priority={false} fill={true} sizes={'48px,48px'}/>
             </a>
-            <SiteNavMenu lang={langProvider.lang} langProvider={langProvider} searchParams={searchParams}/>
+            <SiteNavMenu lang={lang} searchParams={searchParams}/>
         </div>
         <div className={styles.rightNav}>
-            <ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword} lang={langProvider.lang}/>
-            <PSLanguageSelector lang={langProvider.lang} currentUrl={currentUrl}/>
-            <UserAction lang={langProvider.lang} langProvider={langProvider} portalUrl={serverConfig.PUBLIC_PORTAL_URL}
+            <ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword} lang={lang}/>
+            <ThemeSwitch/>
+            <PSLanguageSelector lang={lang} currentUrl={currentUrl}/>
+            <UserAction lang={lang} portalUrl={serverConfig.PUBLIC_PORTAL_URL}
                         userInfo={userInfo}/>
             <a className={styles.toolsLink} href={pandoraUrl}><AppsIcon/></a>
         </div>
         <div className={styles.rightNavMobile}>
-            <PSLanguageSelector lang={langProvider.lang} currentUrl={currentUrl}/>
-            <a className={styles.mobileMenu} href={`${langProvider.lang}`}><MenuIcon/></a>
+            <PSLanguageSelector lang={lang} currentUrl={currentUrl}/>
+            <a className={styles.mobileMenu} href={`${lang}`}><MenuIcon/></a>
         </div>
     </div>
 }

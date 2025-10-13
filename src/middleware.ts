@@ -1,5 +1,6 @@
 import {NextRequest, NextResponse} from 'next/server';
 import {getLanguageFromPathname, langEn, langZh} from "@/atom/common/language";
+import {getLangFromUrl} from "@/services/common/language";
 
 export function middleware(request: NextRequest) {
     const requestHeaders = new Headers(request.headers);
@@ -25,7 +26,7 @@ export function middleware(request: NextRequest) {
             }
         }
     }
-    let lang = getLanguageFromPathname(pathname)
+    let lang = getLangFromUrl(request.url)
     if (!lang) {
         if (pathname === '/') {
             lang = langEn;  // Default to English if no language is specified
@@ -33,10 +34,10 @@ export function middleware(request: NextRequest) {
             return new NextResponse('Page Not Found', {status: 404});
         }
     }
-    if (lang !== langEn && lang !== langZh) {
-        return new NextResponse('Page Not Found', {status: 404});
-    }
-    requestHeaders.set('x-lang', lang)
+    // if (lang !== langEn && lang !== langZh) {
+    //     return new NextResponse('Page Not Found', {status: 404});
+    // }
+    // requestHeaders.set('x-lang', lang)
 
     return NextResponse.next({
         request: {

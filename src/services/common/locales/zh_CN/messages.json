@@ -1,0 +1,65 @@
+{
+  "siteName": {
+    "message": "希波"
+  },
+  "navArticles": {
+    "message": "文章"
+  },
+  "navChannels": {
+    "message": "频道"
+  },
+  "frequentOperation": {
+    "message": "操作过于频繁"
+  },
+  "handwrittenNotes": {
+    "message": "手写笔记"
+  },
+  "codeNotes": {
+    "message": "代码笔记"
+  },
+  "signin": {
+    "message": "登录"
+  },
+  "signup": {
+    "message": "注册"
+  },
+  "latest": {
+    "message": "最新"
+  },
+  "readCount": {
+    "message": "阅读量"
+  },
+  "lastMonth": {
+    "message": "近一月"
+  },
+  "lastYear": {
+    "message": "近一年"
+  },
+  "all": {
+    "message": "全部"
+  },
+  "readRank": {
+    "message": "阅读排行"
+  },
+  "searchPlaceholder": {
+    "message": "搜索"
+  },
+  "invalidUsername": {
+    "message": "无效账户名称"
+  },
+  "invalidPassword": {
+    "message": "无效密码"
+  },
+  "unauthorized": {
+    "message": "未授权"
+  },
+  "AutoTheme": {
+    "message": "自动"
+  },
+  "LightTheme": {
+    "message": "浅色"
+  },
+  "DarkTheme": {
+    "message": "深色"
+  }
+}

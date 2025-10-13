@@ -7,7 +7,7 @@ import {useServerConfig} from "@/services/server/config";
 import {serverGetUserinfo} from "@/services/server/account/account";
 import GlobalLayout from "@/components/server/global";
 import {PageMetadata} from "@/utils/page";
-import {getLanguageProvider} from "@/services/common/language";
+
 
 export const templateBodyId = 'globalTemplateBody'
 
@@ -35,11 +35,10 @@ export default async function ArticleReadLayout({
         currentUserInfo = userInfo;
     }
     const pandoraUrl = serverConfig.PUBLIC_PANDORA_URL
-    const langProvider = getLanguageProvider(lang)
     return <GlobalLayout lang={lang} metadata={metadata}>
         <div className={styles.templateContainer}>
             <div className={styles.templateNavbar}>
-                <ContentPublicNavbar pathname={pathname} searchParams={searchParams} langProvider={langProvider}
+                <ContentPublicNavbar pathname={pathname} searchParams={searchParams} lang={lang}
                                      userInfo={currentUserInfo} pandoraUrl={pandoraUrl}/>
             </div>
             <div id={templateBodyId} className={styles.templateBody}>

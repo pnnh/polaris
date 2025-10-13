@@ -1,10 +1,10 @@
 import styles from "./filter.module.scss";
 import {replaceSearchParams} from "@/atom/common/utils/query";
 import React from "react";
-import {ILanguageProvider} from "@/services/common/language";
+import {langText} from "@/services/common/language";
 
-export function ArticleFilterBar({langProvider, searchParamsValue}: {
-    langProvider: ILanguageProvider,
+export function ArticleFilterBar({lang, searchParamsValue}: {
+    lang: string,
     searchParamsValue: Record<string, string>
 }) {
     const sortClass = (sort: string) => {
@@ -18,17 +18,22 @@ export function ArticleFilterBar({langProvider, searchParamsValue}: {
     return <div className={styles.middleTop}>
         <div className={styles.topLeft}>
             <a className={styles.sortLink + sortClass('latest')}
-               href={replaceSearchParams(searchParamsValue, 'sort', 'latest')}>{langProvider.latest}</a>
+               href={replaceSearchParams(searchParamsValue, 'sort', 'latest')}>
+                {langText(lang, "latest")}</a>
             <a className={styles.sortLink + sortClass('read')}
-               href={replaceSearchParams(searchParamsValue, 'sort', 'read')}>{langProvider.readCount}</a>
+               href={replaceSearchParams(searchParamsValue, 'sort', 'read')}>
+                {langText(lang, "readRank")}</a>
         </div>
         <div className={styles.topRight}>
             <a className={styles.filterLink + filterClass('month')}
-               href={replaceSearchParams(searchParamsValue, 'filter', 'month')}>{langProvider.lastMonth}</a>
+               href={replaceSearchParams(searchParamsValue, 'filter', 'month')}>
+                {langText(lang, "lastMonth")}</a>
             <a className={styles.filterLink + filterClass('year')}
-               href={replaceSearchParams(searchParamsValue, 'filter', 'year')}>{langProvider.lastYear}</a>
+               href={replaceSearchParams(searchParamsValue, 'filter', 'year')}>
+                {langText(lang, "lastYear")}</a>
             <a className={styles.filterLink + filterClass('all')}
-               href={replaceSearchParams(searchParamsValue, 'filter', 'all')}>{langProvider.all}</a>
+               href={replaceSearchParams(searchParamsValue, 'filter', 'all')}>
+                {langText(lang, "all")}</a>
         </div>
     </div>
 }
