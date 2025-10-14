@@ -9,16 +9,16 @@ import langPtPTData from '@/services/common/locales/pt_PT/messages.json' with {t
 import langZhCNData from '@/services/common/locales/zh_CN/messages.json' with {type: 'json'}
 import langZhTWData from '@/services/common/locales/zh_TW/messages.json' with {type: 'json'}
 
-export const langEnUS = 'en-US'
-export const langEsES = 'es-ES' // Spanish
-export const langFrFR = 'fr-FR' // French
-export const langDeDE = 'de-DE' // German
-export const langJaJP = 'ja-JP' // Japanese
-export const langRuRU = 'ru-RU' // Russian
-export const langHiIN = 'hi-IN' // Hindi
-export const langPtPT = 'pt-PT' // Portuguese
-export const langZhCN = 'zh-CN'
-export const langZhTW = 'zh-TW' // Traditional Chinese
+export const langEnUS = 'en'
+export const langEsES = 'es' // Spanish
+export const langFrFR = 'fr' // French
+// export const langDeDE = 'de-DE' // German
+export const langJaJP = 'ja' // Japanese
+// export const langRuRU = 'ru-RU' // Russian
+// export const langHiIN = 'hi-IN' // Hindi
+// export const langPtPT = 'pt-PT' // Portuguese
+export const langZhCN = 'zh'
+// export const langZhTW = 'zh-TW' // Traditional Chinese
 
 export const defaultLanguage = langEnUS
 
@@ -32,20 +32,17 @@ export const supportedLanguages = [
     {
         key: langFrFR, name: 'Français'
     },
-    {
-        key: langDeDE, name: 'Deutsch'
-    },
-    {
-        key: langPtPT, name: 'Português'
-    },
-    {
-        key: langRuRU, name: 'Русский'
-    },
-    {
-        key: langHiIN, name: 'हिन्दी'
-    },
     // {
-    //     key: langZh, name: '简体中文'
+    //     key: langDeDE, name: 'Deutsch'
+    // },
+    // {
+    //     key: langPtPT, name: 'Português'
+    // },
+    // {
+    //     key: langRuRU, name: 'Русский'
+    // },
+    // {
+    //     key: langHiIN, name: 'हिन्दी'
     // },
     {
         key: langJaJP, name: '日本語'
@@ -54,13 +51,7 @@ export const supportedLanguages = [
         key: langZhCN, name: '简体中文'
     },
     // {
-    //     key: langZhans, name: '简体中文'
-    // },
-    {
-        key: langZhTW, name: '繁體中文'
-    },
-    // {
-    //     key: langZhant, name: '繁體中文'
+    //     key: langZhTW, name: '繁體中文'
     // },
 ]
 
@@ -68,16 +59,16 @@ export const languageDataMap: { [key: string]: typeof langEnUSData } = {
     [langEnUS]: langEnUSData,
     [langEsES]: langEsESData,
     [langFrFR]: langFrFRData,
-    [langDeDE]: langDeDEData,
+    // [langDeDE]: langDeDEData,
     [langJaJP]: langJaJPData,
-    [langRuRU]: langRuRUData,
-    [langHiIN]: langHiINData,
+    // [langRuRU]: langRuRUData,
+    // [langHiIN]: langHiINData,
     [langZhCN]: langZhCNData,
     // [langZhans]: langZhCNData,
     // [langZhant]: langZhTWData,
     // [langZhCN]: langZhCNData,
-    [langZhTW]: langZhTWData,
-    [langPtPT]: langPtPTData,
+    // [langZhTW]: langZhTWData,
+    // [langPtPT]: langPtPTData,
 }
 
 export function getLangInfo(lang: string): { key: string, name: string } | undefined {
@@ -102,7 +93,7 @@ export function getTargetLang(wantLang: string, fallbackLang: string): string {
         return langZhCN
     }
     if (wantLang === 'zh-TW' || wantLang === 'zh-HK' || wantLang === 'zh-MO' || wantLang === 'zh-Hant') {
-        return langZhTW
+        return langZhCN
     }
     for (const item of supportedLanguages) {
         if (wantLang.startsWith(`${item.key}-`)) {

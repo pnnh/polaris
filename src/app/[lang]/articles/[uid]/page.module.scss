@@ -10,7 +10,7 @@ $rightAreaWidth: 20rem;
   border-radius: 6px;
   overflow: hidden;
   opacity: 0.9;
-  background: #FFFFFF;
+  background-color: var(--background-color);
 
   @media screen and (min-width: theme.$screenLargeWidth) {
     width: theme.$screenLargeWidth;
@@ -23,10 +23,11 @@ $rightAreaWidth: 20rem;
     border-radius: 4px;
     overflow: hidden;
     padding: 1rem;
+    color: var(--color-text);
 
     .articleDescription {
       font-size: 1rem;
-      color: #474747;
+      color: var(--text-color);
       margin-top: 1rem;
       margin-bottom: 1rem;
     }
@@ -34,7 +35,7 @@ $rightAreaWidth: 20rem;
     .action {
       font-size: 14px;
       height: 1rem;
-      color: #8a919f;
+      color: var(--color-text);
       line-height: 22px;
       display: flex;
       flex-direction: row;
@@ -51,7 +52,7 @@ $rightAreaWidth: 20rem;
     position: absolute;
     top: 0;
     z-index: 0;
-    mask: linear-gradient(to right, transparent 30%, #000);
+    mask: linear-gradient(to right, transparent 30%, var(--text-color));
   }
 }
 
@@ -92,7 +93,7 @@ $rightAreaWidth: 20rem;
 
     .channelCard {
       border-radius: 4px;
-      background-color: #FFFFFF;
+      background-color: var(--background-color);
 
       .channelTitle {
         font-size: 1rem;
@@ -110,12 +111,12 @@ $rightAreaWidth: 20rem;
 
 .articleInfo {
   display: block;
-  background-color: #FFFFFF;
+  background-color: var(--background-color);
   border-radius: 4px;
 
   .articleBody {
     padding: 16px;
-    background: #FFFFFF;
+    background-color: var(--background-color);
     border-radius: 4px;
     position: relative; /*为了准确定位文章附件预览组件*/
   }

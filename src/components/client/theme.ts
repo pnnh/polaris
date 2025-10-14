@@ -1,11 +1,9 @@
 'use client';
+
 import {createTheme} from '@mui/material/styles';
 
-const theme = createTheme({
+const lightTheme = createTheme({
     cssVariables: true,
-    typography: {
-        fontFamily: 'var(--font-roboto)',
-    },
     components: {
         MuiButton: {
             styleOverrides: {
@@ -15,6 +13,26 @@ const theme = createTheme({
             },
         },
     },
+    palette: {
+        mode: 'light',
+    },
 });
 
-export default theme;
+const darkTheme = createTheme({
+    cssVariables: true,
+    components: {
+        MuiButton: {
+            styleOverrides: {
+                root: {
+                    textTransform: 'none', // 全局禁用文字大写
+                },
+            },
+        },
+    },
+    palette: {
+        mode: 'dark',
+    },
+})
+
+export {lightTheme, darkTheme};
+

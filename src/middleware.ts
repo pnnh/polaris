@@ -39,17 +39,23 @@ export function middleware(request: NextRequest) {
     // }
     // requestHeaders.set('x-lang', lang)
 
-    return NextResponse.next({
+    const response = NextResponse.next({
         request: {
             headers: requestHeaders,
         }
     })
+    // 返回该请求头以指示浏览器在后续请求头中附带sec-ch-prefers-color-scheme头以便获取用户的主题偏好
+    response.headers.set('Accept-CH', 'Sec-CH-Prefers-Color-Scheme')
+
+    return response;
 }
 
+// 配置哪些路径需要经过这个中间件，仅匹配路径不包括查询字符串
 export const config = {
     matcher: [
         // '/((?!_next|images|fonts|icons|pwa|ads.txt|favicon.ico|polaris).*)'
         '/',
-        '/([en|zh].*)?',
+        '/(/\\w{2})',
+        '/(/\\w{2}/.*)',
     ],
 }

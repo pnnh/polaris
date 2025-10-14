@@ -11,6 +11,7 @@ import {PSLanguageSelector} from "./language";
 import {getPathname, getSearchString} from "@/services/server/pathname";
 import MenuIcon from '@mui/icons-material/Menu';
 import {ThemeSwitch} from "@/components/server/content/partials/theme";
+import {getServerTheme} from "@/services/server/theme";
 
 export async function ContentPublicNavbar({pathname, searchParams, lang, userInfo, pandoraUrl}: {
     pathname: string,
@@ -23,6 +24,7 @@ export async function ContentPublicNavbar({pathname, searchParams, lang, userInf
 
     const searchString = await getSearchString()
     const currentUrl = `${pathname}${searchString}`
+    const themeName = await getServerTheme()
 
     return <div className={styles.navHeader}>
         <div className={styles.leftNav}>
@@ -33,7 +35,7 @@ export async function ContentPublicNavbar({pathname, searchParams, lang, userInf
         </div>
         <div className={styles.rightNav}>
             <ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword} lang={lang}/>
-            <ThemeSwitch/>
+            <ThemeSwitch lang={lang} themeName={themeName}/>
             <PSLanguageSelector lang={lang} currentUrl={currentUrl}/>
             <UserAction lang={lang} portalUrl={serverConfig.PUBLIC_PORTAL_URL}
                         userInfo={userInfo}/>

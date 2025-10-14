@@ -1,5 +1,5 @@
 .rankCard {
-  background-color: #FFF;
+  background-color: var(--background-color);
   border-radius: 4px;
 
   .rankHeader {
@@ -19,7 +19,7 @@
       font-size: 14px;
 
       a {
-        color: #252933;
+        color: var(--text-color);
         text-decoration: none;
       }
     }

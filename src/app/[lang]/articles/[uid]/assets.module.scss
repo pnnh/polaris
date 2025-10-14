@@ -1,5 +1,5 @@
 .tocCard {
-  background-color: #FFF;
+  background-color: var(--background-color);
   border-radius: 4px;
   position: relative;
 
@@ -16,7 +16,7 @@
         width: 20px;
         height: 20px;
         cursor: pointer;
-        color: #4e4e4e;
+        color: var(--text-color);
       }
     }
   }

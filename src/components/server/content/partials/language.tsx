@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './language.module.scss';
+import styles from './language.module.css';
 
 import * as React from 'react';
 import MenuItem from '@mui/material/MenuItem';

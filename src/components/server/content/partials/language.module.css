@@ -1,5 +1,3 @@
-@use '@/components/common/styles/theme' as *;
-
 .langSelector {
   display: inline-flex;
   height: 1.5rem;
@@ -11,9 +9,9 @@
   svg {
     height: 20px;
     width: 20px;
-    color: $textColor;
-    fill: $textColor;
-    stroke: $textColor;
+    color: var(--text-color);
+    fill: var(--text-color);
+    stroke: var(--text-color);
   }
 }
 
@@ -25,14 +23,14 @@
   gap: 0.3rem;
   cursor: pointer;
   font-size: 0.9rem;
-  color: $textColor;
-  background-color: $backgroundColor;
+  color: var(--text-color);
+  background-color: var(--background-color);
 
   svg {
     height: 24px;
     width: 24px;
-    color: $textColor;
-    fill: $textColor;
-    stroke: $textColor;
+    color: var(--text-color);
+    fill: var(--text-color);
+    stroke: var(--text-color);
   }
 }

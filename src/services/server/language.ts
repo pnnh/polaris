@@ -1,17 +1,26 @@
 import acceptLanguage from 'accept-language';
 import {
-    langDeDE,
+    // langDeDE,
     langEnUS,
     langEsES,
     langFrFR,
-    langHiIN,
+    // langHiIN,
     langJaJP,
-    langPtPT,
-    langRuRU, langZhCN, langZhTW
+    // langPtPT,
+    // langRuRU,
+    langZhCN,
+    // langZhTW
 } from "@/services/common/language";
 
-acceptLanguage.languages([langDeDE, langEnUS, langEsES, langFrFR, langHiIN, langJaJP, langPtPT, langRuRU, langZhCN,
-    langZhTW]);
+acceptLanguage.languages([
+    // langDeDE,
+    langEnUS, langEsES, langFrFR,
+    // langHiIN,
+    langJaJP,
+    // langPtPT, langRuRU,
+    langZhCN,
+    // langZhTW
+]);
 
 export function filterAcceptLanguage(acceptLang: string): string {
     const lang = acceptLanguage.get(acceptLang);

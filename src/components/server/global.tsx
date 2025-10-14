@@ -8,19 +8,12 @@ import {PageMetadata, pageTitle} from "@/utils/page";
 import {isProd, usePublicConfig, useServerConfig} from "@/services/server/config";
 import {JotaiProvider} from "@/components/client/content/provider";
 import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter";
-import {Roboto} from 'next/font/google';
 import {ThemeProvider} from '@mui/material/styles';
-import theme from '@/components/client/theme';
+import {lightTheme, darkTheme} from '@/components/client/theme';
 import {encodeBase58String} from "@/atom/common/utils/basex";
 import {getPathname} from "@/services/server/pathname";
 import {langEn, langZh, replaceLanguageInPathname} from "@/atom/common/language";
-
-const roboto = Roboto({
-    weight: ['300', '400', '500', '700'],
-    subsets: ['latin'],
-    display: 'swap',
-    variable: '--font-roboto',
-});
+import {getServerTheme} from "@/services/server/theme";
 
 // 隔几秒重新验证下数据
 export const revalidate = 1
@@ -49,6 +42,11 @@ export default async function GlobalLayout({
     }
     // const turnstileKey = serverConfig.CLOUDFLARE_PUBLIC_TURNSTILE
     const lightningUrl = serverConfig.PUBLIC_LIGHTNING_URL
+
+    const themeName = await getServerTheme()
+    let isDarkTheme = themeName === 'dark'
+    let pageTheme = themeName === 'dark' ? darkTheme : lightTheme
+
     return <html lang={lang}>
     <head lang={lang}>
         <base href="/"/>
@@ -71,10 +69,10 @@ export default async function GlobalLayout({
         {metadata.description && <meta name="description" content={metadata.description as string}></meta>}
         {isProd() && <GoogleAnalytics gaId="G-Z98PEGYB12"/>}
     </head>
-    <body lang={lang} className={roboto.variable}>
+    <body lang={lang} className={isDarkTheme ? 'darkTheme' : 'lightTheme'}>
     <JotaiProvider>
         <AppRouterCacheProvider options={{key: 'css', enableCssLayer: true}}>
-            <ThemeProvider theme={theme}>
+            <ThemeProvider theme={pageTheme}>
                 {children}
             </ThemeProvider>
         </AppRouterCacheProvider>

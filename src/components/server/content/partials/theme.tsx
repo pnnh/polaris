@@ -1,53 +1,15 @@
 'use client';
 
-import {createTheme} from '@mui/material/styles';
 import styles from './theme.module.scss'
 import {useState} from "react";
 import {StyledMenu} from "@/components/client/dropmenu";
 import MenuItem from "@mui/material/MenuItem";
 import ContrastIcon from '@mui/icons-material/Contrast';
-import {clientGetCurrentTheme, clientSetCurrentTheme, ThemeType} from "@/services/client/theme";
-import {clientGetCurrentLanguage} from "@/services/client/language";
+import {clientSetCurrentTheme, ThemeType} from "@/services/client/theme";
 import {langText} from "@/services/common/language";
 
-const lightTheme = createTheme({
-    cssVariables: true,
-    components: {
-        MuiButton: {
-            styleOverrides: {
-                root: {
-                    textTransform: 'none', // 全局禁用文字大写
-                },
-            },
-        },
-    },
-    palette: {
-        mode: 'light',
-    },
-});
-
-const darkTheme = createTheme({
-    cssVariables: true,
-    components: {
-        MuiButton: {
-            styleOverrides: {
-                root: {
-                    textTransform: 'none', // 全局禁用文字大写
-                },
-            },
-        },
-    },
-    palette: {
-        mode: 'dark',
-    },
-})
-
-export {lightTheme, darkTheme};
-
-export function ThemeSwitch() {
+export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string }) {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const currentTheme = clientGetCurrentTheme()
-    const currentLanguage = clientGetCurrentLanguage()
 
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -62,8 +24,8 @@ export function ThemeSwitch() {
         <div className={styles.themeSelector}
              onClick={handleClick}>
             <ContrastIcon className={styles.themeIcon} aria-hidden={undefined} sx={{cursor: 'pointer'}}/>
-            {currentTheme === 'auto' ? langText(currentLanguage, "AutoTheme") : currentTheme === 'light' ?
-                langText(currentLanguage, "LightTheme") : langText(currentLanguage, "DarkTheme")}
+            {themeName === 'dark' ? langText(lang, "DarkTheme") : themeName === 'light' ?
+                langText(lang, "LightTheme") : langText(lang, "AutoTheme")}
         </div>
         <StyledMenu
             elevation={0}
@@ -77,14 +39,17 @@ export function ThemeSwitch() {
             }}
             anchorEl={anchorEl}
             open={open}>
-            <MenuItem onClick={() => switchTheme('auto')} disableRipple>
-                {langText(currentLanguage, "AutoTheme")}
+            <MenuItem onClick={() => switchTheme('auto')} disableRipple
+                      selected={lang === 'auto'}>
+                {langText(lang, "AutoTheme")}
             </MenuItem>
-            <MenuItem onClick={() => switchTheme('light')} disableRipple>
-                {langText(currentLanguage, "LightTheme")}
+            <MenuItem onClick={() => switchTheme('light')} disableRipple
+                      selected={lang === 'light'}>
+                {langText(lang, "LightTheme")}
             </MenuItem>
-            <MenuItem onClick={() => switchTheme('dark')} disableRipple>
-                {langText(currentLanguage, "DarkTheme")}
+            <MenuItem onClick={() => switchTheme('dark')} disableRipple
+                      selected={lang === 'dark'}>
+                {langText(lang, "DarkTheme")}
             </MenuItem>
         </StyledMenu>
     </>
