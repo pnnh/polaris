@@ -1,7 +1,7 @@
-import {langText} from "@/services/common/language";
+import {transText} from "@/services/common/locales/normal";
 
 export function pageTitle(lang: string, title?: string | null | undefined): string {
-    const slogan = langText(lang, "siteName")
+    const slogan = transText(lang, "siteName")
     if (!title || title.startsWith(slogan)) {
         return slogan
     }

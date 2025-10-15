@@ -7,7 +7,7 @@ import {localText} from "@/atom/common/language";
 export function ConsoleSidebar({lang}: { lang: string }) {
     return <div className={styles.consoleSidebar}>
         <a href={`/${lang}`}>{localText(lang, '首页', 'Home')}</a>
-        <a href={`/${lang}/account/userinfo`}>
+        <a href={`/${lang}/console/userinfo`}>
             {localText(lang, '个人信息', 'User Info')}
         </a>
         <a href={`/${lang}/console/articles`}>

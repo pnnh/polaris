@@ -54,12 +54,3 @@ class StyleGroup {
 }
 
 export const styleGroup = new StyleGroup();
-
-
-export function css(text: TemplateStringsArray, ...values: any[]) {
-    let str = '';
-    text.forEach((string, i) => {
-        str += string + (values[i] || '');
-    });
-    return new StyleObject(str);
-}

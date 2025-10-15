@@ -11,42 +11,41 @@ import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter";
 import {ThemeProvider} from '@mui/material/styles';
 import {lightTheme, darkTheme} from '@/components/client/theme';
 import {encodeBase58String} from "@/atom/common/utils/basex";
-import {getPathname} from "@/services/server/pathname";
-import {langEn, langZh, replaceLanguageInPathname} from "@/atom/common/language";
 import {getServerTheme} from "@/services/server/theme";
+import {getTargetLang, unknownLanguage} from "@/services/common/language";
+import {notFound} from "next/navigation";
+import {ServerComponentStyle, StyleItem} from "@/components/server/component";
 
 // 隔几秒重新验证下数据
 export const revalidate = 1
 export const dynamic = 'force-dynamic'
 
-export default async function GlobalLayout({
-                                               lang,
-                                               metadata,
-                                               children
-                                           }: {
-    lang: string, metadata: PageMetadata,
-    children: React.ReactNode
-}) {
+export default async function GlobalLayout(
+    {
+        lang,
+        metadata,
+        styleItems,
+        children
+    }: {
+        lang: string, metadata: PageMetadata,
+        styleItems?: StyleItem | StyleItem[] | undefined,
+        children: React.ReactNode
+    }) {
     const rootPageTitle = pageTitle(lang,)
 
     const serverConfig = await useServerConfig()
-    const selfUrl = serverConfig.PUBLIC_SELF_URL
     const browserConfigString = JSON.stringify(usePublicConfig(serverConfig))
     const encodedBrowserConfig = encodeBase58String(browserConfigString)
-    const pathname = await getPathname()
-    const langEnUrl = `${selfUrl}${replaceLanguageInPathname(pathname, langEn)}`
-    const langZhUrl = `${selfUrl}${replaceLanguageInPathname(pathname, langZh)}`
-    let langDefaultUrl = langEnUrl;
-    if (pathname === '/') {
-        langDefaultUrl = selfUrl
-    }
-    // const turnstileKey = serverConfig.CLOUDFLARE_PUBLIC_TURNSTILE
     const lightningUrl = serverConfig.PUBLIC_LIGHTNING_URL
 
     const themeName = await getServerTheme()
     let isDarkTheme = themeName === 'dark'
     let pageTheme = themeName === 'dark' ? darkTheme : lightTheme
 
+    // 检测传递的语言参数是否有效
+    if (!lang || getTargetLang(lang, unknownLanguage) === unknownLanguage) {
+        notFound()
+    }
     return <html lang={lang}>
     <head lang={lang}>
         <base href="/"/>
@@ -62,12 +61,12 @@ export default async function GlobalLayout({
         <link rel="shortcut icon" href="/favicon.ico"/>
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
         <meta name="apple-mobile-web-app-title" content={rootPageTitle}/>
-        <link rel="alternate" hrefLang="en" href={langEnUrl}/>
-        <link rel="alternate" hrefLang="zh" href={langZhUrl}/>
         <title>{pageTitle(lang, metadata.title as string)}</title>
         {metadata.keywords && <meta name="keywords" content={metadata.keywords as string}></meta>}
         {metadata.description && <meta name="description" content={metadata.description as string}></meta>}
         {isProd() && <GoogleAnalytics gaId="G-Z98PEGYB12"/>}
+
+        <ServerComponentStyle styleItems={styleItems}></ServerComponentStyle>
     </head>
     <body lang={lang} className={isDarkTheme ? 'darkTheme' : 'lightTheme'}>
     <JotaiProvider>

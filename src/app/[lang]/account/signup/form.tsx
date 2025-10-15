@@ -8,7 +8,7 @@ import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {getTurnstileToken} from "@/photon/client/cloudflare/turnstile";
 import {submitSignup} from "@/photon/client/account/account";
 import {localText} from "@/atom/common/language";
-import {langText} from "@/services/common/language";
+import {transText} from "@/services/common/locales/normal";
 
 const buttonThrottle = new ButtonThrottle(5000)
 
@@ -22,7 +22,7 @@ export function SignupForm({lang, portalUrl}: { lang: string, portalUrl: string 
 
     const submitForm = async () => {
         if (!await buttonThrottle.throttle()) {
-            setInfoMsg(langText(lang, "frequentOperation"))
+            setInfoMsg(transText(lang, "frequentOperation"))
             return
         }
         if (!username || username.length < 1) {
@@ -99,10 +99,10 @@ export function SignupForm({lang, portalUrl}: { lang: string, portalUrl: string 
                 <button type="button" className={styles.submitButton}
                         onClick={() => {
                             submitForm().then()
-                        }}>{langText(lang, "signup")}
+                        }}>{transText(lang, "signup")}
                 </button>
                 <div>{localText(lang, '已有账号？', 'Already have an account?')}
-                    <a href={'/account/signin'}>{langText(lang, "signin")}</a></div>
+                    <a href={'/account/signin'}>{transText(lang, "signin")}</a></div>
             </div>
             <div className={styles.formRow}>
                 <div className={'infoMsg'}>

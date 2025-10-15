@@ -26,7 +26,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     flex-grow: 1;
-    background-color: #FFF;
+    background-color: var(--background-color);
     border-radius: 4px;
 
     .middleBody {
@@ -52,7 +52,7 @@
 
           .description {
             flex-grow: 1;
-            color: #8a919f;
+            color: var(--text-color);
             font-size: 13px;
             line-height: 22px;
             margin-top: 1rem;
@@ -62,7 +62,7 @@
 
           .action {
             height: 1rem;
-            color: #8a919f;
+            color: var(--text-color);
             font-size: 12px;
             line-height: 22px;
             display: flex;

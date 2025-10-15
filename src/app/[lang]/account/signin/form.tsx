@@ -6,8 +6,9 @@ import React, {useState} from "react";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {accountSignin} from "@/photon/client/account/account";
-import {langText} from "@/services/common/language";
+import {transText} from "@/services/common/locales/normal";
 import {localText} from "@/atom/common/language";
+import {accountTransText} from "@/services/common/locales/account";
 
 const buttonThrottle = new ButtonThrottle(1000)
 
@@ -21,21 +22,21 @@ export function SigninForm({lang, portalUrl, signinLink, linkApp, signinCallback
 
     const submitForm = async () => {
         if (!await buttonThrottle.throttle()) {
-            setInfoMsg(langText(lang, "frequentOperation"))
+            setInfoMsg(transText(lang, "frequentOperation"))
             return
         }
         if (!username || username.length < 1) {
-            setInfoMsg(langText(lang, "invalidUsername"))
+            setInfoMsg(transText(lang, "invalidUsername"))
             return
         }
         if (!password || password.length < 1) {
-            setInfoMsg(langText(lang, "invalidPassword"))
+            setInfoMsg(transText(lang, "invalidPassword"))
             return
         }
         const turnstileToken = await getTurnstileToken()
 
         if (!turnstileToken) {
-            setInfoMsg(langText(lang, "unauthorized"))
+            setInfoMsg(transText(lang, "unauthorized"))
             return
         }
         const submitRequest = {
@@ -43,7 +44,7 @@ export function SigninForm({lang, portalUrl, signinLink, linkApp, signinCallback
         }
         const submitResult = await accountSignin(portalUrl, submitRequest)
         if (submitResult.code !== CodeOk) {
-            setInfoMsg(localText(lang, '登录失败', 'Login failed'))
+            setInfoMsg(accountTransText(lang, 'loginFailed'))
             return
         }
         if (signinLink && linkApp) {
@@ -52,7 +53,7 @@ export function SigninForm({lang, portalUrl, signinLink, linkApp, signinCallback
                 window.location.href = `/${lang}/account/signin?app=${encodeURIComponent(linkApp)}&link=${encodeURIComponent(signinLink)}&redirect=${signinCallback}`
             }, 1500)
         } else {
-            setInfoMsg(localText(lang, '登录成功，前往首页...', 'Login successful, redirecting to homepage...'))
+            setInfoMsg(accountTransText(lang, 'loginSuccessRedirecting'))
             setTimeout(() => {
                 window.location.href = '/'
             }, 1500)
@@ -77,10 +78,10 @@ export function SigninForm({lang, portalUrl, signinLink, linkApp, signinCallback
                 <button type="button" className={styles.submitButton}
                         onClick={() => {
                             submitForm().then()
-                        }}>{langText(lang, "signin")}
+                        }}>{transText(lang, "signin")}
                 </button>
                 <div>{localText(lang, '还没有账号？', 'No account yet?')}<a
-                    href={'/account/signup'}>{langText(lang, "signup")}</a></div>
+                    href={`/${lang}/account/signup`}>{transText(lang, "signup")}</a></div>
             </div>
             <div className={styles.formRow}>
                 <div className={'infoMsg'}>

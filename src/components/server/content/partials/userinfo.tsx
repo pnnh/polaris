@@ -1,7 +1,7 @@
 import styles from './userinfo.module.scss'
 import {AccountModel, isAnonymousAccount} from "@/atom/common/models/account";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import {langText} from "@/services/common/language";
+import {transText} from "@/services/common/locales/normal";
 
 export function UserAction({lang, portalUrl, userInfo}: {
     lang: string, portalUrl: string, userInfo: AccountModel | undefined
@@ -24,7 +24,7 @@ export function UserAction({lang, portalUrl, userInfo}: {
     return <div className={styles.userAction}>
         <a className={styles.loginLink} href={`/${lang}/account/signin`}>
             <AccountCircleIcon/>
-            {langText(lang, 'signin')}
+            {transText(lang, 'signin')}
         </a>
         {/*<a className={styles.loginLink} href={`${lang}/account/signup`}>注册</a>*/}
     </div>

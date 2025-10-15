@@ -2,7 +2,7 @@
 
 import styles from "./filter.module.scss";
 import React from "react";
-import {langText} from "@/services/common/language";
+import {transText} from "@/services/common/locales/normal";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import {uuidToBase58} from "@/atom/common/utils/basex";
@@ -28,7 +28,7 @@ export function ConsoleChannelFilterBar({lang, keyword}: {
         </div>
         <div className={styles.topRight}>
             <div className={styles.searchBox}>
-                <input placeholder={langText(lang, "searchPlaceholder")} maxLength={128} value={searchText}
+                <input placeholder={transText(lang, "searchPlaceholder")} maxLength={128} value={searchText}
                        onChange={(event) => setSearchText(event.target.value)}
                        onKeyDown={(event) => {
                            if (event.key === 'Enter') {

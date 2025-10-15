@@ -3,7 +3,7 @@ import styles from './profile.module.scss'
 
 import {getPathname} from "@/services/server/pathname";
 import {pageTitle} from "@/utils/page";
-import {langText} from "@/services/common/language";
+import {transText} from "@/services/common/locales/normal";
 
 export async function SiteNavMenu({lang, searchParams}: {
     lang: string,
@@ -41,8 +41,8 @@ function ArticleNavbar({lang, pathname}: {
     lang: string, pathname: string
 }) {
     const navLinks = [
-        {name: langText(lang, "navArticles"), href: `/${lang}/articles`},
-        {name: langText(lang, "navChannels"), href: `/${lang}/channels`},
+        {name: transText(lang, "navArticles"), href: `/${lang}/articles`},
+        {name: transText(lang, "navChannels"), href: `/${lang}/channels`},
         // {name: '图片', href: `/images`},
         // {name: '随机密码', href: `/tools/password`},
         // {name: 'UUID', href: `/tools/uuid`},
@@ -66,8 +66,8 @@ function ArticleSubNavbar({lang, pathname, searchParams}: {
     searchParams: Record<string, string>
 }) {
     const navLinks = [
-        {name: langText(lang, "handwrittenNotes"), href: `/articles/dir1`},
-        {name: langText(lang, "codeNotes"), href: `/articles/dir2`},
+        {name: transText(lang, "handwrittenNotes"), href: `/articles/dir1`},
+        {name: transText(lang, "codeNotes"), href: `/articles/dir2`},
     ]
     let currentPathname = pathname
     if (currentPathname === '/articles') {

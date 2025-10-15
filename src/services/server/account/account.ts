@@ -7,7 +7,7 @@ import {getDefaultImageUrl} from "@/services/common/note";
 import {cookies} from "next/headers";
 
 export async function serverGetUserinfo(portalUrl: string): Promise<AccountModel | undefined> {
-    const url = `${portalUrl}/account/userinfo`
+    const url = `${portalUrl}/console/userinfo`
     const cookieStore = await cookies()
     const authHeader = cookieStore.toString()
     const getResult = await serverMakeGet(url, authHeader) as PLGetResult<AccountModel>

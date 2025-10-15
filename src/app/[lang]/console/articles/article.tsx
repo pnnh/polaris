@@ -67,7 +67,10 @@ export function ArticleCard({model, lang, portalUrl}: {
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = `${portalUrl}/articles/${model.uid}/assets/${model.cover}`
     }
-    const chanUrl = `/${lang}/channels/${uuidToBase58(model.channel)}`
+    let chanUrl = ''
+    if (model.channel) {
+        chanUrl = `/${lang}/channels/${uuidToBase58(model.channel)}`
+    }
     const deleteUrl = `${portalUrl}/console/articles/${model.uid}`
     return <div className={styles.middleItem} key={model.uid} data-article={model.uid}>
         <div className={styles.itemCover}>

@@ -34,7 +34,7 @@ export function UserinfoEditForm({portalUrl, userInfo, lang}: {
         formData.append("email", email);
         formData.append("description", description);
 
-        const fetchUrl = `${portalUrl}/account/userinfo/edit`; // 替换为实际的上传 URL
+        const fetchUrl = `${portalUrl}/console/userinfo/edit`; // 替换为实际的上传 URL
         fetch(fetchUrl, {
             method: 'POST',
             body: formData // 直接使用 FormData 作为 body
@@ -83,7 +83,7 @@ export function UserinfoEditForm({portalUrl, userInfo, lang}: {
             <div className={styles.submitButtons}>
                 <button type="button" onClick={onSubmit}>{localText(lang, '保存', 'Save')}</button>
                 <button type="button" onClick={() => {
-                    window.location.href = '/account/userinfo'; // 返回用户信息页面
+                    window.location.href = '/console/userinfo'; // 返回用户信息页面
                     return false
                 }}>{localText(lang, '取消', 'Cancel')}
                 </button>

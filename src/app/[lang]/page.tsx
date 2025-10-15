@@ -12,9 +12,9 @@ import {serverPortalSignin} from "@/services/server/domain/domain";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
-import {langEn} from "@/atom/common/language";
 import {ArticleFilterBar} from "@/components/server/content/article/filter";
-
+import {getTargetLang, unknownLanguage} from "@/services/common/language";
+import {notFound} from "next/navigation";
 
 export const dynamic = "force-dynamic";
 
@@ -31,7 +31,10 @@ export default async function Page({params, searchParams}: {
     }
     const pageSize = 10
     const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
+    const lang = paramsValue.lang
+    if (!lang || getTargetLang(lang, unknownLanguage) === unknownLanguage) {
+        notFound()
+    }
 
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')

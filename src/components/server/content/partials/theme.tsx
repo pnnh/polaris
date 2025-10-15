@@ -6,7 +6,7 @@ import {StyledMenu} from "@/components/client/dropmenu";
 import MenuItem from "@mui/material/MenuItem";
 import ContrastIcon from '@mui/icons-material/Contrast';
 import {clientSetCurrentTheme, ThemeType} from "@/services/client/theme";
-import {langText} from "@/services/common/language";
+import {transText} from "@/services/common/locales/normal";
 
 export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string }) {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -24,8 +24,8 @@ export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string
         <div className={styles.themeSelector}
              onClick={handleClick}>
             <ContrastIcon className={styles.themeIcon} aria-hidden={undefined} sx={{cursor: 'pointer'}}/>
-            {themeName === 'dark' ? langText(lang, "DarkTheme") : themeName === 'light' ?
-                langText(lang, "LightTheme") : langText(lang, "AutoTheme")}
+            {themeName === 'dark' ? transText(lang, "DarkTheme") : themeName === 'light' ?
+                transText(lang, "LightTheme") : transText(lang, "AutoTheme")}
         </div>
         <StyledMenu
             elevation={0}
@@ -41,15 +41,15 @@ export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string
             open={open}>
             <MenuItem onClick={() => switchTheme('auto')} disableRipple
                       selected={lang === 'auto'}>
-                {langText(lang, "AutoTheme")}
+                {transText(lang, "AutoTheme")}
             </MenuItem>
             <MenuItem onClick={() => switchTheme('light')} disableRipple
                       selected={lang === 'light'}>
-                {langText(lang, "LightTheme")}
+                {transText(lang, "LightTheme")}
             </MenuItem>
             <MenuItem onClick={() => switchTheme('dark')} disableRipple
                       selected={lang === 'dark'}>
-                {langText(lang, "DarkTheme")}
+                {transText(lang, "DarkTheme")}
             </MenuItem>
         </StyledMenu>
     </>

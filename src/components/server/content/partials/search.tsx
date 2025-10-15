@@ -3,7 +3,7 @@
 import styles from './search.module.scss'
 import SearchIcon from '@mui/icons-material/Search';
 import {useEffect, useState} from "react";
-import {langText} from "@/services/common/language";
+import {transText} from "@/services/common/locales/normal";
 
 export function ContentSearchAction({pathname, queryKeyword, lang}: {
     pathname: string, queryKeyword: string,
@@ -17,7 +17,7 @@ export function ContentSearchAction({pathname, queryKeyword, lang}: {
         window.location.href = `/${lang}/search?keyword=${searchText}`
     }
     return <div className={styles.globalSearchBox}>
-        <input placeholder={langText(lang, "searchPlaceholder")} maxLength={128} value={searchText}
+        <input placeholder={transText(lang, "searchPlaceholder")} maxLength={128} value={searchText}
                onChange={(event) => setSearchText(event.target.value)}
                onKeyDown={(event) => {
                    if (event.key === 'Enter') {

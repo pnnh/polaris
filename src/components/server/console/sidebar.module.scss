@@ -3,14 +3,14 @@
 .consoleSidebar {
   display: flex;
   flex-direction: column;
-  background: #FFFFFF;
+  background: var(--background-color);
   width: styles.$consoleSidebarWidth;
   border-right: solid 1px #E0E0E0;
   flex-shrink: 0;
 
   a {
     text-decoration: none;
-    color: #000000;
+    color: var(--text-color);
     padding: 0.5rem 1rem;
     display: flex;
     align-items: center;

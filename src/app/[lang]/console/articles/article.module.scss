@@ -2,7 +2,7 @@
 
 .middleBody {
   width: 100%;
-  background: #FFFFFF;
+  background: var(--background-color);
 
   .tableHeader {
     width: 100%;
@@ -15,7 +15,7 @@
     border-bottom: solid 1px #e4e6eb80;
     padding: 0 1rem;
     background: #F7F8FA;
-    color: #8a919f;
+    color: var(--text-color);
 
     .headerLabel {
       overflow: hidden;
@@ -42,14 +42,14 @@
       font-weight: 600;
       font-size: 16px;
       line-height: 24px;
-      color: #252933;
+      color: var(--text-color);
       padding-left: 1rem;
 
       a {
         width: 10rem;
         display: inline-block;
         height: 1.5rem;
-        color: #252933;
+        color: var(--text-color);
         text-decoration: none;
         overflow: hidden;
         white-space: nowrap;
@@ -59,7 +59,7 @@
 
     .description {
       flex-grow: 1;
-      color: #8a919f;
+      color: var(--text-color);
       font-size: 13px;
       line-height: 22px;
       margin-top: 1rem;
@@ -71,7 +71,7 @@
       height: 1rem;
       width: 10rem;
       flex-shrink: 0;
-      color: #8a919f;
+      color: var(--text-color);
       font-size: 12px;
       line-height: 22px;
       gap: 0.25rem;

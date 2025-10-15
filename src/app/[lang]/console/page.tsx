@@ -8,7 +8,7 @@ import ConsoleLayout from "@/components/server/console/layout";
 import {useServerConfig} from "@/services/server/config";
 import {serverGetUserinfo} from "@/services/server/account/account";
 import {isAnonymousAccount} from "@/atom/common/models/account";
-
+import {NeedLoginPage} from "@/components/server/content/needLogin";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -22,13 +22,11 @@ export default async function Page({params, searchParams}: {
     const serverConfig = await useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
     const currentUserInfo = await serverGetUserinfo(portalUrl);
-    if (!currentUserInfo || isAnonymousAccount(currentUserInfo)) {
-        return <div className={styles.consolePage}>
-            请先登录
-        </div>
-    }
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
+    if (!currentUserInfo || isAnonymousAccount(currentUserInfo)) {
+        return <NeedLoginPage lang={lang}></NeedLoginPage>
+    }
 
     return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>

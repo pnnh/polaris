@@ -13,8 +13,34 @@ import {ConsoleArticleFilterBar} from "@/app/[lang]/console/articles/filter";
 import {ConsoleArticleMiddleBody} from "@/app/[lang]/console/articles/article";
 import {useServerConfig} from "@/services/server/config";
 import {serverConsoleSelectArticles} from "@/services/server/articles/articles";
+import {css, ServerComponentStyle} from "@/components/server/component";
 
 export const dynamic = "force-dynamic";
+
+const pageStyle = css`
+    .contentContainer {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .conMiddle {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            scrollbar-width: thin;
+            border-radius: 4px;
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            .middlePagination {
+                width: 100%;
+                background: var(--background-color);
+            }
+        }
+    }
+`
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -49,7 +75,7 @@ export default async function Page({params, searchParams}: {
 
     const pagination = calcPagination(page, selectData.count, pageSize)
     return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata}>
+                          metadata={metadata} styleItems={pageStyle}>
         <div className={styles.contentContainer}>
             <ConsoleArticleFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
             <div className={styles.conMiddle}>

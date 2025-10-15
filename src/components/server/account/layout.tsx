@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './layout.module.scss'
 import {PageMetadata} from "@/utils/page";
+import GlobalLayout from "@/components/server/global";
 
 
 export default async function AccountLayout({
@@ -16,7 +17,9 @@ export default async function AccountLayout({
     metadata: PageMetadata,
     lang: string
 }) {
-    return <div className={styles.accountLayout}>
-        {children}
-    </div>
+    return <GlobalLayout lang={lang} metadata={metadata}>
+        <div className={styles.accountLayout}>
+            {children}
+        </div>
+    </GlobalLayout>
 }

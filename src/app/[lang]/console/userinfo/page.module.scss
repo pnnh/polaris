@@ -4,17 +4,16 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: var(--background-color);
     margin-top: 16px;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
 
     .avatar {
       width: 12rem;
-      height: 12rem;
+      height: 8rem;
       border-radius: 50%;
-      margin-bottom: 20px;
+      margin-bottom: 1rem;
 
       img {
         width: 100%;
@@ -35,7 +34,6 @@
       display: table;
       align-items: center;
       text-align: center;
-      width: 40%;
       margin: 0 auto;
 
       .row {
@@ -45,7 +43,7 @@
 
         .rowLabel {
           font-weight: normal;
-          color: #666;
+          color: var(--text-color);
           width: 50%;
           display: table-cell;
           text-align: right;
@@ -53,7 +51,7 @@
         }
 
         .rowContent {
-          color: #333;
+          color: var(--text-color);
           font-size: 1rem;
           display: table-cell;
           text-align: left;

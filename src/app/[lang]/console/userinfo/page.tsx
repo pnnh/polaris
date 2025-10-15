@@ -2,10 +2,11 @@ import {getPathname} from "@/services/server/pathname";
 import {PageMetadata, pageTitle} from "@/utils/page";
 import styles from './page.module.scss'
 import {useServerConfig} from "@/services/server/config";
-import ContentLayout from "@/components/server/content/layout";
 import {getAccountUrn} from "@/atom/common/models/account";
 import {serverGetUserinfo} from "@/services/server/account/account";
 import {langEn, localText} from "@/atom/common/language";
+import {NeedLoginPage} from "@/components/server/content/needLogin";
+import ConsoleLayout from "@/components/server/console/layout";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -23,10 +24,10 @@ export default async function Page({params, searchParams}: {
 
     const userInfo = await serverGetUserinfo(portalUrl)
     if (!userInfo) {
-        return <div>{localText(lang, '遇到错误', 'Something error')}</div>
+        return <NeedLoginPage lang={lang}></NeedLoginPage>
     }
 
-    return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
+    return <ConsoleLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} userInfo={userInfo}>
         <div className={styles.userInfoContainer}>
             <div className={styles.userInfoCard}>
@@ -34,7 +35,7 @@ export default async function Page({params, searchParams}: {
                     <img src={userInfo.photoUrl} alt="User Avatar"/>
                 </div>
                 <div className={styles.editLink}>
-                    <a href={'/account/userinfo/edit'}>{localText(lang, '修改资料', 'Edit profile')}</a>
+                    <a href={`/${lang}/console/userinfo/edit`}>{localText(lang, '修改资料', 'Edit profile')}</a>
                 </div>
                 <div className={styles.details}>
                     <p className={styles.row}>
@@ -66,5 +67,5 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
         </div>
-    </ContentLayout>
+    </ConsoleLayout>
 }

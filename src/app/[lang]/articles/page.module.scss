@@ -26,9 +26,9 @@
     justify-content: flex-start;
     align-items: flex-start;
     flex-grow: 1;
-    background-color: #FFF;
+    background-color: var(--background-color);
     border-radius: 4px;
- 
+
     .middlePagination {
       width: 100%;
     }

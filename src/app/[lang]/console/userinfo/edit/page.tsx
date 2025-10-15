@@ -6,6 +6,7 @@ import {CodeOk, SymbolUnknown} from "@/atom/common/models/protocol";
 import {UserinfoEditForm} from "./form";
 import {serverGetUserinfo} from "@/services/server/account/account";
 import {langEn, localText} from "@/atom/common/language";
+import ConsoleLayout from "@/components/server/console/layout";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -27,10 +28,10 @@ export default async function Page({params, searchParams}: {
         return <div>{localText(lang, '出错了', 'Failed')}</div>
     }
 
-    return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
+    return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div>
             <UserinfoEditForm portalUrl={portalUrl} userInfo={userInfo} lang={lang}/>
         </div>
-    </ContentLayout>
+    </ConsoleLayout>
 }
