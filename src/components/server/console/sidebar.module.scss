@@ -10,7 +10,7 @@
 
   a {
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--text-primary-color);
     padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
@@ -18,7 +18,7 @@
     border-bottom: solid 1px #E0E0E0;
 
     &:hover {
-      background-color: #F0F0F0;
+      background-color: var(--action-hover-color);
     }
 
     &.active {

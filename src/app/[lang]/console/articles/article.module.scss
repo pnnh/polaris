@@ -14,8 +14,8 @@
     justify-content: space-between;
     border-bottom: solid 1px #e4e6eb80;
     padding: 0 1rem;
-    background: #F7F8FA;
-    color: var(--text-color);
+    background: var(--background-color);
+    color: var(--text-primary-color);
 
     .headerLabel {
       overflow: hidden;
@@ -42,14 +42,14 @@
       font-weight: 600;
       font-size: 16px;
       line-height: 24px;
-      color: var(--text-color);
+      color: var(--text-primary-color);
       padding-left: 1rem;
 
       a {
         width: 10rem;
         display: inline-block;
         height: 1.5rem;
-        color: var(--text-color);
+        color: var(--text-primary-color);
         text-decoration: none;
         overflow: hidden;
         white-space: nowrap;
@@ -59,7 +59,7 @@
 
     .description {
       flex-grow: 1;
-      color: var(--text-color);
+      color: var(--text-primary-color);
       font-size: 13px;
       line-height: 22px;
       margin-top: 1rem;
@@ -71,7 +71,7 @@
       height: 1rem;
       width: 10rem;
       flex-shrink: 0;
-      color: var(--text-color);
+      color: var(--text-primary-color);
       font-size: 12px;
       line-height: 22px;
       gap: 0.25rem;

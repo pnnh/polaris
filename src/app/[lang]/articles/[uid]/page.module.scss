@@ -27,7 +27,7 @@ $rightAreaWidth: 20rem;
 
     .articleDescription {
       font-size: 1rem;
-      color: var(--text-color);
+      color: var(--text-primary-color);
       margin-top: 1rem;
       margin-bottom: 1rem;
     }
@@ -52,7 +52,7 @@ $rightAreaWidth: 20rem;
     position: absolute;
     top: 0;
     z-index: 0;
-    mask: linear-gradient(to right, transparent 30%, var(--text-color));
+    mask: linear-gradient(to right, transparent 30%, var(--text-primary-color));
   }
 }
 

@@ -1,7 +1,7 @@
 .tocCard {
   background-color: var(--background-color);
   border-radius: 4px;
-  border: 1px solid var(--text-color);
+  border: 1px solid var(--text-primary-color);
 }
 
 .tocHeader {
@@ -26,7 +26,7 @@
   white-space: nowrap;
 
   a {
-    color: var(--text-color);
+    color: var(--text-primary-color);
     text-decoration: none;
   }
 }

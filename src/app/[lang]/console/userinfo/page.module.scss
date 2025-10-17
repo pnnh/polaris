@@ -43,7 +43,7 @@
 
         .rowLabel {
           font-weight: normal;
-          color: var(--text-color);
+          color: var(--text-primary-color);
           width: 50%;
           display: table-cell;
           text-align: right;
@@ -51,7 +51,7 @@
         }
 
         .rowContent {
-          color: var(--text-color);
+          color: var(--text-primary-color);
           font-size: 1rem;
           display: table-cell;
           text-align: left;

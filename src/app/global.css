@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+@layer theme, base, mui, components, utilities;
+@import 'tailwindcss';
+
+@plugin "daisyui";
+
+/*配色方案参考MUI组件，分别是MUI组件的亮色和暗色主题颜色*/
+
+:root {
+    --background-color: #ffffff;
+    --primary-color: #1976d2;
+    --secondary-color: #9c27b0;
+    --error-color: #d32f2f;
+    --warning-color: #ed6c02;
+    --info-color: #0288d1;
+    --success-color: #2e7d32;
+    --divider-color: rgba(0, 0, 0, 0.12);
+    --text-primary-color: rgba(0, 0, 0, 0.87);
+    --text-secondary-color: rgba(0, 0, 0, 0.6);
+    --text-disabled-color: rgba(0, 0, 0, 0.38);
+    --text-divider-color: rgba(0, 0, 0, 0.12);
+    --action-active-color: rgba(0, 0, 0, 0.54);
+    --action-hover-color: rgba(0, 0, 0, 0.04);
+    --active-selected-color: rgba(0, 0, 0, 0.08);
+    --action-disabled-color: rgba(0, 0, 0, 0.26);
+    --action-disabled-background-color: rgba(0, 0, 0, 0.12);
+    --action-focus-color: rgba(0, 0, 0, 0.12);
+
+    --screenSmallWidth: 20rem; /* 约320px，小于该屏幕宽度时，提示屏幕尺寸过小无法保证展示效果 */
+    --screenMediumWidth: 48rem; /*  约768px，达到该屏幕宽度时显示中等屏幕模式 */
+    --screenLargeWidth: 80rem; /* 约1280px，达到该屏幕宽度时显示大屏幕模式 */
+    --screenExtraLargeWidth: 120rem; /* 约1920px，大于该屏幕宽度时，固定内容宽度为该数值并居中显示 */
+}
+
+body.darkTheme {
+    --background-color: #121212;
+    --primary-color: #90caf9;
+    --secondary-color: #ce93d8;
+    --error-color: #f44336;
+    --warning-color: #ffa726;
+    --info-color: #29b6f6;
+    --success-color: #66bb6a;
+    --divider-color: rgba(0, 0, 0, 0.12);
+    --text-primary-color: #fff;
+    --text-secondary-color: rgba(255, 255, 255, 0.7);
+    --text-disabled-color: rgba(255, 255, 255, 0.5);
+    --text-divider-color: rgba(255, 255, 255, 0.12);
+    --action-active-color: #fff;
+    --action-hover-color: rgba(255, 255, 255, 0.08);
+    --active-selected-color: rgba(255, 255, 255, 0.16);
+    --action-disabled-color: rgba(255, 255, 255, 0.3);
+    --action-disabled-background-color: rgba(255, 255, 255, 0.12);
+    --action-focus-color: rgba(255, 255, 255, 0.12);
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: var(--background-color);
+    overflow-x: hidden;
+    overflow-y: hidden;
+    color: var(--text-primary-color);
+    font-family: Roboto, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    box-sizing: border-box;
+    font-size: 13px;
+}
+
+
+@media (min-width: 20rem) {
+    html,
+    body {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 48rem) {
+    html,
+    body {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 80rem) {
+    html,
+    body {
+        font-size: 16px;
+    }
+}
+
+/*#serverData {*/
+/*    display: none !important;*/
+/*}*/
+
+
+/*nextjs-portal {*/
+/*    display: none;*/
+/*}*/

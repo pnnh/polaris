@@ -1,7 +1,4 @@
 import 'server-only'
-
-import './global.css'
-
 import React, {Suspense} from "react";
 import {GoogleAnalytics} from "@next/third-parties/google";
 import {PageMetadata, pageTitle} from "@/utils/page";

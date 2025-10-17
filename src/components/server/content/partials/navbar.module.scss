@@ -8,7 +8,7 @@
   align-items: center;
   font-size: 1rem;
   font-weight: 400;
-  color: var(--text-color);
+  color: var(--text-primary-color);
 
   @media screen and (min-width: theme.$screenExtraLargeWidth) {
     width: theme.$screenExtraLargeWidth;
@@ -23,7 +23,7 @@
     gap: 1rem;
 
     .brandLink {
-      color: var(--text-color);
+      color: var(--text-primary-color);
       text-decoration: none;
       font-size: 1rem;
       display: inline-block;
@@ -47,7 +47,7 @@
 
     .toolsLink {
       text-decoration: none;
-      color: var(--text-color);
+      color: var(--text-primary-color);
       cursor: pointer;
       display: inline-block;
       height: 1.5rem;
@@ -68,7 +68,7 @@
 
       a {
         text-decoration: none;
-        color: var(--text-color);
+        color: var(--text-primary-color);
         font-size: 0.9rem;
 
         &.active {

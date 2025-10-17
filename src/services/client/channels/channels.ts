@@ -12,7 +12,7 @@ export async function clientChannelsComplete(portalUrl: string, selectQuery: Rec
     const selectResult = await clientMakeGet<PLSelectResult<PSChannelModel>>(url)
 
     if (!selectResult || selectResult.code !== CodeOk || !selectResult.data) {
-        console.warn('频道自动完成失败', selectResult);
+        console.debug('频道自动完成失败', selectResult);
         return undefined;
     }
     return selectResult.data
@@ -22,7 +22,7 @@ export async function clientConsoleInsertChannel(portalUrl: string, model: unkno
     const url = `${portalUrl}/console/channels`
     const insertResult = await clientMakePost<PLInsertResult>(url, model);
     if (!insertResult || insertResult.code !== CodeOk || !insertResult.data) {
-        console.warn('文章插入失败', insertResult);
+        console.debug('文章插入失败', insertResult);
         return '';
     }
     return insertResult.data

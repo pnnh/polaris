@@ -21,14 +21,14 @@ export default async function Home({params, searchParams}: {
     const pathname = await getPathname()
     const paramsValue = await params;
     const searchValue = await searchParams;
-    const lang = paramsValue.lang || langZh
-    const metadata = new PageMetadata(lang)
+    const pageLang = paramsValue.lang || langZh
+    const metadata = new PageMetadata(pageLang)
     const serverConfig = await useServerConfig()
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
     const articleUid = tryBase58ToUuid(paramsValue.uid)
     const isNew = articleUid === EmptyUUID;
     let model: PSArticleModel | undefined = undefined;
-    const wantLang = searchValue.wantLang;
+    const wantLang = searchValue.wantLang || pageLang;
     const copyFrom = searchValue.copyFrom
     if (isNew) {
         let channelUid = '';
@@ -59,9 +59,9 @@ export default async function Home({params, searchParams}: {
         }
         if (copyFrom) {
             const copyFromUid = mustBase58ToUuid(copyFrom);
-            const originModel = await serverConsoleGetArticle(lang, portalUrl, copyFromUid)
+            const originModel = await serverConsoleGetArticle(pageLang, portalUrl, copyFromUid)
             if (!originModel) {
-                throw new Error(localText(lang, '无法找到要复制的文章', 'Cannot find the article to copy'));
+                throw new Error(localText(pageLang, '无法找到要复制的文章', 'Cannot find the article to copy'));
             }
             model.name = originModel.name;
             model.channel = originModel.channel;
@@ -76,28 +76,28 @@ export default async function Home({params, searchParams}: {
         if (!articleUid) {
             notFound();
         }
-        model = await serverConsoleGetArticle(lang, portalUrl, articleUid, wantLang)
+        model = await serverConsoleGetArticle(pageLang, portalUrl, articleUid, wantLang)
         if (!model || !model.uid) {
             if (wantLang) {
-                const createUrl = `/${lang}/console/articles/${uuidToBase58(EmptyUUID)}?wantLang=${wantLang}&copyFrom=${uuidToBase58(articleUid)}`;
+                const createUrl = `/${pageLang}/console/articles/${uuidToBase58(EmptyUUID)}?wantLang=${wantLang}&copyFrom=${uuidToBase58(articleUid)}`;
                 redirect(createUrl)
             } else {
                 notFound();
             }
             return
         }
-        metadata.title = pageTitle(lang, model.title)
+        metadata.title = pageTitle(pageLang, model.title)
 
         metadata.description = model.description
         metadata.keywords = model.keywords
 
         if (!model.body) {
-            return <div>{localText(lang, '暂不支持的文章类型', 'Unsupported article type')}</div>
+            return <div>{localText(pageLang, '暂不支持的文章类型', 'Unsupported article type')}</div>
         }
     }
     const modelString = JSON.stringify(model)
-    return <ConsoleLayout lang={lang} searchParams={await searchParams} pathname={pathname}
+    return <ConsoleLayout lang={pageLang} searchParams={await searchParams} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
-        <ConsoleArticleForm portalUrl={portalUrl} modelString={modelString} lang={lang} copyFrom={copyFrom}/>
+        <ConsoleArticleForm portalUrl={portalUrl} modelString={modelString} lang={pageLang} copyFrom={copyFrom}/>
     </ConsoleLayout>
 }
