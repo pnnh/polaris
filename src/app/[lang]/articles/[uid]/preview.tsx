@@ -6,25 +6,25 @@ import {IoClose} from "react-icons/io5";
 import {articleAssetsPreviewAtom} from "./state";
 import {useAtom} from "jotai";
 import {PSArticleFileModel} from "@/photon/common/models/article";
-
-import {ServerBuildBodyHtml} from "@/atom/server/article";
 import {TocItem} from "@/atom/common/models/toc";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {renderCodeBlock} from "@/app/[lang]/articles/[uid]/codeblock";
+import {BuildBodyHtml} from "./body";
 
-export function ArticlePreview({
-                                   portalUrl, tocList, header, body, assetsUrl
-                               }: {
-    portalUrl: string,
-    tocList: Array<TocItem>,
-    header: string,
-    body: unknown,
-    assetsUrl: string
-}) {
+export function ArticlePreview(
+    {
+        portalUrl, tocList, header, body, assetsUrl
+    }: {
+        portalUrl: string,
+        tocList: Array<TocItem>,
+        header: string,
+        body: unknown,
+        assetsUrl: string
+    }) {
     const [previewState, setPreviewState] = useAtom(articleAssetsPreviewAtom)
     if (!previewState) {
-        return <ServerBuildBodyHtml tocList={tocList} header={header} body={body}
-                                    assetsUrl={assetsUrl} libUrl={'/abc'}/>
+        return <BuildBodyHtml tocList={tocList} header={header} body={body}
+                              assetsUrl={assetsUrl} libUrl={'/abc'}/>
     }
     const fileRepoPath = previewState.full_repo_path
     return <div className={styles.assertPreview}>

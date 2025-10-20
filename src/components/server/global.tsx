@@ -1,4 +1,5 @@
 import 'server-only'
+
 import React, {Suspense} from "react";
 import {GoogleAnalytics} from "@next/third-parties/google";
 import {PageMetadata, pageTitle} from "@/utils/page";
@@ -12,6 +13,7 @@ import {getServerTheme} from "@/services/server/theme";
 import {getTargetLang, unknownLanguage} from "@/services/common/language";
 import {notFound} from "next/navigation";
 import {ServerComponentStyle, StyleItem} from "@/components/server/component";
+import {ClientSetup} from "@/components/client/setup";
 
 // 隔几秒重新验证下数据
 export const revalidate = 1
@@ -62,14 +64,24 @@ export default async function GlobalLayout(
         {metadata.keywords && <meta name="keywords" content={metadata.keywords as string}></meta>}
         {metadata.description && <meta name="description" content={metadata.description as string}></meta>}
         {isProd() && <GoogleAnalytics gaId="G-Z98PEGYB12"/>}
-
+        {isDarkTheme ?
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism-dark.min.css"
+                  integrity="sha512-Njdz7T/p6Ud1FiTMqH87bzDxaZBsVNebOWmacBjMdgWyeIhUSFU4V52oGwo3sT+ud+lyIE98sS291/zxBfozKw=="
+                  crossOrigin="anonymous" referrerPolicy="no-referrer"/> :
+            <link rel="stylesheet"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism-solarizedlight.min.css"
+                  integrity="sha512-fibfhB71IpdEKqLKXP/96WuX1cTMmvZioYp7T6I+lTbvJrrjEGeyYdAf09GHpFptF8toQ32woGZ8bw9+HjZc0A=="
+                  crossOrigin="anonymous" referrerPolicy="no-referrer"/>
+        }
         <ServerComponentStyle styleItems={styleItems}></ServerComponentStyle>
     </head>
     <body lang={lang} className={isDarkTheme ? 'darkTheme' : 'lightTheme'}>
     <JotaiProvider>
         <AppRouterCacheProvider options={{key: 'css', enableCssLayer: true}}>
             <ThemeProvider theme={pageTheme}>
-                {children}
+                <ClientSetup>
+                    {children}
+                </ClientSetup>
             </ThemeProvider>
         </AppRouterCacheProvider>
     </JotaiProvider>

@@ -19,7 +19,6 @@
     --text-primary-color: rgba(0, 0, 0, 0.87);
     --text-secondary-color: rgba(0, 0, 0, 0.6);
     --text-disabled-color: rgba(0, 0, 0, 0.38);
-    --text-divider-color: rgba(0, 0, 0, 0.12);
     --action-active-color: rgba(0, 0, 0, 0.54);
     --action-hover-color: rgba(0, 0, 0, 0.04);
     --active-selected-color: rgba(0, 0, 0, 0.08);
@@ -41,11 +40,10 @@ body.darkTheme {
     --warning-color: #ffa726;
     --info-color: #29b6f6;
     --success-color: #66bb6a;
-    --divider-color: rgba(0, 0, 0, 0.12);
+    --divider-color: rgba(255, 255, 255, 0.12);
     --text-primary-color: #fff;
     --text-secondary-color: rgba(255, 255, 255, 0.7);
     --text-disabled-color: rgba(255, 255, 255, 0.5);
-    --text-divider-color: rgba(255, 255, 255, 0.12);
     --action-active-color: #fff;
     --action-hover-color: rgba(255, 255, 255, 0.08);
     --active-selected-color: rgba(255, 255, 255, 0.16);
@@ -91,6 +89,12 @@ body {
     body {
         font-size: 16px;
     }
+}
+
+/* 代码高亮时避免内容宽度超出，设置自动换行 */
+code span {
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
 /*#serverData {*/

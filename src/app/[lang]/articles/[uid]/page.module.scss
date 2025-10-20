@@ -113,6 +113,7 @@ $rightAreaWidth: 20rem;
   display: block;
   background-color: var(--background-color);
   border-radius: 4px;
+  border: solid 1px var(--divider-color);
 
   .articleBody {
     padding: 16px;

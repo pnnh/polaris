@@ -8,7 +8,6 @@ import {useServerConfig} from "@/services/server/config";
 import GlobalLayout from "@/components/server/global";
 import {PageMetadata} from "@/utils/page";
 
-
 export const templateBodyId = 'globalTemplateBody'
 
 export default async function ContentLayout({

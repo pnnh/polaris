@@ -26,7 +26,6 @@ import {langEn} from "@/atom/common/language";
 import {notFound} from "next/navigation";
 import {serverInsertArticleViewer} from "@/services/server/viewers/viewers";
 import '@/atom/client/editor/editor.scss';
-import "~/prismjs/themes/prism.min.css";
 
 export const dynamic = "force-dynamic";
 
