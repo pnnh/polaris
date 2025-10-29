@@ -5,7 +5,7 @@ import styles from './card.module.scss'
 import {formatRfc3339} from "@/atom/common/utils/datetime";
 import {uuidToBase58} from "@/atom/common/utils/basex";
 import {PSImageServer} from "@/components/server/image";
-import {getDefaultImageUrl, getDefaultNoteImageByUid} from "@/services/common/note";
+import {getDefaultImageUrl, getDefaultNoteImageByUid} from "@/components/common/note";
 import {PSImageModel} from "@/components/common/models/image";
 
 export function ImageCard({model, lang, imagesUrl}: {

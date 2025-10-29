@@ -1,8 +1,8 @@
 import React from 'react'
-import {getPathname} from "@/services/server/pathname";
+import {getPathname} from "@/components/server/pathname";
 
 import {langEn} from "@/atom/common/language";
-import {PageMetadata} from "@/utils/page";
+import {PageMetadata} from "@/components/common/utils/page";
 import ContentLayout from "@/components/server/content/layout";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
 import {ToolBody} from "./tool";

@@ -1,12 +1,12 @@
 import React from 'react'
 import styles from './page.module.scss'
-import {getPathname} from "@/services/server/pathname";
+import {getPathname} from "@/components/server/pathname";
 import {CommentsClient} from "@/photon/client/comments/comments";
-import {useServerConfig} from "@/services/server/config";
+import {useServerConfig} from "@/components/server/config";
 import {langEn} from "@/atom/common/language";
-import {PageMetadata} from "@/utils/page";
+import {PageMetadata} from "@/components/common/utils/page";
 import Base32Component from "@/components/client/tools/base32/base32";
-import {base32Uid, queryApp} from "@/services/server/tools/tools";
+import {base32Uid, queryApp} from "@/components/server/tools/tools";
 import ContentLayout from "@/components/server/content/layout";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
 import NotFound from "~/next/dist/client/components/builtin/not-found";

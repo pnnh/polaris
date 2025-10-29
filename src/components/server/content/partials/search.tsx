@@ -3,7 +3,7 @@
 import styles from './search.module.scss'
 import SearchIcon from '@mui/icons-material/Search';
 import {useEffect, useState} from "react";
-import {transText} from "@/services/common/locales/normal";
+import {transText} from "@/components/common/locales/normal";
 
 export function ContentSearchAction({pathname, queryKeyword, lang}: {
     pathname: string, queryKeyword: string,

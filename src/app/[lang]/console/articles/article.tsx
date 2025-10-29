@@ -2,7 +2,7 @@ import {PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
 import {NoData} from "@/components/common/empty";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {uuidToBase58} from "@/atom/common/utils/basex";
-import {getDefaultNoteImageByUid} from "@/services/common/note";
+import {getDefaultNoteImageByUid} from "@/components/common/note";
 import {isValidUUID} from "@/atom/common/utils/uuid";
 import {FaEye} from "react-icons/fa";
 import {CiAlarmOn} from "react-icons/ci";

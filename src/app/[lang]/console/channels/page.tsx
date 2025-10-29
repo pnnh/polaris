@@ -1,5 +1,5 @@
 import React from 'react'
-import {getPathname} from "@/services/server/pathname";
+import {getPathname} from "@/components/server/pathname";
 import styles from './page.module.scss'
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PSChannelModel} from "@/photon/common/models/channel";
@@ -8,14 +8,14 @@ import {encodeBase58String, stringToBase58, uuidToBase58} from "@/atom/common/ut
 import {EmptyUUID, isValidUUID} from "@/atom/common/utils/uuid";
 import {PSImageServer} from "@/components/server/image";
 import {STSubString} from "@/atom/common/utils/string";
-import {getDefaultChanImageByUid} from "@/services/common/channel";
-import {PageMetadata} from "@/utils/page";
+import {getDefaultChanImageByUid} from "@/components/common/channel";
+import {PageMetadata} from "@/components/common/utils/page";
 import {langEn, localText} from "@/atom/common/language";
 import ConsoleLayout from "@/components/server/console/layout";
 import Button, {ButtonProps} from "@mui/material/Button";
 import {ConsoleChannelFilterBar} from "@/app/[lang]/console/channels/filter";
-import {serverConsoleSelectChannels} from "@/services/server/channels/channels";
-import {useServerConfig} from "@/services/server/config";
+import {serverConsoleSelectChannels} from "@/components/server/channels/channels";
+import {useServerConfig} from "@/components/server/config";
 import PSDeleteButton from "@/components/client/console/delete";
 
 export default async function Page({params, searchParams}: {

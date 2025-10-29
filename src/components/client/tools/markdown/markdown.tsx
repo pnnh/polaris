@@ -4,12 +4,12 @@ import * as React from 'react';
 import styles from './markdown.module.scss'
 import Button from '@mui/material/Button';
 import {useClientConfig} from "@/atom/client/config/config";
-import {IBrowserConfig} from "@/services/common/config";
+import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
 import {useEffect} from "react";
 import {localText} from "@/atom/common/language";
-import {markdownUid, queryApp} from "@/services/server/tools/tools";
-import {markdownStringToHtml} from "@/services/server/markdown/markdown";
+import {markdownUid, queryApp} from "@/components/server/tools/tools";
+import {markdownStringToHtml} from "@/components/server/markdown/markdown";
 import {notFound} from "next/navigation";
 
 export default function MarkdownComponent({lang}: { lang: string }) {

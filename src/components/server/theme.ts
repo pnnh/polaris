@@ -1,8 +1,8 @@
 'use server'
 
 import {cookies, headers} from "next/headers";
-import {serverGetCookie} from "@/services/server/cookie";
-import {ThemeKey} from "@/services/common/theme";
+import {serverGetCookie} from "@/components/server/cookie";
+import {ThemeKey} from "@/components/common/theme";
 
 export async function getServerTheme(): Promise<string> {
     let themeName = 'light'

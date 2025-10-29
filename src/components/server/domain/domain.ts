@@ -1,5 +1,5 @@
-import {RemoteDomain} from "@/services/server/domain/remote";
-import {useServerConfig} from "@/services/server/config";
+import {RemoteDomain} from "@/components/server/domain/remote";
+import {useServerConfig} from "@/components/server/config";
 
 export async function serverPortalSignin(): Promise<RemoteDomain> {
     const serverConfig = await useServerConfig()

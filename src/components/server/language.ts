@@ -10,7 +10,7 @@ import {
     // langRuRU,
     langZhCN,
     // langZhTW
-} from "@/services/common/language";
+} from "@/components/common/language";
 
 acceptLanguage.languages([
     // langDeDE,

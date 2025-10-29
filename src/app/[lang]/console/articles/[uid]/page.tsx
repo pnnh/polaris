@@ -1,14 +1,14 @@
 import React from 'react'
-import {PageMetadata, pageTitle} from "@/utils/page";
-import {getClientIp, getPathname} from "@/services/server/pathname";
+import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+import {getClientIp, getPathname} from "@/components/server/pathname";
 import {tryBase58ToUuid, mustBase58ToUuid, uuidToBase58} from "@/atom/common/utils/basex";
 import {CodeOk, CommonResult, SymbolUnknown} from "@/atom/common/models/protocol";
-import {useServerConfig} from "@/services/server/config";
+import {useServerConfig} from "@/components/server/config";
 import {getLangDefault, langEn, langZh, localText} from "@/atom/common/language";
 import {notFound, redirect} from "next/navigation";
 import ConsoleLayout from "@/components/server/console/layout";
 import {ConsoleArticleForm} from "@/app/[lang]/console/articles/[uid]/form";
-import {serverConsoleGetArticle, serverGetArticle} from "@/services/server/articles/articles";
+import {serverConsoleGetArticle, serverGetArticle} from "@/components/server/articles/articles";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
 

@@ -1,4 +1,4 @@
-import {IBrowserConfig} from "@/services/common/config";
+import {IBrowserConfig} from "@/components/common/config";
 import {ConfigOptions, initAppConfig} from "@/atom/server/config/config";
 
 export interface IServerConfig {

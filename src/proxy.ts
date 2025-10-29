@@ -1,8 +1,8 @@
 import {NextRequest, NextResponse} from 'next/server';
 import {getLanguageFromPathname, langEn, langZh} from "@/atom/common/language";
-import {getLangFromUrl} from "@/services/common/language";
+import {getLangFromUrl} from "@/components/common/language";
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
     const requestHeaders = new Headers(request.headers);
     const url = new URL(request.url);
     const origin = url.origin;

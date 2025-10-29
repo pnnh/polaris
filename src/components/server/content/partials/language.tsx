@@ -8,7 +8,7 @@ import {
     getLangInfo,
     langEnUS, replaceLangInUrl,
     supportedLanguages
-} from "@/services/common/language";
+} from "@/components/common/language";
 import LanguageIcon from '@mui/icons-material/Language';
 import {StyledMenu} from "@/components/client/dropmenu";
 

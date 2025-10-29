@@ -4,14 +4,14 @@ import React, {CSSProperties} from "react";
 import {SiteNavMenu} from "@/components/server/content/partials/profile";
 import {UserAction} from "@/components/server/content/partials/userinfo";
 import {ContentSearchAction} from "@/components/server/content/partials/search";
-import {useServerConfig} from "@/services/server/config";
+import {useServerConfig} from "@/components/server/config";
 import {AccountModel} from "@/atom/common/models/account";
 import AppsIcon from '@mui/icons-material/Apps';
 import {PSLanguageSelector} from "./language";
-import {getPathname, getSearchString} from "@/services/server/pathname";
+import {getPathname, getSearchString} from "@/components/server/pathname";
 import MenuIcon from '@mui/icons-material/Menu';
 import {ThemeSwitch} from "@/components/server/content/partials/theme";
-import {getServerTheme} from "@/services/server/theme";
+import {getServerTheme} from "@/components/server/theme";
 
 export async function ContentPublicNavbar({pathname, searchParams, lang, userInfo, pandoraUrl}: {
     pathname: string,

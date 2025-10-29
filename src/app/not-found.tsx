@@ -1,9 +1,9 @@
 import GlobalLayout from "@/components/server/global";
 import {headers} from "next/headers";
-import {langEnUS} from "@/services/common/language";
-import {filterAcceptLanguage} from "@/services/server/language";
-import {PageMetadata} from "@/utils/page";
-import {transText} from "@/services/common/locales/normal";
+import {langEnUS} from "@/components/common/language";
+import {filterAcceptLanguage} from "@/components/server/language";
+import {PageMetadata} from "@/components/common/utils/page";
+import {transText} from "@/components/common/locales/normal";
 
 export default async function NotFoundPage() {
     const headersList = await headers()

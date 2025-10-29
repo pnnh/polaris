@@ -2,15 +2,15 @@ import 'server-only'
 
 import React, {Suspense} from "react";
 import {GoogleAnalytics} from "@next/third-parties/google";
-import {PageMetadata, pageTitle} from "@/utils/page";
-import {isProd, usePublicConfig, useServerConfig} from "@/services/server/config";
+import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+import {isProd, usePublicConfig, useServerConfig} from "@/components/server/config";
 import {JotaiProvider} from "@/components/client/content/provider";
 import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter";
 import {ThemeProvider} from '@mui/material/styles';
 import {lightTheme, darkTheme} from '@/components/client/theme';
 import {encodeBase58String} from "@/atom/common/utils/basex";
-import {getServerTheme} from "@/services/server/theme";
-import {getTargetLang, unknownLanguage} from "@/services/common/language";
+import {getServerTheme} from "@/components/server/theme";
+import {getTargetLang, unknownLanguage} from "@/components/common/language";
 import {notFound} from "next/navigation";
 import {ServerComponentStyle, StyleItem} from "@/components/server/component";
 import {ClientSetup} from "@/components/client/setup";

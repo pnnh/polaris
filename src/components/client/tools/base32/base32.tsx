@@ -5,11 +5,11 @@ import styles from './base32.module.scss'
 import Button from '@mui/material/Button';
 import {encodeBase32String} from "@/atom/common/utils/basex";
 import {useClientConfig} from "@/atom/client/config/config";
-import {IBrowserConfig} from "@/services/common/config";
+import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
 import {useEffect} from "react";
 import {localText} from "@/atom/common/language";
-import {base32Uid, queryApp} from "@/services/server/tools/tools";
+import {base32Uid, queryApp} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
 
 export default function Base32Component({lang}: { lang: string }) {

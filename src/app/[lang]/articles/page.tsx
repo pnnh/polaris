@@ -1,10 +1,10 @@
 import React from 'react'
 import styles from './page.module.scss'
 import queryString from 'query-string'
-import {serverPortalSignin} from "@/services/server/domain/domain";
-import {PageMetadata, pageTitle} from "@/utils/page";
+import {serverPortalSignin} from "@/components/server/domain/domain";
+import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import ContentLayout from '@/components/server/content/layout'
-import {getPathname} from "@/services/server/pathname";
+import {getPathname} from "@/components/server/pathname";
 import {ArticleRankCard} from "@/components/server/content/article/rank";
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PaginationServer} from "@/components/server/pagination";

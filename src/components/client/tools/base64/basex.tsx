@@ -5,11 +5,11 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import {encodeBase32String, encodeBase58String, encodeBase64String} from "@/atom/common/utils/basex";
 import {useClientConfig} from "@/atom/client/config/config";
-import {IBrowserConfig} from "@/services/common/config";
+import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
 import {useEffect} from "react";
 import {localText} from "@/atom/common/language";
-import {base64Uid, queryApp} from "@/services/server/tools/tools";
+import {base64Uid, queryApp} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
 
 export default function Base64Component({lang}: { lang: string }) {

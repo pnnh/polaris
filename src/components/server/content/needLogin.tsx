@@ -1,8 +1,8 @@
 import styles from "@/components/server/console/layout.module.scss";
 import GlobalLayout from "@/components/server/global";
 import React from "react";
-import {PageMetadata, pageTitle} from "@/utils/page";
-import {transText} from "@/services/common/locales/normal";
+import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+import {transText} from "@/components/common/locales/normal";
 
 export function NeedLoginPage({lang}: { lang: string }) {
     const metadata = new PageMetadata(lang)

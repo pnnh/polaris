@@ -7,9 +7,9 @@ import Button from "@mui/material/Button";
 import React from "react";
 import {TocItem} from "@/atom/common/models/toc";
 import {PSChannelModel} from "@/photon/common/models/channel";
-import {clientConsoleInsertChannel, clientConsoleUpdateChannel} from "@/services/client/channels/channels";
+import {clientConsoleInsertChannel, clientConsoleUpdateChannel} from "@/components/client/channels/channels";
 import {EmptyUUID, isEmptyUUID} from "@/atom/common/utils/uuid";
-import {getDefaultImageUrl} from "@/services/common/note";
+import {getDefaultImageUrl} from "@/components/common/note";
 import {localText} from "@/atom/common/language";
 
 export function ConsoleChannelForm({portalUrl, modelString}: { portalUrl: string, modelString: string }) {

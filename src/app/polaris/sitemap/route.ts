@@ -2,8 +2,8 @@ import {NextRequest, NextResponse} from 'next/server'
 import {SitemapStream, streamToPromise} from 'sitemap'
 import {Readable} from 'stream'
 import {SitemapItemLoose} from "sitemap/dist/lib/types";
-import {serverPortalSignin} from "@/services/server/domain/domain";
-import {useServerConfig} from "@/services/server/config";
+import {serverPortalSignin} from "@/components/server/domain/domain";
+import {useServerConfig} from "@/components/server/config";
 import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {uuidToBase58} from "@/atom/common/utils/basex";

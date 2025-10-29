@@ -2,7 +2,7 @@
 
 import {TextField} from "@mui/material";
 import React, {useEffect} from "react";
-import {clientChannelsComplete} from "@/services/client/channels/channels";
+import {clientChannelsComplete} from "@/components/client/channels/channels";
 import styles from './channel.module.scss';
 
 export function ChannelSelector({channel, lang, portalUrl, onChange}: {

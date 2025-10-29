@@ -1,14 +1,14 @@
 import React from 'react'
 import styles from './page.module.scss'
-import {PageMetadata, pageTitle} from "@/utils/page";
-import {getPathname} from "@/services/server/pathname";
+import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+import {getPathname} from "@/components/server/pathname";
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {tryBase58ToUuid, mustBase58ToUuid} from "@/atom/common/utils/basex";
 import {langEn, langZh, localText} from "@/atom/common/language";
 import {notFound} from "next/navigation";
 import ConsoleLayout from "@/components/server/console/layout";
-import {serverConsoleGetChannel} from "@/services/server/channels/channels";
-import {useServerConfig} from "@/services/server/config";
+import {serverConsoleGetChannel} from "@/components/server/channels/channels";
+import {useServerConfig} from "@/components/server/config";
 import {ConsoleChannelForm} from "./form";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
 import {PSChannelModel} from "@/photon/common/models/channel";

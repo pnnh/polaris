@@ -1,12 +1,12 @@
 import React from 'react'
 import './page.scss'
-import {getPathname} from "@/services/server/pathname";
+import {getPathname} from "@/components/server/pathname";
 import {UuidToolBody} from "@/components/client/tools/uuid/tool";
 import {CommentsClient} from "@/photon/client/comments/comments";
-import {useServerConfig} from "@/services/server/config";
+import {useServerConfig} from "@/components/server/config";
 import {langEn} from "@/atom/common/language";
-import {PageMetadata} from "@/utils/page";
-import {queryApp, uuidUid} from "@/services/server/tools/tools";
+import {PageMetadata} from "@/components/common/utils/page";
+import {queryApp, uuidUid} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
 import ContentLayout from "@/components/server/content/layout";
 import {SymbolUnknown} from "@/atom/common/models/protocol";

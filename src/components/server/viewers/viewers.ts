@@ -1,7 +1,7 @@
 import {CodeOk, CommonResult, PLInsertResult, PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
 import {serverMakeGet, serverMakePost} from "@/atom/server/http";
 import {headers, cookies} from "next/headers";
-import {logDebugMeta, logDebugValues, logErrorMeta, logErrorValues, logWarnValues,} from "@/services/server/logger";
+import {logDebugMeta, logDebugValues, logErrorMeta, logErrorValues, logWarnValues,} from "@/components/server/logger";
 
 export async function serverInsertArticleViewer(portalUrl: string, articleUid: string, clientIp: string): Promise<void> {
     if (!clientIp) {

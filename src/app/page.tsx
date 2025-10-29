@@ -1,21 +1,21 @@
 import React from 'react'
 import styles from './page.module.scss'
 import ContentLayout from '@/components/server/content/layout'
-import {getPathname} from "@/services/server/pathname";
+import {getPathname} from "@/components/server/pathname";
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {replaceSearchParams} from "@/atom/common/utils/query";
 import {PaginationServer} from "@/components/server/pagination";
 import {ArticleRankCard} from "@/components/server/content/article/rank";
-import {PageMetadata, pageTitle} from "@/utils/page";
+import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import queryString from "query-string";
-import {serverPortalSignin} from "@/services/server/domain/domain";
+import {serverPortalSignin} from "@/components/server/domain/domain";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
 import {ArticleFilterBar} from "@/components/server/content/article/filter";
 import {headers} from "next/headers";
-import {getTargetLang, langEnUS} from "@/services/common/language";
-import {filterAcceptLanguage} from "@/services/server/language";
+import {getTargetLang, langEnUS} from "@/components/common/language";
+import {filterAcceptLanguage} from "@/components/server/language";
 
 export default async function Page({searchParams}: {
     searchParams: Promise<Record<string, string>>

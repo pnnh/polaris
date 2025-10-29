@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from './page.module.scss'
-import {getPathname} from "@/services/server/pathname";
+import {getPathname} from "@/components/server/pathname";
 import {CommentsClient} from "@/photon/client/comments/comments";
-import {useServerConfig} from "@/services/server/config";
+import {useServerConfig} from "@/components/server/config";
 import {langEn} from "@/atom/common/language";
-import {PageMetadata} from "@/utils/page";
-import {highlightUid, queryApp} from "@/services/server/tools/tools";
+import {PageMetadata} from "@/components/common/utils/page";
+import {highlightUid, queryApp} from "@/components/server/tools/tools";
 import {HighlightComponent} from "@/components/client/tools/highlight/client";
 import ContentLayout from "@/components/server/content/layout";
 import {SymbolUnknown} from "@/atom/common/models/protocol";

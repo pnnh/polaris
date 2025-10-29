@@ -1,7 +1,7 @@
 import styles from './userinfo.module.scss'
 import {AccountModel, isAnonymousAccount} from "@/atom/common/models/account";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import {transText} from "@/services/common/locales/normal";
+import {transText} from "@/components/common/locales/normal";
 
 export function UserAction({lang, portalUrl, userInfo}: {
     lang: string, portalUrl: string, userInfo: AccountModel | undefined

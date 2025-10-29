@@ -6,9 +6,9 @@ import React, {useState} from "react";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {accountSignin} from "@/photon/client/account/account";
-import {transText} from "@/services/common/locales/normal";
+import {transText} from "@/components/common/locales/normal";
 import {localText} from "@/atom/common/language";
-import {accountTransText} from "@/services/common/locales/account";
+import {accountTransText} from "@/components/common/locales/account";
 
 const buttonThrottle = new ButtonThrottle(1000)
 

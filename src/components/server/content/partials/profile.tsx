@@ -1,9 +1,9 @@
 import React, {CSSProperties} from "react";
 import styles from './profile.module.scss'
 
-import {getPathname} from "@/services/server/pathname";
-import {pageTitle} from "@/utils/page";
-import {transText} from "@/services/common/locales/normal";
+import {getPathname} from "@/components/server/pathname";
+import {pageTitle} from "@/components/common/utils/page";
+import {transText} from "@/components/common/locales/normal";
 
 export async function SiteNavMenu({lang, searchParams}: {
     lang: string,

@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './page.module.scss'
-import {serverPortalSignin} from "@/services/server/domain/domain";
-import {PageMetadata, pageTitle} from "@/utils/page";
-import {getPathname} from "@/services/server/pathname";
+import {serverPortalSignin} from "@/components/server/domain/domain";
+import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+import {getPathname} from "@/components/server/pathname";
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PaginationServer} from "@/components/server/pagination";
 import {replaceSearchParams} from "@/atom/common/utils/query";
@@ -11,8 +11,8 @@ import {langEn} from "@/atom/common/language";
 import ConsoleLayout from "@/components/server/console/layout";
 import {ConsoleArticleFilterBar} from "@/app/[lang]/console/articles/filter";
 import {ConsoleArticleMiddleBody} from "@/app/[lang]/console/articles/article";
-import {useServerConfig} from "@/services/server/config";
-import {serverConsoleSelectArticles} from "@/services/server/articles/articles";
+import {useServerConfig} from "@/components/server/config";
+import {serverConsoleSelectArticles} from "@/components/server/articles/articles";
 import {css, ServerComponentStyle} from "@/components/server/component";
 
 export const dynamic = "force-dynamic";

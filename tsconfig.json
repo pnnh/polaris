@@ -27,7 +27,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "allowJs": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "incremental": true,
     "esModuleInterop": true,
     "strict": true,
@@ -55,7 +55,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "docker/build/types/**/*.ts",
-    "build/types/**/*.ts"
+    "build/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

@@ -1,7 +1,7 @@
 import styles from "./filter.module.scss";
 import {replaceSearchParams} from "@/atom/common/utils/query";
 import React from "react";
-import {transText} from "@/services/common/locales/normal";
+import {transText} from "@/components/common/locales/normal";
 
 export function ArticleFilterBar({lang, searchParamsValue}: {
     lang: string,

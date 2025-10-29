@@ -1,9 +1,9 @@
-import {getPathname} from "@/services/server/pathname";
-import {PageMetadata, pageTitle} from "@/utils/page";
+import {getPathname} from "@/components/server/pathname";
+import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import AccountLayout from "@/components/server/account/layout";
 import styles from './page.module.scss'
 import {SignupForm} from "./form";
-import {useServerConfig} from "@/services/server/config";
+import {useServerConfig} from "@/components/server/config";
 import {langEn, localText} from "@/atom/common/language";
 
 export default async function Page({params, searchParams}: {

@@ -1,7 +1,7 @@
 import {PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
 import {NoData} from "@/components/common/empty";
 import styles from './image.module.scss'
-import {useServerConfig} from "@/services/server/config";
+import {useServerConfig} from "@/components/server/config";
 import {PSImageModel} from "@/components/common/models/image";
 import {ImageCard} from "@/components/server/content/images/card";
 

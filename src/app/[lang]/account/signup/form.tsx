@@ -8,7 +8,7 @@ import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {getTurnstileToken} from "@/photon/client/cloudflare/turnstile";
 import {submitSignup} from "@/photon/client/account/account";
 import {localText} from "@/atom/common/language";
-import {transText} from "@/services/common/locales/normal";
+import {transText} from "@/components/common/locales/normal";
 
 const buttonThrottle = new ButtonThrottle(5000)
 

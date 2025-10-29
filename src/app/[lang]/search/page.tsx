@@ -1,9 +1,9 @@
 import React from 'react'
 import './page.scss'
 import queryString from 'query-string'
-import {serverPortalSignin} from "@/services/server/domain/domain";
+import {serverPortalSignin} from "@/components/server/domain/domain";
 import ContentLayout from '@/components/server/content/layout'
-import {getPathname} from "@/services/server/pathname";
+import {getPathname} from "@/components/server/pathname";
 import {CommonResult, PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 
 import {NoData} from "@/components/common/empty";
@@ -13,7 +13,7 @@ import {PSArticleModel} from "@/photon/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
 import {langEn} from "@/atom/common/language";
-import {PageMetadata} from "@/utils/page";
+import {PageMetadata} from "@/components/common/utils/page";
 
 export const dynamic = "force-dynamic";
 

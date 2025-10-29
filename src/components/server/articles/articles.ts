@@ -2,7 +2,7 @@ import {CodeOk, CommonResult, PLSelectData, PLSelectResult} from "@/atom/common/
 import {PSArticleModel} from "@/photon/common/models/article";
 import {serverMakeGet} from "@/atom/server/http";
 import {cookies} from "next/headers";
-import {getDefaultImageUrl} from "@/services/common/note";
+import {getDefaultImageUrl} from "@/components/common/note";
 import {getLangDefault, isSupportedLanguage, langEn, localText} from "@/atom/common/language";
 import queryString from "query-string";
 

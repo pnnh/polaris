@@ -1,6 +1,6 @@
 import 'server-only'
 import {Client} from 'pg'
-import {useServerConfig} from "@/services/server/config";
+import {useServerConfig} from "@/components/server/config";
 import {Pool} from 'pg'
 
 const serverConfig = await useServerConfig()

@@ -5,8 +5,8 @@ import {useState} from "react";
 import {StyledMenu} from "@/components/client/dropmenu";
 import MenuItem from "@mui/material/MenuItem";
 import ContrastIcon from '@mui/icons-material/Contrast';
-import {clientSetCurrentTheme, ThemeType} from "@/services/client/theme";
-import {transText} from "@/services/common/locales/normal";
+import {clientSetCurrentTheme, ThemeType} from "@/components/client/theme";
+import {transText} from "@/components/common/locales/normal";
 
 export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string }) {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

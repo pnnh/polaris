@@ -2,10 +2,10 @@ import styles from './page.module.scss'
 import React from 'react'
 import {TocInfo} from '@/components/common/toc'
 
-import {serverPortalSignin} from "@/services/server/domain/domain";
-import {PageMetadata, pageTitle} from "@/utils/page";
+import {serverPortalSignin} from "@/components/server/domain/domain";
+import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {templateBodyId} from '@/components/server/content/layout'
-import {getClientIp, getPathname} from "@/services/server/pathname";
+import {getClientIp, getPathname} from "@/components/server/pathname";
 import {GoTop} from "@/components/client/gotop";
 import {CiAlarmOn} from "react-icons/ci";
 import {FaEye} from "react-icons/fa";
@@ -15,16 +15,16 @@ import {tryBase58ToUuid} from "@/atom/common/utils/basex";
 import {CodeOk, CommonResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {TocItem} from "@/atom/common/models/toc";
-import {getDefaultNoteImageByUid} from "@/services/common/note";
+import {getDefaultNoteImageByUid} from "@/components/common/note";
 import {isValidUUID} from "@/atom/common/utils/uuid";
 import ArticleReadLayout from "@/components/server/content/article/layout";
 import {CommentsClient} from "@/photon/client/comments/comments";
-import {useServerConfig} from "@/services/server/config";
+import {useServerConfig} from "@/components/server/config";
 import {ArticleAssets} from "./assets";
 import {ArticlePreview} from "./preview";
 import {langEn} from "@/atom/common/language";
 import {notFound} from "next/navigation";
-import {serverInsertArticleViewer} from "@/services/server/viewers/viewers";
+import {serverInsertArticleViewer} from "@/components/server/viewers/viewers";
 import '@/atom/client/editor/editor.scss';
 
 export const dynamic = "force-dynamic";

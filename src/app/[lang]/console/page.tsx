@@ -1,12 +1,12 @@
 import React from 'react'
-import {PageMetadata, pageTitle} from "@/utils/page";
-import {getPathname} from "@/services/server/pathname";
+import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+import {getPathname} from "@/components/server/pathname";
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {langEn, localText} from "@/atom/common/language";
 import styles from './page.module.scss'
 import ConsoleLayout from "@/components/server/console/layout";
-import {useServerConfig} from "@/services/server/config";
-import {serverGetUserinfo} from "@/services/server/account/account";
+import {useServerConfig} from "@/components/server/config";
+import {serverGetUserinfo} from "@/components/server/account/account";
 import {isAnonymousAccount} from "@/atom/common/models/account";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
 

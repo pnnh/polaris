@@ -19,7 +19,7 @@ import {
 import {copyToClipboard} from "@/atom/client/clipboard";
 import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
-import {queryApp, uuidUid} from "@/services/server/tools/tools";
+import {queryApp, uuidUid} from "@/components/server/tools/tools";
 import {localText} from "@/atom/common/language";
 import {notFound} from "next/navigation";
 

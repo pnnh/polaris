@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './layout.module.scss'
-import {PageMetadata} from "@/utils/page";
+import {PageMetadata} from "@/components/common/utils/page";
 import GlobalLayout from "@/components/server/global";
 
 

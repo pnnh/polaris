@@ -1,13 +1,13 @@
-import {getPathname} from "@/services/server/pathname";
-import {PageMetadata, pageTitle} from "@/utils/page";
+import {getPathname} from "@/components/server/pathname";
+import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import AccountLayout from "@/components/server/account/layout";
 import styles from "./page.module.scss";
 import {SigninForm} from "./form";
-import {useServerConfig} from "@/services/server/config";
+import {useServerConfig} from "@/components/server/config";
 import {langEn, localText} from "@/atom/common/language";
 import GlobalLayout from "@/components/server/global";
 
-import {serverGetUserinfo} from "@/services/server/account/account";
+import {serverGetUserinfo} from "@/components/server/account/account";
 import {LinkSession} from "@/app/[lang]/account/signin/link";
 import {isAnonymousAccount} from "@/atom/common/models/account";
 

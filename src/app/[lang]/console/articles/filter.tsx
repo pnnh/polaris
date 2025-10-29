@@ -2,7 +2,7 @@
 
 import styles from "./filter.module.scss";
 import React from "react";
-import {transText} from "@/services/common/locales/normal";
+import {transText} from "@/components/common/locales/normal";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import {uuidToBase58} from "@/atom/common/utils/basex";

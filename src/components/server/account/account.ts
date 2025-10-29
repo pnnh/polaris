@@ -3,7 +3,7 @@
 import {AccountModel} from "@/atom/common/models/account";
 import {CodeOk, PLGetResult, PLInsertResult} from "@/atom/common/models/protocol";
 import {serverMakeGet} from "@/atom/server/http";
-import {getDefaultImageUrl} from "@/services/common/note";
+import {getDefaultImageUrl} from "@/components/common/note";
 import {cookies} from "next/headers";
 
 export async function serverGetUserinfo(portalUrl: string): Promise<AccountModel | undefined> {

@@ -3,10 +3,10 @@ import {ContentPublicNavbar} from "@/components/server/content/partials/navbar";
 import styles from './layout.module.scss'
 import {AccountModel} from "@/atom/common/models/account";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
-import {useServerConfig} from "@/services/server/config";
-import {serverGetUserinfo} from "@/services/server/account/account";
+import {useServerConfig} from "@/components/server/config";
+import {serverGetUserinfo} from "@/components/server/account/account";
 import GlobalLayout from "@/components/server/global";
-import {PageMetadata} from "@/utils/page";
+import {PageMetadata} from "@/components/common/utils/page";
 
 
 export const templateBodyId = 'globalTemplateBody'

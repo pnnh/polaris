@@ -1,12 +1,12 @@
 import React from 'react'
 import './page.scss'
 import queryString from 'query-string'
-import {serverPortalSignin} from "@/services/server/domain/domain";
+import {serverPortalSignin} from "@/components/server/domain/domain";
 
-import {PageMetadata, pageTitle} from "@/utils/page";
+import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import ContentLayout from '@/components/server/content/layout'
-import {IDomain} from "@/services/common/domain";
-import {getPathname} from "@/services/server/pathname";
+import {IDomain} from "@/components/common/domain";
+import {getPathname} from "@/components/server/pathname";
 import {ArticleRankCard} from "@/components/server/content/article/rank";
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PaginationServer} from "@/components/server/pagination";

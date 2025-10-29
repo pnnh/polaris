@@ -1,4 +1,4 @@
-import {transText} from "@/services/common/locales/normal";
+import {transText} from "@/components/common/locales/normal";
 
 export function pageTitle(lang: string, title?: string | null | undefined): string {
     const slogan = transText(lang, "siteName")

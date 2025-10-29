@@ -1,4 +1,4 @@
-export function setCookie(name: string, value: string, seconds: number) {
+export function psSetCookie(name: string, value: string, seconds: number) {
     const expires = new Date();
     expires.setTime(expires.getTime() + seconds * 1000);
     document.cookie = name + '=' + value + ';expires=' + expires.toUTCString() + ';path=/';

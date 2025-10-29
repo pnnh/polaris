@@ -4,11 +4,11 @@ import * as React from 'react';
 import styles from './md5.module.scss'
 import Button from '@mui/material/Button';
 import {useClientConfig} from "@/atom/client/config/config";
-import {IBrowserConfig} from "@/services/common/config";
+import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
 import {useEffect} from "react";
 import {localText} from "@/atom/common/language";
-import {md5Uid, queryApp} from "@/services/server/tools/tools";
+import {md5Uid, queryApp} from "@/components/server/tools/tools";
 import {stringToMd5} from "@/atom/common/utils/basex";
 import {notFound} from "next/navigation";
 

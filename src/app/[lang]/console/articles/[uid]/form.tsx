@@ -7,15 +7,15 @@ import Button from "@mui/material/Button";
 import React from "react";
 import {TocItem} from "@/atom/common/models/toc";
 import {PSArticleModel} from "@/photon/common/models/article";
-import {clientConsoleInsertArticle, clientConsoleUpdateArticle} from "@/services/client/articles/articles";
+import {clientConsoleInsertArticle, clientConsoleUpdateArticle} from "@/components/client/articles/articles";
 import {EmptyUUID, isEmptyUUID} from "@/atom/common/utils/uuid";
-import {getDefaultImageUrl} from "@/services/common/note";
+import {getDefaultImageUrl} from "@/components/common/note";
 import {uuidToBase58} from "@/atom/common/utils/basex";
 import {isLangEn, langEn, langZh, localText} from "@/atom/common/language";
 import MenuItem from '@mui/material/MenuItem';
 import {
     supportedLanguages
-} from "@/services/common/language";
+} from "@/components/common/language";
 import {Select} from "@mui/material";
 
 function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (newLang: string) => void }) {

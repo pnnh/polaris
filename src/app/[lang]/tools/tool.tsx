@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './tool.module.scss'
-import {selectApps} from "@/services/server/tools/tools";
+import {selectApps} from "@/components/server/tools/tools";
 
 export async function ToolBody({lang}: { lang: string }) {
     const appList = selectApps(lang)

@@ -1,8 +1,8 @@
 import React from 'react'
-import {serverPortalSignin} from "@/services/server/domain/domain";
+import {serverPortalSignin} from "@/components/server/domain/domain";
 import ContentLayout from "@/components/server/content/layout";
-import {IDomain} from "@/services/common/domain";
-import {getPathname} from "@/services/server/pathname";
+import {IDomain} from "@/components/common/domain";
+import {getPathname} from "@/components/server/pathname";
 import styles from './page.module.scss'
 import {CodeOk, PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PSChannelModel} from "@/photon/common/models/channel";
@@ -11,8 +11,8 @@ import {uuidToBase58} from "@/atom/common/utils/basex";
 import {isValidUUID} from "@/atom/common/utils/uuid";
 import {PSImageServer} from "@/components/server/image";
 import {STSubString} from "@/atom/common/utils/string";
-import {getDefaultChanImageByUid} from "@/services/common/channel";
-import {PageMetadata} from "@/utils/page";
+import {getDefaultChanImageByUid} from "@/components/common/channel";
+import {PageMetadata} from "@/components/common/utils/page";
 import {langEn} from "@/atom/common/language";
 import queryString from "query-string";
 
