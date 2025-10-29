@@ -1,0 +1,28 @@
+@use '@/components/common/styles/theme';
+
+.contentContainer {
+  flex-grow: 1;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1rem;
+
+  .conMiddle {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-grow: 1;
+    background-color: #FFF;
+    border-radius: 4px;
+
+
+    .middlePagination {
+      width: 100%;
+    }
+  }
+
+}
+
+

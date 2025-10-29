@@ -43,6 +43,8 @@ function ArticleNavbar({lang, pathname}: {
     const navLinks = [
         {name: transText(lang, "navArticles"), href: `/${lang}/articles`},
         {name: transText(lang, "navChannels"), href: `/${lang}/channels`},
+        {name: transText(lang, "navImages"), href: `/${lang}/images`},
+        {name: transText(lang, "navTools"), href: `/${lang}/tools`},
         // {name: '图片', href: `/images`},
         // {name: '随机密码', href: `/tools/password`},
         // {name: 'UUID', href: `/tools/uuid`},

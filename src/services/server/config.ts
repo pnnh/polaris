@@ -9,6 +9,7 @@ export interface IServerConfig {
     PUBLIC_PANDORA_URL: string
     PUBLIC_LIGHTNING_URL: string
     DATABASE_URL: string
+    PUBLIC_IMAGES_URL: string
 }
 
 let serverConfigInstance: IServerConfig | undefined;
@@ -35,6 +36,7 @@ export async function useServerConfig(): Promise<IServerConfig> {
     const pandoraUrl = await appConfig.GetString('app.PUBLIC_PANDORA_URL');
     const lightningUrl = await appConfig.GetString('app.PUBLIC_LIGHTNING_URL');
     const databaseUrl = await appConfig.GetString('app.DATABASE_URL');
+    const imagesUrl = await appConfig.GetString('app.PUBLIC_IMAGES_URL');
 
     if (!selfUrl) {
         throw new Error('PUBLIC_SELF_URL is required')
@@ -54,6 +56,9 @@ export async function useServerConfig(): Promise<IServerConfig> {
     if (!databaseUrl) {
         throw new Error('_URL is required')
     }
+    if (!imagesUrl) {
+        throw new Error('PUBLIC_IMAGES_URL is required')
+    }
     serverConfigInstance = {
         RUN_MODE: runMode,
         PUBLIC_SELF_URL: selfUrl,
@@ -61,7 +66,8 @@ export async function useServerConfig(): Promise<IServerConfig> {
         CLOUDFLARE_PUBLIC_TURNSTILE: turnstile,
         PUBLIC_PANDORA_URL: pandoraUrl,
         PUBLIC_LIGHTNING_URL: lightningUrl,
-        DATABASE_URL: databaseUrl
+        DATABASE_URL: databaseUrl,
+        PUBLIC_IMAGES_URL: imagesUrl,
     };
 
     return serverConfigInstance;

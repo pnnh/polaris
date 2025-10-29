@@ -1,0 +1,14 @@
+
+.uuidPage {
+  width: 1024px;
+  margin: 0 auto;
+
+  .pageContent {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    margin-top: 32px;
+    margin-bottom: 1rem;
+  }
+}

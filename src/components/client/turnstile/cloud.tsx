@@ -7,7 +7,7 @@ import './cloud.scss'
 import {useEffect, useState} from "react";
 import {localText} from "@/atom/common/language";
 
-function cfTurnstileSetup(turnstileKey: string, lang: string) {
+export function cfTurnstileSetup(turnstileKey: string, lang: string) {
     console.info('cfTurnstileSetup')
     const overlayEl = $('<div/>', {id: CFTurnstileOverlay});
     const overlayBodyEl = $('<div/>', {class: 'overlayBody'}).appendTo(overlayEl);

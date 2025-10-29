@@ -163,7 +163,21 @@ export const TransTexts: {
         "es": "Página no encontrada",
         "fr": "Page non trouvée",
         "ja": "ページが見つかりません"
-    }
+    },
+    "navImages": {
+        "zh": "图片",
+        "en": "Images",
+        "es": "Imágenes",
+        "fr": "Images",
+        "ja": "画像"
+    },
+    "navTools": {
+        "zh": "工具",
+        "en": "Tools",
+        "es": "Herramientas",
+        "fr": "Outils",
+        "ja": "ツール"
+    },
 }
 
 export function transText(lang: string, keyName: keyof typeof TransTexts): string {

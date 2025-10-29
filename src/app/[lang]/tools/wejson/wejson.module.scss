@@ -1,0 +1,48 @@
+.wejsonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .parseRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+
+    .rawContent {
+      flex-grow: 1;
+      flex-shrink: 0;
+      height: 20rem;
+      background: #FFFFFF;
+
+      textarea {
+        width: 100%;
+        height: 100%;
+        padding: 0.5rem;
+      }
+    }
+
+    .previewContent {
+      flex-grow: 1;
+      flex-shrink: 0;
+      height: 20rem;
+      background: #FFFFFF;
+      overflow: auto;
+      scrollbar-width: thin;
+
+      code {
+        width: 100%;
+        height: 100%;
+        padding: 1rem;
+        font-family: 'Courier New', Courier, monospace;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
+    }
+  }
+
+  .toolButtons {
+    margin-bottom: 1rem;
+  }
+}
+
