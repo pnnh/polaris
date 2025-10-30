@@ -1,7 +1,6 @@
 import React from 'react'
 import './page.scss'
 import queryString from 'query-string'
-import {serverPortalSignin} from "@/components/server/domain/domain";
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
 import {CommonResult, PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
@@ -14,6 +13,8 @@ import {calcPagination} from "@/atom/common/utils/pagination";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
 import {langEn} from "@/atom/common/language";
 import {PageMetadata} from "@/components/common/utils/page";
+import {useServerConfig} from "@/components/server/config";
+import {serverMakeGet} from "@/atom/server/http";
 
 export const dynamic = "force-dynamic";
 
@@ -34,7 +35,8 @@ export default async function Page({params, searchParams}: {
     const pageSize = 10
     const channelPk = searchParamsValue.channel
 
-    let domain = await serverPortalSignin()
+    const serverConfig = await useServerConfig()
+    const serverUrl = serverConfig.PUBLIC_PORTAL_URL
     const selectQuery = {
         sort: searchParamsValue.sort,
         filter: searchParamsValue.filter,
@@ -44,9 +46,9 @@ export default async function Page({params, searchParams}: {
         keyword: searchParamsValue.keyword
     }
     const rawQuery = queryString.stringify(selectQuery)
-    const url = `/articles?${rawQuery}`
+    const url = `${serverUrl}/articles?${rawQuery}`
 
-    const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
+    const selectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, '')
     if (!selectResult || !selectResult.data) {
         return <NoData size={'large'}/>
     }
@@ -62,7 +64,7 @@ export default async function Page({params, searchParams}: {
             </div>
             <div className={'contentContainer'}>
                 <div className={'conMiddle'}>
-                    <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang}/>
+                    <ArticleMiddleBody selectResult={selectResult} lang={lang}/>
 
                     <div className={'middlePagination'}>
                         <PaginationServer lang={lang} pagination={pagination}

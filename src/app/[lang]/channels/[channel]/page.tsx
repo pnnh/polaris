@@ -1,16 +1,13 @@
 import React from 'react'
 import './page.scss'
 import queryString from 'query-string'
-import {serverPortalSignin} from "@/components/server/domain/domain";
 
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import ContentLayout from '@/components/server/content/layout'
-import {IDomain} from "@/components/common/domain";
 import {getPathname} from "@/components/server/pathname";
 import {ArticleRankCard} from "@/components/server/content/article/rank";
 import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PaginationServer} from "@/components/server/pagination";
-import {NoData} from "@/components/common/empty";
 import {replaceSearchParams} from "@/atom/common/utils/query";
 import {tryBase58ToUuid} from "@/atom/common/utils/basex";
 import {PSArticleModel} from "@/photon/common/models/article";
@@ -19,6 +16,8 @@ import {langEn} from "@/atom/common/language";
 import {notFound} from "next/navigation";
 import {ArticleFilterBar} from "@/components/server/content/article/filter";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
+import {useServerConfig} from "@/components/server/config";
+import {serverMakeGet} from "@/atom/server/http";
 
 
 export const dynamic = "force-dynamic";
@@ -52,9 +51,10 @@ export default async function Page({params, searchParams}: {
         size: 10,
         channel: channelUrn
     })
-    const domain = await serverPortalSignin()
-    const rankUrl = `/articles?${rankQuery}`
-    const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)
+    const serverConfig = await useServerConfig()
+    const serverUrl = serverConfig.PUBLIC_PORTAL_URL
+    const rankUrl = `${serverUrl}/articles?${rankQuery}`
+    const rankSelectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(rankUrl, '')
 
     const selectQuery = {
         sort: searchParamsValue.sort,
@@ -64,8 +64,8 @@ export default async function Page({params, searchParams}: {
         channel: channelUrn
     }
     const rawQuery = queryString.stringify(selectQuery)
-    const url = `/articles?${rawQuery}`
-    const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
+    const url = `${serverUrl}/articles?${rawQuery}`
+    const selectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, '')
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
@@ -73,7 +73,7 @@ export default async function Page({params, searchParams}: {
         <div className={'contentContainer'}>
             <div className={'conMiddle'}>
                 <ArticleFilterBar lang={lang} searchParamsValue={searchParamsValue}/>
-                <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang}/>
+                <ArticleMiddleBody selectResult={selectResult} lang={lang}/>
                 <div className={'middlePagination'}>
                     <PaginationServer lang={lang} pagination={pagination}
                                       pageLinkFunc={(page) => replaceSearchParams(searchParamsValue, 'page', page.toString())}/>

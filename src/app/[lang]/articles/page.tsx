@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './page.module.scss'
 import queryString from 'query-string'
-import {serverPortalSignin} from "@/components/server/domain/domain";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
@@ -14,6 +13,8 @@ import {PSArticleModel} from "@/photon/common/models/article";
 import {langEn} from "@/atom/common/language";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
 import {ArticleFilterBar} from "@/components/server/content/article/filter";
+import {useServerConfig} from "@/components/server/config";
+import {serverMakeGet} from "@/atom/server/http";
 
 
 export const dynamic = "force-dynamic";
@@ -44,9 +45,10 @@ export default async function Page({params, searchParams}: {
         size: 10,
         lang: lang
     })
-    let domain = await serverPortalSignin()
-    const rankUrl = `/articles?${rankQuery}`
-    const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)
+    const serverConfig = await useServerConfig()
+    const serverUrl = serverConfig.PUBLIC_PORTAL_URL
+    const rankUrl = `${serverUrl}/articles?${rankQuery}`
+    const rankSelectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(rankUrl, '')
 
     const selectQuery = {
         sort: searchParamsValue.sort,
@@ -57,8 +59,8 @@ export default async function Page({params, searchParams}: {
         lang: lang
     }
     const rawQuery = queryString.stringify(selectQuery)
-    const url = `/articles?${rawQuery}`
-    const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
+    const url = `${serverUrl}/articles?${rawQuery}`
+    const selectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, '')
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
@@ -66,7 +68,7 @@ export default async function Page({params, searchParams}: {
         <div className={styles.contentContainer}>
             <div className={styles.conMiddle}>
                 <ArticleFilterBar lang={lang} searchParamsValue={searchParamsValue}/>
-                <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang}/>
+                <ArticleMiddleBody selectResult={selectResult} lang={lang}/>
                 <div className={styles.middlePagination}>
                     <PaginationServer lang={lang} pagination={pagination}
                                       pageLinkFunc={(page) =>

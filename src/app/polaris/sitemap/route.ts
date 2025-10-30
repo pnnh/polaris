@@ -2,20 +2,20 @@ import {NextRequest, NextResponse} from 'next/server'
 import {SitemapStream, streamToPromise} from 'sitemap'
 import {Readable} from 'stream'
 import {SitemapItemLoose} from "sitemap/dist/lib/types";
-import {serverPortalSignin} from "@/components/server/domain/domain";
 import {useServerConfig} from "@/components/server/config";
 import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {uuidToBase58} from "@/atom/common/utils/basex";
 import {langEn, langZh} from "@/atom/common/language";
+import {serverMakeGet} from "@/atom/server/http";
 
 export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
-    const domain = await serverPortalSignin()
-    const url = `/articles?` + `page=1&size=${100}`
-    const result = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
     const serverConfig = await useServerConfig()
+    const serverUrl = serverConfig.PUBLIC_PORTAL_URL
+    const url = `${serverUrl}/articles?` + `page=1&size=${100}`
+    const result = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, '')
     const selfUrl = serverConfig.PUBLIC_SELF_URL
     let links: SitemapItemLoose[] = []
 

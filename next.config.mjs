@@ -1,4 +1,3 @@
-import {withSentryConfig} from '@sentry/nextjs';
 import path from 'path'
 import {fileURLToPath} from 'url'
 import bundleAnalyzer from '@next/bundle-analyzer'
@@ -47,12 +46,4 @@ const withBundleAnalyzer = bundleAnalyzer({
     openAnalyzer: false,
 })
 
-export default withSentryConfig(withBundleAnalyzer(nextConfig), {
-    org: "calieo",
-    project: "javascript-nextjs",
-    silent: !process.env.CI,
-    widenClientFileUpload: true,
-    tunnelRoute: "/monitoring",
-    disableLogger: true,
-    automaticVercelMonitors: true
-});
+export default withBundleAnalyzer(nextConfig);

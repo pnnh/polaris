@@ -13,9 +13,8 @@ import React from "react";
 import styles from './article.module.scss';
 import {STSubString} from "@/atom/common/utils/string";
 
-export function ArticleMiddleBody({selectResult, domain, lang}: {
+export function ArticleMiddleBody({selectResult, lang}: {
     selectResult: PLSelectResult<PSArticleModel>,
-    domain: IDomain,
     lang: string
 }) {
     if (!selectResult || !selectResult.data || !selectResult.data.range || selectResult.data.range.length === 0) {
@@ -23,14 +22,13 @@ export function ArticleMiddleBody({selectResult, domain, lang}: {
     }
     return <div className={styles.middleBody}>
         {selectResult.data.range.map((model, index) => {
-            return <ArticleCard key={index} model={model} domain={domain} lang={lang}/>
+            return <ArticleCard key={index} model={model} lang={lang}/>
         })}
     </div>
 }
 
-export function ArticleCard({model, domain, lang}: {
-    model: PSArticleModel,
-    domain: IDomain, lang: string
+export function ArticleCard({model, lang}: {
+    model: PSArticleModel, lang: string
 }) {
     let readUrl = `${lang}/articles/${uuidToBase58(model.uid)}`
     if (model.header === 'MTLink') {
@@ -38,7 +36,7 @@ export function ArticleCard({model, domain, lang}: {
     }
     let imageUrl = getDefaultNoteImageByUid(model.uid)
     if (model.cover && isValidUUID(model.cover)) {
-        imageUrl = domain.assetUrl(`/articles/${model.uid}/assets/${model.cover}`)
+        imageUrl = `/articles/${model.uid}/assets/${model.cover}`
     }
     return <div className={styles.middleItem} key={model.uid}>
         <div className={styles.itemDetail} data-article={model.uid}>

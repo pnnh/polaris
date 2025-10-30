@@ -8,7 +8,6 @@ import {PaginationServer} from "@/components/server/pagination";
 import {ArticleRankCard} from "@/components/server/content/article/rank";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import queryString from "query-string";
-import {serverPortalSignin} from "@/components/server/domain/domain";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
@@ -16,6 +15,8 @@ import {ArticleFilterBar} from "@/components/server/content/article/filter";
 import {headers} from "next/headers";
 import {getTargetLang, langEnUS} from "@/components/common/language";
 import {filterAcceptLanguage} from "@/components/server/language";
+import {serverMakeGet} from "@/atom/server/http";
+import {useServerConfig} from "@/components/server/config";
 
 export default async function Page({searchParams}: {
     searchParams: Promise<Record<string, string>>
@@ -41,9 +42,10 @@ export default async function Page({searchParams}: {
         direction: 'cta',
         size: 10
     })
-    let domain = await serverPortalSignin()
-    const rankUrl = `/articles?${rankQuery}`
-    const rankSelectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(rankUrl)
+    const serverConfig = await useServerConfig()
+    const serverUrl = serverConfig.PUBLIC_PORTAL_URL
+    const rankUrl = `${serverUrl}/articles?${rankQuery}`
+    const rankSelectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(rankUrl, '')
 
     const selectQuery = {
         sort: searchParamsValue.sort,
@@ -53,9 +55,9 @@ export default async function Page({searchParams}: {
         channel: channelPk
     }
     const rawQuery = queryString.stringify(selectQuery)
-    const url = `/articles?${rawQuery}`
+    const url = `${serverUrl}/articles?${rawQuery}`
 
-    const selectResult = await domain.makeGet<PLSelectResult<PSArticleModel>>(url)
+    const selectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, '')
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
@@ -63,7 +65,7 @@ export default async function Page({searchParams}: {
         <div className={styles.contentContainer}>
             <div className={styles.conMiddle}>
                 <ArticleFilterBar lang={lang} searchParamsValue={searchParamsValue}/>
-                <ArticleMiddleBody selectResult={selectResult} domain={domain} lang={lang}/>
+                <ArticleMiddleBody selectResult={selectResult} lang={lang}/>
                 <div className={styles.middlePagination}>
                     <PaginationServer lang={lang} pagination={pagination}
                                       pageLinkFunc={(page) =>

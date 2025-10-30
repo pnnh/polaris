@@ -1,7 +1,5 @@
 import React from 'react'
-import {serverPortalSignin} from "@/components/server/domain/domain";
 import ContentLayout from "@/components/server/content/layout";
-import {IDomain} from "@/components/common/domain";
 import {getPathname} from "@/components/server/pathname";
 import styles from './page.module.scss'
 import {CodeOk, PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
@@ -15,12 +13,15 @@ import {getDefaultChanImageByUid} from "@/components/common/channel";
 import {PageMetadata} from "@/components/common/utils/page";
 import {langEn} from "@/atom/common/language";
 import queryString from "query-string";
+import {useServerConfig} from "@/components/server/config";
+import {serverMakeGet} from "@/atom/server/http";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, viewer: string }>,
     searchParams: Promise<Record<string, string> & { query: string | undefined }>
 }) {
-    const domain = await serverPortalSignin()
+    const serverConfig = await useServerConfig()
+    const serverUrl = serverConfig.PUBLIC_PORTAL_URL
     const paramsValue = await params;
     const pageSize = 64
     const lang = paramsValue.lang || langEn
@@ -31,8 +32,8 @@ export default async function Page({params, searchParams}: {
         lang: lang
     }
     const rawQuery = queryString.stringify(selectQuery)
-    const url = `/channels?${rawQuery}`
-    const result = await domain.makeGet<PLSelectResult<PSChannelModel>>(url)
+    const url = `${serverUrl}/channels?${rawQuery}`
+    const result = await serverMakeGet<PLSelectResult<PSChannelModel>>(url, '')
 
     if (!result || !result.data) {
         return <NoData size={'middle'}/>
@@ -48,19 +49,19 @@ export default async function Page({params, searchParams}: {
         <div className={styles.container}>
             <div className={styles.list}>
                 {result.data.range.map((model) => {
-                    return <Item key={model.uid} model={model} domain={domain} lang={lang}/>
+                    return <Item key={model.uid} model={model} lang={lang}/>
                 })}
             </div>
         </div>
     </ContentLayout>
 }
 
-function Item(props: { model: PSChannelModel, domain: IDomain, lang: string }) {
+function Item(props: { model: PSChannelModel, lang: string }) {
     const model = props.model
     const readUrl = `/${props.lang}/channels/${uuidToBase58(props.model.uid)}`
     let imageUrl = getDefaultChanImageByUid(model.uid)
     if (model.image && isValidUUID(model.image)) {
-        imageUrl = props.domain.assetUrl(`/channels/${model.uid}/assets/${model.image}`)
+        imageUrl = `/channels/${model.uid}/assets/${model.image}`
     }
 
     return < div className={styles.item}>
