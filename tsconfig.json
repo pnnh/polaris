@@ -1,16 +1,13 @@
 {
   "compilerOptions": {
-    "types": [
-      "node"
-    ],
     "typeRoots": [
       "node_modules/@types",
       "src/types"
     ],
     "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
+      "ESNext",
+      "DOM",
+      "DOM.Iterable"
     ],
     "declaration": true,
     "experimentalDecorators": true,
@@ -18,7 +15,7 @@
     "module": "ESNext",
     "target": "ESNext",
     "moduleResolution": "node",
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "forceConsistentCasingInFileNames": true,
     "strictNullChecks": true,
     "noImplicitAny": true,

@@ -35,7 +35,6 @@ export default async function GlobalLayout(
     const serverConfig = await useServerConfig()
     const browserConfigString = JSON.stringify(usePublicConfig(serverConfig))
     const encodedBrowserConfig = encodeBase58String(browserConfigString)
-    const lightningUrl = serverConfig.PUBLIC_LIGHTNING_URL
 
     const themeName = await getServerTheme()
     let isDarkTheme = themeName === 'dark'
@@ -73,20 +72,21 @@ export default async function GlobalLayout(
                   integrity="sha512-fibfhB71IpdEKqLKXP/96WuX1cTMmvZioYp7T6I+lTbvJrrjEGeyYdAf09GHpFptF8toQ32woGZ8bw9+HjZc0A=="
                   crossOrigin="anonymous" referrerPolicy="no-referrer"/>
         }
+        <link rel="manifest" id="manifest-link" href={`/manifest/manifest_${lang}.json`}/>
         <ServerComponentStyle styleItems={styleItems}></ServerComponentStyle>
     </head>
     <body lang={lang} className={isDarkTheme ? 'darkTheme' : 'lightTheme'}>
     <JotaiProvider>
         <AppRouterCacheProvider options={{key: 'css', enableCssLayer: true}}>
             <ThemeProvider theme={pageTheme}>
-                <ClientSetup>
+                <ClientSetup lang={lang} encodedBrowserConfig={encodedBrowserConfig}>
                     {children}
                 </ClientSetup>
             </ThemeProvider>
         </AppRouterCacheProvider>
     </JotaiProvider>
     <input id="LGEnv" type="hidden" value={encodedBrowserConfig}/>
-    <script type="module" src={lightningUrl} defer={true}></script>
+    {/*<script type="module" src={lightningUrl} defer={true}></script>*/}
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback"
             defer={true}></script>
     </body>

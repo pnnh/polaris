@@ -28,6 +28,3 @@ coverage/
 dist/
 .rollup.cache/
 /*.db
-
-# Sentry Config File
-.env.sentry-build-plugin

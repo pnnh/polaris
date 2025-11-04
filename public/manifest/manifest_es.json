@@ -1,0 +1,43 @@
+{
+  "id": "ebase58",
+  "name": "eBase58 - Herramienta de codificación y decodificación Base58",
+  "icons": [
+    {
+      "src": "/images/logo/logo256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "screenshots": [
+    {
+      "src": "/images/screenshots/desktop/desktop_light.png",
+      "sizes": "1727x1160",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Home screen light theme"
+    },
+    {
+      "src": "/images/screenshots/desktop/desktop_dark.png",
+      "sizes": "1727x1160",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Home screen dark theme"
+    },
+    {
+      "src": "/images/screenshots/mobile/mobile_light.png",
+      "sizes": "750x1160",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "mobile home screen light theme"
+    },
+    {
+      "src": "/images/screenshots/mobile/mobile_dark.png",
+      "sizes": "750x1160",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "mobile home screen dark theme"
+    }
+  ]
+}

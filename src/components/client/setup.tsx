@@ -1,11 +1,99 @@
 'use client'
 
-export function ClientSetup({children}: { children: React.ReactNode }) {
-    if (typeof window !== "undefined") {
-        (window as any).isClient = true
-        window.Prism = window.Prism || {};
-        window.Prism.manual = true;     // 禁止Prism自动高亮代码块，否则会导致服务端和客户端渲染结果不一致错误
+import {useClientConfig} from "@/atom/client/config/config";
+import {IBrowserConfig} from "@/components/common/config";
+import {cfTurnstileSetup} from "@/components/client/cloudflare/cloud";
+import {getStorage, setStorage} from "@/components/client/utils/storage";
+
+function setupPWA(lang: string) {
+    const manifestLink = document.getElementById('manifest-link') as HTMLLinkElement | null;
+    if (!manifestLink) {
+        return
     }
+    if (manifestLink.dataset.setupPWA === "true") {
+        return
+    }
+    manifestLink.dataset.setupPWA = "true";
+
+    const registerServiceWorker = async () => {
+        if ("serviceWorker" in navigator) {
+            try {
+                // First, get all existing registrations
+                navigator.serviceWorker.getRegistrations().then((registrations) => {
+                    console.log(`Found ${registrations.length} Service Workers:`, registrations);
+
+                    // Traverse and uninstall each one
+                    const unregisterPromises = registrations.map((registration) => {
+                        console.log(`Unregistering SW for scope: ${registration.scope}`);
+                        return registration.unregister();
+                    });
+
+                    return Promise.all(unregisterPromises);
+                }).then((results) => {
+                    console.log('All unregistrations completed:', results);  // Array of true/false
+                }).catch((error) => {
+                    console.error('Failed to unregister SWs:', error);
+                });
+
+                // Now register the new service worker
+                const workerUrl = '/worker.js'
+                const registration = await navigator.serviceWorker.register(workerUrl, {
+                    scope: "/",
+                });
+                if (registration.installing) {
+                    console.log("Installing Service worker");
+                } else if (registration.waiting) {
+                    console.log("Service worker installed");
+                } else if (registration.active) {
+                    console.log("Active Service worker");
+                }
+            } catch (error) {
+                console.error(`ServiceWorker register failed：${error}`);
+            }
+        }
+    };
+    const workerInfo = getStorage('worker-info');
+    if (workerInfo) {
+        const info = workerInfo;
+        const now = Date.now();
+        const duration = 3 * 24 * 3600 * 1000
+        if (info.timestamp && now - info.timestamp < duration) {
+            console.log('ServiceWorker recently unregistered, skip registering');
+            return;
+        }
+    }
+
+    registerServiceWorker().then(r => {
+        console.log('ServiceWorker registered');
+        const workerInfo = {timestamp: Date.now()};
+        setStorage('worker-info', workerInfo);
+    }).catch(e => {
+        console.error('ServiceWorker register error', e);
+    });
+}
+
+export function ClientSetup({lang, encodedBrowserConfig, children}: {
+    lang: string, encodedBrowserConfig: string,
+    children: React.ReactNode
+}) {
+    if (typeof window === "undefined") {
+        return <>{children}</>
+    }
+    (window as any).isClient = true
+    window.Prism = window.Prism || {};
+    window.Prism.manual = true;     // 禁止Prism自动高亮代码块，否则会导致服务端和客户端渲染结果不一致错误
+
+    const clientConfig = useClientConfig(encodedBrowserConfig) as IBrowserConfig
+    if (clientConfig && clientConfig.PUBLIC_TURNSTILE) {
+        const turnstileKey = clientConfig.PUBLIC_TURNSTILE;
+        const lang = navigator.language;
+        (window as any).onloadTurnstileCallback = () => {
+            console.info('onloadTurnstileCallback')
+            cfTurnstileSetup(turnstileKey, lang);
+        }
+    }
+    setupPWA(lang)
+
     return <>
         {children}
     </>

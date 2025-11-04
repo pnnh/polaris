@@ -1,7 +1,7 @@
 import {NextRequest, NextResponse} from 'next/server'
 import {SitemapStream, streamToPromise} from 'sitemap'
 import {Readable} from 'stream'
-import {SitemapItemLoose} from "sitemap/dist/lib/types";
+import {SitemapItemLoose} from "sitemap";
 import {useServerConfig} from "@/components/server/config";
 import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/photon/common/models/article";

@@ -26,28 +26,28 @@ export function selectApps(expectLang: string): ApplicationModel[] {
     return [
         {
             uid: passwordUid,
-            url: '/password',
+            url: '/tools/password',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/password.webp',
             ...selectAppLangProfile(passwordUid, expectLang)
         },
         {
             uid: uuidUid,
-            url: '/uuid',
+            url: '/tools/uuid',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/uuid.webp',
             ...selectAppLangProfile(uuidUid, expectLang)
         },
         {
             uid: qrcodeUid,
-            url: '/qrcode',
+            url: '/tools/qrcode',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/qrcode.webp',
             ...selectAppLangProfile(qrcodeUid, expectLang)
         },
         {
             uid: datetimeUid,
-            url: '/datetime',
+            url: '/tools/datetime',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/datetime.webp',
             ...selectAppLangProfile(datetimeUid, expectLang)
@@ -61,42 +61,42 @@ export function selectApps(expectLang: string): ApplicationModel[] {
         },
         {
             uid: base64Uid,
-            url: '/base64',
+            url: '/tools/base64',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/datetime.webp',
             ...selectAppLangProfile(base64Uid, expectLang)
         },
         {
             uid: base32Uid,
-            url: '/base32',
+            url: '/tools/base32',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/datetime.webp',
             ...selectAppLangProfile(base32Uid, expectLang)
         },
         {
             uid: highlightUid,
-            url: '/highlight',
+            url: '/tools/highlight',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/datetime.webp',
             ...selectAppLangProfile(highlightUid, expectLang)
         },
         {
             uid: wejsonUid,
-            url: '/wejson',
+            url: '/tools/wejson',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/datetime.webp',
             ...selectAppLangProfile(wejsonUid, expectLang)
         },
         {
             uid: md5Uid,
-            url: '/md5',
+            url: '/tools/md5',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/datetime.webp',
             ...selectAppLangProfile(md5Uid, expectLang)
         },
         {
             uid: markdownUid,
-            url: '/markdown',
+            url: '/tools/markdown',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/datetime.webp',
             ...selectAppLangProfile(markdownUid, expectLang)

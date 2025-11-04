@@ -83,7 +83,7 @@ export function UserinfoEditForm({portalUrl, userInfo, lang}: {
             <div className={styles.submitButtons}>
                 <button type="button" onClick={onSubmit}>{localText(lang, '保存', 'Save')}</button>
                 <button type="button" onClick={() => {
-                    window.location.href = '/console/userinfo'; // 返回用户信息页面
+                    window.location.href = `/${lang}/console/userinfo`; // 返回用户信息页面
                     return false
                 }}>{localText(lang, '取消', 'Cancel')}
                 </button>
