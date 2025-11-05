@@ -30,7 +30,7 @@ export default async function Page({params, searchParams}: {
         <div className={styles.consolePage}>
             <div className={styles.libGrid}>
                 <div className={styles.libHeader}>
-                    <ConsoleLibraryFilterBar lang={lang} keyword={''}/>
+                    <ConsoleLibraryFilterBar lang={lang} keyword={''} portalUrl={portalUrl}/>
                 </div>
                 <ConsoleLibraryMiddleBody lang={lang} portalUrl={portalUrl}/>
             </div>

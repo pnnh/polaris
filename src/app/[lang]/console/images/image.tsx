@@ -3,32 +3,33 @@ import React, {useEffect} from "react";
 import styles from './image.module.scss';
 import {
     clientGetDirectoryEntry,
-    clientLoadDirectoryFiles, clientRequestFilePermission,
+    clientSyncLibraryFiles, clientRequestFilePermission,
     clientVerifyFilePermission,
-    IDirectoryEntry,
-    IImageEntry
+    ILibraryEntry,
+    IImageEntry, clientGetImageLibraryFiles
 } from "@/components/client/images/service";
 import Button from "@mui/material/Button";
 import {NoData} from "@/components/common/empty";
 
-export function ConsoleImageMiddleBody({libName, lang, portalUrl}: {
-    libName: string, lang: string,
+export function ConsoleImageMiddleBody({libKey, lang, portalUrl}: {
+    libKey: string, lang: string,
     portalUrl: string
 }) {
     const [imageData, setImageData] = React.useState<IImageEntry[]>();
-    const [dirEntry, setDirEntry] = React.useState<IDirectoryEntry>();
+    const [dirEntry, setDirEntry] = React.useState<ILibraryEntry>();
     const [needPermission, setNeedPermission] = React.useState<boolean>(true);
 
-    const loadLib = (entry: IDirectoryEntry) => {
-        clientLoadDirectoryFiles(entry).then((data) => {
+    const loadLib = (entry: ILibraryEntry) => {
+        clientGetImageLibraryFiles(entry, 20).then((data) => {
             setImageData(data);
         }).catch((err) => {
             console.error('加载图片库失败', err);
         });
     }
 
+    let intervalId: any
     useEffect(() => {
-        clientGetDirectoryEntry(libName).then((entry) => {
+        clientGetDirectoryEntry(libKey).then((entry) => {
             setDirEntry(entry);
             return entry
         }).then((entry) => {
@@ -39,8 +40,32 @@ export function ConsoleImageMiddleBody({libName, lang, portalUrl}: {
         }).catch((err) => {
             console.error('加载图片库目录失败', err);
         });
-    }, [libName]);
 
+        intervalId = setInterval(() => {
+            navigator.serviceWorker.ready.then((registration) => {
+                const activeWorker = registration.active;
+                if (activeWorker) {
+                    activeWorker.postMessage({
+                        type: 'SYNC_IMAGE_LIBRARY', data: {
+                            portalUrl,
+                            count: Math.random(),
+                            libName: libKey,
+                        }
+                    });
+
+                    console.log('Periodic message sent to SW2');
+                }
+            }).catch((error) => {
+                console.error('SW not ready2:', error);
+            });
+        }, 10000);
+
+        return () => {
+            if (intervalId) {
+                clearInterval(intervalId);
+            }
+        }
+    }, [libKey]);
 
     if (!dirEntry) {
         return <div className={styles.middleBody}>

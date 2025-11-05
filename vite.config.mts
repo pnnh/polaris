@@ -3,6 +3,8 @@ import {defineConfig} from 'vite';
 import react from "@vitejs/plugin-react-swc"
 import path from "path";
 
+const isProd = process.env.NODE_ENV === 'production'
+
 export default defineConfig((configEnv) => {
     const env = loadEnv(configEnv.mode, __dirname); // 根据 mode 来判断当前是何种环境
 
@@ -13,18 +15,19 @@ export default defineConfig((configEnv) => {
         base: '/',
         publicDir: 'assets',    // 不存在的目录
         build: {
-            sourcemap: false,
+            sourcemap: !isProd,
             minify: 'esbuild',
             outDir: `public`,
             emptyOutDir: false, // 不要清空输出目录，因为还有其他资源文件
             rollupOptions: {
                 input: {
                     worker: path.resolve(__dirname, 'src/worker.ts'),
+                    setup: path.resolve(__dirname, 'src/setup.tsx'),
                 },
                 output: {
                     entryFileNames: `[name].js`,
-                    // chunkFileNames: `[name].js`,
-                    // assetFileNames: `[name].[ext]`,
+                    chunkFileNames: `chunks/[name].js`,
+                    assetFileNames: `assets/[name].[ext]`,
                     // manualChunks(id) {
                     //     if (id.includes('node_modules')) {
                     //         return id.toString().split('node_modules/')[1].split('/')[0].toString();

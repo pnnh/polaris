@@ -8,7 +8,6 @@ import {replaceSearchParams} from "@/atom/common/utils/query";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {langEn} from "@/atom/common/language";
 import {useServerConfig} from "@/components/server/config";
-import {serverConsoleSelectArticles} from "@/components/server/articles/articles";
 import {css, ServerComponentStyle} from "@/components/server/component";
 import ConsoleImageLayout from "@/components/server/console/images/layout";
 import {ConsoleImageFilterBar} from "@/app/[lang]/console/images/filter";
@@ -55,7 +54,6 @@ export default async function Page({params, searchParams}: {
         page = 1
     }
     const pageSize = 10
-    const channelPk = searchParamsValue.channel
 
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
@@ -69,7 +67,7 @@ export default async function Page({params, searchParams}: {
         <div className={styles.contentContainer}>
             <ConsoleImageFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
             <div className={styles.conMiddle}>
-                <ConsoleImageMiddleBody libName={libName} lang={lang}
+                <ConsoleImageMiddleBody libKey={libName} lang={lang}
                                         portalUrl={serverConfig.PUBLIC_PORTAL_URL}/>
                 <div className={styles.middlePagination}>
                     <PaginationServer lang={lang} pagination={pagination}

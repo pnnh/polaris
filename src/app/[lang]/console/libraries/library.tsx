@@ -3,12 +3,13 @@
 import React, {useEffect, useState} from "react";
 import styles from './library.module.scss';
 import ComputerIcon from "@mui/icons-material/Computer";
-import {clientLoadLibraryEntries, IDirectoryEntry} from "@/components/client/images/service";
+import {clientLoadLibraryEntries, ILibraryEntry} from "@/components/client/images/service";
+import CloudQueueIcon from "~/@mui/icons-material/CloudQueue";
 
 export function ConsoleLibraryMiddleBody({lang, portalUrl}: {
     lang: string, portalUrl: string
 }) {
-    const [libraries, setLibraries] = useState<IDirectoryEntry[]>()
+    const [libraries, setLibraries] = useState<ILibraryEntry[]>()
 
     useEffect(() => {
         clientLoadLibraryEntries().then((dirEntries) => {
@@ -48,7 +49,7 @@ export function ConsoleLibraryMiddleBody({lang, portalUrl}: {
             }).catch((error) => {
                 console.error('SW not ready:', error);
             });
-        }, 2000);
+        }, 10000);
 
         return () => {
             // Cleanup if needed when component unmounts
@@ -66,18 +67,18 @@ export function ConsoleLibraryMiddleBody({lang, portalUrl}: {
     }
     return <div className={styles.libBody}>
         {libraries.map((model, index) => {
-            return <ArticleCard key={index} model={model} lang={lang} portalUrl={''}/>
+            return <LibraryCard key={index} model={model} lang={lang} portalUrl={''}/>
         })}
     </div>
 }
 
-export function ArticleCard({model, lang, portalUrl}: {
-    model: IDirectoryEntry,
+function LibraryCard({model, lang, portalUrl}: {
+    model: ILibraryEntry,
     lang: string,
     portalUrl: string
 }) {
     return <div className={styles.libCard}>
-        <ComputerIcon/>
-        <a href={`/${lang}/console/images?libName=${encodeURIComponent(model.name)}`}>本地笔记库{model.name}</a>
+        {model.isLocal ? <ComputerIcon/> : <CloudQueueIcon/>}
+        <a href={`/${lang}/console/images?libName=${encodeURIComponent(model.key)}`}>{model.name}</a>
     </div>
 }

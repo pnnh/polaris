@@ -13,7 +13,6 @@ import {getServerTheme} from "@/components/server/theme";
 import {getTargetLang, unknownLanguage} from "@/components/common/language";
 import {notFound} from "next/navigation";
 import {ServerComponentStyle, StyleItem} from "@/components/server/component";
-import {ClientSetup} from "@/components/client/setup";
 
 // 隔几秒重新验证下数据
 export const revalidate = 1
@@ -73,19 +72,19 @@ export default async function GlobalLayout(
                   crossOrigin="anonymous" referrerPolicy="no-referrer"/>
         }
         <link rel="manifest" id="manifest-link" href={`/manifest/manifest_${lang}.json`}/>
+        <link rel="stylesheet" href="/assets/setup.css"/>
         <ServerComponentStyle styleItems={styleItems}></ServerComponentStyle>
     </head>
     <body lang={lang} className={isDarkTheme ? 'darkTheme' : 'lightTheme'}>
+    <input id="LGEnv" type="hidden" value={encodedBrowserConfig}/>
+    <script type="module" src={"/setup.js"} defer={false}></script>
     <JotaiProvider>
         <AppRouterCacheProvider options={{key: 'css', enableCssLayer: true}}>
             <ThemeProvider theme={pageTheme}>
-                <ClientSetup lang={lang} encodedBrowserConfig={encodedBrowserConfig}>
-                    {children}
-                </ClientSetup>
+                {children}
             </ThemeProvider>
         </AppRouterCacheProvider>
     </JotaiProvider>
-    <input id="LGEnv" type="hidden" value={encodedBrowserConfig}/>
     {/*<script type="module" src={lightningUrl} defer={true}></script>*/}
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback"
             defer={true}></script>

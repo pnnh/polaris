@@ -2,23 +2,23 @@
 
 import {entries, set, get} from 'idb-keyval';
 
-export async function clientSelectImageDirectory() {
-    try {
-        const dirHandle = await window.showDirectoryPicker();
-        for await (const entry of dirHandle.values()) {
-            console.log('selectFiles', entry.kind, entry.name);
-        }
+export async function clientOpenImageLibrary() {
 
-        const dirEntry: IDirectoryEntry = {
-            name: dirHandle.name,
-            handle: dirHandle
-        }
-        await set('myDirectory', dirEntry);  // Stores the handle in IndexedDB
-        console.log('Directory handle saved!');
-        return dirHandle
-    } catch (err) {
-        console.error('Error saving handle:', err);
+    const dirHandle = await window.showDirectoryPicker();
+    for await (const entry of dirHandle.values()) {
+        console.log('selectFiles', entry.kind, entry.name);
     }
+    const libKey = 'library-myDirectory'
+    const dirEntry: ILibraryEntry = {
+        key: libKey,
+        name: dirHandle.name,
+        dirHandle: dirHandle,
+        isLocal: true,
+        libType: 'image-library',
+    }
+    await set(libKey, dirEntry);  // Stores the handle in IndexedDB
+    console.log('Directory handle saved!');
+    return dirEntry
 }
 
 export interface IImageEntry {
@@ -26,33 +26,30 @@ export interface IImageEntry {
     handle: any;
 }
 
-export class LoadError extends Error {
-
-    constructor(message: string) {
-        super(message);
-        this.name = "LoadError";
-    }
-
-}
-
-export async function clientVerifyFilePermission(dirEntry: IDirectoryEntry, mode: 'read' | 'readwrite' = 'readwrite'): Promise<boolean> {
+export async function clientVerifyFilePermission(dirEntry: ILibraryEntry, mode: 'read' | 'readwrite' = 'readwrite'): Promise<boolean> {
     const options = {mode};
     // Check if permission was already granted
-    if (await dirEntry.handle.queryPermission(options) === 'granted') {
+    if (await dirEntry.dirHandle.queryPermission(options) === 'granted') {
         return true;
     }
     // Permission was denied
     return false;
 }
 
-export async function clientRequestFilePermission(dirEntry: IDirectoryEntry, mode: 'read' | 'readwrite' = 'readwrite'): Promise<boolean> {
+export async function clientRequestFilePermission(dirEntry: ILibraryEntry, mode: 'read' | 'readwrite' = 'readwrite'): Promise<boolean> {
+    if (!dirEntry.isLocal) {
+        return true;
+    }
+    if (!dirEntry.dirHandle) {
+        throw new Error('No directory handle found in the entry.');
+    }
     const options = {mode};
     // Check if permission was already granted
-    if (await dirEntry.handle.queryPermission(options) === 'granted') {
+    if (await dirEntry.dirHandle.queryPermission(options) === 'granted') {
         return true;
     }
     // Request permission
-    if (await dirEntry.handle.requestPermission(options) === 'granted') {
+    if (await dirEntry.dirHandle.requestPermission(options) === 'granted') {
         return true;
     }
     // Permission was denied
@@ -61,9 +58,9 @@ export async function clientRequestFilePermission(dirEntry: IDirectoryEntry, mod
 
 export async function clientGetDirectoryEntry(libName: string) {
     // try {
-    const dirEntry = await get(libName || 'myDirectory');
+    const dirEntry = await get(libName);
     if (dirEntry) {
-        const dirEntryObject = dirEntry as IDirectoryEntry;
+        const dirEntryObject = dirEntry as ILibraryEntry;
         dirEntryObject.hasPermission = await clientVerifyFilePermission(dirEntryObject);
         return dirEntryObject;
     } else {
@@ -75,61 +72,71 @@ export async function clientGetDirectoryEntry(libName: string) {
     // }
 }
 
-export async function clientLoadDirectoryFiles(dirEntry: IDirectoryEntry, batchSize: number = 10) {
-    try {
-        // const dirEntry = await get(libName || 'myDirectory');
-        if (dirEntry) {
-            // Verify permission (handles may need re-granting if revoked)
-            // if (await dirHandle.handle.queryPermission({mode: 'readwrite'}) === 'granted') {
-            //     // Use the handle, e.g., list files
-            // } else {
-            //     // Re-prompt for permission if needed
-            //     await dirHandle.handle.requestPermission({mode: 'readwrite'});
-            // }
-            // 请求权限，注意这里需要用户交互才能成功
-            // await clientRequestFilePermission(dirEntry.handle, 'readwrite');
+// 无论是本地还是远程图片库，都是从 IndexedDB 中获取图片文件列表
+// 本地和远程图片库的同步逻辑在 worker 中处理
+export async function clientGetImageLibraryFiles(dirEntry: ILibraryEntry, batchSize: number): Promise<IImageEntry[]> {
+    const allEntries = await entries();
+    console.log('All entries:', allEntries);
 
-            const imgEntries: IImageEntry[] = [];
-            let counter = 0;
-            for await (const [name, handle] of dirEntry.handle.entries()) {
-                console.log('File:', name);
-                if (handle.kind === 'file') {
-                    // const file = await handle.getFile();
-                    // imgEntries.push({name, file});
-                    imgEntries.push({name, handle: handle});
-                    counter++;
-                    if (counter >= batchSize) {
-                        break; // Limit to batch size
-                    }
+    const dirEntries: IImageEntry[] = [];
+    allEntries.forEach(([key, value]) => {
+        console.log(`Key: ${key}, Value:`, value);
+        const strKey = key.toString()
+        if (strKey.startsWith('image-')) {
+            dirEntries.push(value as IImageEntry);
+        }
+    });
+    return dirEntries;
+}
+
+export async function clientSyncLibraryFiles(dirEntry: ILibraryEntry) {
+    try {
+        if (!dirEntry) {
+
+            console.log('No saved handle found. Prompt user to pick one.');
+
+        }
+
+        const imgEntries: IImageEntry[] = [];
+        let counter = 0;
+        const maxSize = 1000;
+        for await (const [name, handle] of dirEntry.dirHandle.entries()) {
+            console.log('File:', name);
+            if (handle.kind === 'file') {
+                imgEntries.push({name, handle: handle});
+                counter++;
+                if (counter >= maxSize) {
+                    break; // Limit to batch size
                 }
             }
-            console.log('Directory handle loaded and accessible!');
-            return imgEntries;
-        } else {
-            console.log('No saved handle found. Prompt user to pick one.');
         }
+        console.log('Directory handle loaded and accessible!');
+        return imgEntries;
     } catch (err) {
         console.error('Error loading handle:', err);
         // Fallback: prompt user to pick again
     }
 }
 
-export interface IDirectoryEntry {
+export interface ILibraryEntry {
+    key: string;
     name: string;
-    handle: any;
+    dirHandle?: any;
     hasPermission?: boolean;
+    isLocal?: boolean;
+    libType?: string;
 }
 
 export async function clientLoadLibraryEntries() {
     const allEntries = await entries();
     console.log('All entries:', allEntries);
 
-    const dirEntries: IDirectoryEntry[] = [];
+    const dirEntries: ILibraryEntry[] = [];
     allEntries.forEach(([key, value]) => {
         console.log(`Key: ${key}, Value:`, value);
         const strKey = key.toString()
         if (strKey.startsWith('library-')) {
-            dirEntries.push({name: key as string, handle: value as FileSystemHandle});
+            dirEntries.push(value as ILibraryEntry);
         }
     });
     return dirEntries;

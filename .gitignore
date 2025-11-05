@@ -28,3 +28,10 @@ coverage/
 dist/
 .rollup.cache/
 /*.db
+
+# vite generated files
+.vite/
+public/setup.js
+public/worker.js
+public/assets/
+public/chunks/

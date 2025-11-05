@@ -5,21 +5,37 @@ import React from "react";
 import {transText} from "@/components/common/locales/normal";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
-import {clientSelectImageDirectory} from "@/components/client/images/service";
+import {clientOpenImageLibrary} from "@/components/client/images/service";
 
-export function ConsoleLibraryFilterBar({lang, keyword}: {
+export function ConsoleLibraryFilterBar({lang, keyword, portalUrl}: {
     lang: string,
-    keyword: string
+    keyword: string, portalUrl: string
 }) {
     const [searchText, setSearchText] = React.useState(keyword || '');
     const goSearch = () => {
         console.debug('go search', searchText);
     }
     const goCreateArticle = () => {
-        clientSelectImageDirectory().then(data => {
-            if (data && data.length > 0) {
-                console.log('selected files', data);
-            }
+        clientOpenImageLibrary().then(entry => {
+            console.log('selected files', entry);
+
+            navigator.serviceWorker.ready.then((registration) => {
+                const activeWorker = registration.active;
+                if (activeWorker) {
+                    activeWorker.postMessage({
+                        type: 'SYNC_IMAGE_LIBRARY', data: {
+                            portalUrl,
+                            count: Math.random(),
+                            libName: entry.key,
+                        }
+                    });
+
+                    console.log('Periodic message sent to SW2');
+                }
+            }).catch((error) => {
+                console.error('SW not ready2:', error);
+            });
+
         }).catch(error => {
             console.error('select files error', error);
         })

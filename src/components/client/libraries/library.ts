@@ -18,6 +18,7 @@ export interface PSLibraryModel {
     lang: string
     match: string
     owner: string
+    header: string
 }
 
 export async function clientConsoleSelectLibraries(portalUrl: string, selectQuery: Record<string, any>) {

@@ -2,6 +2,7 @@
 import {clientConsoleSelectLibraries} from "@/components/client/libraries/library";
 
 import {entries, set, get} from 'idb-keyval';
+import {clientGetDirectoryEntry, clientSyncLibraryFiles, ILibraryEntry} from "@/components/client/images/service";
 
 self.addEventListener('install', event => {
     console.log('Service worker install', event);
@@ -21,10 +22,16 @@ self.onmessage = async (event) => {
         const selectResult = await clientConsoleSelectLibraries(portalUrl, {})
         console.log('Fetched libraries from portal:', selectResult);
         if (selectResult && selectResult.range && selectResult.range.length > 0) {
-            selectResult.range.forEach((range) => {
-                console.log('Library:', range.name, range.title);
-                const entryKey = `library-${range.name}`;
-                set(entryKey, range).then(() => {
+            selectResult.range.forEach((model) => {
+                console.log('Library:', model.name, model.title);
+                const entryKey = `library-${model.name}`;
+                const libEntry: ILibraryEntry = {
+                    key: entryKey,
+                    name: model.name,
+                    isLocal: false,
+                    libType: model.header,
+                }
+                set(entryKey, libEntry).then(() => {
                     console.log(`Stored library entry in IndexedDB with key: ${entryKey}`);
                 }).catch((err) => {
                     console.error(`Failed to store library entry ${entryKey}:`, err);
@@ -34,6 +41,36 @@ self.onmessage = async (event) => {
         if (event.source) {
             event.source.postMessage({dbId: 'my-db', ready: true});
         }
+    } else if (type === 'SYNC_IMAGE_LIBRARY') {
+        const {libName} = data;
+        console.log('Sync image library request received for portal:', portalUrl);
+        if (!libName) {
+            console.warn('No library name provided for image library sync.');
+            return;
+        }
+        const dirEntry = await clientGetDirectoryEntry(libName)
+        if (!dirEntry || !dirEntry.hasPermission) {
+            console.warn('No permission to access the image library directory.');
+            return;
+        }
+        const dirFiles = await clientSyncLibraryFiles(dirEntry)
+        if (!dirFiles || dirFiles.length === 0) {
+            console.warn('No files found in the image library directory.');
+            return;
+        }
+        console.log(`Loaded ${dirFiles.length} files from image library ${libName}.`);
+        dirFiles.forEach(dir => {
+            const entryKey = `image-${libName}-${dir.name}`;
+            const entryValue = {
+                name: dir.name,
+                handle: dir.handle,
+            }
+            set(entryKey, entryValue).then(() => {
+                console.log(`Stored image entry in IndexedDB with key: ${entryKey}`);
+            }).catch(() => {
+                console.error(`Failed to store image entry ${entryKey}`);
+            })
+        })
     }
 };
 
