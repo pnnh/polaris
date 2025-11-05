@@ -46,6 +46,8 @@ function setupPWA(lang: string) {
                     if (type === 'PERIODIC_UPDATE') {
                         console.log('Reply confirmed:', status, 'at', timestamp);
                         // Handle the reply, e.g., update UI
+                    } else if (type === 'SQLITE_READY') {
+                        console.log('SQLite is ready in SW at', timestamp);
                     }
                 }
                 navigator.serviceWorker.addEventListener('message', msgHandler);
@@ -80,14 +82,26 @@ function setupPWA(lang: string) {
     // }
     registerServiceWorker().then(r => {
         console.log('ServiceWorker registered');
-        const workerInfo = {timestamp: Date.now()};
-        setStorage('worker-info', workerInfo);
+        // const workerInfo = {timestamp: Date.now()};
+        // setStorage('worker-info', workerInfo);
     }).catch(e => {
         console.error('ServiceWorker register error', e);
     });
 }
 
-$(function () {
+function setupSqlite() {
+    const worker = new Worker(new URL('./sqlite.ts', import.meta.url));
+    worker.postMessage({action: 'SQLITE_INIT'});
+    worker.onmessage = (e) => {
+        if (e.data.success) {
+            console.log('DB ready:', e.data.isPersistent ? 'Persistent (OPFS)' : 'In-memory fallback');
+        } else {
+            console.error('Init failed:', e.data.error);
+        }
+    };
+}
+
+$(async function () {
     (window as any).isClient = true
     window.Prism = window.Prism || {};
     window.Prism.manual = true;     // 禁止Prism自动高亮代码块，否则会导致服务端和客户端渲染结果不一致错误
@@ -103,4 +117,6 @@ $(function () {
     }
     const lang = document.documentElement.lang || langEnUS;
     setupPWA(lang)
+
+    setupSqlite()
 })

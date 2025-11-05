@@ -9,6 +9,7 @@ import {
     ILibraryEntry
 } from "@/components/client/images/service";
 import {clientConsoleSelectImages} from "@/components/client/images/http";
+import sqlite3InitModule from '@sqlite.org/sqlite-wasm';
 
 self.addEventListener('install', event => {
     console.log('Service worker install', event);
@@ -23,8 +24,8 @@ self.addEventListener('install', event => {
 self.onmessage = async (event) => {
     console.log('Received message', event.data);
     const {type, data} = event.data;
-    const {portalUrl} = data;
     if (type === 'PERIODIC_UPDATE') {
+        const {portalUrl} = data;
         const selectResult = await clientConsoleSelectLibraries(portalUrl, {})
         console.log('Fetched libraries from portal:', selectResult);
         if (selectResult && selectResult.range && selectResult.range.length > 0) {
@@ -48,6 +49,7 @@ self.onmessage = async (event) => {
             event.source.postMessage({dbId: 'my-db', ready: true});
         }
     } else if (type === 'SYNC_IMAGE_LIBRARY') {
+        const {portalUrl} = data;
         const {libName} = data;
         console.log('Sync image library request received for portal:', portalUrl);
         if (!libName) {

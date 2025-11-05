@@ -54,7 +54,14 @@ export default defineConfig((configEnv) => {
         server: {
             hmr: false,
             allowedHosts: ['huable.local', 'huable.xyz', 'localhost'],
+            headers: {
+                'Cross-Origin-Opener-Policy': 'same-origin',
+                'Cross-Origin-Embedder-Policy': 'require-corp',
+            },
         },
-        clearScreen: false
+        clearScreen: false,
+        optimizeDeps: {
+            exclude: ['@sqlite.org/sqlite-wasm'],
+        },
     } as UserConfig;
 });

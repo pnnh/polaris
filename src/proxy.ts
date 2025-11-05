@@ -26,14 +26,14 @@ export function proxy(request: NextRequest) {
             }
         }
     }
-    let lang = getLangFromUrl(request.url)
-    if (!lang) {
-        if (pathname === '/') {
-            lang = langEn;  // Default to English if no language is specified
-        } else {
-            return new NextResponse('Page Not Found', {status: 404});
-        }
-    }
+    // let lang = getLangFromUrl(request.url)
+    // if (!lang) {
+    //     if (pathname === '/') {
+    //         lang = langEn;  // Default to English if no language is specified
+    //     } else {
+    //         return new NextResponse('Page Not Found', {status: 404});
+    //     }
+    // }
     // if (lang !== langEn && lang !== langZh) {
     //     return new NextResponse('Page Not Found', {status: 404});
     // }
@@ -46,6 +46,9 @@ export function proxy(request: NextRequest) {
     })
     // 返回该请求头以指示浏览器在后续请求头中附带sec-ch-prefers-color-scheme头以便获取用户的主题偏好
     response.headers.set('Accept-CH', 'Sec-CH-Prefers-Color-Scheme')
+    // 设置COEP和COOP以启用跨源隔离，这两个头在使用SQLite时需要
+    response.headers.set('Cross-Origin-Embedder-Policy', 'require-corp')
+    response.headers.set('Cross-Origin-Opener-Policy', 'same-origin')
 
     return response;
 }
@@ -55,7 +58,8 @@ export const config = {
     matcher: [
         // '/((?!_next|images|fonts|icons|pwa|ads.txt|favicon.ico|polaris).*)'
         '/',
-        '/(/\\w{2})',
-        '/(/\\w{2}/.*)',
+        // '/(\\w{2})',
+        // '/(\\w{2}/.*)',
+        '/(.*)'
     ],
 }
