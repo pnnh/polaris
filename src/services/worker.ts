@@ -2,7 +2,13 @@
 import {clientConsoleSelectLibraries} from "@/components/client/libraries/library";
 
 import {entries, set, get} from 'idb-keyval';
-import {clientGetDirectoryEntry, clientSyncLibraryFiles, ILibraryEntry} from "@/components/client/images/service";
+import {
+    clientGetDirectoryEntry,
+    clientSyncLocalImageLibraryFiles,
+    IImageEntry,
+    ILibraryEntry
+} from "@/components/client/images/service";
+import {clientConsoleSelectImages} from "@/components/client/images/http";
 
 self.addEventListener('install', event => {
     console.log('Service worker install', event);
@@ -49,23 +55,43 @@ self.onmessage = async (event) => {
             return;
         }
         const dirEntry = await clientGetDirectoryEntry(libName)
-        if (!dirEntry || !dirEntry.hasPermission) {
-            console.warn('No permission to access the image library directory.');
+        if (!dirEntry) {
+            console.warn('No directory entry found for library name:', libName);
             return;
         }
-        const dirFiles = await clientSyncLibraryFiles(dirEntry)
-        if (!dirFiles || dirFiles.length === 0) {
-            console.warn('No files found in the image library directory.');
-            return;
+        const dirFiles: IImageEntry[] = []
+
+        if (dirEntry.isLocal) {
+            if (dirEntry.hasPermission) {
+                await clientSyncLocalImageLibraryFiles(dirEntry)
+                if (!dirFiles || dirFiles.length === 0) {
+                    console.warn('No files found in the image library directory.');
+                    return;
+                }
+            } else {
+                console.warn('No permission to access the image library directory.');
+                return;
+            }
+        } else {
+            console.warn('Remote image library sync not implemented yet.');
+            const svcImages = await clientConsoleSelectImages(portalUrl, {})
+            if (svcImages && svcImages.range && svcImages.range.length > 0) {
+                svcImages.range.forEach(img => {
+                    const imageEntry: IImageEntry = {
+                        key: `image-${libName}-${img.uid}`,
+                        name: img.title,
+                        handle: null,
+                        url: img.file_url,
+                        isLocal: false,
+                    }
+                    dirFiles.push(imageEntry)
+                })
+            }
         }
         console.log(`Loaded ${dirFiles.length} files from image library ${libName}.`);
-        dirFiles.forEach(dir => {
-            const entryKey = `image-${libName}-${dir.name}`;
-            const entryValue = {
-                name: dir.name,
-                handle: dir.handle,
-            }
-            set(entryKey, entryValue).then(() => {
+        dirFiles.forEach(model => {
+            const entryKey = model.key;
+            set(entryKey, model).then(() => {
                 console.log(`Stored image entry in IndexedDB with key: ${entryKey}`);
             }).catch(() => {
                 console.error(`Failed to store image entry ${entryKey}`);

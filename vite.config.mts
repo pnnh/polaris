@@ -21,24 +21,24 @@ export default defineConfig((configEnv) => {
             emptyOutDir: false, // 不要清空输出目录，因为还有其他资源文件
             rollupOptions: {
                 input: {
-                    worker: path.resolve(__dirname, 'src/worker.ts'),
-                    setup: path.resolve(__dirname, 'src/setup.tsx'),
+                    worker: path.resolve(__dirname, 'src/services/worker.ts'),
+                    setup: path.resolve(__dirname, 'src/services/setup.tsx'),
                 },
                 output: {
                     entryFileNames: `[name].js`,
                     chunkFileNames: `chunks/[name].js`,
                     assetFileNames: `assets/[name].[ext]`,
-                    // manualChunks(id) {
-                    //     if (id.includes('node_modules')) {
-                    //         return id.toString().split('node_modules/')[1].split('/')[0].toString();
-                    //     }
-                    // }
+                    manualChunks(id) {
+                        if (id.includes('node_modules')) {
+                            return id.toString().split('node_modules/')[1].split('/')[0].toString();
+                        }
+                    }
                 }
             },
         },
         esbuild: {
-            pure: ['console.debug'],
-            drop: ['debugger']
+            pure: isProd ? ['console.debug'] : [],
+            drop: isProd ? ['debugger'] : []
         },
         plugins: [react({tsDecorators: true})],
         resolve: {

@@ -54,6 +54,7 @@ function setupPWA(lang: string) {
                 const workerUrl = '/worker.js'
                 const registration = await navigator.serviceWorker.register(workerUrl, {
                     scope: "/",
+                    type: 'module'
                 });
                 if (registration.installing) {
                     console.log("Installing Service worker");

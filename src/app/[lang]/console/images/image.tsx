@@ -3,8 +3,7 @@ import React, {useEffect} from "react";
 import styles from './image.module.scss';
 import {
     clientGetDirectoryEntry,
-    clientSyncLibraryFiles, clientRequestFilePermission,
-    clientVerifyFilePermission,
+    clientSyncLocalImageLibraryFiles, clientRequestFilePermission,
     ILibraryEntry,
     IImageEntry, clientGetImageLibraryFiles
 } from "@/components/client/images/service";
@@ -33,7 +32,7 @@ export function ConsoleImageMiddleBody({libKey, lang, portalUrl}: {
             setDirEntry(entry);
             return entry
         }).then((entry) => {
-            if (entry.hasPermission) {
+            if (entry.hasPermission || !entry.isLocal) {
                 setNeedPermission(false);
                 loadLib(entry)
             }
@@ -72,7 +71,7 @@ export function ConsoleImageMiddleBody({libKey, lang, portalUrl}: {
             加载图片库目录...
         </div>
     }
-    if (needPermission) {
+    if (dirEntry.isLocal && needPermission) {
         return <div className={styles.middleBody}>
             <Button size={'small'} onClick={() => {
                 clientRequestFilePermission(dirEntry).then((ok) => {
@@ -108,17 +107,22 @@ export function ImageCard({model, lang, portalUrl}: {
 
     useEffect(() => {
         let isMounted = true;
-        model.handle.getFile().then((imgFile: Blob | MediaSource) => {
-            if (isMounted) {
-                const url = URL.createObjectURL(imgFile);
-                setImgUrl(url);
-            }
-        }).catch((err: any) => {
-            console.error('加载图片文件失败', err);
-        });
+        if (model.isLocal) {
+
+            model.handle.getFile().then((imgFile: Blob | MediaSource) => {
+                if (isMounted) {
+                    const url = URL.createObjectURL(imgFile);
+                    setImgUrl(url);
+                }
+            }).catch((err: any) => {
+                console.error('加载图片文件失败', err);
+            });
+        } else {
+            setImgUrl(model.url || '');
+        }
         return () => {
             isMounted = false;
-            if (imgUrl) {
+            if (model.isLocal && imgUrl) {
                 URL.revokeObjectURL(imgUrl);
             }
         }

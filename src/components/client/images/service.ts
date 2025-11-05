@@ -22,8 +22,11 @@ export async function clientOpenImageLibrary() {
 }
 
 export interface IImageEntry {
+    key: string;
     name: string;
     handle: any;
+    url?: string;
+    isLocal?: boolean;
 }
 
 export async function clientVerifyFilePermission(dirEntry: ILibraryEntry, mode: 'read' | 'readwrite' = 'readwrite'): Promise<boolean> {
@@ -45,7 +48,7 @@ export async function clientRequestFilePermission(dirEntry: ILibraryEntry, mode:
     }
     const options = {mode};
     // Check if permission was already granted
-    if (await dirEntry.dirHandle.queryPermission(options) === 'granted') {
+    if (await clientVerifyFilePermission(dirEntry, mode)) {
         return true;
     }
     // Request permission
@@ -61,7 +64,9 @@ export async function clientGetDirectoryEntry(libName: string) {
     const dirEntry = await get(libName);
     if (dirEntry) {
         const dirEntryObject = dirEntry as ILibraryEntry;
-        dirEntryObject.hasPermission = await clientVerifyFilePermission(dirEntryObject);
+        if (dirEntryObject.isLocal) {
+            dirEntryObject.hasPermission = await clientVerifyFilePermission(dirEntryObject);
+        }
         return dirEntryObject;
     } else {
         throw Error('No saved handle found. Prompt user to pick one.');
@@ -89,12 +94,11 @@ export async function clientGetImageLibraryFiles(dirEntry: ILibraryEntry, batchS
     return dirEntries;
 }
 
-export async function clientSyncLibraryFiles(dirEntry: ILibraryEntry) {
+export async function clientSyncLocalImageLibraryFiles(dirEntry: ILibraryEntry) {
     try {
         if (!dirEntry) {
-
             console.log('No saved handle found. Prompt user to pick one.');
-
+            return [];
         }
 
         const imgEntries: IImageEntry[] = [];
@@ -103,7 +107,13 @@ export async function clientSyncLibraryFiles(dirEntry: ILibraryEntry) {
         for await (const [name, handle] of dirEntry.dirHandle.entries()) {
             console.log('File:', name);
             if (handle.kind === 'file') {
-                imgEntries.push({name, handle: handle});
+                const imgEntry: IImageEntry = {
+                    key: name,
+                    name,
+                    handle: handle,
+                    isLocal: true,
+                }
+                imgEntries.push(imgEntry);
                 counter++;
                 if (counter >= maxSize) {
                     break; // Limit to batch size
