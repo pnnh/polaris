@@ -14,6 +14,7 @@ export interface PSImageModel {
     partition: string
     uid: string
     file_path: string
+    file_url: string
     ext_name: string
     channel_name: string
     name: string

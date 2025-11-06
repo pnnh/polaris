@@ -18,7 +18,14 @@ export async function useServerConfig(): Promise<IServerConfig> {
     if (serverConfigInstance) {
         return serverConfigInstance
     }
-    const configUrl = process.env.CONFIG;
+    let configUrl = process.env.CONFIG;
+    if (!configUrl) {
+        throw new Error('CONFIG environment variable is required')
+    }
+    if (configUrl.startsWith("env://")) {
+        const envName = configUrl.substring(6)
+        configUrl = process.env[envName];
+    }
     if (!configUrl) {
         throw new Error('CONFIG environment variable is required')
     }
@@ -29,7 +36,7 @@ export async function useServerConfig(): Promise<IServerConfig> {
         env: runMode,
         svc: "polaris"
     }
-    const appConfig = initAppConfig(configUrl, configOptions)
+    const appConfig = await initAppConfig(configUrl, configOptions)
     const selfUrl = await appConfig.GetString('app.PUBLIC_POLARIS_URL');
     const portalUrl = await appConfig.GetString('app.PUBLIC_PORTAL_URL');
     const turnstile = await appConfig.GetString('app.CLOUDFLARE_PUBLIC_TURNSTILE');

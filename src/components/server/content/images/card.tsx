@@ -8,12 +8,11 @@ import {PSImageServer} from "@/components/server/image";
 import {getDefaultImageUrl, getDefaultNoteImageByUid} from "@/components/common/note";
 import {PSImageModel} from "@/components/common/models/image";
 
-export function ImageCard({model, lang, imagesUrl}: {
-    model: PSImageModel, lang: string, imagesUrl: string
+export function ImageCard({model, lang}: {
+    model: PSImageModel, lang: string,
 }) {
     const readUrl = `${lang}/images/${uuidToBase58(model.uid || model.uid)}`
-    let imageUrl = imagesUrl && model.file_path ? `${imagesUrl}/${model.file_path}` :
-        getDefaultImageUrl()
+    let imageUrl = model.file_url || getDefaultImageUrl()
 
     return <div className={styles.middleItem} key={model.uid}>
         <div className={styles.imageCover} data-article={model.uid}>

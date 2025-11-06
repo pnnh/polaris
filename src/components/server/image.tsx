@@ -15,8 +15,9 @@ export function PSImageServer({lang, src, alt, width, height, fill, sizes, style
     width = width ? width : 256
     height = height ? height : 256
     return <PSComponentLayout comId={comId} lang={lang}
-                              inlineStyle={inlineStyle}><img src={imageUrl} alt={alt} width={width}
-                                                             height={height}
-                                                             sizes={sizes} style={style}></img>
+                              inlineStyle={inlineStyle}>
+        <img src={imageUrl} alt={alt} width={width}
+             height={height}
+             sizes={sizes} style={style}></img>
     </PSComponentLayout>
 }

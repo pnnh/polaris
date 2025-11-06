@@ -101,7 +101,7 @@ function setupSqlite() {
     };
 }
 
-$(async function () {
+function setupNow() {
     (window as any).isClient = true
     window.Prism = window.Prism || {};
     window.Prism.manual = true;     // 禁止Prism自动高亮代码块，否则会导致服务端和客户端渲染结果不一致错误
@@ -110,11 +110,18 @@ $(async function () {
     if (clientConfig && clientConfig.PUBLIC_TURNSTILE) {
         const turnstileKey = clientConfig.PUBLIC_TURNSTILE;
         const lang = navigator.language;
+        console.log('Cloudflare Turnstile setup, lang:', lang);
         (window as any).onloadTurnstileCallback = () => {
             console.info('onloadTurnstileCallback')
             cfTurnstileSetup(turnstileKey, lang);
         }
     }
+}
+
+// 需要页面加载后立即执行的初始化，不用等待页面完全加载
+setupNow()
+
+$(async function () {
     const lang = document.documentElement.lang || langEnUS;
     setupPWA(lang)
 

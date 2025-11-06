@@ -37,8 +37,9 @@ self.onmessage = async (event) => {
             //returnValue: 'rowsAffected'  // Optional: Returns number of affected rows (e.g., 1)
         });
         const affectedRows = db.changes();  // Returns number (e.g., 1 for single insert)
-        const newId = db.lastID();          // Returns the auto-incremented ID (e.g., 1)
-        console.log(`Inserted ${affectedRows} row(s) with ID: ${newId}`);  // e.g., "Inserted 1 row(s) with ID: 1"
+        console.log('Changed rows:', affectedRows);
+        // const newId = db.lastID();          // Returns the auto-incremented ID (e.g., 1)
+        // console.log(`Inserted ${affectedRows} row(s) with ID: ${newId}`);  // e.g., "Inserted 1 row(s) with ID: 1"
         const rows: any[] = [];
         const result = db.exec({
             sql: 'SELECT * FROM users',
