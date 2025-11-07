@@ -15,9 +15,12 @@ COPY package.json package-lock.json ./
 RUN npm install
 
 FROM deps AS builder
+
+ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
 RUN npx vite build
 RUN npm run build
 RUN npm run test
@@ -35,7 +38,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 
 USER nextjs
 
-EXPOSE 7100
+ENV NODE_ENV=production
 ENV PORT=7100
 ENV HOSTNAME="0.0.0.0"
 

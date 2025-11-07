@@ -1,18 +1,14 @@
-/** @jest-environment jsdom */
-
-import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
+import {expect, test} from 'vitest'
+import {render, screen} from '@testing-library/react'
 import {PSImage} from "@/components/client/image";
 
-describe('PSImage', () => {
-    it('renders a img', () => {
-        const imgSrc = '/abc.jpg'
-        const imgAlt = 'test image'
-        render(<PSImage src={imgSrc} alt={imgAlt} />)
+test('renders a img', () => {
+    const imgSrc = 'http://localhost:3000/abc.jpg'
+    const imgAlt = 'test image'
+    render(<PSImage src={imgSrc} alt={imgAlt}/>)
 
-        const imgTag = screen.getByAltText(imgAlt)
+    const imgTag = screen.getByAltText(imgAlt)
 
-        expect(imgTag).toBeInTheDocument()
-        expect(imgTag).toHaveAttribute('src', imgSrc)
-    })
+    expect(imgTag).toBeDefined()
+    expect(imgTag).toHaveProperty('src', imgSrc)
 })

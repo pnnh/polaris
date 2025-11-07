@@ -14,8 +14,8 @@
     "useDefineForClassFields": false,
     "module": "ESNext",
     "target": "ESNext",
-    "moduleResolution": "node",
-    "skipLibCheck": false,
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
@@ -47,12 +47,9 @@
   },
   "include": [
     "src/**/*",
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "docker/build/types/**/*.ts",
-    "build/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
