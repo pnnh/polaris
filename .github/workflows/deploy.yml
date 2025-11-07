@@ -45,7 +45,7 @@ jobs:
 
       - name: Create Tag and Release
         id: release
-        uses: rymndhng/release-on-push-action@v1.9.1  # Pin to a version for stability
+        uses: rymndhng/release-on-push-action@v0.28.0  # Pin to a version for stability
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
