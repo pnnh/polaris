@@ -1,0 +1,36 @@
+name: Build and Deploy to GHCR
+
+on:
+  push:
+    branches: [main]  # Trigger on push to main; adjust as needed
+
+permissions:
+  contents: read
+  packages: write  # Required for pushing to GHCR
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          load: true
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
+            ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:${{ github.sha }}  # Tag with commit SHA for versioning
+          cache-from: type=gha  # Use GitHub Actions cache for faster builds
+          cache-to: type=gha,mode=max
