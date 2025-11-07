@@ -55,7 +55,7 @@ jobs:
           use_github_release_notes: true  # Use GitHub's auto-generated notes
           max_commits: 50  # Limit notes to recent commits
 
-      - name: Log Release Info (optional)
+      - name: Log Release Info
         run: |
           echo "Created tag: ${{ steps.release.outputs.tag_name }}"
           echo "Release URL: ${{ steps.release.outputs.html_url }}"
