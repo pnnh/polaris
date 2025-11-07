@@ -37,8 +37,6 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           context: .
           push: true
-          tags: |
-            ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
-            ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:${{ github.sha }}  # Tag with commit SHA for versioning
+          tags: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
           cache-from: type=gha  # Use GitHub Actions cache for faster builds
           cache-to: type=gha,mode=max
