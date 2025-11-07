@@ -5,8 +5,9 @@ on:
     branches: [main]  # Trigger on push to main; adjust as needed
 
 permissions:
-  contents: read
+  contents: write   # Required for tagging and releasing
   packages: write  # Required for pushing to GHCR
+  pull-requests: read  # Required for label-based overrides
 
 jobs:
   build-and-push:
@@ -17,6 +18,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive  # This enables recursive submodule checkout
+          fetch-depth: 0  # Fetch all history for accurate versioning
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -40,3 +42,20 @@ jobs:
           tags: ghcr.io/${{ github.repository_owner }}/${{ github.event.repository.name }}:latest
           cache-from: type=gha  # Use GitHub Actions cache for faster builds
           cache-to: type=gha,mode=max
+
+      - name: Create Tag and Release
+        id: release
+        uses: rymndhng/release-on-push-action@v1.9.1  # Pin to a version for stability
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          bump_version_scheme: minor  # Default: minor; options: major, patch, norelease
+          tag_prefix: v  # Prefix for tags, e.g., v1.2.3
+          release_name: Release ${{ steps.release.outputs.version }}
+          use_github_release_notes: true  # Use GitHub's auto-generated notes
+          max_commits: 50  # Limit notes to recent commits
+
+      - name: Log Release Info (optional)
+        run: |
+          echo "Created tag: ${{ steps.release.outputs.tag_name }}"
+          echo "Release URL: ${{ steps.release.outputs.html_url }}"
