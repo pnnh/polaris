@@ -1,16 +1,16 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import {getClientIp, getPathname} from "@/components/server/pathname";
-import {tryBase58ToUuid, mustBase58ToUuid, uuidToBase58} from "@/atom/common/utils/basex";
-import {CodeOk, CommonResult, SymbolUnknown} from "@/atom/common/models/protocol";
+import {getPathname} from "@/components/server/pathname";
+import {mustBase58ToUuid, tryBase58ToUuid, uuidToBase58} from "@/atom/common/utils/basex";
 import {useServerConfig} from "@/components/server/config";
-import {getLangDefault, langEn, langZh, localText} from "@/atom/common/language";
+import {langZh, localText} from "@/atom/common/language";
 import {notFound, redirect} from "next/navigation";
-import ConsoleLayout from "@/components/server/console/layout";
 import {ConsoleArticleForm} from "@/app/[lang]/console/articles/[uid]/form";
-import {serverConsoleGetArticle, serverGetArticle} from "@/components/server/articles/articles";
+import {serverConsoleGetArticle} from "@/components/server/articles/articles";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
+import GlobalLayout from "@/components/server/global";
+import styles from './page.module.scss'
 
 export const dynamic = "force-dynamic";
 
@@ -96,8 +96,14 @@ export default async function Home({params, searchParams}: {
         }
     }
     const modelString = JSON.stringify(model)
-    return <ConsoleLayout lang={pageLang} searchParams={await searchParams} pathname={pathname}
-                          metadata={metadata} userInfo={SymbolUnknown}>
-        <ConsoleArticleForm portalUrl={portalUrl} modelString={modelString} lang={pageLang} copyFrom={copyFrom}/>
-    </ConsoleLayout>
+    return <GlobalLayout lang={pageLang} metadata={metadata}>
+        <div className={styles.articlesPage}>
+            <div className={styles.pageContainer}>
+                <ConsoleArticleForm portalUrl={portalUrl} modelString={modelString} lang={pageLang}
+                                    copyFrom={copyFrom}/>
+
+            </div>
+
+        </div>
+    </GlobalLayout>
 }

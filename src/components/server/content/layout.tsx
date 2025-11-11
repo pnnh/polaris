@@ -38,7 +38,7 @@ export default async function ContentLayout({
         <div className={styles.templateContainer}>
             <div className={styles.templateNavbar}>
                 <ContentPublicNavbar pathname={pathname} searchParams={searchParams} lang={lang}
-                                     userInfo={currentUserInfo} pandoraUrl={pandoraUrl}/>
+                                     userInfo={currentUserInfo}/>
             </div>
             <div id={templateBodyId} className={styles.templateBody}>
                 <div className={styles.bodyContainer}>

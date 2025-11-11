@@ -1,6 +1,6 @@
 import styles from './navbar.module.scss'
 import Image from 'next/image'
-import React, {CSSProperties} from "react";
+import React from "react";
 import {SiteNavMenu} from "@/components/server/content/partials/profile";
 import {UserAction} from "@/components/server/content/partials/userinfo";
 import {ContentSearchAction} from "@/components/server/content/partials/search";
@@ -8,17 +8,16 @@ import {useServerConfig} from "@/components/server/config";
 import {AccountModel} from "@/atom/common/models/account";
 import AppsIcon from '@mui/icons-material/Apps';
 import {PSLanguageSelector} from "./language";
-import {getPathname, getSearchString} from "@/components/server/pathname";
+import {getSearchString} from "@/components/server/pathname";
 import MenuIcon from '@mui/icons-material/Menu';
 import {ThemeSwitch} from "@/components/server/content/partials/theme";
 import {getServerTheme} from "@/components/server/theme";
 
-export async function ContentPublicNavbar({pathname, searchParams, lang, userInfo, pandoraUrl}: {
+export async function ContentPublicNavbar({pathname, searchParams, lang, userInfo}: {
     pathname: string,
     searchParams: Record<string, string>,
     lang: string,
-    userInfo: AccountModel | undefined,
-    pandoraUrl: string
+    userInfo: AccountModel | undefined
 }) {
     const serverConfig = await useServerConfig()
 
@@ -39,7 +38,7 @@ export async function ContentPublicNavbar({pathname, searchParams, lang, userInf
             <PSLanguageSelector lang={lang} currentUrl={currentUrl}/>
             <UserAction lang={lang} portalUrl={serverConfig.PUBLIC_PORTAL_URL}
                         userInfo={userInfo}/>
-            <a className={styles.toolsLink} href={pandoraUrl}><AppsIcon/></a>
+            <a className={styles.toolsLink} href={`/${lang}/tools`}><AppsIcon/></a>
         </div>
         <div className={styles.rightNavMobile}>
             <PSLanguageSelector lang={lang} currentUrl={currentUrl}/>
