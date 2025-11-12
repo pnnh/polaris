@@ -1,10 +1,12 @@
 import {IBrowserConfig} from "@/components/common/config";
 import {ConfigOptions, initAppConfig} from "@/atom/server/config/config";
+import {serverGetGlobalVariable, serverSetGlobalVariable} from "@/atom/server/global";
 
 export interface IServerConfig {
     RUN_MODE: string
     PUBLIC_SELF_URL: string
     PUBLIC_PORTAL_URL: string
+    INTERNAL_PORTAL_URL: string
     CLOUDFLARE_PUBLIC_TURNSTILE: string
     PUBLIC_PANDORA_URL: string
     PUBLIC_LIGHTNING_URL: string
@@ -12,9 +14,10 @@ export interface IServerConfig {
     PUBLIC_IMAGES_URL: string
 }
 
-let serverConfigInstance: IServerConfig | undefined;
+const serverConfigKey = 'SERVER_CONFIG';
 
 export async function useServerConfig(): Promise<IServerConfig> {
+    let serverConfigInstance = serverGetGlobalVariable(serverConfigKey) as IServerConfig | undefined;
     if (serverConfigInstance) {
         return serverConfigInstance
     }
@@ -39,6 +42,7 @@ export async function useServerConfig(): Promise<IServerConfig> {
     const appConfig = await initAppConfig(configUrl, configOptions)
     const selfUrl = await appConfig.GetString('app.PUBLIC_POLARIS_URL');
     const portalUrl = await appConfig.GetString('app.PUBLIC_PORTAL_URL');
+    const internalPortalUrl = await appConfig.GetString('app.INTERNAL_PORTAL_URL');
     const turnstile = await appConfig.GetString('app.CLOUDFLARE_PUBLIC_TURNSTILE');
     const pandoraUrl = await appConfig.GetString('app.PUBLIC_PANDORA_URL');
     const lightningUrl = await appConfig.GetString('app.PUBLIC_LIGHTNING_URL');
@@ -50,6 +54,9 @@ export async function useServerConfig(): Promise<IServerConfig> {
     }
     if (!portalUrl) {
         throw new Error('PUBLIC_PORTAL_URL is required')
+    }
+    if (!internalPortalUrl) {
+        throw new Error('internalPortalUrl is required')
     }
     if (!turnstile) {
         throw new Error('PUBLIC_TURNSTILE is required')
@@ -75,7 +82,9 @@ export async function useServerConfig(): Promise<IServerConfig> {
         PUBLIC_LIGHTNING_URL: lightningUrl,
         DATABASE_URL: databaseUrl,
         PUBLIC_IMAGES_URL: imagesUrl,
+        INTERNAL_PORTAL_URL: internalPortalUrl,
     };
+    serverSetGlobalVariable(serverConfigKey, serverConfigInstance);
 
     return serverConfigInstance;
 }

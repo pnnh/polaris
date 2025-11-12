@@ -12,8 +12,11 @@ let nextConfig = {
     output: 'standalone',
     reactStrictMode: true,
     pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
+    productionBrowserSourceMaps: true,
+    enablePrerenderSourceMaps: true,
     experimental: {
         esmExternals: true,
+        serverSourceMaps: true,
         serverActions: {
             allowedOrigins: ['huable.local', "*.huable.local"],
         },
@@ -38,7 +41,12 @@ let nextConfig = {
         silenceDeprecations: ['legacy-js-api'],
     },
     compiler: {
-        removeConsole: isProd,
+        removeConsole: {
+            exclude: ['error', 'warn', 'log']
+        },
+        emotion: {
+            sourceMap: true
+        }
     },
 }
 const withBundleAnalyzer = bundleAnalyzer({

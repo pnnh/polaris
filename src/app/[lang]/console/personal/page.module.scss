@@ -1,0 +1,38 @@
+.personalPage {
+
+  .libGrid {
+    margin-top: 1rem;
+
+    .libHeader {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      gap: 1rem;
+      background-color: #f0f0f0;
+
+      .libLink {
+        font-size: 1.2rem;
+        color: #000;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+
+        &:hover {
+          background-color: #f0f0f0;
+        }
+      }
+    }
+
+    .libBody {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 1rem;
+
+      .libCard {
+        border: solid 1px #ccc;
+        min-height: 4rem;
+      }
+
+    }
+  }
+}

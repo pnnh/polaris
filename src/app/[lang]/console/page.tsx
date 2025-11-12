@@ -41,63 +41,19 @@ export default async function Page({params, searchParams}: {
                 </div>
                 <div className={styles.libGrid}>
                     <div className={styles.libHeader}>
-                        <a className={styles.libLink}>最近笔记</a>
-                        <a href={`/${lang}/console/articles`} className={styles.libLink}>全部笔记</a>
-                    </div>
-                    <div className={styles.libBody}>
-                        <div className={styles.libCard}>
-                            <ComputerIcon/>
-                            本地笔记库
-                        </div>
-                        <div className={styles.libCard}>
-                            <ComputerIcon/>
-                            <a href={`/${lang}/console/images`} className={styles.libLink}>本地图片库</a>
-                        </div>
-                        <div className={styles.libCard}>
-                            <CloudQueueIcon/>
-                            远程笔记库
-                        </div>
-                        <div className={styles.libCard}>
-                            <CloudQueueIcon/>
-                            <a href={`/${lang}/console/images`} className={styles.libLink}>远程图片库</a></div>
-
-                    </div>
-                </div>
-                <div className={styles.libGrid}>
-                    <div className={styles.libHeader}>
-                        <a className={styles.libLink}>最近图片</a>
-                        <a href={`/${lang}/console/images`} className={styles.libLink}>全部图片</a>
-                    </div>
-                    <div className={styles.libBody}>
-                        <div className={styles.libCard}>
-                            <ComputerIcon/>
-                            本地笔记库
-                        </div>
-                        <div className={styles.libCard}>
-                            <ComputerIcon/>
-                            <a href={`/${lang}/console/images`} className={styles.libLink}>本地图片库</a>
-                        </div>
-                        <div className={styles.libCard}>
-                            <CloudQueueIcon/>
-                            远程笔记库
-                        </div>
-                        <div className={styles.libCard}>
-                            <CloudQueueIcon/>
-                            <a href={`/${lang}/console/images`} className={styles.libLink}>远程图片库</a></div>
-
-                    </div>
-                </div>
-                <div className={styles.libGrid}>
-                    <div className={styles.libHeader}>
                         {/*展示本地和远程库列表，数据存储在本地；使用角标显示不同库类型；主要区别是本地库是否关联了远程库的地址，类似Git；
                     当点击库链接时，根据库类型千万不同页面视图（笔记或图片，本地或远程）；*/}
-                        <a className={styles.libLink}>最近使用的库</a>
-                        <a href={`/${lang}/console/libraries`} className={styles.libLink}>全部库</a>
+                        <a className={styles.libLink}>个人目录</a>
+                        <a href={`/${lang}/console/personal`} className={styles.libLink}>个人主页</a>
                     </div>
                     <div className={styles.libBody}>
                         <div className={styles.libCard}>
                             <ComputerIcon/>
-                            本地笔记库
+                            最近笔记1
+                        </div>
+                        <div className={styles.libCard}>
+                            <ComputerIcon/>
+                            最近笔记2
                         </div>
                         <div className={styles.libCard}>
                             <ComputerIcon/>
@@ -105,18 +61,39 @@ export default async function Page({params, searchParams}: {
                         </div>
                         <div className={styles.libCard}>
                             <CloudQueueIcon/>
-                            远程笔记库
+                            最近笔记库
                         </div>
                         <div className={styles.libCard}>
                             <CloudQueueIcon/>
-                            <a href={`/${lang}/console/images`} className={styles.libLink}>远程图片库</a></div>
+                            <a href={`/${lang}/console/images`} className={styles.libLink}>最近图片库</a></div>
 
                     </div>
                 </div>
                 <div className={styles.libGrid}>
                     <div className={styles.libHeader}>
-                        <a className={styles.libLink}>最近使用的频道</a>
-                        <a href={`/${lang}/console/channels`} className={styles.libLink}>全部频道</a>
+                        <a className={styles.libLink}>社区目录</a>
+                        <a href={`/${lang}/console/community`} className={styles.libLink}>社区主页</a>
+                    </div>
+                    <div className={styles.libBody}>
+                        <div className={styles.libCard}>
+                            <ComputerIcon/>
+                            频道1
+                        </div>
+                        <div className={styles.libCard}>
+                            <ComputerIcon/>
+                            <a href={`/${lang}/console/images`} className={styles.libLink}>本地图片库</a>
+                        </div>
+                        <div className={styles.libCard}>
+                            <CloudQueueIcon/>
+                            频道2
+                        </div>
+
+                    </div>
+                </div>
+                <div className={styles.libGrid}>
+                    <div className={styles.libHeader}>
+                        <a className={styles.libLink}>管理目录</a>
+                        <a href={`/${lang}/console/management`} className={styles.libLink}>管理主页</a>
                     </div>
                     <div className={styles.libBody}>
                         <div className={styles.libCard}>

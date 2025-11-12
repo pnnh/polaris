@@ -1,5 +1,4 @@
-import {ConfigEnv, loadEnv, UserConfig} from 'vite';
-import {defineConfig} from 'vite';
+import {defineConfig, loadEnv, UserConfig} from 'vite';
 import react from "@vitejs/plugin-react-swc"
 import path from "path";
 
@@ -15,7 +14,7 @@ export default defineConfig((configEnv) => {
         base: '/',
         publicDir: 'assets',    // 不存在的目录
         build: {
-            sourcemap: !isProd,
+            sourcemap: true,    // 本就是开源项目，生产环境也生成 sourcemap 方便排查问题
             minify: 'esbuild',
             outDir: `public`,
             emptyOutDir: false, // 不要清空输出目录，因为还有其他资源文件
