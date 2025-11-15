@@ -10,7 +10,7 @@ import {serverConsoleGetChannel} from "@/components/server/channels/channels";
 import {useServerConfig} from "@/components/server/config";
 import {ConsoleChannelForm} from "./form";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
-import {PSChannelModel} from "@/photon/common/models/channel";
+import {PSChannelModel} from "@/components/common/models/channel";
 
 export const dynamic = "force-dynamic";
 

@@ -2,7 +2,7 @@ import React from 'react'
 import {getPathname} from "@/components/server/pathname";
 import styles from './page.module.scss'
 import {SymbolUnknown} from "@/atom/common/models/protocol";
-import {PSChannelModel} from "@/photon/common/models/channel";
+import {PSChannelModel} from "@/components/common/models/channel";
 import {NoData} from "@/components/common/empty";
 import {uuidToBase58} from "@/atom/common/utils/basex";
 import {EmptyUUID, isValidUUID} from "@/atom/common/utils/uuid";

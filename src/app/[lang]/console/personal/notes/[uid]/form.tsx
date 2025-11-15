@@ -6,7 +6,7 @@ import {ConsoleArticleEditor} from "./editor";
 import Button from "@mui/material/Button";
 import React from "react";
 import {TocItem} from "@/atom/common/models/toc";
-import {PSArticleModel} from "@/photon/common/models/article";
+import {PSArticleModel} from "@/components/common/models/article";
 import {clientConsoleInsertArticle, clientConsoleUpdateArticle} from "@/components/client/articles/articles";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
 import {getDefaultImageUrl} from "@/components/common/note";

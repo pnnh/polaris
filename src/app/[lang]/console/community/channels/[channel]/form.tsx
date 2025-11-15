@@ -4,7 +4,7 @@ import styles from "./form.module.scss";
 import {FormControlLabel, Radio, RadioGroup} from "@mui/material";
 import Button from "@mui/material/Button";
 import React from "react";
-import {PSChannelModel} from "@/photon/common/models/channel";
+import {PSChannelModel} from "@/components/common/models/channel";
 import {clientConsoleInsertChannel, clientConsoleUpdateChannel} from "@/components/client/channels/channels";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
 import {getDefaultImageUrl} from "@/components/common/note";

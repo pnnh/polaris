@@ -3,9 +3,9 @@
 import styles from './assets.module.scss'
 import React, {useEffect, useState} from "react";
 import {getIcon} from "material-file-icons";
-import {FaAngleRight, FaAngleDown} from "react-icons/fa6";
-import {CommonResult, PLSelectResult} from "@/atom/common/models/protocol";
-import {PSArticleFileModel} from "@/photon/common/models/article";
+import {FaAngleDown, FaAngleRight} from "react-icons/fa6";
+import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PSArticleFileModel} from "@/components/common/models/article";
 import {encodeBase64String} from "@/atom/common/utils/basex";
 import {clientMakeGet} from "@/atom/client/http";
 import {useAtom} from "jotai";

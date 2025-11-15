@@ -2,7 +2,7 @@ import React from 'react'
 import './page.scss'
 import {getPathname} from "@/components/server/pathname";
 import {UuidToolBody} from "@/components/client/tools/uuid/tool";
-import {CommentsClient} from "@/photon/client/comments/comments";
+import {CommentsClient} from "@/components/client/comments/comments";
 import {useServerConfig} from "@/components/server/config";
 import {langEn} from "@/atom/common/language";
 import {PageMetadata} from "@/components/common/utils/page";

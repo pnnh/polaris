@@ -8,7 +8,7 @@ import {PaginationServer} from "@/components/server/pagination";
 import {ArticleRankCard} from "@/components/server/content/article/rank";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import queryString from "query-string";
-import {PSArticleModel} from "@/photon/common/models/article";
+import {PSArticleModel} from "@/components/common/models/article";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
 import {ArticleFilterBar} from "@/components/server/content/article/filter";

@@ -1,5 +1,5 @@
 import {CodeOk, CommonResult, PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
-import {PSChannelModel} from "@/photon/common/models/channel";
+import {PSChannelModel} from "@/components/common/models/channel";
 import {serverMakeGet} from "@/atom/server/http";
 import {cookies} from "next/headers";
 import queryString from "query-string";

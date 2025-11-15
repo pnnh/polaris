@@ -1,8 +1,8 @@
 import React from "react";
 
 import {generateUuidV7, stringToMd5} from "@/atom/common/utils/basex";
-import {StyleTag} from "@/components/common/style";
 import {isValidUUID} from "@/atom/common/utils/uuid";
+import {StyleTag} from "@/components/client/style";
 
 export function css(text: TemplateStringsArray, ...values: any[]) {
     let str = '';

@@ -7,7 +7,7 @@ import {langZh, localText} from "@/atom/common/language";
 import {notFound, redirect} from "next/navigation";
 import {ConsoleArticleForm} from "./form";
 import {serverConsoleGetArticle} from "@/components/server/articles/articles";
-import {PSArticleModel} from "@/photon/common/models/article";
+import {PSArticleModel} from "@/components/common/models/article";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
 import GlobalLayout from "@/components/server/global";
 import styles from './page.module.scss'

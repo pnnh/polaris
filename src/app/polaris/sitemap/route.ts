@@ -3,7 +3,7 @@ import {SitemapItemLoose, SitemapStream, streamToPromise} from 'sitemap'
 import {Readable} from 'stream'
 import {useServerConfig} from "@/components/server/config";
 import {PLSelectResult} from "@/atom/common/models/protocol";
-import {PSArticleModel} from "@/photon/common/models/article";
+import {PSArticleModel} from "@/components/common/models/article";
 import {uuidToBase58} from "@/atom/common/utils/basex";
 import {serverMakeGet} from "@/atom/server/http";
 

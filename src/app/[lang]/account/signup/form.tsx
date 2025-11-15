@@ -5,8 +5,8 @@ import React, {useState} from "react";
 import {validateEmail} from "@/atom/common/utils/email";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
-import {getTurnstileToken} from "@/photon/client/cloudflare/turnstile";
-import {submitSignup} from "@/photon/client/account/account";
+import {getTurnstileToken} from "@/components/client/cloudflare/turnstile";
+import {submitSignup} from "@/components/client/account/account";
 import {localText} from "@/atom/common/language";
 import {transText} from "@/components/common/locales/normal";
 

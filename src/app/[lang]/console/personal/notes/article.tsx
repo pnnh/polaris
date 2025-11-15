@@ -1,6 +1,6 @@
-import {PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
+import {PLSelectData} from "@/atom/common/models/protocol";
 import {NoData} from "@/components/common/empty";
-import {PSArticleModel} from "@/photon/common/models/article";
+import {PSArticleModel} from "@/components/common/models/article";
 import {uuidToBase58} from "@/atom/common/utils/basex";
 import {getDefaultNoteImageByUid} from "@/components/common/note";
 import {isValidUUID} from "@/atom/common/utils/uuid";

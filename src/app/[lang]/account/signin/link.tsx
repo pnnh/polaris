@@ -1,9 +1,9 @@
 'use client'
 
 import styles from "./link.module.scss";
-import {IAuthApp} from "@/photon/common/models/auth";
+import {IAuthApp} from "@/components/common/models/auth";
 import {useEffect, useState} from "react";
-import {accountSignin, permitAppLogin, queryAuthApp} from "@/photon/client/account/account";
+import {permitAppLogin, queryAuthApp} from "@/components/client/account/account";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {Loading} from "@/components/common/loading";
 import {localText} from "@/atom/common/language";

@@ -1,9 +1,9 @@
 import {CodeOk, CommonResult, PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
-import {PSArticleModel} from "@/photon/common/models/article";
+import {PSArticleModel} from "@/components/common/models/article";
 import {serverMakeGet} from "@/atom/server/http";
 import {cookies} from "next/headers";
 import {getDefaultImageUrl} from "@/components/common/note";
-import {getLangDefault, isSupportedLanguage, langEn, localText} from "@/atom/common/language";
+import {isSupportedLanguage, localText} from "@/atom/common/language";
 import queryString from "query-string";
 
 export async function serverGetArticle(portalUrl: string, uid: string): Promise<PSArticleModel | undefined> {

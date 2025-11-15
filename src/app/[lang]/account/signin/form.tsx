@@ -1,11 +1,11 @@
 'use client'
 
 import styles from './form.module.scss'
-import {getTurnstileToken} from "@/photon/client/cloudflare/turnstile";
+import {getTurnstileToken} from "@/components/client/cloudflare/turnstile";
 import React, {useState} from "react";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
-import {accountSignin} from "@/photon/client/account/account";
+import {accountSignin} from "@/components/client/account/account";
 import {transText} from "@/components/common/locales/normal";
 import {localText} from "@/atom/common/language";
 import {accountTransText} from "@/components/common/locales/account";
