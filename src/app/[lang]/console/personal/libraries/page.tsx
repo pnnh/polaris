@@ -1,14 +1,14 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import {langEn, localText} from "@/atom/common/language";
+import {langEn} from "@/atom/common/language";
 import styles from './page.module.scss'
 import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {isAnonymousAccount} from "@/atom/common/models/account";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
 import GlobalLayout from "@/components/server/global";
-import {ConsoleLibraryFilterBar} from "@/app/[lang]/console/libraries/filter";
-import {ConsoleLibraryMiddleBody} from "@/app/[lang]/console/libraries/library";
+import {ConsoleLibraryFilterBar} from "./filter";
+import {ConsoleLibraryMiddleBody} from "./library";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,

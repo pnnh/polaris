@@ -1,21 +1,19 @@
 'use client'
 
 import styles from "./form.module.scss";
-import {generatorRandomString, STSubString} from "@/atom/common/utils/string";
-import {ConsoleArticleEditor} from "@/app/[lang]/console/articles/[uid]/editor";
+import {generatorRandomString} from "@/atom/common/utils/string";
+import {ConsoleArticleEditor} from "./editor";
 import Button from "@mui/material/Button";
 import React from "react";
 import {TocItem} from "@/atom/common/models/toc";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {clientConsoleInsertArticle, clientConsoleUpdateArticle} from "@/components/client/articles/articles";
-import {EmptyUUID, isEmptyUUID} from "@/atom/common/utils/uuid";
+import {EmptyUUID} from "@/atom/common/utils/uuid";
 import {getDefaultImageUrl} from "@/components/common/note";
 import {uuidToBase58} from "@/atom/common/utils/basex";
 import {isLangEn, langEn, langZh, localText} from "@/atom/common/language";
 import MenuItem from '@mui/material/MenuItem';
-import {
-    supportedLanguages
-} from "@/components/common/language";
+import {supportedLanguages} from "@/components/common/language";
 import {Select} from "@mui/material";
 
 function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (newLang: string) => void }) {

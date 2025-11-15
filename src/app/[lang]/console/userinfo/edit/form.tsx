@@ -4,6 +4,7 @@ import styles from "./form.module.scss";
 import {AccountModel, getAccountUrn} from "@/atom/common/models/account";
 import {useState} from "react";
 import {localText} from "@/atom/common/language";
+import {sanitizeUrl} from "@/atom/common/utils/uri";
 
 export function UserinfoEditForm({portalUrl, userInfo, lang}: {
     portalUrl: string,
@@ -53,7 +54,7 @@ export function UserinfoEditForm({portalUrl, userInfo, lang}: {
         <div className={styles.userInfoCard}>
             <div className={styles.avatarContainer}>
                 <div className={styles.avatar}>
-                    <img src={userInfo.photoUrl} alt="User Avatar"/>
+                    <img src={sanitizeUrl(userInfo.photoUrl)} alt="User Avatar"/>
                 </div>
                 <input id={"fileInput"} type="file" name="file"/>
 

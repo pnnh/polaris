@@ -1,7 +1,7 @@
 'use client'
 
 import queryString from "query-string";
-import {CodeOk, PLInsertResult, PLSelectResult, PLUpdateResult} from "@/atom/common/models/protocol";
+import {CodeOk, PLSelectResult} from "@/atom/common/models/protocol";
 
 import {clientMakeGet} from "@/atom/client/http";
 
@@ -23,7 +23,7 @@ export interface PSLibraryModel {
 
 export async function clientConsoleSelectLibraries(portalUrl: string, selectQuery: Record<string, any>) {
     const rawQuery = queryString.stringify(selectQuery)
-    const url = `${portalUrl}/console/libraries?${rawQuery}`
+    const url = `${portalUrl}/console/personal/libraries?${rawQuery}`
     const selectResult = await clientMakeGet<PLSelectResult<PSLibraryModel>>(url)
 
     if (!selectResult || selectResult.code !== CodeOk || !selectResult.data) {

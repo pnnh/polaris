@@ -5,7 +5,7 @@ import {mustBase58ToUuid, tryBase58ToUuid, uuidToBase58} from "@/atom/common/uti
 import {useServerConfig} from "@/components/server/config";
 import {langZh, localText} from "@/atom/common/language";
 import {notFound, redirect} from "next/navigation";
-import {ConsoleArticleForm} from "@/app/[lang]/console/articles/[uid]/form";
+import {ConsoleArticleForm} from "./form";
 import {serverConsoleGetArticle} from "@/components/server/articles/articles";
 import {PSArticleModel} from "@/photon/common/models/article";
 import {EmptyUUID} from "@/atom/common/utils/uuid";

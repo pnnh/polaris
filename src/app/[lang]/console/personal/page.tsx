@@ -63,7 +63,7 @@ export default async function Page({params, searchParams}: {
                     </div>
                     <div className={styles.libCard}>
                         <ComputerIcon/>
-                        <a href={`/${lang}/console/images`} className={styles.libLink}>本地图片库</a>
+                        <a href={`/${lang}/console/personal/images`} className={styles.libLink}>本地图片库</a>
                     </div>
                     <div className={styles.libCard}>
                         <CloudQueueIcon/>
@@ -71,7 +71,7 @@ export default async function Page({params, searchParams}: {
                     </div>
                     <div className={styles.libCard}>
                         <CloudQueueIcon/>
-                        <a href={`/${lang}/console/images`} className={styles.libLink}>最近图片库</a></div>
+                        <a href={`/${lang}/console/personal/images`} className={styles.libLink}>最近图片库</a></div>
 
                 </div>
             </div>
@@ -91,7 +91,7 @@ export default async function Page({params, searchParams}: {
                     </div>
                     <div className={styles.libCard}>
                         <ComputerIcon/>
-                        <a href={`/${lang}/console/images`} className={styles.libLink}>本地图片库</a>
+                        <a href={`/${lang}/console/personal/images`} className={styles.libLink}>本地图片库</a>
                     </div>
                     <div className={styles.libCard}>
                         <CloudQueueIcon/>
@@ -99,7 +99,7 @@ export default async function Page({params, searchParams}: {
                     </div>
                     <div className={styles.libCard}>
                         <CloudQueueIcon/>
-                        <a href={`/${lang}/console/images`} className={styles.libLink}>最近图片库</a></div>
+                        <a href={`/${lang}/console/personal/images`} className={styles.libLink}>最近图片库</a></div>
 
                 </div>
             </div>
@@ -119,7 +119,7 @@ export default async function Page({params, searchParams}: {
                     </div>
                     <div className={styles.libCard}>
                         <ComputerIcon/>
-                        <a href={`/${lang}/console/images`} className={styles.libLink}>本地图片库</a>
+                        <a href={`/${lang}/console/personal/images`} className={styles.libLink}>本地图片库</a>
                     </div>
                     <div className={styles.libCard}>
                         <CloudQueueIcon/>
@@ -127,7 +127,7 @@ export default async function Page({params, searchParams}: {
                     </div>
                     <div className={styles.libCard}>
                         <CloudQueueIcon/>
-                        <a href={`/${lang}/console/images`} className={styles.libLink}>最近图片库</a></div>
+                        <a href={`/${lang}/console/personal/images`} className={styles.libLink}>最近图片库</a></div>
 
                 </div>
             </div>

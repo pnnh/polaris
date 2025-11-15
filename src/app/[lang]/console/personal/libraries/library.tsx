@@ -79,6 +79,6 @@ function LibraryCard({model, lang, portalUrl}: {
 }) {
     return <div className={styles.libCard}>
         {model.isLocal ? <ComputerIcon/> : <CloudQueueIcon/>}
-        <a href={`/${lang}/console/images?libName=${encodeURIComponent(model.key)}`}>{model.name}</a>
+        <a href={`/${lang}/console/personal/images?libName=${encodeURIComponent(model.key)}`}>{model.name}</a>
     </div>
 }

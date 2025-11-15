@@ -1,7 +1,7 @@
 'use client'
 
 import queryString from "query-string";
-import {CodeOk, PLInsertResult, PLSelectResult, PLUpdateResult} from "@/atom/common/models/protocol";
+import {CodeOk, PLSelectResult} from "@/atom/common/models/protocol";
 
 import {clientMakeGet} from "@/atom/client/http";
 
@@ -21,7 +21,7 @@ export interface PSImageModel {
 
 export async function clientConsoleSelectImages(portalUrl: string, selectQuery: Record<string, any>) {
     const rawQuery = queryString.stringify(selectQuery)
-    const url = `${portalUrl}/console/images?${rawQuery}`
+    const url = `${portalUrl}/console/personal/images?${rawQuery}`
     const selectResult = await clientMakeGet<PLSelectResult<PSImageModel>>(url)
 
     if (!selectResult || selectResult.code !== CodeOk || !selectResult.data) {

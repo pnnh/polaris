@@ -2,9 +2,8 @@ import React from 'react'
 import styles from './page.module.scss'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
-import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
-import {tryBase58ToUuid, mustBase58ToUuid} from "@/atom/common/utils/basex";
-import {langEn, langZh, localText} from "@/atom/common/language";
+import {SymbolUnknown} from "@/atom/common/models/protocol";
+import {mustBase58ToUuid, tryBase58ToUuid} from "@/atom/common/utils/basex";
 import {notFound} from "next/navigation";
 import ConsoleLayout from "@/components/server/console/layout";
 import {serverConsoleGetChannel} from "@/components/server/channels/channels";

@@ -3,13 +3,9 @@
 import styles from "./filter.module.scss";
 import React from "react";
 import {transText} from "@/components/common/locales/normal";
-import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
-import {uuidToBase58} from "@/atom/common/utils/basex";
-import {EmptyUUID} from "@/atom/common/utils/uuid";
-import {localText} from "@/atom/common/language";
 
-export function ConsoleChannelFilterBar({lang, keyword}: {
+export function ConsoleImageFilterBar({lang, keyword}: {
     lang: string,
     keyword: string
 }) {
@@ -17,14 +13,11 @@ export function ConsoleChannelFilterBar({lang, keyword}: {
     const goSearch = () => {
         console.debug('go search', searchText);
     }
-    const goCreateChannel = () => {
-        window.location.href = `/${lang}/console/channels/${uuidToBase58(EmptyUUID)}`
-    }
     return <div className={styles.middleTop}>
         <div className={styles.topLeft}>
-            <Button size={'small'} variant={'contained'} onClick={goCreateChannel}>
-                {localText(lang, '新建频道', 'Create Channel')}
-            </Button>
+            {/*<Button size={'small'} variant={'contained'} onClick={goCreateArticle}>*/}
+            {/*    打开图片目录*/}
+            {/*</Button>*/}
         </div>
         <div className={styles.topRight}>
             <div className={styles.searchBox}>

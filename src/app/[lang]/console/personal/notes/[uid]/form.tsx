@@ -2,7 +2,7 @@
 
 import styles from "./form.module.scss";
 import {generatorRandomString} from "@/atom/common/utils/string";
-import {ConsoleArticleEditor} from "@/app/[lang]/console/articles/[uid]/editor";
+import {ConsoleArticleEditor} from "./editor";
 import Button from "@mui/material/Button";
 import React from "react";
 import {TocItem} from "@/atom/common/models/toc";
@@ -99,9 +99,7 @@ export function ConsoleArticleForm({portalUrl, modelString, lang, copyFrom}: {
         <div className={styles.articleContainer}>
             <ConsoleArticleEditor tocList={tocList} header={oldModel.header}
                                   body={bodyText} assetsUrl={'assetsUrl'} portalUrl={portalUrl}
-                                  onChange={(bodyText) => {
-                                      setBodyText(bodyText)
-                                  }}/>
+                                  onChange={(bodyText) => setBodyText(bodyText)}/>
         </div>
         <div className={styles.bottomBar}>
             <PSConsoleLanguageSelector lang={wangLang} onChange={setWantLang}/>

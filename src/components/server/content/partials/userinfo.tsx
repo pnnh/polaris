@@ -2,15 +2,16 @@ import styles from './userinfo.module.scss'
 import {AccountModel, isAnonymousAccount} from "@/atom/common/models/account";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {transText} from "@/components/common/locales/normal";
+import {sanitizeUrl} from "@/atom/common/utils/uri";
 
 export function UserAction({lang, portalUrl, userInfo}: {
     lang: string, portalUrl: string, userInfo: AccountModel | undefined
 }) {
-
+    const photoUrl = sanitizeUrl(userInfo?.photoUrl)
     if (userInfo && !isAnonymousAccount(userInfo)) {
         return <div className={styles.userAction}>
             <a className={styles.userPhoto} title={userInfo.nickname} href={`/${lang}/console`}>
-                <img src={userInfo.photoUrl} alt="User Avatar"/>
+                <img src={photoUrl} alt="User Avatar"/>
                 <span className={styles.userNickname}>{userInfo.nickname}</span>
             </a>
 
