@@ -1,9 +1,4 @@
 import styles from './language.module.scss';
-// import langEnUSData from '@/components/common/locales/en_US/messages.json' with {type: 'json'}
-// import langEsESData from '@/components/common/locales/es_ES/messages.json' with {type: 'json'}
-// import langFrFRData from '@/components/common/locales/fr_FR/messages.json' with {type: 'json'}
-// import langJaJPData from '@/components/common/locales/ja_JP/messages.json' with {type: 'json'}
-// import langZhCNData from '@/components/common/locales/zh_CN/messages.json' with {type: 'json'}
 
 export const langEnUS = 'en'
 export const langEsES = 'es' // Spanish

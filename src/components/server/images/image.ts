@@ -1,9 +1,9 @@
 import {CodeOk, CommonResult, PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
 import {serverMakeGet} from "@/atom/server/http";
 import {cookies} from "next/headers";
-import {localText} from "@/atom/common/language";
 import queryString from "query-string";
 import {PSImageModel} from "@/components/common/models/image";
+import {transText} from "@/components/common/locales/normal";
 
 export async function serverGetImage(portalUrl: string, uid: string): Promise<PSImageModel | undefined> {
     if (!uid) {
@@ -31,11 +31,11 @@ export async function serverSelectImages(poseidonUrl: string, lang: string, quer
     const authHeader = cookieStore.toString()
     const getResult = await serverMakeGet<PLSelectResult<PSImageModel>>(url, authHeader);
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {
-        throw new Error(localText(lang, '获取文章列表失败', 'Failed to get image list'));
+        throw new Error(transText(lang, '获取文章列表失败', 'Failed to get image list'));
     }
     const selectData = getResult.data
     if (!selectData || !selectData.range) {
-        throw new Error(localText(lang, '获取文章列表失败', 'Failed to get image list'));
+        throw new Error(transText(lang, '获取文章列表失败', 'Failed to get image list'));
     }
     return selectData;
 }

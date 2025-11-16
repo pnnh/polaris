@@ -2,7 +2,7 @@
 
 import styles from "./filter.module.scss";
 import React from "react";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 import SearchIcon from "@mui/icons-material/Search";
 
 export function ConsoleImageFilterBar({lang, keyword}: {
@@ -21,7 +21,7 @@ export function ConsoleImageFilterBar({lang, keyword}: {
         </div>
         <div className={styles.topRight}>
             <div className={styles.searchBox}>
-                <input placeholder={transText(lang, "searchPlaceholder")} maxLength={128} value={searchText}
+                <input placeholder={transKey(lang, "searchPlaceholder")} maxLength={128} value={searchText}
                        onChange={(event) => setSearchText(event.target.value)}
                        onKeyDown={(event) => {
                            if (event.key === 'Enter') {

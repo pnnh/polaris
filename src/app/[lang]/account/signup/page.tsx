@@ -4,7 +4,8 @@ import AccountLayout from "@/components/server/account/layout";
 import styles from './page.module.scss'
 import {SignupForm} from "./form";
 import {useServerConfig} from "@/components/server/config";
-import {langEn, localText} from "@/atom/common/language";
+import {langEn} from "@/atom/common/language";
+import {transText} from "@/components/common/locales/normal";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -22,7 +23,7 @@ export default async function Page({params, searchParams}: {
     return <AccountLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={styles.signupCard}>
-            <div className={styles.signupTitle}>{localText(lang, '注册页面', 'Registration Page')}</div>
+            <div className={styles.signupTitle}>{transText(lang, '注册页面', 'Registration Page')}</div>
             <div className={styles.signupBody}>
                 <SignupForm portalUrl={serverConfig.PUBLIC_PORTAL_URL} lang={lang}/>
             </div>

@@ -3,8 +3,9 @@ import {PSArticleModel} from "@/components/common/models/article";
 import {serverMakeGet} from "@/atom/server/http";
 import {cookies} from "next/headers";
 import {getDefaultImageUrl} from "@/components/common/note";
-import {isSupportedLanguage, localText} from "@/atom/common/language";
+import {isSupportedLanguage} from "@/atom/common/language";
 import queryString from "query-string";
+import {transText} from "@/components/common/locales/normal";
 
 export async function serverGetArticle(portalUrl: string, uid: string): Promise<PSArticleModel | undefined> {
     if (!uid) {
@@ -69,11 +70,11 @@ export async function serverConsoleSelectArticles(portalUrl: string, lang: strin
     const authHeader = cookieStore.toString()
     const getResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, authHeader);
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {
-        throw new Error(localText(lang, '获取文章列表失败', 'Failed to get article list'));
+        throw new Error(transText(lang, '获取文章列表失败', 'Failed to get article list'));
     }
     const selectData = getResult.data
     if (!selectData || !selectData.range) {
-        throw new Error(localText(lang, '获取文章列表失败2', 'Failed to get article list'));
+        throw new Error(transText(lang, '获取文章列表失败2', 'Failed to get article list'));
     }
     return selectData;
 }

@@ -8,7 +8,7 @@ import {PSChannelModel} from "@/components/common/models/channel";
 import {clientConsoleInsertChannel, clientConsoleUpdateChannel} from "@/components/client/channels/channels";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
 import {getDefaultImageUrl} from "@/components/common/note";
-import {localText} from "@/atom/common/language";
+import {transText} from "@/components/common/locales/normal";
 
 export function ConsoleChannelForm({portalUrl, modelString}: { portalUrl: string, modelString: string }) {
     const oldModel = JSON.parse(modelString) as PSChannelModel;
@@ -29,7 +29,7 @@ export function ConsoleChannelForm({portalUrl, modelString}: { portalUrl: string
         if (isNew) {
             clientConsoleInsertChannel(portalUrl, newModel).then((newChannelId) => {
                 if (!newChannelId) {
-                    console.error(localText(lang, '频道插入失败', 'Channel insert failed'))
+                    console.error(transText(lang, '频道插入失败', 'Channel insert failed'))
                     return
                 }
                 window.location.href = `/${lang}/console/channels`
@@ -37,7 +37,7 @@ export function ConsoleChannelForm({portalUrl, modelString}: { portalUrl: string
         } else {
             clientConsoleUpdateChannel(portalUrl, oldModel.uid, newModel).then((channelId) => {
                 if (!channelId) {
-                    console.error(localText(lang, '频道更新失败', 'Channel update failed'))
+                    console.error(transText(lang, '频道更新失败', 'Channel update failed'))
                     return
                 }
                 window.location.href = `/${lang}/console/channels`
@@ -69,10 +69,10 @@ export function ConsoleChannelForm({portalUrl, modelString}: { portalUrl: string
                 <FormControlLabel value="en" control={<Radio/>} label="English"/>
             </RadioGroup>
             <Button variant={'contained'} size={'small'} onClick={onSubmit}>{
-                localText(lang, '保存频道', 'Save Channel')
+                transText(lang, '保存频道', 'Save Channel')
             }</Button>
             <Button variant={'contained'} size={'small'}>{
-                localText(lang, '创建多语言副本', 'Create Multilingual Copy')
+                transText(lang, '创建多语言副本', 'Create Multilingual Copy')
             }</Button>
         </div>
     </div>

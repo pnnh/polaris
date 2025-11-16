@@ -10,13 +10,14 @@ import {PSImageServer} from "@/components/server/image";
 import {STSubString} from "@/atom/common/utils/string";
 import {getDefaultChanImageByUid} from "@/components/common/channel";
 import {PageMetadata} from "@/components/common/utils/page";
-import {langEn, localText} from "@/atom/common/language";
+import {langEn} from "@/atom/common/language";
 import ConsoleLayout from "@/components/server/console/layout";
 import Button from "@mui/material/Button";
 import {ConsoleChannelFilterBar} from "./filter";
 import {serverConsoleSelectChannels} from "@/components/server/channels/channels";
 import {useServerConfig} from "@/components/server/config";
 import PSDeleteButton from "@/components/client/console/delete";
+import {transText} from "@/components/common/locales/normal";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, viewer: string }>,
@@ -69,12 +70,12 @@ function Item(props: { model: PSChannelModel, portalUrl: string, lang: string })
         </div>
         <div className={styles.operation}>
             <Button size={'small'} variant={'text'} href={newUrl}>
-                {localText(props.lang, '新增笔记', 'Create Article')}
+                {transText(props.lang, '新增笔记', 'Create Article')}
             </Button>
         </div>
         <div>
             <PSDeleteButton lang={props.lang} deleteUrl={deleteUrl} resTitle={model.title || model.name}>
-                {localText(props.lang, '删除', 'Delete')}
+                {transText(props.lang, '删除', 'Delete')}
             </PSDeleteButton>
         </div>
     </div>

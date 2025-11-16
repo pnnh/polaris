@@ -1,6 +1,6 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import {langEn, localText} from "@/atom/common/language";
+import {langEn} from "@/atom/common/language";
 import styles from './page.module.scss'
 import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
@@ -9,6 +9,7 @@ import {NeedLoginPage} from "@/components/server/content/needLogin";
 import GlobalLayout from "@/components/server/global";
 import ComputerIcon from '@mui/icons-material/Computer';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
+import {transText} from "@/components/common/locales/normal";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -31,9 +32,9 @@ export default async function Page({params, searchParams}: {
             <div className={styles.pageContainer}>
                 <div>欢迎信息</div>
                 <div className={styles.userInfo}>
-                    {localText(lang, '欢迎使用控制台', 'Welcome to the console')}
+                    {transText(lang, '欢迎使用控制台', 'Welcome to the console')}
                     <br/>
-                    {localText(lang, '请在左侧菜单中选择功能', 'Please select a function from the left menu')}
+                    {transText(lang, '请在左侧菜单中选择功能', 'Please select a function from the left menu')}
                     <br/>
                     {currentUserInfo.nickname}
                     <a href={`/${lang}/console/userinfo`}>个人信息</a>

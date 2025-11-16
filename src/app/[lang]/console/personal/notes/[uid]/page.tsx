@@ -3,7 +3,7 @@ import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
 import {mustBase58ToUuid, tryBase58ToUuid, uuidToBase58} from "@/atom/common/utils/basex";
 import {useServerConfig} from "@/components/server/config";
-import {langZh, localText} from "@/atom/common/language";
+import {langZh} from "@/atom/common/language";
 import {notFound, redirect} from "next/navigation";
 import {ConsoleArticleForm} from "./form";
 import {serverConsoleGetArticle} from "@/components/server/articles/articles";
@@ -11,6 +11,7 @@ import {PSArticleModel} from "@/components/common/models/article";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
 import GlobalLayout from "@/components/server/global";
 import styles from './page.module.scss'
+import {transText} from "@/components/common/locales/normal";
 
 export const dynamic = "force-dynamic";
 
@@ -61,7 +62,7 @@ export default async function Home({params, searchParams}: {
             const copyFromUid = mustBase58ToUuid(copyFrom);
             const originModel = await serverConsoleGetArticle(pageLang, portalUrl, copyFromUid)
             if (!originModel) {
-                throw new Error(localText(pageLang, '无法找到要复制的文章', 'Cannot find the article to copy'));
+                throw new Error(transText(pageLang, '无法找到要复制的文章', 'Cannot find the article to copy'));
             }
             model.name = originModel.name;
             model.channel = originModel.channel;
@@ -92,7 +93,7 @@ export default async function Home({params, searchParams}: {
         metadata.keywords = model.keywords
 
         if (!model.body) {
-            return <div>{localText(pageLang, '暂不支持的文章类型', 'Unsupported article type')}</div>
+            return <div>{transText(pageLang, '暂不支持的文章类型', 'Unsupported article type')}</div>
         }
     }
     const modelString = JSON.stringify(model)

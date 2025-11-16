@@ -3,7 +3,7 @@ import styles from './profile.module.scss'
 
 import {getPathname} from "@/components/server/pathname";
 import {pageTitle} from "@/components/common/utils/page";
-import {transText} from "@/components/common/locales/normal";
+import {transExtra, transKey} from "@/components/common/locales/normal";
 
 export async function SiteNavMenu({lang, searchParams}: {
     lang: string,
@@ -41,10 +41,10 @@ function ArticleNavbar({lang, pathname}: {
     lang: string, pathname: string
 }) {
     const navLinks = [
-        {name: transText(lang, "navArticles"), href: `/${lang}/articles`},
-        {name: transText(lang, "navChannels"), href: `/${lang}/channels`},
-        {name: transText(lang, "navImages"), href: `/${lang}/images`},
-        {name: transText(lang, "navTools"), href: `/${lang}/tools`},
+        {name: transExtra(lang, "文章", "Articles", "navArticles"), href: `/${lang}/articles`},
+        {name: transExtra(lang, "频道", "Channels", "navChannels"), href: `/${lang}/channels`},
+        {name: transKey(lang, "navImages"), href: `/${lang}/images`},
+        {name: transKey(lang, "navTools"), href: `/${lang}/tools`},
         // {name: '图片', href: `/images`},
         // {name: '随机密码', href: `/tools/password`},
         // {name: 'UUID', href: `/tools/uuid`},
@@ -68,8 +68,8 @@ function ArticleSubNavbar({lang, pathname, searchParams}: {
     searchParams: Record<string, string>
 }) {
     const navLinks = [
-        {name: transText(lang, "handwrittenNotes"), href: `/articles/dir1`},
-        {name: transText(lang, "codeNotes"), href: `/articles/dir2`},
+        {name: transKey(lang, "handwrittenNotes"), href: `/articles/dir1`},
+        {name: transKey(lang, "codeNotes"), href: `/articles/dir2`},
     ]
     let currentPathname = pathname
     if (currentPathname === '/articles') {

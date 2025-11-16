@@ -1,5 +1,3 @@
-'use client';
-
 import {TextField} from "@mui/material";
 import React, {useEffect} from "react";
 import {clientChannelsComplete} from "@/components/client/channels/channels";

@@ -4,9 +4,10 @@ import styles from './page.module.scss'
 import {useServerConfig} from "@/components/server/config";
 import {getAccountUrn} from "@/atom/common/models/account";
 import {serverGetUserinfo} from "@/components/server/account/account";
-import {langEn, localText} from "@/atom/common/language";
+import {langEn} from "@/atom/common/language";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
 import ConsoleLayout from "@/components/server/console/layout";
+import {transText} from "@/components/common/locales/normal";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -35,32 +36,32 @@ export default async function Page({params, searchParams}: {
                     <img src={userInfo.photoUrl} alt="User Avatar"/>
                 </div>
                 <div className={styles.editLink}>
-                    <a href={`/${lang}/console/userinfo/edit`}>{localText(lang, '修改资料', 'Edit profile')}</a>
+                    <a href={`/${lang}/console/userinfo/edit`}>{transText(lang, '修改资料', 'Edit profile')}</a>
                 </div>
                 <div className={styles.details}>
                     <p className={styles.row}>
-                        <label className={styles.rowLabel}>{localText(lang, '用户标识', 'UserID')}:</label>
+                        <label className={styles.rowLabel}>{transText(lang, '用户标识', 'UserID')}:</label>
                         <span className={styles.rowContent}>{getAccountUrn(userInfo.uid)}</span>
                     </p>
                     <p className={styles.row}>
-                        <label className={styles.rowLabel}>{localText(lang, '用户名', 'Username')}: </label>
+                        <label className={styles.rowLabel}>{transText(lang, '用户名', 'Username')}: </label>
                         <span className={styles.rowContent}>{userInfo.username}</span></p>
                     <p className={styles.row}>
-                        <label className={styles.rowLabel}>{localText(lang, '用户昵称', 'Nickname')}：</label>
+                        <label className={styles.rowLabel}>{transText(lang, '用户昵称', 'Nickname')}：</label>
                         <span className={styles.rowContent}>{userInfo.nickname}</span>
                     </p>
                     <p className={styles.row}><label
-                        className={styles.rowLabel}>{localText(lang, '邮箱', 'Email')}:</label>
+                        className={styles.rowLabel}>{transText(lang, '邮箱', 'Email')}:</label>
                         <span className={styles.rowContent}>
                             {userInfo.mail}
                         </span></p>
                     <p className={styles.row}><label
-                        className={styles.rowLabel}>{localText(lang, '注册时间', 'Registration Time')}:</label>
+                        className={styles.rowLabel}>{transText(lang, '注册时间', 'Registration Time')}:</label>
                         <span className={styles.rowContent}>
                             {userInfo.create_time}
                         </span></p>
                     <p className={styles.row}><label
-                        className={styles.rowLabel}>{localText(lang, '个人简介', 'Personal Profile')}:</label>
+                        className={styles.rowLabel}>{transText(lang, '个人简介', 'Personal Profile')}:</label>
                         <span className={styles.rowContent}>
                             {userInfo.description}
                         </span></p>

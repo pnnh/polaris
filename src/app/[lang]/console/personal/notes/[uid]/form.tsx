@@ -11,10 +11,11 @@ import {clientConsoleInsertArticle, clientConsoleUpdateArticle} from "@/componen
 import {EmptyUUID} from "@/atom/common/utils/uuid";
 import {getDefaultImageUrl} from "@/components/common/note";
 import {uuidToBase58} from "@/atom/common/utils/basex";
-import {isLangEn, langEn, langZh, localText} from "@/atom/common/language";
+import {isLangEn, langEn, langZh} from "@/atom/common/language";
 import MenuItem from '@mui/material/MenuItem';
 import {supportedLanguages} from "@/components/common/language";
 import {Select} from "@mui/material";
+import {transText} from "@/components/common/locales/normal";
 
 function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (newLang: string) => void }) {
     return <>
@@ -66,7 +67,7 @@ export function ConsoleArticleForm({portalUrl, modelString, lang, copyFrom}: {
         if (isNew) {
             clientConsoleInsertArticle(portalUrl, newModel).then((newArticleId) => {
                 if (!newArticleId) {
-                    console.error(localText(lang, '文章插入失败', 'Article insert failed'))
+                    console.error(transText(lang, '文章插入失败', 'Article insert failed'))
                     return
                 }
                 window.location.href = `/${lang}/console/articles`
@@ -74,7 +75,7 @@ export function ConsoleArticleForm({portalUrl, modelString, lang, copyFrom}: {
         } else {
             clientConsoleUpdateArticle(portalUrl, oldModel.uid, newModel).then((articleId) => {
                 if (!articleId) {
-                    console.error(localText(lang, '文章更新失败', 'Article update failed'))
+                    console.error(transText(lang, '文章更新失败', 'Article update failed'))
                     return
                 }
                 window.location.href = `/${lang}/console/articles`
@@ -104,11 +105,11 @@ export function ConsoleArticleForm({portalUrl, modelString, lang, copyFrom}: {
         <div className={styles.bottomBar}>
             <PSConsoleLanguageSelector lang={wangLang} onChange={setWantLang}/>
             <Button variant={'contained'} size={'small'} onClick={onSubmit}>{
-                localText(lang, '保存文章', 'Save Article')
+                transText(lang, '保存文章', 'Save Article')
             }</Button>
             {!isNew &&
                 <Button variant={'contained'} size={'small'} href={createUrl}>{
-                    localText(lang, `查看英文副本`, 'View Chinese Copy')
+                    transText(lang, `查看英文副本`, 'View Chinese Copy')
                 }</Button>
             }
         </div>

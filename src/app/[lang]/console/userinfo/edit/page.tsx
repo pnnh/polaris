@@ -1,12 +1,12 @@
 import {getPathname} from "@/components/server/pathname";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {useServerConfig} from "@/components/server/config";
-import ContentLayout from "@/components/server/content/layout";
-import {CodeOk, SymbolUnknown} from "@/atom/common/models/protocol";
+import {SymbolUnknown} from "@/atom/common/models/protocol";
 import {UserinfoEditForm} from "./form";
 import {serverGetUserinfo} from "@/components/server/account/account";
-import {langEn, localText} from "@/atom/common/language";
+import {langEn} from "@/atom/common/language";
 import ConsoleLayout from "@/components/server/console/layout";
+import {transText} from "@/components/common/locales/normal";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -25,7 +25,7 @@ export default async function Page({params, searchParams}: {
 
     const userInfo = await serverGetUserinfo(portalUrl)
     if (!userInfo) {
-        return <div>{localText(lang, '出错了', 'Failed')}</div>
+        return <div>{transText(lang, '出错了', 'Failed')}</div>
     }
 
     return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}

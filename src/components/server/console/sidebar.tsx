@@ -2,19 +2,19 @@
 import styles from './sidebar.module.scss';
 
 import React from "react";
-import {localText} from "@/atom/common/language";
+import {transText} from "@/components/common/locales/normal";
 
 export function ConsoleSidebar({lang}: { lang: string }) {
     return <div className={styles.consoleSidebar}>
-        <a href={`/${lang}`}>{localText(lang, '首页', 'Home')}</a>
+        <a href={`/${lang}`}>{transText(lang, '首页', 'Home')}</a>
         <a href={`/${lang}/console/userinfo`}>
-            {localText(lang, '个人信息', 'User Info')}
+            {transText(lang, '个人信息', 'User Info')}
         </a>
         <a href={`/${lang}/console/articles`}>
-            {localText(lang, '笔记', 'Articles')}
+            {transText(lang, '笔记', 'Articles')}
         </a>
         <a href={`/${lang}/console/channels`}>
-            {localText(lang, '频道', 'Channels')}
+            {transText(lang, '频道', 'Channels')}
         </a>
     </div>
 }

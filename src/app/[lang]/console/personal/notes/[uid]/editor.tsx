@@ -1,7 +1,5 @@
-'use client'
-
 import styles from "./editor.module.scss";
-import React, {useEffect, useState} from "react";
+import React from "react";
 
 import {TocItem} from "@/atom/common/models/toc";
 

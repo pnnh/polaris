@@ -3,7 +3,6 @@
 import {useClientConfig} from "@/atom/client/config/config";
 import {IBrowserConfig} from "@/components/common/config";
 import {cfTurnstileSetup} from "@/components/client/cloudflare/cloud";
-import {getStorage, setStorage} from "@/components/client/utils/storage";
 import {langEnUS} from "@/components/common/language";
 import $ from 'jquery';
 
@@ -80,7 +79,7 @@ function setupPWA(lang: string) {
     //         return;
     //     }
     // }
-    registerServiceWorker().then(r => {
+    registerServiceWorker().then(() => {
         console.log('ServiceWorker registered');
         // const workerInfo = {timestamp: Date.now()};
         // setStorage('worker-info', workerInfo);

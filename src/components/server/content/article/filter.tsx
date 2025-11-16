@@ -1,7 +1,7 @@
 import styles from "./filter.module.scss";
 import {replaceSearchParams} from "@/atom/common/utils/query";
 import React from "react";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 export function ArticleFilterBar({lang, searchParamsValue}: {
     lang: string,
@@ -19,21 +19,21 @@ export function ArticleFilterBar({lang, searchParamsValue}: {
         <div className={styles.topLeft}>
             <a className={styles.sortLink + sortClass('latest')}
                href={replaceSearchParams(searchParamsValue, 'sort', 'latest')}>
-                {transText(lang, "latest")}</a>
+                {transKey(lang, "latest")}</a>
             <a className={styles.sortLink + sortClass('read')}
                href={replaceSearchParams(searchParamsValue, 'sort', 'read')}>
-                {transText(lang, "readRank")}</a>
+                {transKey(lang, "readRank")}</a>
         </div>
         <div className={styles.topRight}>
             <a className={styles.filterLink + filterClass('month')}
                href={replaceSearchParams(searchParamsValue, 'filter', 'month')}>
-                {transText(lang, "lastMonth")}</a>
+                {transKey(lang, "lastMonth")}</a>
             <a className={styles.filterLink + filterClass('year')}
                href={replaceSearchParams(searchParamsValue, 'filter', 'year')}>
-                {transText(lang, "lastYear")}</a>
+                {transKey(lang, "lastYear")}</a>
             <a className={styles.filterLink + filterClass('all')}
                href={replaceSearchParams(searchParamsValue, 'filter', 'all')}>
-                {transText(lang, "all")}</a>
+                {transKey(lang, "all")}</a>
         </div>
     </div>
 }

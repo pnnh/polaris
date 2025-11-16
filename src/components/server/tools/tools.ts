@@ -1,5 +1,6 @@
 import {ApplicationLanguageProfile, ApplicationModel} from "@/atom/common/models/tools/application";
-import {langZh, localText} from "@/atom/common/language";
+import {localText} from "@/atom/common/language";
+import {transText} from "@/components/common/locales/normal";
 
 export const passwordUid = '0192e096-22e4-7aa4-8aa9-8093f09d58a7'
 export const uuidUid = '0192e096-2247-7aa4-8aa9-7167ae2d1927'
@@ -109,57 +110,57 @@ function selectAppLangProfile(appUid: string, lang: string): ApplicationLanguage
         case passwordUid:
             return {
                 lang: lang,
-                name: localText(lang, '随机密码生成器', 'Random Password Generator'),
-                description: localText(lang, '可以快速生成随机密码，支持自定义密码长度、密码字符集、密码数量等参数。',
+                name: transText(lang, '随机密码生成器', 'Random Password Generator'),
+                description: transText(lang, '可以快速生成随机密码，支持自定义密码长度、密码字符集、密码数量等参数。',
                     'Quickly generate random passwords, supports custom password length, character set, number of passwords, etc.')
             }
         case uuidUid:
             return {
                 lang: lang,
-                name: localText(lang, 'UUID生成器', 'UUID Generator'),
-                description: localText(lang, '支持常见的UUID标准，快速生成随机的UUID并复制。',
+                name: transText(lang, 'UUID生成器', 'UUID Generator'),
+                description: transText(lang, '支持常见的UUID标准，快速生成随机的UUID并复制。',
                     'Supports common UUID standards, quickly generate random UUIDs and copy them.')
             }
         case qrcodeUid:
             return {
                 lang: lang,
-                name: localText(lang, '二维码生成器', 'QR Code Generator'),
-                description: localText(lang, '支持方便快速地生成二维码，可以自定义二维码的大小、颜色、背景色等，支持生成带logo的二维码。',
+                name: transText(lang, '二维码生成器', 'QR Code Generator'),
+                description: transText(lang, '支持方便快速地生成二维码，可以自定义二维码的大小、颜色、背景色等，支持生成带logo的二维码。',
                     'Supports convenient and quick generation of QR codes, allowing customization of size, color, background color, etc., and supports generating QR codes with logos.')
             }
         case datetimeUid:
             return {
                 lang: lang,
-                name: localText(lang, '日期时间工具', 'Date and Time Tools'),
-                description: localText(lang, '方便快捷的日期时间工具，包括时间戳转换、日期计算、日期格式化等功能。',
+                name: transText(lang, '日期时间工具', 'Date and Time Tools'),
+                description: transText(lang, '方便快捷的日期时间工具，包括时间戳转换、日期计算、日期格式化等功能。',
                     'Convenient and quick date and time tools, including timestamp conversion, date calculation, date formatting, and other functions.')
             }
         case base58Uid:
             return {
                 lang: lang,
-                name: localText(lang, 'Base58 编码工具', 'Base58 Encoding Tool'),
-                description: localText(lang, 'Base58 编码工具可以将字符串转换为 Base58 编码格式，常用于区块链地址等场景。',
+                name: transText(lang, 'Base58 编码工具', 'Base58 Encoding Tool'),
+                description: transText(lang, 'Base58 编码工具可以将字符串转换为 Base58 编码格式，常用于区块链地址等场景。',
                     'Base58 encoding tool can convert strings to Base58 encoding format, commonly used in blockchain addresses and other scenarios.')
             }
         case base64Uid:
             return {
                 lang: lang,
-                name: localText(lang, 'Base64 编码工具', 'Base64 Encoding Tool'),
-                description: localText(lang, 'Base64 编码工具可以将字符串转换为 Base64 编码格式。',
+                name: transText(lang, 'Base64 编码工具', 'Base64 Encoding Tool'),
+                description: transText(lang, 'Base64 编码工具可以将字符串转换为 Base64 编码格式。',
                     'Base64 encoding tool can convert strings to Base64 encoding format.')
             }
         case base32Uid:
             return {
                 lang: lang,
-                name: localText(lang, 'Base32 编码工具', 'Base32 Encoding Tool'),
-                description: localText(lang, 'Base32 编码工具可以将字符串转换为 Base32 编码格式。',
+                name: transText(lang, 'Base32 编码工具', 'Base32 Encoding Tool'),
+                description: transText(lang, 'Base32 编码工具可以将字符串转换为 Base32 编码格式。',
                     'Base32 encoding tool can convert strings to Base32 encoding format.')
             }
         case highlightUid:
             return {
                 lang: lang,
-                name: localText(lang, '源代码高亮编码工具', 'Source Code Highlighting Tool'),
-                description: localText(lang, '源代码高亮工具可以将源代码转换为高亮显示的 HTML 格式，支持多种编程语言。',
+                name: transText(lang, '源代码高亮编码工具', 'Source Code Highlighting Tool'),
+                description: transText(lang, '源代码高亮工具可以将源代码转换为高亮显示的 HTML 格式，支持多种编程语言。',
                     'Source code highlighting tool can convert source code into highlighted HTML format, supporting multiple programming languages.')
             }
         case wejsonUid:

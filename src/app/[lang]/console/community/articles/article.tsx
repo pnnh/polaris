@@ -12,8 +12,8 @@ import React from "react";
 import styles from './article.module.scss';
 import {STSubString} from "@/atom/common/utils/string";
 import PSDeleteButton from "@/components/client/console/delete";
-import {localText} from "@/atom/common/language";
 import PublicIcon from '@mui/icons-material/Public';
+import {transText} from "@/components/common/locales/normal";
 
 export function ConsoleArticleMiddleBody({selectData, lang, portalUrl}: {
     selectData: PLSelectData<PSArticleModel>,
@@ -37,22 +37,22 @@ export function ArticleHeader({lang, portalUrl}: {
 }) {
     return <div className={styles.tableHeader}>
         <div className={styles.headerLabel}>
-            {localText(lang, '封面', 'Cover')}
+            {transText(lang, '封面', 'Cover')}
         </div>
         <div className={styles.headerLabel}>
-            {localText(lang, '标题', 'Title')}
+            {transText(lang, '标题', 'Title')}
         </div>
         <div className={styles.headerLabel}>
-            {localText(lang, '描述', 'Description')}
+            {transText(lang, '描述', 'Description')}
         </div>
         <div className={styles.headerLabel}>
-            {localText(lang, '扩展信息', 'Extended Info')}
+            {transText(lang, '扩展信息', 'Extended Info')}
         </div>
         <div className={styles.headerLabel}>
-            {localText(lang, '频道', 'Channel')}
+            {transText(lang, '频道', 'Channel')}
         </div>
         <div className={styles.headerLabel}>
-            {localText(lang, '操作', 'Action')}
+            {transText(lang, '操作', 'Action')}
         </div>
     </div>
 }
@@ -92,7 +92,7 @@ export function ArticleCard({model, lang, portalUrl}: {
         </div>
         <div>
             <PSDeleteButton lang={lang} deleteUrl={deleteUrl} resTitle={model.title || model.name}>
-                {localText(lang, '删除', 'Delete')}
+                {transText(lang, '删除', 'Delete')}
             </PSDeleteButton>
         </div>
     </div>

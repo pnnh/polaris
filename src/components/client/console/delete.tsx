@@ -4,11 +4,11 @@ import * as React from 'react';
 import {styled} from '@mui/material/styles';
 import Button, {ButtonProps} from '@mui/material/Button';
 import {red} from '@mui/material/colors';
-import {Dialog, DialogTitle, Stack} from '@mui/material';
-import {localText} from "@/atom/common/language";
+import {Dialog} from '@mui/material';
 import {CodeOk, PLDeleteResult} from "@/atom/common/models/protocol";
 import {clientMakeDelete} from "@/atom/client/http";
 import styles from './delete.module.scss';
+import {transText} from "@/components/common/locales/normal";
 
 const ColorButton = styled(Button)<ButtonProps>(({theme}) => ({
     color: theme.palette.getContrastText(red[500]),
@@ -46,7 +46,7 @@ export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
                 return
             }
             console.error('Delete failed', deleteResult);
-            alert(localText(lang, '删除失败', 'Delete failed'));
+            alert(transText(lang, '删除失败', 'Delete failed'));
 
         })
     };
@@ -57,17 +57,17 @@ export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
                 <div className={styles.deleteDialog}>
 
                     <div className={styles.dialogTitle}>
-                        {localText(lang, '是否要删除?', 'Do you want to delete?')}
+                        {transText(lang, '是否要删除?', 'Do you want to delete?')}
                     </div>
                     <div className={styles.resTitle}>
                         {resTitle}
                     </div>
                     <div className={styles.dialogActions}>
                         <Button variant={'contained'} size={'small'} onClick={() => handleSubmit('ok')}>
-                            {localText(lang, '确定', 'OK')}
+                            {transText(lang, '确定', 'OK')}
                         </Button>
                         <Button variant={'contained'} size={'small'} onClick={() => handleClose()}>
-                            {localText(lang, '取消', 'Cancel')}
+                            {transText(lang, '取消', 'Cancel')}
                         </Button>
 
                     </div>
