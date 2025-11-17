@@ -7,7 +7,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 WORKDIR /app
 COPY package.json package-lock.json ./
 
-RUN npm ci --production
+RUN npm ci --production --legacy-peer-deps
 
 FROM deps AS builder
 
