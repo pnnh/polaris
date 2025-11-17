@@ -16,25 +16,24 @@ import {localText} from "@/atom/common/language";
 import PublicIcon from '@mui/icons-material/Public';
 import {transText} from "@/components/common/locales/normal";
 
-export function ConsoleArticleMiddleBody({selectData, lang, portalUrl}: {
+export function ConsoleArticleMiddleBody({selectData, lang, publicPortalUrl}: {
     selectData: PLSelectData<PSArticleModel>,
     lang: string,
-    portalUrl: string
+    publicPortalUrl: string
 }) {
     if (!selectData || !selectData.range || selectData.range.length === 0) {
         return <NoData size='large'/>
     }
     return <div className={styles.middleBody}>
-        <ArticleHeader lang={lang} portalUrl={portalUrl}/>
+        <ArticleHeader lang={lang}/>
         {selectData.range.map((model, index) => {
-            return <ArticleCard key={index} model={model} lang={lang} portalUrl={portalUrl}/>
+            return <ArticleCard key={index} model={model} lang={lang} portalUrl={publicPortalUrl}/>
         })}
     </div>
 }
 
-export function ArticleHeader({lang, portalUrl}: {
+export function ArticleHeader({lang}: {
     lang: string,
-    portalUrl: string
 }) {
     return <div className={styles.tableHeader}>
         <div className={styles.headerLabel}>

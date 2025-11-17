@@ -36,7 +36,7 @@ export default async function Page({params, searchParams}: {
     const channelPk = searchParamsValue.channel
 
     const serverConfig = await useServerConfig()
-    const serverUrl = serverConfig.PUBLIC_PORTAL_URL
+    const serverUrl = serverConfig.INTERNAL_PORTAL_URL
     const selectQuery = {
         sort: searchParamsValue.sort,
         filter: searchParamsValue.filter,

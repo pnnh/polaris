@@ -20,10 +20,8 @@ export default async function Page({params, searchParams}: {
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
     const serverConfig = await useServerConfig()
-    const portalUrl = serverConfig.PUBLIC_PORTAL_URL
 
-
-    const userInfo = await serverGetUserinfo(portalUrl)
+    const userInfo = await serverGetUserinfo(serverConfig.INTERNAL_PORTAL_URL);
     if (!userInfo) {
         return <div>{transText(lang, '出错了', 'Failed')}</div>
     }
@@ -31,7 +29,7 @@ export default async function Page({params, searchParams}: {
     return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div>
-            <UserinfoEditForm portalUrl={portalUrl} userInfo={userInfo} lang={lang}/>
+            <UserinfoEditForm portalUrl={serverConfig.PUBLIC_PORTAL_URL} userInfo={userInfo} lang={lang}/>
         </div>
     </ConsoleLayout>
 }

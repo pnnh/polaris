@@ -20,12 +20,13 @@ export default async function Page({params, searchParams}: {
     metadata.title = pageTitle(lang, '')
 
     const serverConfig = await useServerConfig()
+    const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
     return <AccountLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={styles.signupCard}>
             <div className={styles.signupTitle}>{transText(lang, '注册页面', 'Registration Page')}</div>
             <div className={styles.signupBody}>
-                <SignupForm portalUrl={serverConfig.PUBLIC_PORTAL_URL} lang={lang}/>
+                <SignupForm portalUrl={publicPortalUrl} lang={lang}/>
             </div>
         </div>
     </AccountLayout>

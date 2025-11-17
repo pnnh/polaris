@@ -36,8 +36,7 @@ export async function ContentPublicNavbar({pathname, searchParams, lang, userInf
             <ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword} lang={lang}/>
             <ThemeSwitch lang={lang} themeName={themeName}/>
             <PSLanguageSelector lang={lang} currentUrl={currentUrl}/>
-            <UserAction lang={lang} portalUrl={serverConfig.PUBLIC_PORTAL_URL}
-                        userInfo={userInfo}/>
+            <UserAction lang={lang} userInfo={userInfo}/>
             <a className={styles.toolsLink} href={`/${lang}/tools`}><AppsIcon/></a>
         </div>
         <div className={styles.rightNavMobile}>

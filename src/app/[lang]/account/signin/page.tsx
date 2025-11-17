@@ -26,12 +26,13 @@ export default async function Page({params, searchParams}: {
     const signinCallback = searchParamsValue.redirect
 
     const serverConfig = await useServerConfig()
-    const portalUrl = serverConfig.PUBLIC_PORTAL_URL
+    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
+    const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
 
-    const userInfo = await serverGetUserinfo(portalUrl)
+    const userInfo = await serverGetUserinfo(internalPortalUrl)
     if (userInfo && !isAnonymousAccount(userInfo)) {
         if (signinLink && linkApp) {
-            return <LinkSession lang={lang} portalUrl={portalUrl} signinLink={signinLink} linkApp={linkApp}
+            return <LinkSession lang={lang} portalUrl={publicPortalUrl} signinLink={signinLink} linkApp={linkApp}
                                 signinCallback={signinCallback}/>
         }
         return <div><a href={'/'}>{transText(lang, '前往首页', 'Go home page')}</a></div>
@@ -44,7 +45,7 @@ export default async function Page({params, searchParams}: {
             <div className={styles.signinCard}>
                 <div className={styles.signinTitle}>{transText(lang, '登录页面', 'Login Page')}</div>
                 <div className={styles.signinBody}>
-                    <SigninForm portalUrl={serverConfig.PUBLIC_PORTAL_URL} lang={lang} signinLink={signinLink}
+                    <SigninForm portalUrl={publicPortalUrl} lang={lang} signinLink={signinLink}
                                 linkApp={linkApp} signinCallback={signinCallback}/>
                 </div>
             </div>

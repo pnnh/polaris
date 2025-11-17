@@ -48,8 +48,8 @@ export default async function Page({params, searchParams}: {
         lang: lang
     })
     const serverConfig = await useServerConfig()
-    const serverUrl = serverConfig.PUBLIC_PORTAL_URL
-    const rankUrl = `${serverUrl}/articles?${rankQuery}`
+    const internalServerUrl = serverConfig.INTERNAL_PORTAL_URL
+    const rankUrl = `${internalServerUrl}/articles?${rankQuery}`
     const rankSelectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(rankUrl, '')
 
     const selectQuery = {
@@ -60,7 +60,7 @@ export default async function Page({params, searchParams}: {
         lang: lang
     }
     const rawQuery = queryString.stringify(selectQuery)
-    const url = `${serverUrl}/articles?${rawQuery}`
+    const url = `${internalServerUrl}/articles?${rawQuery}`
 
     const selectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, '')
     const pagination = calcPagination(page, selectResult.data.count, pageSize)

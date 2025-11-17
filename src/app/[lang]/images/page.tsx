@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './page.module.scss'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
-import {PLSelectData, SymbolUnknown} from "@/atom/common/models/protocol";
+import {SymbolUnknown} from "@/atom/common/models/protocol";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {PaginationServer} from "@/components/server/pagination";
 import {replaceSearchParams} from "@/atom/common/utils/query";
@@ -40,9 +40,8 @@ export default async function Page({params, searchParams}: {
         channel: channelPk
     }
     const serverConfig = await useServerConfig()
-    const poseidonUrl = serverConfig.PUBLIC_PORTAL_URL
 
-    const selectData = await serverSelectImages(poseidonUrl, lang, selectQuery)
+    const selectData = await serverSelectImages(serverConfig.INTERNAL_PORTAL_URL, lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
 

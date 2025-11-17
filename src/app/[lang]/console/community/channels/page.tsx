@@ -27,7 +27,9 @@ export default async function Page({params, searchParams}: {
     const searchValue = await searchParams
     const lang = paramsValue.lang || langEn
     const serverConfig = await useServerConfig()
-    const selectData = await serverConsoleSelectChannels(serverConfig.PUBLIC_PORTAL_URL, lang, {})
+    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
+    const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
+    const selectData = await serverConsoleSelectChannels(internalPortalUrl, lang, {})
 
     if (!selectData) {
         return <NoData size={'middle'}/>
@@ -41,23 +43,23 @@ export default async function Page({params, searchParams}: {
             <ConsoleChannelFilterBar lang={lang} keyword={searchValue.keyword}/>
             <div className={styles.list}>
                 {selectData.range.map((model) => {
-                    return <Item key={model.uid} model={model} portalUrl={serverConfig.PUBLIC_PORTAL_URL} lang={lang}/>
+                    return <Item key={model.uid} model={model} publicPortalUrl={publicPortalUrl} lang={lang}/>
                 })}
             </div>
         </div>
     </ConsoleLayout>
 }
 
-function Item(props: { model: PSChannelModel, portalUrl: string, lang: string }) {
+function Item(props: { model: PSChannelModel, publicPortalUrl: string, lang: string }) {
     const model = props.model
     const readUrl = `/${props.lang}/console/channels/${uuidToBase58(props.model.uid)}`
     let imageUrl = getDefaultChanImageByUid(model.uid)
     if (model.image && isValidUUID(model.image)) {
-        imageUrl = `${props.portalUrl}/channels/${model.uid}/assets/${model.image}`
+        imageUrl = `${props.publicPortalUrl}/channels/${model.uid}/assets/${model.image}`
     }
 
     const newUrl = `/${props.lang}/console/articles/${uuidToBase58(EmptyUUID)}?channel=${uuidToBase58(model.uid)}`
-    const deleteUrl = `${props.portalUrl}/console/channels/${model.uid}`
+    const deleteUrl = `${props.publicPortalUrl}/console/channels/${model.uid}`
     return < div className={styles.item}>
         <div className={styles.itemCover}>
             <PSImageServer lang={props.lang} src={imageUrl} alt='star' width={256} height={256}/>

@@ -10,7 +10,7 @@ import {EmptyUUID} from "@/atom/common/utils/uuid";
 import {getDefaultImageUrl} from "@/components/common/note";
 import {transText} from "@/components/common/locales/normal";
 
-export function ConsoleChannelForm({portalUrl, modelString}: { portalUrl: string, modelString: string }) {
+export function ConsoleChannelForm({publicPortalUrl, modelString}: { publicPortalUrl: string, modelString: string }) {
     const oldModel = JSON.parse(modelString) as PSChannelModel;
     const [lang, setLang] = React.useState(oldModel.lang);
     const [name, setName] = React.useState(oldModel.name);
@@ -27,7 +27,7 @@ export function ConsoleChannelForm({portalUrl, modelString}: { portalUrl: string
             name: name,
         }
         if (isNew) {
-            clientConsoleInsertChannel(portalUrl, newModel).then((newChannelId) => {
+            clientConsoleInsertChannel(publicPortalUrl, newModel).then((newChannelId) => {
                 if (!newChannelId) {
                     console.error(transText(lang, '频道插入失败', 'Channel insert failed'))
                     return
@@ -35,7 +35,7 @@ export function ConsoleChannelForm({portalUrl, modelString}: { portalUrl: string
                 window.location.href = `/${lang}/console/channels`
             })
         } else {
-            clientConsoleUpdateChannel(portalUrl, oldModel.uid, newModel).then((channelId) => {
+            clientConsoleUpdateChannel(publicPortalUrl, oldModel.uid, newModel).then((channelId) => {
                 if (!channelId) {
                     console.error(transText(lang, '频道更新失败', 'Channel update failed'))
                     return

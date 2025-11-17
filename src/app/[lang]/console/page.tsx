@@ -19,7 +19,7 @@ export default async function Page({params, searchParams}: {
     const lang = paramsValue.lang || langEn
 
     const serverConfig = await useServerConfig()
-    const portalUrl = serverConfig.PUBLIC_PORTAL_URL
+    const portalUrl = serverConfig.INTERNAL_PORTAL_URL
     const currentUserInfo = await serverGetUserinfo(portalUrl);
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')

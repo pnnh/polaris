@@ -38,12 +38,13 @@ export default async function Home({params, searchParams}: {
     const lang = paramsValue.lang || langEn
     const metadata = new PageMetadata(lang)
     const serverConfig = await useServerConfig()
-    const serverUrl = serverConfig.PUBLIC_PORTAL_URL
+    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
+    const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
     const articleUid = tryBase58ToUuid(paramsValue.uid)
     if (!articleUid) {
         notFound();
     }
-    const url = `${serverUrl}/articles/${articleUid}?lang=${lang}`
+    const url = `${internalPortalUrl}/articles/${articleUid}?lang=${lang}`
     const getResult = await serverMakeGet<CommonResult<PSArticleModel | undefined>>(url, '')
 
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {
@@ -61,11 +62,10 @@ export default async function Home({params, searchParams}: {
     if (!getResult.data.body) {
         return <div>暂不支持的文章类型</div>
     }
-    const portalUrl = serverConfig.PUBLIC_PORTAL_URL
     const clientIp = await getClientIp()
     // update article discover count
     if (clientIp) {
-        await serverInsertArticleViewer(portalUrl, articleUid, clientIp)
+        await serverInsertArticleViewer(internalPortalUrl, articleUid, clientIp)
     }
     const readUrl = `/${lang}/articles/articles/${paramsValue.uid}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)
@@ -95,17 +95,17 @@ export default async function Home({params, searchParams}: {
                     <div className={styles.articleBody}>
                         <ArticlePreview tocList={tocList} header={getResult.data.header}
                                         body={getResult.data.body}
-                                        assetsUrl={'assetsUrl'} portalUrl={portalUrl}/>
+                                        assetsUrl={'assetsUrl'} portalUrl={publicPortalUrl}/>
                     </div>
                 </div>
                 <div className={styles.commentsClient}>
-                    <CommentsClient portalUrl={portalUrl} resource={getResult.data.uid}
+                    <CommentsClient portalUrl={publicPortalUrl} resource={getResult.data.uid}
                                     lang={lang}/>
                 </div>
             </div>
             <div className={styles.rightArea}>
                 <TocInfo readurl={readUrl} model={tocList}/>
-                <ArticleAssets portalUrl={portalUrl} fullRepoPath={fullRepoPath} articleUid={getResult.data.uid}/>
+                <ArticleAssets portalUrl={publicPortalUrl} fullRepoPath={fullRepoPath} articleUid={getResult.data.uid}/>
             </div>
         </div>
         <GoTop anchor={templateBodyId}/>

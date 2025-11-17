@@ -21,9 +21,9 @@ export default async function Page({params, searchParams}: {
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
     const serverConfig = await useServerConfig()
-    const portalUrl = serverConfig.PUBLIC_PORTAL_URL
+    const interlanPortalUrl = serverConfig.INTERNAL_PORTAL_URL
 
-    const userInfo = await serverGetUserinfo(portalUrl)
+    const userInfo = await serverGetUserinfo(interlanPortalUrl)
     if (!userInfo) {
         return <NeedLoginPage lang={lang}></NeedLoginPage>
     }

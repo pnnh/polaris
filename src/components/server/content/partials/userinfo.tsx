@@ -4,8 +4,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {transKey} from "@/components/common/locales/normal";
 import {sanitizeUrl} from "@/atom/common/utils/uri";
 
-export function UserAction({lang, portalUrl, userInfo}: {
-    lang: string, portalUrl: string, userInfo: AccountModel | undefined
+export function UserAction({lang, userInfo}: {
+    lang: string, userInfo: AccountModel | undefined
 }) {
     const photoUrl = sanitizeUrl(userInfo?.photoUrl)
     if (userInfo && !isAnonymousAccount(userInfo)) {

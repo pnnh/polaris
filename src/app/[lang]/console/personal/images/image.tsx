@@ -1,11 +1,13 @@
 'use client';
+
 import React, {useEffect} from "react";
 import styles from './image.module.scss';
 import {
     clientGetDirectoryEntry,
-    clientSyncLocalImageLibraryFiles, clientRequestFilePermission,
-    ILibraryEntry,
-    IImageEntry, clientGetImageLibraryFiles
+    clientGetImageLibraryFiles,
+    clientRequestFilePermission,
+    IImageEntry,
+    ILibraryEntry
 } from "@/components/client/images/service";
 import Button from "@mui/material/Button";
 import {NoData} from "@/components/common/empty";

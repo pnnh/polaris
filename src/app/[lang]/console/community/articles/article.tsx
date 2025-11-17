@@ -15,25 +15,24 @@ import PSDeleteButton from "@/components/client/console/delete";
 import PublicIcon from '@mui/icons-material/Public';
 import {transText} from "@/components/common/locales/normal";
 
-export function ConsoleArticleMiddleBody({selectData, lang, portalUrl}: {
+export function ConsoleArticleMiddleBody({selectData, lang, publicPortalUrl}: {
     selectData: PLSelectData<PSArticleModel>,
     lang: string,
-    portalUrl: string
+    publicPortalUrl: string
 }) {
     if (!selectData || !selectData.range || selectData.range.length === 0) {
         return <NoData size='large'/>
     }
     return <div className={styles.middleBody}>
-        <ArticleHeader lang={lang} portalUrl={portalUrl}/>
+        <ArticleHeader lang={lang}/>
         {selectData.range.map((model, index) => {
-            return <ArticleCard key={index} model={model} lang={lang} portalUrl={portalUrl}/>
+            return <ArticleCard key={index} model={model} lang={lang} publicPortalUrl={publicPortalUrl}/>
         })}
     </div>
 }
 
-export function ArticleHeader({lang, portalUrl}: {
+export function ArticleHeader({lang}: {
     lang: string,
-    portalUrl: string
 }) {
     return <div className={styles.tableHeader}>
         <div className={styles.headerLabel}>
@@ -57,21 +56,21 @@ export function ArticleHeader({lang, portalUrl}: {
     </div>
 }
 
-export function ArticleCard({model, lang, portalUrl}: {
+export function ArticleCard({model, lang, publicPortalUrl}: {
     model: PSArticleModel,
     lang: string,
-    portalUrl: string
+    publicPortalUrl: string
 }) {
     const readUrl = `${lang}/console/articles/${uuidToBase58(model.uid)}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)
     if (model.cover && isValidUUID(model.cover)) {
-        imageUrl = `${portalUrl}/articles/${model.uid}/assets/${model.cover}`
+        imageUrl = `${publicPortalUrl}/articles/${model.uid}/assets/${model.cover}`
     }
     let chanUrl = ''
     if (model.channel) {
         chanUrl = `/${lang}/channels/${uuidToBase58(model.channel)}`
     }
-    const deleteUrl = `${portalUrl}/console/articles/${model.uid}`
+    const deleteUrl = `${publicPortalUrl}/console/articles/${model.uid}`
     return <div className={styles.middleItem} key={model.uid} data-article={model.uid}>
         <div className={styles.itemCover}>
             <PSImageServer lang={lang} src={imageUrl} alt={model.title} fill={true}/>

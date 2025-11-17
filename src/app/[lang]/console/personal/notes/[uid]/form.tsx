@@ -37,10 +37,10 @@ function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (
     </>
 }
 
-export function ConsoleArticleForm({portalUrl, modelString, lang, copyFrom}: {
+export function ConsoleArticleForm({portalUrl, modelString, lang}: {
     portalUrl: string,
     modelString: string,
-    lang: string, copyFrom: string
+    lang: string,
 }) {
     const oldModel = JSON.parse(modelString) as PSArticleModel;
     const [wangLang, setWantLang] = React.useState(oldModel.lang);

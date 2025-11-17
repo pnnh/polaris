@@ -37,10 +37,10 @@ function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (
     </>
 }
 
-export function ConsoleArticleForm({portalUrl, modelString, lang, copyFrom}: {
-    portalUrl: string,
+export function ConsoleArticleForm({publicPortalUrl, modelString, lang}: {
+    publicPortalUrl: string,
     modelString: string,
-    lang: string, copyFrom: string
+    lang: string
 }) {
     const oldModel = JSON.parse(modelString) as PSArticleModel;
     const [wangLang, setWantLang] = React.useState(oldModel.lang);
@@ -65,7 +65,7 @@ export function ConsoleArticleForm({portalUrl, modelString, lang, copyFrom}: {
             channel: oldModel.channel
         }
         if (isNew) {
-            clientConsoleInsertArticle(portalUrl, newModel).then((newArticleId) => {
+            clientConsoleInsertArticle(publicPortalUrl, newModel).then((newArticleId) => {
                 if (!newArticleId) {
                     console.error(transText(lang, '文章插入失败', 'Article insert failed'))
                     return
@@ -73,7 +73,7 @@ export function ConsoleArticleForm({portalUrl, modelString, lang, copyFrom}: {
                 window.location.href = `/${lang}/console/articles`
             })
         } else {
-            clientConsoleUpdateArticle(portalUrl, oldModel.uid, newModel).then((articleId) => {
+            clientConsoleUpdateArticle(publicPortalUrl, oldModel.uid, newModel).then((articleId) => {
                 if (!articleId) {
                     console.error(transText(lang, '文章更新失败', 'Article update failed'))
                     return
@@ -99,7 +99,7 @@ export function ConsoleArticleForm({portalUrl, modelString, lang, copyFrom}: {
         </div>
         <div className={styles.articleContainer}>
             <ConsoleArticleEditor tocList={tocList} header={oldModel.header}
-                                  body={bodyText} assetsUrl={'assetsUrl'} portalUrl={portalUrl}
+                                  body={bodyText} assetsUrl={'assetsUrl'} portalUrl={publicPortalUrl}
                                   onChange={(bodyText) => setBodyText(bodyText)}/>
         </div>
         <div className={styles.bottomBar}>

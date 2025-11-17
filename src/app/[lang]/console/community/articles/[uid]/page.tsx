@@ -25,7 +25,8 @@ export default async function Home({params, searchParams}: {
     const pageLang = paramsValue.lang || langZh
     const metadata = new PageMetadata(pageLang)
     const serverConfig = await useServerConfig()
-    const portalUrl = serverConfig.PUBLIC_PORTAL_URL
+    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
+    const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
     const articleUid = tryBase58ToUuid(paramsValue.uid)
     const isNew = articleUid === EmptyUUID;
     let model: PSArticleModel | undefined = undefined;
@@ -60,7 +61,7 @@ export default async function Home({params, searchParams}: {
         }
         if (copyFrom) {
             const copyFromUid = mustBase58ToUuid(copyFrom);
-            const originModel = await serverConsoleGetArticle(pageLang, portalUrl, copyFromUid)
+            const originModel = await serverConsoleGetArticle(pageLang, internalPortalUrl, copyFromUid)
             if (!originModel) {
                 throw new Error(transText(pageLang, '无法找到要复制的文章', 'Cannot find the article to copy'));
             }
@@ -77,7 +78,7 @@ export default async function Home({params, searchParams}: {
         if (!articleUid) {
             notFound();
         }
-        model = await serverConsoleGetArticle(pageLang, portalUrl, articleUid, wantLang)
+        model = await serverConsoleGetArticle(pageLang, internalPortalUrl, articleUid, wantLang)
         if (!model || !model.uid) {
             if (wantLang) {
                 const createUrl = `/${pageLang}/console/articles/${uuidToBase58(EmptyUUID)}?wantLang=${wantLang}&copyFrom=${uuidToBase58(articleUid)}`;
@@ -100,8 +101,7 @@ export default async function Home({params, searchParams}: {
     return <GlobalLayout lang={pageLang} metadata={metadata}>
         <div className={styles.articlesPage}>
             <div className={styles.pageContainer}>
-                <ConsoleArticleForm portalUrl={portalUrl} modelString={modelString} lang={pageLang}
-                                    copyFrom={copyFrom}/>
+                <ConsoleArticleForm publicPortalUrl={publicPortalUrl} modelString={modelString} lang={pageLang}/>
 
             </div>
 

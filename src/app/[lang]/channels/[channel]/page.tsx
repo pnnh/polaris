@@ -52,7 +52,7 @@ export default async function Page({params, searchParams}: {
         channel: channelUrn
     })
     const serverConfig = await useServerConfig()
-    const serverUrl = serverConfig.PUBLIC_PORTAL_URL
+    const serverUrl = serverConfig.INTERNAL_PORTAL_URL
     const rankUrl = `${serverUrl}/articles?${rankQuery}`
     const rankSelectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(rankUrl, '')
 

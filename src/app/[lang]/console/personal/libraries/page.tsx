@@ -18,8 +18,8 @@ export default async function Page({params, searchParams}: {
     const lang = paramsValue.lang || langEn
 
     const serverConfig = await useServerConfig()
-    const portalUrl = serverConfig.PUBLIC_PORTAL_URL
-    const currentUserInfo = await serverGetUserinfo(portalUrl);
+    const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
+    const currentUserInfo = await serverGetUserinfo(serverConfig.INTERNAL_PORTAL_URL);
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
     if (!currentUserInfo || isAnonymousAccount(currentUserInfo)) {
@@ -30,9 +30,9 @@ export default async function Page({params, searchParams}: {
         <div className={styles.consolePage}>
             <div className={styles.libGrid}>
                 <div className={styles.libHeader}>
-                    <ConsoleLibraryFilterBar lang={lang} keyword={''} portalUrl={portalUrl}/>
+                    <ConsoleLibraryFilterBar lang={lang} keyword={''} portalUrl={publicPortalUrl}/>
                 </div>
-                <ConsoleLibraryMiddleBody lang={lang} portalUrl={portalUrl}/>
+                <ConsoleLibraryMiddleBody lang={lang} portalUrl={publicPortalUrl}/>
             </div>
         </div>
     </GlobalLayout>

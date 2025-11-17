@@ -40,7 +40,7 @@ export default async function Page({params, searchParams}: {
     }
     const serverConfig = await useServerConfig()
 
-    const selectData = await serverConsoleSelectArticles(serverConfig.PUBLIC_PORTAL_URL,
+    const selectData = await serverConsoleSelectArticles(serverConfig.INTERNAL_PORTAL_URL,
         lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)

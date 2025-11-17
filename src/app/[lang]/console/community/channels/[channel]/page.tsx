@@ -31,7 +31,8 @@ export default async function Page({params, searchParams}: {
     metadata.title = pageTitle('')
     const serverConfig = await useServerConfig()
 
-    const portalUrl = serverConfig.PUBLIC_PORTAL_URL
+    const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
+    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
     const isNew = channelUid === EmptyUUID;
     let model: PSChannelModel | undefined = undefined;
     if (isNew) {
@@ -56,7 +57,7 @@ export default async function Page({params, searchParams}: {
         if (!channelUid) {
             notFound();
         }
-        model = await serverConsoleGetChannel(portalUrl, channelUid)
+        model = await serverConsoleGetChannel(internalPortalUrl, channelUid)
         if (!model || !model.uid) {
             notFound();
         }
@@ -73,7 +74,7 @@ export default async function Page({params, searchParams}: {
                           metadata={metadata}>
         <div className={styles.contentContainer}>
             <div className={styles.conMiddle}>
-                <ConsoleChannelForm portalUrl={portalUrl} modelString={modelString}/>
+                <ConsoleChannelForm publicPortalUrl={publicPortalUrl} modelString={modelString}/>
             </div>
         </div>
     </ConsoleLayout>

@@ -21,7 +21,7 @@ export default async function Page({params, searchParams}: {
     searchParams: Promise<Record<string, string> & { query: string | undefined }>
 }) {
     const serverConfig = await useServerConfig()
-    const serverUrl = serverConfig.PUBLIC_PORTAL_URL
+    const serverUrl = serverConfig.INTERNAL_PORTAL_URL
     const paramsValue = await params;
     const pageSize = 64
     const lang = paramsValue.lang || langEn

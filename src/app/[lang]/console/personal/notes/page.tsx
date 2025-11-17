@@ -42,7 +42,7 @@ export default async function Page({params, searchParams}: {
     }
     const serverConfig = await useServerConfig()
 
-    const selectData = await serverConsoleSelectArticles(serverConfig.PUBLIC_PORTAL_URL,
+    const selectData = await serverConsoleSelectArticles(serverConfig.INTERNAL_PORTAL_URL,
         lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
@@ -52,7 +52,7 @@ export default async function Page({params, searchParams}: {
                 <ConsoleArticleFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
                 <div className={styles.conMiddle}>
                     <ConsoleArticleMiddleBody selectData={selectData} lang={lang}
-                                              portalUrl={serverConfig.PUBLIC_PORTAL_URL}/>
+                                              publicPortalUrl={serverConfig.PUBLIC_PORTAL_URL}/>
                     <div className={styles.middlePagination}>
                         <PaginationServer lang={lang} pagination={pagination}
                                           pageLinkFunc={(page) =>
