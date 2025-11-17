@@ -8,10 +8,7 @@ export interface IServerConfig {
     PUBLIC_PORTAL_URL: string
     INTERNAL_PORTAL_URL: string
     CLOUDFLARE_PUBLIC_TURNSTILE: string
-    PUBLIC_PANDORA_URL: string
-    PUBLIC_LIGHTNING_URL: string
     DATABASE_URL: string
-    PUBLIC_IMAGES_URL: string
 }
 
 const serverConfigKey = 'SERVER_CONFIG';
@@ -40,14 +37,11 @@ export async function useServerConfig(): Promise<IServerConfig> {
         svc: "polaris"
     }
     const appConfig = await initAppConfig(configUrl, configOptions)
-    const selfUrl = await appConfig.GetString('app.PUBLIC_POLARIS_URL');
-    const portalUrl = await appConfig.GetString('app.PUBLIC_PORTAL_URL');
-    const internalPortalUrl = await appConfig.GetString('app.INTERNAL_PORTAL_URL');
-    const turnstile = await appConfig.GetString('app.CLOUDFLARE_PUBLIC_TURNSTILE');
-    const pandoraUrl = await appConfig.GetString('app.PUBLIC_PANDORA_URL');
-    const lightningUrl = await appConfig.GetString('app.PUBLIC_LIGHTNING_URL');
-    const databaseUrl = await appConfig.GetString('app.DATABASE_URL');
-    const imagesUrl = await appConfig.GetString('app.PUBLIC_IMAGES_URL');
+    const selfUrl = await appConfig.GetString('PUBLIC_POLARIS_URL');
+    const portalUrl = await appConfig.GetString('PUBLIC_PORTAL_URL');
+    const internalPortalUrl = await appConfig.GetString('INTERNAL_PORTAL_URL');
+    const turnstile = await appConfig.GetString('CLOUDFLARE_PUBLIC_TURNSTILE');
+    const databaseUrl = await appConfig.GetString('DATABASE_URL');
 
     if (!selfUrl) {
         throw new Error('PUBLIC_SELF_URL is required')
@@ -61,27 +55,15 @@ export async function useServerConfig(): Promise<IServerConfig> {
     if (!turnstile) {
         throw new Error('PUBLIC_TURNSTILE is required')
     }
-    if (!pandoraUrl) {
-        throw new Error('PUBLIC_PANDORA_URL is required')
-    }
-    if (!lightningUrl) {
-        throw new Error('PUBLIC_LIGHTNING_URL is required')
-    }
     if (!databaseUrl) {
         throw new Error('_URL is required')
-    }
-    if (!imagesUrl) {
-        throw new Error('PUBLIC_IMAGES_URL is required')
     }
     serverConfigInstance = {
         RUN_MODE: runMode,
         PUBLIC_SELF_URL: selfUrl,
         PUBLIC_PORTAL_URL: portalUrl,
         CLOUDFLARE_PUBLIC_TURNSTILE: turnstile,
-        PUBLIC_PANDORA_URL: pandoraUrl,
-        PUBLIC_LIGHTNING_URL: lightningUrl,
         DATABASE_URL: databaseUrl,
-        PUBLIC_IMAGES_URL: imagesUrl,
         INTERNAL_PORTAL_URL: internalPortalUrl,
     };
     serverSetGlobalVariable(serverConfigKey, serverConfigInstance);
@@ -111,6 +93,5 @@ export function usePublicConfig(serverConfig: IServerConfig): IBrowserConfig {
         PUBLIC_SELF_URL: serverConfig.PUBLIC_SELF_URL,
         PUBLIC_TURNSTILE: serverConfig.CLOUDFLARE_PUBLIC_TURNSTILE,
         PUBLIC_PORTAL_URL: serverConfig.PUBLIC_PORTAL_URL,
-        PUBLIC_LIGHTNING_URL: serverConfig.PUBLIC_LIGHTNING_URL,
     }
 }

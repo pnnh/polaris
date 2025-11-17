@@ -33,7 +33,6 @@ export default async function ContentLayout({
     } else {
         currentUserInfo = userInfo;
     }
-    const pandoraUrl = serverConfig.PUBLIC_PANDORA_URL
     return <GlobalLayout lang={lang} metadata={metadata}>
         <div className={styles.templateContainer}>
             <div className={styles.templateNavbar}>
