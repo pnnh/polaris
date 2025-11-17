@@ -10,9 +10,27 @@ permissions:
   pull-requests: read  # Required for label-based overrides
 
 jobs:
-  build-and-push:
-    runs-on: ubuntu-latest
+  test:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
 
+        - name: Set up Node.js
+          uses: actions/setup-node@v4
+          with:
+            node-version: '22'
+            cache: 'npm' # 开启 npm 缓存
+
+        - name: Install dependencies
+          run: npm ci
+
+        - name: Run tests 
+          run: npm run test # 假设你的 package.json 中 "test": "vitest run"
+
+  build-and-push:
+    needs: test
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

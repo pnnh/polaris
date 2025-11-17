@@ -1,18 +1,13 @@
-FROM node:23 AS base
+FROM node:22 AS base
 
 FROM base AS deps
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends python3 \
-    && apt-get autoremove -y \
-    && apt-get clean -y \
-    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 COPY package.json package-lock.json ./
 
-RUN npm install
+RUN npm ci --production --legacy-peer-deps
 
 FROM deps AS builder
 
@@ -23,7 +18,6 @@ COPY . .
 
 RUN npx vite build
 RUN npm run build
-RUN npm run test
 
 FROM base AS runner
 WORKDIR /app
