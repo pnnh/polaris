@@ -1,13 +1,13 @@
 import 'server-only'
 
-import React, {Suspense} from "react";
+import React from "react";
 import {GoogleAnalytics} from "@next/third-parties/google";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {isProd, usePublicConfig, useServerConfig} from "@/components/server/config";
 import {JotaiProvider} from "@/components/client/content/provider";
 import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter";
 import {ThemeProvider} from '@mui/material/styles';
-import {lightTheme, darkTheme} from '@/components/client/theme';
+import {darkTheme, lightTheme} from '@/components/client/theme';
 import {encodeBase58String} from "@/atom/common/utils/basex";
 import {getServerTheme} from "@/components/server/theme";
 import {getTargetLang, unknownLanguage} from "@/components/common/language";
@@ -77,7 +77,7 @@ export default async function GlobalLayout(
     </head>
     <body lang={lang} className={isDarkTheme ? 'darkTheme' : 'lightTheme'}>
     <input id="LGEnv" type="hidden" value={encodedBrowserConfig}/>
-    <script type="module" src={"/setup.js"} defer={false}></script>
+    <script type="module" src="/setup.js" crossOrigin="anonymous"></script>
     <JotaiProvider>
         <AppRouterCacheProvider options={{key: 'css', enableCssLayer: true}}>
             <ThemeProvider theme={pageTheme}>
@@ -85,7 +85,6 @@ export default async function GlobalLayout(
             </ThemeProvider>
         </AppRouterCacheProvider>
     </JotaiProvider>
-    {/*<script type="module" src={lightningUrl} defer={true}></script>*/}
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback"
             defer={true}></script>
     </body>

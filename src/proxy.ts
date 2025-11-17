@@ -1,6 +1,4 @@
 import {NextRequest, NextResponse} from 'next/server';
-import {getLanguageFromPathname, langEn, langZh} from "@/atom/common/language";
-import {getLangFromUrl} from "@/components/common/language";
 
 export function proxy(request: NextRequest) {
     const requestHeaders = new Headers(request.headers);

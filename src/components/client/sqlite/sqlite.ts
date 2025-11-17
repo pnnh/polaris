@@ -8,7 +8,7 @@ const start = (sqlite3: any) => {
     const db = new sqlite3.oo1.DB('/mydb.sqlite3', 'ct');  // 'ct' = create if not exists, temporary
     // Example: Execute queries
     db.exec('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT);');
-    db.exec('INSERT INTO users (name) VALUES (?);', ['Alice']);
+    // db.exec('INSERT INTO users (name) VALUES (?);', ['Alice']);
     const r = db.exec('SELECT * FROM users;');
     log('Query result:', r);
     db.close();
