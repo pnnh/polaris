@@ -6,7 +6,7 @@ import React, {useState} from "react";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {accountSignin} from "@/components/client/account/account";
-import {transText, transKey} from "@/components/common/locales/normal";
+import {transKey, transText} from "@/components/common/locales/normal";
 
 const buttonThrottle = new ButtonThrottle(1000)
 
@@ -69,6 +69,7 @@ export function SigninForm({lang, portalUrl, signinLink, linkApp, signinCallback
             <div className={styles.formRow}>
                 <label htmlFor="password" className={styles.fieldLabel}>账号密码</label>
                 <input type="password" name="password" className={styles.inputField}
+                       autoComplete={'off'}
                        placeholder={transText(lang, '字母数字及特殊字符', 'Letters, numbers and special characters')}
                        value={password} onChange={(event) => setPassword(event.target.value)}/>
             </div>

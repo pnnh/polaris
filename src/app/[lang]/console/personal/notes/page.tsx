@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './page.module.scss'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import {getPathname} from "@/components/server/pathname";
 import {PaginationServer} from "@/components/server/pagination";
 import {replaceSearchParams} from "@/atom/common/utils/query";
 import {calcPagination} from "@/atom/common/utils/pagination";
@@ -9,7 +8,7 @@ import {langEn} from "@/atom/common/language";
 import {ConsoleArticleFilterBar} from "./filter";
 import {ConsoleArticleMiddleBody} from "./article";
 import {useServerConfig} from "@/components/server/config";
-import {serverConsoleSelectArticles} from "@/components/server/articles/articles";
+import {serverConsoleSelectArticles} from "@/components/personal/articles";
 import GlobalLayout from "@/components/server/global";
 
 export const dynamic = "force-dynamic";
@@ -18,7 +17,6 @@ export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
-    const pathname = await getPathname()
     const searchParamsValue = await searchParams
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn

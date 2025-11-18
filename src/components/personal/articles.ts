@@ -36,7 +36,7 @@ export async function serverConsoleGetArticle(lang: string, portalUrl: string, u
     if (!uid) {
         return undefined
     }
-    let url = `${portalUrl}/${lang}/console/articles/${uid}`
+    let url = `${portalUrl}/${lang}/console/community/articles/${uid}`
     if (wantLang && isSupportedLanguage(wantLang)) {
         if (!isSupportedLanguage(wantLang)) {
             throw new Error(`serverConsoleGetArticle unsupported language: ${wantLang}`);
@@ -65,7 +65,7 @@ export async function serverConsoleGetArticle(lang: string, portalUrl: string, u
 
 export async function serverConsoleSelectArticles(portalUrl: string, lang: string, queryParams: Record<string, any>): Promise<PLSelectData<PSArticleModel>> {
     const rawQuery = queryString.stringify(queryParams)
-    const url = `${portalUrl}/console/articles?${rawQuery}`
+    const url = `${portalUrl}/console/community/articles?${rawQuery}`
     const cookieStore = await cookies()
     const authHeader = cookieStore.toString()
     const getResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, authHeader);

@@ -2,7 +2,7 @@
 
 import styles from "./filter.module.scss";
 import React from "react";
-import {transText, transKey} from "@/components/common/locales/normal";
+import {transKey, transText} from "@/components/common/locales/normal";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import {uuidToBase58} from "@/atom/common/utils/basex";
@@ -15,9 +15,10 @@ export function ConsoleArticleFilterBar({lang, keyword}: {
     const [searchText, setSearchText] = React.useState(keyword || '');
     const goSearch = () => {
         console.debug('go search', searchText);
+        window.location.href = `/${lang}/console/community/articles?keyword=${encodeURIComponent(searchText)}`
     }
     const goCreateArticle = () => {
-        window.location.href = `/${lang}/console/articles/${uuidToBase58(EmptyUUID)}`
+        window.location.href = `/${lang}/console/community/articles/${uuidToBase58(EmptyUUID)}`
     }
     return <div className={styles.middleTop}>
         <div className={styles.topLeft}>

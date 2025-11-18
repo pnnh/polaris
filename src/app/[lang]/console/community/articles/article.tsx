@@ -61,7 +61,7 @@ export function ArticleCard({model, lang, publicPortalUrl}: {
     lang: string,
     publicPortalUrl: string
 }) {
-    const readUrl = `${lang}/console/articles/${uuidToBase58(model.uid)}`
+    const readUrl = `${lang}/console/community/articles/${uuidToBase58(model.uid)}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = `${publicPortalUrl}/articles/${model.uid}/assets/${model.cover}`
@@ -70,7 +70,7 @@ export function ArticleCard({model, lang, publicPortalUrl}: {
     if (model.channel) {
         chanUrl = `/${lang}/channels/${uuidToBase58(model.channel)}`
     }
-    const deleteUrl = `${publicPortalUrl}/console/articles/${model.uid}`
+    const deleteUrl = `${publicPortalUrl}/console/community/articles/${model.uid}?action=delete`
     return <div className={styles.middleItem} key={model.uid} data-article={model.uid}>
         <div className={styles.itemCover}>
             <PSImageServer lang={lang} src={imageUrl} alt={model.title} fill={true}/>

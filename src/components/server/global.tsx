@@ -86,6 +86,8 @@ export default async function GlobalLayout(
         </AppRouterCacheProvider>
     </JotaiProvider>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback"
+            async
+            crossOrigin="anonymous"
             defer={true}></script>
     </body>
     </html>

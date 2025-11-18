@@ -5,7 +5,7 @@ import {getPathname} from "@/components/server/pathname";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {langEn} from "@/atom/common/language";
 import {useServerConfig} from "@/components/server/config";
-import {serverConsoleSelectArticles} from "@/components/server/articles/articles";
+import {serverConsoleSelectArticles} from "@/components/personal/articles";
 import GlobalLayout from "@/components/server/global";
 import ComputerIcon from "~/@mui/icons-material/Computer";
 import CloudQueueIcon from "~/@mui/icons-material/CloudQueue";

@@ -7,7 +7,6 @@ import Button from "@mui/material/Button";
 import React from "react";
 import {TocItem} from "@/atom/common/models/toc";
 import {PSArticleModel} from "@/components/common/models/article";
-import {clientConsoleInsertArticle, clientConsoleUpdateArticle} from "@/components/client/articles/articles";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
 import {getDefaultImageUrl} from "@/components/common/note";
 import {uuidToBase58} from "@/atom/common/utils/basex";
@@ -16,6 +15,7 @@ import MenuItem from '@mui/material/MenuItem';
 import {supportedLanguages} from "@/components/common/language";
 import {Select} from "@mui/material";
 import {transText} from "@/components/common/locales/normal";
+import {PersonalBrowser} from "@/components/personal/browser";
 
 function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (newLang: string) => void }) {
     return <>
@@ -65,7 +65,7 @@ export function ConsoleArticleForm({portalUrl, modelString, lang}: {
             channel: oldModel.channel
         }
         if (isNew) {
-            clientConsoleInsertArticle(portalUrl, newModel).then((newArticleId) => {
+            PersonalBrowser.clientConsoleInsertArticle(portalUrl, newModel).then((newArticleId) => {
                 if (!newArticleId) {
                     console.error(transText(lang, '文章插入失败', 'Article insert failed'))
                     return
@@ -73,7 +73,7 @@ export function ConsoleArticleForm({portalUrl, modelString, lang}: {
                 window.location.href = `/${lang}/console/articles`
             })
         } else {
-            clientConsoleUpdateArticle(portalUrl, oldModel.uid, newModel).then((articleId) => {
+            PersonalBrowser.clientConsoleUpdateArticle(portalUrl, oldModel.uid, newModel).then((articleId) => {
                 if (!articleId) {
                     console.error(transText(lang, '文章更新失败', 'Article update failed'))
                     return

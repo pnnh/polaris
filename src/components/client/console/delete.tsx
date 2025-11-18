@@ -6,7 +6,7 @@ import Button, {ButtonProps} from '@mui/material/Button';
 import {red} from '@mui/material/colors';
 import {Dialog} from '@mui/material';
 import {CodeOk, PLDeleteResult} from "@/atom/common/models/protocol";
-import {clientMakeDelete} from "@/atom/client/http";
+import {clientMakePost} from "@/atom/client/http";
 import styles from './delete.module.scss';
 import {transText} from "@/components/common/locales/normal";
 
@@ -38,7 +38,7 @@ export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
 
     const handleSubmit = (value: string) => {
         console.debug('handleSubmit', value);
-        clientMakeDelete<PLDeleteResult>(deleteUrl).then((deleteResult) => {
+        clientMakePost<PLDeleteResult>(deleteUrl, {}).then((deleteResult) => {
             if (deleteResult && deleteResult.code === CodeOk) {
                 console.debug('Delete successful', deleteResult);
                 handleClose();

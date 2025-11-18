@@ -1,7 +1,6 @@
 import React from 'react'
 import styles from './page.module.scss'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import {getPathname} from "@/components/server/pathname";
 import {PaginationServer} from "@/components/server/pagination";
 import {replaceSearchParams} from "@/atom/common/utils/query";
 import {calcPagination} from "@/atom/common/utils/pagination";
@@ -9,7 +8,7 @@ import {langEn} from "@/atom/common/language";
 import {ConsoleArticleFilterBar} from "./filter";
 import {ConsoleArticleMiddleBody} from "./article";
 import {useServerConfig} from "@/components/server/config";
-import {serverConsoleSelectArticles} from "@/components/server/articles/articles";
+import {CommunityArticleNodeService} from "@/components/community/articles";
 import GlobalLayout from "@/components/server/global";
 
 export const dynamic = "force-dynamic";
@@ -18,7 +17,6 @@ export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
-    const pathname = await getPathname()
     const searchParamsValue = await searchParams
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
@@ -28,7 +26,7 @@ export default async function Page({params, searchParams}: {
         page = 1
     }
     const pageSize = 10
-    const channelPk = searchParamsValue.channel
+    const searchText = searchParamsValue.keyword
 
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
@@ -38,13 +36,13 @@ export default async function Page({params, searchParams}: {
         filter: searchParamsValue.filter,
         page,
         size: pageSize,
-        channel: channelPk
+        keyword: searchText
     }
     const serverConfig = await useServerConfig()
 
     const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
-    const publicPortalUrl = serverConfig.INTERNAL_PORTAL_URL
-    const selectData = await serverConsoleSelectArticles(internalPortalUrl,
+    const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
+    const selectData = await CommunityArticleNodeService.consoleQueryArticles(internalPortalUrl,
         lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
@@ -58,7 +56,7 @@ export default async function Page({params, searchParams}: {
                     <div className={styles.middlePagination}>
                         <PaginationServer lang={lang} pagination={pagination}
                                           pageLinkFunc={(page) =>
-                                              `/${lang}/console/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
+                                              `/${lang}/console/community/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                     </div>
                 </div>
             </div>

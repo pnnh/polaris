@@ -6,7 +6,7 @@ import {useServerConfig} from "@/components/server/config";
 import {langZh} from "@/atom/common/language";
 import {notFound, redirect} from "next/navigation";
 import {ConsoleArticleForm} from "./form";
-import {serverConsoleGetArticle} from "@/components/server/articles/articles";
+import {serverConsoleGetArticle} from "@/components/personal/articles";
 import {PSArticleModel} from "@/components/common/models/article";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
 import GlobalLayout from "@/components/server/global";

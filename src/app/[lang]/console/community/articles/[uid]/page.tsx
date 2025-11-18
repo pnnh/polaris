@@ -1,17 +1,16 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import {getPathname} from "@/components/server/pathname";
-import {mustBase58ToUuid, tryBase58ToUuid, uuidToBase58} from "@/atom/common/utils/basex";
+import {mustBase58ToUuid, tryBase58ToUuid} from "@/atom/common/utils/basex";
 import {useServerConfig} from "@/components/server/config";
 import {langZh} from "@/atom/common/language";
-import {notFound, redirect} from "next/navigation";
+import {notFound} from "next/navigation";
 import {ConsoleArticleForm} from "./form";
-import {serverConsoleGetArticle} from "@/components/server/articles/articles";
 import {PSArticleModel} from "@/components/common/models/article";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
 import GlobalLayout from "@/components/server/global";
 import styles from './page.module.scss'
 import {transText} from "@/components/common/locales/normal";
+import {CommunityArticleNodeService} from "@/components/community/articles";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +18,6 @@ export default async function Home({params, searchParams}: {
     params: Promise<{ lang: string, uid: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
-    const pathname = await getPathname()
     const paramsValue = await params;
     const searchValue = await searchParams;
     const pageLang = paramsValue.lang || langZh
@@ -61,10 +59,15 @@ export default async function Home({params, searchParams}: {
         }
         if (copyFrom) {
             const copyFromUid = mustBase58ToUuid(copyFrom);
-            const originModel = await serverConsoleGetArticle(pageLang, internalPortalUrl, copyFromUid)
-            if (!originModel) {
+            const query = {
+                action: 'get',
+                keyword: copyFromUid
+            }
+            const queryResult = await CommunityArticleNodeService.consoleQueryArticles(internalPortalUrl, pageLang, query)
+            if (!queryResult || queryResult.range.length === 0) {
                 throw new Error(transText(pageLang, '无法找到要复制的文章', 'Cannot find the article to copy'));
             }
+            const originModel = queryResult.range[0];
             model.name = originModel.name;
             model.channel = originModel.channel;
             model.cover = originModel.cover;
@@ -78,16 +81,15 @@ export default async function Home({params, searchParams}: {
         if (!articleUid) {
             notFound();
         }
-        model = await serverConsoleGetArticle(pageLang, internalPortalUrl, articleUid, wantLang)
-        if (!model || !model.uid) {
-            if (wantLang) {
-                const createUrl = `/${pageLang}/console/articles/${uuidToBase58(EmptyUUID)}?wantLang=${wantLang}&copyFrom=${uuidToBase58(articleUid)}`;
-                redirect(createUrl)
-            } else {
-                notFound();
-            }
-            return
+        const query = {
+            action: 'get',
+            keyword: articleUid
         }
+        const queryResult = await CommunityArticleNodeService.consoleQueryArticles(internalPortalUrl, pageLang, query)
+        if (!queryResult || queryResult.range.length === 0) {
+            notFound()
+        }
+        model = queryResult.range[0];
         metadata.title = pageTitle(pageLang, model.title)
 
         metadata.description = model.description
@@ -102,9 +104,7 @@ export default async function Home({params, searchParams}: {
         <div className={styles.articlesPage}>
             <div className={styles.pageContainer}>
                 <ConsoleArticleForm publicPortalUrl={publicPortalUrl} modelString={modelString} lang={pageLang}/>
-
             </div>
-
         </div>
     </GlobalLayout>
 }
