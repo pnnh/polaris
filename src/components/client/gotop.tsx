@@ -1,8 +1,16 @@
 'use client'
 
-import styles from './gotop.module.scss'
 import Image from "next/image";
 import {useEffect, useState} from "react";
+import {css} from "@emotion/css";
+
+const goTopContainerStyle = css`
+    position: fixed;
+    bottom: 4rem;
+    right: 4rem;
+    z-index: 1000;
+    cursor: pointer;
+`
 
 export function GoTop({anchor}: { anchor: string }) {
     const [show, setShow] = useState(false)
@@ -23,7 +31,7 @@ export function GoTop({anchor}: { anchor: string }) {
             anchorElement.removeEventListener('scroll', scrollHandler)
         }
     })
-    return <div style={{display: show ? 'block' : 'none'}} className={styles.goTopContainer}
+    return <div style={{display: show ? 'block' : 'none'}} className={goTopContainerStyle}
                 onClick={() => {
                     const anchorElement = document.getElementById(anchor)
                     if (!anchorElement) {

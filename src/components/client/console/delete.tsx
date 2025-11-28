@@ -7,7 +7,6 @@ import {red} from '@mui/material/colors';
 import {Dialog} from '@mui/material';
 import {CodeOk, PLDeleteResult} from "@/atom/common/models/protocol";
 import {clientMakePost} from "@/atom/client/http";
-import styles from './delete.module.scss';
 import {transText} from "@/components/common/locales/normal";
 
 const ColorButton = styled(Button)<ButtonProps>(({theme}) => ({
@@ -52,17 +51,42 @@ export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
     };
     return (
         <div>
+            <style jsx={true}>{`
+                .deleteDialog {
+                    min-height: 8rem;
+                    min-width: 10rem;
+
+                    .dialogTitle {
+                        font-size: 1.1rem;
+                        font-weight: bolder;
+                        border-bottom: solid 1px #e1e1e280;
+                        padding: 0.5rem 1rem;
+                    }
+
+                    .resTitle {
+                        padding: 0.5rem 1rem;
+                    }
+
+                    .dialogActions {
+                        border-top: solid 1px #e1e1e280;
+                        padding: 0.5rem 1rem;
+                        display: flex;
+                        flex-direction: row;
+                        gap: 0.5rem;
+                    }
+                }
+            `}</style>
             <ColorButton variant="text" size={'small'} onClick={handleClickOpen}>{children}</ColorButton>
             <Dialog onClose={handleClose} open={open}>
-                <div className={styles.deleteDialog}>
+                <div className={'deleteDialog'}>
 
-                    <div className={styles.dialogTitle}>
+                    <div className={'dialogTitle'}>
                         {transText(lang, '是否要删除?', 'Do you want to delete?')}
                     </div>
-                    <div className={styles.resTitle}>
+                    <div className={'resTitle'}>
                         {resTitle}
                     </div>
-                    <div className={styles.dialogActions}>
+                    <div className={'dialogActions'}>
                         <Button variant={'contained'} size={'small'} onClick={() => handleSubmit('ok')}>
                             {transText(lang, '确定', 'OK')}
                         </Button>

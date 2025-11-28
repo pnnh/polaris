@@ -7,7 +7,6 @@ import {PageMetadata} from "@/components/common/utils/page";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {useServerConfig} from "@/components/server/config";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
-import {StyleItem} from "@/components/server/component";
 import {ConsoleImageSidebar} from "@/components/server/console/images/sidebar";
 
 export default async function ConsoleImageLayout(
@@ -18,14 +17,12 @@ export default async function ConsoleImageLayout(
         metadata,
         lang,
         userInfo,
-        styleItems
     }: {
         children: React.ReactNode,
         pathname: string,
         searchParams: Record<string, string>,
         metadata: PageMetadata,
         lang: string,
-        styleItems?: StyleItem | StyleItem[] | undefined,
         userInfo: AccountModel | typeof SymbolUnknown
     }) {
     let currentUserInfo: AccountModel | undefined;
@@ -40,7 +37,7 @@ export default async function ConsoleImageLayout(
     if (!currentUserInfo || isAnonymousAccount(currentUserInfo)) {
         return <NeedLoginPage lang={lang}></NeedLoginPage>
     }
-    return <GlobalLayout lang={lang} metadata={metadata} styleItems={styleItems}>
+    return <GlobalLayout lang={lang} metadata={metadata}>
         <div className={styles.consoleContainer}>
             <ConsoleImageSidebar lang={lang}/>
             {children}

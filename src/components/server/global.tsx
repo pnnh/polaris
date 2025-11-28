@@ -12,7 +12,6 @@ import {encodeBase58String} from "@/atom/common/utils/basex";
 import {getServerTheme} from "@/components/server/theme";
 import {getTargetLang, unknownLanguage} from "@/components/common/language";
 import {notFound} from "next/navigation";
-import {ServerComponentStyle, StyleItem} from "@/components/server/component";
 
 // 隔几秒重新验证下数据
 export const revalidate = 1
@@ -22,11 +21,9 @@ export default async function GlobalLayout(
     {
         lang,
         metadata,
-        styleItems,
         children
     }: {
         lang: string, metadata: PageMetadata,
-        styleItems?: StyleItem | StyleItem[] | undefined,
         children: React.ReactNode
     }) {
     const rootPageTitle = pageTitle(lang,)
@@ -73,7 +70,6 @@ export default async function GlobalLayout(
         }
         <link rel="manifest" id="manifest-link" href={`/manifest/manifest_${lang}.json`}/>
         <link rel="stylesheet" href="/assets/setup.css"/>
-        <ServerComponentStyle styleItems={styleItems}></ServerComponentStyle>
     </head>
     <body lang={lang} className={isDarkTheme ? 'darkTheme' : 'lightTheme'}>
     <input id="LGEnv" type="hidden" value={encodedBrowserConfig}/>

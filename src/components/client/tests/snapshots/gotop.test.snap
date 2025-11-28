@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`GoTop renders correctly 1`] = `
+.emotion-0 {
+  position: fixed;
+  bottom: 4rem;
+  right: 4rem;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+<div>
+  <div
+    class="emotion-0"
+    style="display: none;"
+  >
+    <img
+      alt="go-top"
+      data-nimg="1"
+      decoding="async"
+      height="48"
+      loading="lazy"
+      src="/icons/gotop.svg"
+      style="color: transparent;"
+      width="48"
+    />
+  </div>
+</div>
+`;

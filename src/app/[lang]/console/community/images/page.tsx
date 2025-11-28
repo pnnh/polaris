@@ -8,37 +8,11 @@ import {replaceSearchParams} from "@/atom/common/utils/query";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {langEn} from "@/atom/common/language";
 import {useServerConfig} from "@/components/server/config";
-import {css} from "@/components/server/component";
 import ConsoleImageLayout from "@/components/server/console/images/layout";
 import {ConsoleImageFilterBar} from "./filter";
 import {ConsoleImageMiddleBody} from "./image";
 
 export const dynamic = "force-dynamic";
-
-const pageStyle = css`
-    .contentContainer {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-
-        .conMiddle {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            scrollbar-width: thin;
-            border-radius: 4px;
-            overflow-y: auto;
-            overflow-x: hidden;
-
-            .middlePagination {
-                width: 100%;
-                background: var(--background-color);
-            }
-        }
-    }
-`
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -63,7 +37,7 @@ export default async function Page({params, searchParams}: {
     const libName = searchParamsValue.libName
     const pagination = calcPagination(page, 100, pageSize)
     return <ConsoleImageLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                               metadata={metadata} styleItems={pageStyle}>
+                               metadata={metadata}>
         <div className={styles.contentContainer}>
             <ConsoleImageFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
             <div className={styles.conMiddle}>

@@ -63,7 +63,7 @@ export default async function Page({params, searchParams}: {
     const libName = searchParamsValue.libName
     const pagination = calcPagination(page, 100, pageSize)
     return <ConsoleImageLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                               metadata={metadata} styleItems={pageStyle}>
+                               metadata={metadata}>
         <div className={styles.contentContainer}>
             <ConsoleImageFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
             <div className={styles.conMiddle}>

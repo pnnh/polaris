@@ -8,6 +8,7 @@ import ContrastIcon from '@mui/icons-material/Contrast';
 import {clientSetCurrentTheme, ThemeType} from "@/components/client/theme";
 import {transKey} from "@/components/common/locales/normal";
 
+
 export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string }) {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 

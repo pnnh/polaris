@@ -8,6 +8,12 @@ export default defineConfig({
     test: {
         globals: true,
         environment: 'jsdom',
+        setupFiles: ['./vitest.setup.ts'],
+        resolveSnapshotPath: (testPath: string, snapExtension: string) => {
+            const dir = path.dirname(testPath)
+            const base = path.basename(testPath, path.extname(testPath))
+            return path.join(dir, 'snapshots', `${base}${snapExtension}`)
+        },
     },
     resolve: {
         alias: {
