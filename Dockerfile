@@ -16,8 +16,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN npx vite build
-RUN npm run build
+RUN npx vite build && npm run build
 
 FROM base AS runner
 WORKDIR /app

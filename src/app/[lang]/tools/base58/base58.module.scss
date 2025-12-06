@@ -1,0 +1,71 @@
+
+.base58Component {
+  margin-bottom: 1rem;
+
+  .description {
+    font-size: 1rem;
+    color: #4a4a4a;
+    margin: 1rem 0 1rem 0;
+  }
+
+  .productTitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 1rem 0;
+    text-align: center;
+  }
+
+  .textContainer {
+    margin: 1rem 0 1rem 0;
+    background-color: var(--background-color);
+    color: var(--text-primary-color);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    textarea {
+      width: calc(100% - 4rem);
+      min-height: 8rem;
+      padding: 1rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: none;
+      background-color: var(--background-color);
+      color: var(--text-primary-color);
+      outline: none;
+    }
+  }
+
+  .flavorContainer {
+    margin: 1rem 0 1rem 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .actionContainer {
+    margin: 1rem 0 1rem 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .errorContainer {
+    padding: 0 1rem;
+    color: red;
+    font-size: 1rem;
+    font-style: italic;
+    background-color: var(--background-color);
+  }
+
+  .resultContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background-color);
+    color: var(--text-primary-color);
+  }
+}
+

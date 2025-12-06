@@ -9,7 +9,7 @@ export async function ToolBody({lang}: { lang: string }) {
             {
                 appList.map(app => {
                     const toolUrl = app.url.startsWith('https') || app.url.startsWith('https')
-                        ? app.url : `${lang}/${app.url}`
+                        ? app.url : `${lang}${app.url}`
                     return <div className={styles.appCard} key={app.uid}>
                         <img className={styles.appImage} src={app.image} alt={app.name}/>
                         <div className={styles.appTitle}>

@@ -1,23 +1,8 @@
-import {langEnUS, langEsES, langFrFR, langJaJP, LangTextValue, langZhCN} from "../language"
+import {langEnUS, langEsES, langFrFR, langJaJP, langZhCN} from "../language"
 import {TransTexts} from "@/components/common/locales/texts";
 
 export function transKey(lang: string, keyName: keyof typeof TransTexts): string {
-    const langText = TransTexts[keyName]
-    if (!langText) {
-        throw new Error('Translation key not found: ' + keyName)
-    }
-    switch (lang) {
-        case langZhCN:
-            return langText.zh
-        case langJaJP:
-            return langText.ja
-        case langEsES:
-            return langText.es
-        case langFrFR:
-            return langText.fr
-    }
-    // Fallback to English
-    return langText.en
+    return transExtra(lang, '', '', keyName)
 }
 
 export function transText(lang: string, zhText: string, enText: string): string {
@@ -29,9 +14,9 @@ export function transText(lang: string, zhText: string, enText: string): string 
 
 export function transExtra(lang: string, zhText: string, enText: string,
                            keyName: keyof typeof TransTexts): string {
-    if (lang === langZhCN) {
+    if (lang === langZhCN && zhText) {
         return zhText
-    } else if (lang === langEnUS) {
+    } else if (lang === langEnUS && enText) {
         return enText
     }
     if (!keyName) {

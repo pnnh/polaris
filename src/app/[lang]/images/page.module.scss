@@ -1,12 +1,26 @@
-@use '@/components/common/styles/theme';
 
 .contentContainer {
   flex-grow: 1;
-  flex-direction: row;
+  flex-direction: column;
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   margin: 1rem;
+
+  .conTop {
+    .linkTag {
+      color: var(--text-primary-color);
+      text-decoration: none;
+      display: inline-block;
+      padding: 0.5rem 0.5rem;
+      border-radius: 0.25rem;
+      background-color: var(--background-color);
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 
   .conMiddle {
     display: flex;

@@ -11,6 +11,7 @@ import {langEn} from "@/atom/common/language";
 import {PageMetadata} from "@/components/common/utils/page";
 import {serverSelectImages} from "@/components/server/images/image";
 import {ImageMiddleBody} from "@/components/server/content/images/image";
+import {transText} from "@/components/common/locales/normal";
 
 export const dynamic = "force-dynamic";
 
@@ -48,7 +49,16 @@ export default async function Page({params, searchParams}: {
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={styles.contentContainer}>
-
+            <div className={styles.conTop}>
+                <a className={styles.linkTag} href={`/${lang}/images?type=illustration`}>
+                    {transText(lang, '插画', 'illustration')}</a>
+                <a className={styles.linkTag} href={`/${lang}/images?type=sticker`}>
+                    {transText(lang, '表情图', 'Sticker')}</a>
+                <a className={styles.linkTag} href={`/${lang}/images?type=emoji`}>
+                    {transText(lang, 'Emoji', 'Emoji')}</a>
+                <a className={styles.linkTag} href={`/${lang}/images?type=icons`}>
+                    {transText(lang, '图标', 'Icons')}</a>
+            </div>
             <div className={styles.conMiddle}>
                 <ImageMiddleBody selectData={selectData} lang={lang}/>
 

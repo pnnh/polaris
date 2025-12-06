@@ -41,10 +41,10 @@ function ArticleNavbar({lang, pathname}: {
     lang: string, pathname: string
 }) {
     const navLinks = [
+        {name: transKey(lang, "navTools"), href: `/${lang}/tools`},
         {name: transExtra(lang, "文章", "Articles", "navArticles"), href: `/${lang}/articles`},
         {name: transExtra(lang, "频道", "Channels", "navChannels"), href: `/${lang}/channels`},
         {name: transKey(lang, "navImages"), href: `/${lang}/images`},
-        {name: transKey(lang, "navTools"), href: `/${lang}/tools`},
         // {name: '图片', href: `/images`},
         // {name: '随机密码', href: `/tools/password`},
         // {name: 'UUID', href: `/tools/uuid`},

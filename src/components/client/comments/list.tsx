@@ -1,8 +1,7 @@
 import './list.scss'
 import {useEffect, useState} from "react";
 import {PLSelectResult} from "@/atom/common/models/protocol";
-import {PSCommentModel} from "@/atom/common/models/comment";
-import {fetchComments} from "@/components/client/comments/comment";
+import {fetchComments, PSCommentModel} from "@/components/client/comments/comment";
 import {transText} from "@/components/common/locales/normal";
 
 export function ListArea({portalUrl, resource, lang}: { portalUrl: string, resource: string, lang: string }) {

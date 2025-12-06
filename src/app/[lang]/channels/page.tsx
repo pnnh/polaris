@@ -4,7 +4,6 @@ import {getPathname} from "@/components/server/pathname";
 import styles from './page.module.scss'
 import {CodeOk, PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
 import {PSChannelModel} from "@/components/common/models/channel";
-import {NoData} from "@/components/common/empty";
 import {uuidToBase58} from "@/atom/common/utils/basex";
 import {isValidUUID} from "@/atom/common/utils/uuid";
 import {PSImageServer} from "@/components/server/image";
@@ -15,6 +14,7 @@ import {langEn} from "@/atom/common/language";
 import queryString from "query-string";
 import {useServerConfig} from "@/components/server/config";
 import {serverMakeGet} from "@/atom/server/http";
+import {NoDataPage} from "@/components/misc/NoData";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, viewer: string }>,
@@ -23,6 +23,7 @@ export default async function Page({params, searchParams}: {
     const serverConfig = await useServerConfig()
     const serverUrl = serverConfig.INTERNAL_PORTAL_URL
     const paramsValue = await params;
+    const searchParamsValue = await searchParams
     const pageSize = 64
     const lang = paramsValue.lang || langEn
 
@@ -35,16 +36,18 @@ export default async function Page({params, searchParams}: {
     const url = `${serverUrl}/channels?${rawQuery}`
     const result = await serverMakeGet<PLSelectResult<PSChannelModel>>(url, '')
 
-    if (!result || !result.data) {
-        return <NoData size={'middle'}/>
-    }
-    if (result.code !== CodeOk) {
-        return <NoData size={'middle'} message={result.message}/>
-    }
     const pathname = await getPathname()
     const metadata = new PageMetadata(lang)
+    if (!result || !result.data) {
+        return <NoDataPage lang={lang} searchParams={searchParamsValue} pathname={pathname}
+                           metadata={metadata} size={'middle'}/>
+    }
+    if (result.code !== CodeOk) {
+        return <NoDataPage lang={lang} searchParams={searchParamsValue} pathname={pathname}
+                           metadata={metadata} size={'middle'} message={result.message}/>
+    }
 
-    return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={await searchParams} pathname={pathname}
+    return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={styles.container}>
             <div className={styles.list}>

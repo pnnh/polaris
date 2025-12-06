@@ -1,6 +1,6 @@
-import React from 'react'
+'use client'
 
-import {CSSProperties} from "react";
+import React, {CSSProperties} from 'react'
 
 const noDataStyle: CSSProperties = {
     width: '100%',
@@ -22,3 +22,4 @@ export function NoData({size, message}: { size: 'small' | 'middle' | 'large', me
         {message && <div style={{marginLeft: '16px', fontSize: '1.2rem', color: '#888888'}}>{message}</div>}
     </div>
 }
+

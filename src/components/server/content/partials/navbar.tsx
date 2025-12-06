@@ -4,7 +4,6 @@ import React from "react";
 import {SiteNavMenu} from "@/components/server/content/partials/profile";
 import {UserAction} from "@/components/server/content/partials/userinfo";
 import {ContentSearchAction} from "@/components/server/content/partials/search";
-import {useServerConfig} from "@/components/server/config";
 import {AccountModel} from "@/atom/common/models/account";
 import AppsIcon from '@mui/icons-material/Apps';
 import {PSLanguageSelector} from "./language";
@@ -19,8 +18,6 @@ export async function ContentPublicNavbar({pathname, searchParams, lang, userInf
     lang: string,
     userInfo: AccountModel | undefined
 }) {
-    const serverConfig = await useServerConfig()
-
     const searchString = await getSearchString()
     const currentUrl = `${pathname}${searchString}`
     const themeName = await getServerTheme()

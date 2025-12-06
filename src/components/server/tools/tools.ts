@@ -1,6 +1,6 @@
 import {ApplicationLanguageProfile, ApplicationModel} from "@/atom/common/models/tools/application";
 import {localText} from "@/atom/common/language";
-import {transText} from "@/components/common/locales/normal";
+import {transKey, transText} from "@/components/common/locales/normal";
 
 export const passwordUid = '0192e096-22e4-7aa4-8aa9-8093f09d58a7'
 export const uuidUid = '0192e096-2247-7aa4-8aa9-7167ae2d1927'
@@ -17,6 +17,7 @@ export const base32Uid = '01986ec8-c38a-72d9-8bd0-358d388fd11d'
 export const wejsonUid = '01988d47-7faa-7739-90b3-50e2eb6760b7'
 export const md5Uid = '01988db9-4938-7099-a986-9a11a5771a17'
 export const markdownUid = '01988dbe-ca68-722e-9782-52587d1478a0'
+export const editorUid = '019ae7ec-7d37-771a-97fb-b3a75ad406f5'
 
 export function queryApp(expectLang: string, appUid: string): ApplicationModel | undefined {
     const apps = selectApps(expectLang)
@@ -55,7 +56,7 @@ export function selectApps(expectLang: string): ApplicationModel[] {
         },
         {
             uid: base58Uid,
-            url: 'https://ebase58.huable.xyz',
+            url: '/tools/base58',
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/datetime.webp',
             ...selectAppLangProfile(base58Uid, expectLang)
@@ -101,6 +102,13 @@ export function selectApps(expectLang: string): ApplicationModel[] {
             update_time: '2024-10-30T12:00:00.000Z',
             image: '/images/application/datetime.webp',
             ...selectAppLangProfile(markdownUid, expectLang)
+        },
+        {
+            uid: editorUid,
+            url: '/tools/editor',
+            update_time: '2024-10-30T12:00:00.000Z',
+            image: '/images/application/datetime.webp',
+            ...selectAppLangProfile(editorUid, expectLang)
         },
     ]
 }
@@ -183,6 +191,12 @@ function selectAppLangProfile(appUid: string, lang: string): ApplicationLanguage
                 name: localText(lang, 'Markdown 工具', 'Markdown Tool'),
                 description: localText(lang, 'Markdown 工具可以处理 Markdown 格式的文本，支持预览、转换等功能。',
                     'Markdown tool can handle Markdown formatted text, supporting preview, conversion, and other functions.')
+            }
+        case editorUid:
+            return {
+                lang: lang,
+                name: transKey(lang, 'toolEditorName'),
+                description: transKey(lang, 'toolEditorDesc')
             }
         default:
             return {
