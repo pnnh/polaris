@@ -4,7 +4,7 @@ import styles from './basex.module.scss'
 import * as React from 'react';
 import {useEffect} from 'react';
 import Button from '@mui/material/Button';
-import {encodeBase32String, encodeBase64String} from "@/atom/common/utils/basex";
+import {decodeBase64String, encodeBase64String} from "@/atom/common/utils/basex";
 import {useClientConfig} from "@/atom/client/config/config";
 import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
@@ -30,11 +30,16 @@ export default function Base64Component({lang}: { lang: string }) {
         }
         setOutput(encodeBase64String(source));
     }
-    const encodeBase32 = () => {
-        if (!source) {
-            return;
+    const decodeBase64 = () => {
+        try {
+            if (!source) {
+                return;
+            }
+            const resultStr = decodeBase64String(source);
+            setOutput(resultStr);
+        } catch (e) {
+            return '';
         }
-        setOutput(encodeBase32String(source));
     }
     const appInfo = queryApp(lang, base64Uid)
     if (!appInfo) {
@@ -48,7 +53,10 @@ export default function Base64Component({lang}: { lang: string }) {
                   onChange={(event) => setSource(event.target.value)}/>
         <div className={styles.toolButtons}>
             <Button variant="contained" size={'small'} onClick={encodeBase64}>
-                {transText(lang, 'Base64编码', 'Base64 Encode')}
+                {transText(lang, 'Base64编码', 'Encode Base64')}
+            </Button>
+            <Button variant="contained" size={'small'} onClick={decodeBase64}>
+                {transText(lang, 'Base64解码', 'Decode Base64')}
             </Button>
         </div>
         <textarea className={styles.targetText} placeholder={

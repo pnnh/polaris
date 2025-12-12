@@ -2,6 +2,7 @@
 
 import React from "react";
 import './timestamp.scss'
+import {transKey} from "@/components/common/locales/normal";
 
 enum Tab {
     GenTimestamp,
@@ -17,15 +18,15 @@ export function TimestampHelper({lang}: { lang: string }) {
                 "tabContainer"}>
                 <div className={`tabItem ${tab === Tab.GenTimestamp ? 'active' : ''}`}
                      onClick={() => setTab(Tab.GenTimestamp)}>
-                    {'timestamp.tab.genTimestamp'}
+                    {transKey(lang, 'timestamp.tab.genTimestamp')}
                 </div>
                 <div className={`tabItem ${tab === Tab.TimestampToDatetime ? 'active' : ''}`}
                      onClick={() => setTab(Tab.TimestampToDatetime)}>
-                    {"timestamp.tab.timestampToDatetime"}
+                    {transKey(lang, "timestamp.tab.timestampToDatetime")}
                 </div>
                 <div className={`tabItem ${tab === Tab.DatetimeToTimestamp ? 'active' : ''}`}
                      onClick={() => setTab(Tab.DatetimeToTimestamp)}>
-                    {"timestamp.tab.datetimeToTimestamp"}
+                    {transKey(lang, "timestamp.tab.datetimeToTimestamp")}
                 </div>
             </div>
             <div className={

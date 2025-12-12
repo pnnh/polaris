@@ -53,10 +53,10 @@ self.onmessage = async (event) => {
             console.log('No data in users table.');
         } else {
             console.log(`Found ${result.length} row(s):`);
-            for (const row of result) {
-                console.log('Row:', row);  // e.g., { id: 1, name: 'Alice' }
-                // Or print specific columns: console.log(`ID: ${row.id}, Name: ${row.name}`);
-            }
+            // for (const row of result) {
+            //     console.log('Row:', row);  // e.g., { id: 1, name: 'Alice' }
+            //     // Or print specific columns: console.log(`ID: ${row.id}, Name: ${row.name}`);
+            // }
         }
 
         db.close();

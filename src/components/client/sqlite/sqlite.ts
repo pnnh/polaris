@@ -19,8 +19,10 @@ const init = async () => {
         const sqlite3 = await sqlite3InitModule({print: log, printErr: error});
         start(sqlite3);
     } catch (e: any) {
-        error('sqlite init', e.name, e.message);
+        error('sqlite init error', e.name, e.message);
     }
 };
 
-init();
+init().then(r => {
+    console.log('SQLite init');
+});
