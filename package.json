@@ -75,7 +75,7 @@
     "sharp": "^0.34.5",
     "sitemap": "^9.0.0",
     "slate": "^0.118.1",
-    "slate-dom": "^0.118.1",
+    "slate-dom": "^0.119.0",
     "slate-history": "^0.113.1",
     "slate-react": "^0.118.2",
     "sqlite": "^5.1.1",
