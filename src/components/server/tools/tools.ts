@@ -18,6 +18,10 @@ export const wejsonUid = '01988d47-7faa-7739-90b3-50e2eb6760b7'
 export const md5Uid = '01988db9-4938-7099-a986-9a11a5771a17'
 export const markdownUid = '01988dbe-ca68-722e-9782-52587d1478a0'
 export const editorUid = '019ae7ec-7d37-771a-97fb-b3a75ad406f5'
+export const sha256Uid = '019b2082-4164-76eb-b9be-b99a88f2a141'
+export const sha512Uid = '019b2090-217a-738a-a9bc-e76de965787e'
+export const aesUid = '019b2176-8409-773d-9d64-57fd408491df'
+export const rsaUid = '019b217f-6e4a-73cd-bb11-ede2f6e27297'
 
 export function queryApp(expectLang: string, appUid: string): ApplicationModel | undefined {
     const apps = selectApps(expectLang)
@@ -110,6 +114,34 @@ export function selectApps(expectLang: string): ApplicationModel[] {
             image: '/images/application/datetime.webp',
             ...selectAppLangProfile(editorUid, expectLang)
         },
+        {
+            uid: sha256Uid,
+            url: '/tools/sha256',
+            update_time: '2024-10-30T12:00:00.000Z',
+            image: '/images/application/datetime.webp',
+            ...selectAppLangProfile(sha256Uid, expectLang)
+        },
+        {
+            uid: sha512Uid,
+            url: '/tools/sha512',
+            update_time: '2024-10-30T12:00:00.000Z',
+            image: '/images/application/datetime.webp',
+            ...selectAppLangProfile(sha512Uid, expectLang)
+        },
+        {
+            uid: aesUid,
+            url: '/tools/aes',
+            update_time: '2024-10-30T12:00:00.000Z',
+            image: '/images/application/datetime.webp',
+            ...selectAppLangProfile(aesUid, expectLang)
+        },
+        {
+            uid: rsaUid,
+            url: '/tools/rsa',
+            update_time: '2024-10-30T12:00:00.000Z',
+            image: '/images/application/datetime.webp',
+            ...selectAppLangProfile(rsaUid, expectLang)
+        },
     ]
 }
 
@@ -197,6 +229,30 @@ function selectAppLangProfile(appUid: string, lang: string): ApplicationLanguage
                 lang: lang,
                 name: transKey(lang, 'toolEditorName'),
                 description: transKey(lang, 'toolEditorDesc')
+            }
+        case sha256Uid:
+            return {
+                lang: lang,
+                name: transKey(lang, 'toolSha256Name'),
+                description: transKey(lang, 'toolSha256Desc')
+            }
+        case sha512Uid:
+            return {
+                lang: lang,
+                name: transKey(lang, 'toolSha512Name'),
+                description: transKey(lang, 'toolSha512Desc')
+            }
+        case aesUid:
+            return {
+                lang: lang,
+                name: transKey(lang, 'toolAesName'),
+                description: transKey(lang, 'toolAesDesc')
+            }
+        case rsaUid:
+            return {
+                lang: lang,
+                name: transKey(lang, 'toolRsaName'),
+                description: transKey(lang, 'toolRsaDesc')
             }
         default:
             return {

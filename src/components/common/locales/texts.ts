@@ -542,5 +542,125 @@ export const TransTexts: {
         "de-DE": "Datum- und Uhrzeit-Tool",
         "pt-PT": "Ferramenta de data e hora",
         "zh-TW": "日期時間工具"
+    },
+    "toolSha256Name": {
+        "zh": "SHA-256 哈希工具",
+        "en": "SHA-256 Hash Tool",
+        "es": "Herramienta de hash SHA-256",
+        "fr": "Outil de hachage SHA-256",
+        "ja": "SHA-256 ハッシュツール",
+        "de-DE": "SHA-256 Hash-Tool",
+        "pt-PT": "Ferramenta de hash SHA-256",
+        "zh-TW": "SHA-256 哈希工具"
+    },
+    "toolSha256Desc": {
+        "zh": "SHA-256 哈希工具可以计算字符串的 SHA-256 哈希值，常用于数据完整性校验和密码存储。",
+        "en": "SHA-256 hash tool can calculate the SHA-256 hash value of a string, commonly used for data integrity verification and password storage.",
+        "es": "La herramienta de hash SHA-256 puede calcular el valor hash SHA-256 de una cadena, comúnmente utilizada para la verificación de integridad de datos y el almacenamiento de contraseñas.",
+        "fr": "L'outil de hachage SHA-256 peut calculer la valeur de hachage SHA-256 d'une chaîne, couramment utilisé pour la vérification de l'intégrité des données et le stockage des mots de passe.",
+        "ja": "SHA-256 ハッシュツールは、文字列の SHA-256 ハッシュ値を計算でき、データの整合性検証やパスワードの保存に一般的に使用されます。",
+        "de-DE": "Das SHA-256-Hash-Tool kann den SHA-256-Hashwert einer Zeichenfolge berechnen, der häufig für die Überprüfung der Datenintegrität und die Passwortspeicherung verwendet wird.",
+        "pt-PT": "A ferramenta de hash SHA-256 pode calcular o valor hash SHA-256 de uma string, comumente usada para verificação de integridade de dados e armazenamento de senhas.",
+        "zh-TW": "SHA-256 哈希工具可以計算字符串的 SHA-256 哈希值，常用於數據完整性校驗和密碼存儲。"
+    },
+    "toolSha512Name": {
+        "zh": "SHA-512 哈希工具",
+        "en": "SHA-512 Hash Tool",
+        "es": "Herramienta de hash SHA-512",
+        "fr": "Outil de hachage SHA-512",
+        "ja": "SHA-512 ハッシュツール",
+        "de-DE": "SHA-512 Hash-Tool",
+        "pt-PT": "Ferramenta de hash SHA-512",
+        "zh-TW": "SHA-512 哈希工具"
+    },
+    "toolSha512Desc": {
+        "zh": "SHA-512 哈希工具可以计算字符串的 SHA-512 哈希值，提供更高的安全性，适用于需要强加密的场景。",
+        "en": "SHA-512 hash tool can calculate the SHA-512 hash value of a string, providing higher security, suitable for scenarios requiring strong encryption.",
+        "es": "La herramienta de hash SHA-512 puede calcular el valor hash SHA-512 de una cadena, proporcionando mayor seguridad, adecuada para escenarios que requieren cifrado fuerte.",
+        "fr": "L'outil de hachage SHA-512 peut calculer la valeur de hachage SHA-512 d'une chaîne, offrant une sécurité accrue, adapté aux scénarios nécessitant un chiffrement fort.",
+        "ja": "SHA-512 ハッシュツールは、文字列の SHA-512 ハッシュ値を計算でき、より高いセキュリティを提供し、強力な暗号化が必要なシナリオに適しています。",
+        "de-DE": "Das SHA-512-Hash-Tool kann den SHA-512-Hashwert einer Zeichenfolge berechnen und bietet höhere Sicherheit, die für Szenarien geeignet ist, die starke Verschlüsselung erfordern.",
+        "pt-PT": "A ferramenta de hash SHA-512 pode calcular o valor hash SHA-512 de uma string, proporcionando maior segurança, adequada para cenários que exigem criptografia forte.",
+        "zh-TW": "SHA-512 哈希工具可以計算字符串的 SHA-512 哈希值，提供更高的安全性，適用於需要強加密的場景。"
+    },
+    "toolAesName": {
+        "zh": "AES 加密解密工具",
+        "en": "AES Encryption/Decryption Tool",
+        "es": "Herramienta de cifrado/descifrado AES",
+        "fr": "Outil de chiffrement/déchiffrement AES",
+        "ja": "AES 暗号化/復号化ツール",
+        "de-DE": "AES Verschlüsselungs-/Entschlüsselungstool",
+        "pt-PT": "Ferramenta de criptografia/descriptografia AES",
+        "zh-TW": "AES 加密解密工具"
+    },
+    "toolAesDesc": {
+        "zh": "AES 加密解密工具支持使用 AES 算法对文本进行加密和解密，保障数据的安全性。",
+        "en": "AES encryption/decryption tool supports encrypting and decrypting text using the AES algorithm, ensuring data security.",
+        "es": "La herramienta de cifrado/descifrado AES admite el cifrado y descifrado de texto utilizando el algoritmo AES, garantizando la seguridad de los datos.",
+        "fr": "L'outil de chiffrement/déchiffrement AES prend en charge le chiffrement et le déchiffrement de texte à l'aide de l'algorithme AES, garantissant la sécurité des données.",
+        "ja": "AES 暗号化/復号化ツールは、AES アルゴリズムを使用してテキストを暗号化および復号化し、データのセキュリティを確保します。",
+        "de-DE": "Das AES-Verschlüsselungs-/Entschlüsselungstool unterstützt die Verschlüsselung und Entschlüsselung von Texten mit dem AES-Algorithmus und gewährleistet die Datensicherheit.",
+        "pt-PT": "A ferramenta de criptografia/descriptografia AES suporta a criptografia e descriptografia de texto usando o algoritmo AES, garantindo a segurança dos dados.",
+        "zh-TW": "AES 加密解密工具支持使用 AES 算法對文本進行加密和解密，保障數據的安全性。"
+    },
+    "toolRsaName": {
+        "zh": "RSA 加密解密工具",
+        "en": "RSA Encryption/Decryption Tool",
+        "es": "Herramienta de cifrado/descifrado RSA",
+        "fr": "Outil de chiffrement/déchiffrement RSA",
+        "ja": "RSA 暗号化/復号化ツール",
+        "de-DE": "RSA Verschlüsselungs-/Entschlüsselungstool",
+        "pt-PT": "Ferramenta de criptografia/descriptografia RSA",
+        "zh-TW": "RSA 加密解密工具"
+    },
+    "toolRsaDesc": {
+        "zh": "RSA 加密解密工具支持使用 RSA 算法对文本进行加密和解密，适用于需要高安全性的场景。",
+        "en": "RSA encryption/decryption tool supports encrypting and decrypting text using the RSA algorithm, suitable for scenarios requiring high security.",
+        "es": "La herramienta de cifrado/descifrado RSA admite el cifrado y descifrado de texto utilizando el algoritmo RSA, adecuado para escenarios que requieren alta seguridad.",
+        "fr": "L'outil de chiffrement/déchiffrement RSA prend en charge le chiffrement et le déchiffrement de texte à l'aide de l'algorithme RSA, adapté aux scénarios nécessitant une haute sécurité.",
+        "ja": "RSA 暗号化/復号化ツールは、RSA アルゴリズムを使用してテキストを暗号化および復号化し、高いセキュリティが必要なシナリオに適しています。",
+        "de-DE": "Das RSA-Verschlüsselungs-/Entschlüsselungstool unterstützt die Verschlüsselung und Entschlüsselung von Texten mit dem RSA-Algorithmus und ist für Szenarien geeignet, die hohe Sicherheit erfordern.",
+        "pt-PT": "A ferramenta de criptografia/descriptografia RSA suporta a criptografia e descriptografia de texto usando o algoritmo RSA, adequada para cenários que exigem alta segurança.",
+        "zh-TW": "RSA 加密解密工具支持使用 RSA 算法對文本進行加密和解密，適用於需要高安全性的場景。"
+    },
+    "tools.aes.randomKey": {
+        "zh": "随机生成密钥",
+        "en": "Generate Random Key",
+        "es": "Generar clave aleatoria",
+        "fr": "Générer une clé aléatoire",
+        "ja": "ランダムキーを生成",
+        "de-DE": "Zufälligen Schlüssel generieren",
+        "pt-PT": "Gerar chave aleatória",
+        "zh-TW": "隨機生成密鑰"
+    },
+    "tools.aes.keyPlaceholder": {
+        "zh": "请输入16/24/32字节的密钥",
+        "en": "Please enter a 16/24/32-byte key",
+        "es": "Por favor ingrese una clave de 16/24/32 bytes",
+        "fr": "Veuillez saisir une clé de 16/24/32 octets",
+        "ja": "16/24/32バイトのキーを入力してください",
+        "de-DE": "Bitte geben Sie einen 16/24/32-Byte-Schlüssel ein",
+        "pt-PT": "Por favor insira uma chave de 16/24/32 bytes",
+        "zh-TW": "請輸入16/24/32字節的密鑰"
+    },
+    'tools.aes.encode': {
+        "zh": "加密",
+        "en": "Encrypt",
+        "es": "Encriptar",
+        "fr": "Chiffrer",
+        "ja": "暗号化",
+        "de-DE": "Verschlüsseln",
+        "pt-PT": "Criptografar",
+        "zh-TW": "加密"
+    },
+    'tools.aes.decode': {
+        "zh": "解密",
+        "en": "Decrypt",
+        "es": "Descifrar",
+        "fr": "Décrypter",
+        "ja": "復号化",
+        "de-DE": "Entschlüsseln",
+        "pt-PT": "Descriptografar",
+        "zh-TW": "解密"
     }
 }

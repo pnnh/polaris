@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
 @layer theme, base, mui, components, utilities;
+@layer panda-reset, panda-base, panda-tokens, panda-recipes, panda-utilities;
+
 @import 'tailwindcss';
 
 @plugin "daisyui";
@@ -68,7 +70,6 @@ body {
     box-sizing: border-box;
     font-size: 13px;
 }
-
 
 @media (min-width: 20rem) {
     html,

@@ -12,6 +12,7 @@ import {encodeBase58String} from "@/atom/common/utils/basex";
 import {getServerTheme} from "@/components/server/theme";
 import {getTargetLang, unknownLanguage} from "@/components/common/language";
 import {notFound} from "next/navigation";
+import {CssBaseline, StyledEngineProvider} from "@mui/material";
 
 // 隔几秒重新验证下数据
 export const revalidate = 1
@@ -76,9 +77,12 @@ export default async function GlobalLayout(
     <script type="module" src="/setup.js" crossOrigin="anonymous"></script>
     <JotaiProvider>
         <AppRouterCacheProvider options={{key: 'css', enableCssLayer: true}}>
-            <ThemeProvider theme={pageTheme}>
-                {children}
-            </ThemeProvider>
+            <StyledEngineProvider injectFirst>
+                <ThemeProvider theme={pageTheme}>
+                    <CssBaseline/>
+                    {children}
+                </ThemeProvider>
+            </StyledEngineProvider>
         </AppRouterCacheProvider>
     </JotaiProvider>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback"

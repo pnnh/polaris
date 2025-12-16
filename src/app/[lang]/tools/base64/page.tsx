@@ -5,7 +5,7 @@ import {CommentsClient} from "@/components/client/comments/comments";
 import {useServerConfig} from "@/components/server/config";
 import {langEn} from "@/atom/common/language";
 import {PageMetadata} from "@/components/common/utils/page";
-import Base64Component from "@/components/client/tools/base64/basex";
+import Base64Component from "./basex";
 import {base64Uid, queryApp} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
 import ContentLayout from "@/components/server/content/layout";
