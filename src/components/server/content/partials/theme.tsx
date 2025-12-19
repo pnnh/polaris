@@ -1,12 +1,25 @@
 'use client';
 
-import styles from './theme.module.scss'
+import {css} from '@emotion/css'
 import {useState} from "react";
 import {StyledMenu} from "@/components/client/dropmenu";
 import MenuItem from "@mui/material/MenuItem";
 import ContrastIcon from '@mui/icons-material/Contrast';
 import {clientSetCurrentTheme, ThemeType} from "@/components/client/theme";
 import {transKey} from "@/components/common/locales/normal";
+
+const styles = {
+    themeSelector: css`
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        gap: 0.2rem;
+    `,
+    themeIcon: css`
+        color: var(--text-primary-color);
+        background: var(--background-color);
+    `
+}
 
 
 export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string }) {

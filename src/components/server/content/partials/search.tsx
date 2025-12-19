@@ -1,9 +1,29 @@
 'use client'
 
-import styles from './search.module.scss'
+import {css} from '@emotion/css'
 import SearchIcon from '@mui/icons-material/Search';
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {transKey} from "@/components/common/locales/normal";
+
+const styles = {
+    globalSearchBox: css`
+        border: solid 1px #ccc;
+        border-radius: 6px;
+        height: 26px;
+        width: 200px;
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        align-items: center;
+        padding: 0 0.5rem;
+
+        input {
+            border: none;
+            outline: none;
+            flex-grow: 1;
+        }
+    `
+}
 
 export function ContentSearchAction({pathname, queryKeyword, lang}: {
     pathname: string, queryKeyword: string,

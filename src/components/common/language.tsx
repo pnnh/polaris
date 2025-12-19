@@ -1,4 +1,18 @@
-import styles from './language.module.scss';
+import {css} from '@emotion/css';
+
+const styles = {
+    langSelector: css`
+        display: inline-block;
+        height: 1.5rem;
+        width: 1.5rem;
+        opacity: 0.8;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    `
+}
 
 export const langEnUS = 'en'
 export const langEsES = 'es' // Spanish

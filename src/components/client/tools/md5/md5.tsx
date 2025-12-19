@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import {useEffect} from 'react';
-import styles from './md5.module.scss'
+import {css} from '@emotion/css'
 import Button from '@mui/material/Button';
 import {useClientConfig} from "@/atom/client/config/config";
 import {IBrowserConfig} from "@/components/common/config";
@@ -11,6 +11,49 @@ import {md5Uid, queryApp} from "@/components/server/tools/tools";
 import {stringToMd5} from "@/atom/common/utils/basex";
 import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
+
+const styles = {
+    md5Page: css`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+        height: 100%;
+        scrollbar-width: thin;
+        overflow-y: auto;
+        overflow-x: hidden;
+    `,
+    sourceText: css`
+        width: 512px;
+        height: 160px;
+        padding: 8px;
+        flex-shrink: 0;
+        background: #FFFFFF;
+        border: 1px solid #d3d3d3;
+        border-radius: 8px;
+    `,
+    toolButtons: css`
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        flex-shrink: 0;
+    `,
+    targetText: css`
+        width: 512px;
+        height: 160px;
+        padding: 8px;
+        flex-shrink: 0;
+        background: #FFFFFF;
+        border: 1px solid #d3d3d3;
+        border-radius: 8px;
+    `,
+    commentsClient: css`
+        width: 548px;
+    `
+}
 
 export default function Md5Component({lang}: { lang: string }) {
     const [source, setSource] = React.useState('');

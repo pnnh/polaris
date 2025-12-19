@@ -1,15 +1,53 @@
 'use client'
 
-import styles from './form.module.scss'
+import {css} from '@emotion/css'
 import React, {useState} from "react";
 import {validateEmail} from "@/atom/common/utils/email";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {ButtonThrottle} from "@/atom/client/button/throttle";
 import {getTurnstileToken} from "@/components/client/cloudflare/turnstile";
 import {submitSignup} from "@/components/client/account/account";
-import {transText, transKey} from "@/components/common/locales/normal";
+import {transKey, transText} from "@/components/common/locales/normal";
 
 const buttonThrottle = new ButtonThrottle(5000)
+
+const styles = {
+    signupForm: css`
+        & > div:last-child {
+            margin-bottom: 0;
+        }
+    `,
+    formRow: css`
+        margin-bottom: 2rem;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+    `,
+    fieldLabel: css`
+        font-size: 1.0rem;
+        font-weight: 400;
+        width: 6rem;
+        text-align: right;
+    `,
+    inputField: css`
+        padding: 8px;
+        border: solid 1px #e0e0e0;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        width: 284px;
+    `,
+    submitButton: css`
+        padding: 0.5rem 1rem;
+        border: solid 1px #e0e0e0;
+        border-radius: 4px;
+        background-color: dodgerblue;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+    `
+}
 
 export function SignupForm({lang, portalUrl}: { lang: string, portalUrl: string }) {
     const [username, setUsername] = useState('')

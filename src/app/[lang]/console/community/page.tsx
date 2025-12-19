@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './page.module.scss'
+import {css} from '@emotion/css'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
 import {langEn} from "@/atom/common/language";
@@ -8,6 +8,40 @@ import ComputerIcon from "~/@mui/icons-material/Computer";
 import CloudQueueIcon from "~/@mui/icons-material/CloudQueue";
 
 export const dynamic = "force-dynamic";
+
+const styles = {
+    communityPage: css``,
+    libGrid: css`
+        margin-top: 1rem;
+    `,
+    libHeader: css`
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        gap: 1rem;
+        background-color: #f0f0f0;
+    `,
+    libLink: css`
+        font-size: 1.2rem;
+        color: #000;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+    `,
+    libBody: css`
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 1rem;
+    `,
+    libCard: css`
+        border: solid 1px #ccc;
+        min-height: 4rem;
+    `
+}
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,

@@ -10,6 +10,7 @@
       "DOM",
       "DOM.Iterable"
     ],
+    "sourceRoot": "src",
     "declaration": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
@@ -43,6 +44,9 @@
     "plugins": [
       {
         "name": "next"
+      },
+      {
+        "name": "typescript-plugin-css-modules"
       }
     ]
   },
