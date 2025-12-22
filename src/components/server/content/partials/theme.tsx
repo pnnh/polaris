@@ -1,11 +1,11 @@
-'use client';
+;
 
 import {css} from '@emotion/css'
 import {useState} from "react";
 import {StyledMenu} from "@/components/client/dropmenu";
 import MenuItem from "@mui/material/MenuItem";
 import ContrastIcon from '@mui/icons-material/Contrast';
-import {clientSetCurrentTheme, ThemeType} from "@/components/client/theme";
+import {clientSetCurrentTheme,} from "@/components/client/theme";
 import {transKey} from "@/components/common/locales/normal";
 
 const styles = {
@@ -29,7 +29,7 @@ export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
-    const switchTheme = (targetTheme: ThemeType) => {
+    const switchTheme = (targetTheme: string) => {
         clientSetCurrentTheme(targetTheme)
         setAnchorEl(null);
         window.location.reload()

@@ -1,21 +1,46 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {langEn} from "@/atom/common/language";
-import styles from './page.module.scss'
+import {css} from '@emotion/css'
 import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {isAnonymousAccount} from "@/atom/common/models/account";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
-import GlobalLayout from "@/components/server/global";
+import {GlobalLayout} from "@/components/server/global";
 import {ConsoleLibraryFilterBar} from "./filter";
 import {ConsoleLibraryMiddleBody} from "./library";
+import {Request, Response} from "express";
 
-export default async function Page({params, searchParams}: {
-    params: Promise<{ lang: string, channel: string }>,
-    searchParams: Promise<Record<string, string>>
-}) {
-    const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
+const styles = {
+    consolePage: css`
+        width: 1024px;
+        margin: 0 auto;
+    `,
+    libGrid: css`
+        margin-top: 1rem;
+    `,
+    libHeader: css`
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        gap: 1rem;
+        background-color: #f0f0f0;
+    `,
+    libLink: css`
+        font-size: 1.2rem;
+        color: #000;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+    `
+};
+
+export async function Page(request: Request, response: Response) {
+
+    const lang = request.params.lang || langEn
 
     const serverConfig = await useServerConfig()
     const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL

@@ -1,10 +1,79 @@
-'use client'
-
-import styles from "./form.module.scss";
+import {css} from '@emotion/css';
 import {AccountModel, getAccountUrn} from "@/atom/common/models/account";
 import {useState} from "react";
 import {sanitizeUrl} from "@/atom/common/utils/uri";
 import {transText} from "@/components/common/locales/normal";
+
+const styles = {
+    userInfoCard: css`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        background-color: #ffffff;
+        margin-top: 16px;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: relative;
+    `,
+    avatarContainer: css`
+        width: 40%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+    `,
+    avatar: css`
+        width: 12rem;
+        height: 12rem;
+        border-radius: 50%;
+        margin-bottom: 20px;
+
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    `,
+    details: css`
+        display: table;
+        align-items: center;
+        text-align: center;
+        width: 40%;
+        margin: 0 auto;
+    `,
+    row: css`
+        display: table-row;
+        font-weight: bold;
+        margin-bottom: 10px;
+    `,
+    rowLabel: css`
+        font-weight: normal;
+        color: #666;
+        width: 50%;
+        display: table-cell;
+        text-align: right;
+        padding-right: 1rem;
+    `,
+    rowContent: css`
+        color: #333;
+        font-size: 1rem;
+        display: table-cell;
+        text-align: left;
+        word-break: break-all;
+    `,
+    submitButtons: css`
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 20px;
+        height: 4rem;
+    `
+};
 
 export function UserinfoEditForm({portalUrl, userInfo, lang}: {
     portalUrl: string,

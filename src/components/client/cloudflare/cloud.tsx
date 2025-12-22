@@ -1,5 +1,3 @@
-'use client'
-
 import $ from "jquery";
 
 import './cloud.scss'

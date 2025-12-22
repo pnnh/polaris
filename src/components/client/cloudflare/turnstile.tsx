@@ -1,5 +1,3 @@
-'use client'
-
 import $ from "jquery";
 
 export const CFTurnstileOverlay = 'CFTurnstileOverlay'
@@ -33,19 +31,19 @@ function turnstileSuccessCallback(token: string) {
         return;
     }
     overlay.hide()
-    if (window.turnstileSuccessCallback) {
-        window.turnstileSuccessCallback(token)
+    if ((window as any).turnstileSuccessCallback) {
+        (window as any).turnstileSuccessCallback(token)
     }
 }
 
 export function turnstileScript(publicTurnstileKey: string, lang: string) {
     console.info('turnstileScript');
-    if (typeof window.turnstile === 'undefined') {
+    if (typeof (window as any).turnstile === 'undefined') {
         console.error('Turnstile not found')
         return;
     }
 
-    window.turnstile.render(`#${CFTurnstileBody}`, {
+    (window as any).turnstile.render(`#${CFTurnstileBody}`, {
         sitekey: publicTurnstileKey,
         language: lang,
         callback: turnstileSuccessCallback,
@@ -58,11 +56,11 @@ export function turnstileScript(publicTurnstileKey: string, lang: string) {
 
 export async function getTurnstileToken(): Promise<string | undefined> {
     console.info('getTurnstileToken');
-    if (!window.turnstile) {
+    if (!(window as any).turnstile) {
         return;
     }
-    const token = window.turnstile.getResponse()
-    if (token && !window.turnstile.isExpired()) {
+    const token = (window as any).turnstile.getResponse()
+    if (token && !(window as any).turnstile.isExpired()) {
         return token
     }
     const overlay = $(`#${CFTurnstileOverlay}`)
@@ -74,7 +72,7 @@ export async function getTurnstileToken(): Promise<string | undefined> {
         const timer = setTimeout(() => {
             reject(new Error(`Promise timed out after 5s`));
         }, 30000);
-        window.turnstileSuccessCallback = (token: string) => {
+        (window as any).turnstileSuccessCallback = (token: string) => {
             clearTimeout(timer)
             resolve(token)
         }

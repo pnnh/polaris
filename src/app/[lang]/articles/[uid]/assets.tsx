@@ -1,6 +1,4 @@
-'use client'
-
-import styles from './assets.module.scss'
+import {css} from '@emotion/css'
 import React, {useEffect, useState} from "react";
 import {getIcon} from "material-file-icons";
 import {FaAngleDown, FaAngleRight} from "react-icons/fa6";
@@ -11,6 +9,62 @@ import {clientMakeGet} from "@/atom/client/http";
 import {useAtom} from "jotai";
 import {articleAssetsPreviewAtom} from "./state";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+
+const styles = {
+    tocCard: css`
+        background-color: var(--background-color);
+        border-radius: 4px;
+        position: relative;
+    `,
+    tocHeader: css`
+        padding: 1rem;
+        border-bottom: solid 1px #e1e1e280;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        a svg {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            color: var(--text-primary-color);
+        }
+    `,
+    tocBody: css`
+        padding: 1rem;
+        max-height: 450px;
+        overflow-y: auto;
+    `,
+    tocItem: css`
+        padding-right: 0.5rem;
+        font-size: 14px;
+    `,
+    assertItemText: css`
+        cursor: pointer;
+    `,
+    assetItem: css`
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2px;
+        height: 32px;
+
+        &:hover {
+            background: #e6e6e6;
+        }
+    `,
+    dirOpenIcon: css`
+        cursor: pointer;
+    `,
+    fileIcon: css`
+        width: 18px;
+        height: 18px;
+    `
+};
 
 async function selectFiles(portalUrl: string, articleUid: string, parentPath: string = '') {
     const assetsUrl = `${portalUrl}/articles/${articleUid}/assets?parent=${encodeURIComponent(parentPath)}`

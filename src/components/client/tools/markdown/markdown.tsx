@@ -1,5 +1,3 @@
-'use client'
-
 import * as React from 'react';
 import {useEffect} from 'react';
 import {css} from '@emotion/css'
@@ -9,7 +7,6 @@ import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
 import {markdownUid, queryApp} from "@/components/server/tools/tools";
 import {markdownStringToHtml} from "@/components/server/markdown/markdown";
-import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
 
 const styles = {
@@ -76,7 +73,8 @@ export default function MarkdownComponent({lang}: { lang: string }) {
     }
     const appInfo = queryApp(lang, markdownUid)
     if (!appInfo) {
-        notFound()
+
+        throw new Error('MarkdownComponent appInfo is undefined');
     }
     return <div className={styles.markdownComponent}>
         <h1>{appInfo.name}</h1>

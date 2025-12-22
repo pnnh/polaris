@@ -1,12 +1,52 @@
-'use client'
-
-import styles from "./filter.module.scss";
+import {css} from '@emotion/css';
 import React from "react";
-import {transText, transKey} from "@/components/common/locales/normal";
+import {transKey, transText} from "@/components/common/locales/normal";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import {uuidToBase58} from "@/atom/common/utils/basex";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
+
+const styles = {
+    middleTop: css`
+        border-bottom: solid 1px #e1e1e280;
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+        background-color: var(--background-color);
+        height: 3rem;
+    `,
+    topLeft: css`
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+    `,
+    topRight: css`
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+    `,
+    searchBox: css`
+        border: solid 1px #ccc;
+        border-radius: 6px;
+        height: 26px;
+        width: 200px;
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        align-items: center;
+        padding: 0 0.5rem;
+
+        input {
+            border: none;
+            outline: none;
+            flex-grow: 1;
+        }
+    `
+};
 
 export function ConsoleArticleFilterBar({lang, keyword}: {
     lang: string,

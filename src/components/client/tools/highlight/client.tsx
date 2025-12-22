@@ -1,5 +1,3 @@
-'use client'
-
 import './selector'
 import {CodeSelector, ICodeSelectorProps,} from "./selector";
 // @ts-ignore

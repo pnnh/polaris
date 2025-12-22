@@ -1,4 +1,3 @@
-import {NextRequest} from 'next/server'
 import {SitemapItemLoose, SitemapStream, streamToPromise} from 'sitemap'
 import {Readable} from 'stream'
 import {useServerConfig} from "@/components/server/config";
@@ -6,10 +5,9 @@ import {PLSelectResult} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/components/common/models/article";
 import {uuidToBase58} from "@/atom/common/utils/basex";
 import {serverMakeGet} from "@/atom/server/http";
+import {Request, Response} from "express";
 
-export const dynamic = "force-dynamic";
-
-export async function GET(request: NextRequest) {
+export async function HandleSitemap(request: Request, response: Response) {
     const serverConfig = await useServerConfig()
     const serverUrl = serverConfig.INTERNAL_PORTAL_URL
     const url = `${serverUrl}/articles?` + `page=1&size=${100}`
@@ -30,5 +28,6 @@ export async function GET(request: NextRequest) {
     const data = await streamToPromise(Readable.from(links).pipe(stream)).then((data) =>
         data.toString()
     )
-    return new Response(data, {headers: {'Content-Type': 'application/xml'}})
+    response.setHeader('Content-Type', 'application/xml')
+    return response.send(data)
 }

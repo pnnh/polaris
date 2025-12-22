@@ -1,5 +1,3 @@
-'use client'
-
 import {useClientConfig} from "@/atom/client/config/config";
 import {IBrowserConfig} from "@/components/common/config";
 import {cfTurnstileSetup} from "@/components/client/cloudflare/cloud";

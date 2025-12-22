@@ -1,5 +1,3 @@
-'use client'
-
 import {CodeOk, PLUpdateResult} from "@/atom/common/models/protocol";
 import {clientMakePost} from "@/atom/client/http";
 

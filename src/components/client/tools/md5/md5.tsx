@@ -1,5 +1,3 @@
-'use client'
-
 import * as React from 'react';
 import {useEffect} from 'react';
 import {css} from '@emotion/css'
@@ -9,7 +7,6 @@ import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
 import {md5Uid, queryApp} from "@/components/server/tools/tools";
 import {stringToMd5} from "@/atom/common/utils/basex";
-import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
 
 const styles = {
@@ -76,7 +73,8 @@ export default function Md5Component({lang}: { lang: string }) {
     }
     const appInfo = queryApp(lang, md5Uid)
     if (!appInfo) {
-        notFound()
+
+        throw new Error('Md5Component appInfo is undefined');
     }
     return <div className={styles.md5Page}>
         <h1>{appInfo.name}</h1>

@@ -1,5 +1,3 @@
-'use client'
-
 import * as React from 'react';
 import {useEffect} from 'react';
 import {css} from '@emotion/css'
@@ -9,7 +7,6 @@ import {useClientConfig} from "@/atom/client/config/config";
 import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
 import {base32Uid, queryApp} from "@/components/server/tools/tools";
-import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
 
 const styles = {
@@ -86,7 +83,8 @@ export default function Base32Component({lang}: { lang: string }) {
     }
     const appInfo = queryApp(lang, base32Uid)
     if (!appInfo) {
-        notFound()
+
+        throw new Error('Base32Component appInfo is undefined');
     }
     return <div className={styles.base32Page}>
         <h1>{appInfo.name}</h1>

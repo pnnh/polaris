@@ -1,5 +1,3 @@
-'use client'
-
 import queryString from "query-string";
 import {CodeOk, PLInsertResult, PLSelectResult, PLUpdateResult} from "@/atom/common/models/protocol";
 import {PSChannelModel} from "@/components/common/models/channel";

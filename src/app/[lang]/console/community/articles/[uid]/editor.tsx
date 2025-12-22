@@ -1,7 +1,28 @@
-import styles from "./editor.module.scss";
 import React from "react";
 
 import {TocItem} from "@/atom/common/models/toc";
+import {css} from "@emotion/css";
+
+const styles = {
+    articleEditorContainer: css`
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        background: var(--background-color);
+    `,
+    sourceArea: css`
+        width: 50%;
+        scrollbar-width: thin;
+    `,
+    sourceTextarea: css`
+        width: 100%;
+        height: 100%;
+        scrollbar-width: thin;
+        resize: none;
+        border: solid 1px var(--color-primary);
+    `
+}
 
 export function ConsoleArticleEditor({
                                          portalUrl, tocList, header, body, assetsUrl, onChange

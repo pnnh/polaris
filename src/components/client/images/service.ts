@@ -1,10 +1,8 @@
-'use client'
-
-import {entries, set, get} from 'idb-keyval';
+import {entries, get, set} from 'idb-keyval';
 
 export async function clientOpenImageLibrary() {
 
-    const dirHandle = await window.showDirectoryPicker();
+    const dirHandle = await (window as any).showDirectoryPicker();
     for await (const entry of dirHandle.values()) {
         console.log('selectFiles', entry.kind, entry.name);
     }

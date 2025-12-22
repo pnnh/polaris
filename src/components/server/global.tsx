@@ -1,24 +1,15 @@
-import 'server-only'
-
 import React from "react";
-import {GoogleAnalytics} from "@next/third-parties/google";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import {isProd, usePublicConfig, useServerConfig} from "@/components/server/config";
+import {usePublicConfig, useServerConfig} from "@/components/server/config";
 import {JotaiProvider} from "@/components/client/content/provider";
-import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter";
 import {ThemeProvider} from '@mui/material/styles';
 import {darkTheme, lightTheme} from '@/components/client/theme';
 import {encodeBase58String} from "@/atom/common/utils/basex";
 import {getServerTheme} from "@/components/server/theme";
 import {getTargetLang, unknownLanguage} from "@/components/common/language";
-import {notFound} from "next/navigation";
-import {CssBaseline, StyledEngineProvider} from "@mui/material";
+import {CssBaseline} from "@mui/material";
 
-// 隔几秒重新验证下数据
-export const revalidate = 1
-export const dynamic = 'force-dynamic'
-
-export default async function GlobalLayout(
+export async function GlobalLayout(
     {
         lang,
         metadata,
@@ -39,7 +30,7 @@ export default async function GlobalLayout(
 
     // 检测传递的语言参数是否有效
     if (!lang || getTargetLang(lang, unknownLanguage) === unknownLanguage) {
-        notFound()
+        throw new Error(`Invalid language parameter: ${lang}`)
     }
     return <html lang={lang}>
     <head lang={lang}>
@@ -59,7 +50,7 @@ export default async function GlobalLayout(
         <title>{pageTitle(lang, metadata.title as string)}</title>
         {metadata.keywords && <meta name="keywords" content={metadata.keywords as string}></meta>}
         {metadata.description && <meta name="description" content={metadata.description as string}></meta>}
-        {isProd() && <GoogleAnalytics gaId="G-Z98PEGYB12"/>}
+        {/*{isProd() && <GoogleAnalytics gaId="G-Z98PEGYB12"/>}*/}
         {isDarkTheme ?
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism-dark.min.css"
                   integrity="sha512-Njdz7T/p6Ud1FiTMqH87bzDxaZBsVNebOWmacBjMdgWyeIhUSFU4V52oGwo3sT+ud+lyIE98sS291/zxBfozKw=="
@@ -76,14 +67,10 @@ export default async function GlobalLayout(
     <input id="LGEnv" type="hidden" value={encodedBrowserConfig}/>
     <script type="module" src="/setup.js" crossOrigin="anonymous"></script>
     <JotaiProvider>
-        <AppRouterCacheProvider options={{key: 'css', enableCssLayer: true}}>
-            <StyledEngineProvider injectFirst>
-                <ThemeProvider theme={pageTheme}>
-                    <CssBaseline/>
-                    {children}
-                </ThemeProvider>
-            </StyledEngineProvider>
-        </AppRouterCacheProvider>
+        <ThemeProvider theme={pageTheme}>
+            <CssBaseline/>
+            {children}
+        </ThemeProvider>
     </JotaiProvider>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback"
             async

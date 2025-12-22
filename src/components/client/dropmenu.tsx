@@ -1,4 +1,4 @@
-'use client';
+;
 
 import Menu, {MenuProps} from '@mui/material/Menu';
 import {alpha, styled} from "@mui/system";

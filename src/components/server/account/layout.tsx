@@ -1,19 +1,26 @@
 import React from 'react'
-import styles from './layout.module.scss'
+import {css} from '@emotion/css';
 import {PageMetadata} from "@/components/common/utils/page";
-import GlobalLayout from "@/components/server/global";
+import {GlobalLayout} from "@/components/server/global";
 
+const styles = {
+    accountLayout: css`
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        justify-items: center;
+        align-items: center;
+    `
+};
 
-export default async function AccountLayout({
-                                                children,
-                                                pathname,
-                                                searchParams,
-                                                metadata,
-                                                lang
-                                            }: {
+export async function AccountLayout({
+                                        children,
+                                        metadata,
+                                        lang
+                                    }: {
     children: React.ReactNode,
-    pathname: string,
-    searchParams: Record<string, string>,
     metadata: PageMetadata,
     lang: string
 }) {

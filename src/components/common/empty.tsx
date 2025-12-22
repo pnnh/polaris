@@ -1,5 +1,3 @@
-'use client'
-
 import React, {CSSProperties} from 'react'
 
 const noDataStyle: CSSProperties = {

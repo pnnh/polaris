@@ -1,9 +1,17 @@
-'use client'
-
 import Prism from 'prismjs';
-import styles from './preview.module.scss';
+import {css} from '@emotion/css';
 
-export function WePreview({jsonText}:{jsonText:string}) {
+const styles = {
+    previewCode: css`
+        font-family: 'Courier New', Courier, monospace;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        white-space: pre-wrap;
+    `
+};
+
+export function WePreview({jsonText}: { jsonText: string }) {
     if (!jsonText) {
         return <code>无内容</code>
     }

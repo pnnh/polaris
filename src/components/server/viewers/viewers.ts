@@ -1,7 +1,7 @@
-import {CodeOk, CommonResult, PLInsertResult, PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
-import {serverMakeGet, serverMakePost} from "@/atom/server/http";
-import {headers, cookies} from "next/headers";
-import {logDebugMeta, logDebugValues, logErrorMeta, logErrorValues, logWarnValues,} from "@/components/server/logger";
+import {CodeOk, PLInsertResult} from "@/atom/common/models/protocol";
+import {serverMakePost} from "@/atom/server/http";
+
+import {logWarnValues,} from "@/components/server/logger";
 
 export async function serverInsertArticleViewer(portalUrl: string, articleUid: string, clientIp: string): Promise<void> {
     if (!clientIp) {
@@ -9,20 +9,18 @@ export async function serverInsertArticleViewer(portalUrl: string, articleUid: s
     }
 
     const url = `${portalUrl}/articles/${articleUid}/viewer`
-    const headerList = await headers();
-    const headersString = Array.from(headerList.entries())
-        .map(([key, value]) => `${key}: ${value}`)
-        .join('\n');
+    // const headerList = await headers();
+    // const headersString = Array.from(headerList.entries())
+    //     .map(([key, value]) => `${key}: ${value}`)
+    //     .join('\n');
 
-    logDebugValues('serverInsertArticleViewer', headersString);
-
-    const cookieStore = await cookies()
-    const authHeader = cookieStore.toString()
+    // const cookieStore = await cookies()
+    // const authHeader = cookieStore.toString()
     const postParams = {
         clientIp,
-        headers: headersString
+        headers: 'todo headersString'
     }
-    const insertResult = await serverMakePost<PLInsertResult>(url, postParams, authHeader);
+    const insertResult = await serverMakePost<PLInsertResult>(url, postParams, 'todo authHeader');
     if (!insertResult || insertResult.code !== CodeOk || !insertResult.data) {
         logWarnValues('serverInsertArticleViewer', 'insertResult is invalid', insertResult);
         return undefined

@@ -3,37 +3,42 @@ import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {mustBase58ToUuid, tryBase58ToUuid} from "@/atom/common/utils/basex";
 import {useServerConfig} from "@/components/server/config";
 import {langZh} from "@/atom/common/language";
-import {notFound} from "next/navigation";
 import {ConsoleArticleForm} from "./form";
 import {PSArticleModel} from "@/components/common/models/article";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
-import GlobalLayout from "@/components/server/global";
-import styles from './page.module.scss'
+import {GlobalLayout} from "@/components/server/global";
+import {css} from '@emotion/css'
 import {transText} from "@/components/common/locales/normal";
 import {CommunityArticleNodeService} from "@/components/community/articles";
+import {Request, Response} from "express";
+
+const styles = {
+    articlesPage: css`
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    `,
+    pageContainer: css``
+};
 
 export const dynamic = "force-dynamic";
 
-export default async function Home({params, searchParams}: {
-    params: Promise<{ lang: string, uid: string }>,
-    searchParams: Promise<Record<string, string>>
-}) {
-    const paramsValue = await params;
-    const searchValue = await searchParams;
-    const pageLang = paramsValue.lang || langZh
+export async function Home(request: Request, response: Response) {
+
+    const pageLang = request.params.lang || langZh
     const metadata = new PageMetadata(pageLang)
     const serverConfig = await useServerConfig()
     const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
     const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
-    const articleUid = tryBase58ToUuid(paramsValue.uid)
+    const articleUid = tryBase58ToUuid(request.params.uid)
     const isNew = articleUid === EmptyUUID;
     let model: PSArticleModel | undefined = undefined;
-    const wantLang = searchValue.wantLang || pageLang;
-    const copyFrom = searchValue.copyFrom
+    const wantLang = request.query.wantLang || pageLang;
+    const copyFrom = request.query.copyFrom
     if (isNew) {
         let channelUid = '';
-        if (searchValue.channel) {
-            channelUid = mustBase58ToUuid(searchValue.channel);
+        if (request.query.channel) {
+            channelUid = mustBase58ToUuid(request.query.channel as string);
         }
         model = {
             full_repo_path: "", full_repo_url: "", repo_url: "", url: "",
@@ -53,12 +58,12 @@ export default async function Home({params, searchParams}: {
             description: '',
             keywords: '',
             body: '',
-            lang: wantLang,
+            lang: wantLang as string,
             create_time: '',
             update_time: ''
         }
         if (copyFrom) {
-            const copyFromUid = mustBase58ToUuid(copyFrom);
+            const copyFromUid = mustBase58ToUuid(copyFrom as string);
             const query = {
                 action: 'get',
                 keyword: copyFromUid
@@ -79,7 +84,8 @@ export default async function Home({params, searchParams}: {
         }
     } else {
         if (!articleUid) {
-            notFound();
+            ;
+            throw new Error(transText(pageLang, '无效的文章标识', 'Invalid article identifier'));
         }
         const query = {
             action: 'get',
@@ -87,7 +93,8 @@ export default async function Home({params, searchParams}: {
         }
         const queryResult = await CommunityArticleNodeService.consoleQueryArticles(internalPortalUrl, pageLang, query)
         if (!queryResult || queryResult.range.length === 0) {
-            notFound()
+
+            throw new Error(transText(pageLang, '无法找到指定的文章', 'Cannot find the specified article'));
         }
         model = queryResult.range[0];
         metadata.title = pageTitle(pageLang, model.title)

@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react'
 import './datetime.scss'
 import {TimestampHelper} from "@/components/client/tools/datetime/timestamp";

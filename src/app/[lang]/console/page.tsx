@@ -1,22 +1,66 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {langEn} from "@/atom/common/language";
-import styles from './page.module.scss'
+import {css} from '@emotion/css';
 import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {isAnonymousAccount} from "@/atom/common/models/account";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
-import GlobalLayout from "@/components/server/global";
+import {GlobalLayout} from "@/components/server/global";
 import ComputerIcon from '@mui/icons-material/Computer';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import {transText} from "@/components/common/locales/normal";
+import {Request, Response} from "express";
 
-export default async function Page({params, searchParams}: {
-    params: Promise<{ lang: string, channel: string }>,
-    searchParams: Promise<Record<string, string>>
-}) {
-    const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
+const styles = {
+    consolePage: css`
+        overflow-x: hidden;
+        overflow-y: auto;
+        height: 100vh;
+    `,
+    pageContainer: css`
+        width: 1024px;
+        margin: 0 auto;
+    `,
+    userInfo: css`
+        margin-top: 1rem;
+        font-size: 1rem;
+    `,
+    libGrid: css`
+        margin-top: 1rem;
+    `,
+    libHeader: css`
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        gap: 1rem;
+        background-color: #f0f0f0;
+    `,
+    libLink: css`
+        font-size: 1.2rem;
+        color: #000;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+    `,
+    libBody: css`
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 1rem;
+    `,
+    libCard: css`
+        border: solid 1px #ccc;
+        min-height: 4rem;
+    `
+};
+
+export async function Page(request: Request, response: Response) {
+
+    const lang = request.params.lang || langEn
 
     const serverConfig = await useServerConfig()
     const portalUrl = serverConfig.INTERNAL_PORTAL_URL

@@ -1,31 +1,36 @@
-import styles from './page.module.scss'
-import ContentLayout from "@/components/server/content/layout";
+import {css} from '@emotion/css';
+import {ContentLayout} from "@/components/server/content/layout";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
-import {getPathname} from "@/components/server/pathname";
 import {langEn} from "@/atom/common/language";
 import {passwordUid, queryApp} from "@/components/server/tools/tools";
-import {notFound} from "~/next/navigation";
 import {PageMetadata} from "@/components/common/utils/page";
 import RandomPasswordPage from "@/app/[lang]/tools/password/password";
+import {Request, Response} from "express";
 
-export default async function Home({params, searchParams}: {
-    params: Promise<{ lang: string, channel: string }>,
-    searchParams: Promise<Record<string, string>>
-}) {
+const styles = {
+    passwordPage: css`
+        width: 960px;
+        margin: 0 auto;
+    `
+};
 
-    const pathname = await getPathname()
-    const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
-    const searchParamsValue = await searchParams
+export async function Home(request: Request, response: Response) {
+
+    const pathname = request.path
+
+    const lang = request.params.lang || langEn
+
 
     const appInfo = queryApp(lang, passwordUid)
     if (!appInfo) {
-        notFound()
+
+        response.status(404).send("Not Found");
+        return;
     }
 
     const metadata = new PageMetadata(lang, appInfo.name)
     metadata.description = appInfo.description
-    return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout lang={lang} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
         <div className={styles.passwordPage}>
             <RandomPasswordPage lang={lang}/>

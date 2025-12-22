@@ -1,11 +1,11 @@
-import {getPathname} from "@/components/server/pathname";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import AccountLayout from "@/components/server/account/layout";
+import {AccountLayout} from "@/components/server/account/layout";
 import {css} from '@emotion/css'
 import {SignupForm} from "./form";
 import {useServerConfig} from "@/components/server/config";
 import {langEn} from "@/atom/common/language";
 import {transText} from "@/components/common/locales/normal";
+import {Request, Response} from "express";
 
 const styles = {
     signupCard: css`
@@ -28,21 +28,17 @@ const styles = {
     `
 }
 
-export default async function Page({params, searchParams}: {
-    params: Promise<{ lang: string, channel: string }>,
-    searchParams: Promise<Record<string, string>>
-}) {
-    const pathname = await getPathname()
-    const searchParamsValue = await searchParams
+export async function Page(request: Request, response: Response) {
+    const pathname = request.path
 
-    const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
+
+    const lang = request.params.lang || langEn
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
 
     const serverConfig = await useServerConfig()
     const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
-    return <AccountLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
+    return <AccountLayout lang={lang}
                           metadata={metadata}>
         <div className={styles.signupCard}>
             <div className={styles.signupTitle}>{transText(lang, '注册页面', 'Registration Page')}</div>

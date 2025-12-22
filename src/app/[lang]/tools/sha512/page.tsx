@@ -1,30 +1,35 @@
-import styles from './page.module.scss'
-import ContentLayout from "@/components/server/content/layout";
+import {css} from '@emotion/css';
+import {ContentLayout} from "@/components/server/content/layout";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
-import {getPathname} from "@/components/server/pathname";
 import {langEn} from "@/atom/common/language";
 import {base58Uid, queryApp} from "@/components/server/tools/tools";
-import {notFound} from "~/next/navigation";
 import {PageMetadata} from "@/components/common/utils/page";
-import Sha512Component from "./sha512";
+import {Sha512Component} from "./sha512";
+import {Request, Response} from "express";
 
-export default async function Home({params, searchParams}: {
-    params: Promise<{ lang: string, channel: string }>,
-    searchParams: Promise<Record<string, string>>
-}) {
-    const pathname = await getPathname()
-    const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
-    const searchParamsValue = await searchParams
+const styles = {
+    sha512Page: css`
+        width: 960px;
+        margin: 0 auto;
+    `
+};
+
+export async function Home(request: Request, response: Response) {
+    const pathname = request.path
+
+    const lang = request.params.lang || langEn
+
 
     const appInfo = queryApp(lang, base58Uid)
     if (!appInfo) {
-        notFound()
+
+        response.status(404).send("Not Found");
+        return;
     }
 
     const metadata = new PageMetadata(lang, appInfo.name)
     metadata.description = appInfo.description
-    return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout lang={lang} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
         <div className={styles.sha512Page}>
             <Sha512Component lang={lang}/>

@@ -1,9 +1,6 @@
-'use client'
-
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import {aesUid, queryApp} from "@/components/server/tools/tools";
-import {notFound} from "next/navigation";
 import {transKey, transText} from "@/components/common/locales/normal";
 import {aesServerDecode, aesServerEncode, aesServerGenerateKey} from "@/app/[lang]/tools/aes/server";
 import {IconButton, TextField} from "@mui/material";
@@ -32,10 +29,10 @@ export default function AesComponent({lang}: { lang: string }) {
     }
     const appInfo = queryApp(lang, aesUid)
     if (!appInfo) {
-        notFound()
+        throw new Error('AesComponent appInfo is undefined');
     }
     return <div className={'sha256Page'}>
-        <style jsx>{`
+        <style>{`
             .sha256Page {
                 display: flex;
                 flex-direction: column;

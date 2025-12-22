@@ -1,9 +1,6 @@
-'use client'
-
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import {queryApp, sha256Uid} from "@/components/server/tools/tools";
-import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
 import {encodeSHA256} from "@/atom/common/utils/crypto";
 
@@ -19,10 +16,11 @@ export default function Hash256Component({lang}: { lang: string }) {
     }
     const appInfo = queryApp(lang, sha256Uid)
     if (!appInfo) {
-        notFound()
+
+        throw new Error('Hash256Component appInfo is undefined');
     }
     return <div className={'sha256Page'}>
-        <style jsx>{`
+        <style>{`
             .sha256Page {
                 display: flex;
                 flex-direction: column;

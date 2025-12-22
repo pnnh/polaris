@@ -1,4 +1,4 @@
-'use client';
+;
 
 import * as React from 'react';
 import {styled} from '@mui/material/styles';
@@ -51,7 +51,7 @@ export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
     };
     return (
         <div>
-            <style jsx={true}>{`
+            <style>{`
                 .deleteDialog {
                     min-height: 8rem;
                     min-width: 10rem;

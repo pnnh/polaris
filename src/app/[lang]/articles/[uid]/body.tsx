@@ -1,5 +1,3 @@
-'use client'
-
 import React from "react";
 import {TocItem} from "@/atom/common/models/toc";
 import {SteleBody} from "@/atom/common/models/stele";

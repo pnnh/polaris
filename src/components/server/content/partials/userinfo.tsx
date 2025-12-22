@@ -1,4 +1,3 @@
-import './userinfo.css'
 import {AccountModel, isAnonymousAccount} from "@/atom/common/models/account";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {transKey} from "@/components/common/locales/normal";

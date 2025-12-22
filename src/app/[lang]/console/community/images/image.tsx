@@ -1,7 +1,7 @@
-'use client';
+;
 
 import React, {useEffect} from "react";
-import styles from './image.module.scss';
+import {css} from '@emotion/css';
 import {
     clientGetDirectoryEntry,
     clientGetImageLibraryFiles,
@@ -11,6 +11,35 @@ import {
 } from "@/components/client/images/service";
 import Button from "@mui/material/Button";
 import {NoData} from "@/components/common/empty";
+
+const styles = {
+    middleBody: css`
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        width: 100%;
+    `,
+    imageCard: css`
+        border: solid 1px #E0E0E0;
+        border-radius: 8px;
+        padding: 1rem;
+        background-color: var(--background-color);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        &:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        img {
+            height: 4rem;
+            width: 4rem;
+            object-fit: cover;
+        }
+    `
+};
 
 export function ConsoleImageMiddleBody({libKey, lang, portalUrl}: {
     libKey: string, lang: string,

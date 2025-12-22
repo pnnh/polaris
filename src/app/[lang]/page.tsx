@@ -1,34 +1,23 @@
 import React from 'react'
-import ContentLayout from '@/components/server/content/layout'
-import {getPathname} from "@/components/server/pathname";
+import {ContentLayout} from '@/components/server/content/layout'
 import {SymbolUnknown} from "@/atom/common/models/protocol";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getTargetLang, unknownLanguage} from "@/components/common/language";
-import {notFound} from "next/navigation";
 import {ToolBody} from "./tools/tool";
+import {Request, Response} from 'express'
 
-export const dynamic = "force-dynamic";
+export async function Page(request: Request, response: Response) {
+    const pathname = request.path
 
-export default async function Page({params, searchParams}: {
-    params: Promise<{ lang: string }>,
-    searchParams: Promise<Record<string, string>>
-}) {
-    const pathname = await getPathname()
-    const searchParamsValue = await searchParams
-
-    let page = Number(searchParamsValue.page)
-    if (isNaN(page)) {
-        page = 1
-    }
-    const paramsValue = await params;
-    const lang = paramsValue.lang
+    const lang = request.params.lang;
     if (!lang || getTargetLang(lang, unknownLanguage) === unknownLanguage) {
-        notFound()
+        response.status(404);
+        return <div>404 Not Found</div>;
     }
 
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
-    return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout lang={lang} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
         <ToolBody lang={lang}/>
     </ContentLayout>

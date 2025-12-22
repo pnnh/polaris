@@ -1,6 +1,4 @@
-'use client'
-
-import styles from './basex.module.scss'
+import {css} from '@emotion/css'
 import * as React from 'react';
 import {useEffect} from 'react';
 import Button from '@mui/material/Button';
@@ -9,8 +7,50 @@ import {useClientConfig} from "@/atom/client/config/config";
 import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
 import {base64Uid, queryApp} from "@/components/server/tools/tools";
-import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
+
+const styles = {
+    basexPage: css`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+        height: 100%;
+        scrollbar-width: thin;
+        overflow-y: auto;
+        overflow-x: hidden;
+    `,
+    sourceText: css`
+        width: 900px;
+        height: 160px;
+        padding: 8px;
+        flex-shrink: 0;
+        background: #FFFFFF;
+        border: 1px solid #d3d3d3;
+        border-radius: 8px;
+    `,
+    toolButtons: css`
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+        flex-shrink: 0;
+    `,
+    targetText: css`
+        width: 900px;
+        height: 160px;
+        padding: 8px;
+        flex-shrink: 0;
+        background: #FFFFFF;
+        border: 1px solid #d3d3d3;
+        border-radius: 8px;
+    `,
+    commentsClient: css`
+        width: 548px;
+    `
+};
 
 export default function Base64Component({lang}: { lang: string }) {
     const [source, setSource] = React.useState('');
@@ -43,7 +83,8 @@ export default function Base64Component({lang}: { lang: string }) {
     }
     const appInfo = queryApp(lang, base64Uid)
     if (!appInfo) {
-        notFound()
+
+        throw new Error('Base64Component appInfo is undefined');
     }
     return <div className={styles.basexPage}>
         <h1>{appInfo.name}</h1>

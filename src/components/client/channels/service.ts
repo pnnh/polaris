@@ -1,5 +1,3 @@
-'use client'
-
 import {entries, set, get} from 'idb-keyval';
 
 export interface IChannelEntry {

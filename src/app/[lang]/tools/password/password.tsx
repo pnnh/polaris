@@ -1,5 +1,3 @@
-'use client'
-
 import {useState} from 'react'
 import {passwordStrength} from '@cmss/check-password-strength'
 import {Button, IconButton, Tooltip} from "@mui/material";

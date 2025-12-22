@@ -1,6 +1,3 @@
-'use server'
-
-import {cookies, headers} from "next/headers";
 import {serverGetCookie} from "@/components/server/cookie";
 import {ThemeKey} from "@/components/common/theme";
 
@@ -12,8 +9,9 @@ export async function getServerTheme(): Promise<string> {
     if (themeValue === 'light' || themeValue === 'dark') {
         themeName = themeValue
     } else {
-        const headersList = await headers()
-        const secChPrefersColorScheme = headersList.get('sec-ch-prefers-color-scheme')
+        // const headersList = await headers()
+        // const secChPrefersColorScheme = headersList.get('sec-ch-prefers-color-scheme')
+        const secChPrefersColorScheme = 'light' // todo
         if (secChPrefersColorScheme === 'light' || secChPrefersColorScheme === 'dark') {
             themeName = secChPrefersColorScheme
         }

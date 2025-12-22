@@ -1,5 +1,3 @@
-'use client'
-
 import {getVisitorId} from "@/components/client/comments/fingerprint";
 import {clientMakeGet, clientMakePost} from "@/atom/client/http";
 import {AccountModel} from "@/atom/common/models/account";

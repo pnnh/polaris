@@ -1,5 +1,3 @@
-'use client'
-
 import queryString from "query-string";
 import {CodeOk, PLSelectResult} from "@/atom/common/models/protocol";
 

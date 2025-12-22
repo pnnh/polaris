@@ -1,7 +1,4 @@
-'use client'
-
 import "./search.scss";
-import Image from "next/image";
 import React, {CSSProperties} from "react";
 
 export function ContentSearchAction({pathname, queryKeyword}: { pathname: string, queryKeyword: string | undefined }) {
@@ -25,10 +22,10 @@ export function ContentSearchAction({pathname, queryKeyword}: { pathname: string
             }
         }} placeholder={'搜索'}/>
         <div className={'iconContainer'} onClick={() => doSearch}>
-            <Image className={'searchIcon'}
-                   src='/icons/materials/search_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg'
-                   alt='search' height={24}
-                   width={24}/>
+            <img className={'searchIcon'}
+                 src='/icons/materials/search_24dp_5F6368_FILL0_wght400_GRAD0_opsz24.svg'
+                 alt='search' height={24}
+                 width={24}/>
         </div>
     </div>
 }

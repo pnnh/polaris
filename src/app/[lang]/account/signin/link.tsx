@@ -1,12 +1,22 @@
-'use client'
-
-import styles from "./link.module.scss";
+import {css} from '@emotion/css';
 import {IAuthApp} from "@/components/common/models/auth";
 import {useEffect, useState} from "react";
 import {permitAppLogin, queryAuthApp} from "@/components/client/account/account";
 import {CodeOk} from "@/atom/common/models/protocol";
 import {Loading} from "@/components/common/loading";
 import {transText} from "@/components/common/locales/normal";
+
+const styles = {
+    linkSession: css`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+    `
+};
 
 export function LinkSession({lang, portalUrl, signinLink, linkApp, signinCallback}: {
     lang: string, portalUrl: string, signinLink: string, linkApp: string, signinCallback: string

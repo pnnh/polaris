@@ -1,4 +1,3 @@
-'use client'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import React, {useState} from 'react'
@@ -11,7 +10,6 @@ import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import {queryApp, uuidUid} from "@/components/server/tools/tools";
 import {localText} from "@/atom/common/language";
-import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
 
 function generateUUID(version: number, options?: {
@@ -78,7 +76,8 @@ export function UuidToolBody({lang}: { lang: string }) {
 
     const appInfo = queryApp(lang, uuidUid)
     if (!appInfo) {
-        notFound()
+        
+        return <div>{transText(lang, '应用未找到', 'App Not Found')}</div>
     }
 
     const appendHistory = (newItem: NormalUUIDItem) => {

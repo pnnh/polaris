@@ -1,6 +1,4 @@
-'use client'
-
-import styles from "./preview.module.scss";
+import {css} from '@emotion/css'
 import React, {useEffect, useState} from "react";
 import {IoClose} from "react-icons/io5";
 import {articleAssetsPreviewAtom} from "./state";
@@ -10,6 +8,51 @@ import {TocItem} from "@/atom/common/models/toc";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {renderCodeBlock} from "@/app/[lang]/articles/[uid]/codeblock";
 import {BuildBodyHtml} from "./body";
+
+const styles = {
+    assertPreview: css`
+        width: 100%;
+        background: #fefefe;
+    `,
+    previewHeader: css`
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: solid 1px #f3f3f3;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+    `,
+    pathTitle: css`
+        font-size: 16px;
+        color: #3c3c3c;
+        font-weight: 500;
+    `,
+    fileActions: css`
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+
+        i {
+            cursor: pointer;
+        }
+
+        a svg {
+            height: 1rem;
+            width: 1rem;
+        }
+    `,
+    previewBody: css`
+        font-size: 14px;
+        height: 100%;
+        background: #fff;
+    `,
+    textPreview: css`
+        word-break: break-word;
+        white-space: break-spaces;
+    `
+};
 
 export function ArticlePreview(
     {

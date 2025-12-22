@@ -1,39 +1,72 @@
 import React from 'react'
-import styles from './page.module.scss'
+import {css} from '@emotion/css';
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import {getPathname} from "@/components/server/pathname";
 import {calcPagination} from "@/atom/common/utils/pagination";
 import {langEn} from "@/atom/common/language";
 import {useServerConfig} from "@/components/server/config";
 import {serverConsoleSelectArticles} from "@/components/personal/articles";
-import GlobalLayout from "@/components/server/global";
+import {GlobalLayout} from "@/components/server/global";
 import ComputerIcon from "~/@mui/icons-material/Computer";
 import CloudQueueIcon from "~/@mui/icons-material/CloudQueue";
+import {Request, Response} from "express";
+
+const styles = {
+    personalPage: css`
+        /* Empty class as parent container */
+    `,
+    libGrid: css`
+        margin-top: 1rem;
+    `,
+    libHeader: css`
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        gap: 1rem;
+        background-color: #f0f0f0;
+    `,
+    libLink: css`
+        font-size: 1.2rem;
+        color: #000;
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+
+        &:hover {
+            background-color: #f0f0f0;
+        }
+    `,
+    libBody: css`
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 1rem;
+    `,
+    libCard: css`
+        border: solid 1px #ccc;
+        min-height: 4rem;
+    `
+};
 
 export const dynamic = "force-dynamic";
 
-export default async function Page({params, searchParams}: {
-    params: Promise<{ lang: string, channel: string }>,
-    searchParams: Promise<Record<string, string>>
-}) {
-    const pathname = await getPathname()
-    const searchParamsValue = await searchParams
-    const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
+export async function Page(request: Request, response: Response) {
+    const pathname = request.path
 
-    let page = Number(searchParamsValue.page)
+
+    const lang = request.params.lang || langEn
+
+    let page = Number(request.query.page)
     if (isNaN(page)) {
         page = 1
     }
     const pageSize = 10
-    const channelPk = searchParamsValue.channel
+    const channelPk = request.query.channel
 
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
 
     const selectQuery = {
-        sort: searchParamsValue.sort,
-        filter: searchParamsValue.filter,
+        sort: request.query.sort,
+        filter: request.query.filter,
         page,
         size: pageSize,
         channel: channelPk

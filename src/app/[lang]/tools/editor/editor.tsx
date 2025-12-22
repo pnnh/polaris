@@ -1,5 +1,3 @@
-'use client'
-
 import {SFXEditor} from "@/atom/client/editor/editor";
 import {SFEditorModel} from "@/atom/client/editor/nodes/node";
 import {useState} from "react";

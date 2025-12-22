@@ -1,5 +1,3 @@
-'use client'
-
 import Prism, {Grammar} from 'prismjs'
 import {encodeHTML} from "entities";
 import '@/atom/client/editor/highlight'

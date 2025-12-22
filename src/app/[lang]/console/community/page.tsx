@@ -1,11 +1,11 @@
 import React from 'react'
 import {css} from '@emotion/css'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import {getPathname} from "@/components/server/pathname";
 import {langEn} from "@/atom/common/language";
-import GlobalLayout from "@/components/server/global";
+import {GlobalLayout} from "@/components/server/global";
 import ComputerIcon from "~/@mui/icons-material/Computer";
 import CloudQueueIcon from "~/@mui/icons-material/CloudQueue";
+import {Request, Response} from "express";
 
 export const dynamic = "force-dynamic";
 
@@ -43,16 +43,13 @@ const styles = {
     `
 }
 
-export default async function Page({params, searchParams}: {
-    params: Promise<{ lang: string, channel: string }>,
-    searchParams: Promise<Record<string, string>>
-}) {
-    const pathname = await getPathname()
-    const searchParamsValue = await searchParams
-    const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
+export async function Page(request: Request, response: Response) {
+    const pathname = request.path
 
-    let page = Number(searchParamsValue.page)
+
+    const lang = request.params.lang || langEn
+
+    let page = Number(request.query.page)
     if (isNaN(page)) {
         page = 1
     }

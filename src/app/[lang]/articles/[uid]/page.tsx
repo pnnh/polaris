@@ -1,10 +1,9 @@
-import styles from './page.module.scss'
+import {css} from '@emotion/css'
 import React from 'react'
 import {TocInfo} from '@/components/common/toc'
 
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {templateBodyId} from '@/components/server/content/layout'
-import {getClientIp, getPathname} from "@/components/server/pathname";
 import {GoTop} from "@/components/client/gotop";
 import {CiAlarmOn} from "react-icons/ci";
 import {FaEye} from "react-icons/fa";
@@ -16,33 +15,143 @@ import {PSArticleModel} from "@/components/common/models/article";
 import {TocItem} from "@/atom/common/models/toc";
 import {getDefaultNoteImageByUid} from "@/components/common/note";
 import {isValidUUID} from "@/atom/common/utils/uuid";
-import ArticleReadLayout from "@/components/server/content/article/layout";
+import {ArticleReadLayout} from "@/components/server/content/article/layout";
 import {CommentsClient} from "@/components/client/comments/comments";
 import {useServerConfig} from "@/components/server/config";
 import {ArticleAssets} from "./assets";
 import {ArticlePreview} from "./preview";
 import {langEn} from "@/atom/common/language";
-import {notFound} from "next/navigation";
 import {serverInsertArticleViewer} from "@/components/server/viewers/viewers";
 import '@/atom/client/editor/editor.scss';
 import {serverMakeGet} from "@/atom/server/http";
+import {Request, Response} from "express";
+
+const styles = {
+    articleCover: css`
+        width: 100%;
+        height: 12rem;
+        position: relative;
+        margin: 1rem auto 0;
+        border-radius: 6px;
+        overflow: hidden;
+        opacity: 0.9;
+        background-color: var(--background-color);
+
+        @media screen and (min-width: 80rem) {
+            width: 80rem;
+            margin: 1rem auto 0 auto;
+        }
+    `,
+    articleHeader: css`
+        position: relative;
+        z-index: 1;
+        border-radius: 4px;
+        overflow: hidden;
+        padding: 1rem;
+        color: var(--primary-color);
+    `,
+    articleDescription: css`
+        font-size: 1rem;
+        color: var(--text-primary-color);
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    `,
+    action: css`
+        font-size: 14px;
+        height: 1rem;
+        color: var(--text-primary-color);
+        line-height: 22px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 4px;
+    `,
+    coverImage: css`
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        z-index: 0;
+        mask: linear-gradient(to right, transparent 30%, var(--text-primary-color));
+    `,
+    articleContainer: css`
+        display: flex;
+        flex-direction: row;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        width: 100%;
+        gap: 1rem;
+
+        @media screen and (min-width: 80rem) {
+            width: 80rem;
+            margin: 1rem auto 0 auto;
+        }
+    `,
+    leftArea: css`
+        border-radius: 2px;
+        width: calc(100% - 20rem - 1rem);
+    `,
+    commentsClient: css`
+        margin-top: 1rem;
+    `,
+    rightArea: css`
+        flex-direction: column;
+        gap: 1rem;
+        width: 20rem;
+        flex-shrink: 0;
+        display: none;
+
+        @media screen and (min-width: 80rem) {
+            display: flex;
+        }
+    `,
+    channelCard: css`
+        border-radius: 4px;
+        background-color: var(--background-color);
+    `,
+    channelTitle: css`
+        font-size: 1rem;
+        font-weight: 400;
+        padding: 1rem;
+        border-bottom: solid 1px #e3e3e3;
+    `,
+    channelDescription: css`
+        padding: 1rem;
+    `,
+    articleInfo: css`
+        display: block;
+        background-color: var(--background-color);
+        border-radius: 4px;
+        border: solid 1px var(--divider-color);
+    `,
+    articleBody: css`
+        padding: 16px;
+        background-color: var(--background-color);
+        border-radius: 4px;
+        position: relative;
+    `,
+    articleTitle: css`
+        font-weight: 600;
+        font-size: 20px;
+        margin-bottom: 16px;
+    `
+};
 
 export const dynamic = "force-dynamic";
 
-export default async function Home({params, searchParams}: {
-    params: Promise<{ lang: string, uid: string }>,
-    searchParams: Promise<Record<string, string>>
-}) {
-    const pathname = await getPathname()
-    const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
+export async function Home(request: Request, response: Response) {
+    const pathname = request.path
+
+    const lang = request.params.lang || langEn
     const metadata = new PageMetadata(lang)
     const serverConfig = await useServerConfig()
     const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
     const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
-    const articleUid = tryBase58ToUuid(paramsValue.uid)
+    const articleUid = tryBase58ToUuid(request.params.uid)
     if (!articleUid) {
-        notFound();
+        return response.sendStatus(404)
     }
     const url = `${internalPortalUrl}/articles/${articleUid}?lang=${lang}`
     const getResult = await serverMakeGet<CommonResult<PSArticleModel | undefined>>(url, '')
@@ -62,18 +171,18 @@ export default async function Home({params, searchParams}: {
     if (!getResult.data.body) {
         return <div>暂不支持的文章类型</div>
     }
-    const clientIp = await getClientIp()
+    const clientIp = '127.0.0.1'//await getClientIp()
     // update article discover count
     if (clientIp) {
         await serverInsertArticleViewer(internalPortalUrl, articleUid, clientIp)
     }
-    const readUrl = `/${lang}/articles/articles/${paramsValue.uid}`
+    const readUrl = `/${lang}/articles/articles/${request.params.uid}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = `/articles/${model.uid}/assets/${model.cover}`
     }
     const fullRepoPath = model.full_repo_path
-    return <ArticleReadLayout lang={lang} searchParams={await searchParams} pathname={pathname}
+    return <ArticleReadLayout lang={lang} pathname={pathname}
                               metadata={metadata} userInfo={SymbolUnknown}>
 
         <div className={styles.articleCover}>

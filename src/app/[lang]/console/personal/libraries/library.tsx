@@ -1,10 +1,21 @@
-'use client'
-
 import React, {useEffect, useState} from "react";
-import styles from './library.module.scss';
+import {css} from '@emotion/css';
 import ComputerIcon from "@mui/icons-material/Computer";
 import {clientLoadLibraryEntries, ILibraryEntry} from "@/components/client/images/service";
 import CloudQueueIcon from "~/@mui/icons-material/CloudQueue";
+
+const styles = {
+    libBody: css`
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 1rem;
+    `,
+    libCard: css`
+        border: solid 1px #ccc;
+        min-height: 4rem;
+    `
+};
 
 export function ConsoleLibraryMiddleBody({lang, portalUrl}: {
     lang: string, portalUrl: string

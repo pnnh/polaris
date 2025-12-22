@@ -1,8 +1,17 @@
-import {PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
+import {PLSelectData} from "@/atom/common/models/protocol";
 import {NoData} from "@/components/common/empty";
-import styles from './image.module.scss'
+import {css} from '@emotion/css'
 import {PSImageModel} from "@/components/common/models/image";
 import {ImageCard} from "@/components/server/content/images/card";
+
+const styles = {
+    middleBody: css`
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+        gap: 1rem;
+    `
+};
 
 export async function ImageMiddleBody({selectData, lang}: {
     selectData: PLSelectData<PSImageModel>,

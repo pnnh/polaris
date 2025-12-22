@@ -1,5 +1,3 @@
-'use client'
-
 import React from "react";
 import './timestamp.scss'
 import {transKey} from "@/components/common/locales/normal";

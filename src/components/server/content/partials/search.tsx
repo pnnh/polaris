@@ -1,5 +1,3 @@
-'use client'
-
 import {css} from '@emotion/css'
 import SearchIcon from '@mui/icons-material/Search';
 import {useState} from "react";

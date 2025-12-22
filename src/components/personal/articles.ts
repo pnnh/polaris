@@ -1,7 +1,6 @@
 import {CodeOk, CommonResult, PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
 import {PSArticleModel} from "@/components/common/models/article";
 import {serverMakeGet} from "@/atom/server/http";
-import {cookies} from "next/headers";
 import {getDefaultImageUrl} from "@/components/common/note";
 import {isSupportedLanguage} from "@/atom/common/language";
 import queryString from "query-string";
@@ -12,9 +11,9 @@ export async function serverGetArticle(portalUrl: string, uid: string): Promise<
         return undefined
     }
     const url = `${portalUrl}/articles/${uid}`
-    const cookieStore = await cookies()
-    const authHeader = cookieStore.toString()
-    const getResult = await serverMakeGet<CommonResult<PSArticleModel | undefined>>(url, authHeader);
+    // const cookieStore = await cookies()
+    // const authHeader = cookieStore.toString()
+    const getResult = await serverMakeGet<CommonResult<PSArticleModel | undefined>>(url, 'todo authHeader');
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {
         return undefined
     }
@@ -43,9 +42,9 @@ export async function serverConsoleGetArticle(lang: string, portalUrl: string, u
         }
         url += `?wantLang=${wantLang}`
     }
-    const cookieStore = await cookies()
-    const authHeader = cookieStore.toString()
-    const getResult = await serverMakeGet<CommonResult<PSArticleModel | undefined>>(url, authHeader);
+    // const cookieStore = await cookies()
+    // const authHeader = cookieStore.toString()
+    const getResult = await serverMakeGet<CommonResult<PSArticleModel | undefined>>(url, 'authHeader');
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {
         return undefined
     }
@@ -66,9 +65,9 @@ export async function serverConsoleGetArticle(lang: string, portalUrl: string, u
 export async function serverConsoleSelectArticles(portalUrl: string, lang: string, queryParams: Record<string, any>): Promise<PLSelectData<PSArticleModel>> {
     const rawQuery = queryString.stringify(queryParams)
     const url = `${portalUrl}/console/community/articles?${rawQuery}`
-    const cookieStore = await cookies()
-    const authHeader = cookieStore.toString()
-    const getResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, authHeader);
+    // const cookieStore = await cookies()
+    // const authHeader = cookieStore.toString()
+    const getResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, 'authHeader');
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {
         throw new Error(transText(lang, '获取文章列表失败', 'Failed to get article list'));
     }

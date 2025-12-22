@@ -1,23 +1,20 @@
 import React from 'react'
-import {getPathname} from "@/components/server/pathname";
 
 import {langEn} from "@/atom/common/language";
 import {PageMetadata} from "@/components/common/utils/page";
-import ContentLayout from "@/components/server/content/layout";
+import {ContentLayout} from "@/components/server/content/layout";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
 import {ToolBody} from "./tool";
+import {Request, Response} from 'express'
 
-export default async function Page({params, searchParams}: {
-    params: Promise<{ lang: string, channel: string }>,
-    searchParams: Promise<Record<string, string>>
-}) {
-    const pathname = await getPathname()
-    const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
-    const searchParamsValue = await searchParams
+export async function Page(request: Request, response: Response) {
+    const pathname = request.path
+
+    const lang = request.params.lang || langEn
+
 
     const metadata = new PageMetadata(lang)
-    return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
+    return <ContentLayout lang={lang} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
         <ToolBody lang={lang}/>
     </ContentLayout>

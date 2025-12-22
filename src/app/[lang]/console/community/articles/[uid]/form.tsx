@@ -1,6 +1,3 @@
-'use client'
-
-import styles from "./form.module.scss";
 import {generatorRandomString} from "@/atom/common/utils/string";
 import {ConsoleArticleEditor} from "./editor";
 import Button from "@mui/material/Button";
@@ -13,6 +10,138 @@ import {supportedLanguages} from "@/components/common/language";
 import {Select} from "@mui/material";
 import {transText} from "@/components/common/locales/normal";
 import {CommunityBrowser} from "@/components/community/browser";
+// src/app/[lang]/console/community/articles/[uid]/form.styles.ts
+import {css} from '@emotion/css';
+
+export const styles = {
+    bodyContainer: css`
+        overflow: hidden;
+    `,
+    articleCover: css`
+        width: calc(100vw - 16rem);
+        height: 12rem;
+        position: relative;
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--background-color);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    `,
+    articleHeader: css`
+        flex-grow: 1;
+        position: relative;
+        z-index: 1;
+        border-radius: 4px;
+        overflow: hidden;
+    `,
+    articleTitle: css`
+        font-weight: 600;
+        font-size: 20px;
+        margin-bottom: 16px;
+        padding-left: 1rem;
+
+        input {
+            width: calc(100% - 3rem);
+            border-color: #b4b4b4;
+            border-radius: 4px;
+            border-width: 1px;
+            padding: 0.5rem;
+        }
+    `,
+    articleDescription: css`
+        font-size: 1rem;
+        color: var(--text-primary-color);
+        padding-left: 1rem;
+        border: solid 1px #b4b4b4;
+        border-radius: 4px;
+
+        textarea {
+            resize: none;
+            width: calc(100% - 3rem);
+            height: 5rem;
+            border-color: #b4b4b4;
+            border-radius: 4px;
+            padding: 0.5rem;
+            scrollbar-width: thin;
+        }
+    `,
+    coverImage: css`
+        width: 8rem;
+        height: 8rem;
+        flex-shrink: 0;
+        object-fit: cover;
+        top: 0;
+        z-index: 0;
+        margin-right: 1rem;
+    `,
+    articleContainer: css`
+        display: flex;
+        flex-direction: row;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        width: calc(100vw - 16rem - 2rem);
+        height: calc(100vh - 12rem - 4rem - 6rem);
+        gap: 1rem;
+        background: var(--background-color);
+        padding: 1rem;
+        @media screen and (min-width: 80rem) {
+            width: 80vw;
+            margin: 1rem auto 0 auto;
+        }
+    `,
+    bottomBar: css`
+        height: 4rem;
+        width: 100vw;
+        background: var(--background-color);
+        display: flex;
+        flex-direction: row;
+        justify-items: center;
+        align-items: center;
+        gap: 1rem;
+        padding-left: 1rem;
+        @media screen and (min-width: 80rem) {
+            width: 80vw;
+            margin: 1rem auto 0 auto;
+        }
+    `,
+    langSelector: css`
+        display: inline-flex;
+        height: 1.5rem;
+        flex-direction: row;
+        gap: 0.3rem;
+        justify-items: center;
+        cursor: pointer;
+
+        svg {
+            height: 20px;
+            width: 20px;
+            color: var(--text-primary-color);
+            fill: var(--text-primary-color);
+            stroke: var(--text-primary-color);
+        }
+    `,
+    langItem: css`
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        height: 1.5rem;
+        gap: 0.3rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: var(--text-primary-color);
+        background-color: var(--background-color);
+
+        svg {
+            height: 24px;
+            width: 24px;
+            color: var(--text-primary-color);
+            fill: var(--text-primary-color);
+            stroke: var(--text-primary-color);
+        }
+    `,
+};
 
 function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (newLang: string) => void }) {
     return <>

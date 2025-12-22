@@ -1,5 +1,3 @@
-'use client'
-
 import {useState} from "react";
 import {textToQRCode} from "@/utils/qrcode";
 
@@ -8,7 +6,7 @@ export function QRCodeComponent({lang}: { lang: string }) {
     const [downloadUrl, setDownloadUrl] = useState('')
     const [error, setError] = useState('')
     return <div className={'qrCodeComponent'}>
-        <style jsx>{`
+        <style>{`
             .qrCodeComponent {
                 margin-bottom: 1rem;
             }

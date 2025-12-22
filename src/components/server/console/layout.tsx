@@ -1,26 +1,32 @@
 import React from 'react'
-import styles from './layout.module.scss'
+import {css} from '@emotion/css'
 import {AccountModel, isAnonymousAccount} from "@/atom/common/models/account";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
-import GlobalLayout from "@/components/server/global";
+import {GlobalLayout} from "@/components/server/global";
 import {PageMetadata} from "@/components/common/utils/page";
 import {ConsoleSidebar} from "@/components/server/console/sidebar";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {useServerConfig} from "@/components/server/config";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
 
-export default async function ConsoleLayout(
+const styles = {
+    consoleContainer: css`
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+    `
+};
+
+export async function ConsoleLayout(
     {
         children,
-        pathname,
-        searchParams,
         metadata,
         lang,
         userInfo,
     }: {
         children: React.ReactNode,
-        pathname: string,
-        searchParams: Record<string, string>,
         metadata: PageMetadata,
         lang: string,
         userInfo: AccountModel | typeof SymbolUnknown

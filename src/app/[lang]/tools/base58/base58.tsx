@@ -1,12 +1,74 @@
-'use client'
-
 import {useState} from "react";
-import styles from './base58.module.scss'
+import {css} from '@emotion/css'
 import {Button, FormControlLabel, Radio, RadioGroup, Tooltip} from "@mui/material";
-import {css} from "@emotion/css";
 import {base58ToString, stringToBase58} from "@/atom/common/utils/basex";
 import {copyToClipboard} from "@/atom/client/clipboard";
 import {transExtra, transKey} from "@/components/common/locales/normal";
+
+const styles = {
+    base58Component: css`
+        margin-bottom: 1rem;
+    `,
+    description: css`
+        font-size: 1rem;
+        color: #4a4a4a;
+        margin: 1rem 0 1rem 0;
+    `,
+    productTitle: css`
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin: 1rem 0;
+        text-align: center;
+    `,
+    textContainer: css`
+        margin: 1rem 0 1rem 0;
+        background-color: var(--background-color);
+        color: var(--text-primary-color);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        textarea {
+            width: calc(100% - 4rem);
+            min-height: 8rem;
+            padding: 1rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+            background-color: var(--background-color);
+            color: var(--text-primary-color);
+            outline: none;
+        }
+    `,
+    flavorContainer: css`
+        margin: 1rem 0 1rem 1rem;
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+    `,
+    actionContainer: css`
+        margin: 1rem 0 1rem 1rem;
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+    `,
+    errorContainer: css`
+        padding: 0 1rem;
+        color: red;
+        font-size: 1rem;
+        font-style: italic;
+        background-color: var(--background-color);
+    `,
+    resultContainer: css`
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--background-color);
+        color: var(--text-primary-color);
+    `
+};
 
 const resultActionContainer = css({
     margin: '1rem 0 1rem 1rem',

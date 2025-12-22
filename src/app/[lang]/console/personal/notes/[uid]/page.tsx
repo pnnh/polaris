@@ -1,40 +1,46 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import {getPathname} from "@/components/server/pathname";
 import {mustBase58ToUuid, tryBase58ToUuid, uuidToBase58} from "@/atom/common/utils/basex";
 import {useServerConfig} from "@/components/server/config";
 import {langZh} from "@/atom/common/language";
-import {notFound, redirect} from "next/navigation";
 import {ConsoleArticleForm} from "./form";
 import {serverConsoleGetArticle} from "@/components/personal/articles";
 import {PSArticleModel} from "@/components/common/models/article";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
-import GlobalLayout from "@/components/server/global";
-import styles from './page.module.scss'
+import {GlobalLayout} from "@/components/server/global";
+
 import {transText} from "@/components/common/locales/normal";
+import {css} from "@emotion/css";
+import {Request, Response} from "express";
 
 export const dynamic = "force-dynamic";
 
-export default async function Home({params, searchParams}: {
-    params: Promise<{ lang: string, uid: string }>,
-    searchParams: Promise<Record<string, string>>
-}) {
-    const pathname = await getPathname()
-    const paramsValue = await params;
-    const searchValue = await searchParams;
-    const pageLang = paramsValue.lang || langZh
+const styles = {
+    articlesPage: css`
+
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    `
+}
+
+export async function Home(request: Request, response: Response) {
+    const pathname = request.path
+
+    ;
+    const pageLang = request.params.lang as string || langZh
     const metadata = new PageMetadata(pageLang)
     const serverConfig = await useServerConfig()
     const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
-    const articleUid = tryBase58ToUuid(paramsValue.uid)
+    const articleUid = tryBase58ToUuid(request.params.uid)
     const isNew = articleUid === EmptyUUID;
     let model: PSArticleModel | undefined = undefined;
-    const wantLang = searchValue.wantLang || pageLang;
-    const copyFrom = searchValue.copyFrom
+    const wantLang = request.query.wantLang as string || pageLang;
+    const copyFrom = request.query.copyFrom
     if (isNew) {
         let channelUid = '';
-        if (searchValue.channel) {
-            channelUid = mustBase58ToUuid(searchValue.channel);
+        if (request.query.channel) {
+            channelUid = mustBase58ToUuid(request.query.channel as string);
         }
         model = {
             full_repo_path: "", full_repo_url: "", repo_url: "", url: "",
@@ -58,8 +64,8 @@ export default async function Home({params, searchParams}: {
             create_time: '',
             update_time: ''
         }
-        if (copyFrom) {
-            const copyFromUid = mustBase58ToUuid(copyFrom);
+        if (copyFrom && model) {
+            const copyFromUid = mustBase58ToUuid(copyFrom as string);
             const originModel = await serverConsoleGetArticle(pageLang, internalPortalUrl, copyFromUid)
             if (!originModel) {
                 throw new Error(transText(pageLang, '无法找到要复制的文章', 'Cannot find the article to copy'));
@@ -75,15 +81,17 @@ export default async function Home({params, searchParams}: {
         }
     } else {
         if (!articleUid) {
-            notFound();
+            ;
+            return response.sendStatus(404)
         }
         model = await serverConsoleGetArticle(pageLang, internalPortalUrl, articleUid, wantLang)
         if (!model || !model.uid) {
             if (wantLang) {
                 const createUrl = `/${pageLang}/console/articles/${uuidToBase58(EmptyUUID)}?wantLang=${wantLang}&copyFrom=${uuidToBase58(articleUid)}`;
-                redirect(createUrl)
+                response.redirect(createUrl)
             } else {
-                notFound();
+                ;
+                return response.sendStatus(404)
             }
             return
         }
@@ -99,11 +107,8 @@ export default async function Home({params, searchParams}: {
     const modelString = JSON.stringify(model)
     return <GlobalLayout lang={pageLang} metadata={metadata}>
         <div className={styles.articlesPage}>
-            <div className={styles.pageContainer}>
-                <ConsoleArticleForm portalUrl={serverConfig.PUBLIC_PORTAL_URL} modelString={modelString}
-                                    lang={pageLang}/>
-
-            </div>
+            <ConsoleArticleForm portalUrl={serverConfig.PUBLIC_PORTAL_URL} modelString={modelString}
+                                lang={pageLang}/>
 
         </div>
     </GlobalLayout>

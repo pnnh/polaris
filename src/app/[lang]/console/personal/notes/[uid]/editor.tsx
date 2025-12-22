@@ -1,7 +1,29 @@
-import styles from "./editor.module.scss";
 import React from "react";
 
 import {TocItem} from "@/atom/common/models/toc";
+import {css} from "@emotion/css";
+
+const styles = {
+    articleEditorContainer: css`
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        background: var(--background-color);
+    `,
+    sourceArea: css`
+        width: 50%;
+        scrollbar-width: thin;
+    `,
+    sourceTextArea: css`
+
+        width: 100%;
+        height: 100%;
+        scrollbar-width: thin;
+        resize: none;
+        border: 0;
+    `
+}
 
 export function ConsoleArticleEditor({
                                          portalUrl, tocList, header, body, assetsUrl, onChange
@@ -16,7 +38,7 @@ export function ConsoleArticleEditor({
     // const [bodyText, setBodyText] = useState<string>(body as string || '');
     return <div className={styles.articleEditorContainer}>
         <div className={styles.sourceArea}>
-            <textarea className={styles.sourceTextarea} value={body as string || ''}
+            <textarea className={styles.sourceTextArea} value={body as string || ''}
                       onChange={(event) => onChange(event.target.value)}></textarea>
         </div>
         {/*<div className={styles.viewArea}>*/}

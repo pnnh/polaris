@@ -1,5 +1,3 @@
-'use client'
-
 import {css} from '@emotion/css'
 import React, {useState} from "react";
 import {validateEmail} from "@/atom/common/utils/email";

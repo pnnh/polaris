@@ -1,5 +1,3 @@
-'use client'
-
 import {EditArea} from "./edit";
 import {ListArea} from "./list";
 import * as React from "react";
@@ -10,7 +8,7 @@ export function CommentsClient({lang, portalUrl, resource}: {
     resource: string
 }) {
     return <div className={'commentsContainer'}>
-        <style jsx>{`
+        <style>{`
             .commentsContainer {
                 padding: 1rem;
                 overflow: hidden;

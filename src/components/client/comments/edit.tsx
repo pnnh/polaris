@@ -1,5 +1,3 @@
-'use client'
-
 import './edit.scss'
 import React, {useEffect, useState} from "react";
 import {CodeOk} from "@/atom/common/models/protocol";
