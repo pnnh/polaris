@@ -6,6 +6,7 @@
     "next": "next dev -p 7100 --turbo",
     "build": "vite build && panda codegen && next build",
     "analyze": "ENV=production ANALYZE=true next build",
+    "dev": "vite",
     "vite": "vite build --watch",
     "test": "vitest run",
     "panda": "panda codegen --clean --watch"
