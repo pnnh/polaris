@@ -1,7 +1,6 @@
 import React from 'react'
 import {css} from '@emotion/css';
 import {PageMetadata} from "@/components/common/utils/page";
-import {GlobalLayout} from "@/components/server/global";
 
 const styles = {
     accountLayout: css`
@@ -24,9 +23,7 @@ export async function AccountLayout({
     metadata: PageMetadata,
     lang: string
 }) {
-    return <GlobalLayout lang={lang} metadata={metadata}>
-        <div className={styles.accountLayout}>
-            {children}
-        </div>
-    </GlobalLayout>
+    return <div className={styles.accountLayout}>
+        {children}
+    </div>
 }

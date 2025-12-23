@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {css} from '@emotion/css';
 import ComputerIcon from "@mui/icons-material/Computer";
 import {clientLoadLibraryEntries, ILibraryEntry} from "@/components/client/images/service";
-import CloudQueueIcon from "~/@mui/icons-material/CloudQueue";
+import CloudQueueIcon from "@mui/icons-material/CloudQueue";
 
 const styles = {
     libBody: css`

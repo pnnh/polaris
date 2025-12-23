@@ -5,7 +5,6 @@ import {AccountModel} from "@/atom/common/models/account";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {useServerConfig} from "@/components/server/config";
-import {GlobalLayout} from "@/components/server/global";
 import {PageMetadata} from "@/components/common/utils/page";
 
 const styles = {
@@ -59,17 +58,15 @@ export async function ContentLayout({
     } else {
         currentUserInfo = userInfo;
     }
-    return <GlobalLayout lang={lang} metadata={metadata}>
-        <div className={styles.templateContainer}>
-            <div className={styles.templateNavbar}>
-                <ContentPublicNavbar pathname={pathname} lang={lang}
-                                     userInfo={currentUserInfo}/>
-            </div>
-            <div id={templateBodyId} className={styles.templateBody}>
-                <div className={styles.bodyContainer}>
-                    {children}
-                </div>
+    return <div className={styles.templateContainer}>
+        <div className={styles.templateNavbar}>
+            <ContentPublicNavbar pathname={pathname} lang={lang}
+                                 userInfo={currentUserInfo}/>
+        </div>
+        <div id={templateBodyId} className={styles.templateBody}>
+            <div className={styles.bodyContainer}>
+                {children}
             </div>
         </div>
-    </GlobalLayout>
+    </div>
 }

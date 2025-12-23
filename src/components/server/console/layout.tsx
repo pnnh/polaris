@@ -2,7 +2,6 @@ import React from 'react'
 import {css} from '@emotion/css'
 import {AccountModel, isAnonymousAccount} from "@/atom/common/models/account";
 import {SymbolUnknown} from "@/atom/common/models/protocol";
-import {GlobalLayout} from "@/components/server/global";
 import {PageMetadata} from "@/components/common/utils/page";
 import {ConsoleSidebar} from "@/components/server/console/sidebar";
 import {serverGetUserinfo} from "@/components/server/account/account";
@@ -43,10 +42,8 @@ export async function ConsoleLayout(
     if (!currentUserInfo || isAnonymousAccount(currentUserInfo)) {
         return <NeedLoginPage lang={lang}></NeedLoginPage>
     }
-    return <GlobalLayout lang={lang} metadata={metadata}>
-        <div className={styles.consoleContainer}>
-            <ConsoleSidebar lang={lang}/>
-            {children}
-        </div>
-    </GlobalLayout>
+    return <div className={styles.consoleContainer}>
+        <ConsoleSidebar lang={lang}/>
+        {children}
+    </div>
 }

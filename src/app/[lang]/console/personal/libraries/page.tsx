@@ -6,7 +6,6 @@ import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {isAnonymousAccount} from "@/atom/common/models/account";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
-import {GlobalLayout} from "@/components/server/global";
 import {ConsoleLibraryFilterBar} from "./filter";
 import {ConsoleLibraryMiddleBody} from "./library";
 import {Request, Response} from "express";
@@ -51,16 +50,14 @@ export async function Page(request: Request, response: Response) {
         return <NeedLoginPage lang={lang}></NeedLoginPage>
     }
 
-    return <GlobalLayout lang={lang} metadata={metadata}>
-        <div className={styles.consolePage}>
-            <div className={styles.libGrid}>
-                <div className={styles.libHeader}>
-                    <ConsoleLibraryFilterBar lang={lang} keyword={''} portalUrl={publicPortalUrl}/>
-                </div>
-                <ConsoleLibraryMiddleBody lang={lang} portalUrl={publicPortalUrl}/>
+    return <div className={styles.consolePage}>
+        <div className={styles.libGrid}>
+            <div className={styles.libHeader}>
+                <ConsoleLibraryFilterBar lang={lang} keyword={''} portalUrl={publicPortalUrl}/>
             </div>
+            <ConsoleLibraryMiddleBody lang={lang} portalUrl={publicPortalUrl}/>
         </div>
-    </GlobalLayout>
+    </div>
 }
 
 

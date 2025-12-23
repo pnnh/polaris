@@ -4,7 +4,6 @@ import {css} from '@emotion/css'
 import {SigninForm} from "./form";
 import {useServerConfig} from "@/components/server/config";
 import {langEn} from "@/atom/common/language";
-import {GlobalLayout} from "@/components/server/global";
 
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {LinkSession} from "@/app/[lang]/account/signin/link";
@@ -58,16 +57,14 @@ export async function Page(request: Request, response: Response) {
     }
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
-    return <GlobalLayout lang={lang} metadata={metadata}>
-        <AccountLayout lang={lang}
-                       metadata={metadata}>
-            <div className={styles.signinCard}>
-                <div className={styles.signinTitle}>{transText(lang, '登录页面', 'Login Page')}</div>
-                <div className={styles.signinBody}>
-                    <SigninForm portalUrl={publicPortalUrl} lang={lang} signinLink={signinLink}
-                                linkApp={linkApp} signinCallback={signinCallback}/>
-                </div>
+    return <AccountLayout lang={lang}
+                          metadata={metadata}>
+        <div className={styles.signinCard}>
+            <div className={styles.signinTitle}>{transText(lang, '登录页面', 'Login Page')}</div>
+            <div className={styles.signinBody}>
+                <SigninForm portalUrl={publicPortalUrl} lang={lang} signinLink={signinLink}
+                            linkApp={linkApp} signinCallback={signinCallback}/>
             </div>
-        </AccountLayout>
-    </GlobalLayout>
+        </div>
+    </AccountLayout>
 }

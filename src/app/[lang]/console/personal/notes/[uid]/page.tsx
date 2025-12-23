@@ -7,7 +7,6 @@ import {ConsoleArticleForm} from "./form";
 import {serverConsoleGetArticle} from "@/components/personal/articles";
 import {PSArticleModel} from "@/components/common/models/article";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
-import {GlobalLayout} from "@/components/server/global";
 
 import {transText} from "@/components/common/locales/normal";
 import {css} from "@emotion/css";
@@ -105,11 +104,9 @@ export async function Home(request: Request, response: Response) {
         }
     }
     const modelString = JSON.stringify(model)
-    return <GlobalLayout lang={pageLang} metadata={metadata}>
-        <div className={styles.articlesPage}>
-            <ConsoleArticleForm portalUrl={serverConfig.PUBLIC_PORTAL_URL} modelString={modelString}
-                                lang={pageLang}/>
+    return <div className={styles.articlesPage}>
+        <ConsoleArticleForm portalUrl={serverConfig.PUBLIC_PORTAL_URL} modelString={modelString}
+                            lang={pageLang}/>
 
-        </div>
-    </GlobalLayout>
+    </div>
 }

@@ -1,5 +1,3 @@
-import {GlobalLayout} from "@/components/server/global";
-
 import {langEnUS} from "@/components/common/language";
 import {filterAcceptLanguage} from "@/components/server/language";
 import {PageMetadata} from "@/components/common/utils/page";
@@ -11,5 +9,5 @@ export async function NotFoundPage(request: Request) {
     const lang = filterAcceptLanguage(acceptLang)
     const metadata = new PageMetadata(lang)
     metadata.title = transKey(lang, "PageNotFound")
-    return <GlobalLayout lang={lang} metadata={metadata}>{metadata.title}</GlobalLayout>;
+    return <div>{metadata.title}</div>;
 }

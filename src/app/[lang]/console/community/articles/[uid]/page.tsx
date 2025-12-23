@@ -6,7 +6,6 @@ import {langZh} from "@/atom/common/language";
 import {ConsoleArticleForm} from "./form";
 import {PSArticleModel} from "@/components/common/models/article";
 import {EmptyUUID} from "@/atom/common/utils/uuid";
-import {GlobalLayout} from "@/components/server/global";
 import {css} from '@emotion/css'
 import {transText} from "@/components/common/locales/normal";
 import {CommunityArticleNodeService} from "@/components/community/articles";
@@ -107,11 +106,9 @@ export async function Home(request: Request, response: Response) {
         }
     }
     const modelString = JSON.stringify(model)
-    return <GlobalLayout lang={pageLang} metadata={metadata}>
-        <div className={styles.articlesPage}>
-            <div className={styles.pageContainer}>
-                <ConsoleArticleForm publicPortalUrl={publicPortalUrl} modelString={modelString} lang={pageLang}/>
-            </div>
+    return <div className={styles.articlesPage}>
+        <div className={styles.pageContainer}>
+            <ConsoleArticleForm publicPortalUrl={publicPortalUrl} modelString={modelString} lang={pageLang}/>
         </div>
-    </GlobalLayout>
+    </div>
 }

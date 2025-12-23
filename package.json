@@ -7,7 +7,8 @@
     "build": "vite build && rollup -c rollup.config.mjs",
     "vite": "vite build --watch",
     "test": "vitest run",
-    "rollup": "rollup -c rollup.config.mjs --watch"
+    "rollup": "rollup -c rollup.config.mjs --watch",
+    "panda": "panda codegen"
   },
   "dependencies": {
     "@cmss/check-password-strength": "^2.1.6",
@@ -87,6 +88,7 @@
   },
   "devDependencies": {
     "@emotion/jest": "^11.14.2",
+    "@pandacss/dev": "^1.7.1",
     "@rollup/plugin-alias": "^6.0.0",
     "@rollup/plugin-commonjs": "^29.0.0",
     "@rollup/plugin-json": "^6.1.0",

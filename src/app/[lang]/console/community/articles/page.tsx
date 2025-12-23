@@ -9,7 +9,6 @@ import {ConsoleArticleFilterBar} from "./filter";
 import {ConsoleArticleMiddleBody} from "./article";
 import {useServerConfig} from "@/components/server/config";
 import {CommunityArticleNodeService} from "@/components/community/articles";
-import {GlobalLayout} from "@/components/server/global";
 import {Request, Response} from "express";
 
 const styles = {
@@ -72,22 +71,20 @@ export async function Page(request: Request, response: Response) {
         lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
-    return <GlobalLayout lang={lang} metadata={metadata}>
-        <div className={styles.articlesPage}>
-            <div className={styles.pageContainer}>
-                <ConsoleArticleFilterBar lang={lang} keyword={request.query.keyword as string}/>
-                <div className={styles.conMiddle}>
-                    <ConsoleArticleMiddleBody selectData={selectData} lang={lang}
-                                              publicPortalUrl={publicPortalUrl}/>
-                    <div className={styles.middlePagination}>
-                        <PaginationServer lang={lang} pagination={pagination}
-                                          pageLinkFunc={(page) =>
-                                              `/${lang}/console/community/articles` + replaceSearchParams({}, 'page', page.toString())}/>
-                    </div>
+    return <div className={styles.articlesPage}>
+        <div className={styles.pageContainer}>
+            <ConsoleArticleFilterBar lang={lang} keyword={request.query.keyword as string}/>
+            <div className={styles.conMiddle}>
+                <ConsoleArticleMiddleBody selectData={selectData} lang={lang}
+                                          publicPortalUrl={publicPortalUrl}/>
+                <div className={styles.middlePagination}>
+                    <PaginationServer lang={lang} pagination={pagination}
+                                      pageLinkFunc={(page) =>
+                                          `/${lang}/console/community/articles` + replaceSearchParams({}, 'page', page.toString())}/>
                 </div>
             </div>
         </div>
-    </GlobalLayout>
+    </div>
 }
 
 
