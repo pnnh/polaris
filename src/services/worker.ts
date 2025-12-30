@@ -1,7 +1,7 @@
 // Use the install event to pre-cache all initial resources.
 import {clientConsoleSelectLibraries} from "@/components/client/libraries/library";
 
-import {entries, set, get} from 'idb-keyval';
+import {set} from 'idb-keyval';
 import {
     clientGetDirectoryEntry,
     clientSyncLocalImageLibraryFiles,
@@ -9,7 +9,6 @@ import {
     ILibraryEntry
 } from "@/components/client/images/service";
 import {clientConsoleSelectImages} from "@/components/client/images/http";
-import sqlite3InitModule from '@sqlite.org/sqlite-wasm';
 
 self.addEventListener('install', event => {
     console.log('Service worker install', event);
@@ -103,7 +102,7 @@ self.onmessage = async (event) => {
 };
 
 self.addEventListener('fetch', event => {
-    console.log('Received fetch', event);
+    // console.log('Received fetch', event);
     // event.respondWith((async () => {
     //     const cache = await caches.open(CACHE_NAME);
     //

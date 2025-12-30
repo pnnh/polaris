@@ -1,0 +1,17 @@
+import React from "react";
+import {TocItem} from "@/atom/common/models/toc";
+import {ArticleComponent} from "@/app/host/partials/article";
+import {BuildBodyHtml} from "@/app/[lang]/articles/[uid]/body";
+
+
+export function ArticleContainer({tocList, header, body, assetsUrl}: {
+    tocList: Array<TocItem>, header: string, body: unknown,
+    assetsUrl: string
+}) {
+    return (
+        <ArticleComponent>
+            <BuildBodyHtml tocList={tocList} header={header} body={body}
+                           assetsUrl={assetsUrl} libUrl={''}/>
+        </ArticleComponent>
+    )
+}

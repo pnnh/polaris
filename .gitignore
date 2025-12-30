@@ -35,6 +35,8 @@ public/setup.js
 public/worker.js
 public/assets/
 public/chunks/
+public/index.js
+public/index.html
 *.js.map
 *.map.css
 *.map.mjs

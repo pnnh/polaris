@@ -3,9 +3,7 @@ import Image from 'next/image'
 import React from "react";
 import {SiteNavMenu} from "@/components/server/content/partials/profile";
 import {UserAction} from "@/components/server/content/partials/userinfo";
-import {ContentSearchAction} from "@/components/server/content/partials/search";
 import {AccountModel} from "@/atom/common/models/account";
-import AppsIcon from '@mui/icons-material/Apps';
 import {PSLanguageSelector} from "./language";
 import {getSearchString} from "@/components/server/pathname";
 import MenuIcon from '@mui/icons-material/Menu';
@@ -30,11 +28,11 @@ export async function ContentPublicNavbar({pathname, searchParams, lang, userInf
             <SiteNavMenu lang={lang} searchParams={searchParams}/>
         </div>
         <div className={styles.rightNav}>
-            <ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword} lang={lang}/>
+            {/*<ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword} lang={lang}/>*/}
             <ThemeSwitch lang={lang} themeName={themeName}/>
             <PSLanguageSelector lang={lang} currentUrl={currentUrl}/>
             <UserAction lang={lang} userInfo={userInfo}/>
-            <a className={styles.toolsLink} href={`/${lang}/tools`}><AppsIcon/></a>
+            {/*<a className={styles.toolsLink} href={`/${lang}/tools`}><AppsIcon/></a>*/}
         </div>
         <div className={styles.rightNavMobile}>
             <PSLanguageSelector lang={lang} currentUrl={currentUrl}/>
