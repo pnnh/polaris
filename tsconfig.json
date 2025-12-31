@@ -58,6 +58,10 @@
   ],
   "exclude": [
     "node_modules",
-    "**/*.spec.ts"
+    "dist",
+    "**/*.spec.ts",
+    "vite.config.mts",
+    "vitest.config.mts",
+    "vitest.setup.ts"
   ]
 }
