@@ -10,7 +10,7 @@ import {JotaiProvider} from "@/components/client/content/provider";
 import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter";
 import {ThemeProvider} from '@mui/material/styles';
 import {darkTheme, lightTheme} from '@/components/client/theme';
-import {encodeBase58String} from "@/atom/common/utils/basex";
+import {encodeBase58String} from "@pnnh/atom";
 import {getServerTheme} from "@/components/server/theme";
 import {CssBaseline} from "@mui/material";
 
