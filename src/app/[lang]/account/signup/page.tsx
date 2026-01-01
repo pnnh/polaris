@@ -4,7 +4,7 @@ import AccountLayout from "@/components/server/account/layout";
 import styles from './page.module.scss'
 import {SignupForm} from "./form";
 import {useServerConfig} from "@/components/server/config";
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import {transText} from "@/components/common/locales/normal";
 
 export default async function Page({params, searchParams}: {

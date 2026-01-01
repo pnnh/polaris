@@ -1,6 +1,6 @@
 import {getPathname} from "@/components/server/pathname";
 import {getServerTheme} from "@/components/server/theme";
-import {GoogleAnalytics} from "~/@next/third-parties/dist/google";
+import {GoogleAnalytics} from "@next/third-parties/google";
 import {isProd} from "@/components/server/config";
 
 export default async function () {

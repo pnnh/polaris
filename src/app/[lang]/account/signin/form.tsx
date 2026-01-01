@@ -3,8 +3,8 @@
 import styles from './form.module.scss'
 import {getTurnstileToken} from "@/components/client/cloudflare/turnstile";
 import React, {useState} from "react";
-import {CodeOk} from "@/atom/common/models/protocol";
-import {ButtonThrottle} from "@/atom/client/button/throttle";
+import {CodeOk} from "@pnnh/atom";
+import {ButtonThrottle} from "@pnnh/atom/browser";
 import {accountSignin} from "@/components/client/account/account";
 import {transKey, transText} from "@/components/common/locales/normal";
 

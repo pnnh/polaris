@@ -1,16 +1,16 @@
-import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PLSelectResult} from "@pnnh/atom";
 import {NoData} from "@/components/common/empty";
 import {PSArticleModel} from "@/components/common/models/article";
-import {uuidToBase58} from "@/atom/common/utils/basex";
+import {uuidToBase58} from "@pnnh/atom";
 import {getDefaultNoteImageByUid} from "@/components/common/note";
-import {isValidUUID} from "@/atom/common/utils/uuid";
+import {isValidUUID} from "@pnnh/atom";
 import {FaEye} from "react-icons/fa";
 import {CiAlarmOn} from "react-icons/ci";
-import {formatRfc3339} from "@/atom/common/utils/datetime";
+import {formatRfc3339} from "@pnnh/atom";
 import {PSImageServer} from "@/components/server/image";
 import React from "react";
 import styles from './article.module.scss';
-import {STSubString} from "@/atom/common/utils/string";
+import {STSubString} from "@pnnh/atom";
 
 export function ArticleMiddleBody({selectResult, lang}: {
     selectResult: PLSelectResult<PSArticleModel>,

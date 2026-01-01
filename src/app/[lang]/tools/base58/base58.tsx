@@ -4,8 +4,8 @@ import {useState} from "react";
 import styles from './base58.module.scss'
 import {Button, FormControlLabel, Radio, RadioGroup, Tooltip} from "@mui/material";
 import {css} from "@emotion/css";
-import {base58ToString, stringToBase58} from "@/atom/common/utils/basex";
-import {copyToClipboard} from "@/atom/client/clipboard";
+import {base58ToString, stringToBase58} from "@pnnh/atom";
+import {copyToClipboard} from "@pnnh/atom/browser";
 import {transExtra, transKey} from "@/components/common/locales/normal";
 
 const resultActionContainer = css({

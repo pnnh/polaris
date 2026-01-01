@@ -35,18 +35,12 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ],
-      "~/*": [
-        "./node_modules/*"
       ]
     },
     "plugins": [
       {
         "name": "next"
       },
-      {
-        "name": "typescript-plugin-css-modules"
-      }
     ]
   },
   "include": [

@@ -4,10 +4,10 @@ import styles from './assets.module.scss'
 import React, {useEffect, useState} from "react";
 import {getIcon} from "material-file-icons";
 import {FaAngleDown, FaAngleRight} from "react-icons/fa6";
-import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PLSelectResult} from "@pnnh/atom";
 import {PSArticleFileModel} from "@/components/common/models/article";
-import {encodeBase64String} from "@/atom/common/utils/basex";
-import {clientMakeGet} from "@/atom/client/http";
+import {encodeBase64String} from "@pnnh/atom";
+import {clientMakeGet} from "@pnnh/atom/browser";
 import {useAtom} from "jotai";
 import {articleAssetsPreviewAtom} from "./state";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';

@@ -1,6 +1,6 @@
 import './list.scss'
 import {useEffect, useState} from "react";
-import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PLSelectResult} from "@pnnh/atom";
 import {fetchComments, PSCommentModel} from "@/components/client/comments/comment";
 import {transText} from "@/components/common/locales/normal";
 

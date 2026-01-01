@@ -1,9 +1,9 @@
 'use client'
 
 import queryString from "query-string";
-import {CodeOk, PLInsertResult, PLSelectResult, PLUpdateResult} from "@/atom/common/models/protocol";
+import {CodeOk, PLInsertResult, PLSelectResult, PLUpdateResult} from "@pnnh/atom";
 import {PSChannelModel} from "@/components/common/models/channel";
-import {clientMakeGet, clientMakePost, clientMakePut} from "@/atom/client/http";
+import {clientMakeGet, clientMakePost, clientMakePut} from "@pnnh/atom/browser";
 
 export async function clientChannelsComplete(portalUrl: string, selectQuery: Record<string, any>) {
     const rawQuery = queryString.stringify(selectQuery)

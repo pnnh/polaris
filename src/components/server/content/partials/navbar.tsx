@@ -3,12 +3,12 @@ import Image from 'next/image'
 import React from "react";
 import {SiteNavMenu} from "@/components/server/content/partials/profile";
 import {UserAction} from "@/components/server/content/partials/userinfo";
-import {AccountModel} from "@/atom/common/models/account";
 import {PSLanguageSelector} from "./language";
 import {getSearchString} from "@/components/server/pathname";
 import MenuIcon from '@mui/icons-material/Menu';
 import {ThemeSwitch} from "@/components/server/content/partials/theme";
 import {getServerTheme} from "@/components/server/theme";
+import {AccountModel} from "@/components/common/models/account/account";
 
 export async function ContentPublicNavbar({pathname, searchParams, lang, userInfo}: {
     pathname: string,
@@ -40,5 +40,3 @@ export async function ContentPublicNavbar({pathname, searchParams, lang, userInf
         </div>
     </div>
 }
-
-

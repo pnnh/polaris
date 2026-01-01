@@ -5,8 +5,8 @@ import React from "react";
 import {transKey, transText} from "@/components/common/locales/normal";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
-import {uuidToBase58} from "@/atom/common/utils/basex";
-import {EmptyUUID} from "@/atom/common/utils/uuid";
+import {uuidToBase58} from "@pnnh/atom";
+import {EmptyUUID} from "@pnnh/atom";
 
 export function ConsoleArticleFilterBar({lang, keyword}: {
     lang: string,

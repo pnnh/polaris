@@ -1,10 +1,10 @@
 'use server'
 
-import {AccountModel} from "@/atom/common/models/account";
-import {CodeOk, PLGetResult} from "@/atom/common/models/protocol";
-import {serverMakeGet} from "@/atom/server/http";
+import {CodeOk, PLGetResult} from "@pnnh/atom";
+import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {getDefaultImageUrl} from "@/components/common/note";
 import {cookies} from "next/headers";
+import {AccountModel} from "@/components/common/models/account/account";
 
 export async function serverGetUserinfo(portalUrl: string): Promise<AccountModel | undefined> {
     const url = `${portalUrl}/console/userinfo`

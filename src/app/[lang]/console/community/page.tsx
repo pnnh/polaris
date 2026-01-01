@@ -2,10 +2,10 @@ import React from 'react'
 import styles from './page.module.scss'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import GlobalLayout from "@/components/server/global";
-import ComputerIcon from "~/@mui/icons-material/Computer";
-import CloudQueueIcon from "~/@mui/icons-material/CloudQueue";
+import ComputerIcon from "@mui/icons-material/Computer";
+import CloudQueueIcon from "@mui/icons-material/CloudQueue";
 
 export const dynamic = "force-dynamic";
 

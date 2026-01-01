@@ -1,7 +1,7 @@
 'use client'
 
-import {CodeOk, PLUpdateResult} from "@/atom/common/models/protocol";
-import {clientMakePost, clientMakePut} from "@/atom/client/http";
+import {CodeOk, PLUpdateResult} from "@pnnh/atom";
+import {clientMakePost, clientMakePut} from "@pnnh/atom/browser";
 
 export class PersonalBrowser {
 
@@ -25,4 +25,3 @@ export class PersonalBrowser {
         return insertResult.data
     }
 }
-

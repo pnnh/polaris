@@ -1,9 +1,8 @@
 'use client'
 
 import queryString from "query-string";
-import {CodeOk, PLSelectResult} from "@/atom/common/models/protocol";
-
-import {clientMakeGet} from "@/atom/client/http";
+import {CodeOk, PLSelectResult} from "@pnnh/atom";
+import {clientMakeGet} from "@pnnh/atom/browser";
 
 export interface PSLibraryModel {
     name: string

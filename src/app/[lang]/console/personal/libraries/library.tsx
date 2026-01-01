@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import styles from './library.module.scss';
 import ComputerIcon from "@mui/icons-material/Computer";
 import {clientLoadLibraryEntries, ILibraryEntry} from "@/components/client/images/service";
-import CloudQueueIcon from "~/@mui/icons-material/CloudQueue";
+import CloudQueueIcon from "@mui/icons-material/CloudQueue";
 
 export function ConsoleLibraryMiddleBody({lang, portalUrl}: {
     lang: string, portalUrl: string

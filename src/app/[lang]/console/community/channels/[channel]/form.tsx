@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import React from "react";
 import {PSChannelModel} from "@/components/common/models/channel";
 import {clientConsoleInsertChannel, clientConsoleUpdateChannel} from "@/components/client/channels/channels";
-import {EmptyUUID} from "@/atom/common/utils/uuid";
+import {EmptyUUID} from "@pnnh/atom";
 import {getDefaultImageUrl} from "@/components/common/note";
 import {transText} from "@/components/common/locales/normal";
 

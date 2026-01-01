@@ -1,7 +1,7 @@
 import React from "react";
 
-import {generateUuidV7, stringToMd5} from "@/atom/common/utils/basex";
-import {isValidUUID} from "@/atom/common/utils/uuid";
+import {generateUuidV7, stringToMd5} from "@pnnh/atom";
+import {isValidUUID} from "@pnnh/atom";
 import {StyleTag} from "@/components/client/style";
 
 export function css(text: TemplateStringsArray, ...values: any[]) {

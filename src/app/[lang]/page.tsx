@@ -2,20 +2,20 @@ import React from 'react'
 import styles from './page.module.scss'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
-import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
-import {replaceSearchParams} from "@/atom/common/utils/query";
+import {PLSelectResult, SymbolUnknown} from "@pnnh/atom";
+import {replaceSearchParams} from "@pnnh/atom";
 import {PaginationServer} from "@/components/server/pagination";
 import {ArticleRankCard} from "@/components/server/content/article/rank";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import queryString from "query-string";
 import {PSArticleModel} from "@/components/common/models/article";
-import {calcPagination} from "@/atom/common/utils/pagination";
+import {calcPagination} from "@pnnh/atom";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
 import {ArticleFilterBar} from "@/components/server/content/article/filter";
 import {getTargetLang, unknownLanguage} from "@/components/common/language";
 import {notFound} from "next/navigation";
 import {useServerConfig} from "@/components/server/config";
-import {serverMakeGet} from "@/atom/server/http";
+import {serverMakeGet} from "@pnnh/atom/nodejs";
 
 export const dynamic = "force-dynamic";
 
@@ -83,4 +83,3 @@ export default async function Page({params, searchParams}: {
         </div>
     </ContentLayout>
 }
-

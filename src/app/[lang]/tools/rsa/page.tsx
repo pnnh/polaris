@@ -1,10 +1,10 @@
 import styles from './page.module.scss'
 import ContentLayout from "@/components/server/content/layout";
-import {SymbolUnknown} from "@/atom/common/models/protocol";
+import {SymbolUnknown} from "@pnnh/atom";
 import {getPathname} from "@/components/server/pathname";
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import {aesUid, queryApp} from "@/components/server/tools/tools";
-import {notFound} from "~/next/navigation";
+import {notFound} from "next/navigation";
 import {PageMetadata} from "@/components/common/utils/page";
 import RsaComponent from "./client";
 

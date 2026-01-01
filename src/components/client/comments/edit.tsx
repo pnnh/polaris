@@ -2,12 +2,12 @@
 
 import './edit.scss'
 import React, {useEffect, useState} from "react";
-import {CodeOk} from "@/atom/common/models/protocol";
-import {ButtonThrottle} from "@/atom/client/button/throttle";
-import {AccountModel} from "@/atom/common/models/account";
+import {CodeOk} from "@pnnh/atom";
+import {ButtonThrottle} from "@pnnh/atom/browser";
 import {submitComment} from "@/components/client/comments/comment";
 import {getUserinfo} from "@/components/client/account/account";
 import {transText} from "@/components/common/locales/normal";
+import {AccountModel} from "@/components/common/models/account/account";
 
 const buttonThrottle = new ButtonThrottle(2000)
 
@@ -80,4 +80,3 @@ export function EditArea({lang, portalUrl, resource}: {
         </div>
     </div>
 }
-

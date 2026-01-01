@@ -1,11 +1,11 @@
 'use client'
 
 import styles from "./form.module.scss";
-import {generatorRandomString} from "@/atom/common/utils/string";
+import {generatorRandomString} from "@pnnh/atom";
 import {ConsoleArticleEditor} from "./editor";
 import Button from "@mui/material/Button";
 import React from "react";
-import {TocItem} from "@/atom/common/models/toc";
+import {TocItem} from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
 import {getDefaultImageUrl} from "@/components/common/note";
 import MenuItem from '@mui/material/MenuItem';

@@ -1,7 +1,7 @@
 import styles from "./editor.module.scss";
 import React from "react";
 
-import {TocItem} from "@/atom/common/models/toc";
+import {TocItem} from "@pnnh/atom";
 
 export function ConsoleArticleEditor({
                                          portalUrl, tocList, header, body, assetsUrl, onChange

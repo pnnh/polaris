@@ -14,6 +14,8 @@ let nextConfig = {
     pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
     productionBrowserSourceMaps: true,
     enablePrerenderSourceMaps: true,
+    transpilePackages: ['@pnnh/atom'],
+    serverComponentsExternalPackages: [],
     experimental: {
         esmExternals: true,
         serverSourceMaps: true,

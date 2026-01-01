@@ -4,13 +4,13 @@ import AccountLayout from "@/components/server/account/layout";
 import styles from "./page.module.scss";
 import {SigninForm} from "./form";
 import {useServerConfig} from "@/components/server/config";
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import GlobalLayout from "@/components/server/global";
 
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {LinkSession} from "@/app/[lang]/account/signin/link";
-import {isAnonymousAccount} from "@/atom/common/models/account";
 import {transText} from "@/components/common/locales/normal";
+import {isAnonymousAccount} from "@/components/common/models/account/account";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,

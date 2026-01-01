@@ -2,8 +2,8 @@ import {FaEye} from "react-icons/fa";
 import {CiAlarmOn} from "react-icons/ci";
 import React from "react";
 import styles from './card.module.scss'
-import {formatRfc3339} from "@/atom/common/utils/datetime";
-import {uuidToBase58} from "@/atom/common/utils/basex";
+import {formatRfc3339} from "@pnnh/atom";
+import {uuidToBase58} from "@pnnh/atom";
 import {PSImageServer} from "@/components/server/image";
 import {getDefaultImageUrl, getDefaultNoteImageByUid} from "@/components/common/note";
 import {PSImageModel} from "@/components/common/models/image";

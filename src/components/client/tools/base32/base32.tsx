@@ -4,13 +4,13 @@ import * as React from 'react';
 import {useEffect} from 'react';
 import styles from './base32.module.scss'
 import Button from '@mui/material/Button';
-import {decodeBase32String, encodeBase32String} from "@/atom/common/utils/basex";
-import {useClientConfig} from "@/atom/client/config/config";
+import {decodeBase32String, encodeBase32String} from "@pnnh/atom";
 import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
 import {base32Uid, queryApp} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
+import {useClientConfig} from "@/components/client/config/config";
 
 export default function Base32Component({lang}: { lang: string }) {
     const [source, setSource] = React.useState('');

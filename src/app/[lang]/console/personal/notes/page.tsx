@@ -2,9 +2,9 @@ import React from 'react'
 import styles from './page.module.scss'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {PaginationServer} from "@/components/server/pagination";
-import {replaceSearchParams} from "@/atom/common/utils/query";
-import {calcPagination} from "@/atom/common/utils/pagination";
-import {langEn} from "@/atom/common/language";
+import {replaceSearchParams} from "@pnnh/atom";
+import {calcPagination} from "@pnnh/atom";
+import {langEn} from "@pnnh/atom";
 import {ConsoleArticleFilterBar} from "./filter";
 import {ConsoleArticleMiddleBody} from "./article";
 import {useServerConfig} from "@/components/server/config";

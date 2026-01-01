@@ -3,7 +3,7 @@ import 'server-only'
 import React from "react";
 import './global.css'
 import {langEnUS} from "@/components/common/language";
-import {headers} from "~/next/headers";
+import {headers} from "next/headers";
 import {filterAcceptLanguage} from "@/components/server/language";
 import {usePublicConfig, useServerConfig} from "@/components/server/config";
 import {JotaiProvider} from "@/components/client/content/provider";

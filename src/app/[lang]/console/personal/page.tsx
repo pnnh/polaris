@@ -2,13 +2,13 @@ import React from 'react'
 import styles from './page.module.scss'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
-import {calcPagination} from "@/atom/common/utils/pagination";
-import {langEn} from "@/atom/common/language";
+import {calcPagination} from "@pnnh/atom";
+import {langEn} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import {serverConsoleSelectArticles} from "@/components/personal/articles";
 import GlobalLayout from "@/components/server/global";
-import ComputerIcon from "~/@mui/icons-material/Computer";
-import CloudQueueIcon from "~/@mui/icons-material/CloudQueue";
+import ComputerIcon from "@mui/icons-material/Computer";
+import CloudQueueIcon from "@mui/icons-material/CloudQueue";
 
 export const dynamic = "force-dynamic";
 

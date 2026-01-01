@@ -1,6 +1,6 @@
 import {getVisitorId} from "@/components/client/comments/fingerprint";
-import {PLInsertResult, PLSelectResult} from "@/atom/common/models/protocol";
-import {clientMakeGet, clientMakePost} from "@/atom/client/http";
+import {PLInsertResult, PLSelectResult} from "@pnnh/atom";
+import {clientMakeGet, clientMakePost} from "@pnnh/atom/browser";
 
 export interface PSCommentModel {
     uid: string;

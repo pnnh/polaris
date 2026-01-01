@@ -1,5 +1,5 @@
-import {CodeOk, CommonResult, PLInsertResult, PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
-import {serverMakeGet, serverMakePost} from "@/atom/server/http";
+import {CodeOk, CommonResult, PLInsertResult, PLSelectData, PLSelectResult} from "@pnnh/atom";
+import {serverMakeGet, serverMakePost} from "@pnnh/atom/nodejs";
 import {headers, cookies} from "next/headers";
 import {logDebugMeta, logDebugValues, logErrorMeta, logErrorValues, logWarnValues,} from "@/components/server/logger";
 

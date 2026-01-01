@@ -1,6 +1,6 @@
-import {CodeOk, PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
+import {CodeOk, PLSelectData, PLSelectResult} from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
-import {serverMakeGet} from "@/atom/server/http";
+import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {cookies} from "next/headers";
 import {getDefaultImageUrl} from "@/components/common/note";
 import queryString from "query-string";

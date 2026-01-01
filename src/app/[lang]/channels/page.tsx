@@ -2,18 +2,18 @@ import React from 'react'
 import ContentLayout from "@/components/server/content/layout";
 import {getPathname} from "@/components/server/pathname";
 import styles from './page.module.scss'
-import {CodeOk, PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
+import {CodeOk, PLSelectResult, SymbolUnknown} from "@pnnh/atom";
 import {PSChannelModel} from "@/components/common/models/channel";
-import {uuidToBase58} from "@/atom/common/utils/basex";
-import {isValidUUID} from "@/atom/common/utils/uuid";
+import {uuidToBase58} from "@pnnh/atom";
+import {isValidUUID} from "@pnnh/atom";
 import {PSImageServer} from "@/components/server/image";
-import {STSubString} from "@/atom/common/utils/string";
+import {STSubString} from "@pnnh/atom";
 import {getDefaultChanImageByUid} from "@/components/common/channel";
 import {PageMetadata} from "@/components/common/utils/page";
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import queryString from "query-string";
 import {useServerConfig} from "@/components/server/config";
-import {serverMakeGet} from "@/atom/server/http";
+import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {NoDataPage} from "@/components/misc/NoData";
 
 export default async function Page({params, searchParams}: {

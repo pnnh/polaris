@@ -6,7 +6,7 @@ import {IoClose} from "react-icons/io5";
 import {articleAssetsPreviewAtom} from "./state";
 import {useAtom} from "jotai";
 import {PSArticleFileModel} from "@/components/common/models/article";
-import {TocItem} from "@/atom/common/models/toc";
+import {TocItem} from "@pnnh/atom";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {renderCodeBlock} from "@/app/[lang]/articles/[uid]/codeblock";
 import {BuildBodyHtml} from "./body";

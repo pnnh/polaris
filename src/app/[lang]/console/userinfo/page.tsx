@@ -2,12 +2,12 @@ import {getPathname} from "@/components/server/pathname";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import styles from './page.module.scss'
 import {useServerConfig} from "@/components/server/config";
-import {getAccountUrn} from "@/atom/common/models/account";
 import {serverGetUserinfo} from "@/components/server/account/account";
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
 import ConsoleLayout from "@/components/server/console/layout";
 import {transText} from "@/components/common/locales/normal";
+import {getAccountUrn} from "@/components/common/models/account/account";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,

@@ -1,11 +1,11 @@
 'use client'
 
 import {getVisitorId} from "@/components/client/comments/fingerprint";
-import {clientMakeGet, clientMakePost} from "@/atom/client/http";
-import {AccountModel} from "@/atom/common/models/account";
-import {ATInsertResult, PLGetResult, PLInsertResult} from "@/atom/common/models/protocol";
+import {clientMakeGet, clientMakePost} from "@pnnh/atom/browser";
+import {ATInsertResult, PLGetResult, PLInsertResult} from "@pnnh/atom";
 import {IAuthApp} from "@/components/common/models/auth";
 import {PNSessionViewModel} from "@/components/common/models/account/session";
+import {AccountModel} from "@/components/common/models/account/account";
 
 export async function submitSignup(portalUrl: string, submitRequest: any) {
     submitRequest.fingerprint = await getVisitorId()

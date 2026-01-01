@@ -1,4 +1,4 @@
-import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PLSelectResult} from "@pnnh/atom";
 import {PSLibraryModel} from "@/components/client/libraries/library";
 import {PSArticleModel} from "@/components/common/models/article";
 import {PSNotebookModel} from "@/components/common/models/personal/notebook";

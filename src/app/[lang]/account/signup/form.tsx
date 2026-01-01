@@ -2,9 +2,8 @@
 
 import styles from './form.module.scss'
 import React, {useState} from "react";
-import {validateEmail} from "@/atom/common/utils/email";
-import {CodeOk} from "@/atom/common/models/protocol";
-import {ButtonThrottle} from "@/atom/client/button/throttle";
+import {CodeOk, validateEmail} from "@pnnh/atom";
+import {ButtonThrottle} from "@pnnh/atom/browser";
 import {getTurnstileToken} from "@/components/client/cloudflare/turnstile";
 import {submitSignup} from "@/components/client/account/account";
 import {transText, transKey} from "@/components/common/locales/normal";

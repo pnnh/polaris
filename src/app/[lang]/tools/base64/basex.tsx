@@ -4,13 +4,13 @@ import styles from './basex.module.scss'
 import * as React from 'react';
 import {useEffect} from 'react';
 import Button from '@mui/material/Button';
-import {decodeBase64String, encodeBase64String} from "@/atom/common/utils/basex";
-import {useClientConfig} from "@/atom/client/config/config";
+import {decodeBase64String, encodeBase64String} from "@pnnh/atom";
 import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
 import {base64Uid, queryApp} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
+import {useClientConfig} from "@/components/client/config/config";
 
 export default function Base64Component({lang}: { lang: string }) {
     const [source, setSource] = React.useState('');

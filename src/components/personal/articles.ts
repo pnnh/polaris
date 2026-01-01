@@ -1,9 +1,9 @@
-import {CodeOk, CommonResult, PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
+import {CodeOk, CommonResult, PLSelectData, PLSelectResult} from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
-import {serverMakeGet} from "@/atom/server/http";
+import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {cookies} from "next/headers";
 import {getDefaultImageUrl} from "@/components/common/note";
-import {isSupportedLanguage} from "@/atom/common/language";
+import {isSupportedLanguage} from "@pnnh/atom";
 import queryString from "query-string";
 import {transText} from "@/components/common/locales/normal";
 

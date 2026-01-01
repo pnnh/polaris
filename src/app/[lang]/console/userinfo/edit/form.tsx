@@ -1,10 +1,10 @@
 'use client'
 
 import styles from "./form.module.scss";
-import {AccountModel, getAccountUrn} from "@/atom/common/models/account";
 import {useState} from "react";
-import {sanitizeUrl} from "@/atom/common/utils/uri";
+import {sanitizeUrl} from "@pnnh/atom";
 import {transText} from "@/components/common/locales/normal";
+import {AccountModel, getAccountUrn} from "@/components/common/models/account/account";
 
 export function UserinfoEditForm({portalUrl, userInfo, lang}: {
     portalUrl: string,

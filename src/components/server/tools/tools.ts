@@ -1,6 +1,7 @@
-import {ApplicationLanguageProfile, ApplicationModel} from "@/atom/common/models/tools/application";
-import {localText} from "@/atom/common/language";
+
+import {localText} from "@pnnh/atom";
 import {transKey, transText} from "@/components/common/locales/normal";
+import {ApplicationLanguageProfile, ApplicationModel} from "@/components/common/models/application";
 
 export const passwordUid = '0192e096-22e4-7aa4-8aa9-8093f09d58a7'
 export const uuidUid = '0192e096-2247-7aa4-8aa9-7167ae2d1927'

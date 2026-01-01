@@ -1,6 +1,6 @@
-import {CodeOk, CommonResult, PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
+import {CodeOk, CommonResult, PLSelectData, PLSelectResult} from "@pnnh/atom";
 import {PSChannelModel} from "@/components/common/models/channel";
-import {serverMakeGet} from "@/atom/server/http";
+import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {cookies} from "next/headers";
 import queryString from "query-string";
 import {transText} from "@/components/common/locales/normal";
@@ -39,4 +39,3 @@ export async function serverConsoleSelectChannels(portalUrl: string, lang: strin
     }
     return selectData;
 }
-

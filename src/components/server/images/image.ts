@@ -1,5 +1,5 @@
-import {CodeOk, CommonResult, PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
-import {serverMakeGet} from "@/atom/server/http";
+import {CodeOk, CommonResult, PLSelectData, PLSelectResult} from "@pnnh/atom";
+import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {cookies} from "next/headers";
 import queryString from "query-string";
 import {PSImageModel} from "@/components/common/models/image";

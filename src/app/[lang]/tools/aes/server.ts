@@ -1,6 +1,6 @@
 'use server'
 
-import {nodeDecodeAes, nodeEncodeAes, nodeGenerateAesKey} from "@/atom/server/crypto/aes";
+import {nodeDecodeAes, nodeEncodeAes, nodeGenerateAesKey} from "@pnnh/atom/nodejs";
 
 export async function aesServerGenerateKey(): Promise<string> {
     return nodeGenerateAesKey()

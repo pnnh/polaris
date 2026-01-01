@@ -4,7 +4,7 @@ import * as React from 'react';
 import {useEffect} from 'react';
 import styles from './markdown.module.scss'
 import Button from '@mui/material/Button';
-import {useClientConfig} from "@/atom/client/config/config";
+import {useClientConfig} from "@/components/client/config/config";
 import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
 import {markdownUid, queryApp} from "@/components/server/tools/tools";

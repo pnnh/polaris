@@ -1,5 +1,5 @@
 import styles from "./filter.module.scss";
-import {replaceSearchParams} from "@/atom/common/utils/query";
+import {replaceSearchParams} from "@pnnh/atom";
 import React from "react";
 import {transKey} from "@/components/common/locales/normal";
 

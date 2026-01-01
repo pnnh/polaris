@@ -6,11 +6,11 @@ import './tool.scss'
 import {NIL, v1 as uuidv1, v3 as uuidv3, v4 as uuidv4, v5 as uuidv5, v6 as uuidv6, v7 as uuidv7, validate} from 'uuid';
 
 import {dnsNamespace, NormalUUIDItem, oidNamespace, OptionType, urlNamespace, x500Namespace} from "./state";
-import {copyToClipboard} from "@/atom/client/clipboard";
+import {copyToClipboard} from "@pnnh/atom/browser";
 import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import {queryApp, uuidUid} from "@/components/server/tools/tools";
-import {localText} from "@/atom/common/language";
+import {localText} from "@pnnh/atom";
 import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
 

@@ -1,5 +1,5 @@
-import {CodeOk, PLGetResult} from "@/atom/common/models/protocol";
-import {AccountModel} from "@/atom/common/models/account";
+import {CodeOk, PLGetResult} from "@pnnh/atom";
+import {AccountModel} from "@/components/common/models/account/account";
 import {clientMakeHttpGet} from "@/app/host/services/client/http";
 
 export async function checkLoginStatus(linkId: string) {

@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import {queryApp, sha256Uid} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
-import {encodeSHA256} from "@/atom/common/utils/crypto";
+import {encodeSHA256} from "@pnnh/atom";
 
 export default function Hash256Component({lang}: { lang: string }) {
     const [source, setSource] = React.useState('');

@@ -1,9 +1,9 @@
 'use client'
 import React from 'react'
 import './feature.scss'
-import {generateUuidV7} from "@/atom/common/utils/basex";
-import {AccountModel} from "@/atom/common/models/account";
+import {generateUuidV7} from "@pnnh/atom";
 import {checkLoginStatus} from "@/app/host/services/client/account/account";
+import {AccountModel} from "@/components/common/models/account/account";
 
 export function ConsoleFeature() {
     const [accountModel, setAccountModel] = React.useState<AccountModel | null>(null)

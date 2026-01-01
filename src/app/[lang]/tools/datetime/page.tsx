@@ -2,10 +2,10 @@ import React from 'react'
 import './page.scss'
 import {getPathname} from "@/components/server/pathname";
 import DatetimeComponent from '@/components/client/tools/datetime/datetime';
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import {PageMetadata} from "@/components/common/utils/page";
 import ContentLayout from "@/components/server/content/layout";
-import {SymbolUnknown} from "@/atom/common/models/protocol";
+import {SymbolUnknown} from "@pnnh/atom";
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,

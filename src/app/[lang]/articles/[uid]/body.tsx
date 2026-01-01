@@ -1,9 +1,9 @@
 'use client'
 
 import React from "react";
-import {TocItem} from "@/atom/common/models/toc";
-import {SteleBody} from "@/atom/common/models/stele";
-import {buildNodeView} from "@/atom/common/parser/view";
+import {TocItem} from "@pnnh/atom";
+import {SteleBody} from "@pnnh/atom";
+import {buildNodeView} from "@pnnh/atom";
 import DOMPurify from 'isomorphic-dompurify';
 import Prism from 'prismjs';
 import {markedHighlight} from 'marked-highlight';

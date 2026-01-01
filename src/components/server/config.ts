@@ -1,6 +1,6 @@
 import {IBrowserConfig} from "@/components/common/config";
-import {ConfigOptions, initAppConfig} from "@/atom/server/config/config";
-import {serverGetGlobalVariable, serverSetGlobalVariable} from "@/atom/server/global";
+import {serverGetGlobalVariable, serverSetGlobalVariable} from "@pnnh/atom/nodejs";
+import {ConfigOptions, initAppConfig} from "@/components/server/config/config";
 
 export interface IServerConfig {
     RUN_MODE: string

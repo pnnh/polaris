@@ -1,14 +1,14 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
-import {mustBase58ToUuid, tryBase58ToUuid, uuidToBase58} from "@/atom/common/utils/basex";
+import {mustBase58ToUuid, tryBase58ToUuid, uuidToBase58} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
-import {langZh} from "@/atom/common/language";
+import {langZh} from "@pnnh/atom";
 import {notFound, redirect} from "next/navigation";
 import {ConsoleArticleForm} from "./form";
 import {serverConsoleGetArticle} from "@/components/personal/articles";
 import {PSArticleModel} from "@/components/common/models/article";
-import {EmptyUUID} from "@/atom/common/utils/uuid";
+import {EmptyUUID} from "@pnnh/atom";
 import GlobalLayout from "@/components/server/global";
 import styles from './page.module.scss'
 import {transText} from "@/components/common/locales/normal";

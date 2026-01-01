@@ -2,7 +2,8 @@
 
 import Prism, {Grammar} from 'prismjs'
 import {encodeHTML} from "entities";
-import '@/atom/client/editor/highlight'
+
+// import '@/atom/client/editor/highlight'
 
 export function renderCodeBlock(contentText: string, filePath: string) {
     const lowerFilePath = filePath.toLowerCase();

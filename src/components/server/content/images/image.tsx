@@ -1,4 +1,4 @@
-import {PLSelectData, PLSelectResult} from "@/atom/common/models/protocol";
+import {PLSelectData, PLSelectResult} from "@pnnh/atom";
 import {NoData} from "@/components/common/empty";
 import styles from './image.module.scss'
 import {PSImageModel} from "@/components/common/models/image";

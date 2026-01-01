@@ -1,7 +1,7 @@
 'use client'
 
-import {CodeOk, PLUpdateResult} from "@/atom/common/models/protocol";
-import {clientMakePost} from "@/atom/client/http";
+import {CodeOk, PLUpdateResult} from "@pnnh/atom";
+import {clientMakePost} from "@pnnh/atom/browser";
 
 export class CommunityBrowser {
     static async clientConsoleUpdateArticle(portalUrl: string, uid: string, model: unknown): Promise<string> {
@@ -14,4 +14,3 @@ export class CommunityBrowser {
         return insertResult.data
     }
 }
-

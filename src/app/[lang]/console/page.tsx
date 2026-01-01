@@ -1,15 +1,15 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import styles from './page.module.scss'
 import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
-import {isAnonymousAccount} from "@/atom/common/models/account";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
 import GlobalLayout from "@/components/server/global";
 import ComputerIcon from '@mui/icons-material/Computer';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import {transText} from "@/components/common/locales/normal";
+import {isAnonymousAccount} from "@/components/common/models/account/account";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,

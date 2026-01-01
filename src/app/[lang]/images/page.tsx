@@ -2,12 +2,12 @@ import React from 'react'
 import styles from './page.module.scss'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
-import {SymbolUnknown} from "@/atom/common/models/protocol";
-import {calcPagination} from "@/atom/common/utils/pagination";
+import {SymbolUnknown} from "@pnnh/atom";
+import {calcPagination} from "@pnnh/atom";
 import {PaginationServer} from "@/components/server/pagination";
-import {replaceSearchParams} from "@/atom/common/utils/query";
+import {replaceSearchParams} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import {PageMetadata} from "@/components/common/utils/page";
 import {serverSelectImages} from "@/components/server/images/image";
 import {ImageMiddleBody} from "@/components/server/content/images/image";

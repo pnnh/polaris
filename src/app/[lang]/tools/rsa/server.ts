@@ -1,6 +1,6 @@
 'use server'
 
-import {nodeDecodeRsa, nodeEncodeRsa} from "@/atom/server/crypto/rsa";
+import {nodeDecodeRsa, nodeEncodeRsa} from "@pnnh/atom/nodejs";
 
 export async function rsaServerEncode(data: string, key: string): Promise<string> {
     return nodeEncodeRsa(data, key);

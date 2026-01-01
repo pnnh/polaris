@@ -5,8 +5,8 @@ import {styled} from '@mui/material/styles';
 import Button, {ButtonProps} from '@mui/material/Button';
 import {red} from '@mui/material/colors';
 import {Dialog} from '@mui/material';
-import {CodeOk, PLDeleteResult} from "@/atom/common/models/protocol";
-import {clientMakePost} from "@/atom/client/http";
+import {CodeOk, PLDeleteResult} from "@pnnh/atom";
+import {clientMakePost} from "@pnnh/atom/browser";
 import {transText} from "@/components/common/locales/normal";
 
 const ColorButton = styled(Button)<ButtonProps>(({theme}) => ({

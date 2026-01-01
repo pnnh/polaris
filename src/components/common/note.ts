@@ -1,4 +1,4 @@
-import {stringHashCode} from "@/atom/common/utils/hash";
+import {stringHashCode} from "@pnnh/atom";
 
 const MAX_DEFAULT_IMAGE = 16;
 

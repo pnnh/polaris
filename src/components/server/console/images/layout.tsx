@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from './layout.module.scss'
-import {AccountModel, isAnonymousAccount} from "@/atom/common/models/account";
-import {SymbolUnknown} from "@/atom/common/models/protocol";
+import {SymbolUnknown} from "@pnnh/atom";
 import GlobalLayout from "@/components/server/global";
 import {PageMetadata} from "@/components/common/utils/page";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {useServerConfig} from "@/components/server/config";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
 import {ConsoleImageSidebar} from "@/components/server/console/images/sidebar";
+import {AccountModel, isAnonymousAccount} from "@/components/common/models/account/account";
 
 export default async function ConsoleImageLayout(
     {

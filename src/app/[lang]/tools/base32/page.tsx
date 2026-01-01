@@ -3,12 +3,12 @@ import styles from './page.module.scss'
 import {getPathname} from "@/components/server/pathname";
 import {CommentsClient} from "@/components/client/comments/comments";
 import {useServerConfig} from "@/components/server/config";
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import {PageMetadata} from "@/components/common/utils/page";
 import Base32Component from "@/components/client/tools/base32/base32";
 import {base32Uid, queryApp} from "@/components/server/tools/tools";
 import ContentLayout from "@/components/server/content/layout";
-import {SymbolUnknown} from "@/atom/common/models/protocol";
+import {SymbolUnknown} from "@pnnh/atom";
 import {notFound} from "next/navigation";
 
 export default async function Home({params, searchParams}: {

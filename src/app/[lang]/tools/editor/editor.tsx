@@ -1,7 +1,7 @@
 'use client'
 
-import {SFXEditor} from "@/atom/client/editor/editor";
-import {SFEditorModel} from "@/atom/client/editor/nodes/node";
+import {SFXEditor} from "@pnnh/atom/browser";
+import {SFEditorModel} from "@pnnh/atom/browser";
 import {useState} from "react";
 import {transText} from "@/components/common/locales/normal";
 

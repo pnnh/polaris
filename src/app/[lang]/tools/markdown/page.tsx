@@ -3,13 +3,13 @@ import styles from './page.module.scss'
 import {getPathname} from "@/components/server/pathname";
 import {CommentsClient} from "@/components/client/comments/comments";
 import {useServerConfig} from "@/components/server/config";
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import {PageMetadata} from "@/components/common/utils/page";
 import MarkdownComponent from "@/components/client/tools/markdown/markdown";
 import {markdownUid, queryApp} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
 import ContentLayout from "@/components/server/content/layout";
-import {SymbolUnknown} from "@/atom/common/models/protocol";
+import {SymbolUnknown} from "@pnnh/atom";
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,

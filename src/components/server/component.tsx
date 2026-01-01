@@ -1,7 +1,7 @@
 import React from "react";
 
-import {generateUuidV7, stringToMd5} from "@/atom/common/utils/basex";
-import {isValidUUID} from "@/atom/common/utils/uuid";
+import {generateUuidV7, stringToMd5} from "@pnnh/atom";
+import {isValidUUID} from "@pnnh/atom";
 
 export function css(text: TemplateStringsArray, ...values: any[]) {
     let str = '';

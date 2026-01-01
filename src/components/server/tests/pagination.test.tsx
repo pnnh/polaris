@@ -1,9 +1,9 @@
-import {calcPagination} from "@/atom/common/utils/pagination";
+import {calcPagination} from "@pnnh/atom";
 import {PaginationServer} from "@/components/server/pagination";
 import React from "react";
 import {expect, test} from 'vitest'
 import {render, screen} from '@testing-library/react'
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 
 const comId = 'd59f406b-7a36-4127-baef-2f878b462885'
 

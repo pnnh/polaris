@@ -2,14 +2,14 @@ import React from 'react'
 import styles from './page.module.scss'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
-import {SymbolUnknown} from "@/atom/common/models/protocol";
-import {mustBase58ToUuid, tryBase58ToUuid} from "@/atom/common/utils/basex";
+import {SymbolUnknown} from "@pnnh/atom";
+import {mustBase58ToUuid, tryBase58ToUuid} from "@pnnh/atom";
 import {notFound} from "next/navigation";
 import ConsoleLayout from "@/components/server/console/layout";
 import {serverConsoleGetChannel} from "@/components/server/channels/channels";
 import {useServerConfig} from "@/components/server/config";
 import {ConsoleChannelForm} from "./form";
-import {EmptyUUID} from "@/atom/common/utils/uuid";
+import {EmptyUUID} from "@pnnh/atom";
 import {PSChannelModel} from "@/components/common/models/channel";
 
 export const dynamic = "force-dynamic";

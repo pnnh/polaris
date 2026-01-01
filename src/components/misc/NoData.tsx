@@ -2,7 +2,7 @@ import 'server-only'
 
 import {PageMetadata} from "@/components/common/utils/page";
 import ContentLayout from "@/components/server/content/layout";
-import {SymbolUnknown} from "@/atom/common/models/protocol";
+import {SymbolUnknown} from "@pnnh/atom";
 import React from "react";
 import {NoData} from "@/components/common/empty";
 

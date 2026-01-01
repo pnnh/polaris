@@ -3,18 +3,18 @@ import './page.scss'
 import queryString from 'query-string'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
-import {PLSelectResult, SymbolUnknown} from "@/atom/common/models/protocol";
+import {PLSelectResult, SymbolUnknown} from "@pnnh/atom";
 
 import {NoData} from "@/components/common/empty";
 import {PaginationServer} from "@/components/server/pagination";
-import {replaceSearchParams} from "@/atom/common/utils/query";
+import {replaceSearchParams} from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
-import {calcPagination} from "@/atom/common/utils/pagination";
+import {calcPagination} from "@pnnh/atom";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import {PageMetadata} from "@/components/common/utils/page";
 import {useServerConfig} from "@/components/server/config";
-import {serverMakeGet} from "@/atom/server/http";
+import {serverMakeGet} from "@pnnh/atom/nodejs";
 
 export const dynamic = "force-dynamic";
 
@@ -75,4 +75,3 @@ export default async function Page({params, searchParams}: {
         </div>
     </ContentLayout>
 }
-

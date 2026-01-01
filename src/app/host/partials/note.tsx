@@ -1,5 +1,5 @@
 import React from "react";
-import {TocItem} from "@/atom/common/models/toc";
+import {TocItem} from "@pnnh/atom";
 import {ArticleComponent} from "@/app/host/partials/article";
 import {BuildBodyHtml} from "@/app/[lang]/articles/[uid]/body";
 

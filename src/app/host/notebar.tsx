@@ -3,7 +3,7 @@
 import React, {useEffect, useState} from 'react'
 import {libraryAtom, noteAtom, notebookAtom} from './providers/notebook'
 import './notebar.scss'
-import {PLSelectResult} from "@/atom/common/models/protocol";
+import {PLSelectResult} from "@pnnh/atom";
 import {useAtom, useAtomValue} from "jotai";
 import {clientSigninDomain} from "./services/client/domain";
 import {PSArticleModel} from "@/components/common/models/article";

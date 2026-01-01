@@ -1,10 +1,10 @@
 import {getPathname} from "@/components/server/pathname";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {useServerConfig} from "@/components/server/config";
-import {SymbolUnknown} from "@/atom/common/models/protocol";
+import {SymbolUnknown} from "@pnnh/atom";
 import {UserinfoEditForm} from "./form";
 import {serverGetUserinfo} from "@/components/server/account/account";
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import ConsoleLayout from "@/components/server/console/layout";
 import {transText} from "@/components/common/locales/normal";
 

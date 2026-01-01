@@ -9,8 +9,8 @@ import ReportOffIcon from '@mui/icons-material/ReportOff';
 import WarningIcon from '@mui/icons-material/Warning';
 import InfoIcon from '@mui/icons-material/Info';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import {randomPassword} from "@/atom/common/utils/rand";
-import {copyToClipboard} from "@/atom/client/clipboard";
+import {randomPassword} from "@pnnh/atom";
+import {copyToClipboard} from "@pnnh/atom/browser";
 import {transKey} from "@/components/common/locales/normal";
 
 const styleToolTitle = css`

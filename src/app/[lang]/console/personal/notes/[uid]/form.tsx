@@ -1,16 +1,16 @@
 'use client'
 
 import styles from "./form.module.scss";
-import {generatorRandomString} from "@/atom/common/utils/string";
+import {generatorRandomString} from "@pnnh/atom";
 import {ConsoleArticleEditor} from "./editor";
 import Button from "@mui/material/Button";
 import React from "react";
-import {TocItem} from "@/atom/common/models/toc";
+import {TocItem} from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
-import {EmptyUUID} from "@/atom/common/utils/uuid";
+import {EmptyUUID} from "@pnnh/atom";
 import {getDefaultImageUrl} from "@/components/common/note";
-import {uuidToBase58} from "@/atom/common/utils/basex";
-import {isLangEn, langEn, langZh} from "@/atom/common/language";
+import {uuidToBase58} from "@pnnh/atom";
+import {isLangEn, langEn, langZh} from "@pnnh/atom";
 import MenuItem from '@mui/material/MenuItem';
 import {supportedLanguages} from "@/components/common/language";
 import {Select} from "@mui/material";

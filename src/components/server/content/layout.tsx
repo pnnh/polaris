@@ -1,12 +1,12 @@
 import React from 'react'
 import {ContentPublicNavbar} from "@/components/server/content/partials/navbar";
 import styles from './layout.module.scss'
-import {AccountModel} from "@/atom/common/models/account";
-import {SymbolUnknown} from "@/atom/common/models/protocol";
+import {SymbolUnknown} from "@pnnh/atom";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {useServerConfig} from "@/components/server/config";
 import GlobalLayout from "@/components/server/global";
 import {PageMetadata} from "@/components/common/utils/page";
+import {AccountModel} from "@/components/common/models/account/account";
 
 export const templateBodyId = 'globalTemplateBody'
 

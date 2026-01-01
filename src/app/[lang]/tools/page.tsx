@@ -1,10 +1,10 @@
 import React from 'react'
 import {getPathname} from "@/components/server/pathname";
 
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import {PageMetadata} from "@/components/common/utils/page";
 import ContentLayout from "@/components/server/content/layout";
-import {SymbolUnknown} from "@/atom/common/models/protocol";
+import {SymbolUnknown} from "@pnnh/atom";
 import {ToolBody} from "./tool";
 
 export default async function Page({params, searchParams}: {

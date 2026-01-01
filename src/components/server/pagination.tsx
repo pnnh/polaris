@@ -1,4 +1,4 @@
-import {FullPagination} from "@/atom/common/utils/pagination";
+import {FullPagination} from "@pnnh/atom";
 import {css, PSComponentLayout, PSComponentLayoutProps} from "@/components/common/component";
 import {transText} from "@/components/common/locales/normal";
 

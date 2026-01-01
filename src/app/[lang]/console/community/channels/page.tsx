@@ -1,16 +1,16 @@
 import React from 'react'
 import {getPathname} from "@/components/server/pathname";
 import styles from './page.module.scss'
-import {SymbolUnknown} from "@/atom/common/models/protocol";
+import {SymbolUnknown} from "@pnnh/atom";
 import {PSChannelModel} from "@/components/common/models/channel";
 import {NoData} from "@/components/common/empty";
-import {uuidToBase58} from "@/atom/common/utils/basex";
-import {EmptyUUID, isValidUUID} from "@/atom/common/utils/uuid";
+import {uuidToBase58} from "@pnnh/atom";
+import {EmptyUUID, isValidUUID} from "@pnnh/atom";
 import {PSImageServer} from "@/components/server/image";
-import {STSubString} from "@/atom/common/utils/string";
+import {STSubString} from "@pnnh/atom";
 import {getDefaultChanImageByUid} from "@/components/common/channel";
 import {PageMetadata} from "@/components/common/utils/page";
-import {langEn} from "@/atom/common/language";
+import {langEn} from "@pnnh/atom";
 import ConsoleLayout from "@/components/server/console/layout";
 import Button from "@mui/material/Button";
 import {ConsoleChannelFilterBar} from "./filter";
