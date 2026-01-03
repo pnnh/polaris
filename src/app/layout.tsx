@@ -5,28 +5,28 @@ import './global.css'
 import {langEnUS} from "@/components/common/language";
 import {headers} from "next/headers";
 import {filterAcceptLanguage} from "@/components/server/language";
-import {usePublicConfig, useServerConfig} from "@/components/server/config";
 import {JotaiProvider} from "@/components/client/content/provider";
 import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter";
 import {ThemeProvider} from '@mui/material/styles';
 import {darkTheme, lightTheme} from '@/components/client/theme';
-import {encodeBase58String} from "@pnnh/atom";
 import {getServerTheme} from "@/components/server/theme";
 import {CssBaseline} from "@mui/material";
 
 export default async function RootLayout({
                                              header,
                                              children,
+                                             footer
                                          }: {
-    header?: React.ReactNode;
-    children: React.ReactNode;
+    header?: React.ReactNode,
+    children: React.ReactNode,
+    footer?: React.ReactNode
 }) {
     const headersList = await headers()
     const acceptLang = headersList.get('Accept-Language') || langEnUS
     const lang = filterAcceptLanguage(acceptLang)
-    const serverConfig = await useServerConfig()
-    const browserConfigString = JSON.stringify(usePublicConfig(serverConfig))
-    const encodedBrowserConfig = encodeBase58String(browserConfigString)
+    // const serverConfig = await useServerConfig()
+    // const browserConfigString = JSON.stringify(usePublicConfig(serverConfig))
+    // const encodedBrowserConfig = encodeBase58String(browserConfigString)
 
     const themeName = await getServerTheme()
     let isDarkTheme = themeName === 'dark'
@@ -52,8 +52,6 @@ export default async function RootLayout({
         {header}
     </head>
     <body lang={lang} className={isDarkTheme ? 'darkTheme' : 'lightTheme'}>
-    <input id="LGEnv" type="hidden" value={encodedBrowserConfig}/>
-    <script type="module" src="/setup.js" crossOrigin="anonymous"></script>
     <JotaiProvider>
         <AppRouterCacheProvider options={{key: 'css', enableCssLayer: true}}>
             <ThemeProvider theme={pageTheme}>
@@ -62,6 +60,7 @@ export default async function RootLayout({
             </ThemeProvider>
         </AppRouterCacheProvider>
     </JotaiProvider>
+    {footer}
     </body>
     </html>
 }

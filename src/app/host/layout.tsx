@@ -1,5 +1,4 @@
 import React from 'react'
-import {ConsoleFeature} from './partials/feature'
 import './layout.scss'
 
 
@@ -8,13 +7,9 @@ export default async function ConsoleLayout({
                                             }: {
     children: React.ReactNode
 }) {
-
     return (
         <div className={'consolePage'}>
             <div className={'mainContainer'}>
-                <div className={'leftNav'}>
-                    <ConsoleFeature/>
-                </div>
                 <div className={'rightBody'}>
                     {children}
                 </div>

@@ -3,15 +3,51 @@ import dotenv from "dotenv";
 import {IServerConfigStore} from "./store";
 import {GalaxyConfigStore} from "./galaxy";
 import {PgConfigStore} from "./pgstore";
+import {IServerConfigProvider} from "../config";
+import {resolvePath} from "@pnnh/atom/nodejs";
+import {psResolvePath} from "@/components/server/filesystem/path";
 
 export class FileConfigStore implements IServerConfigStore {
     private configRecord: Record<string, any> = {};
 
     constructor(envPath: string) {
-        const result = dotenv.config({path: envPath, processEnv: this.configRecord})
+        const fullPath = psResolvePath(envPath)
+        const result = dotenv.config({path: fullPath, processEnv: this.configRecord})
         if (result.error) {
             throw new Error(`load config error: ${result.error}`)
         }
+    }
+
+    async GetProvider(): Promise<IServerConfigProvider> {
+        const selfUrl = await this.GetString('PUBLIC_POLARIS_URL');
+        const portalUrl = await this.GetString('PUBLIC_PORTAL_URL');
+        const internalPortalUrl = await this.GetString('INTERNAL_PORTAL_URL');
+        const turnstile = await this.GetString('CLOUDFLARE_PUBLIC_TURNSTILE');
+        const databaseUrl = await this.GetString('DATABASE_URL');
+
+        if (!selfUrl) {
+            throw new Error('PUBLIC_SELF_URL is required')
+        }
+        if (!portalUrl) {
+            throw new Error('PUBLIC_PORTAL_URL is required')
+        }
+        if (!internalPortalUrl) {
+            throw new Error('internalPortalUrl is required')
+        }
+        // if (!turnstile) {
+        //     throw new Error('PUBLIC_TURNSTILE is required')
+        // }
+        // if (!databaseUrl) {
+        //     throw new Error('_URL is required')
+        // }
+
+        return {
+            PUBLIC_SELF_URL: selfUrl,
+            PUBLIC_PORTAL_URL: portalUrl,
+            // CLOUDFLARE_PUBLIC_TURNSTILE: turnstile,
+            // DATABASE_URL: databaseUrl,
+            INTERNAL_PORTAL_URL: internalPortalUrl,
+        } as IServerConfigProvider;
     }
 
     async GetValue(key: string): Promise<any | undefined> {

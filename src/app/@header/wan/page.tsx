@@ -1,3 +1,7 @@
+import React from "react";
+
 export default async function () {
-    return <></>
+    return <>
+        <script type="module" src="/setup.js" crossOrigin="anonymous"></script>
+    </>
 }

@@ -1,3 +1,5 @@
+import {IServerConfigProvider} from "@/components/server/config";
+
 export interface IServerConfigStore {
     GetValue(key: string): Promise<any | undefined>;
 
@@ -6,4 +8,6 @@ export interface IServerConfigStore {
     GetNumber(key: string): Promise<number | undefined>;
 
     GetBoolean(key: string): Promise<boolean | undefined>;
+
+    GetProvider(): Promise<IServerConfigProvider>
 }

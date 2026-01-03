@@ -3,20 +3,8 @@
 import queryString from "query-string";
 import {CodeOk, PLSelectResult} from "@pnnh/atom";
 import {clientMakeGet} from "@pnnh/atom/browser";
+import {PSImageModel} from "@/components/common/models/image";
 
-export interface PSImageModel {
-    uid: string
-    title: string
-    create_time: string
-    update_time: string
-    keywords: string
-    description: string
-    status: number
-    owner: string
-    file_path: string
-    ext_name: string
-    file_url: string
-}
 
 export async function clientConsoleSelectImages(portalUrl: string, selectQuery: Record<string, any>) {
     const rawQuery = queryString.stringify(selectQuery)

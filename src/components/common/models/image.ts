@@ -18,4 +18,5 @@ export interface PSImageModel {
     ext_name: string
     channel_name: string
     name: string
+    url: string
 }

@@ -40,3 +40,5 @@ public/index.html
 *.js.map
 *.map.css
 *.map.mjs
+
+config/

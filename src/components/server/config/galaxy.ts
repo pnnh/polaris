@@ -2,6 +2,7 @@ import {IServerConfigStore} from "./store";
 import {ConfigOptions} from "./config";
 import {isValidName, CodeOk, CommonResult} from "@pnnh/atom";
 import NodeCache from "node-cache";
+import {IServerConfigProvider} from "@/components/server/config";
 
 const configCache = new NodeCache({stdTTL: 30, checkperiod: 10});
 
@@ -22,6 +23,38 @@ export class GalaxyConfigStore implements IServerConfigStore {
     constructor(configUrl: string, options: ConfigOptions) {
         this.configUrl = configUrl;
         this.configOptions = options;
+    }
+
+    async GetProvider(): Promise<IServerConfigProvider> {
+        const selfUrl = await this.GetString('PUBLIC_POLARIS_URL');
+        const portalUrl = await this.GetString('PUBLIC_PORTAL_URL');
+        const internalPortalUrl = await this.GetString('INTERNAL_PORTAL_URL');
+        const turnstile = await this.GetString('CLOUDFLARE_PUBLIC_TURNSTILE');
+        const databaseUrl = await this.GetString('DATABASE_URL');
+
+        if (!selfUrl) {
+            throw new Error('PUBLIC_SELF_URL is required')
+        }
+        if (!portalUrl) {
+            throw new Error('PUBLIC_PORTAL_URL is required')
+        }
+        if (!internalPortalUrl) {
+            throw new Error('internalPortalUrl is required')
+        }
+        if (!turnstile) {
+            throw new Error('PUBLIC_TURNSTILE is required')
+        }
+        if (!databaseUrl) {
+            throw new Error('_URL is required')
+        }
+
+        return {
+            PUBLIC_SELF_URL: selfUrl,
+            PUBLIC_PORTAL_URL: portalUrl,
+            CLOUDFLARE_PUBLIC_TURNSTILE: turnstile,
+            DATABASE_URL: databaseUrl,
+            INTERNAL_PORTAL_URL: internalPortalUrl,
+        } as IServerConfigProvider;
     }
 
     async GetValue(key: string): Promise<any | undefined> {
