@@ -1,5 +1,6 @@
 import React from 'react'
 import './layout.scss'
+import {HostNavbar} from "@/app/host/navbar";
 
 
 export default async function ConsoleLayout({
@@ -8,11 +9,10 @@ export default async function ConsoleLayout({
     children: React.ReactNode
 }) {
     return (
-        <div className={'consolePage'}>
-            <div className={'mainContainer'}>
-                <div className={'rightBody'}>
-                    {children}
-                </div>
+        <div>
+            <HostNavbar/>
+            <div>
+                {children}
             </div>
         </div>
     )
