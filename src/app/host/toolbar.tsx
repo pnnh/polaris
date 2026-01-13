@@ -3,7 +3,7 @@ import React from 'react'
 import Button from "@mui/material/Button";
 import {stringToBase58} from "@pnnh/atom";
 
-export function HostToolbar() {
+export function OpenToolbar() {
     return <div>
         <Button onClick={() => {
             window.serverAPI.openFolder().then((dir: string) => {
@@ -15,6 +15,6 @@ export function HostToolbar() {
                 const targetUrl = `/host/storage/files?dir=${dirParam}`
                 window.location.href = targetUrl
             })
-        }}>打开目录</Button>
+        }}>打开本地目录</Button>
     </div>
 }

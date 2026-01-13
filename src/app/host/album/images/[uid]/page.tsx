@@ -9,8 +9,7 @@ export default async function Page({searchParams, params}: {
     const uid = paramsValue.uid
 
     const serverConfig = await useServerConfig()
-
-
+    
     const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
     const imgUrl = `${publicPortalUrl}/host/album/images/file?file=${uid}`
 

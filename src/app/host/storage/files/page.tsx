@@ -1,9 +1,10 @@
 import React from 'react'
 import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {useServerConfig} from "@/components/server/config";
-import {encodeBase58String, encodeBase64String, PLSelectResult, stringToBase58} from "@pnnh/atom";
-import {PSArticleModel} from "@/components/common/models/article";
+import {PLSelectResult} from "@pnnh/atom";
 import {css} from "@/gen/styled/css";
+import {PSAutoIcon, PSDirectoryIcon} from "@/components/icons/file-icon";
+import {PSFileModel} from "@/components/common/models/file";
 
 const containerStyles = {
     notesGrid: css`
@@ -24,11 +25,10 @@ export default async function Page({searchParams}: {
     const serverConfig = await useServerConfig()
     const serverUrl = serverConfig.INTERNAL_PORTAL_URL
     const url = `${serverUrl}/host/storage/files?dir=${encodeURIComponent(dir)}`
-    const selectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, '')
+    const selectResult = await serverMakeGet<PLSelectResult<PSFileModel>>(url, '')
     if (!selectResult || selectResult.code !== 200) {
         throw new Error("host notebook")
     }
-
 
     return <>
         <div className={containerStyles.notesGrid}>
@@ -43,19 +43,52 @@ export default async function Page({searchParams}: {
 
 const cardStyles = {
     cardItem: css`
-        padding: 12px;
         border: 1px solid #e0e0e0;
         border-radius: 8px;
         background-color: #fafafa;
         transition: box-shadow 0.3s ease;
+        position: relative;
+    `,
+    iconBox: css`
+        height: 6rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `,
+    actionBar: css`
+        height: 2rem;
+        width: 100%;
+        padding: 0 0.5rem 0 0.5rem;
+        display: flex;
+        align-items: center;
+    `,
+    titleBox: css`
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
     `
 }
 
-function NoteItemCard({model}: { model: PSArticleModel }) {
-    const uid = stringToBase58(model.url, 'base58')
+function NoteItemCard({model}: { model: PSFileModel }) {
+    let linkUrl = `/host/storage/files/${model.path}`
+    if (model.is_dir) {
+        linkUrl = `/host/storage/files?dir=${encodeURIComponent(model.path)}`
+    }
     return <div className={cardStyles.cardItem}>
-        <div>
-            <a href={`/host/storage/files/${uid}`}>{model.title}</a>
+        <div className={cardStyles.iconBox}>
+            {model.is_dir ?
+                <PSDirectoryIcon size={64}/> :
+                <PSAutoIcon filename={model.title} size={64}/>
+            }
+
+        </div>
+        <div className={cardStyles.actionBar}>
+            <div className={cardStyles.titleBox}>
+
+                <a href={linkUrl} title={model.title}>{model.title}</a>
+            </div>
         </div>
     </div>
 }
+
