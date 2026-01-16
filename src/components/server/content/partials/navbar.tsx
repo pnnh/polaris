@@ -35,7 +35,7 @@ export async function ContentPublicNavbar({pathname, searchParams, lang, userInf
             {/*<a className={styles.toolsLink} href={`/${lang}/tools`}><AppsIcon/></a>*/}
         </div>
         <div className={styles.rightNavMobile}>
-            <PSLanguageSelector lang={lang} currentUrl={currentUrl}/>
+            {/*<PSLanguageSelector lang={lang} currentUrl={currentUrl}/>*/}
             <a className={styles.mobileMenu} href={`${lang}`}><MenuIcon/></a>
         </div>
     </div>

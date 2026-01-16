@@ -4,11 +4,7 @@ import styles from './language.module.css';
 
 import * as React from 'react';
 import MenuItem from '@mui/material/MenuItem';
-import {
-    getLangInfo,
-    langEnUS, replaceLangInUrl,
-    supportedLanguages
-} from "@/components/common/language";
+import {getLangInfo, replaceLangInUrl, supportedLanguages} from "@/components/common/language";
 import LanguageIcon from '@mui/icons-material/Language';
 import {StyledMenu} from "@/components/client/dropmenu";
 
@@ -32,7 +28,7 @@ export function PSLanguageSelector({lang, currentUrl}: { lang: string, currentUr
         <div className={styles.langSelector}
              onClick={handleClick}>
             <LanguageIcon aria-hidden={undefined}/>
-            {langInfo.name}
+            {/*{langInfo.name}*/}
         </div>
         <StyledMenu
             elevation={0}

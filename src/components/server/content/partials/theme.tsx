@@ -25,8 +25,8 @@ export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string
         <div className={styles.themeSelector}
              onClick={handleClick}>
             <ContrastIcon className={styles.themeIcon} aria-hidden={undefined} sx={{cursor: 'pointer'}}/>
-            {themeName === 'dark' ? transKey(lang, "DarkTheme") : themeName === 'light' ?
-                transKey(lang, "LightTheme") : transKey(lang, "AutoTheme")}
+            {/*{themeName === 'dark' ? transKey(lang, "DarkTheme") : themeName === 'light' ?*/}
+            {/*    transKey(lang, "LightTheme") : transKey(lang, "AutoTheme")}*/}
         </div>
         <StyledMenu
             elevation={0}

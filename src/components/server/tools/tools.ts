@@ -1,8 +1,10 @@
-
 import {localText} from "@pnnh/atom";
-import {transKey, transText} from "@/components/common/locales/normal";
+import {transKey, transText, transTodo} from "@/components/common/locales/normal";
 import {ApplicationLanguageProfile, ApplicationModel} from "@/components/common/models/application";
 
+export const articlesUid = '019bbb53-f051-750a-8532-2358b64f31f3'
+export const imagesUid = '019bbb53-ef8d-7589-aebc-851c627eabd0'
+export const channelsUid = '019bbb53-ee65-7461-837a-4b1b226ac6de'
 export const passwordUid = '0192e096-22e4-7aa4-8aa9-8093f09d58a7'
 export const uuidUid = '0192e096-2247-7aa4-8aa9-7167ae2d1927'
 export const qrcodeUid = '0192e096-21bd-7aa4-8aa9-618897c0f57d'
@@ -31,6 +33,27 @@ export function queryApp(expectLang: string, appUid: string): ApplicationModel |
 
 export function selectApps(expectLang: string): ApplicationModel[] {
     return [
+        {
+            uid: articlesUid,
+            url: `/articles`,
+            update_time: '2024-10-30T12:00:00.000Z',
+            image: '/images/application/articles.jpeg',
+            ...selectAppLangProfile(articlesUid, expectLang)
+        },
+        {
+            uid: imagesUid,
+            url: `/images`,
+            update_time: '2024-10-30T12:00:00.000Z',
+            image: '/images/application/images.jpg',
+            ...selectAppLangProfile(imagesUid, expectLang)
+        },
+        {
+            uid: channelsUid,
+            url: `/channels`,
+            update_time: '2024-10-30T12:00:00.000Z',
+            image: '/images/application/channels.webp',
+            ...selectAppLangProfile(channelsUid, expectLang)
+        },
         {
             uid: passwordUid,
             url: '/tools/password',
@@ -148,6 +171,24 @@ export function selectApps(expectLang: string): ApplicationModel[] {
 
 function selectAppLangProfile(appUid: string, lang: string): ApplicationLanguageProfile {
     switch (appUid) {
+        case articlesUid:
+            return {
+                lang: lang,
+                name: transText(lang, '笔记', 'Articles'),
+                description: transTodo('')
+            }
+        case imagesUid:
+            return {
+                lang: lang,
+                name: transText(lang, '图片相册', 'Image Album'),
+                description: transTodo('')
+            }
+        case channelsUid:
+            return {
+                lang: lang,
+                name: transText(lang, '频道', 'Channels'),
+                description: transTodo('')
+            }
         case passwordUid:
             return {
                 lang: lang,

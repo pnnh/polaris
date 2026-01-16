@@ -1,7 +1,6 @@
 import styles from './userinfo.module.scss'
 import {AccountModel, isAnonymousAccount} from "@/components/common/models/account/account";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import {transKey} from "@/components/common/locales/normal";
 import {sanitizeUrl} from "@pnnh/atom";
 
 export function UserAction({lang, userInfo}: {
@@ -25,7 +24,7 @@ export function UserAction({lang, userInfo}: {
     return <div className={styles.userAction}>
         <a className={styles.loginLink} href={`/${lang}/account/signin`}>
             <AccountCircleIcon/>
-            {transKey(lang, 'signin')}
+            {/*{transKey(lang, 'signin')}*/}
         </a>
         {/*<a className={styles.loginLink} href={`${lang}/account/signup`}>注册</a>*/}
     </div>
