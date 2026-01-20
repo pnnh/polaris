@@ -1,4 +1,3 @@
-import './list.scss'
 import {useEffect, useState} from "react";
 import {PLSelectResult} from "@pnnh/atom";
 import {fetchComments, PSCommentModel} from "@/components/client/comments/comment";
@@ -32,7 +31,37 @@ export function ListArea({portalUrl, resource, lang}: { portalUrl: string, resou
                     </div>
                 })
             }
-
         </div>
+
+        <style jsx>{`
+            .listContainer {
+            }
+
+            .areaTitle {
+                font-size: 1.1rem;
+                font-weight: bold;
+            }
+
+            .commentItem {
+                padding: 0.5rem 0;
+            }
+
+            .commentHeader {
+                display: flex;
+                flex-direction: row;
+                gap: 1rem;
+                align-items: center;
+                font-size: 0.9rem;
+                color: var(--text-primary-color);
+                padding: 0.5rem 0;
+                border-bottom: solid 0.5px #ccc;
+            }
+
+            .commentContent {
+                margin-top: 0.5rem;
+                font-size: 1rem;
+                color: var(--text-primary-color);
+            }
+        `}</style>
     </div>
 }

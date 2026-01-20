@@ -1,12 +1,49 @@
 'use client';
 
-import styles from './language.module.css';
-
+import {css} from "@/gen/styled/css";
 import * as React from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import {getLangInfo, replaceLangInUrl, supportedLanguages} from "@/components/common/language";
 import LanguageIcon from '@mui/icons-material/Language';
 import {StyledMenu} from "@/components/client/dropmenu";
+
+const styles = {
+    langSelector: css`
+        display: inline-flex;
+        height: 1.5rem;
+        flex-direction: row;
+        gap: 0.3rem;
+        justify-items: center;
+        cursor: pointer;
+
+        & svg {
+            height: 20px;
+            width: 20px;
+            color: var(--text-primary-color);
+            fill: var(--text-primary-color);
+            stroke: var(--text-primary-color);
+        }
+    `,
+    langItem: css`
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        height: 1.5rem;
+        gap: 0.3rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+        color: var(--text-primary-color);
+        background-color: var(--background-color);
+
+        & svg {
+            height: 24px;
+            width: 24px;
+            color: var(--text-primary-color);
+            fill: var(--text-primary-color);
+            stroke: var(--text-primary-color);
+        }
+    `,
+};
 
 export function PSLanguageSelector({lang, currentUrl}: { lang: string, currentUrl: string }) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

@@ -2,13 +2,13 @@
 
 declare global {
 }
-
-declare module '*.module.css' {
-    const classes: { [key: string]: string };
-    export default classes;
-}
-
-declare module '*.module.scss' {
-    const classes: { [key: string]: string };
-    export default classes;
-}
+// 不再使用css module
+// declare module '*.module.css' {
+//     const classes: { [key: string]: string };
+//     export default classes;
+// }
+//
+// declare module '*.module.scss' {
+//     const classes: { [key: string]: string };
+//     export default classes;
+// }

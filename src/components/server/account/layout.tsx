@@ -1,8 +1,19 @@
 import React from 'react'
-import styles from './layout.module.scss'
+import {css} from "@/gen/styled/css";
 import {PageMetadata} from "@/components/common/utils/page";
 import GlobalLayout from "@/components/server/global";
 
+const styles = {
+    accountLayout: css`
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: row;
+        gap: 0;
+        justify-items: center;
+        align-items: center;
+    `,
+};
 
 export default async function AccountLayout({
                                                 children,

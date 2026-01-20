@@ -92,77 +92,77 @@ export default async function Page({params, searchParams}: {
                         <ComputerIcon/>
                         最近笔记1
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <ComputerIcon/>
                         最近笔记2
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <ComputerIcon/>
-                        <a href={`/${lang}/console/personal/images`} className={styles.libLink}>本地图片库</a>
+                        <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>本地图片库</a>
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <CloudQueueIcon/>
                         最近笔记库
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <CloudQueueIcon/>
-                        <a href={`/${lang}/console/personal/images`} className={styles.libLink}>最近图片库</a></div>
+                        <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>最近图片库</a></div>
 
                 </div>
             </div>
-            <div className={styles.libGrid}>
-                <div className={styles.libHeader}>
-                    <a className={styles.libLink}>最近图片</a>
-                    <a href={`/${lang}/console/personal`} className={styles.libLink}>个人主页</a>
+            <div className={pageStyles.libGrid}>
+                <div className={pageStyles.libHeader}>
+                    <a className={pageStyles.libLink}>最近图片</a>
+                    <a href={`/${lang}/console/personal`} className={pageStyles.libLink}>个人主页</a>
                 </div>
-                <div className={styles.libBody}>
-                    <div className={styles.libCard}>
+                <div className={pageStyles.libBody}>
+                    <div className={pageStyles.libCard}>
                         <ComputerIcon/>
                         最近笔记1
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <ComputerIcon/>
                         最近笔记2
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <ComputerIcon/>
-                        <a href={`/${lang}/console/personal/images`} className={styles.libLink}>本地图片库</a>
+                        <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>本地图片库</a>
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <CloudQueueIcon/>
                         最近笔记库
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <CloudQueueIcon/>
-                        <a href={`/${lang}/console/personal/images`} className={styles.libLink}>最近图片库</a></div>
+                        <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>最近图片库</a></div>
 
                 </div>
             </div>
-            <div className={styles.libGrid}>
-                <div className={styles.libHeader}>
-                    <a className={styles.libLink}>最近资料库</a>
-                    <a href={`/${lang}/console/personal`} className={styles.libLink}>完整列表</a>
+            <div className={pageStyles.libGrid}>
+                <div className={pageStyles.libHeader}>
+                    <a className={pageStyles.libLink}>最近资料库</a>
+                    <a href={`/${lang}/console/personal`} className={pageStyles.libLink}>完整列表</a>
                 </div>
-                <div className={styles.libBody}>
-                    <div className={styles.libCard}>
+                <div className={pageStyles.libBody}>
+                    <div className={pageStyles.libCard}>
                         <ComputerIcon/>
                         最近笔记1
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <ComputerIcon/>
                         最近笔记2
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <ComputerIcon/>
-                        <a href={`/${lang}/console/personal/images`} className={styles.libLink}>本地图片库</a>
+                        <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>本地图片库</a>
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <CloudQueueIcon/>
                         最近笔记库
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <CloudQueueIcon/>
-                        <a href={`/${lang}/console/personal/images`} className={styles.libLink}>最近图片库</a></div>
+                        <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>最近图片库</a></div>
 
                 </div>
             </div>

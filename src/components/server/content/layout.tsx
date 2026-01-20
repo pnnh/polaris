@@ -1,12 +1,40 @@
 import React from 'react'
 import {ContentPublicNavbar} from "@/components/server/content/partials/navbar";
-import styles from './layout.module.scss'
+import {css} from "@/gen/styled/css";
 import {SymbolUnknown} from "@pnnh/atom";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {useServerConfig} from "@/components/server/config";
 import GlobalLayout from "@/components/server/global";
 import {PageMetadata} from "@/components/common/utils/page";
 import {AccountModel} from "@/components/common/models/account/account";
+
+const styles = {
+    templateContainer: css`
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+        scrollbar-width: thin;
+    `,
+    templateNavbar: css`
+        width: 100vw;
+        background-color: var(--background-color);
+        border-bottom: solid 1px #d3d3d3;
+    `,
+    templateBody: css`
+        scrollbar-width: thin;
+        overflow-x: hidden;
+        overflow-y: auto;
+    `,
+    bodyContainer: css`
+        margin: 0 auto;
+        @media screen and (min-width: 120rem) {
+            width: calc(120rem - 24rem);
+            margin: 0 auto;
+        }
+    `,
+};
 
 export const templateBodyId = 'globalTemplateBody'
 

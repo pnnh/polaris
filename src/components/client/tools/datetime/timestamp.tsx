@@ -1,7 +1,6 @@
 'use client'
 
 import React from "react";
-import './timestamp.scss'
 import {transKey} from "@/components/common/locales/normal";
 
 enum Tab {
@@ -42,6 +41,34 @@ export function TimestampHelper({lang}: { lang: string }) {
                 }
             </div>
         </div>
+
+        <style jsx>{`
+            .timestampHelper {
+                width: 100%;
+            }
+
+            .helperContainer {
+                width: 100%;
+                margin-bottom: 2rem;
+            }
+
+            .tabContainer {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                margin-bottom: 1rem;
+            }
+
+            .tabItem {
+                padding: 0.5rem;
+                border-bottom: none;
+                cursor: pointer;
+            }
+
+            .tabItem.active {
+                border-bottom: 2px solid #333;
+            }
+        `}</style>
     </div>
 }
 
@@ -181,6 +208,42 @@ function GenTimestamp() {
                 "tableCell"}>perl -e "print time"
             </div>
         </div>
+
+        <style jsx>{`
+            .helpTable {
+                width: 100%;
+                padding: 0;
+                display: table;
+                border-top: 0.5px solid #f0f0f0;
+                border-left: 0.5px solid #f0f0f0;
+                border-right: 0.5px solid #f0f0f0;
+            }
+
+            .tableRow {
+                padding: 0;
+                text-align: left;
+                display: table-row;
+            }
+
+            .tableLabel {
+                font-weight: normal;
+                font-size: 0.9rem;
+                display: table-cell;
+                width: 10rem;
+                background-color: #fafafa;
+                border-bottom: 0.5px solid #f0f0f0;
+                border-right: 0.5px solid #f0f0f0;
+                padding: 0.5rem;
+            }
+
+            .tableCell {
+                padding: 0.5rem;
+                display: table-cell;
+                border-bottom: 0.5px solid #f0f0f0;
+                font-size: 0.9rem;
+                color: #333;
+            }
+        `}</style>
     </div>
 }
 
@@ -415,5 +478,41 @@ function DatetimeToTimestamp() {
                 "tableCell"}><code>DateDiff("s", "01/01/1970 00:00:00", time)</code>
             </div>
         </div>
+
+        <style jsx>{`
+            .helpTable {
+                width: 100%;
+                padding: 0;
+                display: table;
+                border-top: 0.5px solid #f0f0f0;
+                border-left: 0.5px solid #f0f0f0;
+                border-right: 0.5px solid #f0f0f0;
+            }
+
+            .tableRow {
+                padding: 0;
+                text-align: left;
+                display: table-row;
+            }
+
+            .tableLabel {
+                font-weight: normal;
+                font-size: 0.9rem;
+                display: table-cell;
+                width: 10rem;
+                background-color: #fafafa;
+                border-bottom: 0.5px solid #f0f0f0;
+                border-right: 0.5px solid #f0f0f0;
+                padding: 0.5rem;
+            }
+
+            .tableCell {
+                padding: 0.5rem;
+                display: table-cell;
+                border-bottom: 0.5px solid #f0f0f0;
+                font-size: 0.9rem;
+                color: #333;
+            }
+        `}</style>
     </div>
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './layout.module.scss'
+import {css} from "@/gen/styled/css";
 import {SymbolUnknown} from "@pnnh/atom";
 import GlobalLayout from "@/components/server/global";
 import {PageMetadata} from "@/components/common/utils/page";
@@ -8,6 +8,16 @@ import {serverGetUserinfo} from "@/components/server/account/account";
 import {useServerConfig} from "@/components/server/config";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
 import {AccountModel, isAnonymousAccount} from "@/components/common/models/account/account";
+
+const styles = {
+    consoleContainer: css`
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        width: 100vw;
+        overflow: hidden;
+    `,
+};
 
 export default async function ConsoleLayout(
     {

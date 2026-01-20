@@ -1,6 +1,6 @@
 import React from 'react'
 import {getPathname} from "@/components/server/pathname";
-import styles from './page.module.scss'
+import {css} from "@/gen/styled/css";
 import {SymbolUnknown} from "@pnnh/atom";
 import {PSChannelModel} from "@/components/common/models/channel";
 import {NoData} from "@/components/common/empty";
@@ -18,6 +18,52 @@ import {serverConsoleSelectChannels} from "@/components/server/channels/channels
 import {useServerConfig} from "@/components/server/config";
 import PSDeleteButton from "@/components/client/console/delete";
 import {transText} from "@/components/common/locales/normal";
+
+const pageStyles = {
+    channelsContainer: css`
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    `,
+    list: css`
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+        gap: 1rem;
+    `,
+    item: css`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        padding: 1rem;
+        background: var(--background-color);
+    `,
+    itemCover: css`
+        width: 100%;
+        height: 256px;
+        overflow: hidden;
+        border-radius: 0.5rem;
+    `,
+    title: css`
+        font-size: 1.2rem;
+        font-weight: bold;
+    `,
+    link: css`
+        text-decoration: none;
+        color: var(--text-color);
+    `,
+    description: css`
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+    `,
+    operation: css`
+        display: flex;
+        gap: 0.5rem;
+    `
+}
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, viewer: string }>,
@@ -39,9 +85,9 @@ export default async function Page({params, searchParams}: {
 
     return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchValue} pathname={pathname}
                           metadata={metadata}>
-        <div className={styles.channelsContainer}>
+        <div className={pageStyles.channelsContainer}>
             <ConsoleChannelFilterBar lang={lang} keyword={searchValue.keyword}/>
-            <div className={styles.list}>
+            <div className={pageStyles.list}>
                 {selectData.range.map((model) => {
                     return <Item key={model.uid} model={model} publicPortalUrl={publicPortalUrl} lang={lang}/>
                 })}
@@ -60,17 +106,17 @@ function Item(props: { model: PSChannelModel, publicPortalUrl: string, lang: str
 
     const newUrl = `/${props.lang}/console/articles/${uuidToBase58(EmptyUUID)}?channel=${uuidToBase58(model.uid)}`
     const deleteUrl = `${props.publicPortalUrl}/console/channels/${model.uid}`
-    return < div className={styles.item}>
-        <div className={styles.itemCover}>
+    return <div className={pageStyles.item}>
+        <div className={pageStyles.itemCover}>
             <PSImageServer lang={props.lang} src={imageUrl} alt='star' width={256} height={256}/>
         </div>
-        <div className={styles.title}>
-            <a className={styles.link} href={readUrl}>{props.model.name}</a>
+        <div className={pageStyles.title}>
+            <a className={pageStyles.link} href={readUrl}>{props.model.name}</a>
         </div>
-        <div className={styles.description}>
+        <div className={pageStyles.description}>
             {STSubString(props.model.description, 140)}
         </div>
-        <div className={styles.operation}>
+        <div className={pageStyles.operation}>
             <Button size={'small'} variant={'text'} href={newUrl}>
                 {transText(props.lang, '新增笔记', 'Create Article')}
             </Button>

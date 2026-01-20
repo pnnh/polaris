@@ -1,4 +1,4 @@
-import styles from './language.module.scss';
+import {css} from "@/gen/styled/css";
 
 export const langEnUS = 'en'
 export const langEsES = 'es' // Spanish
@@ -44,6 +44,19 @@ export const supportedLanguages = [
         key: langZhTW, name: '繁體中文'
     },
 ]
+
+const styles = {
+    langSelector: css`
+        display: inline-block;
+        height: 1.5rem;
+        width: 1.5rem;
+        opacity: 0.8;
+        & img {
+            width: 100%;
+            height: 100%;
+        }
+    `,
+};
 
 export function getLangInfo(lang: string): { key: string, name: string } | undefined {
     const targetLang = getTargetLang(lang, defaultLanguage)

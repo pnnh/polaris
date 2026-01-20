@@ -1,9 +1,64 @@
 import React, {CSSProperties} from "react";
-import styles from './profile.module.scss'
-
-import {getPathname} from "@/components/server/pathname";
-import {pageTitle} from "@/components/common/utils/page";
+import {css} from "@/gen/styled/css";
 import {transExtra, transKey} from "@/components/common/locales/normal";
+import {getPathname} from "@/components/server/pathname";
+import {pageTitle} from "@/components/common/page";
+
+const styles = {
+    siteNavMenu: css`
+        display: none;
+        @media screen and (min-width: 48rem) {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    `,
+    selectorBox: css`
+        border: solid 1px #e0e0e0;
+        border-radius: 4px;
+        background: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    `,
+    navLink: css`
+        color: var(--text-primary-color);
+        text-decoration: none;
+        font-size: 0.95rem;
+    `,
+    navLinkInBox: css`
+        color: var(--text-primary-color);
+        padding: 8px 16px;
+        text-decoration: none;
+        font-size: 1rem;
+        border-bottom: solid 1px #e0e0e0;
+
+        &:last-child {
+            border-width: 0;
+        }
+    `,
+    roleButtonContainer: css`
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        justify-content: center;
+        align-items: center;
+    `,
+    siteLink: css`
+        text-decoration: none;
+        color: var(--text-primary-color);
+        cursor: pointer;
+        font-size: 1.1rem;
+    `,
+    toolsLink: css`
+        text-decoration: none;
+        color: #4e4e4e;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 400;
+    `,
+};
 
 export async function SiteNavMenu({lang, searchParams}: {
     lang: string,

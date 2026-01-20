@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './page.module.scss'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
 import {SymbolUnknown} from "@pnnh/atom";
@@ -8,37 +7,35 @@ import {replaceSearchParams} from "@pnnh/atom";
 import {calcPagination} from "@pnnh/atom";
 import {langEn} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
-import {css} from "@/components/server/component";
 import ConsoleImageLayout from "@/components/server/console/images/layout";
 import {ConsoleImageFilterBar} from "./filter";
 import {ConsoleImageMiddleBody} from "./image";
+import {css} from "@/gen/styled/css";
 
 export const dynamic = "force-dynamic";
 
-const pageStyle = css`
-    .contentContainer {
+const pageStyles = {
+    contentContainer: css`
         display: flex;
         flex-direction: column;
         width: 100%;
-
-        .conMiddle {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            scrollbar-width: thin;
-            border-radius: 4px;
-            overflow-y: auto;
-            overflow-x: hidden;
-
-            .middlePagination {
-                width: 100%;
-                background: var(--background-color);
-            }
-        }
-    }
-`
+    `,
+    conMiddle: css`
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        scrollbar-width: thin;
+        border-radius: 4px;
+        overflow-y: auto;
+        overflow-x: hidden;
+    `,
+    middlePagination: css`
+        width: 100%;
+        background: var(--background-color);
+    `
+}
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -64,12 +61,12 @@ export default async function Page({params, searchParams}: {
     const pagination = calcPagination(page, 100, pageSize)
     return <ConsoleImageLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                                metadata={metadata}>
-        <div className={styles.contentContainer}>
+        <div className={pageStyles.contentContainer}>
             <ConsoleImageFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
-            <div className={styles.conMiddle}>
+            <div className={pageStyles.conMiddle}>
                 <ConsoleImageMiddleBody libKey={libName} lang={lang}
                                         portalUrl={serverConfig.PUBLIC_PORTAL_URL}/>
-                <div className={styles.middlePagination}>
+                <div className={pageStyles.middlePagination}>
                     <PaginationServer lang={lang} pagination={pagination}
                                       pageLinkFunc={(page) =>
                                           `/${lang}/console/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>

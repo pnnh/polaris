@@ -22,8 +22,7 @@ import 'prismjs/components/prism-rust'
 import 'prismjs/components/prism-python'
 import 'prismjs/components/prism-php'
 import 'prismjs/components/prism-sql'
-import {Button, css} from '@mui/material';
-import './client.scss'
+import {Button} from '@mui/material';
 
 export function highlightCode(code: string, language: string) {
     return Prism.highlight(code, Prism.languages.javascript, 'javascript');
@@ -117,6 +116,102 @@ const codeThemes: ICodeTheme[] = [
                 </pre>
             </div>
         </div>
+
+        <style jsx>{`
+            .editorContainer {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-items: center;
+                align-items: center;
+            }
+
+            .editorContainer :global(textarea) {
+                font-family: monospace;
+                font-size: 0.9rem;
+                background-color: #ffffff;
+                border: 0;
+                flex-grow: 1;
+                width: calc(100% - 2rem);
+                padding: 1rem;
+                overflow: auto;
+                scrollbar-width: thin;
+            }
+
+            .codeBlockContainer {
+                font-family: monospace;
+                font-size: 0.9rem;
+                padding: 1rem;
+                background-color: #FFFFFF;
+                height: 20rem;
+                width: 100%;
+                border-radius: 4px;
+            }
+
+            .codeBlockContainer :global(textarea) {
+                width: 100%;
+                height: 100%;
+            }
+
+            .selectorContainer {
+                margin-top: 1rem;
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+
+            .actionContainer {
+                padding: 0.5rem 1rem;
+                width: 100%;
+                margin-bottom: 1rem;
+                background-color: #FFFFFF;
+                display: flex;
+                flex-direction: row;
+                gap: 1rem;
+            }
+
+            .previewContainer {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .previewBlock {
+                width: 100%;
+                margin-bottom: 1rem;
+                height: 32rem;
+                overflow: auto;
+                scrollbar-width: thin;
+                border-radius: 4px;
+            }
+
+            .previewBlock.dark {
+                background-color: #333;
+            }
+
+            .previewBlock :global(pre) {
+                padding: 0;
+                margin: 0;
+                display: block;
+                width: 100%;
+                overflow: hidden;
+                border: 0;
+                background-color: transparent;
+            }
+
+            .previewBlock :global(pre span) {
+                border: 0 !important;
+                background-color: transparent !important;
+            }
+
+            .previewBlock :global(pre code) {
+                display: block;
+                width: 100%;
+                overflow: hidden;
+                border: 0;
+                background-color: transparent;
+            }
+        `}</style>
     </div>
 }
 

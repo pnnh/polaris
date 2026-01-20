@@ -73,47 +73,47 @@ export default async function Page({params, searchParams}: {
                         <ComputerIcon/>
                         最近笔记1
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <ComputerIcon/>
                         最近笔记2
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <CloudQueueIcon/>
                         最近笔记3
                     </div>
                 </div>
             </div>
-            <div className={styles.libGrid}>
-                <div className={styles.libHeader}>
-                    <a className={styles.libLink}>最近图片</a>
-                    <a href={`/${lang}/console/community/images`} className={styles.libLink}>全部图片</a>
+            <div className={pageStyles.libGrid}>
+                <div className={pageStyles.libHeader}>
+                    <a className={pageStyles.libLink}>最近图片</a>
+                    <a href={`/${lang}/console/community/images`} className={pageStyles.libLink}>全部图片</a>
                 </div>
-                <div className={styles.libBody}>
-                    <div className={styles.libCard}>
+                <div className={pageStyles.libBody}>
+                    <div className={pageStyles.libCard}>
                         <ComputerIcon/>
                         最近图片1
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <ComputerIcon/>
                         最近图片2
                     </div>
                 </div>
             </div>
-            <div className={styles.libGrid}>
-                <div className={styles.libHeader}>
-                    <a className={styles.libLink}>最近频道</a>
-                    <a href={`/${lang}/console/community/channels`} className={styles.libLink}>全部频道</a>
+            <div className={pageStyles.libGrid}>
+                <div className={pageStyles.libHeader}>
+                    <a className={pageStyles.libLink}>最近频道</a>
+                    <a href={`/${lang}/console/community/channels`} className={pageStyles.libLink}>全部频道</a>
                 </div>
-                <div className={styles.libBody}>
-                    <div className={styles.libCard}>
+                <div className={pageStyles.libBody}>
+                    <div className={pageStyles.libCard}>
                         <ComputerIcon/>
                         最近频道1
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <ComputerIcon/>
                         最近频道2
                     </div>
-                    <div className={styles.libCard}>
+                    <div className={pageStyles.libCard}>
                         <CloudQueueIcon/>
                         最近频道3
                     </div>

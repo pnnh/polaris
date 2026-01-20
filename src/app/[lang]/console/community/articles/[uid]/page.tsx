@@ -8,11 +8,21 @@ import {ConsoleArticleForm} from "./form";
 import {PSArticleModel} from "@/components/common/models/article";
 import {EmptyUUID} from "@pnnh/atom";
 import GlobalLayout from "@/components/server/global";
-import styles from './page.module.scss'
+import {css} from "@/gen/styled/css";
 import {transText} from "@/components/common/locales/normal";
 import {CommunityArticleNodeService} from "@/components/community/articles";
 
 export const dynamic = "force-dynamic";
+
+const pageStyles = {
+    articlesPage: css`
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    `,
+    pageContainer: css`
+    `
+}
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ lang: string, uid: string }>,
@@ -101,8 +111,8 @@ export default async function Home({params, searchParams}: {
     }
     const modelString = JSON.stringify(model)
     return <GlobalLayout lang={pageLang} metadata={metadata}>
-        <div className={styles.articlesPage}>
-            <div className={styles.pageContainer}>
+        <div className={pageStyles.articlesPage}>
+            <div className={pageStyles.pageContainer}>
                 <ConsoleArticleForm publicPortalUrl={publicPortalUrl} modelString={modelString} lang={pageLang}/>
             </div>
         </div>

@@ -10,8 +10,18 @@ import {serverConsoleGetArticle} from "@/components/personal/articles";
 import {PSArticleModel} from "@/components/common/models/article";
 import {EmptyUUID} from "@pnnh/atom";
 import GlobalLayout from "@/components/server/global";
-import styles from './page.module.scss'
+import {css} from "@/gen/styled/css";
 import {transText} from "@/components/common/locales/normal";
+
+const pageStyles = {
+    articlesPage: css`
+        height: 100vh;
+        overflow-x: hidden;
+        overflow-y: auto;
+    `,
+    pageContainer: css`
+    `
+}
 
 export const dynamic = "force-dynamic";
 
@@ -98,8 +108,8 @@ export default async function Home({params, searchParams}: {
     }
     const modelString = JSON.stringify(model)
     return <GlobalLayout lang={pageLang} metadata={metadata}>
-        <div className={styles.articlesPage}>
-            <div className={styles.pageContainer}>
+        <div className={pageStyles.articlesPage}>
+            <div className={pageStyles.pageContainer}>
                 <ConsoleArticleForm portalUrl={serverConfig.PUBLIC_PORTAL_URL} modelString={modelString}
                                     lang={pageLang}/>
 

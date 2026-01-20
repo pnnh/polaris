@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import {useEffect} from 'react';
-import styles from './base32.module.scss'
 import Button from '@mui/material/Button';
 import {decodeBase32String, encodeBase32String} from "@pnnh/atom";
 import {IBrowserConfig} from "@/components/common/config";
@@ -40,13 +39,13 @@ export default function Base32Component({lang, appInfo}: { lang: string, appInfo
             return '';
         }
     }
-    return <div className={styles.base32Page}>
+    return <div className="base32Page">
         <h1>{appInfo.name}</h1>
-        <textarea className={styles.sourceText} placeholder={
+        <textarea className="sourceText" placeholder={
             transText(lang, '请输入需要编码的文本', 'Please enter the text to be encoded')
         } value={source}
                   onChange={(event) => setSource(event.target.value)}/>
-        <div className={styles.toolButtons}>
+        <div className="toolButtons">
             <Button variant="contained" size={'small'} onClick={encodeBase32}>
                 {transText(lang, 'Base32编码', 'Base32 Encode')}
             </Button>
@@ -54,9 +53,56 @@ export default function Base32Component({lang, appInfo}: { lang: string, appInfo
                 {transText(lang, 'Base32解码', 'Base32 Decode')}
             </Button>
         </div>
-        <textarea className={styles.targetText} placeholder={
+        <textarea className="targetText" placeholder={
             transText(lang, '编码结果', 'Encoded Result')
         } value={output} onChange={(event) =>
             setOutput(event.target.value)}/>
+
+        <style jsx>{`
+            .base32Page {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 16px;
+                height: 100%;
+                scrollbar-width: thin;
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            .sourceText {
+                width: 800px;
+                height: 160px;
+                padding: 8px;
+                flex-shrink: 0;
+                background: #FFFFFF;
+                border: 1px solid #d3d3d3;
+                border-radius: 8px;
+            }
+
+            .toolButtons {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 16px;
+                flex-shrink: 0;
+            }
+
+            .targetText {
+                width: 800px;
+                height: 160px;
+                padding: 8px;
+                flex-shrink: 0;
+                background: #FFFFFF;
+                border: 1px solid #d3d3d3;
+                border-radius: 8px;
+            }
+
+            .commentsClient {
+                width: 548px;
+            }
+        `}</style>
     </div>
 }

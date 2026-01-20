@@ -27,6 +27,7 @@
     --action-disabled-color: rgba(0, 0, 0, 0.26);
     --action-disabled-background-color: rgba(0, 0, 0, 0.12);
     --action-focus-color: rgba(0, 0, 0, 0.12);
+    --border-color: #e0e0e0;
 
     --screenSmallWidth: 20rem; /* 约320px，小于该屏幕宽度时，提示屏幕尺寸过小无法保证展示效果 */
     --screenMediumWidth: 48rem; /*  约768px，达到该屏幕宽度时显示中等屏幕模式 */

@@ -128,60 +128,60 @@ export default async function Page({params, searchParams}: {
                             <ComputerIcon/>
                             最近笔记1
                         </div>
-                        <div className={styles.libCard}>
+                        <div className={pageStyles.libCard}>
                             <ComputerIcon/>
                             最近笔记2
                         </div>
-                        <div className={styles.libCard}>
+                        <div className={pageStyles.libCard}>
                             <ComputerIcon/>
-                            <a href={`/${lang}/console/personal/images`} className={styles.libLink}>本地图片库</a>
+                            <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>本地图片库</a>
                         </div>
-                        <div className={styles.libCard}>
+                        <div className={pageStyles.libCard}>
                             <CloudQueueIcon/>
                             最近笔记库
                         </div>
-                        <div className={styles.libCard}>
+                        <div className={pageStyles.libCard}>
                             <CloudQueueIcon/>
-                            <a href={`/${lang}/console/personal/images`} className={styles.libLink}>最近图片库</a></div>
+                            <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>最近图片库</a></div>
 
                     </div>
                 </div>
-                <div className={styles.libGrid}>
-                    <div className={styles.libHeader}>
-                        <a className={styles.libLink}>社区目录</a>
-                        <a href={`/${lang}/console/community`} className={styles.libLink}>社区主页</a>
+                <div className={pageStyles.libGrid}>
+                    <div className={pageStyles.libHeader}>
+                        <a className={pageStyles.libLink}>社区目录</a>
+                        <a href={`/${lang}/console/community`} className={pageStyles.libLink}>社区主页</a>
                     </div>
-                    <div className={styles.libBody}>
-                        <div className={styles.libCard}>
+                    <div className={pageStyles.libBody}>
+                        <div className={pageStyles.libCard}>
                             <ComputerIcon/>
                             频道1
                         </div>
-                        <div className={styles.libCard}>
+                        <div className={pageStyles.libCard}>
                             <ComputerIcon/>
-                            <a href={`/${lang}/console/personal/images`} className={styles.libLink}>本地图片库</a>
+                            <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>本地图片库</a>
                         </div>
-                        <div className={styles.libCard}>
+                        <div className={pageStyles.libCard}>
                             <CloudQueueIcon/>
                             频道2
                         </div>
 
                     </div>
                 </div>
-                <div className={styles.libGrid}>
-                    <div className={styles.libHeader}>
-                        <a className={styles.libLink}>管理目录</a>
-                        <a href={`/${lang}/console/management`} className={styles.libLink}>管理主页</a>
+                <div className={pageStyles.libGrid}>
+                    <div className={pageStyles.libHeader}>
+                        <a className={pageStyles.libLink}>管理目录</a>
+                        <a href={`/${lang}/console/management`} className={pageStyles.libLink}>管理主页</a>
                     </div>
-                    <div className={styles.libBody}>
-                        <div className={styles.libCard}>
+                    <div className={pageStyles.libBody}>
+                        <div className={pageStyles.libCard}>
                             <ComputerIcon/>
                             频道1
                         </div>
-                        <div className={styles.libCard}>
+                        <div className={pageStyles.libCard}>
                             <ComputerIcon/>
-                            <a href={`/${lang}/console/personal/images`} className={styles.libLink}>本地图片库</a>
+                            <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>本地图片库</a>
                         </div>
-                        <div className={styles.libCard}>
+                        <div className={pageStyles.libCard}>
                             <CloudQueueIcon/>
                             频道2
                         </div>

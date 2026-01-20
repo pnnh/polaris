@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './page.module.scss'
+import {css} from "@/gen/styled/css";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
 import {SymbolUnknown} from "@pnnh/atom";
@@ -13,6 +13,19 @@ import {EmptyUUID} from "@pnnh/atom";
 import {PSChannelModel} from "@/components/common/models/channel";
 
 export const dynamic = "force-dynamic";
+
+const pageStyles = {
+    contentContainer: css`
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    `,
+    conRight: css`
+    `,
+    conMiddle: css`
+        flex: 1;
+    `
+}
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -72,8 +85,8 @@ export default async function Page({params, searchParams}: {
 
     return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchValue} pathname={pathname}
                           metadata={metadata}>
-        <div className={styles.contentContainer}>
-            <div className={styles.conMiddle}>
+        <div className={pageStyles.contentContainer}>
+            <div className={pageStyles.conMiddle}>
                 <ConsoleChannelForm publicPortalUrl={publicPortalUrl} modelString={modelString}/>
             </div>
         </div>

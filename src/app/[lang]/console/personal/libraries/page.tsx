@@ -1,6 +1,6 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import styles from './page.module.scss'
+import {css} from "@/gen/styled/css";
 import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
@@ -9,6 +9,22 @@ import {ConsoleLibraryFilterBar} from "./filter";
 import {ConsoleLibraryMiddleBody} from "./library";
 import {isAnonymousAccount} from "@/components/common/models/account/account";
 import {langEn} from "@pnnh/atom";
+
+const pageStyles = {
+    consolePage: css`
+    `,
+    libGrid: css`
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        height: 100%;
+    `,
+    libHeader: css`
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    `
+}
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -27,9 +43,9 @@ export default async function Page({params, searchParams}: {
     }
 
     return <GlobalLayout lang={lang} metadata={metadata}>
-        <div className={styles.consolePage}>
-            <div className={styles.libGrid}>
-                <div className={styles.libHeader}>
+        <div className={pageStyles.consolePage}>
+            <div className={pageStyles.libGrid}>
+                <div className={pageStyles.libHeader}>
                     <ConsoleLibraryFilterBar lang={lang} keyword={''} portalUrl={publicPortalUrl}/>
                 </div>
                 <ConsoleLibraryMiddleBody lang={lang} portalUrl={publicPortalUrl}/>

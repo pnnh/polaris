@@ -1,5 +1,4 @@
 import React from 'react'
-import styles from './page.module.scss'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
 import {SymbolUnknown} from "@pnnh/atom";
@@ -12,8 +11,46 @@ import {PageMetadata} from "@/components/common/utils/page";
 import {serverSelectImages} from "@/components/server/images/image";
 import {ImageMiddleBody} from "@/components/server/content/images/image";
 import {transText} from "@/components/common/locales/normal";
+import {css} from "@/gen/styled/css";
 
 export const dynamic = "force-dynamic";
+
+const pageStyles = {
+    contentContainer: css`
+        flex-grow: 1;
+        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        margin: 1rem;
+    `,
+    conTop: css`
+    `,
+    linkTag: css`
+        color: var(--text-primary-color);
+        text-decoration: none;
+        display: inline-block;
+        padding: 0.5rem 0.5rem;
+        border-radius: 0.25rem;
+        background-color: var(--background-color);
+        
+        &:hover {
+            text-decoration: underline;
+        }
+    `,
+    conMiddle: css`
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-grow: 1;
+        background-color: #FFF;
+        border-radius: 4px;
+    `,
+    middlePagination: css`
+        width: 100%;
+    `
+}
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -48,21 +85,21 @@ export default async function Page({params, searchParams}: {
 
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
-        <div className={styles.contentContainer}>
-            <div className={styles.conTop}>
-                <a className={styles.linkTag} href={`/${lang}/images?type=illustration`}>
+        <div className={pageStyles.contentContainer}>
+            <div className={pageStyles.conTop}>
+                <a className={pageStyles.linkTag} href={`/${lang}/images?type=illustration`}>
                     {transText(lang, '插画', 'illustration')}</a>
-                <a className={styles.linkTag} href={`/${lang}/images?type=sticker`}>
+                <a className={pageStyles.linkTag} href={`/${lang}/images?type=sticker`}>
                     {transText(lang, '表情图', 'Sticker')}</a>
-                <a className={styles.linkTag} href={`/${lang}/images?type=emoji`}>
+                <a className={pageStyles.linkTag} href={`/${lang}/images?type=emoji`}>
                     {transText(lang, 'Emoji', 'Emoji')}</a>
-                <a className={styles.linkTag} href={`/${lang}/images?type=icons`}>
+                <a className={pageStyles.linkTag} href={`/${lang}/images?type=icons`}>
                     {transText(lang, '图标', 'Icons')}</a>
             </div>
-            <div className={styles.conMiddle}>
+            <div className={pageStyles.conMiddle}>
                 <ImageMiddleBody selectData={selectData} lang={lang}/>
 
-                <div className={styles.middlePagination}>
+                <div className={pageStyles.middlePagination}>
                     <PaginationServer lang={lang} pagination={pagination}
                                       pageLinkFunc={(page) =>
                                           `/${lang}/images` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>

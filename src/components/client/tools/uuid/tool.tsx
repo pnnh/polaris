@@ -2,7 +2,6 @@
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import React, {useState} from 'react'
-import './tool.scss'
 import {NIL, v1 as uuidv1, v3 as uuidv3, v4 as uuidv4, v5 as uuidv5, v6 as uuidv6, v7 as uuidv7, validate} from 'uuid';
 
 import {dnsNamespace, NormalUUIDItem, oidNamespace, OptionType, urlNamespace, x500Namespace} from "./state";
@@ -145,6 +144,89 @@ export function UuidToolBody({lang, appInfo}: { lang: string, appInfo: Applicati
         </div>
         {state && <UUIDItemCard uuidItem={state} lang={lang}/>}
         {state && <GenHistoryTable lang={lang} history={history}/>}
+
+        <style jsx>{`
+            .toolComponent {
+                width: 100%;
+            }
+
+            .toolBody {
+                width: 100%;
+                background: #ffffff;
+                border-radius: 8px;
+                overflow-y: auto;
+                margin: 16px auto 0;
+            }
+
+            .titleContainer {
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: 16px;
+                margin-bottom: 16px;
+                padding-right: 16px;
+            }
+
+            .toolTitle {
+                margin: 0.5rem 1rem;
+            }
+
+            .toolDescription {
+                margin: 8px 16px 16px;
+                font-size: 16px;
+                color: #666666;
+            }
+
+            .tip {
+                margin-top: 8px;
+                margin-left: 16px;
+                margin-right: 16px;
+                font-size: 14px;
+                color: #666666;
+            }
+
+            .actionRow {
+                margin: 2rem 16px;
+                display: flex;
+                gap: 0.5rem;
+                align-items: center;
+            }
+
+            .optionRow {
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+                margin-left: 16px;
+                margin-right: 16px;
+                margin-bottom: 16px;
+                font-size: 0.95rem;
+                color: #666666;
+                align-items: center;
+            }
+
+            .namespaceForm {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                justify-content: center;
+            }
+
+            .namespaceSwitch {
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+                align-items: center;
+            }
+
+            .namespaceText {
+                display: flex;
+                flex-direction: row;
+                gap: 16px;
+                align-items: center;
+            }
+        `}</style>
     </div>
 }
 
@@ -334,6 +416,55 @@ function UUIDItemCard({uuidItem, lang}: { uuidItem: NormalUUIDItem, lang: string
                 </div>}
             </div>
         </div>}
+
+        <style jsx>{`
+            .uuidItemCard {
+                display: table;
+                width: 100%;
+                border-collapse: collapse;
+                border-spacing: 0;
+                margin-top: 16px;
+                margin-bottom: 16px;
+                font-size: 1rem;
+                background: #ffffff;
+                border-radius: 4px;
+                padding: 1rem;
+            }
+
+            .headerRow, .dataRow {
+                display: table-row;
+                width: 100%;
+                border-bottom: 1px solid #f3f3f3;
+            }
+
+            .headerCell {
+                display: table-cell;
+                font-size: 0.9rem;
+                vertical-align: middle;
+                width: 6rem;
+                padding: 8px;
+            }
+
+            .dataCell {
+                display: table-cell;
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+
+            .uuidItem {
+                color: #666666;
+            }
+
+            .uuidItem:first-of-type {
+                margin-bottom: 0.5rem;
+            }
+
+            .dataCell:first-of-type {
+                font-weight: bold;
+                vertical-align: middle;
+                text-align: left;
+            }
+        `}</style>
     </div>
 }
 
@@ -360,5 +491,27 @@ function CopyItem({uuidText}: { uuidText: string }) {
             </div>
         </div>
         <span>{uuidText}</span>
+
+        <style jsx>{`
+            .styleCopyItem {
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+                align-items: center;
+            }
+
+            .styleCopyItem :global(svg) {
+                cursor: pointer;
+                margin-bottom: 0 !important;
+            }
+
+            .styleCopyItem :global(svg:hover) {
+                color: #666666;
+            }
+
+            .styleCopyItem :global(span) {
+                margin-bottom: 0 !important;
+            }
+        `}</style>
     </div>
 }

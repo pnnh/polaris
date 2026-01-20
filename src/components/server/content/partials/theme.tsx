@@ -1,6 +1,5 @@
 'use client';
 
-import styles from './theme.module.scss'
 import {useState} from "react";
 import {StyledMenu} from "@/components/client/dropmenu";
 import MenuItem from "@mui/material/MenuItem";
@@ -22,9 +21,9 @@ export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string
         window.location.reload()
     }
     return <>
-        <div className={styles.themeSelector}
+        <div className="themeSelector"
              onClick={handleClick}>
-            <ContrastIcon className={styles.themeIcon} aria-hidden={undefined} sx={{cursor: 'pointer'}}/>
+            <ContrastIcon className="themeIcon" aria-hidden={undefined} sx={{cursor: 'pointer'}}/>
             {/*{themeName === 'dark' ? transKey(lang, "DarkTheme") : themeName === 'light' ?*/}
             {/*    transKey(lang, "LightTheme") : transKey(lang, "AutoTheme")}*/}
         </div>
@@ -53,5 +52,19 @@ export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string
                 {transKey(lang, "DarkTheme")}
             </MenuItem>
         </StyledMenu>
+
+        <style jsx>{`
+            .themeSelector {
+                cursor: pointer;
+                display: flex;
+                flex-direction: row;
+                gap: 0.2rem;
+            }
+
+            .themeSelector :global(.themeIcon) {
+                color: var(--text-primary-color);
+                background: var(--background-color);
+            }
+        `}</style>
     </>
 }

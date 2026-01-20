@@ -1,6 +1,5 @@
 'use client'
 
-import styles from "./form.module.scss";
 import {FormControlLabel, Radio, RadioGroup} from "@mui/material";
 import Button from "@mui/material/Button";
 import React from "react";
@@ -45,23 +44,23 @@ export function ConsoleChannelForm({publicPortalUrl, modelString}: { publicPorta
         }
     }
     const coverUrl = oldModel.image || getDefaultImageUrl();
-    return <div className={styles.bodyContainer}>
-        <div className={styles.channelCover}>
-            <div className={styles.channelHeader}>
+    return <div className="bodyContainer">
+        <div className="channelCover">
+            <div className="channelHeader">
                 <div>
                     <input value={name} onChange={(event) => setName(event.target.value)}/>
                 </div>
-                <div className={styles.channelTitle}>
+                <div className="channelTitle">
                     <input value={title} onChange={(event) => setTitle(event.target.value)}/>
                 </div>
-                <div className={styles.channelDescription}>
+                <div className="channelDescription">
                         <textarea name={'channelDescription'}
                                   value={description} onChange={(event => setDescription(event.target.value))}/>
                 </div>
             </div>
-            <img className={styles.coverImage} src={coverUrl} alt={oldModel.title}/>
+            <img className="coverImage" src={coverUrl} alt={oldModel.title}/>
         </div>
-        <div className={styles.bottomBar}>
+        <div className="bottomBar">
             <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label"
                         name="row-radio-buttons-group" value={lang}
                         onChange={(event) => setLang(event.target.value)}>
@@ -75,5 +74,82 @@ export function ConsoleChannelForm({publicPortalUrl, modelString}: { publicPorta
                 transText(lang, '创建多语言副本', 'Create Multilingual Copy')
             }</Button>
         </div>
+        <style jsx>{`
+          .bodyContainer {
+            overflow: hidden;
+          }
+          .channelCover {
+            width: calc(100vw - 16rem);
+            height: 12rem;
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            background: var(--background-color);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+          }
+          .channelHeader {
+            flex-grow: 1;
+            position: relative;
+            z-index: 1;
+            border-radius: 4px;
+            overflow: hidden;
+          }
+          .channelTitle {
+            font-weight: 600;
+            font-size: 20px;
+            margin-bottom: 16px;
+            padding-left: 1rem;
+          }
+          .channelTitle input {
+            width: calc(100% - 3rem);
+            border-color: #b4b4b4;
+            border-radius: 4px;
+            border-width: 1px;
+            padding: 0.5rem;
+          }
+          .channelDescription {
+            font-size: 1rem;
+            color: var(--text-primary-color);
+            padding-left: 1rem;
+          }
+          .channelDescription textarea {
+            resize: none;
+            width: calc(100% - 3rem);
+            height: 5rem;
+            border-color: #b4b4b4;
+            border-radius: 4px;
+            padding: 0.5rem;
+            scrollbar-width: thin;
+          }
+          .coverImage {
+            width: 8rem;
+            height: 8rem;
+            flex-shrink: 0;
+            object-fit: cover;
+            top: 0;
+            z-index: 0;
+            margin-right: 1rem;
+          }
+          .bottomBar {
+            height: 4rem;
+            width: 100vw;
+            background: var(--background-color);
+            display: flex;
+            flex-direction: row;
+            justify-items: center;
+            align-items: center;
+            gap: 1rem;
+            padding-left: 1rem;
+          }
+          @media screen and (min-width: 80rem) {
+            .bottomBar {
+              width: 80vw;
+              margin: 1rem auto 0 auto;
+            }
+          }
+        `}</style>
     </div>
 }

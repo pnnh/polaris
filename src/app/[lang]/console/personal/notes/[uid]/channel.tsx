@@ -1,7 +1,15 @@
 import {TextField} from "@mui/material";
 import React, {useEffect} from "react";
 import {clientChannelsComplete} from "@/components/client/channels/channels";
-import styles from './channel.module.scss';
+import {css} from "@/gen/styled/css";
+
+const channelStyles = {
+    channelSelector: css`
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+    `
+}
 
 export function ChannelSelector({channel, lang, portalUrl, onChange}: {
     channel: string,
@@ -36,7 +44,7 @@ export function ChannelSelector({channel, lang, portalUrl, onChange}: {
     useEffect(() => {
         doComplete(channel)
     }, [channel]);
-    return <div className={styles.channelSelector}>
+    return <div className={channelStyles.channelSelector}>
         <TextField label="Outlined" variant="outlined" size={'small'} value={channelKeyword}
                    onChange={(event) => doComplete(event.target.value)}/>
         <span>{channelName}</span>
