@@ -7,6 +7,13 @@ import {PageMetadata} from "@/components/common/utils/page";
 import AesComponent from "./aes";
 import {css} from '@/gen/styled/css'
 
+const pageStyles = {
+    pageContainer: css`
+        width: 960px;
+        margin: 0 auto !important;
+    `
+}
+
 export default async function Home({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
     searchParams: Promise<Record<string, string>>
@@ -21,15 +28,11 @@ export default async function Home({params, searchParams}: {
         notFound()
     }
 
-    const stylePageContainer = css`
-        width: 960px;
-        margin: 0 auto !important;
-    `
     const metadata = new PageMetadata(lang, appInfo.name)
     metadata.description = appInfo.description
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
-        <div className={stylePageContainer}>
+        <div className={pageStyles.pageContainer}>
             <AesComponent lang={lang} appInfo={appInfo}/>
         </div>
     </ContentLayout>

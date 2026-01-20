@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './page.module.scss'
+import {css} from "@/gen/styled/css";
 import queryString from 'query-string'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import ContentLayout from '@/components/server/content/layout'
@@ -15,6 +15,38 @@ import {ArticleMiddleBody} from "@/components/server/content/article/article";
 import {ArticleFilterBar} from "@/components/server/content/article/filter";
 import {useServerConfig} from "@/components/server/config";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
+
+const pageStyles = {
+    contentContainer: css`
+        flex-grow: 1;
+        flex-direction: row;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        margin: 1rem;
+    `,
+    conRight: css`
+        display: block;
+        width: 16rem;
+        flex-shrink: 0;
+        
+        @media (max-width: 48rem) {
+            display: none;
+        }
+    `,
+    conMiddle: css`
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-grow: 1;
+        background-color: var(--background-color);
+        border-radius: 4px;
+    `,
+    middlePagination: css`
+        width: 100%;
+    `
+}
 
 
 export const dynamic = "force-dynamic";
@@ -65,17 +97,17 @@ export default async function Page({params, searchParams}: {
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
-        <div className={styles.contentContainer}>
-            <div className={styles.conMiddle}>
+        <div className={pageStyles.contentContainer}>
+            <div className={pageStyles.conMiddle}>
                 <ArticleFilterBar lang={lang} searchParamsValue={searchParamsValue}/>
                 <ArticleMiddleBody selectResult={selectResult} lang={lang}/>
-                <div className={styles.middlePagination}>
+                <div className={pageStyles.middlePagination}>
                     <PaginationServer lang={lang} pagination={pagination}
                                       pageLinkFunc={(page) =>
                                           `/${lang}/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                 </div>
             </div>
-            <div className={styles.conRight}>
+            <div className={pageStyles.conRight}>
                 <ArticleRankCard rankResult={rankSelectResult} lang={lang}/>
             </div>
         </div>

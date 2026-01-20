@@ -1,4 +1,4 @@
-import styles from './page.module.scss'
+import {css} from "@/gen/styled/css";
 import {Base58Component} from "./base58";
 import ContentLayout from "@/components/server/content/layout";
 import {langEn, SymbolUnknown} from "@pnnh/atom";
@@ -6,6 +6,13 @@ import {getPathname} from "@/components/server/pathname";
 import {base58Uid, queryApp} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
 import {PageMetadata} from "@/components/common/utils/page";
+
+const pageStyles = {
+    base58Page: css`
+        width: 960px;
+        margin: 0 auto;
+    `
+}
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -26,7 +33,7 @@ export default async function Home({params, searchParams}: {
     metadata.description = appInfo.description
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
-        <div className={styles.base58Page}>
+        <div className={pageStyles.base58Page}>
             <Base58Component lang={lang}/>
         </div>
     </ContentLayout>

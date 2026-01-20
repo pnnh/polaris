@@ -1,4 +1,4 @@
-import styles from './page.module.scss'
+import {css} from "@/gen/styled/css";
 import ContentLayout from "@/components/server/content/layout";
 import {langEn, SymbolUnknown} from "@pnnh/atom";
 import {getPathname} from "@/components/server/pathname";
@@ -6,6 +6,13 @@ import {aesUid, queryApp} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
 import {PageMetadata} from "@/components/common/utils/page";
 import RsaComponent from "./client";
+
+const pageStyles = {
+    pageContainer: css`
+        width: 960px;
+        margin: 0 auto;
+    `
+}
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -25,7 +32,7 @@ export default async function Home({params, searchParams}: {
     metadata.description = appInfo.description
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
-        <div className={styles.pageContainer}>
+        <div className={pageStyles.pageContainer}>
             <RsaComponent lang={lang} appInfo={appInfo}/>
         </div>
     </ContentLayout>

@@ -1,4 +1,4 @@
-import styles from './page.module.scss'
+import {css} from "@/gen/styled/css";
 import React from 'react'
 import {TocInfo} from '@/components/common/toc'
 
@@ -26,6 +26,106 @@ import {notFound} from "next/navigation";
 import {serverInsertArticleViewer} from "@/components/server/viewers/viewers";
 // import '@/atom/client/editor/editor.scss';
 import {serverMakeGet} from "@pnnh/atom/nodejs";
+
+const pageStyles = {
+    articleCover: css`
+        width: 100%;
+        height: 12rem;
+        position: relative;
+        margin: 1rem auto 0;
+        border-radius: 6px;
+        overflow: hidden;
+        opacity: 0.9;
+        background-color: var(--background-color);
+        
+        @media screen and (min-width: 80rem) {
+            width: 80rem;
+            margin: 1rem auto 0 auto;
+        }
+    `,
+    articleHeader: css`
+        position: relative;
+        z-index: 1;
+        border-radius: 4px;
+        overflow: hidden;
+        padding: 1rem;
+        color: var(--color-text);
+    `,
+    articleTitle: css`
+        font-weight: 600;
+        font-size: 20px;
+        margin-bottom: 16px;
+    `,
+    articleDescription: css`
+        font-size: 1rem;
+        color: var(--text-primary-color);
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    `,
+    action: css`
+        font-size: 14px;
+        height: 1rem;
+        color: var(--color-text);
+        line-height: 22px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 4px;
+    `,
+    coverImage: css`
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        z-index: 0;
+        mask: linear-gradient(to right, transparent 30%, var(--text-primary-color));
+    `,
+    articleContainer: css`
+        display: flex;
+        flex-direction: row;
+        margin-top: 1rem;
+        margin-bottom: 2rem;
+        width: 100%;
+        gap: 1rem;
+        
+        @media screen and (min-width: 80rem) {
+            width: 80rem;
+            margin: 1rem auto 0 auto;
+        }
+    `,
+    leftArea: css`
+        border-radius: 2px;
+        width: calc(100% - 20rem - 1rem);
+    `,
+    commentsClient: css`
+        margin-top: 1rem;
+    `,
+    rightArea: css`
+        flex-direction: column;
+        gap: 1rem;
+        width: 20rem;
+        flex-shrink: 0;
+        display: none;
+        
+        @media screen and (min-width: 80rem) {
+            display: flex;
+        }
+    `,
+    articleInfo: css`
+        display: block;
+        background-color: var(--background-color);
+        border-radius: 4px;
+        border: solid 1px var(--divider-color);
+    `,
+    articleBody: css`
+        padding: 16px;
+        background-color: var(--background-color);
+        border-radius: 4px;
+        position: relative;
+    `
+}
 
 export const dynamic = "force-dynamic";
 
@@ -76,34 +176,34 @@ export default async function Home({params, searchParams}: {
     return <ArticleReadLayout lang={lang} searchParams={await searchParams} pathname={pathname}
                               metadata={metadata} userInfo={SymbolUnknown}>
 
-        <div className={styles.articleCover}>
-            <div className={styles.articleHeader}>
-                <h1 className={styles.articleTitle} id={titleId}>{getResult.data.title}</h1>
-                <div className={styles.articleDescription}>
+        <div className={pageStyles.articleCover}>
+            <div className={pageStyles.articleHeader}>
+                <h1 className={pageStyles.articleTitle} id={titleId}>{getResult.data.title}</h1>
+                <div className={pageStyles.articleDescription}>
                     {STSubString(model.description || model.body, 80)}
                 </div>
-                <div className={styles.action}>
+                <div className={pageStyles.action}>
                     <FaEye size={'1rem'}/><span>{getResult.data.discover}</span>&nbsp;
                     <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(getResult.data.update_time)}</span>
                 </div>
             </div>
-            <img className={styles.coverImage} src={imageUrl} alt={model.title}/>
+            <img className={pageStyles.coverImage} src={imageUrl} alt={model.title}/>
         </div>
-        <div className={styles.articleContainer}>
-            <div className={styles.leftArea} id={'articleReadBody'}>
-                <div className={styles.articleInfo}>
-                    <div className={styles.articleBody}>
+        <div className={pageStyles.articleContainer}>
+            <div className={pageStyles.leftArea} id={'articleReadBody'}>
+                <div className={pageStyles.articleInfo}>
+                    <div className={pageStyles.articleBody}>
                         <ArticlePreview tocList={tocList} header={getResult.data.header}
                                         body={getResult.data.body}
                                         assetsUrl={'assetsUrl'} portalUrl={publicPortalUrl}/>
                     </div>
                 </div>
-                <div className={styles.commentsClient}>
+                <div className={pageStyles.commentsClient}>
                     <CommentsClient portalUrl={publicPortalUrl} resource={getResult.data.uid}
                                     lang={lang}/>
                 </div>
             </div>
-            <div className={styles.rightArea}>
+            <div className={pageStyles.rightArea}>
                 <TocInfo readurl={readUrl} model={tocList}/>
                 <ArticleAssets portalUrl={publicPortalUrl} fullRepoPath={fullRepoPath} articleUid={getResult.data.uid}/>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import './page.scss'
+import {css} from "@/gen/styled/css";
 import {getPathname} from "@/components/server/pathname";
 import {UuidToolBody} from "@/components/client/tools/uuid/tool";
 import {CommentsClient} from "@/components/client/comments/comments";
@@ -9,6 +9,24 @@ import {PageMetadata} from "@/components/common/utils/page";
 import {queryApp, uuidUid} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
 import ContentLayout from "@/components/server/content/layout";
+
+const pageStyles = {
+    uuidPage: css`
+        width: 1024px;
+        margin: 0 auto;
+    `,
+    pageContent: css`
+        display: flex;
+        flex-direction: row;
+        justify-items: center;
+        align-items: center;
+        margin-top: 32px;
+        margin-bottom: 1rem;
+    `,
+    commentsClient: css`
+        margin-top: 2rem;
+    `
+}
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -31,11 +49,11 @@ export default async function Home({params, searchParams}: {
     const portalUrl = serverConfig.PUBLIC_PORTAL_URL
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
-        <div className={'uuidPage'}>
-            <div className={'pageContent'}>
+        <div className={pageStyles.uuidPage}>
+            <div className={pageStyles.pageContent}>
                 <UuidToolBody lang={lang} appInfo={appInfo}/>
             </div>
-            <div className={'commentsClient'}>
+            <div className={pageStyles.commentsClient}>
                 <CommentsClient portalUrl={portalUrl} resource={uuidUid}
                                 lang={lang}/>
             </div>
