@@ -1,7 +1,6 @@
 'use client'
 
 import {useState} from "react";
-import styles from './base58.module.scss'
 import {Button, FormControlLabel, Radio, RadioGroup, Tooltip} from "@mui/material";
 import {css} from "@emotion/css";
 import {base58ToString, stringToBase58} from "@pnnh/atom";
@@ -40,15 +39,16 @@ export function Base58Component({lang}: { lang: string }) {
         setOpen(false);
     };
 
-    return <div className={styles.base58Component}>
-        <h1 className={styles.productTitle}>{transExtra(lang, 'Base58 编码和解码工具', 'Base58 encoding and decoding tool', 'base58Tool')}</h1>
-        <div className={styles.textContainer}>
+    return <>
+        <div className="base58Component">
+        <h1 className="productTitle">{transExtra(lang, 'Base58 编码和解码工具', 'Base58 encoding and decoding tool', 'base58Tool')}</h1>
+        <div className="textContainer">
                 <textarea name={'base58-source'} value={sourceText}
                           onChange={(event) => setSourceText(event.target.value)}
                           maxLength={4096}
                           placeholder={transExtra(lang, "请输入文本", "Please input text", 'InputPlaceholder')}></textarea>
         </div>
-        <div className={styles.flavorContainer}>
+        <div className="flavorContainer">
             <RadioGroup
                 row
                 aria-labelledby="base58-flavor-group-label"
@@ -62,7 +62,7 @@ export function Base58Component({lang}: { lang: string }) {
                 <FormControlLabel value="check" control={<Radio size='small'/>} label="check"/>
             </RadioGroup>
         </div>
-        <div className={styles.actionContainer}>
+        <div className="actionContainer">
             <Button variant={'contained'} size={'small'} onClick={() => {
                 if (!sourceText) {
                     setError(transKey(lang, 'InputPlaceholder'))
@@ -100,10 +100,10 @@ export function Base58Component({lang}: { lang: string }) {
                 {transKey(lang, 'ClearButton')}
             </Button>
         </div>
-        <div className={styles.errorContainer}>
+        <div className="errorContainer">
             {error && <div>{error}</div>}
         </div>
-        <div className={styles.resultContainer}>
+        <div className="resultContainer">
             <div className={resultTextStyle}>
                 {resultText || <div className={resultTipsStyle}>
                     {transKey(lang, 'ResultPlaceholder')}
@@ -150,4 +150,68 @@ export function Base58Component({lang}: { lang: string }) {
             </Tooltip>
         </div>
     </div>
+    <style jsx>{`
+      .base58Component {
+        margin-bottom: 1rem;
+      }
+      .description {
+        font-size: 1rem;
+        color: #4a4a4a;
+        margin: 1rem 0 1rem 0;
+      }
+      .productTitle {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin: 1rem 0;
+        text-align: center;
+      }
+      .textContainer {
+        margin: 1rem 0 1rem 0;
+        background-color: var(--background-color);
+        color: var(--text-primary-color);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+      .textContainer textarea {
+        width: calc(100% - 4rem);
+        min-height: 8rem;
+        padding: 1rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: none;
+        background-color: var(--background-color);
+        color: var(--text-primary-color);
+        outline: none;
+      }
+      .flavorContainer {
+        margin: 1rem 0 1rem 1rem;
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+      }
+      .actionContainer {
+        margin: 1rem 0 1rem 1rem;
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+      }
+      .errorContainer {
+        padding: 0 1rem;
+        color: red;
+        font-size: 1rem;
+        font-style: italic;
+        background-color: var(--background-color);
+      }
+      .resultContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--background-color);
+        color: var(--text-primary-color);
+      }
+    `}</style>
+    </>
 }

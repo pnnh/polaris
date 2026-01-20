@@ -1,6 +1,5 @@
 'use client'
 
-import './edit.scss'
 import React, {useEffect, useState} from "react";
 import {CodeOk} from "@pnnh/atom";
 import {ButtonThrottle} from "@pnnh/atom/browser";
@@ -52,7 +51,8 @@ export function EditArea({lang, portalUrl, resource}: {
         })
     }, []);
 
-    return <div className={'editContainer'}>
+    return <>
+        <div className={'editContainer'}>
         <div className={'areaTitle'}>
             {transText(lang, '发表评论', 'Post a comment')}
         </div>
@@ -79,4 +79,61 @@ export function EditArea({lang, portalUrl, resource}: {
             </div>
         </div>
     </div>
+    <style jsx>{`
+      .editContainer .areaTitle {
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+      .editRow {
+        display: flex;
+        flex-direction: row;
+        margin: 1rem auto;
+        gap: 1rem;
+      }
+      .infoColumn {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        flex-grow: 1;
+      }
+      .editorRow {
+        width: 100%;
+        border: solid 1px #ccc;
+        border-radius: 4px;
+        min-height: 6rem;
+        overflow: hidden;
+      }
+      .editorRow textarea {
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        font-size: 1rem;
+        padding: 0.5rem;
+      }
+      .actionsRow {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .submitArea {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+      }
+      .submitButton {
+        padding: 0.3rem 0.8rem;
+        background-color: #127af8;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        animation: buttonThrottle 2s step-end forwards;
+      }
+      .infoMsg {
+        font-size: 0.9rem;
+      }
+    `}</style>
+    </>
 }

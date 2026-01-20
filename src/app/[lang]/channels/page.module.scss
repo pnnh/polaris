@@ -1,4 +1,3 @@
-@use '@/components/common/styles/theme';
 
 .container {
   flex-grow: 1;
@@ -17,7 +16,7 @@
   grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
 }
 
-@media (max-width: theme.$screenMediumWidth) {
+@media (max-width: 48rem) {
   .list {
     grid-template-columns: 1fr;
   }

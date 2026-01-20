@@ -1,6 +1,5 @@
 'use client'
 
-import "./search.scss";
 import Image from "next/image";
 import React, {CSSProperties} from "react";
 
@@ -16,7 +15,8 @@ export function ContentSearchAction({pathname, queryKeyword}: { pathname: string
         window.location.href = `/content/search?keyword=${encodeURIComponent(keyword)}`
     }
 
-    return <div className={'searchContainer'} style={style}>
+    return <>
+        <div className={'searchContainer'} style={style}>
         <input className={'searchInput'} value={keyword} onChange={(event) => {
             setKeyword(event.target.value)
         }} onKeyDown={(event) => {
@@ -31,4 +31,38 @@ export function ContentSearchAction({pathname, queryKeyword}: { pathname: string
                    width={24}/>
         </div>
     </div>
+    <style jsx>{`
+      .searchContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        overflow: hidden;
+      }
+      .searchInput {
+        width: 12rem;
+        height: 1.8rem;
+        padding: 0 4px;
+        font-size: 0.9rem;
+        border: 0;
+        outline-color: transparent;
+      }
+      @media (max-width: 48rem) {
+        .searchInput {
+          width: 8rem;
+        }
+      }
+      .iconContainer {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .searchIcon {
+        margin-right: 6px;
+        filter: drop-shadow(0px 100px #aaa);
+        transform: translateY(-100px);
+      }
+    `}</style>
+    </>
 }

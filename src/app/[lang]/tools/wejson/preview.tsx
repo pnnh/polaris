@@ -1,7 +1,6 @@
 'use client'
 
 import Prism from 'prismjs';
-import styles from './preview.module.scss';
 
 export function WePreview({jsonText}:{jsonText:string}) {
     if (!jsonText) {
@@ -16,6 +15,17 @@ export function WePreview({jsonText}:{jsonText:string}) {
     } catch (error) {
         htmlText = 'Invalid JSON: ' + error
     }
-    return <code dangerouslySetInnerHTML={{__html: htmlText}} className={styles.previewCode}>
+    return <>
+        <code dangerouslySetInnerHTML={{__html: htmlText}} className="previewCode">
     </code>
+    <style jsx>{`
+      .previewCode {
+        font-family: 'Courier New', Courier, monospace;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+        white-space: pre-wrap;
+      }
+    `}</style>
+    </>
 }

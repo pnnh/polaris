@@ -1,4 +1,3 @@
-@use '@/components/common/styles/theme';
 
 .templateContainer {
   display: flex;
@@ -21,8 +20,8 @@
 
     .bodyContainer {
       margin: 0 auto;
-      @media screen and (min-width: theme.$screenExtraLargeWidth) {
-        width: theme.$screenExtraLargeWidth - 24rem;
+      @media screen and (min-width: 120rem) {
+        width: 120rem - 24rem;
         margin: 0 auto;
       }
     }

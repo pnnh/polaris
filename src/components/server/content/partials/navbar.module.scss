@@ -1,4 +1,3 @@
-@use '@/components/common/styles/theme';
 
 .navHeader {
   display: flex;
@@ -10,8 +9,8 @@
   font-weight: 400;
   color: var(--text-primary-color);
 
-  @media screen and (min-width: theme.$screenExtraLargeWidth) {
-    width: theme.$screenExtraLargeWidth;
+  @media screen and (min-width: 120rem) {
+    width: 120rem;
     margin: 0 auto;
   }
 
@@ -40,7 +39,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.9rem;
-    @media screen and (min-width: theme.$screenMediumWidth) {
+    @media screen and (min-width: 48rem) {
       display: flex;
       margin-right: 1rem;
     }
@@ -96,7 +95,7 @@
       }
     }
 
-    @media screen and (min-width: theme.$screenMediumWidth) {
+    @media screen and (min-width: 48rem) {
       display: none;
     }
   }

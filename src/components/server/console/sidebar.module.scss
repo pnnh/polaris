@@ -1,10 +1,9 @@
-@use 'styles';
 
 .consoleSidebar {
   display: flex;
   flex-direction: column;
   background: var(--background-color);
-  width: styles.$consoleSidebarWidth;
+  width: 16rem;
   border-right: solid 1px #E0E0E0;
   flex-shrink: 0;
 

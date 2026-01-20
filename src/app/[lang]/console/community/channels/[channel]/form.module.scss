@@ -1,15 +1,10 @@
-@use '@/components/common/styles/theme';
-@use '@/components/server/console/styles';
 
 .bodyContainer {
   overflow: hidden;
 
-  $coverHeight: 12rem;
-  $bottomHeight: 4rem;
-
   .channelCover {
-    width: calc(100vw - #{styles.$consoleSidebarWidth});
-    height: $coverHeight;
+    width: calc(100vw - 16rem);
+    height: 12rem;
     position: relative;
     border-radius: 6px;
     overflow: hidden;
@@ -74,20 +69,20 @@
     flex-direction: row;
     margin-top: 1rem;
     margin-bottom: 2rem;
-    width: calc(100vw - #{styles.$consoleSidebarWidth} - 2rem);
-    height: calc(100vh - #{$coverHeight} - $bottomHeight - 6rem);
+    width: calc(100vw - 16rem - 2rem);
+    height: calc(100vh - 12rem - 4rem - 6rem);
     gap: 1rem;
     background: var(--background-color);
     padding: 1rem;
 
-    @media screen and (min-width: theme.$screenLargeWidth) {
+    @media screen and (min-width: 80rem) {
       width: 80vw;
       margin: 1rem auto 0 auto;
     }
   }
 
   .bottomBar {
-    height: $bottomHeight;
+    height: 4rem;
     width: 100vw;
     background: var(--background-color);
     display: flex;
@@ -96,7 +91,7 @@
     align-items: center;
     gap: 1rem;
     padding-left: 1rem;
-    @media screen and (min-width: theme.$screenLargeWidth) {
+    @media screen and (min-width: 80rem) {
       width: 80vw;
       margin: 1rem auto 0 auto;
     }

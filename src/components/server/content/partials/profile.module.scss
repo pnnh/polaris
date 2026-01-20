@@ -1,8 +1,7 @@
-@use '@/components/common/styles/theme';
 
 .siteNavMenu {
   display: none;
-  @media screen and (min-width: theme.$screenMediumWidth) {
+  @media screen and (min-width: 48rem) {
     display: flex;
     flex-direction: row;
     align-items: center;
