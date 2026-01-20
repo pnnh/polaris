@@ -1,6 +1,5 @@
 'use client'
 
-import styles from "./link.module.scss";
 import {IAuthApp} from "@/components/common/models/auth";
 import {useEffect, useState} from "react";
 import {permitAppLogin, queryAuthApp} from "@/components/client/account/account";
@@ -57,7 +56,8 @@ export function LinkSession({lang, portalUrl, signinLink, linkApp, signinCallbac
             {errorMsg ?? <div>{errorMsg}</div>}
         </div>
     }
-    return <div className={styles.linkSession}>
+    return <>
+        <div className="linkSession">
         <div>{transText(lang, '是否授权？', 'Authorization?')}<b>{appInfo.name}</b></div>
         {errorMsg ?? <div>{errorMsg}</div>}
         {permitResult ? permitResult : <div>
@@ -68,4 +68,16 @@ export function LinkSession({lang, portalUrl, signinLink, linkApp, signinCallbac
             </button>
         </div>}
     </div>
+    <style jsx>{`
+      .linkSession {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+      }
+    `}</style>
+    </>
 }

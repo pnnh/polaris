@@ -1,6 +1,5 @@
 'use client'
 
-import styles from "./form.module.scss";
 import {useState} from "react";
 import {sanitizeUrl} from "@pnnh/atom";
 import {transText} from "@/components/common/locales/normal";
@@ -51,38 +50,39 @@ export function UserinfoEditForm({portalUrl, userInfo, lang}: {
     }
 
     return (
-        <div className={styles.userInfoCard}>
-            <div className={styles.avatarContainer}>
-                <div className={styles.avatar}>
+        <>
+        <div className="userInfoCard">
+            <div className="avatarContainer">
+                <div className="avatar">
                     <img src={sanitizeUrl(userInfo.photoUrl)} alt="User Avatar"/>
                 </div>
                 <input id={"fileInput"} type="file" name="file"/>
 
             </div>
-            <div className={styles.details}>
-                <p className={styles.row}>
-                    <label className={styles.rowLabel}>{transText(lang, '用户标识', 'UserID')}:</label>
-                    <span className={styles.rowContent}>{accountUrn}</span>
+            <div className="details">
+                <p className="row">
+                    <label className="rowLabel">{transText(lang, '用户标识', 'UserID')}:</label>
+                    <span className="rowContent">{accountUrn}</span>
                 </p>
-                <p className={styles.row}>
-                    <label className={styles.rowLabel}>{transText(lang, '用户名', 'Username')}: </label>
+                <p className="row">
+                    <label className="rowLabel">{transText(lang, '用户名', 'Username')}: </label>
                     <input value={username} onChange={(event) => setUsername(event.target.value)}/>
                 </p>
-                <p className={styles.row}>
-                    <label className={styles.rowLabel}>{transText(lang, '用户昵称', 'Nickname')}：</label>
+                <p className="row">
+                    <label className="rowLabel">{transText(lang, '用户昵称', 'Nickname')}：</label>
                     <input value={nickname} onChange={(event => setNickname(event.target.value))}/>
                 </p>
-                <p className={styles.row}><label
-                    className={styles.rowLabel}>{transText(lang, '邮箱', 'Email')}:</label>
+                <p className="row"><label
+                    className="rowLabel">{transText(lang, '邮箱', 'Email')}:</label>
                     <input value={email} onChange={(event) => setEmail(event.target.value)}/>
                 </p>
-                <p className={styles.row}><label
-                    className={styles.rowLabel}>{transText(lang, '个人简介', 'Description')}:</label>
+                <p className="row"><label
+                    className="rowLabel">{transText(lang, '个人简介', 'Description')}:</label>
                     <textarea value={description}
                               onChange={(event) => setDescription(event.target.value)}></textarea>
                 </p>
             </div>
-            <div className={styles.submitButtons}>
+            <div className="submitButtons">
                 <button type="button" onClick={onSubmit}>{transText(lang, '保存', 'Save')}</button>
                 <button type="button" onClick={() => {
                     window.location.href = `/${lang}/console/userinfo`; // 返回用户信息页面
@@ -91,5 +91,75 @@ export function UserinfoEditForm({portalUrl, userInfo, lang}: {
                 </button>
             </div>
         </div>
+        <style jsx>{`
+          .userInfoCard {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #ffffff;
+            margin-top: 16px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+          }
+          .avatarContainer {
+            width: 40%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+          }
+          .avatar {
+            width: 12rem;
+            height: 12rem;
+            border-radius: 50%;
+            margin-bottom: 20px;
+          }
+          .avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+          .details {
+            display: table;
+            align-items: center;
+            text-align: center;
+            width: 40%;
+            margin: 0 auto;
+          }
+          .row {
+            display: table-row;
+            font-weight: bold;
+            margin-bottom: 10px;
+          }
+          .rowLabel {
+            font-weight: normal;
+            color: #666;
+            width: 50%;
+            display: table-cell;
+            text-align: right;
+            padding-right: 1rem;
+          }
+          .rowContent {
+            color: #333;
+            font-size: 1rem;
+            display: table-cell;
+            text-align: left;
+            word-break: break-all;
+          }
+          .submitButtons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 20px;
+            height: 4rem;
+          }
+        `}</style>
+        </>
     );
 }

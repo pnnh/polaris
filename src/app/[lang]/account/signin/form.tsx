@@ -1,6 +1,5 @@
 'use client'
 
-import styles from './form.module.scss'
 import {getTurnstileToken} from "@/components/client/cloudflare/turnstile";
 import React, {useState} from "react";
 import {CodeOk} from "@pnnh/atom";
@@ -59,22 +58,23 @@ export function SigninForm({lang, portalUrl, signinLink, linkApp, signinCallback
     }
 
     return (
-        <form className={styles.signinForm}>
-            <div className={styles.formRow}>
-                <label htmlFor="username" className={styles.fieldLabel}>账号名称</label>
-                <input type="text" name="username" className={styles.inputField}
+        <>
+        <form className="signinForm">
+            <div className="formRow">
+                <label htmlFor="username" className="fieldLabel">账号名称</label>
+                <input type="text" name="username" className="inputField"
                        placeholder={transText(lang, '字母或数字', 'Letters or numbers')}
                        value={username} onChange={(event) => setUsername(event.target.value)}/>
             </div>
-            <div className={styles.formRow}>
-                <label htmlFor="password" className={styles.fieldLabel}>账号密码</label>
-                <input type="password" name="password" className={styles.inputField}
+            <div className="formRow">
+                <label htmlFor="password" className="fieldLabel">账号密码</label>
+                <input type="password" name="password" className="inputField"
                        autoComplete={'off'}
                        placeholder={transText(lang, '字母数字及特殊字符', 'Letters, numbers and special characters')}
                        value={password} onChange={(event) => setPassword(event.target.value)}/>
             </div>
-            <div className={styles.formRow}>
-                <button type="button" className={styles.submitButton}
+            <div className="formRow">
+                <button type="button" className="submitButton"
                         onClick={() => {
                             submitForm().then()
                         }}>{transKey(lang, "signin")}
@@ -82,11 +82,46 @@ export function SigninForm({lang, portalUrl, signinLink, linkApp, signinCallback
                 <div>{transText(lang, '还没有账号？', 'No account yet?')}<a
                     href={`/${lang}/account/signup`}>{transKey(lang, "signup")}</a></div>
             </div>
-            <div className={styles.formRow}>
-                <div className={'infoMsg'}>
+            <div className="formRow">
+                <div className="infoMsg">
                     {infoMsg}
                 </div>
             </div>
         </form>
+        <style jsx>{`
+          .signinForm {
+            .formRow {
+              margin-bottom: 2rem;
+              display: flex;
+              flex-direction: row;
+              gap: 1rem;
+              align-items: center;
+              justify-content: center;
+            }
+            .fieldLabel {
+              font-size: 1.0rem;
+              font-weight: 400;
+              width: 6rem;
+              text-align: right;
+            }
+            .inputField {
+              padding: 8px;
+              border: solid 1px #e0e0e0;
+              border-radius: 4px;
+              font-size: 0.9rem;
+              width: 284px;
+            }
+            .submitButton {
+              padding: 0.5rem 1rem;
+              border: solid 1px #e0e0e0;
+              border-radius: 4px;
+              background-color: dodgerblue;
+              color: #fff;
+              font-size: 1rem;
+              cursor: pointer;
+            }
+          }
+        `}</style>
+        </>
     );
 }

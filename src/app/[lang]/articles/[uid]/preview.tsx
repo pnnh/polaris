@@ -1,6 +1,5 @@
 'use client'
 
-import styles from "./preview.module.scss";
 import React, {useEffect, useState} from "react";
 import {IoClose} from "react-icons/io5";
 import {articleAssetsPreviewAtom} from "./state";
@@ -27,12 +26,13 @@ export function ArticlePreview(
                               assetsUrl={assetsUrl} libUrl={'/abc'}/>
     }
     const fileRepoPath = previewState.full_repo_path
-    return <div className={styles.assertPreview}>
-        <div className={styles.previewHeader}>
-            <div className={styles.pathTitle}>
+    return <>
+        <div className="assertPreview">
+        <div className="previewHeader">
+            <div className="pathTitle">
                 {previewState.title}
             </div>
-            <div className={styles.fileActions}>
+            <div className="fileActions">
                 <a href={fileRepoPath} target={'_blank'}>
                     <OpenInNewIcon/>
                 </a>
@@ -43,10 +43,49 @@ export function ArticlePreview(
                 </i>
             </div>
         </div>
-        <div className={styles.previewBody}>
+        <div className="previewBody">
             <PreviewBody portalUrl={portalUrl} model={previewState}/>
         </div>
     </div>
+    <style jsx>{`
+      .assertPreview {
+        width: 100%;
+        background: #fefefe;
+      }
+      .previewHeader {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: solid 1px #f3f3f3;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+      }
+      .pathTitle {
+        font-size: 16px;
+        color: #3c3c3c;
+        font-weight: 500;
+      }
+      .fileActions {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .fileActions i {
+        cursor: pointer;
+      }
+      .fileActions a :global(svg) {
+        height: 1rem;
+        width: 1rem;
+      }
+      .previewBody {
+        font-size: 14px;
+        height: 100%;
+        background: #fff;
+      }
+    `}</style>
+    </>
 }
 
 function PreviewBody({portalUrl, model}: { portalUrl: string, model: PSArticleFileModel }) {
@@ -73,10 +112,26 @@ function TextPreview({portalUrl, model}: { portalUrl: string, model: PSArticleFi
         })
     }, [fileUrl])
     if (!contentHtml) {
-        return <div className={styles.textPreview}></div>
+        return <>
+            <div className="textPreview"></div>
+            <style jsx>{`
+              .textPreview {
+                word-break: break-word;
+                white-space: break-spaces;
+              }
+            `}</style>
+        </>
     }
-    return <div className={styles.textPreview} dangerouslySetInnerHTML={{__html: contentHtml}}>
+    return <>
+        <div className="textPreview" dangerouslySetInnerHTML={{__html: contentHtml}}>
     </div>
+    <style jsx>{`
+      .textPreview {
+        word-break: break-word;
+        white-space: break-spaces;
+      }
+    `}</style>
+    </>
 }
 
 

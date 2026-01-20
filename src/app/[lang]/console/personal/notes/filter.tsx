@@ -1,6 +1,5 @@
 'use client'
 
-import styles from "./filter.module.scss";
 import React from "react";
 import {transText, transKey} from "@/components/common/locales/normal";
 import Button from "@mui/material/Button";
@@ -19,14 +18,15 @@ export function ConsoleArticleFilterBar({lang, keyword}: {
     const goCreateArticle = () => {
         window.location.href = `/${lang}/console/articles/${uuidToBase58(EmptyUUID)}`
     }
-    return <div className={styles.middleTop}>
-        <div className={styles.topLeft}>
+    return <>
+        <div className="middleTop">
+        <div className="topLeft">
             <Button size={'small'} variant={'contained'} onClick={goCreateArticle}>
                 {transText(lang, '新增笔记', 'Create Article')}
             </Button>
         </div>
-        <div className={styles.topRight}>
-            <div className={styles.searchBox}>
+        <div className="topRight">
+            <div className="searchBox">
                 <input placeholder={transKey(lang, "searchPlaceholder")} maxLength={128} value={searchText}
                        onChange={(event) => setSearchText(event.target.value)}
                        onKeyDown={(event) => {
@@ -38,4 +38,40 @@ export function ConsoleArticleFilterBar({lang, keyword}: {
             </div>
         </div>
     </div>
+    <style jsx>{`
+      .middleTop {
+        border-bottom: solid 1px #e1e1e280;
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+        background-color: var(--background-color);
+        height: 3rem;
+      }
+      .topLeft, .topRight {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+      }
+      .searchBox {
+        border: solid 1px #ccc;
+        border-radius: 6px;
+        height: 26px;
+        width: 200px;
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        align-items: center;
+        padding: 0 0.5rem;
+      }
+      .searchBox input {
+        border: none;
+        outline: none;
+        flex-grow: 1;
+      }
+    `}</style>
+    </>
 }

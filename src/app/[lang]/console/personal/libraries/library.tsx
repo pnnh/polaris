@@ -1,7 +1,6 @@
 'use client'
 
 import React, {useEffect, useState} from "react";
-import styles from './library.module.scss';
 import ComputerIcon from "@mui/icons-material/Computer";
 import {clientLoadLibraryEntries, ILibraryEntry} from "@/components/client/images/service";
 import CloudQueueIcon from "@mui/icons-material/CloudQueue";
@@ -61,15 +60,35 @@ export function ConsoleLibraryMiddleBody({lang, portalUrl}: {
     }, []);
 
     if (!libraries || libraries.length === 0) {
-        return <div className={styles.libBody}>
+        return <>
+            <div className="libBody">
             暂无本地图片库
         </div>
+        <style jsx>{`
+          .libBody {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 1rem;
+          }
+        `}</style>
+        </>
     }
-    return <div className={styles.libBody}>
+    return <>
+        <div className="libBody">
         {libraries.map((model, index) => {
             return <LibraryCard key={index} model={model} lang={lang} portalUrl={''}/>
         })}
     </div>
+    <style jsx>{`
+      .libBody {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 1rem;
+      }
+    `}</style>
+    </>
 }
 
 function LibraryCard({model, lang, portalUrl}: {
@@ -77,8 +96,16 @@ function LibraryCard({model, lang, portalUrl}: {
     lang: string,
     portalUrl: string
 }) {
-    return <div className={styles.libCard}>
+    return <>
+        <div className="libCard">
         {model.isLocal ? <ComputerIcon/> : <CloudQueueIcon/>}
         <a href={`/${lang}/console/personal/images?libName=${encodeURIComponent(model.key)}`}>{model.name}</a>
     </div>
+    <style jsx>{`
+      .libCard {
+        border: solid 1px #ccc;
+        min-height: 4rem;
+      }
+    `}</style>
+    </>
 }

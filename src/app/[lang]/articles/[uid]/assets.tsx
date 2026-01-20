@@ -1,6 +1,5 @@
 'use client'
 
-import styles from './assets.module.scss'
 import React, {useEffect, useState} from "react";
 import {getIcon} from "material-file-icons";
 import {FaAngleDown, FaAngleRight} from "react-icons/fa6";
@@ -37,11 +36,12 @@ export function ArticleAssets({portalUrl, fullRepoPath, articleUid}: {
         return <div></div>
     }
 
-    return <div className={styles.tocCard} id={'assetsCard'}>
-        <div className={styles.tocHeader}>
+    return <>
+        <div className="tocCard" id={'assetsCard'}>
+        <div className="tocHeader">
             <span>文件信息</span><a href={fullRepoPath} target={'_blank'}><OpenInNewIcon/></a>
         </div>
-        <div className={styles.tocBody} id={'assetsBody'}>
+        <div className="tocBody" id={'assetsBody'}>
             {
                 files.map((model, index) => {
                     return <FileGroup key={`assets-${0}-${index}`} portalUrl={portalUrl}
@@ -51,6 +51,60 @@ export function ArticleAssets({portalUrl, fullRepoPath, articleUid}: {
             }
         </div>
     </div>
+    <style jsx>{`
+      .tocCard {
+        background-color: var(--background-color);
+        border-radius: 4px;
+        position: relative;
+      }
+      .tocHeader {
+        padding: 1rem;
+        border-bottom: solid 1px #e1e1e280;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .tocHeader a :global(svg) {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        color: var(--text-primary-color);
+      }
+      .tocBody {
+        padding: 1rem;
+        max-height: 450px;
+        overflow-y: auto;
+      }
+      .tocItem {
+        padding-right: 0.5rem;
+        font-size: 14px;
+      }
+      .assertItemText {
+        cursor: pointer;
+      }
+      .assetItem {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2px;
+        height: 32px;
+      }
+      .assetItem:hover {
+        background: #e6e6e6;
+      }
+      .dirOpenIcon {
+        cursor: pointer;
+      }
+      .fileIcon {
+        width: 18px;
+        height: 18px;
+      }
+    `}</style>
+    </>
 }
 
 function FileGroup({portalUrl, articleUrn, model, level}:
@@ -68,7 +122,7 @@ function FileGroup({portalUrl, articleUrn, model, level}:
         if (!model.is_dir) {
             return <div className={'w-4'}></div>
         }
-        return <i className={styles.dirOpenIcon} onClick={() => {
+        return <i className="dirOpenIcon" onClick={() => {
             if (open) {
                 setOpen(false)
                 return
@@ -87,11 +141,11 @@ function FileGroup({portalUrl, articleUrn, model, level}:
         </i>
     }
     return <>
-        <div key={`assets-${level}`} className={styles.tocItem}>
-            <div className={styles.assetItem} style={{paddingLeft: `${(level + 1) * 0.3}rem`}}>
+        <div key={`assets-${level}`} className="tocItem">
+            <div className="assetItem" style={{paddingLeft: `${(level + 1) * 0.3}rem`}}>
                 {openIcon()}
                 <FileIcon filename={model.title}/>
-                <span title={model.title} className={styles.assertItemText}
+                <span title={model.title} className="assertItemText"
                       onClick={(event) => {
                           if (model.is_dir) {
                               return
@@ -118,7 +172,7 @@ function FileGroup({portalUrl, articleUrn, model, level}:
 
 function FileIcon({filename}: { filename: string }) {
     return <div
-        className={styles.fileIcon}
+        className="fileIcon"
         dangerouslySetInnerHTML={{__html: getIcon(filename).svg}}
     />;
 }

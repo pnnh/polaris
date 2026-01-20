@@ -1,7 +1,6 @@
 'use client';
 
 import React, {useEffect} from "react";
-import styles from './image.module.scss';
 import {
     clientGetDirectoryEntry,
     clientGetImageLibraryFiles,
@@ -69,12 +68,22 @@ export function ConsoleImageMiddleBody({libKey, lang, portalUrl}: {
     }, [libKey]);
 
     if (!dirEntry) {
-        return <div className={styles.middleBody}>
+        return <>
+            <div className="middleBody">
             加载图片库目录...
         </div>
+        <style jsx>{`
+          .middleBody {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            width: 100%;
+          }
+        `}</style>
+        </>
     }
     if (dirEntry.isLocal && needPermission) {
-        return <div className={styles.middleBody}>
+        return <>
+            <div className="middleBody">
             <Button size={'small'} onClick={() => {
                 clientRequestFilePermission(dirEntry).then((ok) => {
                     if (!ok) {
@@ -86,6 +95,14 @@ export function ConsoleImageMiddleBody({libKey, lang, portalUrl}: {
                 })
             }}>点击加载库内容</Button>
         </div>
+        <style jsx>{`
+          .middleBody {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            width: 100%;
+          }
+        `}</style>
+        </>
 
     }
 
@@ -93,11 +110,20 @@ export function ConsoleImageMiddleBody({libKey, lang, portalUrl}: {
         return <NoData size={'large'}/>
     }
 
-    return <div className={styles.middleBody}>
+    return <>
+        <div className="middleBody">
         {imageData.map((model, index) => {
             return <ImageCard key={index} model={model} lang={lang} portalUrl={portalUrl}/>
         })}
     </div>
+    <style jsx>{`
+      .middleBody {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        width: 100%;
+      }
+    `}</style>
+    </>
 }
 
 export function ImageCard({model, lang, portalUrl}: {
@@ -130,7 +156,30 @@ export function ImageCard({model, lang, portalUrl}: {
         }
     }, [model]);
 
-    return <div className={styles.imageCard}>
+    return <>
+        <div className="imageCard">
         {imgUrl && <img src={imgUrl} alt={model.name}/>}
     </div>
+    <style jsx>{`
+      .imageCard {
+        border: solid 1px #E0E0E0;
+        border-radius: 8px;
+        padding: 1rem;
+        background-color: var(--background-color);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .imageCard:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      }
+      .imageCard img {
+        height: 4rem;
+        width: 4rem;
+        object-fit: cover;
+      }
+    `}</style>
+    </>
 }
