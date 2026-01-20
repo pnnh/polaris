@@ -9,10 +9,9 @@ import {dnsNamespace, NormalUUIDItem, oidNamespace, OptionType, urlNamespace, x5
 import {copyToClipboard} from "@pnnh/atom/browser";
 import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
-import {queryApp, uuidUid} from "@/components/server/tools/tools";
 import {localText} from "@pnnh/atom";
-import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
+import {ApplicationWithText} from "@/components/common/models/application";
 
 function generateUUID(version: number, options?: {
     type: OptionType
@@ -72,14 +71,10 @@ function generateUUID(version: number, options?: {
     }
 }
 
-export function UuidToolBody({lang}: { lang: string }) {
+export function UuidToolBody({lang, appInfo}: { lang: string, appInfo: ApplicationWithText }) {
     const [state, setState] = useState<NormalUUIDItem | undefined>()
     const [history, setHistory] = useState<NormalUUIDItem[]>([])
 
-    const appInfo = queryApp(lang, uuidUid)
-    if (!appInfo) {
-        notFound()
-    }
 
     const appendHistory = (newItem: NormalUUIDItem) => {
         setHistory((old) => {

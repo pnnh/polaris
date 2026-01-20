@@ -14,6 +14,8 @@ export interface IServerConfigProvider {
     get CLOUDFLARE_PUBLIC_TURNSTILE(): string
 
     get DATABASE_URL(): string
+
+    get STORAGE_URL(): string
 }
 
 const serverConfigKey = 'SERVER_CONFIG';

@@ -1,8 +1,7 @@
 import styles from './page.module.scss'
 import ContentLayout from "@/components/server/content/layout";
-import {SymbolUnknown} from "@pnnh/atom";
+import {langEn, SymbolUnknown} from "@pnnh/atom";
 import {getPathname} from "@/components/server/pathname";
-import {langEn} from "@pnnh/atom";
 import {qrcodeUid, queryApp} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
 import {PageMetadata} from "@/components/common/utils/page";
@@ -17,7 +16,7 @@ export default async function Home({params, searchParams}: {
     const lang = paramsValue.lang || langEn
     const searchParamsValue = await searchParams
 
-    const appInfo = queryApp(lang, qrcodeUid)
+    const appInfo = await queryApp(lang, qrcodeUid)
     if (!appInfo) {
         notFound()
     }

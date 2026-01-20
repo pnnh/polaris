@@ -1,6 +1,6 @@
 import React from 'react'
 import './layout.scss'
-import {HostNavbar} from "@/app/host/navbar";
+import {HostNavbar} from "./navbar";
 
 
 export default async function ConsoleLayout({

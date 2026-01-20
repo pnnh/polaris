@@ -3,12 +3,11 @@ import styles from './page.module.scss'
 import {getPathname} from "@/components/server/pathname";
 import {CommentsClient} from "@/components/client/comments/comments";
 import {useServerConfig} from "@/components/server/config";
-import {langEn} from "@pnnh/atom";
+import {langEn, SymbolUnknown} from "@pnnh/atom";
 import {PageMetadata} from "@/components/common/utils/page";
 import Base32Component from "@/components/client/tools/base32/base32";
 import {base32Uid, queryApp} from "@/components/server/tools/tools";
 import ContentLayout from "@/components/server/content/layout";
-import {SymbolUnknown} from "@pnnh/atom";
 import {notFound} from "next/navigation";
 
 export default async function Home({params, searchParams}: {
@@ -20,7 +19,7 @@ export default async function Home({params, searchParams}: {
     const lang = paramsValue.lang || langEn
     const searchParamsValue = await searchParams
 
-    const appInfo = queryApp(lang, base32Uid)
+    const appInfo = await queryApp(lang, base32Uid)
     if (!appInfo) {
         notFound()
     }
@@ -33,7 +32,7 @@ export default async function Home({params, searchParams}: {
                           metadata={metadata} userInfo={SymbolUnknown}>
         <div className={styles.base32Page}>
             <h1 className={styles.productTitle}>{appInfo.name}</h1>
-            <Base32Component lang={lang}/>
+            <Base32Component lang={lang} appInfo={appInfo}/>
             <div className={styles.commentsClient}>
                 <CommentsClient portalUrl={portalUrl} resource={appInfo.uid}
                                 lang={lang}/>

@@ -2,10 +2,10 @@
 import React from 'react'
 import './viewer.scss'
 import {useAtom} from "jotai";
-import {noteAtom} from "@/app/host/providers/notebook";
+import {noteAtom} from "@/app/[lang]/host/providers/notebook";
 import {PSArticleModel} from "@/components/common/models/article";
-import {storeArticleToDatabase} from "@/app/host/services/client/personal/notes";
-import {ArticleContainer} from "@/app/host/partials/note";
+import {storeArticleToDatabase} from "@/app/[lang]/host/services/client/personal/notes";
+import {ArticleContainer} from "@/app/[lang]/host/partials/note";
 
 export function ArticleEditorArea() {
     const [selectedArticle, setSelectedArticle] = useAtom(noteAtom)

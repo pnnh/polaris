@@ -7,12 +7,11 @@ import Button from '@mui/material/Button';
 import {decodeBase64String, encodeBase64String} from "@pnnh/atom";
 import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
-import {base64Uid, queryApp} from "@/components/server/tools/tools";
-import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
 import {useClientConfig} from "@/components/client/config/config";
+import {ApplicationWithText} from "@/components/common/models/application";
 
-export default function Base64Component({lang}: { lang: string }) {
+export default function Base64Component({lang, appInfo}: { lang: string, appInfo: ApplicationWithText }) {
     const [source, setSource] = React.useState('');
     const [output, setOutput] = React.useState('');
     const [clientConfig, setClientConfig] = React.useState<IBrowserConfig | undefined>(undefined);
@@ -40,10 +39,6 @@ export default function Base64Component({lang}: { lang: string }) {
         } catch (e) {
             return '';
         }
-    }
-    const appInfo = queryApp(lang, base64Uid)
-    if (!appInfo) {
-        notFound()
     }
     return <div className={styles.basexPage}>
         <h1>{appInfo.name}</h1>

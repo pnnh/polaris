@@ -1,5 +1,5 @@
 import {PSArticleModel} from "@/components/common/models/article";
-import {openDatabase} from "@/app/host/services/client/database";
+import {openDatabase} from "@/app/[lang]/host/services/client/database";
 
 
 interface DatabaseArticleItem {

@@ -2,14 +2,13 @@
 
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import {aesUid, queryApp} from "@/components/server/tools/tools";
-import {notFound} from "next/navigation";
 import {transKey, transText} from "@/components/common/locales/normal";
 import {aesServerDecode, aesServerEncode, aesServerGenerateKey} from "@/app/[lang]/tools/aes/server";
 import {IconButton, TextField} from "@mui/material";
 import ImportExportIcon from '@mui/icons-material/ImportExport';
+import {ApplicationWithText} from "@/components/common/models/application";
 
-export default function AesComponent({lang}: { lang: string }) {
+export default function AesComponent({lang, appInfo}: { lang: string, appInfo: ApplicationWithText }) {
     const [source, setSource] = React.useState('');
     const [output, setOutput] = React.useState('');
     const [aesKey, setAesKey] = React.useState('')
@@ -29,10 +28,6 @@ export default function AesComponent({lang}: { lang: string }) {
         aesServerDecode(source, aesKey).then((decodedText) => {
             setOutput(decodedText);
         })
-    }
-    const appInfo = queryApp(lang, aesUid)
-    if (!appInfo) {
-        notFound()
     }
     return <div className={'sha256Page'}>
         <style jsx>{`

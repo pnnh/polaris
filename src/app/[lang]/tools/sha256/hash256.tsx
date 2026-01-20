@@ -2,12 +2,11 @@
 
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import {queryApp, sha256Uid} from "@/components/server/tools/tools";
-import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
 import {encodeSHA256} from "@pnnh/atom";
+import {ApplicationWithText} from "@/components/common/models/application";
 
-export default function Hash256Component({lang}: { lang: string }) {
+export default function Hash256Component({lang, appInfo}: { lang: string, appInfo: ApplicationWithText }) {
     const [source, setSource] = React.useState('');
     const [output, setOutput] = React.useState('');
 
@@ -16,10 +15,6 @@ export default function Hash256Component({lang}: { lang: string }) {
             return;
         }
         setOutput(encodeSHA256(source));
-    }
-    const appInfo = queryApp(lang, sha256Uid)
-    if (!appInfo) {
-        notFound()
     }
     return <div className={'sha256Page'}>
         <style jsx>{`

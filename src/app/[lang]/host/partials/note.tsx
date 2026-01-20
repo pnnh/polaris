@@ -1,6 +1,6 @@
 import React from "react";
 import {TocItem} from "@pnnh/atom";
-import {ArticleComponent} from "@/app/host/partials/article";
+import {ArticleComponent} from "@/app/[lang]/host/partials/article";
 import {BuildBodyHtml} from "@/app/[lang]/articles/[uid]/body";
 
 

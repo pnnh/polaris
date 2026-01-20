@@ -3,13 +3,12 @@ import styles from './page.module.scss'
 import {getPathname} from "@/components/server/pathname";
 import {CommentsClient} from "@/components/client/comments/comments";
 import {useServerConfig} from "@/components/server/config";
-import {langEn} from "@pnnh/atom";
+import {langEn, SymbolUnknown} from "@pnnh/atom";
 import {PageMetadata} from "@/components/common/utils/page";
 import {queryApp, wejsonUid} from "@/components/server/tools/tools";
 import {WeJsonClient} from "./wejson";
 import {notFound} from "next/navigation";
 import ContentLayout from "@/components/server/content/layout";
-import {SymbolUnknown} from "@pnnh/atom";
 
 export default async function Home({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -20,7 +19,7 @@ export default async function Home({params, searchParams}: {
     const lang = paramsValue.lang || langEn
     const searchParamsValue = await searchParams
 
-    const appInfo = queryApp(lang, wejsonUid)
+    const appInfo = await queryApp(lang, wejsonUid)
     if (!appInfo) {
         notFound()
     }

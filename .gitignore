@@ -42,3 +42,4 @@ public/index.html
 *.map.mjs
 
 config/
+data/

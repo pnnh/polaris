@@ -3,8 +3,8 @@
 import React, {useEffect, useState} from 'react'
 import './library.scss'
 import {useAtom} from "jotai";
-import {libraryAtom} from "@/app/host/providers/notebook";
-import {clientSigninDomain} from "@/app/host/services/client/domain";
+import {libraryAtom} from "@/app/[lang]/host/providers/notebook";
+import {clientSigninDomain} from "@/app/[lang]/host/services/client/domain";
 
 export function LibrarySelector() {
     const [notebookDropdown, setLibraryDropdown] = useState<boolean>(false)

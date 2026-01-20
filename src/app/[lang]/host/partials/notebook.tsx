@@ -2,8 +2,8 @@
 import React, {useEffect} from 'react'
 import './notebook.scss'
 import {useAtom, useAtomValue} from "jotai";
-import {libraryAtom, notebookAtom} from "@/app/host/providers/notebook";
-import {clientSigninDomain} from "@/app/host/services/client/domain";
+import {libraryAtom, notebookAtom} from "@/app/[lang]/host/providers/notebook";
+import {clientSigninDomain} from "@/app/[lang]/host/services/client/domain";
 import {PSNotebookModel} from "@/components/common/models/personal/notebook";
 
 export function NotebookList() {

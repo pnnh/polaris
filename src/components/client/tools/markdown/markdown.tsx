@@ -7,12 +7,11 @@ import Button from '@mui/material/Button';
 import {useClientConfig} from "@/components/client/config/config";
 import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
-import {markdownUid, queryApp} from "@/components/server/tools/tools";
 import {markdownStringToHtml} from "@/components/server/markdown/markdown";
-import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
+import {ApplicationWithText} from "@/components/common/models/application";
 
-export default function MarkdownComponent({lang}: { lang: string }) {
+export default function MarkdownComponent({lang, appInfo}: { lang: string, appInfo: ApplicationWithText }) {
     const [source, setSource] = React.useState('');
     const [output, setOutput] = React.useState('');
     const [clientConfig, setClientConfig] = React.useState<IBrowserConfig | undefined>(undefined);
@@ -30,10 +29,6 @@ export default function MarkdownComponent({lang}: { lang: string }) {
         }
         const outHtml = markdownStringToHtml(source);
         setOutput(outHtml);
-    }
-    const appInfo = queryApp(lang, markdownUid)
-    if (!appInfo) {
-        notFound()
     }
     return <div className={styles.markdownComponent}>
         <h1>{appInfo.name}</h1>

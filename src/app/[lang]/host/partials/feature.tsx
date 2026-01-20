@@ -2,7 +2,7 @@
 import React from 'react'
 import './feature.scss'
 import {generateUuidV7} from "@pnnh/atom";
-import {checkLoginStatus} from "@/app/host/services/client/account/account";
+import {checkLoginStatus} from "@/app/[lang]/host/services/client/account/account";
 import {AccountModel} from "@/components/common/models/account/account";
 
 export function ConsoleFeature() {

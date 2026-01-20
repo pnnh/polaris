@@ -7,12 +7,11 @@ import Button from '@mui/material/Button';
 import {useClientConfig} from "@/components/client/config/config";
 import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
-import {md5Uid, queryApp} from "@/components/server/tools/tools";
 import {stringToMd5} from "@pnnh/atom";
-import {notFound} from "next/navigation";
 import {transText} from "@/components/common/locales/normal";
+import {ApplicationWithText} from "@/components/common/models/application";
 
-export default function Md5Component({lang}: { lang: string }) {
+export default function Md5Component({lang, appInfo}: { lang: string, appInfo: ApplicationWithText }) {
     const [source, setSource] = React.useState('');
     const [output, setOutput] = React.useState('');
     const [clientConfig, setClientConfig] = React.useState<IBrowserConfig | undefined>(undefined);
@@ -30,10 +29,6 @@ export default function Md5Component({lang}: { lang: string }) {
             return;
         }
         setOutput(stringToMd5(source));
-    }
-    const appInfo = queryApp(lang, md5Uid)
-    if (!appInfo) {
-        notFound()
     }
     return <div className={styles.md5Page}>
         <h1>{appInfo.name}</h1>

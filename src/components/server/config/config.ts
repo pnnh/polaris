@@ -4,7 +4,6 @@ import {IServerConfigStore} from "./store";
 import {GalaxyConfigStore} from "./galaxy";
 import {PgConfigStore} from "./pgstore";
 import {IServerConfigProvider} from "../config";
-import {resolvePath} from "@pnnh/atom/nodejs";
 import {psResolvePath} from "@/components/server/filesystem/path";
 
 export class FileConfigStore implements IServerConfigStore {
@@ -24,6 +23,7 @@ export class FileConfigStore implements IServerConfigStore {
         const internalPortalUrl = await this.GetString('INTERNAL_PORTAL_URL');
         const turnstile = await this.GetString('CLOUDFLARE_PUBLIC_TURNSTILE');
         const databaseUrl = await this.GetString('DATABASE_URL');
+        const storageUrl = await this.GetString('STORAGE_URL');
 
         if (!selfUrl) {
             throw new Error('PUBLIC_SELF_URL is required')
@@ -47,6 +47,8 @@ export class FileConfigStore implements IServerConfigStore {
             // CLOUDFLARE_PUBLIC_TURNSTILE: turnstile,
             // DATABASE_URL: databaseUrl,
             INTERNAL_PORTAL_URL: internalPortalUrl,
+            STORAGE_URL: storageUrl || '',
+            RUN_MODE: process.env.RUN_MODE || 'development'
         } as IServerConfigProvider;
     }
 
