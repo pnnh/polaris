@@ -16,9 +16,10 @@ const pageStyles = {
 
 export default async function Page({searchParams, params}: {
     searchParams: Promise<Record<string, string>>
-    params: Promise<{ path: string }>,
+    params: Promise<{ lang: string, path: string }>,
 }) {
     const paramsValue = await params
+    const lang = paramsValue.lang
 
     const serverConfig = await useServerConfig()
     const serverUrl = serverConfig.INTERNAL_PORTAL_URL

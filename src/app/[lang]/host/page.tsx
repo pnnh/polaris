@@ -22,9 +22,12 @@ const pageStyles = {
 
     `
 }
-export default async function Page({searchParams}: {
+export default async function Page({params, searchParams}: {
+    params: Promise<{ lang: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
+    const paramsValue = await params
+    const lang = paramsValue.lang
     return <div className={pageStyles.pageContainer}>
         <div className={pageStyles.toolbar}>
             <OpenToolbar/>
@@ -33,32 +36,32 @@ export default async function Page({searchParams}: {
         <div className={pageStyles.gridContainer}>
             <FileItemCard model={{
                 lang: 'en',
-                url: '/host/storage/files?dir=7ue33Yh26K2mAcDUKuR2XF13j2Y2Nw2KX6MrwL3qzyHKedcL',
+                url: `/${lang}/host/storage/files?dir=7ue33Yh26K2mAcDUKuR2XF13j2Y2Nw2KX6MrwL3qzyHKedcL`,
                 title: transTodo('目录1')
             }}/>
             <FileItemCard model={{
                 lang: 'en',
-                url: '/host/storage/files?dir=3aJXN5FS5dBDZWuyivbWB4KUCf2rKdhxCserhigKCM7cVxNrjzvvn2AVPnxuxHZZVMkujn',
+                url: `/${lang}/host/storage/files?dir=3aJXN5FS5dBDZWuyivbWB4KUCf2rKdhxCserhigKCM7cVxNrjzvvn2AVPnxuxHZZVMkujn`,
                 title: transTodo('mac目录2')
             }}/>
             <NoteItemCard model={{
                 lang: 'en',
-                url: '/host/notebook/notes?dir=RTpcV29ya3NwYWNlXGJsb2dcQ1BsdXMubm90ZWxpYnJhcnlcQ01ha2XnrJTorrDmnKwubm90ZWJvb2s=',
+                url: `/${lang}/host/notebook/notes?dir=RTpcV29ya3NwYWNlXGJsb2dcQ1BsdXMubm90ZWxpYnJhcnlcQ01ha2XnrJTorrDmnKwubm90ZWJvb2s=`,
                 title: transTodo('笔记本1')
             }}/>
             <NoteItemCard model={{
                 lang: 'en',
-                url: '/host/notebook/notes?dir=3aJXN5FS5dBDZWuyivbWB4KUCf2rKdhxCserhigKCM7cVxNxEDNpbomYfuKGe4KQPx7uB6',
+                url: `/${lang}/host/notebook/notes?dir=3aJXN5FS5dBDZWuyivbWB4KUCf2rKdhxCserhigKCM7cVxNxEDNpbomYfuKGe4KQPx7uB6`,
                 title: transTodo('mac笔记本2')
             }}/>
             <ImageItemCard model={{
                 lang: 'en',
-                url: '/host/album/images?dir=RTpcV29ya3NwYWNlXGJsb2dcaW1hZ2VzXOWFtuWugy5pbWFnZWNoYW5uZWw=',
+                url: `/${lang}/host/album/images?dir=RTpcV29ya3NwYWNlXGJsb2dcaW1hZ2VzXOWFtuWugy5pbWFnZWNoYW5uZWw=`,
                 title: transTodo('相册1')
             }}/>
             <ImageItemCard model={{
                 lang: 'en',
-                url: '/host/album/images?dir=9PWT5zYiBsrv5EKb3DTgwojwBLbuPcKXakMq8cToAwGvJuXnRKBTZcowjRM2kiVex5oWwVbYif1Tk3jvbu',
+                url: `/${lang}/host/album/images?dir=9PWT5zYiBsrv5EKb3DTgwojwBLbuPcKXakMq8cToAwGvJuXnRKBTZcowjRM2kiVex5oWwVbYif1Tk3jvbu`,
                 title: transTodo('mac相册2')
             }}/>
         </div>

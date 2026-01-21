@@ -1,7 +1,7 @@
 import React from 'react'
 import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {useServerConfig} from "@/components/server/config";
-import {CommonResult, decodeBase58String, PLSelectResult} from "@pnnh/atom";
+import {CommonResult} from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
 import {css} from "@/gen/styled/css";
 
@@ -15,9 +15,10 @@ const pageStyles = {
 
 export default async function Page({searchParams, params}: {
     searchParams: Promise<Record<string, string>>
-    params: Promise<{ uid: string }>,
+    params: Promise<{ uid: string, lang: string }>,
 }) {
     const paramsValue = await params
+    const lang = paramsValue.lang
     const encodedUid = paramsValue.uid
 
     const serverConfig = await useServerConfig()

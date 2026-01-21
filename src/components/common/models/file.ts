@@ -19,4 +19,5 @@ export interface PSFileModel {
     is_image: boolean
     storage_path: string
     full_repo_path: string
+    is_ignore: string
 }

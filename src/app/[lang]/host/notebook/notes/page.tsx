@@ -1,7 +1,7 @@
 import React from 'react'
 import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {useServerConfig} from "@/components/server/config";
-import {encodeBase58String, encodeBase64String, PLSelectResult, stringToBase58} from "@pnnh/atom";
+import {PLSelectResult, stringToBase58} from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
 import {css} from "@/gen/styled/css";
 
@@ -13,9 +13,12 @@ const containerStyles = {
     `
 }
 
-export default async function Page({searchParams}: {
+export default async function Page({params, searchParams}: {
+    params: Promise<{ lang: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
+    const paramsValue = await params
+    const lang = paramsValue.lang
     const searchParamsValue = await searchParams
     const dir = searchParamsValue.dir
     if (!dir) {
@@ -33,7 +36,7 @@ export default async function Page({searchParams}: {
         <div className={containerStyles.notesGrid}>
             {
                 selectResult.data.range.map((model) => {
-                    return <NoteItemCard model={model} key={model.uid}/>
+                    return <NoteItemCard lang={lang} model={model} key={model.uid}/>
                 })
             }
         </div>
@@ -50,11 +53,11 @@ const cardStyles = {
     `
 }
 
-function NoteItemCard({model}: { model: PSArticleModel }) {
+function NoteItemCard({lang, model}: { lang: string, model: PSArticleModel }) {
     const uid = stringToBase58(model.url, 'base58')
     return <div className={cardStyles.cardItem}>
         <div>
-            <a href={`/host/notebook/notes/${uid}`}>{model.title}</a>
+            <a href={`/${lang}/host/notebook/notes/${uid}`}>{model.title}</a>
         </div>
     </div>
 }

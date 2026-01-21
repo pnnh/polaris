@@ -1,0 +1,12 @@
+import {SVGProps} from "react";
+
+export function GridIcon(props: SVGProps<SVGSVGElement>) {
+    return (
+        <svg className="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3525"
+             width="128" height="128">
+            <path
+                d="M768 768 1024 768 1024 1024 768 1024 768 768ZM384 768 640 768 640 1024 384 1024 384 768ZM0 768 256 768 256 1024 0 1024 0 768ZM768 384 1024 384 1024 640 768 640 768 384ZM384 384 640 384 640 640 384 640 384 384ZM0 384 256 384 256 640 0 640 0 384ZM768 0 1024 0 1024 256 768 256 768 0ZM384 0 640 0 640 256 384 256 384 0ZM0 0 256 0 256 256 0 256 0 0Z"
+                fill="currentColor" p-id="3526"></path>
+        </svg>
+    )
+}

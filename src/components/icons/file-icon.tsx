@@ -36,7 +36,12 @@ export function PSSearchIcon() {
     />;
 }
 
+
 export function PSAutoIcon({filename, size}: { filename: string, size?: number }) {
+    if (size !== 16 && size !== 24 && size !== 32 && size !== 48 && size !== 64 && size !== 96 && size !== 128
+        && size !== 256 && size !== 512) {
+        size = 32;
+    }
     const extName = filename.split('.').pop()?.toLowerCase();
     if (!extName) {
         return <FileIcon/>;
@@ -73,6 +78,9 @@ export function PSAutoIcon({filename, size}: { filename: string, size?: number }
             color="currentColor"
             strokeWidth={1.5}
         />;
+    } else if (extName === 'py') {
+        return <img style={{width: `${size}px`, height: `${size}px`}} src={'/icons/files/python128.png'}
+                    alt={'python'}/>
     } else {
         return <HugeiconsIcon
             icon={FileEmpty02Icon}

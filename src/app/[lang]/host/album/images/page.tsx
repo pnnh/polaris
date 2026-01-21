@@ -1,7 +1,7 @@
 import React from 'react'
 import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {useServerConfig} from "@/components/server/config";
-import {encodeBase58String, encodeBase64String, formatRfc3339, PLSelectResult, stringToBase58} from "@pnnh/atom";
+import {formatRfc3339, PLSelectResult, stringToBase58} from "@pnnh/atom";
 import {PSImageModel} from "@/components/common/models/image";
 
 import {langEnUS} from "@/components/common/language";
@@ -71,9 +71,12 @@ const styles = {
         gap: 6px;`
 }
 
-export default async function Page({searchParams}: {
+export default async function Page({params, searchParams}: {
+    params: Promise<{ lang: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
+    const paramsValue = await params
+    const lang = paramsValue.lang
     const searchParamsValue = await searchParams
     const dir = searchParamsValue.dir
     if (!dir) {
@@ -92,19 +95,19 @@ export default async function Page({searchParams}: {
         <div className={styles.imageGrid}>
             {
                 selectResult.data.range.map((model) => {
-                    return <ImageCard key={model.uid} model={model} publicPortalUrl={publicPortalUrl}/>
+                    return <ImageCard lang={lang} key={model.uid} model={model} publicPortalUrl={publicPortalUrl}/>
                 })
             }
         </div>
     </>
 }
 
-export function ImageCard({model, publicPortalUrl}: {
-    model: PSImageModel, publicPortalUrl: string
+export function ImageCard({lang, model, publicPortalUrl}: {
+    lang: string, model: PSImageModel, publicPortalUrl: string
 }) {
     const uid = stringToBase58(model.url, 'base58')
     const imageUrl = `${publicPortalUrl}/host/album/images/file?file=${uid}`
-    const contentUrl = `/host/album/images/${uid}`
+    const contentUrl = `/${lang}/host/album/images/${uid}`
     return <div className={styles.imageCard} key={model.uid}>
         <div className={styles.imageCover} data-article={model.uid}>
             <PSImageServer lang={langEnUS} src={imageUrl} alt={model.title} fill={true}/>
