@@ -13,6 +13,8 @@ export interface PSFileModel {
     uid: string
     name: string
     url: string
+    image_url: string
+    mimetype: string
     path: string
     is_dir: boolean
     is_text: boolean

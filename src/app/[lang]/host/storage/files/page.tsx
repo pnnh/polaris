@@ -8,7 +8,9 @@ import {PSFileModel} from "@/components/common/models/file";
 import {transTodo} from "@/components/common/locales/normal";
 import {GridIcon} from "@/components/icons/gui/grid";
 import {TableIcon} from "@/components/icons/gui/table";
-
+import queryString from "query-string";
+import {FilesystemIcon} from "@/components/icons/gui/filesystem";
+import {LibraryIcon} from "@/components/icons/gui/library";
 
 const toolbarContainerStyles = {
     toolbarBox: css`
@@ -34,6 +36,14 @@ const toolbarContainerStyles = {
     `
 }
 
+function buildUrlWithParams(lang: string, params: Record<string, string | boolean>, name: string, value: string | boolean) {
+    const baseUrl = `/${lang}/host/storage/files`
+    const newParams = {...params};
+    newParams[name] = value;
+    const quary = queryString.stringify(newParams);
+    return `${baseUrl}?${quary}`;
+}
+
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string }>,
     searchParams: Promise<Record<string, string>>
@@ -46,10 +56,11 @@ export default async function Page({params, searchParams}: {
         throw new Error("Not Found")
     }
     const showIgnore = searchParamsValue.showIgnore === 'true'
-    const viewType = searchParamsValue.viewType || 'grid'
+    const layoutType = searchParamsValue.layoutType || 'grid'
+    const viewType = searchParamsValue.viewType || 'library'
     const serverConfig = await useServerConfig()
     const serverUrl = serverConfig.INTERNAL_PORTAL_URL
-    const url = `${serverUrl}/host/storage/files?dir=${encodeURIComponent(dir)}&showIgnore=${showIgnore}`
+    const url = `${serverUrl}/host/storage/files?dir=${encodeURIComponent(dir)}&showIgnore=${encodeURIComponent(showIgnore)}&viewType=${encodeURIComponent(viewType)}`
     const selectResult = await serverMakeGet<PLSelectResult<PSFileModel>>(url, '')
     if (!selectResult || selectResult.code !== 200) {
         throw new Error("host notebook")
@@ -71,27 +82,36 @@ export default async function Page({params, searchParams}: {
         <div className={toolbarContainerStyles.toolbarBox}>
             <div className={toolbarBoxStyles.leftArea}>
 
-                <a href={`/${lang}/host/storage/files?dir=${encodeURIComponent(dir)}&showIgnore=${showIgnore}&viewType=grid`}
+                <a href={buildUrlWithParams(lang, searchParamsValue, 'layoutType', 'grid')}
                    title={transTodo('卡片网格视图')} className={toolbarContainerStyles.ignoreIcon}
-                   style={viewType === 'grid' ? {color: 'blue'} : {color: 'black'}}>
+                   style={layoutType === 'grid' ? {color: 'blue'} : {color: 'black'}}>
                     <GridIcon/>
                 </a>
-                <a href={`/${lang}/host/storage/files?dir=${encodeURIComponent(dir)}&showIgnore=${showIgnore}&viewType=table`}
+                <a href={buildUrlWithParams(lang, searchParamsValue, 'layoutType', 'table')}
                    title={transTodo('树形表格视图')} className={toolbarContainerStyles.ignoreIcon}
-                   style={viewType === 'table' ? {color: 'blue'} : {color: 'black'}}>
+                   style={layoutType === 'table' ? {color: 'blue'} : {color: 'black'}}>
                     <TableIcon/>
                 </a>
             </div>
             <div className={toolbarBoxStyles.rightArea}>
-
-                <a href={`/${lang}/host/storage/files?dir=${encodeURIComponent(dir)}&showIgnore=${!showIgnore}`}
+                <a href={buildUrlWithParams(lang, searchParamsValue, 'viewType', 'library')}
+                   title={transTodo('库视图')} className={toolbarContainerStyles.ignoreIcon}
+                   style={viewType === 'library' ? {color: 'blue'} : {color: 'black'}}>
+                    <LibraryIcon/>
+                </a>
+                <a href={buildUrlWithParams(lang, searchParamsValue, 'viewType', 'filesystem')}
+                   title={transTodo('文件系统视图')} className={toolbarContainerStyles.ignoreIcon}
+                   style={viewType === 'filesystem' ? {color: 'blue'} : {color: 'black'}}>
+                    <FilesystemIcon/>
+                </a>
+                <a href={buildUrlWithParams(lang, searchParamsValue, 'showIgnore', !showIgnore)}
                    title={showIgnore ? transTodo('隐藏忽略文件') : transTodo('显示忽略文件')}>
                     <img className={toolbarContainerStyles.ignoreIcon}
                          src={showIgnore ? '/icons/gui/show.svg' : '/icons/gui/ignore.svg'} alt={'ignore'}/>
                 </a>
             </div>
         </div>
-        {viewType === 'grid' ? <GridViewContainer selectResult={selectResult} lang={lang}/> :
+        {layoutType === 'grid' ? <GridViewContainer selectResult={selectResult} lang={lang} viewType={viewType}/> :
             <TableViewContainer selectResult={selectResult} lang={lang}/>}
 
     </div>
@@ -103,11 +123,15 @@ const notesGrid = css`
     gap: 16px;
 `
 
-function GridViewContainer({selectResult, lang}: { selectResult: PLSelectResult<PSFileModel>, lang: string }) {
+function GridViewContainer({selectResult, lang, viewType}: {
+    selectResult: PLSelectResult<PSFileModel>,
+    lang: string,
+    viewType: string
+}) {
     return <div className={notesGrid}>
         {
             selectResult.data.range.map((model) => {
-                return <NoteItemCard lang={lang} model={model} key={model.uid}/>
+                return <NoteItemCard lang={lang} model={model} key={model.uid} viewType={viewType}/>
             })
         }
     </div>
@@ -116,9 +140,7 @@ function GridViewContainer({selectResult, lang}: { selectResult: PLSelectResult<
 
 const cardStyles = {
     cardItem: css`
-        border: 1px solid #e0e0e0;
         border-radius: 8px;
-        background-color: #fafafa;
         transition: box-shadow 0.3s ease;
         position: relative;
     `,
@@ -134,6 +156,7 @@ const cardStyles = {
         padding: 0 0.5rem 0 0.5rem;
         display: flex;
         align-items: center;
+        justify-content: center;
     `,
     titleBox: css`
         overflow: hidden;
@@ -143,25 +166,45 @@ const cardStyles = {
     `
 }
 
-function NoteItemCard({lang, model}: { lang: string, model: PSFileModel }) {
+function NoteItemCard({lang, model, viewType}: { lang: string, model: PSFileModel, viewType: string }) {
     let linkUrl = `/${lang}/host/storage/files/${model.path}`
     if (model.is_dir) {
         linkUrl = `/${lang}/host/storage/files?dir=${encodeURIComponent(model.path)}`
     }
     return <div className={cardStyles.cardItem} style={model.is_ignore ? {opacity: 0.5} : {}}>
         <div className={cardStyles.iconBox}>
-            {model.is_dir ?
-                <PSDirectoryIcon size={64}/> :
-                <PSAutoIcon filename={model.title} size={64}/>
-            }
+            <CardIcon model={model} viewType={viewType}/>
         </div>
         <div className={cardStyles.actionBar}>
             <div className={cardStyles.titleBox}>
-                {model.is_ignore}
                 <a href={linkUrl} title={model.title}>{model.title}</a>
             </div>
         </div>
     </div>
+}
+
+function CardIcon({model, viewType}: { model: PSFileModel, viewType: string }) {
+    if (model.is_dir) {
+        if (model.mimetype === 'polaris/image' && viewType === 'library') {
+            return <img src={model.image_url} alt={model.title} className={css`
+                height: 6rem;
+                width: 6rem;
+                object-fit: cover;
+                border: solid 1px #e0e0e0;
+                border-radius: 8px;
+                padding: 2px;
+            `}/>
+        }
+        return <PSDirectoryIcon size={64}/>
+    } else if (model.is_image) {
+        return <img src={model.url} alt={model.title} className={css`
+            height: 6rem;
+            width: 6rem;
+            object-fit: cover;
+        `}/>
+    } else {
+        return <PSAutoIcon filename={model.title} size={64}/>
+    }
 }
 
 const notesTable = css`
