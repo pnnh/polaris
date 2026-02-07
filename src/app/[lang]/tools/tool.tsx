@@ -1,7 +1,7 @@
 import React from 'react'
 import {css} from "@/gen/styled/css";
-import {getAppWithText, selectAppsFromStorage} from "@/components/server/tools/tools";
-import {ApplicationWithText} from "@/components/common/models/application";
+import {selectAppsFromStorage} from "@/components/server/tools/tools";
+import {PSFileModel} from "@/components/common/models/file";
 import {FileItemCard, ImageItemCard, NoteItemCard} from "@/app/[lang]/host/page";
 
 const toolStyles = {
@@ -60,31 +60,27 @@ export async function ToolBody({lang}: { lang: string }) {
         <div className={toolStyles.appGrid}>
             {
                 appList.map(async (app) => {
-                    const appWithText = await getAppWithText(lang, app)
-                    if (!appWithText) {
-                        return null
-                    }
-                    return renderResourceCard({model: appWithText, lang})
+                    return renderResourceCard({model: app, lang})
                 })
             }
         </div>
     </div>
 }
 
-function renderResourceCard({model, lang}: { model: ApplicationWithText, lang: string }) {
-    if (model.mime === 'polaris/directory') {
+function renderResourceCard({model, lang}: { model: PSFileModel, lang: string }) {
+    if (model.mimetype === 'polaris/directory') {
         return <FileItemCard model={{lang: lang, title: model.name, url: model.url}}/>
     }
-    if (model.mime === 'polaris/album') {
+    if (model.mimetype === 'polaris/album') {
         return <ImageItemCard model={{lang: lang, title: model.name, url: model.url}}/>
     }
-    if (model.mime === 'polaris/notebook') {
+    if (model.mimetype === 'polaris/notebook') {
         return <NoteItemCard model={{lang: lang, title: model.name, url: model.url}}/>
     }
     const toolUrl = model.url.startsWith('https') || model.url.startsWith('https')
         ? model.url : `${lang}${model.url}`
     return <div className={toolStyles.appCard} key={model.uid}>
-        <img className={toolStyles.appImage} src={model.image} alt={model.name}/>
+        <img className={toolStyles.appImage} src={model.image_url} alt={model.name}/>
         <div className={toolStyles.appTitle}>
             <a style={{color: '#333', textDecoration: 'none'}} href={toolUrl}>{model.name}</a>
         </div>

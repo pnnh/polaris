@@ -8,9 +8,9 @@ import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
 import {transText} from "@/components/common/locales/normal";
 import {useClientConfig} from "@/components/client/config/config";
-import {ApplicationWithText} from "@/components/common/models/application";
+import {PSFileModel} from "@/components/common/models/file";
 
-export default function Base32Component({lang, appInfo}: { lang: string, appInfo: ApplicationWithText }) {
+export default function Base32Component({lang, appInfo}: { lang: string, appInfo: PSFileModel }) {
     const [source, setSource] = React.useState('');
     const [output, setOutput] = React.useState('');
     const [clientConfig, setClientConfig] = React.useState<IBrowserConfig | undefined>(undefined);

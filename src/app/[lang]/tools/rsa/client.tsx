@@ -4,9 +4,9 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import {transText} from "@/components/common/locales/normal";
 import {rsaServerEncode} from "./server";
-import {ApplicationWithText} from "@/components/common/models/application";
+import {PSFileModel} from "@/components/common/models/file";
 
-export default function RsaComponent({lang, appInfo}: { lang: string, appInfo: ApplicationWithText }) {
+export default function RsaComponent({lang, appInfo}: { lang: string, appInfo: PSFileModel }) {
     const [source, setSource] = React.useState('');
     const [output, setOutput] = React.useState('');
 

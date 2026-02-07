@@ -43,3 +43,5 @@ public/index.html
 
 config/
 data/
+# 快照文件
+.snap

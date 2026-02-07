@@ -10,7 +10,7 @@ import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import {localText} from "@pnnh/atom";
 import {transText} from "@/components/common/locales/normal";
-import {ApplicationWithText} from "@/components/common/models/application";
+import {PSFileModel} from "@/components/common/models/file";
 
 function generateUUID(version: number, options?: {
     type: OptionType
@@ -70,7 +70,7 @@ function generateUUID(version: number, options?: {
     }
 }
 
-export function UuidToolBody({lang, appInfo}: { lang: string, appInfo: ApplicationWithText }) {
+export function UuidToolBody({lang, appInfo}: { lang: string, appInfo: PSFileModel }) {
     const [state, setState] = useState<NormalUUIDItem | undefined>()
     const [history, setHistory] = useState<NormalUUIDItem[]>([])
 

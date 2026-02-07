@@ -6,9 +6,9 @@ import {transKey, transText} from "@/components/common/locales/normal";
 import {aesServerDecode, aesServerEncode, aesServerGenerateKey} from "@/app/[lang]/tools/aes/server";
 import {IconButton, TextField} from "@mui/material";
 import ImportExportIcon from '@mui/icons-material/ImportExport';
-import {ApplicationWithText} from "@/components/common/models/application";
+import {PSFileModel} from "@/components/common/models/file";
 
-export default function AesComponent({lang, appInfo}: { lang: string, appInfo: ApplicationWithText }) {
+export default function AesComponent({lang, appInfo}: { lang: string, appInfo: PSFileModel }) {
     const [source, setSource] = React.useState('');
     const [output, setOutput] = React.useState('');
     const [aesKey, setAesKey] = React.useState('')

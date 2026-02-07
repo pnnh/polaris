@@ -27,3 +27,12 @@ export async function serverGetUserinfo(portalUrl: string): Promise<AccountModel
     }
     return userInfo
 }
+
+export async function serverTryGetUserinfo(portalUrl: string): Promise<AccountModel | undefined | Error> {
+    try {
+        return await serverGetUserinfo(portalUrl)
+    } catch (error) {
+        console.error('获取用户信息时发生错误', error)
+        return error instanceof Error ? error : new Error('Unknown error')
+    }
+}

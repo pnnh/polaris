@@ -2,11 +2,12 @@ import React from 'react'
 import {ContentPublicNavbar} from "@/components/server/content/partials/navbar";
 import {css} from "@/gen/styled/css";
 import {SymbolUnknown} from "@pnnh/atom";
-import {serverGetUserinfo} from "@/components/server/account/account";
+import {serverGetUserinfo, serverTryGetUserinfo} from "@/components/server/account/account";
 import {useServerConfig} from "@/components/server/config";
 import GlobalLayout from "@/components/server/global";
 import {PageMetadata} from "@/components/common/utils/page";
-import {AccountModel} from "@/components/common/models/account/account";
+import {AccountModel, anonymousAccount} from "@/components/common/models/account/account";
+import {isErrorLike} from "@/components/common/error";
 
 const styles = {
     templateContainer: css`
@@ -57,7 +58,13 @@ export default async function ContentLayout({
     const serverConfig = await useServerConfig()
     if (userInfo === SymbolUnknown) {
         const portalUrl = serverConfig.INTERNAL_PORTAL_URL
-        currentUserInfo = await serverGetUserinfo(portalUrl);
+        const getResult = await serverTryGetUserinfo(portalUrl);
+        // 出错时认为是未登录，返回匿名用户
+        if (isErrorLike(getResult)) {
+            currentUserInfo = anonymousAccount;
+        } else {
+            currentUserInfo = getResult as AccountModel;
+        }
     } else {
         currentUserInfo = userInfo;
     }
