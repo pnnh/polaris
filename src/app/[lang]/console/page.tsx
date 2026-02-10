@@ -8,7 +8,7 @@ import {NeedLoginPage} from "@/components/server/content/needLogin";
 import GlobalLayout from "@/components/server/global";
 import ComputerIcon from '@mui/icons-material/Computer';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 import {isAnonymousAccount} from "@/components/common/models/account/account";
 
 const pageStyles = {
@@ -40,7 +40,7 @@ const pageStyles = {
         color: #000;
         text-decoration: none;
         padding: 0.5rem 1rem;
-        
+
         &:hover {
             background-color: #f0f0f0;
         }
@@ -70,7 +70,7 @@ const pageStyles = {
         color: #000;
         text-decoration: none;
         padding: 0.5rem 1rem;
-        
+
         &:hover {
             background-color: #f0f0f0;
         }
@@ -108,9 +108,9 @@ export default async function Page({params, searchParams}: {
             <div className={pageStyles.pageContainer}>
                 <div>欢迎信息</div>
                 <div className={pageStyles.userInfo}>
-                    {transText(lang, '欢迎使用控制台', 'Welcome to the console')}
+                    {transKey(lang, "console.welcome")}
                     <br/>
-                    {transText(lang, '请在左侧菜单中选择功能', 'Please select a function from the left menu')}
+                    {transKey(lang, "console.selectFunction")}
                     <br/>
                     {currentUserInfo.nickname}
                     <a href={`/${lang}/console/userinfo`}>个人信息</a>
@@ -142,7 +142,8 @@ export default async function Page({params, searchParams}: {
                         </div>
                         <div className={pageStyles.libCard}>
                             <CloudQueueIcon/>
-                            <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>最近图片库</a></div>
+                            <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>最近图片库</a>
+                        </div>
 
                     </div>
                 </div>

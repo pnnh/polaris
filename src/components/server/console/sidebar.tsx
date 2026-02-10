@@ -1,19 +1,19 @@
 'use client';
 
 import React from "react";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 export function ConsoleSidebar({lang}: { lang: string }) {
     return <div className="consoleSidebar">
-        <a href={`/${lang}`}>{transText(lang, '首页', 'Home')}</a>
+        <a href={`/${lang}`}>{transKey(lang, "common.home")}</a>
         <a href={`/${lang}/console/userinfo`}>
-            {transText(lang, '个人信息', 'User Info')}
+            {transKey(lang, "common.userInfo")}
         </a>
         <a href={`/${lang}/console/articles`}>
-            {transText(lang, '笔记', 'Articles')}
+            {transKey(lang, "common.articles")}
         </a>
         <a href={`/${lang}/console/channels`}>
-            {transText(lang, '频道', 'Channels')}
+            {transKey(lang, "common.channels")}
         </a>
 
         <style jsx>{`

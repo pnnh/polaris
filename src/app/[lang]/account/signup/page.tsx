@@ -5,7 +5,7 @@ import {css} from "@/gen/styled/css";
 import {SignupForm} from "./form";
 import {useServerConfig} from "@/components/server/config";
 import {langEn} from "@pnnh/atom";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 const pageStyles = {
     signupCard: css`
@@ -45,7 +45,7 @@ export default async function Page({params, searchParams}: {
     return <AccountLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata}>
         <div className={pageStyles.signupCard}>
-            <div className={pageStyles.signupTitle}>{transText(lang, '注册页面', 'Registration Page')}</div>
+            <div className={pageStyles.signupTitle}>{transKey(lang, "signup.registrationPage")}</div>
             <div className={pageStyles.signupBody}>
                 <SignupForm portalUrl={publicPortalUrl} lang={lang}/>
             </div>

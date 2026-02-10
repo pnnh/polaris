@@ -1,16 +1,14 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import {mustBase58ToUuid, tryBase58ToUuid} from "@pnnh/atom";
+import {EmptyUUID, langZh, mustBase58ToUuid, tryBase58ToUuid} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
-import {langZh} from "@pnnh/atom";
 import {notFound} from "next/navigation";
 import {ConsoleArticleForm} from "./form";
 import {PSArticleModel} from "@/components/common/models/article";
-import {EmptyUUID} from "@pnnh/atom";
 import GlobalLayout from "@/components/server/global";
 import {css} from "@/gen/styled/css";
-import {transText} from "@/components/common/locales/normal";
 import {CommunityArticleNodeService} from "@/components/community/articles";
+import {transKey} from "@/components/common/locales/normal";
 
 export const dynamic = "force-dynamic";
 
@@ -75,7 +73,7 @@ export default async function Home({params, searchParams}: {
             }
             const queryResult = await CommunityArticleNodeService.consoleQueryArticles(internalPortalUrl, pageLang, query)
             if (!queryResult || queryResult.range.length === 0) {
-                throw new Error(transText(pageLang, '无法找到要复制的文章', 'Cannot find the article to copy'));
+                throw new Error(transKey(pageLang, "console.article.cannotFindCopy"));
             }
             const originModel = queryResult.range[0];
             model.name = originModel.name;
@@ -106,7 +104,7 @@ export default async function Home({params, searchParams}: {
         metadata.keywords = model.keywords
 
         if (!model.body) {
-            return <div>{transText(pageLang, '暂不支持的文章类型', 'Unsupported article type')}</div>
+            return <div>{transKey(pageLang, "console.article.unsupportedType")}</div>
         }
     }
     const modelString = JSON.stringify(model)

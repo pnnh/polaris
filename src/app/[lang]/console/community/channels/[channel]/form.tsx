@@ -7,7 +7,7 @@ import {PSChannelModel} from "@/components/common/models/channel";
 import {clientConsoleInsertChannel, clientConsoleUpdateChannel} from "@/components/client/channels/channels";
 import {EmptyUUID} from "@pnnh/atom";
 import {getDefaultImageUrl} from "@/components/common/note";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 export function ConsoleChannelForm({publicPortalUrl, modelString}: { publicPortalUrl: string, modelString: string }) {
     const oldModel = JSON.parse(modelString) as PSChannelModel;
@@ -28,7 +28,7 @@ export function ConsoleChannelForm({publicPortalUrl, modelString}: { publicPorta
         if (isNew) {
             clientConsoleInsertChannel(publicPortalUrl, newModel).then((newChannelId) => {
                 if (!newChannelId) {
-                    console.error(transText(lang, '频道插入失败', 'Channel insert failed'))
+                    console.error(transKey(lang, "console.channel.insertFailed"))
                     return
                 }
                 window.location.href = `/${lang}/console/channels`
@@ -36,7 +36,7 @@ export function ConsoleChannelForm({publicPortalUrl, modelString}: { publicPorta
         } else {
             clientConsoleUpdateChannel(publicPortalUrl, oldModel.uid, newModel).then((channelId) => {
                 if (!channelId) {
-                    console.error(transText(lang, '频道更新失败', 'Channel update failed'))
+                    console.error(transKey(lang, "console.channel.updateFailed"))
                     return
                 }
                 window.location.href = `/${lang}/console/channels`
@@ -68,88 +68,97 @@ export function ConsoleChannelForm({publicPortalUrl, modelString}: { publicPorta
                 <FormControlLabel value="en" control={<Radio/>} label="English"/>
             </RadioGroup>
             <Button variant={'contained'} size={'small'} onClick={onSubmit}>{
-                transText(lang, '保存频道', 'Save Channel')
+                transKey(lang, "console.channel.save")
             }</Button>
             <Button variant={'contained'} size={'small'}>{
-                transText(lang, '创建多语言副本', 'Create Multilingual Copy')
+                transKey(lang, "console.channel.createMultilingualCopy")
             }</Button>
         </div>
         <style jsx>{`
-          .bodyContainer {
-            overflow: hidden;
-          }
-          .channelCover {
-            width: calc(100vw - 16rem);
-            height: 12rem;
-            position: relative;
-            border-radius: 6px;
-            overflow: hidden;
-            background: var(--background-color);
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-          }
-          .channelHeader {
-            flex-grow: 1;
-            position: relative;
-            z-index: 1;
-            border-radius: 4px;
-            overflow: hidden;
-          }
-          .channelTitle {
-            font-weight: 600;
-            font-size: 20px;
-            margin-bottom: 16px;
-            padding-left: 1rem;
-          }
-          .channelTitle input {
-            width: calc(100% - 3rem);
-            border-color: #b4b4b4;
-            border-radius: 4px;
-            border-width: 1px;
-            padding: 0.5rem;
-          }
-          .channelDescription {
-            font-size: 1rem;
-            color: var(--text-primary-color);
-            padding-left: 1rem;
-          }
-          .channelDescription textarea {
-            resize: none;
-            width: calc(100% - 3rem);
-            height: 5rem;
-            border-color: #b4b4b4;
-            border-radius: 4px;
-            padding: 0.5rem;
-            scrollbar-width: thin;
-          }
-          .coverImage {
-            width: 8rem;
-            height: 8rem;
-            flex-shrink: 0;
-            object-fit: cover;
-            top: 0;
-            z-index: 0;
-            margin-right: 1rem;
-          }
-          .bottomBar {
-            height: 4rem;
-            width: 100vw;
-            background: var(--background-color);
-            display: flex;
-            flex-direction: row;
-            justify-items: center;
-            align-items: center;
-            gap: 1rem;
-            padding-left: 1rem;
-          }
-          @media screen and (min-width: 80rem) {
-            .bottomBar {
-              width: 80vw;
-              margin: 1rem auto 0 auto;
+            .bodyContainer {
+                overflow: hidden;
             }
-          }
+
+            .channelCover {
+                width: calc(100vw - 16rem);
+                height: 12rem;
+                position: relative;
+                border-radius: 6px;
+                overflow: hidden;
+                background: var(--background-color);
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .channelHeader {
+                flex-grow: 1;
+                position: relative;
+                z-index: 1;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+
+            .channelTitle {
+                font-weight: 600;
+                font-size: 20px;
+                margin-bottom: 16px;
+                padding-left: 1rem;
+            }
+
+            .channelTitle input {
+                width: calc(100% - 3rem);
+                border-color: #b4b4b4;
+                border-radius: 4px;
+                border-width: 1px;
+                padding: 0.5rem;
+            }
+
+            .channelDescription {
+                font-size: 1rem;
+                color: var(--text-primary-color);
+                padding-left: 1rem;
+            }
+
+            .channelDescription textarea {
+                resize: none;
+                width: calc(100% - 3rem);
+                height: 5rem;
+                border-color: #b4b4b4;
+                border-radius: 4px;
+                padding: 0.5rem;
+                scrollbar-width: thin;
+            }
+
+            .coverImage {
+                width: 8rem;
+                height: 8rem;
+                flex-shrink: 0;
+                object-fit: cover;
+                top: 0;
+                z-index: 0;
+                margin-right: 1rem;
+            }
+
+            .bottomBar {
+                height: 4rem;
+                width: 100vw;
+                background: var(--background-color);
+                display: flex;
+                flex-direction: row;
+                justify-items: center;
+                align-items: center;
+                gap: 1rem;
+                padding-left: 1rem;
+            }
+
+            @media screen and (min-width: 80rem) {
+                .bottomBar {
+                    width: 80vw;
+                    margin: 1rem auto 0 auto;
+                }
+            }
         `}</style>
     </div>
 }

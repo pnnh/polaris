@@ -1,23 +1,19 @@
 import React from 'react'
 import {getPathname} from "@/components/server/pathname";
 import {css} from "@/gen/styled/css";
-import {SymbolUnknown} from "@pnnh/atom";
+import {EmptyUUID, isValidUUID, langEn, STSubString, SymbolUnknown, uuidToBase58} from "@pnnh/atom";
 import {PSChannelModel} from "@/components/common/models/channel";
 import {NoData} from "@/components/common/empty";
-import {uuidToBase58} from "@pnnh/atom";
-import {EmptyUUID, isValidUUID} from "@pnnh/atom";
 import {PSImageServer} from "@/components/server/image";
-import {STSubString} from "@pnnh/atom";
 import {getDefaultChanImageByUid} from "@/components/common/channel";
 import {PageMetadata} from "@/components/common/utils/page";
-import {langEn} from "@pnnh/atom";
 import ConsoleLayout from "@/components/server/console/layout";
 import Button from "@mui/material/Button";
 import {ConsoleChannelFilterBar} from "./filter";
 import {serverConsoleSelectChannels} from "@/components/server/channels/channels";
 import {useServerConfig} from "@/components/server/config";
 import PSDeleteButton from "@/components/client/console/delete";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 const pageStyles = {
     channelsContainer: css`
@@ -118,12 +114,12 @@ function Item(props: { model: PSChannelModel, publicPortalUrl: string, lang: str
         </div>
         <div className={pageStyles.operation}>
             <Button size={'small'} variant={'text'} href={newUrl}>
-                {transText(props.lang, '新增笔记', 'Create Article')}
+                {transKey(props.lang, "console.article.createNew")}
             </Button>
         </div>
         <div>
             <PSDeleteButton lang={props.lang} deleteUrl={deleteUrl} resTitle={model.title || model.name}>
-                {transText(props.lang, '删除', 'Delete')}
+                {transKey(props.lang, "console.common.delete")}
             </PSDeleteButton>
         </div>
     </div>

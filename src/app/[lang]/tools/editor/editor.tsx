@@ -1,9 +1,8 @@
 'use client'
 
-import {SFXEditor} from "@pnnh/atom/browser";
-import {SFEditorModel} from "@pnnh/atom/browser";
+import {SFEditorModel, SFXEditor} from "@pnnh/atom/browser";
 import {useState} from "react";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 const initEditorValue: SFEditorModel = {
     children: [
@@ -28,7 +27,7 @@ export function EditorComponent({lang}: { lang: string }) {
         <div>
             <button onClick={() => {
                 console.log('Raw Editor Value:', JSON.stringify(editorValue, null, 2));
-            }}>{transText(lang, '输出原始文本', 'Output raw text')}</button>
+            }}>{transKey(lang, "tools.editor.outputRawText")}</button>
         </div>
     </div>
 }

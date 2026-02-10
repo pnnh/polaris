@@ -662,5 +662,985 @@ export const TransTexts: {
         "de-DE": "Entschlüsseln",
         "pt-PT": "Descriptografar",
         "zh-TW": "解密"
+    },
+    "signup.invalidUsername": {
+        "zh": "无效账号名称",
+        "en": "Invalid username",
+        "es": "Nombre de usuario no válido",
+        "fr": "Nom d'utilisateur invalide",
+        "ja": "無効なユーザー名",
+        "de-DE": "Ungültiger Benutzername",
+        "pt-PT": "Nome de usuário inválido",
+        "zh-TW": "無效帳號名稱"
+    },
+    "signup.invalidPassword": {
+        "zh": "无效账号密码",
+        "en": "Invalid password",
+        "es": "Contraseña inválida",
+        "fr": "Mot de passe invalide",
+        "ja": "無効なパスワード",
+        "de-DE": "Ungültiges Passwort",
+        "pt-PT": "Senha inválida",
+        "zh-TW": "無效帳號密碼"
+    },
+    "signup.passwordsNotMatch": {
+        "zh": "两次输入的密码不一致",
+        "en": "Passwords do not match",
+        "es": "Las contraseñas no coinciden",
+        "fr": "Les mots de passe ne correspondent pas",
+        "ja": "パスワードが一致しません",
+        "de-DE": "Passwörter stimmen nicht überein",
+        "pt-PT": "As senhas não coincidem",
+        "zh-TW": "兩次輸入的密碼不一致"
+    },
+    "signup.invalidEmail": {
+        "zh": "无效电子邮箱",
+        "en": "Invalid email address",
+        "es": "Dirección de correo electrónico no válida",
+        "fr": "Adresse e-mail invalide",
+        "ja": "無効なメールアドレス",
+        "de-DE": "Ungültige E-Mail-Adresse",
+        "pt-PT": "Endereço de e-mail inválido",
+        "zh-TW": "無效電子郵箱"
+    },
+    "signup.verificationFailed": {
+        "zh": "未通过验证",
+        "en": "Verification failed",
+        "es": "Verificación fallida",
+        "fr": "Échec de la vérification",
+        "ja": "検証に失敗しました",
+        "de-DE": "Verifizierung fehlgeschlagen",
+        "pt-PT": "Falha na verificação",
+        "zh-TW": "未通過驗證"
+    },
+    "signup.signupFailed": {
+        "zh": "注册失败",
+        "en": "Signup failed",
+        "es": "Registro fallido",
+        "fr": "Échec de l'inscription",
+        "ja": "登録に失敗しました",
+        "de-DE": "Registrierung fehlgeschlagen",
+        "pt-PT": "Falha no cadastro",
+        "zh-TW": "註冊失敗"
+    },
+    "signup.signupSuccess": {
+        "zh": "注册成功，前往首页...",
+        "en": "Signup successful, redirecting to homepage...",
+        "es": "Registro exitoso, redirigiendo a la página principal...",
+        "fr": "Inscription réussie, redirection vers la page d'accueil...",
+        "ja": "登録成功、ホームページにリダイレクトしています...",
+        "de-DE": "Registrierung erfolgreich, Weiterleitung zur Startseite...",
+        "pt-PT": "Cadastro bem-sucedido, redirecionando para a página inicial...",
+        "zh-TW": "註冊成功，前往首頁..."
+    },
+    "signup.usernamePlaceholder": {
+        "zh": "字母或数字",
+        "en": "Letters or numbers",
+        "es": "Letras o números",
+        "fr": "Lettres ou chiffres",
+        "ja": "文字または数字",
+        "de-DE": "Buchstaben oder Zahlen",
+        "pt-PT": "Letras ou números",
+        "zh-TW": "字母或數字"
+    },
+    "signup.passwordPlaceholder": {
+        "zh": "字母数字及特殊字符",
+        "en": "Letters, numbers and special characters",
+        "es": "Letras, números y caracteres especiales",
+        "fr": "Lettres, chiffres et caractères spéciaux",
+        "ja": "文字、数字、特殊文字",
+        "de-DE": "Buchstaben, Zahlen und Sonderzeichen",
+        "pt-PT": "Letras, números e caracteres especiais",
+        "zh-TW": "字母數字及特殊字符"
+    },
+    "signup.nickname": {
+        "zh": "账号昵称",
+        "en": "Nickname",
+        "es": "Apodo",
+        "fr": "Surnom",
+        "ja": "ニックネーム",
+        "de-DE": "Spitzname",
+        "pt-PT": "Apelido",
+        "zh-TW": "帳號暱稱"
+    },
+    "signup.email": {
+        "zh": "电子邮箱",
+        "en": "Email",
+        "es": "Correo electrónico",
+        "fr": "E-mail",
+        "ja": "メールアドレス",
+        "de-DE": "E-Mail",
+        "pt-PT": "E-mail",
+        "zh-TW": "電子郵箱"
+    },
+    "signup.optional": {
+        "zh": "可选输入",
+        "en": "Optional",
+        "es": "Opcional",
+        "fr": "Facultatif",
+        "ja": "オプション",
+        "de-DE": "Optional",
+        "pt-PT": "Opcional",
+        "zh-TW": "可選輸入"
+    },
+    "signup.alreadyHaveAccount": {
+        "zh": "已有账号？",
+        "en": "Already have an account?",
+        "es": "¿Ya tienes una cuenta?",
+        "fr": "Vous avez déjà un compte?",
+        "ja": "既にアカウントをお持ちですか？",
+        "de-DE": "Haben Sie bereits ein Konto?",
+        "pt-PT": "Já tem uma conta?",
+        "zh-TW": "已有帳號？"
+    },
+    "signup.registrationPage": {
+        "zh": "注册页面",
+        "en": "Registration Page",
+        "es": "Página de registro",
+        "fr": "Page d'inscription",
+        "ja": "登録ページ",
+        "de-DE": "Registrierungsseite",
+        "pt-PT": "Página de cadastro",
+        "zh-TW": "註冊頁面"
+    },
+    "signin.loginSuccessAuth": {
+        "zh": "登录成功，前往授权页面...",
+        "en": "Login successful, redirecting to authorization page...",
+        "es": "Inicio de sesión exitoso, redirigiendo a la página de autorización...",
+        "fr": "Connexion réussie, redirection vers la page d'autorisation...",
+        "ja": "ログイン成功、認証ページにリダイレクトしています...",
+        "de-DE": "Anmeldung erfolgreich, Weiterleitung zur Autorisierungsseite...",
+        "pt-PT": "Login bem-sucedido, redirecionando para a página de autorização...",
+        "zh-TW": "登入成功，前往授權頁面..."
+    },
+    "signin.usernamePlaceholder": {
+        "zh": "字母或数字",
+        "en": "Letters or numbers",
+        "es": "Letras o números",
+        "fr": "Lettres ou chiffres",
+        "ja": "文字または数字",
+        "de-DE": "Buchstaben oder Zahlen",
+        "pt-PT": "Letras ou números",
+        "zh-TW": "字母或數字"
+    },
+    "signin.passwordPlaceholder": {
+        "zh": "字母数字及特殊字符",
+        "en": "Letters, numbers and special characters",
+        "es": "Letras, números y caracteres especiales",
+        "fr": "Lettres, chiffres et caractères spéciaux",
+        "ja": "文字、数字、特殊文字",
+        "de-DE": "Buchstaben, Zahlen und Sonderzeichen",
+        "pt-PT": "Letras, números e caracteres especiais",
+        "zh-TW": "字母數字及特殊字符"
+    },
+    "signin.noAccountYet": {
+        "zh": "还没有账号？",
+        "en": "No account yet?",
+        "es": "¿Aún no tienes cuenta?",
+        "fr": "Pas encore de compte?",
+        "ja": "まだアカウントをお持ちでないですか？",
+        "de-DE": "Noch kein Konto?",
+        "pt-PT": "Ainda não tem conta?",
+        "zh-TW": "還沒有帳號？"
+    },
+    "signin.goHomePage": {
+        "zh": "前往首页",
+        "en": "Go home page",
+        "es": "Ir a la página de inicio",
+        "fr": "Aller à la page d'accueil",
+        "ja": "ホームページに移動",
+        "de-DE": "Zur Startseite gehen",
+        "pt-PT": "Ir para a página inicial",
+        "zh-TW": "前往首頁"
+    },
+    "signin.loginPage": {
+        "zh": "登录页面",
+        "en": "Login Page",
+        "es": "Página de inicio de sesión",
+        "fr": "Page de connexion",
+        "ja": "ログインページ",
+        "de-DE": "Anmeldeseite",
+        "pt-PT": "Página de login",
+        "zh-TW": "登入頁面"
+    },
+    "auth.queryAppFailed": {
+        "zh": "应用信息查询失败",
+        "en": "Failed to query application information",
+        "es": "Error al consultar la información de la aplicación",
+        "fr": "Échec de la requête d'informations sur l'application",
+        "ja": "アプリケーション情報の取得に失敗しました",
+        "de-DE": "Fehler beim Abrufen der Anwendungsinformationen",
+        "pt-PT": "Falha ao consultar informações do aplicativo",
+        "zh-TW": "應用信息查詢失敗"
+    },
+    "auth.invalidAppInfo": {
+        "zh": "应用信息无效",
+        "en": "Invalid application information",
+        "es": "Información de aplicación no válida",
+        "fr": "Informations d'application invalides",
+        "ja": "無効なアプリケーション情報",
+        "de-DE": "Ungültige Anwendungsinformationen",
+        "pt-PT": "Informações de aplicativo inválidas",
+        "zh-TW": "應用信息無效"
+    },
+    "auth.authorizationFailed": {
+        "zh": "授权失败",
+        "en": "Authorization failed",
+        "es": "Autorización fallida",
+        "fr": "Échec de l'autorisation",
+        "ja": "認証に失敗しました",
+        "de-DE": "Autorisierung fehlgeschlagen",
+        "pt-PT": "Falha na autorização",
+        "zh-TW": "授權失敗"
+    },
+    "auth.authorizationCompleted": {
+        "zh": "授权完成，可以关闭该页面",
+        "en": "Authorization completed, you can close this page",
+        "es": "Autorización completada, puede cerrar esta página",
+        "fr": "Autorisation terminée, vous pouvez fermer cette page",
+        "ja": "認証が完了しました。このページを閉じることができます",
+        "de-DE": "Autorisierung abgeschlossen, Sie können diese Seite schließen",
+        "pt-PT": "Autorização concluída, você pode fechar esta página",
+        "zh-TW": "授權完成，可以關閉該頁面"
+    },
+    "auth.authorizationQuestion": {
+        "zh": "是否授权？",
+        "en": "Authorization?",
+        "es": "¿Autorización?",
+        "fr": "Autorisation?",
+        "ja": "認証しますか？",
+        "de-DE": "Autorisierung?",
+        "pt-PT": "Autorização?",
+        "zh-TW": "是否授權？"
+    },
+    "auth.accept": {
+        "zh": "同意",
+        "en": "Accept",
+        "es": "Aceptar",
+        "fr": "Accepter",
+        "ja": "同意",
+        "de-DE": "Akzeptieren",
+        "pt-PT": "Aceitar",
+        "zh-TW": "同意"
+    },
+    "auth.reject": {
+        "zh": "拒绝",
+        "en": "Reject",
+        "es": "Rechazar",
+        "fr": "Rejeter",
+        "ja": "拒否",
+        "de-DE": "Ablehnen",
+        "pt-PT": "Rejeitar",
+        "zh-TW": "拒絕"
+    },
+    "tools.common.inputPlaceholder": {
+        "zh": "请输入需要编码的文本",
+        "en": "Please enter the text to be encoded",
+        "es": "Por favor ingrese el texto a codificar",
+        "fr": "Veuillez saisir le texte à encoder",
+        "ja": "エンコードするテキストを入力してください",
+        "de-DE": "Bitte geben Sie den zu kodierenden Text ein",
+        "pt-PT": "Por favor insira o texto a ser codificado",
+        "zh-TW": "請輸入需要編碼的文本"
+    },
+    "tools.common.resultPlaceholder": {
+        "zh": "编码结果",
+        "en": "Encoded Result",
+        "es": "Resultado codificado",
+        "fr": "Résultat encodé",
+        "ja": "エンコード結果",
+        "de-DE": "Kodiertes Ergebnis",
+        "pt-PT": "Resultado codificado",
+        "zh-TW": "編碼結果"
+    },
+    "tools.sha256.encode": {
+        "zh": "Sha256编码",
+        "en": "Encode Sha256",
+        "es": "Codificar Sha256",
+        "fr": "Encoder Sha256",
+        "ja": "Sha256 エンコード",
+        "de-DE": "Sha256 kodieren",
+        "pt-PT": "Codificar Sha256",
+        "zh-TW": "Sha256編碼"
+    },
+    "tools.sha512.encode": {
+        "zh": "Sha512编码",
+        "en": "Encode Sha512",
+        "es": "Codificar Sha512",
+        "fr": "Encoder Sha512",
+        "ja": "Sha512 エンコード",
+        "de-DE": "Sha512 kodieren",
+        "pt-PT": "Codificar Sha512",
+        "zh-TW": "Sha512編碼"
+    },
+    "tools.base64.encode": {
+        "zh": "Base64编码",
+        "en": "Encode Base64",
+        "es": "Codificar Base64",
+        "fr": "Encoder Base64",
+        "ja": "Base64 エンコード",
+        "de-DE": "Base64 kodieren",
+        "pt-PT": "Codificar Base64",
+        "zh-TW": "Base64編碼"
+    },
+    "tools.base64.decode": {
+        "zh": "Base64解码",
+        "en": "Decode Base64",
+        "es": "Decodificar Base64",
+        "fr": "Décoder Base64",
+        "ja": "Base64 デコード",
+        "de-DE": "Base64 dekodieren",
+        "pt-PT": "Decodificar Base64",
+        "zh-TW": "Base64解碼"
+    },
+    "tools.rsa.encode": {
+        "zh": "编码",
+        "en": "Encode",
+        "es": "Codificar",
+        "fr": "Encoder",
+        "ja": "エンコード",
+        "de-DE": "Kodieren",
+        "pt-PT": "Codificar",
+        "zh-TW": "編碼"
+    },
+    "tools.editor.outputRawText": {
+        "zh": "输出原始文本",
+        "en": "Output raw text",
+        "es": "Texto sin formato de salida",
+        "fr": "Sortir le texte brut",
+        "ja": "生のテキストを出力",
+        "de-DE": "Rohtext ausgeben",
+        "pt-PT": "Saída de texto bruto",
+        "zh-TW": "輸出原始文本"
+    },
+    "tools.uuid.versionSelection": {
+        "zh": "版本选择",
+        "en": "Version Selection",
+        "es": "Selección de versión",
+        "fr": "Sélection de version",
+        "ja": "バージョン選択",
+        "de-DE": "Versionsauswahl",
+        "pt-PT": "Seleção de versão",
+        "zh-TW": "版本選擇"
+    },
+    "tools.uuid.namespace": {
+        "zh": "命名空间",
+        "en": "Namespace",
+        "es": "Espacio de nombres",
+        "fr": "Espace de noms",
+        "ja": "名前空間",
+        "de-DE": "Namensraum",
+        "pt-PT": "Espaço de nomes",
+        "zh-TW": "命名空間"
+    },
+    "tools.uuid.random": {
+        "zh": "随机",
+        "en": "Random",
+        "es": "Aleatorio",
+        "fr": "Aléatoire",
+        "ja": "ランダム",
+        "de-DE": "Zufällig",
+        "pt-PT": "Aleatório",
+        "zh-TW": "隨機"
+    },
+    "tools.uuid.custom": {
+        "zh": "自定义",
+        "en": "Custom",
+        "es": "Personalizado",
+        "fr": "Personnalisé",
+        "ja": "カスタム",
+        "de-DE": "Benutzerdefiniert",
+        "pt-PT": "Personalizado",
+        "zh-TW": "自定義"
+    },
+    "console.welcome": {
+        "zh": "欢迎使用控制台",
+        "en": "Welcome to the console",
+        "es": "Bienvenido a la consola",
+        "fr": "Bienvenue dans la console",
+        "ja": "コンソールへようこそ",
+        "de-DE": "Willkommen in der Konsole",
+        "pt-PT": "Bem-vindo ao console",
+        "zh-TW": "歡迎使用控制台"
+    },
+    "console.selectFunction": {
+        "zh": "请在左侧菜单中选择功能",
+        "en": "Please select a function from the left menu",
+        "es": "Por favor seleccione una función del menú izquierdo",
+        "fr": "Veuillez sélectionner une fonction dans le menu de gauche",
+        "ja": "左側のメニューから機能を選択してください",
+        "de-DE": "Bitte wählen Sie eine Funktion aus dem linken Menü",
+        "pt-PT": "Por favor, selecione uma função no menu esquerdo",
+        "zh-TW": "請在左側菜單中選擇功能"
+    },
+    "console.article.cannotFindCopy": {
+        "zh": "无法找到要复制的文章",
+        "en": "Cannot find the article to copy",
+        "es": "No se puede encontrar el artículo para copiar",
+        "fr": "Impossible de trouver l'article à copier",
+        "ja": "コピーする記事が見つかりません",
+        "de-DE": "Der zu kopierende Artikel kann nicht gefunden werden",
+        "pt-PT": "Não foi possível encontrar o artigo para copiar",
+        "zh-TW": "無法找到要複製的文章"
+    },
+    "console.article.unsupportedType": {
+        "zh": "暂不支持的文章类型",
+        "en": "Unsupported article type",
+        "es": "Tipo de artículo no compatible",
+        "fr": "Type d'article non pris en charge",
+        "ja": "サポートされていない記事タイプ",
+        "de-DE": "Nicht unterstützter Artikeltyp",
+        "pt-PT": "Tipo de artigo não suportado",
+        "zh-TW": "暫不支持的文章類型"
+    },
+    "console.article.insertFailed": {
+        "zh": "文章插入失败",
+        "en": "Article insert failed",
+        "es": "Error al insertar artículo",
+        "fr": "Échec de l'insertion de l'article",
+        "ja": "記事の挿入に失敗しました",
+        "de-DE": "Einfügen des Artikels fehlgeschlagen",
+        "pt-PT": "Falha ao inserir artigo",
+        "zh-TW": "文章插入失敗"
+    },
+    "console.article.updateFailed": {
+        "zh": "文章更新失败",
+        "en": "Article update failed",
+        "es": "Error al actualizar artículo",
+        "fr": "Échec de la mise à jour de l'article",
+        "ja": "記事の更新に失敗しました",
+        "de-DE": "Aktualisierung des Artikels fehlgeschlagen",
+        "pt-PT": "Falha ao atualizar artigo",
+        "zh-TW": "文章更新失敗"
+    },
+    "console.article.save": {
+        "zh": "保存文章",
+        "en": "Save Article",
+        "es": "Guardar artículo",
+        "fr": "Enregistrer l'article",
+        "ja": "記事を保存",
+        "de-DE": "Artikel speichern",
+        "pt-PT": "Salvar artigo",
+        "zh-TW": "保存文章"
+    },
+    "console.article.viewCopy": {
+        "zh": "查看副本",
+        "en": "View Copy",
+        "es": "Ver copia",
+        "fr": "Voir la copie",
+        "ja": "コピーを表示",
+        "de-DE": "Kopie anzeigen",
+        "pt-PT": "Ver cópia",
+        "zh-TW": "查看副本"
+    },
+    "console.article.cover": {
+        "zh": "封面",
+        "en": "Cover",
+        "es": "Portada",
+        "fr": "Couverture",
+        "ja": "カバー",
+        "de-DE": "Cover",
+        "pt-PT": "Capa",
+        "zh-TW": "封面"
+    },
+    "console.article.title": {
+        "zh": "标题",
+        "en": "Title",
+        "es": "Título",
+        "fr": "Titre",
+        "ja": "タイトル",
+        "de-DE": "Titel",
+        "pt-PT": "Título",
+        "zh-TW": "標題"
+    },
+    "console.article.description": {
+        "zh": "描述",
+        "en": "Description",
+        "es": "Descripción",
+        "fr": "Description",
+        "ja": "説明",
+        "de-DE": "Beschreibung",
+        "pt-PT": "Descrição",
+        "zh-TW": "描述"
+    },
+    "console.article.extendedInfo": {
+        "zh": "扩展信息",
+        "en": "Extended Info",
+        "es": "Información extendida",
+        "fr": "Informations étendues",
+        "ja": "拡張情報",
+        "de-DE": "Erweiterte Informationen",
+        "pt-PT": "Informações estendidas",
+        "zh-TW": "擴展信息"
+    },
+    "console.article.action": {
+        "zh": "操作",
+        "en": "Action",
+        "es": "Acción",
+        "fr": "Action",
+        "ja": "操作",
+        "de-DE": "Aktion",
+        "pt-PT": "Ação",
+        "zh-TW": "操作"
+    },
+    "console.article.createNew": {
+        "zh": "新增笔记",
+        "en": "Create Article",
+        "es": "Crear artículo",
+        "fr": "Créer un article",
+        "ja": "記事を作成",
+        "de-DE": "Artikel erstellen",
+        "pt-PT": "Criar artigo",
+        "zh-TW": "新增筆記"
+    },
+    "console.userinfo.failed": {
+        "zh": "出错了",
+        "en": "Failed",
+        "es": "Falló",
+        "fr": "Échec",
+        "ja": "失敗しました",
+        "de-DE": "Fehlgeschlagen",
+        "pt-PT": "Falhou",
+        "zh-TW": "出錯了"
+    },
+    "console.userinfo.fileInputNotFound": {
+        "zh": "文件输入框未找到或未正确设置",
+        "en": "File input not found or not set correctly",
+        "es": "Entrada de archivo no encontrada o no configurada correctamente",
+        "fr": "Entrée de fichier introuvable ou mal configurée",
+        "ja": "ファイル入力が見つからないか、正しく設定されていません",
+        "de-DE": "Dateieingabe nicht gefunden oder nicht korrekt eingerichtet",
+        "pt-PT": "Entrada de arquivo não encontrada ou não configurada corretamente",
+        "zh-TW": "文件輸入框未找到或未正確設置"
+    },
+    "console.userinfo.success": {
+        "zh": "成功",
+        "en": "Success",
+        "es": "Éxito",
+        "fr": "Succès",
+        "ja": "成功",
+        "de-DE": "Erfolg",
+        "pt-PT": "Sucesso",
+        "zh-TW": "成功"
+    },
+    "console.userinfo.error": {
+        "zh": "错误",
+        "en": "Failed",
+        "es": "Error",
+        "fr": "Erreur",
+        "ja": "エラー",
+        "de-DE": "Fehler",
+        "pt-PT": "Erro",
+        "zh-TW": "錯誤"
+    },
+    "console.userinfo.userId": {
+        "zh": "用户标识",
+        "en": "UserID",
+        "es": "ID de usuario",
+        "fr": "ID utilisateur",
+        "ja": "ユーザーID",
+        "de-DE": "Benutzer-ID",
+        "pt-PT": "ID do usuário",
+        "zh-TW": "用戶標識"
+    },
+    "console.userinfo.username": {
+        "zh": "用户名",
+        "en": "Username",
+        "es": "Nombre de usuario",
+        "fr": "Nom d'utilisateur",
+        "ja": "ユーザー名",
+        "de-DE": "Benutzername",
+        "pt-PT": "Nome de usuário",
+        "zh-TW": "用戶名"
+    },
+    "console.userinfo.nickname": {
+        "zh": "用户昵称",
+        "en": "Nickname",
+        "es": "Apodo",
+        "fr": "Surnom",
+        "ja": "ニックネーム",
+        "de-DE": "Spitzname",
+        "pt-PT": "Apelido",
+        "zh-TW": "用戶昵稱"
+    },
+    "console.userinfo.editProfile": {
+        "zh": "修改资料",
+        "en": "Edit profile",
+        "es": "Editar perfil",
+        "fr": "Modifier le profil",
+        "ja": "プロフィールを編集",
+        "de-DE": "Profil bearbeiten",
+        "pt-PT": "Editar perfil",
+        "zh-TW": "修改資料"
+    },
+    "console.channel.createNew": {
+        "zh": "新建频道",
+        "en": "Create Channel",
+        "es": "Crear canal",
+        "fr": "Créer un canal",
+        "ja": "チャンネルを作成",
+        "de-DE": "Kanal erstellen",
+        "pt-PT": "Criar canal",
+        "zh-TW": "新建頻道"
+    },
+    "console.channel.insertFailed": {
+        "zh": "频道插入失败",
+        "en": "Channel insert failed",
+        "es": "Error al insertar canal",
+        "fr": "Échec de l'insertion du canal",
+        "ja": "チャンネルの挿入に失敗しました",
+        "de-DE": "Einfügen des Kanals fehlgeschlagen",
+        "pt-PT": "Falha ao inserir canal",
+        "zh-TW": "頻道插入失敗"
+    },
+    "console.channel.updateFailed": {
+        "zh": "频道更新失败",
+        "en": "Channel update failed",
+        "es": "Error al actualizar canal",
+        "fr": "Échec de la mise à jour du canal",
+        "ja": "チャンネルの更新に失敗しました",
+        "de-DE": "Aktualisierung des Kanals fehlgeschlagen",
+        "pt-PT": "Falha ao atualizar canal",
+        "zh-TW": "頻道更新失敗"
+    },
+    "console.channel.save": {
+        "zh": "保存频道",
+        "en": "Save Channel",
+        "es": "Guardar canal",
+        "fr": "Enregistrer le canal",
+        "ja": "チャンネルを保存",
+        "de-DE": "Kanal speichern",
+        "pt-PT": "Salvar canal",
+        "zh-TW": "保存頻道"
+    },
+    "console.channel.createMultilingualCopy": {
+        "zh": "创建多语言副本",
+        "en": "Create Multilingual Copy",
+        "es": "Crear copia multilingüe",
+        "fr": "Créer une copie multilingue",
+        "ja": "多言語コピーを作成",
+        "de-DE": "Mehrsprachige Kopie erstellen",
+        "pt-PT": "Criar cópia multilíngue",
+        "zh-TW": "創建多語言副本"
+    },
+    "console.userinfo.email": {
+        "zh": "邮箱",
+        "en": "Email",
+        "es": "Correo electrónico",
+        "fr": "E-mail",
+        "ja": "メール",
+        "de-DE": "E-Mail",
+        "pt-PT": "E-mail",
+        "zh-TW": "郵箱"
+    },
+    "console.userinfo.registrationTime": {
+        "zh": "注册时间",
+        "en": "Registration Time",
+        "es": "Hora de registro",
+        "fr": "Heure d'inscription",
+        "ja": "登録時間",
+        "de-DE": "Registrierungszeit",
+        "pt-PT": "Hora de registro",
+        "zh-TW": "註冊時間"
+    },
+    "console.userinfo.personalProfile": {
+        "zh": "个人简介",
+        "en": "Personal Profile",
+        "es": "Perfil personal",
+        "fr": "Profil personnel",
+        "ja": "個人プロフィール",
+        "de-DE": "Persönliches Profil",
+        "pt-PT": "Perfil pessoal",
+        "zh-TW": "個人簡介"
+    },
+    "console.userinfo.description": {
+        "zh": "个人简介",
+        "en": "Description",
+        "es": "Descripción",
+        "fr": "Description",
+        "ja": "説明",
+        "de-DE": "Beschreibung",
+        "pt-PT": "Descrição",
+        "zh-TW": "個人簡介"
+    },
+    "console.common.save": {
+        "zh": "保存",
+        "en": "Save",
+        "es": "Guardar",
+        "fr": "Enregistrer",
+        "ja": "保存",
+        "de-DE": "Speichern",
+        "pt-PT": "Salvar",
+        "zh-TW": "保存"
+    },
+    "console.common.cancel": {
+        "zh": "取消",
+        "en": "Cancel",
+        "es": "Cancelar",
+        "fr": "Annuler",
+        "ja": "キャンセル",
+        "de-DE": "Abbrechen",
+        "pt-PT": "Cancelar",
+        "zh-TW": "取消"
+    },
+    "common.pagination.previous": {
+        "zh": "上一页",
+        "en": "Previous Page",
+        "es": "Página anterior",
+        "fr": "Page précédente",
+        "ja": "前のページ",
+        "de-DE": "Vorherige Seite",
+        "pt-PT": "Página anterior",
+        "zh-TW": "上一頁"
+    },
+    "common.pagination.next": {
+        "zh": "下一页",
+        "en": "Next Page",
+        "es": "Página siguiente",
+        "fr": "Page suivante",
+        "ja": "次のページ",
+        "de-DE": "Nächste Seite",
+        "pt-PT": "Próxima página",
+        "zh-TW": "下一頁"
+    },
+    "common.channels": {
+        "zh": "频道",
+        "en": "Channels",
+        "es": "Canales",
+        "fr": "Chaînes",
+        "ja": "チャンネル",
+        "de-DE": "Kanäle",
+        "pt-PT": "Canais",
+        "zh-TW": "頻道"
+    },
+    "common.home": {
+        "zh": "首页",
+        "en": "Home",
+        "es": "Inicio",
+        "fr": "Accueil",
+        "ja": "ホーム",
+        "de-DE": "Startseite",
+        "pt-PT": "Início",
+        "zh-TW": "首頁"
+    },
+    "common.userInfo": {
+        "zh": "个人信息",
+        "en": "User Info",
+        "es": "Información del usuario",
+        "fr": "Informations utilisateur",
+        "ja": "ユーザー情報",
+        "de-DE": "Benutzerinformationen",
+        "pt-PT": "Informações do usuário",
+        "zh-TW": "個人信息"
+    },
+    "common.articles": {
+        "zh": "笔记",
+        "en": "Articles",
+        "es": "Artículos",
+        "fr": "Articles",
+        "ja": "記事",
+        "de-DE": "Artikel",
+        "pt-PT": "Artigos",
+        "zh-TW": "筆記"
+    },
+    "comments.cannotBeEmpty": {
+        "zh": "评论内容不能为空",
+        "en": "Comment content cannot be empty",
+        "es": "El contenido del comentario no puede estar vacío",
+        "fr": "Le contenu du commentaire ne peut pas être vide",
+        "ja": "コメント内容を空にすることはできません",
+        "de-DE": "Kommentarinhalt darf nicht leer sein",
+        "pt-PT": "O conteúdo do comentário não pode estar vazio",
+        "zh-TW": "評論內容不能為空"
+    },
+    "comments.submissionFailed": {
+        "zh": "评论提交失败",
+        "en": "Comment submission failed",
+        "es": "Error al enviar el comentario",
+        "fr": "Échec de la soumission du commentaire",
+        "ja": "コメントの送信に失敗しました",
+        "de-DE": "Kommentarübermittlung fehlgeschlagen",
+        "pt-PT": "Falha ao enviar comentário",
+        "zh-TW": "評論提交失敗"
+    },
+    "comments.submittedSuccessfully": {
+        "zh": "评论提交成功",
+        "en": "Comment submitted successfully",
+        "es": "Comentario enviado con éxito",
+        "fr": "Commentaire soumis avec succès",
+        "ja": "コメントが正常に送信されました",
+        "de-DE": "Kommentar erfolgreich übermittelt",
+        "pt-PT": "Comentário enviado com sucesso",
+        "zh-TW": "評論提交成功"
+    },
+    "comments.postComment": {
+        "zh": "发表评论",
+        "en": "Post a comment",
+        "es": "Publicar un comentario",
+        "fr": "Publier un commentaire",
+        "ja": "コメントを投稿",
+        "de-DE": "Kommentar posten",
+        "pt-PT": "Postar um comentário",
+        "zh-TW": "發表評論"
+    },
+    "comments.enterComment": {
+        "zh": "输入评论内容",
+        "en": "Enter your comment",
+        "es": "Ingrese su comentario",
+        "fr": "Entrez votre commentaire",
+        "ja": "コメントを入力",
+        "de-DE": "Geben Sie Ihren Kommentar ein",
+        "pt-PT": "Digite seu comentário",
+        "zh-TW": "輸入評論內容"
+    },
+    "comments.submitComment": {
+        "zh": "提交评论",
+        "en": "Submit Comment",
+        "es": "Enviar comentario",
+        "fr": "Soumettre le commentaire",
+        "ja": "コメントを送信",
+        "de-DE": "Kommentar absenden",
+        "pt-PT": "Enviar comentário",
+        "zh-TW": "提交評論"
+    },
+    "tools.markdown.inputPlaceholder": {
+        "zh": "请输入Markdown文本",
+        "en": "Please enter Markdown text",
+        "es": "Por favor ingrese texto Markdown",
+        "fr": "Veuillez saisir du texte Markdown",
+        "ja": "Markdownテキストを入力してください",
+        "de-DE": "Bitte geben Sie Markdown-Text ein",
+        "pt-PT": "Por favor insira texto Markdown",
+        "zh-TW": "請輸入Markdown文本"
+    },
+    "tools.markdown.preview": {
+        "zh": "Markdown 预览",
+        "en": "Markdown Preview",
+        "es": "Vista previa de Markdown",
+        "fr": "Aperçu Markdown",
+        "ja": "Markdown プレビュー",
+        "de-DE": "Markdown-Vorschau",
+        "pt-PT": "Visualização de Markdown",
+        "zh-TW": "Markdown 預覽"
+    },
+    "tools.markdown.previewResult": {
+        "zh": "Markdown 预览结果",
+        "en": "Markdown Preview Result",
+        "es": "Resultado de vista previa de Markdown",
+        "fr": "Résultat de l'aperçu Markdown",
+        "ja": "Markdown プレビュー結果",
+        "de-DE": "Markdown-Vorschauergebnis",
+        "pt-PT": "Resultado da visualização de Markdown",
+        "zh-TW": "Markdown 預覽結果"
+    },
+    "tools.base32.encode": {
+        "zh": "Base32编码",
+        "en": "Base32 Encode",
+        "es": "Codificar Base32",
+        "fr": "Encoder Base32",
+        "ja": "Base32 エンコード",
+        "de-DE": "Base32 kodieren",
+        "pt-PT": "Codificar Base32",
+        "zh-TW": "Base32編碼"
+    },
+    "tools.base32.decode": {
+        "zh": "Base32解码",
+        "en": "Base32 Decode",
+        "es": "Decodificar Base32",
+        "fr": "Décoder Base32",
+        "ja": "Base32 デコード",
+        "de-DE": "Base32 dekodieren",
+        "pt-PT": "Decodificar Base32",
+        "zh-TW": "Base32解碼"
+    },
+    "console.common.delete": {
+        "zh": "删除",
+        "en": "Delete",
+        "es": "Eliminar",
+        "fr": "Supprimer",
+        "ja": "削除",
+        "de-DE": "Löschen",
+        "pt-PT": "Excluir",
+        "zh-TW": "刪除"
+    },
+    "tools.md5.encode": {
+        "zh": "Md5编码",
+        "en": "Md5 Encode",
+        "es": "Codificar Md5",
+        "fr": "Encoder Md5",
+        "ja": "Md5 エンコード",
+        "de-DE": "Md5 kodieren",
+        "pt-PT": "Codificar Md5",
+        "zh-TW": "Md5編碼"
+    },
+    "console.delete.failed": {
+        "zh": "删除失败",
+        "en": "Delete failed",
+        "es": "Error al eliminar",
+        "fr": "Échec de la suppression",
+        "ja": "削除に失敗しました",
+        "de-DE": "Löschen fehlgeschlagen",
+        "pt-PT": "Falha ao excluir",
+        "zh-TW": "刪除失敗"
+    },
+    "console.delete.confirm": {
+        "zh": "是否要删除?",
+        "en": "Do you want to delete?",
+        "es": "¿Quieres eliminar?",
+        "fr": "Voulez-vous supprimer?",
+        "ja": "削除しますか？",
+        "de-DE": "Möchten Sie löschen?",
+        "pt-PT": "Deseja excluir?",
+        "zh-TW": "是否要刪除?"
+    },
+    "console.delete.ok": {
+        "zh": "确定",
+        "en": "OK",
+        "es": "Aceptar",
+        "fr": "OK",
+        "ja": "確定",
+        "de-DE": "OK",
+        "pt-PT": "OK",
+        "zh-TW": "確定"
+    },
+    "cloudflare.pleaseClick": {
+        "zh": "请点击验证",
+        "en": "Please Click",
+        "es": "Por favor haga clic",
+        "fr": "Veuillez cliquer",
+        "ja": "クリックしてください",
+        "de-DE": "Bitte klicken",
+        "pt-PT": "Por favor clique",
+        "zh-TW": "請點擊驗證"
+    },
+    "articles.getListFailed": {
+        "zh": "获取文章列表失败",
+        "en": "Failed to get article list",
+        "es": "Error al obtener la lista de artículos",
+        "fr": "Échec de l'obtention de la liste des articles",
+        "ja": "記事リストの取得に失敗しました",
+        "de-DE": "Fehler beim Abrufen der Artikelliste",
+        "pt-PT": "Falha ao obter lista de artigos",
+        "zh-TW": "獲取文章列表失敗"
+    },
+    "comments.noComments": {
+        "zh": "暂无评论",
+        "en": "No comments yet",
+        "es": "Sin comentarios aún",
+        "fr": "Pas encore de commentaires",
+        "ja": "まだコメントはありません",
+        "de-DE": "Noch keine Kommentare",
+        "pt-PT": "Ainda sem comentários",
+        "zh-TW": "暫無評論"
+    },
+    "channels.getListFailed": {
+        "zh": "获取频道列表失败",
+        "en": "Failed to get channel list",
+        "es": "Error al obtener la lista de canales",
+        "fr": "Échec de l'obtention de la liste des canaux",
+        "ja": "チャンネルリストの取得に失敗しました",
+        "de-DE": "Fehler beim Abrufen der Kanalliste",
+        "pt-PT": "Falha ao obter lista de canais",
+        "zh-TW": "獲取頻道列表失敗"
     }
 }

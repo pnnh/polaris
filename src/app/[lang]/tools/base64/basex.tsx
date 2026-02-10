@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import {decodeBase64String, encodeBase64String} from "@pnnh/atom";
 import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 import {useClientConfig} from "@/components/client/config/config";
 import {PSFileModel} from "@/components/common/models/file";
 
@@ -43,19 +43,19 @@ export default function Base64Component({lang, appInfo}: { lang: string, appInfo
         <div className="basexPage">
             <h1>{appInfo.name}</h1>
             <textarea className="sourceText" placeholder={
-                transText(lang, '请输入需要编码的文本', 'Please enter the text to be encoded')
+                transKey(lang, "tools.common.inputPlaceholder")
             } value={source}
                       onChange={(event) => setSource(event.target.value)}/>
             <div className="toolButtons">
                 <Button variant="contained" size={'small'} onClick={encodeBase64}>
-                    {transText(lang, 'Base64编码', 'Encode Base64')}
+                    {transKey(lang, "tools.base64.encode")}
                 </Button>
                 <Button variant="contained" size={'small'} onClick={decodeBase64}>
-                    {transText(lang, 'Base64解码', 'Decode Base64')}
+                    {transKey(lang, "tools.base64.decode")}
                 </Button>
             </div>
             <textarea className="targetText" placeholder={
-                transText(lang, '编码结果', 'Encoded Result')
+                transKey(lang, "tools.common.resultPlaceholder")
             } value={output} onChange={(event) =>
                 setOutput(event.target.value)}/>
         </div>

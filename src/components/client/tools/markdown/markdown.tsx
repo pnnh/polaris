@@ -3,12 +3,12 @@
 import * as React from 'react';
 import {useEffect} from 'react';
 import Button from '@mui/material/Button';
-import {useClientConfig} from "@/components/client/config/config";
+import {transKey} from "@/components/common/locales/normal";
 import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
 import {markdownStringToHtml} from "@/components/server/markdown/markdown";
-import {transText} from "@/components/common/locales/normal";
 import {PSFileModel} from "@/components/common/models/file";
+import {useClientConfig} from "@/components/client/config/config";
 
 export default function MarkdownComponent({lang, appInfo}: { lang: string, appInfo: PSFileModel }) {
     const [source, setSource] = React.useState('');
@@ -32,16 +32,16 @@ export default function MarkdownComponent({lang, appInfo}: { lang: string, appIn
     return <div className="markdownComponent">
         <h1>{appInfo.name}</h1>
         <textarea className="sourceText" placeholder={
-            transText(lang, '请输入Markdown文本', 'Please enter Markdown text')
+            transKey(lang, "tools.markdown.inputPlaceholder")
         } value={source}
                   onChange={(event) => setSource(event.target.value)}/>
         <div className="toolButtons">
             <Button variant="contained" size={'small'} onClick={encodeMarkdown}>
-                {transText(lang, 'Markdown 预览', 'Markdown Preview')}
+                {transKey(lang, "tools.markdown.preview")}
             </Button>
         </div>
         <textarea className="targetText" placeholder={
-            transText(lang, 'Markdown 预览结果', 'Markdown Preview Result')
+            transKey(lang, "tools.markdown.previewResult")
         } value={output} onChange={(event) =>
             setOutput(event.target.value)}/>
 

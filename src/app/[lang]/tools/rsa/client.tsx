@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 import {rsaServerEncode} from "./server";
 import {PSFileModel} from "@/components/common/models/file";
 
@@ -64,16 +64,16 @@ export default function RsaComponent({lang, appInfo}: { lang: string, appInfo: P
         `}</style>
         <h1>{appInfo.name}</h1>
         <textarea className={'sourceText'} placeholder={
-            transText(lang, '请输入需要编码的文本', 'Please enter the text to be encoded')
+            transKey(lang, "tools.common.inputPlaceholder")
         } value={source}
                   onChange={(event) => setSource(event.target.value)}/>
         <div className={'toolButtons'}>
             <Button variant="contained" size={'small'} onClick={encodeFunc}>
-                {transText(lang, '编码', 'Encode')}
+                {transKey(lang, "tools.rsa.encode")}
             </Button>
         </div>
         <textarea className={'targetText'} placeholder={
-            transText(lang, '编码结果', 'Encoded Result')
+            transKey(lang, "tools.common.resultPlaceholder")
         } value={output} onChange={(event) =>
             setOutput(event.target.value)}/>
     </div>

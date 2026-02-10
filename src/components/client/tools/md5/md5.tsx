@@ -3,12 +3,12 @@
 import * as React from 'react';
 import {useEffect} from 'react';
 import Button from '@mui/material/Button';
-import {useClientConfig} from "@/components/client/config/config";
-import {IBrowserConfig} from "@/components/common/config";
+import {PSFileModel} from "@/components/common/models/file";
 import {Loading} from "@/components/common/loading";
 import {stringToMd5} from "@pnnh/atom";
-import {transText} from "@/components/common/locales/normal";
-import {PSFileModel} from "@/components/common/models/file";
+import {IBrowserConfig} from "@/components/common/config";
+import {useClientConfig} from "@/components/client/config/config";
+import {transKey} from "@/components/common/locales/normal";
 
 export default function Md5Component({lang, appInfo}: { lang: string, appInfo: PSFileModel }) {
     const [source, setSource] = React.useState('');
@@ -32,16 +32,16 @@ export default function Md5Component({lang, appInfo}: { lang: string, appInfo: P
     return <div className="md5Page">
         <h1>{appInfo.name}</h1>
         <textarea className="sourceText" placeholder={
-            transText(lang, '请输入需要编码的文本', 'Please enter the text to be encoded')
+            transKey(lang, "tools.common.inputPlaceholder")
         } value={source}
                   onChange={(event) => setSource(event.target.value)}/>
         <div className="toolButtons">
             <Button variant="contained" size={'small'} onClick={encodeMd5}>
-                {transText(lang, 'Md5编码', 'Md5 Encode')}
+                {transKey(lang, "tools.md5.encode")}
             </Button>
         </div>
         <textarea className="targetText" placeholder={
-            transText(lang, '编码结果', 'Encoded Result')
+            transKey(lang, "tools.common.resultPlaceholder")
         } value={output} onChange={(event) =>
             setOutput(event.target.value)}/>
 

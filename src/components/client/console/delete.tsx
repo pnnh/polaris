@@ -34,7 +34,6 @@ export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
         setOpen(false);
     };
 
-
     const handleSubmit = (value: string) => {
         console.debug('handleSubmit', value);
         clientMakePost<PLDeleteResult>(deleteUrl, {}).then((deleteResult) => {

@@ -6,9 +6,9 @@ import Button from '@mui/material/Button';
 import {decodeBase32String, encodeBase32String} from "@pnnh/atom";
 import {IBrowserConfig} from "@/components/common/config";
 import {Loading} from "@/components/common/loading";
-import {transText} from "@/components/common/locales/normal";
 import {useClientConfig} from "@/components/client/config/config";
 import {PSFileModel} from "@/components/common/models/file";
+import {transKey} from "@/components/common/locales/normal";
 
 export default function Base32Component({lang, appInfo}: { lang: string, appInfo: PSFileModel }) {
     const [source, setSource] = React.useState('');
@@ -42,19 +42,19 @@ export default function Base32Component({lang, appInfo}: { lang: string, appInfo
     return <div className="base32Page">
         <h1>{appInfo.name}</h1>
         <textarea className="sourceText" placeholder={
-            transText(lang, '请输入需要编码的文本', 'Please enter the text to be encoded')
+            transKey(lang, "tools.common.inputPlaceholder")
         } value={source}
                   onChange={(event) => setSource(event.target.value)}/>
         <div className="toolButtons">
             <Button variant="contained" size={'small'} onClick={encodeBase32}>
-                {transText(lang, 'Base32编码', 'Base32 Encode')}
+                {transKey(lang, "tools.base32.encode")}
             </Button>
             <Button variant="contained" size={'small'} onClick={decodeBase32}>
-                {transText(lang, 'Base32解码', 'Base32 Decode')}
+                {transKey(lang, "tools.base32.decode")}
             </Button>
         </div>
         <textarea className="targetText" placeholder={
-            transText(lang, '编码结果', 'Encoded Result')
+            transKey(lang, "tools.common.resultPlaceholder")
         } value={output} onChange={(event) =>
             setOutput(event.target.value)}/>
 

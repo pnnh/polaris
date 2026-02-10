@@ -1,12 +1,11 @@
 import {getPathname} from "@/components/server/pathname";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {useServerConfig} from "@/components/server/config";
-import {SymbolUnknown} from "@pnnh/atom";
+import {langEn, SymbolUnknown} from "@pnnh/atom";
 import {UserinfoEditForm} from "./form";
 import {serverGetUserinfo} from "@/components/server/account/account";
-import {langEn} from "@pnnh/atom";
 import ConsoleLayout from "@/components/server/console/layout";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
@@ -23,7 +22,7 @@ export default async function Page({params, searchParams}: {
 
     const userInfo = await serverGetUserinfo(serverConfig.INTERNAL_PORTAL_URL);
     if (!userInfo) {
-        return <div>{transText(lang, '出错了', 'Failed')}</div>
+        return <div>{transKey(lang, "console.userinfo.failed")}</div>
     }
 
     return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}

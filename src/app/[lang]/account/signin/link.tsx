@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import {permitAppLogin, queryAuthApp} from "@/components/client/account/account";
 import {CodeOk} from "@pnnh/atom";
 import {Loading} from "@/components/common/loading";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 export function LinkSession({lang, portalUrl, signinLink, linkApp, signinCallback}: {
     lang: string, portalUrl: string, signinLink: string, linkApp: string, signinCallback: string
@@ -16,12 +16,12 @@ export function LinkSession({lang, portalUrl, signinLink, linkApp, signinCallbac
     useEffect(() => {
         queryAuthApp(portalUrl, linkApp).then((getResult) => {
             if (getResult.code !== CodeOk) {
-                setErrorMsg(transText(lang, '应用信息查询失败', 'Failed to query application information'));
+                setErrorMsg(transKey(lang, "auth.queryAppFailed"));
                 return
             }
             const app = getResult.data;
             if (!app || !app.name || app.name !== linkApp || !app.title) {
-                setErrorMsg(transText(lang, '应用信息无效', 'Invalid application information'));
+                setErrorMsg(transKey(lang, "auth.invalidAppInfo"));
                 return
             }
             setAppInfo(app);
@@ -35,7 +35,7 @@ export function LinkSession({lang, portalUrl, signinLink, linkApp, signinCallbac
         const submitResult = await permitAppLogin(portalUrl, submitRequest)
         console.log('submitResult', submitResult)
         if (submitResult.code !== CodeOk || !submitResult.data || !submitResult.data.uid) {
-            setErrorMsg(transText(lang, '授权失败', 'Authorization failed'));
+            setErrorMsg(transKey(lang, "auth.authorizationFailed"));
             return
         }
         if (signinCallback && signinCallback.startsWith("https://")) {
@@ -47,7 +47,7 @@ export function LinkSession({lang, portalUrl, signinLink, linkApp, signinCallbac
             // 使用新的URL进行跳转
             window.location.href = parsedUrl.toString();
         } else {
-            setPermitResult(transText(lang, '授权完成，可以关闭该页面', 'Authorization completed, you can close this page'));
+            setPermitResult(transKey(lang, "auth.authorizationCompleted"));
         }
     }
     if (!appInfo) {
@@ -58,26 +58,26 @@ export function LinkSession({lang, portalUrl, signinLink, linkApp, signinCallbac
     }
     return <>
         <div className="linkSession">
-        <div>{transText(lang, '是否授权？', 'Authorization?')}<b>{appInfo.name}</b></div>
-        {errorMsg ?? <div>{errorMsg}</div>}
-        {permitResult ? permitResult : <div>
-            <button onClick={submitAuth}>{transText(lang, '同意', 'Accept')}</button>
-            <button onClick={() => {
-                window.location.href = '/'
-            }}>{transText(lang, '拒绝', 'Reject')}
-            </button>
-        </div>}
-    </div>
-    <style jsx>{`
-      .linkSession {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-        padding: 20px;
-      }
-    `}</style>
+            <div>{transKey(lang, "auth.authorizationQuestion")}<b>{appInfo.name}</b></div>
+            {errorMsg ?? <div>{errorMsg}</div>}
+            {permitResult ? permitResult : <div>
+                <button onClick={submitAuth}>{transKey(lang, "auth.accept")}</button>
+                <button onClick={() => {
+                    window.location.href = '/'
+                }}>{transKey(lang, "auth.reject")}
+                </button>
+            </div>}
+        </div>
+        <style jsx>{`
+            .linkSession {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                padding: 20px;
+            }
+        `}</style>
     </>
 }

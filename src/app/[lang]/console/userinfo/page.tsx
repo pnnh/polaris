@@ -6,8 +6,8 @@ import {serverGetUserinfo} from "@/components/server/account/account";
 import {langEn} from "@pnnh/atom";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
 import ConsoleLayout from "@/components/server/console/layout";
-import {transText} from "@/components/common/locales/normal";
 import {getAccountUrn} from "@/components/common/models/account/account";
+import {transKey} from "@/components/common/locales/normal";
 
 const pageStyles = {
     userInfoContainer: css`
@@ -27,7 +27,7 @@ const pageStyles = {
         height: 8rem;
         border-radius: 50%;
         margin-bottom: 1rem;
-        
+
         img {
             width: 100%;
             height: 100%;
@@ -97,32 +97,32 @@ export default async function Page({params, searchParams}: {
                     <img src={userInfo.photoUrl} alt="User Avatar"/>
                 </div>
                 <div className={pageStyles.editLink}>
-                    <a href={`/${lang}/console/userinfo/edit`}>{transText(lang, '修改资料', 'Edit profile')}</a>
+                    <a href={`/${lang}/console/userinfo/edit`}>{transKey(lang, "console.userinfo.editProfile")}</a>
                 </div>
                 <div className={pageStyles.details}>
                     <p className={pageStyles.row}>
-                        <label className={pageStyles.rowLabel}>{transText(lang, '用户标识', 'UserID')}:</label>
+                        <label className={pageStyles.rowLabel}>{transKey(lang, "console.userinfo.userId")}:</label>
                         <span className={pageStyles.rowContent}>{getAccountUrn(userInfo.uid)}</span>
                     </p>
                     <p className={pageStyles.row}>
-                        <label className={pageStyles.rowLabel}>{transText(lang, '用户名', 'Username')}: </label>
+                        <label className={pageStyles.rowLabel}>{transKey(lang, "console.userinfo.username")}: </label>
                         <span className={pageStyles.rowContent}>{userInfo.username}</span></p>
                     <p className={pageStyles.row}>
-                        <label className={pageStyles.rowLabel}>{transText(lang, '用户昵称', 'Nickname')}：</label>
+                        <label className={pageStyles.rowLabel}>{transKey(lang, "console.userinfo.nickname")}：</label>
                         <span className={pageStyles.rowContent}>{userInfo.nickname}</span>
                     </p>
                     <p className={pageStyles.row}><label
-                        className={pageStyles.rowLabel}>{transText(lang, '邮箱', 'Email')}:</label>
+                        className={pageStyles.rowLabel}>{transKey(lang, "console.userinfo.email")}:</label>
                         <span className={pageStyles.rowContent}>
                             {userInfo.mail}
                         </span></p>
                     <p className={pageStyles.row}><label
-                        className={pageStyles.rowLabel}>{transText(lang, '注册时间', 'Registration Time')}:</label>
+                        className={pageStyles.rowLabel}>{transKey(lang, "console.userinfo.registrationTime")}:</label>
                         <span className={pageStyles.rowContent}>
                             {userInfo.create_time}
                         </span></p>
                     <p className={pageStyles.row}><label
-                        className={pageStyles.rowLabel}>{transText(lang, '个人简介', 'Personal Profile')}:</label>
+                        className={pageStyles.rowLabel}>{transKey(lang, "console.userinfo.personalProfile")}:</label>
                         <span className={pageStyles.rowContent}>
                             {userInfo.description}
                         </span></p>

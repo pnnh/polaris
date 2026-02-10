@@ -9,7 +9,7 @@ import GlobalLayout from "@/components/server/global";
 
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {LinkSession} from "@/app/[lang]/account/signin/link";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 import {isAnonymousAccount} from "@/components/common/models/account/account";
 
 const pageStyles = {
@@ -57,7 +57,7 @@ export default async function Page({params, searchParams}: {
             return <LinkSession lang={lang} portalUrl={publicPortalUrl} signinLink={signinLink} linkApp={linkApp}
                                 signinCallback={signinCallback}/>
         }
-        return <div><a href={'/'}>{transText(lang, '前往首页', 'Go home page')}</a></div>
+        return <div><a href={'/'}>{transKey(lang, "signin.goHomePage")}</a></div>
     }
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
@@ -65,7 +65,7 @@ export default async function Page({params, searchParams}: {
         <AccountLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                        metadata={metadata}>
             <div className={pageStyles.signinCard}>
-                <div className={pageStyles.signinTitle}>{transText(lang, '登录页面', 'Login Page')}</div>
+                <div className={pageStyles.signinTitle}>{transKey(lang, "signin.loginPage")}</div>
                 <div className={pageStyles.signinBody}>
                     <SigninForm portalUrl={publicPortalUrl} lang={lang} signinLink={signinLink}
                                 linkApp={linkApp} signinCallback={signinCallback}/>

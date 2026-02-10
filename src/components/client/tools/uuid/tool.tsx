@@ -9,7 +9,7 @@ import {copyToClipboard} from "@pnnh/atom/browser";
 import {TextField} from "@mui/material";
 import Button from "@mui/material/Button";
 import {localText} from "@pnnh/atom";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 import {PSFileModel} from "@/components/common/models/file";
 
 function generateUUID(version: number, options?: {
@@ -95,7 +95,7 @@ export function UuidToolBody({lang, appInfo}: { lang: string, appInfo: PSFileMod
 
             <div className={'actionRow'}>
                 <div className={'w-24 inline-block font-bold'}>
-                    {transText(lang, '版本选择', 'Version Selection')}
+                    {transKey(lang, "tools.uuid.versionSelection")}
                 </div>
                 <Button variant={'contained'} size={'small'} lang={lang} onClick={() => {
                     setState(generateUUID(0))
@@ -253,7 +253,7 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
     return <>
         <div className={'optionRow'}>
             <div className={'w-24 inline-block'}>
-                {transText(lang, '命名空间', 'Namespace')}
+                {transKey(lang, "tools.uuid.namespace")}
             </div>
             <div className={'namespaceForm'}>
                 <div className={'namespaceSwitch'}>
@@ -266,7 +266,7 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
                         setState(newItem)
                         appendHistory(newItem)
                     }}>
-                        {transText(lang, '随机', 'Random')}
+                        {transKey(lang, "tools.uuid.random")}
                     </Button>
                     <Button variant={'contained'} size={'small'} lang={lang} onClick={() => {
                         const newItem = generateUUID(state.version, {
@@ -311,7 +311,7 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
                         })
                         setState(newItem)
                         appendHistory(newItem)
-                    }}>{transText(lang, '自定义', 'Custom')}</Button>
+                    }}>{transKey(lang, "tools.uuid.custom")}</Button>
                 </div>
                 <div className={'namespaceText'}>
                     <div>
@@ -319,7 +319,7 @@ function GenOptionTable({lang, state, setState, history, setHistory}:
                             <TextField
                                 size={'small'}
                                 disabled={state?.options?.type !== OptionType.Custom}
-                                placeholder={transText(lang, '命名空间', 'Namespace')}
+                                placeholder={transKey(lang, "tools.uuid.namespace")}
                                 value={state?.options?.namespace || ''}
                                 onChange={(event) => {
                                     const valid = validate(event.target.value)

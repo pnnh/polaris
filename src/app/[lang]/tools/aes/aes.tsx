@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import {transKey, transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 import {aesServerDecode, aesServerEncode, aesServerGenerateKey} from "@/app/[lang]/tools/aes/server";
 import {IconButton, TextField} from "@mui/material";
 import ImportExportIcon from '@mui/icons-material/ImportExport';
@@ -82,7 +82,7 @@ export default function AesComponent({lang, appInfo}: { lang: string, appInfo: P
         `}</style>
         <h1 className={'toolTitle'}>{appInfo.name}</h1>
         <textarea className={'sourceText'} placeholder={
-            transText(lang, '请输入需要编码的文本', 'Please enter the text to be encoded')
+            transKey(lang, "tools.common.inputPlaceholder")
         } value={source}
                   onChange={(event) => setSource(event.target.value)}/>
         <div className={'toolButtons'}>
@@ -109,7 +109,7 @@ export default function AesComponent({lang, appInfo}: { lang: string, appInfo: P
             </IconButton>
         </div>
         <textarea className={'targetText'} placeholder={
-            transText(lang, '编码结果', 'Encoded Result')
+            transKey(lang, "tools.common.resultPlaceholder")
         } value={output} onChange={(event) =>
             setOutput(event.target.value)}/>
     </div>

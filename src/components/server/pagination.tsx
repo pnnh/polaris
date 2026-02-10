@@ -1,6 +1,6 @@
 import {FullPagination} from "@pnnh/atom";
 import {css, PSComponentLayout, PSComponentLayoutProps} from "@/components/common/component";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 const stylePageContent = css`
     margin: 0.5rem;
@@ -49,7 +49,7 @@ export function PaginationServer({lang, pagination, pageLinkFunc, inlineStyle, c
                 {pagination.previousPage >= 1
                     ? (<a href={pageLinkFunc(pagination.previousPage)}
                           className={stylePageItem.className}>
-                        {transText(lang, '上一页', 'Previous Page')}
+                        {transKey(lang, "common.pagination.previous")}
                     </a>)
                     : (<></>)}
                 {[...Array(pagination.endPage - pagination.startPage + 1).keys()].map((_, index) => {
@@ -61,7 +61,7 @@ export function PaginationServer({lang, pagination, pageLinkFunc, inlineStyle, c
                 {pagination.nextPage <= pagination.maxPage
                     ? (<a href={pageLinkFunc(pagination.nextPage)}
                           className={stylePageItem.className}>
-                        {transText(lang, '下一页', 'Next Page')}
+                        {transKey(lang, "common.pagination.next")}
                     </a>)
                     : (<></>)}
             </div>
