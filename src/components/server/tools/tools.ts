@@ -1,8 +1,7 @@
 import {useServerConfig} from "@/components/server/config";
-import {psResolvePath} from "@/components/server/filesystem/path";
-import fs from "node:fs";
-import path from "path";
 import {PSFileModel} from "@/components/common/models/file";
+import {clientMakeGet} from "@pnnh/atom/browser";
+import {PLGetResult, PLSelectData, PLSelectResult} from "@pnnh/atom";
 
 export const articlesUid = '019bbb53-f051-750a-8532-2358b64f31f3'
 export const imagesUid = '019bbb53-ef8d-7589-aebc-851c627eabd0'
@@ -29,49 +28,23 @@ export const aesUid = '019b2176-8409-773d-9d64-57fd408491df'
 export const rsaUid = '019b217f-6e4a-73cd-bb11-ede2f6e27297'
 
 export async function queryApp(expectLang: string, appUid: string): Promise<PSFileModel | undefined> {
-    const appList = await selectAppsFromStorage()
-    return appList.find(app => app.uid === appUid)
+    const serverConfig = await useServerConfig()
+    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
+    const url = `${internalPortalUrl}/cloud/files/desc?uid=${appUid}`
+    const selectResult = await clientMakeGet<PLGetResult<PSFileModel>>(url)
+    if (!selectResult || selectResult.code !== 200 || !selectResult.data) {
+        throw new Error("host notebook")
+    }
+    return selectResult.data
 }
 
-export async function selectAppsFromStorage(): Promise<PSFileModel[]> {
+export async function selectAppsFromStorage(): Promise<PLSelectData<PSFileModel>> {
     const serverConfig = await useServerConfig()
-    const storageUrl = psResolvePath(serverConfig.STORAGE_URL)
-
-    const resultFiles: PSFileModel[] = []
-    const files = fs.readdirSync(storageUrl)
-    for (const file of files) {
-        const fullPath = path.join(storageUrl, file)
-        const fileStat = fs.statSync(fullPath)
-        const model: PSFileModel = {
-            channel: "",
-            create_time: "",
-            creator: "",
-            description: "",
-            discover: 0,
-            full_repo_path: "",
-            image_url: "",
-            is_dir: false,
-            is_ignore: "",
-            is_image: false,
-            is_text: false,
-            keywords: "",
-            owner: "",
-            partition: "",
-            path: "",
-            status: 0,
-            storage_path: "",
-            title: "",
-            name: file,
-            url: `file://${fullPath}`,
-            mimetype: 'application/octet-stream',
-            update_time: fileStat.mtime.toISOString(),
-            uid: fileStat.ino.toString()
-        }
-        if (!fileStat.isDirectory()) {
-            model.is_dir = true
-        }
-        resultFiles.push(model)
-
+    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
+    const url = `${internalPortalUrl}/cloud/files`
+    const selectResult = await clientMakeGet<PLSelectResult<PSFileModel>>(url)
+    if (!selectResult || selectResult.code !== 200 || !selectResult.data) {
+        throw new Error("host notebook")
     }
-    return resultFiles
+    return selectResult.data
 }

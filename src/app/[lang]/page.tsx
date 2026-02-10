@@ -5,7 +5,7 @@ import {SymbolUnknown} from "@pnnh/atom";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getTargetLang, unknownLanguage} from "@/components/common/language";
 import {notFound} from "next/navigation";
-import {ToolBody} from "@/app/[lang]/tools/tool";
+import {FilesGridBody} from "@/app/[lang]/tools/tool";
 
 export const dynamic = "force-dynamic";
 
@@ -26,6 +26,6 @@ export default async function Page({params, searchParams}: {
     metadata.title = pageTitle(lang, '')
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
-        <ToolBody lang={lang}/>
+        <FilesGridBody lang={lang}/>
     </ContentLayout>
 }

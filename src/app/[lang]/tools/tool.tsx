@@ -39,7 +39,6 @@ const toolStyles = {
     appTitle: css`
         font-size: 20px;
         font-weight: 600;
-        border-bottom: solid 1px #c4c4c4;
         position: relative;
         z-index: 2;
         padding: 16px;
@@ -54,12 +53,12 @@ const toolStyles = {
     `
 }
 
-export async function ToolBody({lang}: { lang: string }) {
+export async function FilesGridBody({lang}: { lang: string }) {
     const appList = await selectAppsFromStorage()
     return <div className={toolStyles.toolBodyComponent}>
         <div className={toolStyles.appGrid}>
             {
-                appList.map(async (app) => {
+                appList.range.map(async (app) => {
                     return renderResourceCard({model: app, lang})
                 })
             }
@@ -80,10 +79,9 @@ function renderResourceCard({model, lang}: { model: PSFileModel, lang: string })
     const toolUrl = model.url.startsWith('https') || model.url.startsWith('https')
         ? model.url : `${lang}${model.url}`
     return <div className={toolStyles.appCard} key={model.uid}>
-        <img className={toolStyles.appImage} src={model.image_url} alt={model.name}/>
         <div className={toolStyles.appTitle}>
-            <a style={{color: '#333', textDecoration: 'none'}} href={toolUrl}>{model.name}</a>
+            <a style={{color: '#333', textDecoration: 'none'}} href={toolUrl}
+               title={model.title || model.name}>{model.title || model.name}</a>
         </div>
-        <p className={toolStyles.appDescription}>{model.description}</p>
     </div>
 }

@@ -1,8 +1,8 @@
 import React, {CSSProperties} from "react";
 import {css} from "@/gen/styled/css";
-import {transExtra, transKey} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 import {getPathname} from "@/components/server/pathname";
-import {pageTitle} from "@/components/common/page";
+import {pageTitle} from "@/components/common/utils/page";
 
 const styles = {
     siteNavMenu: css`
@@ -97,8 +97,8 @@ function ArticleNavbar({lang, pathname}: {
 }) {
     const navLinks = [
         {name: transKey(lang, "navTools"), href: `/${lang}/tools`},
-        {name: transExtra(lang, "文章", "Articles", "navArticles"), href: `/${lang}/articles`},
-        {name: transExtra(lang, "频道", "Channels", "navChannels"), href: `/${lang}/channels`},
+        {name: transKey(lang, "navArticles"), href: `/${lang}/articles`},
+        {name: transKey(lang, "navChannels"), href: `/${lang}/channels`},
         {name: transKey(lang, "navImages"), href: `/${lang}/images`},
         // {name: '图片', href: `/images`},
         // {name: '随机密码', href: `/tools/password`},

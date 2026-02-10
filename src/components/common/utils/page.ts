@@ -1,7 +1,7 @@
-import {transExtra} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 export function pageTitle(lang: string, title?: string | null | undefined): string {
-    const slogan = transExtra(lang, "希波", "HUABLE", "siteName")
+    const slogan = transKey(lang, "siteName")
     if (!title || title.startsWith(slogan)) {
         return slogan
     }

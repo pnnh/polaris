@@ -6,7 +6,7 @@ import {PageMetadata} from "@/components/common/utils/page";
 import {headers} from "next/headers";
 import {langEnUS} from "@/components/common/language";
 import {filterAcceptLanguage} from "@/components/server/language";
-import {ToolBody} from "@/app/[lang]/tools/tool";
+import {FilesGridBody} from "@/app/[lang]/tools/tool";
 
 export default async function Page({searchParams}: {
     searchParams: Promise<Record<string, string>>
@@ -21,7 +21,7 @@ export default async function Page({searchParams}: {
     const metadata = new PageMetadata(lang)
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
-        <ToolBody lang={lang}/>
+        <FilesGridBody lang={lang}/>
     </ContentLayout>
 }
 
