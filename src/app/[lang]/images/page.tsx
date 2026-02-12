@@ -2,16 +2,13 @@ import React from 'react'
 import {css} from "@/gen/styled/css";
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
-import {SymbolUnknown} from "@pnnh/atom";
-import {calcPagination} from "@pnnh/atom";
+import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {PaginationServer} from "@/components/server/pagination";
-import {replaceSearchParams} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
-import {langEn} from "@pnnh/atom";
 import {PageMetadata} from "@/components/common/utils/page";
 import {serverSelectImages} from "@/components/server/images/image";
 import {ImageMiddleBody} from "@/components/server/content/images/image";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 const pageStyles = {
     contentContainer: css`
@@ -88,13 +85,13 @@ export default async function Page({params, searchParams}: {
         <div className={pageStyles.contentContainer}>
             <div className={pageStyles.conTop}>
                 <a className={pageStyles.linkTag} href={`/${lang}/images?type=illustration`}>
-                    {transText(lang, '插画', 'illustration')}</a>
+                    {transKey(lang, 'images.illustration')}</a>
                 <a className={pageStyles.linkTag} href={`/${lang}/images?type=sticker`}>
-                    {transText(lang, '表情图', 'Sticker')}</a>
+                    {transKey(lang, 'images.sticker')}</a>
                 <a className={pageStyles.linkTag} href={`/${lang}/images?type=emoji`}>
-                    {transText(lang, 'Emoji', 'Emoji')}</a>
+                    {transKey(lang, 'images.emoji')}</a>
                 <a className={pageStyles.linkTag} href={`/${lang}/images?type=icons`}>
-                    {transText(lang, '图标', 'Icons')}</a>
+                    {transKey(lang, 'images.icons')}</a>
             </div>
             <div className={pageStyles.conMiddle}>
                 <ImageMiddleBody selectData={selectData} lang={lang}/>

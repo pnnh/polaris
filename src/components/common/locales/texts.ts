@@ -1642,5 +1642,55 @@ export const TransTexts: {
         "de-DE": "Fehler beim Abrufen der Kanalliste",
         "pt-PT": "Falha ao obter lista de canais",
         "zh-TW": "獲取頻道列表失敗"
+    },
+    "images.illustration": {
+        "zh": "插画",
+        "en": "illustration",
+        "es": "ilustración",
+        "fr": "illustration",
+        "ja": "イラスト",
+        "de-DE": "Illustration",
+        "pt-PT": "ilustração",
+        "zh-TW": "插畫"
+    },
+    "images.sticker": {
+        "zh": "表情图",
+        "en": "Sticker",
+        "es": "Pegatina",
+        "fr": "Autocollant",
+        "ja": "ステッカー",
+        "de-DE": "Aufkleber",
+        "pt-PT": "Adesivo",
+        "zh-TW": "表情圖"
+    },
+    "images.emoji": {
+        "zh": "Emoji",
+        "en": "Emoji",
+        "es": "Emoji",
+        "fr": "Emoji",
+        "ja": "絵文字",
+        "de-DE": "Emoji",
+        "pt-PT": "Emoji",
+        "zh-TW": "Emoji"
+    },
+    "images.icons": {
+        "zh": "图标",
+        "en": "Icons",
+        "es": "Iconos",
+        "fr": "Icônes",
+        "ja": "アイコン",
+        "de-DE": "Symbole",
+        "pt-PT": "Ícones",
+        "zh-TW": "圖標"
+    },
+    "images.getListFailed": {
+        "zh": "获取图片列表失败",
+        "en": "Failed to get image list",
+        "es": "Error al obtener la lista de imágenes",
+        "fr": "Échec de l'obtention de la liste des images",
+        "ja": "画像リストの取得に失敗しました",
+        "de-DE": "Fehler beim Abrufen der Bildliste",
+        "pt-PT": "Falha ao obter lista de imagens",
+        "zh-TW": "獲取圖片列表失敗"
     }
 }

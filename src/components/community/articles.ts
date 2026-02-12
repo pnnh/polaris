@@ -4,7 +4,7 @@ import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {cookies} from "next/headers";
 import {getDefaultImageUrl} from "@/components/common/note";
 import queryString from "query-string";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 export class CommunityArticleNodeService {
     static async consoleQueryArticles(portalUrl: string, lang: string, queryParams: Record<string, any>): Promise<PLSelectData<PSArticleModel>> {
@@ -14,11 +14,11 @@ export class CommunityArticleNodeService {
         const authHeader = cookieStore.toString()
         const getResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, authHeader);
         if (!getResult || getResult.code !== CodeOk || !getResult.data) {
-            throw new Error(transText(lang, '获取文章列表失败', 'Failed to get article list'));
+            throw new Error(transKey(lang, 'articles.getListFailed'));
         }
         const selectData = getResult.data
         if (!selectData || !selectData.range) {
-            throw new Error(transText(lang, '获取文章列表失败2', 'Failed to get article list'));
+            throw new Error(transKey(lang, 'articles.getListFailed'));
         }
         for (const item of selectData.range) {
             const modelInfo = item

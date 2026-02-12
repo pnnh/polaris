@@ -7,7 +7,7 @@ import {red} from '@mui/material/colors';
 import {Dialog} from '@mui/material';
 import {CodeOk, PLDeleteResult} from "@pnnh/atom";
 import {clientMakePost} from "@pnnh/atom/browser";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 const ColorButton = styled(Button)<ButtonProps>(({theme}) => ({
     color: theme.palette.getContrastText(red[500]),
@@ -44,7 +44,7 @@ export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
                 return
             }
             console.error('Delete failed', deleteResult);
-            alert(transText(lang, '删除失败', 'Delete failed'));
+            alert(transKey(lang, 'console.delete.failed'));
 
         })
     };
@@ -80,17 +80,17 @@ export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
                 <div className={'deleteDialog'}>
 
                     <div className={'dialogTitle'}>
-                        {transText(lang, '是否要删除?', 'Do you want to delete?')}
+                        {transKey(lang, 'console.delete.confirm')}
                     </div>
                     <div className={'resTitle'}>
                         {resTitle}
                     </div>
                     <div className={'dialogActions'}>
                         <Button variant={'contained'} size={'small'} onClick={() => handleSubmit('ok')}>
-                            {transText(lang, '确定', 'OK')}
+                            {transKey(lang, 'console.delete.ok')}
                         </Button>
                         <Button variant={'contained'} size={'small'} onClick={() => handleClose()}>
-                            {transText(lang, '取消', 'Cancel')}
+                            {transKey(lang, 'console.common.cancel')}
                         </Button>
 
                     </div>

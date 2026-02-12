@@ -1,0 +1,3 @@
+[submodule "src/photon"]
+	path = src/photon
+	url = git@github.com:pnnh/photon.git

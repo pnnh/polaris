@@ -1,19 +1,15 @@
 'use client'
 
-import {generatorRandomString} from "@pnnh/atom";
+import {EmptyUUID, generatorRandomString, isLangEn, langEn, langZh, TocItem, uuidToBase58} from "@pnnh/atom";
 import {ConsoleArticleEditor} from "./editor";
 import Button from "@mui/material/Button";
 import React from "react";
-import {TocItem} from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
-import {EmptyUUID} from "@pnnh/atom";
 import {getDefaultImageUrl} from "@/components/common/note";
-import {uuidToBase58} from "@pnnh/atom";
-import {isLangEn, langEn, langZh} from "@pnnh/atom";
 import MenuItem from '@mui/material/MenuItem';
 import {supportedLanguages} from "@/components/common/language";
 import {Select} from "@mui/material";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 import {PersonalBrowser} from "@/components/personal/browser";
 
 function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (newLang: string) => void }) {
@@ -66,7 +62,7 @@ export function ConsoleArticleForm({portalUrl, modelString, lang}: {
         if (isNew) {
             PersonalBrowser.clientConsoleInsertArticle(portalUrl, newModel).then((newArticleId) => {
                 if (!newArticleId) {
-                    console.error(transText(lang, '文章插入失败', 'Article insert failed'))
+                    console.error(transKey(lang, 'console.article.insertFailed'))
                     return
                 }
                 window.location.href = `/${lang}/console/articles`
@@ -74,7 +70,7 @@ export function ConsoleArticleForm({portalUrl, modelString, lang}: {
         } else {
             PersonalBrowser.clientConsoleUpdateArticle(portalUrl, oldModel.uid, newModel).then((articleId) => {
                 if (!articleId) {
-                    console.error(transText(lang, '文章更新失败', 'Article update failed'))
+                    console.error(transKey(lang, 'console.article.updateFailed'))
                     return
                 }
                 window.location.href = `/${lang}/console/articles`
@@ -104,11 +100,11 @@ export function ConsoleArticleForm({portalUrl, modelString, lang}: {
         <div className="bottomBar">
             <PSConsoleLanguageSelector lang={wangLang} onChange={setWantLang}/>
             <Button variant={'contained'} size={'small'} onClick={onSubmit}>{
-                transText(lang, '保存文章', 'Save Article')
+                transKey(lang, 'console.article.save')
             }</Button>
             {!isNew &&
                 <Button variant={'contained'} size={'small'} href={createUrl}>{
-                    transText(lang, `查看英文副本`, 'View Chinese Copy')
+                    transKey(lang, 'console.article.viewCopy')
                 }</Button>
             }
         </div>

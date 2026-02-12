@@ -5,14 +5,9 @@ import queryString from 'query-string'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
-import {ArticleRankCard} from "@/components/server/content/article/rank";
-import {PLSelectResult, SymbolUnknown} from "@pnnh/atom";
+import {calcPagination, langEn, PLSelectResult, replaceSearchParams, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
 import {PaginationServer} from "@/components/server/pagination";
-import {replaceSearchParams} from "@pnnh/atom";
-import {tryBase58ToUuid} from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
-import {calcPagination} from "@pnnh/atom";
-import {langEn} from "@pnnh/atom";
 import {notFound} from "next/navigation";
 import {ArticleFilterBar} from "@/components/server/content/article/filter";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
@@ -32,7 +27,7 @@ const pageStyles = {
         display: block;
         width: 16rem;
         flex-shrink: 0;
-        
+
         @media (max-width: 48rem) {
             display: none;
         }
@@ -110,9 +105,6 @@ export default async function Page({params, searchParams}: {
                     <PaginationServer lang={lang} pagination={pagination}
                                       pageLinkFunc={(page) => replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                 </div>
-            </div>
-            <div className={pageStyles.conRight}>
-                <ArticleRankCard rankResult={rankSelectResult} lang={lang}/>
             </div>
         </div>
     </ContentLayout>

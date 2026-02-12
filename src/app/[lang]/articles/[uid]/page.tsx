@@ -1,6 +1,5 @@
 import {css} from "@/gen/styled/css";
 import React from 'react'
-import {TocInfo} from '@/components/common/toc'
 
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {templateBodyId} from '@/components/server/content/layout'
@@ -8,20 +7,24 @@ import {getClientIp, getPathname} from "@/components/server/pathname";
 import {GoTop} from "@/components/client/gotop";
 import {CiAlarmOn} from "react-icons/ci";
 import {FaEye} from "react-icons/fa";
-import {generatorRandomString, STSubString} from "@pnnh/atom";
-import {formatRfc3339} from "@pnnh/atom";
-import {tryBase58ToUuid} from "@pnnh/atom";
-import {CodeOk, CommonResult, SymbolUnknown} from "@pnnh/atom";
+import {
+    CodeOk,
+    CommonResult,
+    formatRfc3339,
+    generatorRandomString,
+    isValidUUID,
+    langEn,
+    STSubString,
+    SymbolUnknown,
+    TocItem,
+    tryBase58ToUuid
+} from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
-import {TocItem} from "@pnnh/atom";
 import {getDefaultNoteImageByUid} from "@/components/common/note";
-import {isValidUUID} from "@pnnh/atom";
 import ArticleReadLayout from "@/components/server/content/article/layout";
 import {CommentsClient} from "@/components/client/comments/comments";
 import {useServerConfig} from "@/components/server/config";
-import {ArticleAssets} from "./assets";
 import {ArticlePreview} from "./preview";
-import {langEn} from "@pnnh/atom";
 import {notFound} from "next/navigation";
 import {serverInsertArticleViewer} from "@/components/server/viewers/viewers";
 // import '@/atom/client/editor/editor.scss';
@@ -37,7 +40,7 @@ const pageStyles = {
         overflow: hidden;
         opacity: 0.9;
         background-color: var(--background-color);
-        
+
         @media screen and (min-width: 80rem) {
             width: 80rem;
             margin: 1rem auto 0 auto;
@@ -49,7 +52,7 @@ const pageStyles = {
         border-radius: 4px;
         overflow: hidden;
         padding: 1rem;
-        color: var(--color-text);
+        color: var(--text-primary-color);
     `,
     articleTitle: css`
         font-weight: 600;
@@ -65,7 +68,7 @@ const pageStyles = {
     action: css`
         font-size: 14px;
         height: 1rem;
-        color: var(--color-text);
+        color: var(--text-primary-color);
         line-height: 22px;
         display: flex;
         flex-direction: row;
@@ -89,7 +92,7 @@ const pageStyles = {
         margin-bottom: 2rem;
         width: 100%;
         gap: 1rem;
-        
+
         @media screen and (min-width: 80rem) {
             width: 80rem;
             margin: 1rem auto 0 auto;
@@ -108,7 +111,7 @@ const pageStyles = {
         width: 20rem;
         flex-shrink: 0;
         display: none;
-        
+
         @media screen and (min-width: 80rem) {
             display: flex;
         }
@@ -203,10 +206,10 @@ export default async function Home({params, searchParams}: {
                                     lang={lang}/>
                 </div>
             </div>
-            <div className={pageStyles.rightArea}>
-                <TocInfo readurl={readUrl} model={tocList}/>
-                <ArticleAssets portalUrl={publicPortalUrl} fullRepoPath={fullRepoPath} articleUid={getResult.data.uid}/>
-            </div>
+            {/*<div className={pageStyles.rightArea}>*/}
+            {/*    <TocInfo readurl={readUrl} model={tocList}/>*/}
+            {/*    <ArticleAssets portalUrl={publicPortalUrl} fullRepoPath={fullRepoPath} articleUid={getResult.data.uid}/>*/}
+            {/*</div>*/}
         </div>
         <GoTop anchor={templateBodyId}/>
     </ArticleReadLayout>

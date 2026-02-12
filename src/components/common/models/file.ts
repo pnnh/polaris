@@ -9,6 +9,8 @@ export interface PSFileModel {
     status: number
     owner: string
     channel: string
+    body: string
+    header: string
     partition: string
     uid: string
     name: string
@@ -22,4 +24,5 @@ export interface PSFileModel {
     storage_path: string
     full_repo_path: string
     is_ignore: string
+    object_uid: string
 }

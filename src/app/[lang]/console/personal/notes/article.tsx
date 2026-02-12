@@ -1,20 +1,15 @@
-import {PLSelectData} from "@pnnh/atom";
+import {formatRfc3339, isValidUUID, localText, PLSelectData, STSubString, uuidToBase58} from "@pnnh/atom";
 import {NoData} from "@/components/common/empty";
 import {PSArticleModel} from "@/components/common/models/article";
-import {uuidToBase58} from "@pnnh/atom";
 import {getDefaultNoteImageByUid} from "@/components/common/note";
-import {isValidUUID} from "@pnnh/atom";
 import {FaEye} from "react-icons/fa";
 import {CiAlarmOn} from "react-icons/ci";
-import {formatRfc3339} from "@pnnh/atom";
 import {PSImageServer} from "@/components/server/image";
 import React from "react";
 import {css} from "@/gen/styled/css";
-import {STSubString} from "@pnnh/atom";
 import PSDeleteButton from "@/components/client/console/delete";
-import {localText} from "@pnnh/atom";
 import PublicIcon from '@mui/icons-material/Public';
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 const articleStyles = {
     middleBody: css`
@@ -128,22 +123,22 @@ export function ArticleHeader({lang}: {
 }) {
     return <div className={articleStyles.tableHeader}>
         <div className={articleStyles.headerLabel}>
-            {transText(lang, '封面', 'Cover')}
+            {transKey(lang, 'console.article.cover')}
         </div>
         <div className={articleStyles.headerLabel}>
-            {transText(lang, '标题', 'Title')}
+            {transKey(lang, 'console.article.title')}
         </div>
         <div className={articleStyles.headerLabel}>
-            {transText(lang, '描述', 'Description')}
+            {transKey(lang, 'console.article.description')}
         </div>
         <div className={articleStyles.headerLabel}>
-            {transText(lang, '扩展信息', 'Extended Info')}
+            {transKey(lang, 'console.article.extendedInfo')}
         </div>
         <div className={articleStyles.headerLabel}>
-            {transText(lang, '频道', 'Channel')}
+            {transKey(lang, 'navChannels')}
         </div>
         <div className={articleStyles.headerLabel}>
-            {transText(lang, '操作', 'Action')}
+            {transKey(lang, 'console.article.action')}
         </div>
     </div>
 }

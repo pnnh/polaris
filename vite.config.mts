@@ -20,7 +20,6 @@ export default defineConfig((configEnv) => {
             emptyOutDir: false, // 不要清空输出目录，因为还有其他资源文件
             rollupOptions: {
                 input: {
-                    index: path.join(process.cwd(), 'index.html'),
                     worker: path.resolve(__dirname, 'src/services/worker.ts'),
                     setup: path.resolve(__dirname, 'src/services/setup.tsx'),
                 },

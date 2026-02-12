@@ -3,7 +3,7 @@ import {PSChannelModel} from "@/components/common/models/channel";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {cookies} from "next/headers";
 import queryString from "query-string";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 export async function serverConsoleGetChannel(portalUrl: string, uid: string): Promise<PSChannelModel | undefined> {
     if (!uid) {
@@ -31,11 +31,11 @@ export async function serverConsoleSelectChannels(portalUrl: string, lang: strin
     const authHeader = cookieStore.toString()
     const getResult = await serverMakeGet<PLSelectResult<PSChannelModel>>(url, authHeader);
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {
-        throw new Error(transText(lang, '获取频道列表失败', 'Failed to get channel list'));
+        throw new Error(transKey(lang, 'channels.getListFailed'));
     }
     const selectData = getResult.data
     if (!selectData || !selectData.range) {
-        throw new Error(transText(lang, '获取频道列表失败', 'Failed to get channel list'));
+        throw new Error(transKey(lang, 'channels.getListFailed'));
     }
     return selectData;
 }

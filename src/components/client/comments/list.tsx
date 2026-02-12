@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {PLSelectResult} from "@pnnh/atom";
 import {fetchComments, PSCommentModel} from "@/components/client/comments/comment";
-import {transText} from "@/components/common/locales/normal";
+import {transKey} from "@/components/common/locales/normal";
 
 export function ListArea({portalUrl, resource, lang}: { portalUrl: string, resource: string, lang: string }) {
     const [list, setList] = useState<PLSelectResult<PSCommentModel>>()
@@ -15,7 +15,7 @@ export function ListArea({portalUrl, resource, lang}: { portalUrl: string, resou
     }
     if (!list.data || list.data.count === 0 || !list.data.range) {
         return <div>
-            {transText(lang, '暂无评论', 'No comments yet')}
+            {transKey(lang, 'comments.noComments')}
         </div>
     }
     return <div className={'listContainer'}>

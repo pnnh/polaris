@@ -1,7 +1,7 @@
 import {useServerConfig} from "@/components/server/config";
 import {PSFileModel} from "@/components/common/models/file";
 import {clientMakeGet} from "@pnnh/atom/browser";
-import {PLGetResult, PLSelectData, PLSelectResult} from "@pnnh/atom";
+import {PLGetResult, PLSelectResult} from "@pnnh/atom";
 
 export const articlesUid = '019bbb53-f051-750a-8532-2358b64f31f3'
 export const imagesUid = '019bbb53-ef8d-7589-aebc-851c627eabd0'
@@ -38,13 +38,13 @@ export async function queryApp(expectLang: string, appUid: string): Promise<PSFi
     return selectResult.data
 }
 
-export async function selectAppsFromStorage(): Promise<PLSelectData<PSFileModel>> {
+export async function selectAppsFromStorage(page: number, size: number): Promise<PLSelectResult<PSFileModel>> {
     const serverConfig = await useServerConfig()
     const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
-    const url = `${internalPortalUrl}/cloud/files`
+    const url = `${internalPortalUrl}/cloud/files?page=${Number(page)}&size=${Number(size)}`
     const selectResult = await clientMakeGet<PLSelectResult<PSFileModel>>(url)
     if (!selectResult || selectResult.code !== 200 || !selectResult.data) {
         throw new Error("host notebook")
     }
-    return selectResult.data
+    return selectResult
 }

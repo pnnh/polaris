@@ -84,11 +84,11 @@ export async function SiteNavMenu({lang, searchParams}: {
                 })
             }
         </div>
-        {/*<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#C6C6C6">*/}
-        {/*    <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>*/}
-        {/*</svg>*/}
-        {/*<ArticleNavbar pathname={pathname} lang={lang}/>*/}
-        {/*<ArticleSubNavbar langProvider={langProvider} pathname={pathname} searchParams={searchParams}/>*/}
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#C6C6C6">
+            <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>
+        </svg>
+        <ArticleNavbar pathname={pathname} lang={lang}/>
+        {/*<ArticleSubNavbar lang={lang} pathname={pathname} searchParams={searchParams}/>*/}
     </div>
 }
 

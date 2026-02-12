@@ -24,10 +24,3 @@ export function transKey(lang: string, keyName: keyof typeof TransTexts): string
 export function transTodo(zhText: string): string {
     return zhText
 }
-
-export function transText(lang: string, zhText: string, enText: string): string {
-    if (lang === langZhCN) {
-        return zhText
-    }
-    return enText
-}

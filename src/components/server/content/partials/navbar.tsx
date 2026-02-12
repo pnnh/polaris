@@ -9,6 +9,7 @@ import {ThemeSwitch} from "@/components/server/content/partials/theme";
 import {getServerTheme} from "@/components/server/theme";
 import {AccountModel} from "@/components/common/models/account/account";
 import {getSearchString} from "@/components/server/pathname";
+import {ContentSearchAction} from "@/components/client/content/search";
 
 const styles = {
     navHeader: css`
@@ -123,7 +124,7 @@ export async function ContentPublicNavbar({pathname, searchParams, lang, userInf
             <SiteNavMenu lang={lang} searchParams={searchParams}/>
         </div>
         <div className={styles.rightNav}>
-            {/*<ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword} lang={lang}/>*/}
+            <ContentSearchAction pathname={pathname} queryKeyword={searchParams.keyword} lang={lang}/>
             <ThemeSwitch lang={lang} themeName={themeName}/>
             <PSLanguageSelector lang={lang} currentUrl={currentUrl}/>
             <UserAction lang={lang} userInfo={userInfo}/>
