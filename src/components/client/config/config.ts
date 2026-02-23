@@ -28,3 +28,5 @@ export function useClientConfig(encodedBrowserConfig?: string): any {
     clientSetWindowVariable(CLIENT_CONFIG_KEY, configValue)
     return configValue
 }
+
+export const isProduction = process.env.NODE_ENV === 'production'

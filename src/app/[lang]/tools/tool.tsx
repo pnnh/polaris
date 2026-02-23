@@ -2,7 +2,89 @@ import React from 'react'
 import {css} from "@/gen/styled/css";
 import {PSFileModel} from "@/components/common/models/file";
 import {transTodo} from "@/components/common/locales/normal";
-import {STSubString, uuidToBase58} from "@pnnh/atom";
+import {replaceSearchParams, STSubString, uuidToBase58} from "@pnnh/atom";
+import {FaEye} from "react-icons/fa";
+import {CiAlarmOn} from "react-icons/ci";
+import {formatRfc3339} from "@pnnh/atom";
+import {PSImageServer} from "@/components/server/image";
+import {getDefaultImageUrl} from "@/components/common/note";
+
+const imageStyles = {
+    middleItem: css`
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    `,
+    imageCover: css`
+        flex-shrink: 0;
+        margin-right: 1rem;
+        position: relative;
+        overflow: hidden;
+
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 2px;
+            font-size: 0;
+        }
+    `,
+    imageInfo: css`
+        display: flex;
+        padding: 0.5rem 1rem;
+        flex-direction: column;
+        justify-content: flex-start;
+        flex-grow: 1;
+    `,
+    itemTitle: css`
+        height: 1.5rem;
+        flex-shrink: 0;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        color: #252933;
+        overflow: hidden;
+
+        & a {
+            color: #252933;
+            text-decoration: none;
+        }
+    `,
+    action: css`
+        height: 1rem;
+        color: #8a919f;
+        font-size: 12px;
+        line-height: 22px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 6px;
+    `,
+};
+
+export function PSImageCard({model, lang}: {
+    model: PSFileModel, lang: string,
+}) {
+    const readUrl = `${lang}/images/${uuidToBase58(model.uid || model.uid)}`
+    let imageUrl = model.url || getDefaultImageUrl()
+
+    return <div className={imageStyles.middleItem} key={model.uid}>
+        <div className={imageStyles.imageCover} data-article={model.uid}>
+            <PSImageServer lang={lang} src={imageUrl} alt={model.title} fill={true}/>
+        </div>
+        <div className={imageStyles.imageInfo}>
+            <div className={imageStyles.itemTitle}>
+                <a href={readUrl} title={model.uid}>{model.title}</a></div>
+            <div className={imageStyles.action}>
+                <FaEye size={'1rem'}/><span>{model.discover}</span>
+                <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(model.update_time)}</span>
+            </div>
+        </div>
+    </div>
+}
+
 
 const toolStyles = {
     toolBodyComponent: css`
@@ -53,19 +135,25 @@ const toolStyles = {
     `
 }
 
-export function renderResourceCard({model, lang}: { model: PSFileModel, lang: string }) {
-    if (model.mimetype === 'polaris/directory') {
-        return <DirectoryItemCard model={{lang: lang, title: model.name, url: model.url}}/>
+export function ResourceCard({model, lang, searchParams}: {
+    model: PSFileModel, lang: string,
+    searchParams: Record<string, string>,
+}) {
+    if (model.mimetype === 'polaris/directory' || model.mimetype === 'polaris/folder' || model.mimetype === 'directory'
+        || model.mimetype === 'folder') {
+        return <DirectoryItemCard lang={lang} searchParams={searchParams} model={model}/>
     }
     if (model.mimetype === 'polaris/album') {
-        return <AlbumItemCard model={{lang: lang, title: model.name, url: model.url}}/>
+        return <AlbumItemCard lang={lang} model={model}/>
     }
     if (model.mimetype === 'polaris/notebook') {
-        return <NotebookItemCard model={{lang: lang, title: model.name, url: model.url}}/>
+        return <NotebookItemCard lang={lang} model={model}/>
     } else if (model.mimetype === 'polaris/note') {
         return <PSNoteItemCard lang={lang} model={model}/>
     } else if (model.mimetype === 'polaris/application') {
         return <PSAppCard lang={lang} model={model}/>
+    } else if (model.mimetype && model.mimetype.startsWith('image/')) {
+        return <PSImageCard model={model} lang={lang}/>
     }
     return <FileItemCard lang={lang} model={model}/>
 }
@@ -150,32 +238,31 @@ export async function PSNoteItemCard({lang, model}: { lang: string, model: PSFil
     }
 }
 
-interface CardProps {
-    lang: string
-    url: string
-    title: string
-}
-
-export async function DirectoryItemCard({model}: { model: CardProps }) {
+export async function DirectoryItemCard({lang, model, searchParams}: {
+    lang: string, model: PSFileModel,
+    searchParams: Record<string, string>,
+}) {
+    // 查看子目录下内容时，搜索和分页条件不再适用，所以不再保留
+    const newUrl = `/${lang}?parent=${uuidToBase58(model.uid)}`
     return <div className={cardStyles.cardItem}>
 
-        <a href={`${model.lang}${model.url}`}>{transTodo(model.title)}</a>
+        <a href={`${newUrl}`}>{transTodo(model.title)}</a>
 
     </div>
 }
 
-export async function NotebookItemCard({model}: { model: CardProps }) {
+export async function NotebookItemCard({lang, model}: { lang: string, model: PSFileModel }) {
     return <div className={cardStyles.cardItem}>
 
-        <a href={`${model.lang}${model.url}`}>{transTodo(model.title)}</a>
+        <a href={`${lang}${model.url}`}>{transTodo(model.title)}</a>
 
     </div>
 }
 
-export async function AlbumItemCard({model}: { model: CardProps }) {
+export async function AlbumItemCard({lang, model}: { lang: string, model: PSFileModel }) {
     return <div className={cardStyles.cardItem}>
 
-        <a href={`${model.lang}${model.url}`}>{transTodo(model.title)}</a>
+        <a href={`${lang}${model.url}`}>{transTodo(model.title)}</a>
 
     </div>
 }

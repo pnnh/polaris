@@ -51,6 +51,7 @@ const styles = {
         height: 1.5rem;
         width: 1.5rem;
         opacity: 0.8;
+
         & img {
             width: 100%;
             height: 100%;
@@ -105,29 +106,4 @@ export function replaceLangInUrl(url: string, lang: string): string {
         urlObj.pathname = `/${lang}`
     }
     return urlObj.toString()
-}
-
-export function PSLanguageSelector({lang, currentUrl}: { lang: string, currentUrl: string }) {
-    let currentLang = lang
-    if (!currentLang || currentLang !== langZhCN) {
-        currentLang = langEnUS;
-    }
-    const targetLang = currentLang === langEnUS ? langZhCN : langZhCN;
-    let targetUrl = '';
-    if (currentUrl === '/') {
-        // 访问首页的情况
-        targetUrl = `/${targetLang}`;
-    } else if (currentUrl.startsWith('/?')) {
-        // 访问首页带参数的情况
-        targetUrl = currentUrl.replace(`/?`, `/${targetLang}?`);
-    } else {
-        // 访问其他页面的情况
-        targetUrl = currentUrl.replace(`/${lang}`, `/${targetLang}`);
-    }
-    const linkTip = lang === langZhCN ? '访问英文页面' : 'Switch to Chinese page';
-    return <div className={styles.langSelector}>
-        <a href={targetUrl} title={linkTip}>
-            <img src={lang === langEnUS ? '/icons/language/langEn.svg' : '/icons/language/langZh.svg'} alt={'lang'}/>
-        </a>
-    </div>
 }

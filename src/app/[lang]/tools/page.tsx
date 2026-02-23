@@ -5,8 +5,8 @@ import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/
 import {PageMetadata} from "@/components/common/utils/page";
 import ContentLayout from "@/components/server/content/layout";
 import {css} from "@/gen/styled/css";
-import {selectAppsFromStorage} from "@/components/server/tools/tools";
-import {renderResourceCard} from "@/app/[lang]/tools/tool";
+import {selectFilesFromBackend} from "@/components/server/tools/tools";
+import {ResourceCard} from "@/app/[lang]/tools/tool";
 import {PaginationServer} from "@/components/server/pagination";
 
 const toolStyles = {
@@ -22,6 +22,7 @@ const toolStyles = {
         grid-gap: 3rem;
         width: 100%;
         margin-bottom: 1rem;
+        grid-auto-rows: 1fr;
     `,
     appCard: css`
         border: 1px solid #e0e0e0;
@@ -75,24 +76,25 @@ export default async function Page({params, searchParams}: {
     const pageSize = 10
     const metadata = new PageMetadata(lang)
 
-    const appList = await selectAppsFromStorage(page, pageSize)
-    const pagination = calcPagination(page, appList.data.count, pageSize)
+
+    // const appList = await selectFilesFromBackend(page, pageSize)
+    // const pagination = calcPagination(page, appList.data.count, pageSize)
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           metadata={metadata} userInfo={SymbolUnknown}>
-        const appList = await selectAppsFromStorage()
-        return <div className={toolStyles.toolBodyComponent}>
-        <div className={toolStyles.appGrid}>
-            {
-                appList.data.range.map(async (app) => {
-                    return renderResourceCard({model: app, lang})
-                })
-            }
+        <div className={toolStyles.toolBodyComponent}>
+            {/*<div className={toolStyles.appGrid}>*/}
+            {/*    {*/}
+            {/*        appList.data.range.map(async (app) => {*/}
+            {/*            return ResourceCard({model: app, lang})*/}
+            {/*        })*/}
+            {/*    }*/}
+            {/*</div>*/}
+            {/*<div>*/}
+            {/*    <PaginationServer lang={lang} pagination={pagination}*/}
+            {/*                      pageLinkFunc={(page) =>*/}
+            {/*                          `/${lang}/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>*/}
+            {/*</div>*/}
+            Todo
         </div>
-        <div>
-            <PaginationServer lang={lang} pagination={pagination}
-                              pageLinkFunc={(page) =>
-                                  `/${lang}/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
-        </div>
-    </div>
     </ContentLayout>
 }

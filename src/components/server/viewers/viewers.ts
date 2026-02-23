@@ -1,7 +1,7 @@
 import {CodeOk, CommonResult, PLInsertResult, PLSelectData, PLSelectResult} from "@pnnh/atom";
 import {serverMakeGet, serverMakePost} from "@pnnh/atom/nodejs";
 import {headers, cookies} from "next/headers";
-import {logDebugMeta, logDebugValues, logErrorMeta, logErrorValues, logWarnValues,} from "@/components/server/logger";
+import {serverLogDebugMeta, logWarnMeta} from "@/components/server/logger";
 
 export async function serverInsertArticleViewer(portalUrl: string, articleUid: string, clientIp: string): Promise<void> {
     if (!clientIp) {
@@ -14,7 +14,7 @@ export async function serverInsertArticleViewer(portalUrl: string, articleUid: s
         .map(([key, value]) => `${key}: ${value}`)
         .join('\n');
 
-    logDebugValues('serverInsertArticleViewer', headersString);
+    serverLogDebugMeta('serverInsertArticleViewer', {headersString});
 
     const cookieStore = await cookies()
     const authHeader = cookieStore.toString()
@@ -24,7 +24,7 @@ export async function serverInsertArticleViewer(portalUrl: string, articleUid: s
     }
     const insertResult = await serverMakePost<PLInsertResult>(url, postParams, authHeader);
     if (!insertResult || insertResult.code !== CodeOk || !insertResult.data) {
-        logWarnValues('serverInsertArticleViewer', 'insertResult is invalid', insertResult);
+        logWarnMeta('serverInsertArticleViewer', {insertResult});
         return undefined
     }
     const modelInfo = insertResult.data
