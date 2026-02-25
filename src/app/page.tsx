@@ -9,7 +9,7 @@ import {filterAcceptLanguage} from "@/components/server/language";
 import {PaginationServer} from "@/components/server/pagination";
 import {FileSelectOptions, selectFilesFromBackend} from "@/components/server/tools/tools";
 import {PSHomeBody} from "@/components/server/body";
-import {notFound} from "next/navigation";
+import {css} from "@/gen/styled/css";
 
 export default async function Page({searchParams}: {
     searchParams: Promise<Record<string, string>>
@@ -44,11 +44,18 @@ export default async function Page({searchParams}: {
                           metadata={metadata} userInfo={SymbolUnknown}>
 
         <PSHomeBody lang={lang} searchParams={searchParamsValue} selectResult={selectResult}/>
-        <div>
+        <div className={paginationStyles.paginationContainer}>
             <PaginationServer lang={lang} pagination={pagination}
                               pageLinkFunc={(page) => `/${lang}` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
         </div>
     </ContentLayout>
 }
 
+const paginationStyles = {
+    paginationContainer: css`
 
+        width: 1024px;
+        margin: 0 auto;
+        padding-top: 1rem;
+        padding-bottom: 2rem;`
+}

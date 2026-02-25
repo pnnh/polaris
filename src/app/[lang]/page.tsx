@@ -9,6 +9,7 @@ import {FileSelectOptions, selectFilesFromBackend} from "@/components/server/too
 import {PaginationServer} from "@/components/server/pagination";
 import {PSHomeBody} from "@/components/server/body";
 import {serverLogDebugMeta} from "@/components/server/logger";
+import {css} from "@/gen/styled/css";
 
 export const dynamic = "force-dynamic";
 
@@ -50,10 +51,19 @@ export default async function Page({params, searchParams}: {
 
         <PSHomeBody lang={lang} searchParams={searchParamsValue} selectResult={selectResult}/>
 
-        <div>
+        <div className={paginationStyles.paginationContainer}>
             <PaginationServer lang={lang} pagination={pagination}
                               pageLinkFunc={(page) =>
                                   `/${lang}` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
         </div>
     </ContentLayout>
+}
+
+const paginationStyles = {
+    paginationContainer: css`
+
+        width: 1024px;
+        margin: 0 auto;
+        padding-top: 1rem;
+        padding-bottom: 2rem;`
 }

@@ -3,9 +3,6 @@ import {css} from "@/gen/styled/css";
 import {PSFileModel} from "@/components/common/models/file";
 import {transTodo} from "@/components/common/locales/normal";
 import {replaceSearchParams, STSubString, uuidToBase58} from "@pnnh/atom";
-import {FaEye} from "react-icons/fa";
-import {CiAlarmOn} from "react-icons/ci";
-import {formatRfc3339} from "@pnnh/atom";
 import {PSImageServer} from "@/components/server/image";
 import {getDefaultImageUrl} from "@/components/common/note";
 
@@ -14,17 +11,16 @@ const imageStyles = {
         position: relative;
         overflow: hidden;
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     `,
     imageCover: css`
         flex-shrink: 0;
-        margin-right: 1rem;
         position: relative;
         overflow: hidden;
+        height: 80%;
 
         & img {
             width: 100%;
-            height: 100%;
+            aspect-ratio: 1 / 1;
             object-fit: cover;
             border-radius: 2px;
             font-size: 0;
@@ -67,7 +63,7 @@ const imageStyles = {
 export function PSImageCard({model, lang}: {
     model: PSFileModel, lang: string,
 }) {
-    const readUrl = `${lang}/images/${uuidToBase58(model.uid || model.uid)}`
+    const readUrl = `${lang}/images/${uuidToBase58(model.uid)}`
     let imageUrl = model.url || getDefaultImageUrl()
 
     return <div className={imageStyles.middleItem} key={model.uid}>
@@ -76,11 +72,7 @@ export function PSImageCard({model, lang}: {
         </div>
         <div className={imageStyles.imageInfo}>
             <div className={imageStyles.itemTitle}>
-                <a href={readUrl} title={model.uid}>{model.title}</a></div>
-            <div className={imageStyles.action}>
-                <FaEye size={'1rem'}/><span>{model.discover}</span>
-                <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(model.update_time)}</span>
-            </div>
+                <a href={readUrl} title={model.title}>{model.title}</a></div>
         </div>
     </div>
 }
