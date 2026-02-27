@@ -6,6 +6,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ContrastIcon from '@mui/icons-material/Contrast';
 import {clientSetCurrentTheme, ThemeType} from "@/components/client/theme";
 import {transKey} from "@/components/common/locales/normal";
+import {css} from "@/gen/styled/css";
 
 
 export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string }) {
@@ -21,7 +22,7 @@ export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string
         window.location.reload()
     }
     return <>
-        <div className="themeSelector"
+        <div className={themeStyles.themeSelector}
              onClick={handleClick}>
             <ContrastIcon className="themeIcon" aria-hidden={undefined} sx={{cursor: 'pointer'}}/>
             {/*{themeName === 'dark' ? transKey(lang, "DarkTheme") : themeName === 'light' ?*/}
@@ -52,19 +53,19 @@ export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string
                 {transKey(lang, "DarkTheme")}
             </MenuItem>
         </StyledMenu>
-
-        <style jsx>{`
-            .themeSelector {
-                cursor: pointer;
-                display: flex;
-                flex-direction: row;
-                gap: 0.2rem;
-            }
-
-            .themeSelector :global(.themeIcon) {
-                color: var(--text-primary-color);
-                background: var(--background-color);
-            }
-        `}</style>
     </>
+}
+
+const themeStyles = {
+    themeSelector: css`
+        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        gap: 0.2rem;
+
+        & .themeIcon {
+            color: var(--text-primary-color);
+            background: var(--background-color);
+        }
+    `
 }

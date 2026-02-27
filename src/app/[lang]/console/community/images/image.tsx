@@ -10,6 +10,7 @@ import {
 } from "@/components/client/images/service";
 import Button from "@mui/material/Button";
 import {NoData} from "@/components/common/empty";
+import {css} from "@/gen/styled/css";
 
 export function ConsoleImageMiddleBody({libKey, lang, portalUrl}: {
     libKey: string, lang: string,
@@ -69,39 +70,25 @@ export function ConsoleImageMiddleBody({libKey, lang, portalUrl}: {
 
     if (!dirEntry) {
         return <>
-            <div className="middleBody">
-            加载图片库目录...
-        </div>
-        <style jsx>{`
-          .middleBody {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            width: 100%;
-          }
-        `}</style>
+            <div className={imageStyles.middleBody}>
+                加载图片库目录...
+            </div>
         </>
     }
     if (dirEntry.isLocal && needPermission) {
         return <>
-            <div className="middleBody">
-            <Button size={'small'} onClick={() => {
-                clientRequestFilePermission(dirEntry).then((ok) => {
-                    if (!ok) {
-                        return
-                    }
-                    loadLib(dirEntry)
-                }).catch((err) => {
-                    console.error('请求文件访问权限失败', err);
-                })
-            }}>点击加载库内容</Button>
-        </div>
-        <style jsx>{`
-          .middleBody {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            width: 100%;
-          }
-        `}</style>
+            <div className={imageStyles.middleBody}>
+                <Button size={'small'} onClick={() => {
+                    clientRequestFilePermission(dirEntry).then((ok) => {
+                        if (!ok) {
+                            return
+                        }
+                        loadLib(dirEntry)
+                    }).catch((err) => {
+                        console.error('请求文件访问权限失败', err);
+                    })
+                }}>点击加载库内容</Button>
+            </div>
         </>
 
     }
@@ -111,18 +98,11 @@ export function ConsoleImageMiddleBody({libKey, lang, portalUrl}: {
     }
 
     return <>
-        <div className="middleBody">
-        {imageData.map((model, index) => {
-            return <ImageCard key={index} model={model} lang={lang} portalUrl={portalUrl}/>
-        })}
-    </div>
-    <style jsx>{`
-      .middleBody {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        width: 100%;
-      }
-    `}</style>
+        <div className={imageStyles.middleBody}>
+            {imageData.map((model, index) => {
+                return <ImageCard key={index} model={model} lang={lang} portalUrl={portalUrl}/>
+            })}
+        </div>
     </>
 }
 
@@ -157,11 +137,19 @@ export function ImageCard({model, lang, portalUrl}: {
     }, [model]);
 
     return <>
-        <div className="imageCard">
-        {imgUrl && <img src={imgUrl} alt={model.name}/>}
-    </div>
-    <style jsx>{`
-      .imageCard {
+        <div className={imageStyles.imageCard}>
+            {imgUrl && <img src={imgUrl} alt={model.name}/>}
+        </div>
+    </>
+}
+
+const imageStyles = {
+    middleBody: css`
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        width: 100%;
+    `,
+    imageCard: css`
         border: solid 1px #E0E0E0;
         border-radius: 8px;
         padding: 1rem;
@@ -171,15 +159,15 @@ export function ImageCard({model, lang, portalUrl}: {
         flex-direction: column;
         align-items: center;
         text-align: center;
-      }
-      .imageCard:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-      }
-      .imageCard img {
-        height: 4rem;
-        width: 4rem;
-        object-fit: cover;
-      }
-    `}</style>
-    </>
+
+        &:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        & img {
+            height: 4rem;
+            width: 4rem;
+            object-fit: cover;
+        }
+    `
 }

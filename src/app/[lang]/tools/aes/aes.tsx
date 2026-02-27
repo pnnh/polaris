@@ -7,6 +7,7 @@ import {aesServerDecode, aesServerEncode, aesServerGenerateKey} from "@/app/[lan
 import {IconButton, TextField} from "@mui/material";
 import ImportExportIcon from '@mui/icons-material/ImportExport';
 import {PSFileModel} from "@/components/common/models/file";
+import {css} from "@/gen/styled/css";
 
 export default function AesComponent({lang, appInfo}: { lang: string, appInfo: PSFileModel }) {
     const [source, setSource] = React.useState('');
@@ -29,63 +30,13 @@ export default function AesComponent({lang, appInfo}: { lang: string, appInfo: P
             setOutput(decodedText);
         })
     }
-    return <div className={'sha256Page'}>
-        <style jsx>{`
-            .sha256Page {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-start;
-                gap: 16px;
-                height: 100%;
-                scrollbar-width: thin;
-                overflow-y: auto;
-                overflow-x: hidden;
-
-                .toolTitle {
-                    font-size: 18px;
-                    font-weight: bold;
-                    margin-top: 8px;
-                }
-
-                .sourceText {
-                    width: 100%;
-                    height: 160px;
-                    padding: 8px;
-                    flex-shrink: 0;
-                    background: #FFFFFF;
-                    border: 1px solid #d3d3d3;
-                    border-radius: 8px;
-                }
-
-                .toolButtons {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: flex-start;
-                    align-items: center;
-                    gap: 16px;
-                    flex-shrink: 0;
-                    width: 100%;
-                }
-
-                .targetText {
-                    width: 100%;
-                    height: 160px;
-                    padding: 8px;
-                    flex-shrink: 0;
-                    background: #FFFFFF;
-                    border: 1px solid #d3d3d3;
-                    border-radius: 8px;
-                }
-
-            }
-        `}</style>
-        <h1 className={'toolTitle'}>{appInfo.name}</h1>
-        <textarea className={'sourceText'} placeholder={
+    return <div className={aesStyles.sha256Page}>
+        <h1 className={aesStyles.toolTitle}>{appInfo.name}</h1>
+        <textarea className={aesStyles.sourceText} placeholder={
             transKey(lang, "tools.common.inputPlaceholder")
         } value={source}
                   onChange={(event) => setSource(event.target.value)}/>
-        <div className={'toolButtons'}>
+        <div className={aesStyles.toolButtons}>
             <TextField id={'AesKeyInput'} maxRows={1} sx={{width: 400}} variant={'outlined'} size={'small'}
                        value={aesKey} slotProps={{htmlInput: {maxLength: 64}}}
                        placeholder={transKey(lang, 'tools.aes.keyPlaceholder')}
@@ -108,9 +59,55 @@ export default function AesComponent({lang, appInfo}: { lang: string, appInfo: P
                 <ImportExportIcon/>
             </IconButton>
         </div>
-        <textarea className={'targetText'} placeholder={
+        <textarea className={aesStyles.targetText} placeholder={
             transKey(lang, "tools.common.resultPlaceholder")
         } value={output} onChange={(event) =>
             setOutput(event.target.value)}/>
     </div>
+}
+
+const aesStyles = {
+    sha256Page: css`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+        height: 100%;
+        scrollbar-width: thin;
+        overflow-y: auto;
+        overflow-x: hidden;
+    `,
+    toolTitle: css`
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 8px;
+    `,
+    sourceText: css`
+        width: 100%;
+        height: 160px;
+        padding: 8px;
+        flex-shrink: 0;
+        background: #FFFFFF;
+        border: 1px solid #d3d3d3;
+        border-radius: 8px;
+    `,
+    toolButtons: css`
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 16px;
+        flex-shrink: 0;
+        width: 100%;
+    `,
+    targetText: css`
+        width: 100%;
+        height: 160px;
+        padding: 8px;
+        flex-shrink: 0;
+        background: #FFFFFF;
+        border: 1px solid #d3d3d3;
+        border-radius: 8px;
+    `
 }

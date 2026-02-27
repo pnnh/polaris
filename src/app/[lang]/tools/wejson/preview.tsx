@@ -1,8 +1,9 @@
 'use client'
 
 import Prism from 'prismjs';
+import {css} from "@/gen/styled/css";
 
-export function WePreview({jsonText}:{jsonText:string}) {
+export function WePreview({jsonText}: { jsonText: string }) {
     if (!jsonText) {
         return <code>无内容</code>
     }
@@ -16,16 +17,17 @@ export function WePreview({jsonText}:{jsonText:string}) {
         htmlText = 'Invalid JSON: ' + error
     }
     return <>
-        <code dangerouslySetInnerHTML={{__html: htmlText}} className="previewCode">
-    </code>
-    <style jsx>{`
-      .previewCode {
+        <code dangerouslySetInnerHTML={{__html: htmlText}} className={previewStyles.previewCode}>
+        </code>
+    </>
+}
+
+const previewStyles = {
+    previewCode: css`
         font-family: 'Courier New', Courier, monospace;
         padding: 10px;
         border-radius: 5px;
         overflow-x: auto;
         white-space: pre-wrap;
-      }
-    `}</style>
-    </>
+    `
 }

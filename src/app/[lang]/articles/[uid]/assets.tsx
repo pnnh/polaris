@@ -3,13 +3,13 @@
 import React, {useEffect, useState} from "react";
 import {getIcon} from "material-file-icons";
 import {FaAngleDown, FaAngleRight} from "react-icons/fa6";
-import {PLSelectResult} from "@pnnh/atom";
+import {encodeBase64String, PLSelectResult} from "@pnnh/atom";
 import {PSArticleFileModel} from "@/components/common/models/article";
-import {encodeBase64String} from "@pnnh/atom";
 import {clientMakeGet} from "@pnnh/atom/browser";
 import {useAtom} from "jotai";
 import {articleAssetsPreviewAtom} from "./state";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import {css} from "@/gen/styled/css";
 
 async function selectFiles(portalUrl: string, articleUid: string, parentPath: string = '') {
     const assetsUrl = `${portalUrl}/articles/${articleUid}/assets?parent=${encodeURIComponent(parentPath)}`
@@ -37,73 +37,20 @@ export function ArticleAssets({portalUrl, fullRepoPath, articleUid}: {
     }
 
     return <>
-        <div className="tocCard" id={'assetsCard'}>
-        <div className="tocHeader">
-            <span>文件信息</span><a href={fullRepoPath} target={'_blank'}><OpenInNewIcon/></a>
+        <div className={assetsStyles.tocCard} id={'assetsCard'}>
+            <div className={assetsStyles.tocHeader}>
+                <span>文件信息</span><a href={fullRepoPath} target={'_blank'}><OpenInNewIcon/></a>
+            </div>
+            <div className={assetsStyles.tocBody} id={'assetsBody'}>
+                {
+                    files.map((model, index) => {
+                        return <FileGroup key={`assets-${0}-${index}`} portalUrl={portalUrl}
+                                          articleUrn={articleUid}
+                                          model={model} level={0}/>
+                    })
+                }
+            </div>
         </div>
-        <div className="tocBody" id={'assetsBody'}>
-            {
-                files.map((model, index) => {
-                    return <FileGroup key={`assets-${0}-${index}`} portalUrl={portalUrl}
-                                      articleUrn={articleUid}
-                                      model={model} level={0}/>
-                })
-            }
-        </div>
-    </div>
-    <style jsx>{`
-      .tocCard {
-        background-color: var(--background-color);
-        border-radius: 4px;
-        position: relative;
-      }
-      .tocHeader {
-        padding: 1rem;
-        border-bottom: solid 1px #e1e1e280;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .tocHeader a :global(svg) {
-        width: 20px;
-        height: 20px;
-        cursor: pointer;
-        color: var(--text-primary-color);
-      }
-      .tocBody {
-        padding: 1rem;
-        max-height: 450px;
-        overflow-y: auto;
-      }
-      .tocItem {
-        padding-right: 0.5rem;
-        font-size: 14px;
-      }
-      .assertItemText {
-        cursor: pointer;
-      }
-      .assetItem {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 2px;
-        height: 32px;
-      }
-      .assetItem:hover {
-        background: #e6e6e6;
-      }
-      .dirOpenIcon {
-        cursor: pointer;
-      }
-      .fileIcon {
-        width: 18px;
-        height: 18px;
-      }
-    `}</style>
     </>
 }
 
@@ -122,7 +69,7 @@ function FileGroup({portalUrl, articleUrn, model, level}:
         if (!model.is_dir) {
             return <div className={'w-4'}></div>
         }
-        return <i className="dirOpenIcon" onClick={() => {
+        return <i className={assetsStyles.dirOpenIcon} onClick={() => {
             if (open) {
                 setOpen(false)
                 return
@@ -141,11 +88,11 @@ function FileGroup({portalUrl, articleUrn, model, level}:
         </i>
     }
     return <>
-        <div key={`assets-${level}`} className="tocItem">
-            <div className="assetItem" style={{paddingLeft: `${(level + 1) * 0.3}rem`}}>
+        <div key={`assets-${level}`} className={assetsStyles.tocItem}>
+            <div className={assetsStyles.assetItem} style={{paddingLeft: `${(level + 1) * 0.3}rem`}}>
                 {openIcon()}
                 <FileIcon filename={model.title}/>
-                <span title={model.title} className="assertItemText"
+                <span title={model.title} className={assetsStyles.assertItemText}
                       onClick={(event) => {
                           if (model.is_dir) {
                               return
@@ -172,7 +119,64 @@ function FileGroup({portalUrl, articleUrn, model, level}:
 
 function FileIcon({filename}: { filename: string }) {
     return <div
-        className="fileIcon"
+        className={assetsStyles.fileIcon}
         dangerouslySetInnerHTML={{__html: getIcon(filename).svg}}
     />;
 }
+
+const assetsStyles = {
+    tocCard: css`
+        background-color: var(--background-color);
+        border-radius: 4px;
+        position: relative;
+    `,
+    tocHeader: css`
+        padding: 1rem;
+        border-bottom: solid 1px #e1e1e280;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        & a svg {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            color: var(--text-primary-color);
+        }
+    `,
+    tocBody: css`
+        padding: 1rem;
+        max-height: 450px;
+        overflow-y: auto;
+    `,
+    tocItem: css`
+        padding-right: 0.5rem;
+        font-size: 14px;
+    `,
+    assertItemText: css`
+        cursor: pointer;
+    `,
+    assetItem: css`
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2px;
+        height: 32px;
+
+        &:hover {
+            background: #e6e6e6;
+        }
+    `,
+    dirOpenIcon: css`
+        cursor: pointer;
+    `,
+    fileIcon: css`
+        width: 18px;
+        height: 18px;
+    `
+}
+

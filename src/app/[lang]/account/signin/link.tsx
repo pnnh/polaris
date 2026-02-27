@@ -6,6 +6,7 @@ import {permitAppLogin, queryAuthApp} from "@/components/client/account/account"
 import {CodeOk} from "@pnnh/atom";
 import {Loading} from "@/components/common/loading";
 import {transKey} from "@/components/common/locales/normal";
+import {css} from "@/gen/styled/css";
 
 export function LinkSession({lang, portalUrl, signinLink, linkApp, signinCallback}: {
     lang: string, portalUrl: string, signinLink: string, linkApp: string, signinCallback: string
@@ -57,7 +58,7 @@ export function LinkSession({lang, portalUrl, signinLink, linkApp, signinCallbac
         </div>
     }
     return <>
-        <div className="linkSession">
+        <div className={linkStyles.linkSession}>
             <div>{transKey(lang, "auth.authorizationQuestion")}<b>{appInfo.name}</b></div>
             {errorMsg ?? <div>{errorMsg}</div>}
             {permitResult ? permitResult : <div>
@@ -68,16 +69,17 @@ export function LinkSession({lang, portalUrl, signinLink, linkApp, signinCallbac
                 </button>
             </div>}
         </div>
-        <style jsx>{`
-            .linkSession {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                height: 100%;
-                padding: 20px;
-            }
-        `}</style>
     </>
+}
+
+const linkStyles = {
+    linkSession: css`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+    `
 }

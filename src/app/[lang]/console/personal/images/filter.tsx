@@ -3,6 +3,7 @@
 import React from "react";
 import {transKey} from "@/components/common/locales/normal";
 import SearchIcon from "@mui/icons-material/Search";
+import {css} from "@/gen/styled/css";
 
 export function ConsoleImageFilterBar({lang, keyword}: {
     lang: string,
@@ -13,27 +14,30 @@ export function ConsoleImageFilterBar({lang, keyword}: {
         console.debug('go search', searchText);
     }
     return <>
-        <div className="middleTop">
-        <div className="topLeft">
-            {/*<Button size={'small'} variant={'contained'} onClick={goCreateArticle}>*/}
-            {/*    打开图片目录*/}
-            {/*</Button>*/}
-        </div>
-        <div className="topRight">
-            <div className="searchBox">
-                <input placeholder={transKey(lang, "searchPlaceholder")} maxLength={128} value={searchText}
-                       onChange={(event) => setSearchText(event.target.value)}
-                       onKeyDown={(event) => {
-                           if (event.key === 'Enter') {
-                               goSearch()
-                           }
-                       }}/>
-                <SearchIcon fontSize={'small'} onClick={goSearch}/>
+        <div className={filterStyles.middleTop}>
+            <div className={filterStyles.topLeft}>
+                {/*<Button size={'small'} variant={'contained'} onClick={goCreateArticle}>*/}
+                {/*    打开图片目录*/}
+                {/*</Button>*/}
+            </div>
+            <div className={filterStyles.topRight}>
+                <div className={filterStyles.searchBox}>
+                    <input placeholder={transKey(lang, "searchPlaceholder")} maxLength={128} value={searchText}
+                           onChange={(event) => setSearchText(event.target.value)}
+                           onKeyDown={(event) => {
+                               if (event.key === 'Enter') {
+                                   goSearch()
+                               }
+                           }}/>
+                    <SearchIcon fontSize={'small'} onClick={goSearch}/>
+                </div>
             </div>
         </div>
-    </div>
-    <style jsx>{`
-      .middleTop {
+    </>
+}
+
+const filterStyles = {
+    middleTop: css`
         border-bottom: solid 1px #e1e1e280;
         width: 100%;
         box-sizing: border-box;
@@ -44,13 +48,18 @@ export function ConsoleImageFilterBar({lang, keyword}: {
         font-size: 0.8rem;
         background-color: var(--background-color);
         height: 3rem;
-      }
-      .topLeft, .topRight {
+    `,
+    topLeft: css`
         display: flex;
         flex-direction: row;
         gap: 0.5rem;
-      }
-      .searchBox {
+    `,
+    topRight: css`
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+    `,
+    searchBox: css`
         border: solid 1px #ccc;
         border-radius: 6px;
         height: 26px;
@@ -60,12 +69,11 @@ export function ConsoleImageFilterBar({lang, keyword}: {
         gap: 0.5rem;
         align-items: center;
         padding: 0 0.5rem;
-      }
-      .searchBox input {
-        border: none;
-        outline: none;
-        flex-grow: 1;
-      }
-    `}</style>
-    </>
+
+        & input {
+            border: none;
+            outline: none;
+            flex-grow: 1;
+        }
+    `
 }

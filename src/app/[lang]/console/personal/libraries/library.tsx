@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import ComputerIcon from "@mui/icons-material/Computer";
 import {clientLoadLibraryEntries, ILibraryEntry} from "@/components/client/images/service";
 import CloudQueueIcon from "@mui/icons-material/CloudQueue";
+import {css} from "@/gen/styled/css";
 
 export function ConsoleLibraryMiddleBody({lang, portalUrl}: {
     lang: string, portalUrl: string
@@ -61,33 +62,17 @@ export function ConsoleLibraryMiddleBody({lang, portalUrl}: {
 
     if (!libraries || libraries.length === 0) {
         return <>
-            <div className="libBody">
-            暂无本地图片库
-        </div>
-        <style jsx>{`
-          .libBody {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-top: 1rem;
-          }
-        `}</style>
+            <div className={libraryStyles.libBody}>
+                暂无本地图片库
+            </div>
         </>
     }
     return <>
-        <div className="libBody">
-        {libraries.map((model, index) => {
-            return <LibraryCard key={index} model={model} lang={lang} portalUrl={''}/>
-        })}
-    </div>
-    <style jsx>{`
-      .libBody {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-        margin-top: 1rem;
-      }
-    `}</style>
+        <div className={libraryStyles.libBody}>
+            {libraries.map((model, index) => {
+                return <LibraryCard key={index} model={model} lang={lang} portalUrl={''}/>
+            })}
+        </div>
     </>
 }
 
@@ -97,15 +82,22 @@ function LibraryCard({model, lang, portalUrl}: {
     portalUrl: string
 }) {
     return <>
-        <div className="libCard">
-        {model.isLocal ? <ComputerIcon/> : <CloudQueueIcon/>}
-        <a href={`/${lang}/console/personal/images?libName=${encodeURIComponent(model.key)}`}>{model.name}</a>
-    </div>
-    <style jsx>{`
-      .libCard {
+        <div className={libraryStyles.libCard}>
+            {model.isLocal ? <ComputerIcon/> : <CloudQueueIcon/>}
+            <a href={`/${lang}/console/personal/images?libName=${encodeURIComponent(model.key)}`}>{model.name}</a>
+        </div>
+    </>
+}
+
+const libraryStyles = {
+    libBody: css`
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-top: 1rem;
+    `,
+    libCard: css`
         border: solid 1px #ccc;
         min-height: 4rem;
-      }
-    `}</style>
-    </>
+    `
 }

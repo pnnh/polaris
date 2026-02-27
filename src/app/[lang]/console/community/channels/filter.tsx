@@ -5,6 +5,7 @@ import {transKey} from "@/components/common/locales/normal";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import {EmptyUUID, uuidToBase58} from "@pnnh/atom";
+import {css} from "@/gen/styled/css";
 
 export function ConsoleChannelFilterBar({lang, keyword}: {
     lang: string,
@@ -18,14 +19,14 @@ export function ConsoleChannelFilterBar({lang, keyword}: {
         window.location.href = `/${lang}/console/channels/${uuidToBase58(EmptyUUID)}`
     }
     return <>
-        <div className="middleTop">
-            <div className="topLeft">
+        <div className={filterStyles.middleTop}>
+            <div className={filterStyles.topLeft}>
                 <Button size={'small'} variant={'contained'} onClick={goCreateChannel}>
                     {transKey(lang, "console.channel.createNew")}
                 </Button>
             </div>
-            <div className="topRight">
-                <div className="searchBox">
+            <div className={filterStyles.topRight}>
+                <div className={filterStyles.searchBox}>
                     <input placeholder={transKey(lang, "searchPlaceholder")} maxLength={128} value={searchText}
                            onChange={(event) => setSearchText(event.target.value)}
                            onKeyDown={(event) => {
@@ -37,43 +38,47 @@ export function ConsoleChannelFilterBar({lang, keyword}: {
                 </div>
             </div>
         </div>
-        <style jsx>{`
-            .middleTop {
-                border-bottom: solid 1px #e1e1e280;
-                width: 100%;
-                box-sizing: border-box;
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                padding: 0.5rem;
-                font-size: 0.8rem;
-                background-color: var(--background-color);
-                height: 3rem;
-            }
-
-            .topLeft, .topRight {
-                display: flex;
-                flex-direction: row;
-                gap: 0.5rem;
-            }
-
-            .searchBox {
-                border: solid 1px #ccc;
-                border-radius: 6px;
-                height: 26px;
-                width: 200px;
-                display: flex;
-                flex-direction: row;
-                gap: 0.5rem;
-                align-items: center;
-                padding: 0 0.5rem;
-            }
-
-            .searchBox input {
-                border: none;
-                outline: none;
-                flex-grow: 1;
-            }
-        `}</style>
     </>
+}
+
+const filterStyles = {
+    middleTop: css`
+        border-bottom: solid 1px #e1e1e280;
+        width: 100%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.5rem;
+        font-size: 0.8rem;
+        background-color: var(--background-color);
+        height: 3rem;
+    `,
+    topLeft: css`
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+    `,
+    topRight: css`
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+    `,
+    searchBox: css`
+        border: solid 1px #ccc;
+        border-radius: 6px;
+        height: 26px;
+        width: 200px;
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+        align-items: center;
+        padding: 0 0.5rem;
+
+        & input {
+            border: none;
+            outline: none;
+            flex-grow: 1;
+        }
+    `
 }

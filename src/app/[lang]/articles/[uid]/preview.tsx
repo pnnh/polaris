@@ -9,6 +9,7 @@ import {TocItem} from "@pnnh/atom";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import {renderCodeBlock} from "@/app/[lang]/articles/[uid]/codeblock";
 import {BuildBodyHtml} from "./body";
+import {css} from "@/gen/styled/css";
 
 export function ArticlePreview(
     {
@@ -27,64 +28,26 @@ export function ArticlePreview(
     }
     const fileRepoPath = previewState.full_repo_path
     return <>
-        <div className="assertPreview">
-        <div className="previewHeader">
-            <div className="pathTitle">
-                {previewState.title}
+        <div className={previewStyles.assertPreview}>
+            <div className={previewStyles.previewHeader}>
+                <div className={previewStyles.pathTitle}>
+                    {previewState.title}
+                </div>
+                <div className={previewStyles.fileActions}>
+                    <a href={fileRepoPath} target={'_blank'}>
+                        <OpenInNewIcon/>
+                    </a>
+                    <i onClick={() => {
+                        setPreviewState(undefined)
+                    }}>
+                        <IoClose size={'1.2rem'}/>
+                    </i>
+                </div>
             </div>
-            <div className="fileActions">
-                <a href={fileRepoPath} target={'_blank'}>
-                    <OpenInNewIcon/>
-                </a>
-                <i onClick={() => {
-                    setPreviewState(undefined)
-                }}>
-                    <IoClose size={'1.2rem'}/>
-                </i>
+            <div className={previewStyles.previewBody}>
+                <PreviewBody portalUrl={portalUrl} model={previewState}/>
             </div>
         </div>
-        <div className="previewBody">
-            <PreviewBody portalUrl={portalUrl} model={previewState}/>
-        </div>
-    </div>
-    <style jsx>{`
-      .assertPreview {
-        width: 100%;
-        background: #fefefe;
-      }
-      .previewHeader {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: solid 1px #f3f3f3;
-        margin-bottom: 1rem;
-        padding-bottom: 0.5rem;
-      }
-      .pathTitle {
-        font-size: 16px;
-        color: #3c3c3c;
-        font-weight: 500;
-      }
-      .fileActions {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      .fileActions i {
-        cursor: pointer;
-      }
-      .fileActions a :global(svg) {
-        height: 1rem;
-        width: 1rem;
-      }
-      .previewBody {
-        font-size: 14px;
-        height: 100%;
-        background: #fff;
-      }
-    `}</style>
     </>
 }
 
@@ -113,24 +76,12 @@ function TextPreview({portalUrl, model}: { portalUrl: string, model: PSArticleFi
     }, [fileUrl])
     if (!contentHtml) {
         return <>
-            <div className="textPreview"></div>
-            <style jsx>{`
-              .textPreview {
-                word-break: break-word;
-                white-space: break-spaces;
-              }
-            `}</style>
+            <div className={previewStyles.textPreview}></div>
         </>
     }
     return <>
-        <div className="textPreview" dangerouslySetInnerHTML={{__html: contentHtml}}>
-    </div>
-    <style jsx>{`
-      .textPreview {
-        word-break: break-word;
-        white-space: break-spaces;
-      }
-    `}</style>
+        <div className={previewStyles.textPreview} dangerouslySetInnerHTML={{__html: contentHtml}}>
+        </div>
     </>
 }
 
@@ -141,3 +92,49 @@ function ImagePreview({portalUrl, model}: { portalUrl: string, model: PSArticleF
         <img src={imageUrl}/>
     </div>
 }
+
+const previewStyles = {
+    assertPreview: css`
+        width: 100%;
+        background: #fefefe;
+    `,
+    previewHeader: css`
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: solid 1px #f3f3f3;
+        margin-bottom: 1rem;
+        padding-bottom: 0.5rem;
+    `,
+    pathTitle: css`
+        font-size: 16px;
+        color: #3c3c3c;
+        font-weight: 500;
+    `,
+    fileActions: css`
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        
+        & i {
+            cursor: pointer;
+        }
+        
+        & a svg {
+            height: 1rem;
+            width: 1rem;
+        }
+    `,
+    previewBody: css`
+        font-size: 14px;
+        height: 100%;
+        background: #fff;
+    `,
+    textPreview: css`
+        word-break: break-word;
+        white-space: break-spaces;
+    `
+}
+

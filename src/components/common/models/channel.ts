@@ -12,10 +12,3 @@ export interface PSChannelModel {
     match: string
     owner: string
 }
-
-export interface PSChannelMetadataModel {
-    uid: string
-    image: string,
-    description: string,
-    name: string
-}

@@ -12,6 +12,7 @@ import 'prismjs/components/prism-css'
 import 'prismjs/components/prism-java'
 import 'prismjs/components/prism-bash'
 import 'prismjs/components/prism-go'
+import {css} from "@/gen/styled/css";
 import 'prismjs/components/prism-c'
 import 'prismjs/components/prism-cpp'
 import 'prismjs/components/prism-csharp'
@@ -97,122 +98,118 @@ const codeThemes: ICodeTheme[] = [
                 console.error('oops, something went wrong!', error);
             });
     }
-    return <div className="editorContainer">
+    return <div className={highlightStyles.editorContainer}>
         <link rel={'stylesheet'} href={`/assets/prismjs/themes/${codeProps.codeTheme}.min.css`}></link>
-        <div className="codeBlockContainer">
+        <div className={highlightStyles.codeBlockContainer}>
             <textarea value={codeText} onChange={(event) => setCodeText(event.target.value)}/>
         </div>
-        <div className="selectorContainer">
+        <div className={highlightStyles.selectorContainer}>
             <CodeSelector value={codeProps} onChange={setCodeProps}/>
         </div>
-        <div className="actionContainer">
+        <div className={highlightStyles.actionContainer}>
             <Button variant={'contained'} onClick={formatCode}>格式化</Button>
             <Button variant={'contained'} onClick={exportImage}>导出图像</Button>
         </div>
-        <div className="previewContainer">
-            <div id={'previewBlock'} className={`previewBlock prism-theme ${darkTheme ? 'dark' : ''}`}>
+        <div className={highlightStyles.previewContainer}>
+            <div id={'previewBlock'}
+                 className={`${highlightStyles.previewBlock} prism-theme ${darkTheme ? 'dark' : ''}`}>
                 <pre id={'previewPre'} className={`language-${codeProps.codeLang}`} tabIndex={0}>
                     <code id={'previewCode'} className={`language-${codeProps.codeLang}`}></code>
                 </pre>
             </div>
         </div>
-
-        <style jsx>{`
-            .editorContainer {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-items: center;
-                align-items: center;
-            }
-
-            .editorContainer :global(textarea) {
-                font-family: monospace;
-                font-size: 0.9rem;
-                background-color: #ffffff;
-                border: 0;
-                flex-grow: 1;
-                width: calc(100% - 2rem);
-                padding: 1rem;
-                overflow: auto;
-                scrollbar-width: thin;
-            }
-
-            .codeBlockContainer {
-                font-family: monospace;
-                font-size: 0.9rem;
-                padding: 1rem;
-                background-color: #FFFFFF;
-                height: 20rem;
-                width: 100%;
-                border-radius: 4px;
-            }
-
-            .codeBlockContainer :global(textarea) {
-                width: 100%;
-                height: 100%;
-            }
-
-            .selectorContainer {
-                margin-top: 1rem;
-                width: 100%;
-                margin-bottom: 1rem;
-            }
-
-            .actionContainer {
-                padding: 0.5rem 1rem;
-                width: 100%;
-                margin-bottom: 1rem;
-                background-color: #FFFFFF;
-                display: flex;
-                flex-direction: row;
-                gap: 1rem;
-            }
-
-            .previewContainer {
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .previewBlock {
-                width: 100%;
-                margin-bottom: 1rem;
-                height: 32rem;
-                overflow: auto;
-                scrollbar-width: thin;
-                border-radius: 4px;
-            }
-
-            .previewBlock.dark {
-                background-color: #333;
-            }
-
-            .previewBlock :global(pre) {
-                padding: 0;
-                margin: 0;
-                display: block;
-                width: 100%;
-                overflow: hidden;
-                border: 0;
-                background-color: transparent;
-            }
-
-            .previewBlock :global(pre span) {
-                border: 0 !important;
-                background-color: transparent !important;
-            }
-
-            .previewBlock :global(pre code) {
-                display: block;
-                width: 100%;
-                overflow: hidden;
-                border: 0;
-                background-color: transparent;
-            }
-        `}</style>
     </div>
+}
+
+const highlightStyles = {
+    editorContainer: css`
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+
+        & textarea {
+            font-family: monospace;
+            font-size: 0.9rem;
+            background-color: #ffffff;
+            border: 0;
+            flex-grow: 1;
+            width: calc(100% - 2rem);
+            padding: 1rem;
+            overflow: auto;
+            scrollbar-width: thin;
+        }
+    `,
+    codeBlockContainer: css`
+        font-family: monospace;
+        font-size: 0.9rem;
+        padding: 1rem;
+        background-color: #FFFFFF;
+        height: 20rem;
+        width: 100%;
+        border-radius: 4px;
+
+        & textarea {
+            width: 100%;
+            height: 100%;
+        }
+    `,
+    selectorContainer: css`
+        margin-top: 1rem;
+        width: 100%;
+        margin-bottom: 1rem;
+    `,
+    actionContainer: css`
+        padding: 0.5rem 1rem;
+        width: 100%;
+        margin-bottom: 1rem;
+        background-color: #FFFFFF;
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    `,
+    previewContainer: css`
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    `,
+    previewBlock: css`
+        width: 100%;
+        margin-bottom: 1rem;
+        height: 32rem;
+        overflow: auto;
+        scrollbar-width: thin;
+        border-radius: 4px;
+
+        &.dark {
+            background-color: #333;
+        }
+
+        & pre {
+            padding: 0;
+            margin: 0;
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            border: 0;
+            background-color: transparent;
+        }
+
+        & pre span {
+            border: 0 !important;
+            background-color: transparent !important;
+        }
+
+        & pre code {
+            display: block;
+            width: 100%;
+            overflow: hidden;
+            border: 0;
+            background-color: transparent;
+        }
+    `
 }
 
 

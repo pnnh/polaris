@@ -8,6 +8,7 @@ import {clientConsoleInsertChannel, clientConsoleUpdateChannel} from "@/componen
 import {EmptyUUID} from "@pnnh/atom";
 import {getDefaultImageUrl} from "@/components/common/note";
 import {transKey} from "@/components/common/locales/normal";
+import {css} from "@/gen/styled/css";
 
 export function ConsoleChannelForm({publicPortalUrl, modelString}: { publicPortalUrl: string, modelString: string }) {
     const oldModel = JSON.parse(modelString) as PSChannelModel;
@@ -44,23 +45,23 @@ export function ConsoleChannelForm({publicPortalUrl, modelString}: { publicPorta
         }
     }
     const coverUrl = oldModel.image || getDefaultImageUrl();
-    return <div className="bodyContainer">
-        <div className="channelCover">
-            <div className="channelHeader">
+    return <div className={channelStyles.bodyContainer}>
+        <div className={channelStyles.channelCover}>
+            <div className={channelStyles.channelHeader}>
                 <div>
                     <input value={name} onChange={(event) => setName(event.target.value)}/>
                 </div>
-                <div className="channelTitle">
+                <div className={channelStyles.channelTitle}>
                     <input value={title} onChange={(event) => setTitle(event.target.value)}/>
                 </div>
-                <div className="channelDescription">
+                <div className={channelStyles.channelDescription}>
                         <textarea name={'channelDescription'}
                                   value={description} onChange={(event => setDescription(event.target.value))}/>
                 </div>
             </div>
-            <img className="coverImage" src={coverUrl} alt={oldModel.title}/>
+            <img className={channelStyles.coverImage} src={coverUrl} alt={oldModel.title}/>
         </div>
-        <div className="bottomBar">
+        <div className={channelStyles.bottomBar}>
             <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label"
                         name="row-radio-buttons-group" value={lang}
                         onChange={(event) => setLang(event.target.value)}>
@@ -74,91 +75,84 @@ export function ConsoleChannelForm({publicPortalUrl, modelString}: { publicPorta
                 transKey(lang, "console.channel.createMultilingualCopy")
             }</Button>
         </div>
-        <style jsx>{`
-            .bodyContainer {
-                overflow: hidden;
-            }
-
-            .channelCover {
-                width: calc(100vw - 16rem);
-                height: 12rem;
-                position: relative;
-                border-radius: 6px;
-                overflow: hidden;
-                background: var(--background-color);
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-
-            .channelHeader {
-                flex-grow: 1;
-                position: relative;
-                z-index: 1;
-                border-radius: 4px;
-                overflow: hidden;
-            }
-
-            .channelTitle {
-                font-weight: 600;
-                font-size: 20px;
-                margin-bottom: 16px;
-                padding-left: 1rem;
-            }
-
-            .channelTitle input {
-                width: calc(100% - 3rem);
-                border-color: #b4b4b4;
-                border-radius: 4px;
-                border-width: 1px;
-                padding: 0.5rem;
-            }
-
-            .channelDescription {
-                font-size: 1rem;
-                color: var(--text-primary-color);
-                padding-left: 1rem;
-            }
-
-            .channelDescription textarea {
-                resize: none;
-                width: calc(100% - 3rem);
-                height: 5rem;
-                border-color: #b4b4b4;
-                border-radius: 4px;
-                padding: 0.5rem;
-                scrollbar-width: thin;
-            }
-
-            .coverImage {
-                width: 8rem;
-                height: 8rem;
-                flex-shrink: 0;
-                object-fit: cover;
-                top: 0;
-                z-index: 0;
-                margin-right: 1rem;
-            }
-
-            .bottomBar {
-                height: 4rem;
-                width: 100vw;
-                background: var(--background-color);
-                display: flex;
-                flex-direction: row;
-                justify-items: center;
-                align-items: center;
-                gap: 1rem;
-                padding-left: 1rem;
-            }
-
-            @media screen and (min-width: 80rem) {
-                .bottomBar {
-                    width: 80vw;
-                    margin: 1rem auto 0 auto;
-                }
-            }
-        `}</style>
     </div>
+}
+
+const channelStyles = {
+    bodyContainer: css`
+        overflow: hidden;
+    `,
+    channelCover: css`
+        width: calc(100vw - 16rem);
+        height: 12rem;
+        position: relative;
+        border-radius: 6px;
+        overflow: hidden;
+        background: var(--background-color);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    `,
+    channelHeader: css`
+        flex-grow: 1;
+        position: relative;
+        z-index: 1;
+        border-radius: 4px;
+        overflow: hidden;
+    `,
+    channelTitle: css`
+        font-weight: 600;
+        font-size: 20px;
+        margin-bottom: 16px;
+        padding-left: 1rem;
+
+        & input {
+            width: calc(100% - 3rem);
+            border-color: #b4b4b4;
+            border-radius: 4px;
+            border-width: 1px;
+            padding: 0.5rem;
+        }
+    `,
+    channelDescription: css`
+        font-size: 1rem;
+        color: var(--text-primary-color);
+        padding-left: 1rem;
+
+        & textarea {
+            resize: none;
+            width: calc(100% - 3rem);
+            height: 5rem;
+            border-color: #b4b4b4;
+            border-radius: 4px;
+            padding: 0.5rem;
+            scrollbar-width: thin;
+        }
+    `,
+    coverImage: css`
+        width: 8rem;
+        height: 8rem;
+        flex-shrink: 0;
+        object-fit: cover;
+        top: 0;
+        z-index: 0;
+        margin-right: 1rem;
+    `,
+    bottomBar: css`
+        height: 4rem;
+        width: 100vw;
+        background: var(--background-color);
+        display: flex;
+        flex-direction: row;
+        justify-items: center;
+        align-items: center;
+        gap: 1rem;
+        padding-left: 1rem;
+
+        @media screen and (min-width: 80rem) {
+            width: 80vw;
+            margin: 1rem auto 0 auto;
+        }
+    `
 }

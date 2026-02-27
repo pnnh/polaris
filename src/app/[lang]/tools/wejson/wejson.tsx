@@ -4,6 +4,7 @@ import React from 'react';
 import {WePreview} from "./preview";
 import Button from "@mui/material/Button";
 import {Alert} from "@mui/material";
+import {css} from "@/gen/styled/css";
 
 export function WeJsonClient() {
     const [rawContent, setRawContent] = React.useState('');
@@ -11,74 +12,77 @@ export function WeJsonClient() {
     const [parsedContent, setParsedContent] = React.useState('');
 
     return <>
-        <div className="wejsonContainer">
-        <h1>WeJson Client Component</h1>
-        <div className="parseRow">
-            <div className="rawContent">
+        <div className={wejsonStyles.wejsonContainer}>
+            <h1>WeJson Client Component</h1>
+            <div className={wejsonStyles.parseRow}>
+                <div className={wejsonStyles.rawContent}>
                 <textarea value={rawContent}
                           onChange={(event) => setRawContent(event.target.value)}/>
+                </div>
+                <div className={wejsonStyles.previewContent}>
+                    <WePreview jsonText={parsedContent}/>
+                </div>
             </div>
-            <div className="previewContent">
-                <WePreview jsonText={parsedContent}/>
+            <div>
+                {errMsg && <Alert severity="error">{errMsg}</Alert>}
+            </div>
+            <div className={wejsonStyles.toolButtons}>
+                <Button variant={'contained'} size={'small'} onClick={() => {
+                    try {
+                        const parsed = JSON.parse(rawContent);
+                        setParsedContent(JSON.stringify(parsed, null, 2));
+                    } catch (error) {
+                        setErrMsg('Invalid JSON: ' + error);
+                    }
+                }}>Parse JSON
+                </Button>
             </div>
         </div>
-        <div>
-            {errMsg && <Alert severity="error">{errMsg}</Alert>}
-        </div>
-        <div className="toolButtons">
-            <Button variant={'contained'} size={'small'} onClick={() => {
-                try {
-                    const parsed = JSON.parse(rawContent);
-                    setParsedContent(JSON.stringify(parsed, null, 2));
-                } catch (error) {
-                    setErrMsg('Invalid JSON: ' + error);
-                }
-            }}>Parse JSON
-            </Button>
-        </div>
-    </div>
-    <style jsx>{`
-      .wejsonContainer {
+    </>
+}
+
+const wejsonStyles = {
+    wejsonContainer: css`
         display: flex;
         flex-direction: column;
         gap: 1rem;
-      }
-      .parseRow {
+    `,
+    parseRow: css`
         display: flex;
         flex-direction: row;
         align-items: center;
         gap: 1rem;
-      }
-      .rawContent {
+    `,
+    rawContent: css`
         flex-grow: 1;
         flex-shrink: 0;
         height: 20rem;
         background: #FFFFFF;
-      }
-      .rawContent textarea {
-        width: 100%;
-        height: 100%;
-        padding: 0.5rem;
-      }
-      .previewContent {
+
+        & textarea {
+            width: 100%;
+            height: 100%;
+            padding: 0.5rem;
+        }
+    `,
+    previewContent: css`
         flex-grow: 1;
         flex-shrink: 0;
         height: 20rem;
         background: #FFFFFF;
         overflow: auto;
         scrollbar-width: thin;
-      }
-      .previewContent code {
-        width: 100%;
-        height: 100%;
-        padding: 1rem;
-        font-family: 'Courier New', Courier, monospace;
-        white-space: pre-wrap;
-        word-break: break-all;
-      }
-      .toolButtons {
+
+        & code {
+            width: 100%;
+            height: 100%;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+    `,
+    toolButtons: css`
         margin-bottom: 1rem;
-      }
-    `}</style>
-    </>
+    `
 }

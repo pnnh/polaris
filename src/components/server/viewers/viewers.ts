@@ -1,7 +1,7 @@
-import {CodeOk, CommonResult, PLInsertResult, PLSelectData, PLSelectResult} from "@pnnh/atom";
-import {serverMakeGet, serverMakePost} from "@pnnh/atom/nodejs";
-import {headers, cookies} from "next/headers";
-import {serverLogDebugMeta, logWarnMeta} from "@/components/server/logger";
+import {CodeOk, PLInsertResult} from "@pnnh/atom";
+import {serverMakePost} from "@pnnh/atom/nodejs";
+import {cookies, headers} from "next/headers";
+import {serverLogDebugMeta, serverLogWarnMeta} from "@/components/server/logger";
 
 export async function serverInsertArticleViewer(portalUrl: string, articleUid: string, clientIp: string): Promise<void> {
     if (!clientIp) {
@@ -24,7 +24,7 @@ export async function serverInsertArticleViewer(portalUrl: string, articleUid: s
     }
     const insertResult = await serverMakePost<PLInsertResult>(url, postParams, authHeader);
     if (!insertResult || insertResult.code !== CodeOk || !insertResult.data) {
-        logWarnMeta('serverInsertArticleViewer', {insertResult});
+        serverLogWarnMeta('serverInsertArticleViewer', {insertResult});
         return undefined
     }
     const modelInfo = insertResult.data

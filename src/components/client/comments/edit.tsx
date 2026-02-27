@@ -7,6 +7,7 @@ import {submitComment} from "@/components/client/comments/comment";
 import {getUserinfo} from "@/components/client/account/account";
 import {transKey} from "@/components/common/locales/normal";
 import {AccountModel} from "@/components/common/models/account/account";
+import {css} from "@/gen/styled/css";
 
 const buttonThrottle = new ButtonThrottle(2000)
 
@@ -52,19 +53,19 @@ export function EditArea({lang, portalUrl, resource}: {
     }, []);
 
     return <>
-        <div className={'editContainer'}>
-            <div className={'areaTitle'}>
+        <div className={editStyles.editContainer}>
+            <div className={editStyles.areaTitle}>
                 {transKey(lang, "comments.postComment")}
             </div>
-            <div className={'editRow'}>
-                <div className={'infoColumn'}>
-                    <div className={'editorRow'}>
+            <div className={editStyles.editRow}>
+                <div className={editStyles.infoColumn}>
+                    <div className={editStyles.editorRow}>
                     <textarea placeholder={transKey(lang, "comments.enterComment")}
                               onChange={(e) => setContent(e.target.value)}/>
                     </div>
-                    <div className={'actionsRow'}>
-                        <div className={'submitArea'}>
-                            <button className={'submitButton'} onClick={() => {
+                    <div className={editStyles.actionsRow}>
+                        <div className={editStyles.submitArea}>
+                            <button className={editStyles.submitButton} onClick={() => {
                                 submitForm().catch((err) => {
                                     console.error('submitForm', err)
                                     setInfoMsg(transKey(lang, "comments.submissionFailed"))
@@ -72,76 +73,76 @@ export function EditArea({lang, portalUrl, resource}: {
                             }}>{transKey(lang, "comments.submitComment")}
                             </button>
                         </div>
-                        <div className={'infoMsg'}>
+                        <div className={editStyles.infoMsg}>
                             {infoMsg}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <style jsx>{`
-            .editContainer .areaTitle {
-                font-size: 1.1rem;
-                font-weight: bold;
-            }
-
-            .editRow {
-                display: flex;
-                flex-direction: row;
-                margin: 1rem auto;
-                gap: 1rem;
-            }
-
-            .infoColumn {
-                display: flex;
-                flex-direction: column;
-                gap: 1rem;
-                flex-grow: 1;
-            }
-
-            .editorRow {
-                width: 100%;
-                border: solid 1px #ccc;
-                border-radius: 4px;
-                min-height: 6rem;
-                overflow: hidden;
-            }
-
-            .editorRow textarea {
-                width: 100%;
-                height: 100%;
-                border: none;
-                outline: none;
-                font-size: 1rem;
-                padding: 0.5rem;
-            }
-
-            .actionsRow {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-            }
-
-            .submitArea {
-                display: flex;
-                flex-direction: row;
-                gap: 0.5rem;
-            }
-
-            .submitButton {
-                padding: 0.3rem 0.8rem;
-                background-color: #127af8;
-                color: #FFFFFF;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                font-size: 1rem;
-                animation: buttonThrottle 2s step-end forwards;
-            }
-
-            .infoMsg {
-                font-size: 0.9rem;
-            }
-        `}</style>
     </>
+}
+
+const editStyles = {
+    editContainer: css`
+        & .areaTitle {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+    `,
+    areaTitle: css`
+        font-size: 1.1rem;
+        font-weight: bold;
+    `,
+    editRow: css`
+        display: flex;
+        flex-direction: row;
+        margin: 1rem auto;
+        gap: 1rem;
+    `,
+    infoColumn: css`
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        flex-grow: 1;
+    `,
+    editorRow: css`
+        width: 100%;
+        border: solid 1px #ccc;
+        border-radius: 4px;
+        min-height: 6rem;
+        overflow: hidden;
+
+        & textarea {
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            padding: 0.5rem;
+        }
+    `,
+    actionsRow: css`
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    `,
+    submitArea: css`
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+    `,
+    submitButton: css`
+        padding: 0.3rem 0.8rem;
+        background-color: #127af8;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        animation: buttonThrottle 2s step-end forwards;
+    `,
+    infoMsg: css`
+        font-size: 0.9rem;
+    `
 }
