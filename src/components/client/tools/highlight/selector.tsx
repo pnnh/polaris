@@ -1,5 +1,5 @@
 import {MenuItem, Select} from "@mui/material";
-import {css} from '@emotion/css';
+import {css} from '@/gen/styled/css';
 
 interface ICodeTheme {
     name: string;

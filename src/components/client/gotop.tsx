@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import {useEffect, useState} from "react";
-import {css} from "@emotion/css";
+import {css} from "@/gen/styled/css";
 
 const goTopContainerStyle = css`
     position: fixed;
