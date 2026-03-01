@@ -39,9 +39,14 @@ export function SignupForm({lang, portalUrl}: { lang: string, portalUrl: string 
             setInfoMsg(transKey(lang, "signup.invalidEmail"))
             return
         }
+        const turnstileToken = await getTurnstileToken()
+        if (!turnstileToken) {
+            setInfoMsg(transKey(lang, "signup.verificationFailed"))
+            return
+        }
         const submitRequest = {
             username, password, confirm_password: confirmPassword,
-            email, nickname,
+            email, nickname, turnstile_token: turnstileToken,
         }
         const submitResult = await submitSignup(portalUrl, submitRequest)
         console.log('submitResult', submitResult)

@@ -11,7 +11,6 @@ import ConsoleImageLayout from "@/components/server/console/images/layout";
 import {ConsoleImageFilterBar} from "./filter";
 import {ConsoleImageMiddleBody} from "./image";
 import {css} from "@/gen/styled/css";
-import {serverConsoleSelectImages} from "@/components/personal/images";
 
 export const dynamic = "force-dynamic";
 
@@ -58,15 +57,6 @@ export default async function Page({params, searchParams}: {
 
     const serverConfig = await useServerConfig()
 
-    const selectQuery = {
-        sort: searchParamsValue.sort,
-        filter: searchParamsValue.filter,
-        page,
-        size: pageSize,
-    }
-    const selectData = await serverConsoleSelectImages(serverConfig.INTERNAL_STARGATE_URL,
-        lang, selectQuery)
-
     const libName = searchParamsValue.libName
     const pagination = calcPagination(page, 100, pageSize)
     return <ConsoleImageLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
@@ -74,7 +64,8 @@ export default async function Page({params, searchParams}: {
         <div className={pageStyles.contentContainer}>
             <ConsoleImageFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
             <div className={pageStyles.conMiddle}>
-                <ConsoleImageMiddleBody libKey={libName} lang={lang} selectData={selectData}/>
+                <ConsoleImageMiddleBody libKey={libName} lang={lang}
+                                        portalUrl={serverConfig.PUBLIC_PORTAL_URL}/>
                 <div className={pageStyles.middlePagination}>
                     <PaginationServer lang={lang} pagination={pagination}
                                       pageLinkFunc={(page) =>

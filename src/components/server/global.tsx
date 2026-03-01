@@ -15,9 +15,5 @@ export default async function GlobalLayout(
 
     return <>
         {children}
-        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstileCallback"
-                async
-                crossOrigin="anonymous"
-                defer={true}></script>
     </>
 }

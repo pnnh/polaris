@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "next": "next dev -p 7100 --turbo",
-    "build": "panda codegen && next build",
+    "build": "vite build && panda codegen && next build",
     "analyze": "ENV=production ANALYZE=true next build",
     "dev": "vite",
     "vite": "vite build --watch",

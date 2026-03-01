@@ -44,7 +44,7 @@ export class PgConfigStore implements IServerConfigStore {
             throw new Error('PUBLIC_TURNSTILE is required')
         }
         if (!databaseUrl) {
-            throw new Error('_URL is required')
+            throw new Error('DATABASE_URL is required')
         }
 
         return {

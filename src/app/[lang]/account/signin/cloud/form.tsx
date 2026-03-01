@@ -1,5 +1,6 @@
 'use client'
 
+import {getTurnstileToken} from "@/components/client/cloudflare/turnstile";
 import React, {useState} from "react";
 import {CodeOk} from "@pnnh/atom";
 import {ButtonThrottle} from "@pnnh/atom/browser";
@@ -30,8 +31,14 @@ export function SigninForm({lang, portalUrl, signinLink, linkApp, signinCallback
             setInfoMsg(transKey(lang, "invalidPassword"))
             return
         }
+        const turnstileToken = await getTurnstileToken()
+
+        if (!turnstileToken) {
+            setInfoMsg(transKey(lang, "unauthorized"))
+            return
+        }
         const submitRequest = {
-            username, password, link: signinLink
+            username, password, turnstile_token: turnstileToken, link: signinLink
         }
         const submitResult = await accountSignin(portalUrl, submitRequest)
         if (submitResult.code !== CodeOk) {

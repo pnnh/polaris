@@ -118,75 +118,22 @@ export default async function Page({params, searchParams}: {
                 </div>
                 <div className={pageStyles.libGrid}>
                     <div className={pageStyles.libHeader}>
-                        {/*展示本地和远程库列表，数据存储在本地；使用角标显示不同库类型；主要区别是本地库是否关联了远程库的地址，类似Git；
-                    当点击库链接时，根据库类型千万不同页面视图（笔记或图片，本地或远程）；*/}
                         <a className={pageStyles.libLink}>个人目录</a>
                         <a href={`/${lang}/console/personal`} className={pageStyles.libLink}>个人主页</a>
                     </div>
                     <div className={pageStyles.libBody}>
                         <div className={pageStyles.libCard}>
-                            <ComputerIcon/>
-                            最近笔记1
-                        </div>
-                        <div className={pageStyles.libCard}>
-                            <ComputerIcon/>
-                            最近笔记2
-                        </div>
-                        <div className={pageStyles.libCard}>
-                            <ComputerIcon/>
-                            <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>本地图片库</a>
+                            <CloudQueueIcon/>
+                            <a href={`/${lang}/console/personal/files`} className={pageStyles.libLink}>所有文件</a>
                         </div>
                         <div className={pageStyles.libCard}>
                             <CloudQueueIcon/>
-                            最近笔记库
+                            <a href={`/${lang}/console/personal/notes`} className={pageStyles.libLink}>所有笔记</a>
                         </div>
                         <div className={pageStyles.libCard}>
                             <CloudQueueIcon/>
-                            <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>最近图片库</a>
+                            <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>所有图片</a>
                         </div>
-
-                    </div>
-                </div>
-                <div className={pageStyles.libGrid}>
-                    <div className={pageStyles.libHeader}>
-                        <a className={pageStyles.libLink}>社区目录</a>
-                        <a href={`/${lang}/console/community`} className={pageStyles.libLink}>社区主页</a>
-                    </div>
-                    <div className={pageStyles.libBody}>
-                        <div className={pageStyles.libCard}>
-                            <ComputerIcon/>
-                            频道1
-                        </div>
-                        <div className={pageStyles.libCard}>
-                            <ComputerIcon/>
-                            <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>本地图片库</a>
-                        </div>
-                        <div className={pageStyles.libCard}>
-                            <CloudQueueIcon/>
-                            频道2
-                        </div>
-
-                    </div>
-                </div>
-                <div className={pageStyles.libGrid}>
-                    <div className={pageStyles.libHeader}>
-                        <a className={pageStyles.libLink}>管理目录</a>
-                        <a href={`/${lang}/console/management`} className={pageStyles.libLink}>管理主页</a>
-                    </div>
-                    <div className={pageStyles.libBody}>
-                        <div className={pageStyles.libCard}>
-                            <ComputerIcon/>
-                            频道1
-                        </div>
-                        <div className={pageStyles.libCard}>
-                            <ComputerIcon/>
-                            <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>本地图片库</a>
-                        </div>
-                        <div className={pageStyles.libCard}>
-                            <CloudQueueIcon/>
-                            频道2
-                        </div>
-
                     </div>
                 </div>
             </div>
