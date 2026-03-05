@@ -1,17 +1,17 @@
 import React from "react";
-import {PSImageModel} from "@/components/common/models/image";
 import {NoData} from "@/components/common/empty";
 import {css} from "@/gen/styled/css";
 import {PLSelectData} from "@pnnh/atom";
 import {getDefaultImageUrl} from "@/components/common/note"
+import {PSFileModel} from "@/components/common/models/file";
 
-export function ConsoleImageMiddleBody({selectData, libKey, lang}: {
+export function ConsoleFileMiddleBody({selectData, libKey, lang}: {
     libKey: string, lang: string,
-    selectData: PLSelectData<PSImageModel>
+    selectData: PLSelectData<PSFileModel>
 }) {
     if (!selectData) {
         return <>
-            <div className={imageStyles.middleBody}>
+            <div className={fileStyles.middleBody}>
                 加载图片库目录...
             </div>
         </>
@@ -22,34 +22,34 @@ export function ConsoleImageMiddleBody({selectData, libKey, lang}: {
     }
 
     return <>
-        <div className={imageStyles.middleBody}>
+        <div className={fileStyles.middleBody}>
             {selectData.range.map((model, index) => {
-                return <ImageCard key={index} model={model} lang={lang}/>
+                return <FileCard key={index} model={model} lang={lang}/>
             })}
         </div>
     </>
 }
 
-export async function ImageCard({model, lang}: {
-    model: PSImageModel,
+async function FileCard({model, lang}: {
+    model: PSFileModel,
     lang: string
 }) {
-    let imageUrl = model.url || getDefaultImageUrl()
+    let fileUrl = model.url || getDefaultImageUrl()
 
     return <>
-        <div className={imageStyles.imageCard}>
-            {imageUrl && <img src={imageUrl} alt={model.name}/>}
+        <div className={fileStyles.fileCard}>
+            {fileUrl && <img src={fileUrl} alt={model.name}/>}
         </div>
     </>
 }
 
-const imageStyles = {
+const fileStyles = {
     middleBody: css`
         display: grid;
         grid-template-columns: repeat(4, minmax(150px, 1fr));
         width: 100%;
     `,
-    imageCard: css`
+    fileCard: css`
         border-radius: 8px;
         padding: 1rem;
         display: flex;

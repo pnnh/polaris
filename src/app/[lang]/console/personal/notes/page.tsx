@@ -2,14 +2,12 @@ import React from 'react'
 import {css} from "@/gen/styled/css";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {PaginationServer} from "@/components/server/pagination";
-import {replaceSearchParams} from "@pnnh/atom";
-import {calcPagination} from "@pnnh/atom";
-import {langEn} from "@pnnh/atom";
-import {ConsoleArticleFilterBar} from "./filter";
-import {ConsoleArticleMiddleBody} from "./article";
+import {calcPagination, langEn, replaceSearchParams} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import {serverConsoleSelectArticles} from "@/components/personal/articles";
 import GlobalLayout from "@/components/server/global";
+import {ConsoleArticleFilterBar} from "./filter";
+import {ConsoleArticleMiddleBody} from "./article";
 
 const pageStyles = {
     articlesPage: css`
@@ -67,8 +65,9 @@ export default async function Page({params, searchParams}: {
         channel: channelPk
     }
     const serverConfig = await useServerConfig()
+    const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
 
-    const selectData = await serverConsoleSelectArticles(serverConfig.INTERNAL_PORTAL_URL,
+    const selectData = await serverConsoleSelectArticles(internalStargateUrl,
         lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
@@ -77,12 +76,11 @@ export default async function Page({params, searchParams}: {
             <div className={pageStyles.pageContainer}>
                 <ConsoleArticleFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
                 <div className={pageStyles.conMiddle}>
-                    <ConsoleArticleMiddleBody selectData={selectData} lang={lang}
-                                              publicPortalUrl={serverConfig.PUBLIC_PORTAL_URL}/>
+                    <ConsoleArticleMiddleBody selectData={selectData} lang={lang}/>
                     <div className={pageStyles.middlePagination}>
                         <PaginationServer lang={lang} pagination={pagination}
                                           pageLinkFunc={(page) =>
-                                              `/${lang}/console/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
+                                              `/${lang}/console/personal/notes` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                     </div>
                 </div>
             </div>

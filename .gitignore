@@ -41,7 +41,6 @@ public/index.html
 *.map.css
 *.map.mjs
 
-/config/
-data/
+/data/
 # 快照文件
 .snap

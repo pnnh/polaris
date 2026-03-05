@@ -1,4 +1,4 @@
-import {formatRfc3339, isValidUUID, localText, PLSelectData, STSubString, uuidToBase58} from "@pnnh/atom";
+import {formatRfc3339, localText, PLSelectData, STSubString, uuidToBase58} from "@pnnh/atom";
 import {NoData} from "@/components/common/empty";
 import {PSArticleModel} from "@/components/common/models/article";
 import {getDefaultNoteImageByUid} from "@/components/common/note";
@@ -10,6 +10,7 @@ import {css} from "@/gen/styled/css";
 import PSDeleteButton from "@/components/client/console/delete";
 import PublicIcon from '@mui/icons-material/Public';
 import {transKey} from "@/components/common/locales/normal";
+import {useServerConfig} from "@/components/server/config";
 
 const articleStyles = {
     middleBody: css`
@@ -53,7 +54,7 @@ const articleStyles = {
         line-height: 24px;
         color: var(--text-primary-color);
         padding-left: 1rem;
-        
+
         a {
             width: 10rem;
             display: inline-block;
@@ -92,7 +93,7 @@ const articleStyles = {
         flex-shrink: 0;
         position: relative;
         margin-right: 1rem;
-        
+
         img {
             width: 3rem;
             height: 3rem;
@@ -102,23 +103,26 @@ const articleStyles = {
     `
 }
 
-export function ConsoleArticleMiddleBody({selectData, lang, publicPortalUrl}: {
+export async function ConsoleArticleMiddleBody({selectData, lang}: {
     selectData: PLSelectData<PSArticleModel>,
-    lang: string,
-    publicPortalUrl: string
+    lang: string
 }) {
     if (!selectData || !selectData.range || selectData.range.length === 0) {
         return <NoData size='large'/>
     }
+    const serverConfig = await useServerConfig()
+    const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
+    const stargateUrl = serverConfig.PUBLIC_STARGATE_URL
     return <div className={articleStyles.middleBody}>
-        <ArticleHeader lang={lang}/>
+        <NoteHeader lang={lang}/>
         {selectData.range.map((model, index) => {
-            return <ArticleCard key={index} model={model} lang={lang} portalUrl={publicPortalUrl}/>
+            return <NoteCard key={index} model={model} lang={lang} portalUrl={publicPortalUrl}
+                             stargateUrl={stargateUrl}/>
         })}
     </div>
 }
 
-export function ArticleHeader({lang}: {
+export function NoteHeader({lang}: {
     lang: string,
 }) {
     return <div className={articleStyles.tableHeader}>
@@ -143,21 +147,19 @@ export function ArticleHeader({lang}: {
     </div>
 }
 
-export function ArticleCard({model, lang, portalUrl}: {
+export function NoteCard({model, lang, portalUrl, stargateUrl}: {
     model: PSArticleModel,
     lang: string,
-    portalUrl: string
+    portalUrl: string, stargateUrl: string
 }) {
     const readUrl = `${lang}/console/articles/${uuidToBase58(model.uid)}`
-    let imageUrl = getDefaultNoteImageByUid(model.uid)
-    if (model.cover && isValidUUID(model.cover)) {
-        imageUrl = `${portalUrl}/articles/${model.uid}/assets/${model.cover}`
-    }
+    let imageUrl = model.url || getDefaultNoteImageByUid(model.uid)
+
     let chanUrl = ''
     if (model.channel) {
         chanUrl = `/${lang}/channels/${uuidToBase58(model.channel)}`
     }
-    const deleteUrl = `${portalUrl}/console/articles/${model.uid}`
+    const deleteUrl = `${stargateUrl}/console/notes/${model.uid}`
     return <div className={articleStyles.middleItem} key={model.uid} data-article={model.uid}>
         <div className={articleStyles.itemCover}>
             <PSImageServer lang={lang} src={imageUrl} alt={model.title} fill={true}/>

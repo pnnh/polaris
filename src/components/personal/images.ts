@@ -2,9 +2,9 @@ import {CodeOk, CommonResult, isSupportedLanguage, PLSelectData, PLSelectResult}
 import {PSImageModel} from "@/components/common/models/image";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {cookies} from "next/headers";
-import {getDefaultImageUrl} from "@/components/common/note";
 import queryString from "query-string";
 import {transKey} from "@/components/common/locales/normal";
+import {useServerConfig} from "@/components/server/config";
 
 export async function serverGetImage(portalUrl: string, uid: string): Promise<PSImageModel | undefined> {
     if (!uid) {
@@ -62,9 +62,11 @@ export async function serverConsoleGetImage(lang: string, portalUrl: string, uid
     return getResult.data;
 }
 
-export async function serverConsoleSelectImages(portalUrl: string, lang: string, queryParams: Record<string, any>): Promise<PLSelectData<PSImageModel>> {
+export async function serverConsoleSelectImages(lang: string, queryParams: Record<string, any>): Promise<PLSelectData<PSImageModel>> {
+    const serverConfig = await useServerConfig()
+    const stargateUrl = serverConfig.INTERNAL_STARGATE_URL
     const rawQuery = queryString.stringify(queryParams)
-    const url = `${portalUrl}/console/images?${rawQuery}`
+    const url = `${stargateUrl}/console/images?${rawQuery}`
     const cookieStore = await cookies()
     const authHeader = cookieStore.toString()
     const getResult = await serverMakeGet<PLSelectResult<PSImageModel>>(url, authHeader);

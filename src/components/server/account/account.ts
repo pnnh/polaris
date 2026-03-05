@@ -7,7 +7,7 @@ import {cookies} from "next/headers";
 import {AccountModel} from "@/components/common/models/account/account";
 
 export async function serverGetUserinfo(portalUrl: string): Promise<AccountModel | undefined> {
-    const url = `${portalUrl}/console/userinfo`
+    const url = `${portalUrl}/account/userinfo`
     const cookieStore = await cookies()
     const authHeader = cookieStore.toString()
     const getResult = await serverMakeGet(url, authHeader) as PLGetResult<AccountModel>

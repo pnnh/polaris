@@ -4,10 +4,10 @@ import {getPathname} from "@/components/server/pathname";
 import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {PaginationServer} from "@/components/server/pagination";
 import ConsoleImageLayout from "@/components/server/console/images/layout";
-import {ConsoleImageFilterBar} from "./filter";
-import {ConsoleImageMiddleBody} from "./image";
+import {ConsoleFileFilterBar} from "./filter";
+import {ConsoleFileMiddleBody} from "./file";
 import {css} from "@/gen/styled/css";
-import {serverConsoleSelectImages} from "@/components/personal/images";
+import {serverConsoleSelectFiles} from "@/components/personal/file";
 
 export const dynamic = "force-dynamic";
 
@@ -58,20 +58,20 @@ export default async function Page({params, searchParams}: {
         page,
         size: pageSize,
     }
-    const selectData = await serverConsoleSelectImages(lang, selectQuery)
+    const selectData = await serverConsoleSelectFiles(lang, selectQuery)
 
     const libName = searchParamsValue.libName
     const pagination = calcPagination(page, 100, pageSize)
     return <ConsoleImageLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
                                metadata={metadata}>
         <div className={pageStyles.contentContainer}>
-            <ConsoleImageFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
+            <ConsoleFileFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
             <div className={pageStyles.conMiddle}>
-                <ConsoleImageMiddleBody libKey={libName} lang={lang} selectData={selectData}/>
+                <ConsoleFileMiddleBody libKey={libName} lang={lang} selectData={selectData}/>
                 <div className={pageStyles.middlePagination}>
                     <PaginationServer lang={lang} pagination={pagination}
                                       pageLinkFunc={(page) =>
-                                          `/${lang}/console/personal/images` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
+                                          `/${lang}/console/personal/files` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                 </div>
             </div>
         </div>

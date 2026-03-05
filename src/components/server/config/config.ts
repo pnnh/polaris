@@ -65,6 +65,17 @@ export class FileConfigProvider implements IServerConfigProvider {
             throw new Error('STORAGE_URL is required')
         }
         this.storageUrl = storageUrl;
+
+        const stargateUrl = await this.configStore.GetString('PUBLIC_STARGATE_URL');
+        if (!stargateUrl) {
+            throw new Error('stargateUrl is required')
+        }
+        this.stargateUrl = stargateUrl;
+        const internalStorageUrl = await this.configStore.GetString('INTERNAL_STARGATE_URL');
+        if (!internalStorageUrl) {
+            throw new Error('internalStorageUrl is required')
+        }
+        this.internalStargateUrl = internalStorageUrl;
     }
 
     get CLOUDFLARE_PUBLIC_TURNSTILE(): string | undefined {
@@ -143,16 +154,6 @@ export class FileConfigStore implements IServerConfigStore {
         if (envValue !== undefined) {
             return envValue;
         }
-        // 以下为旧逻辑
-        // const nameList = key.split('.');
-        // let name: string
-        // if (nameList.length === 1) {
-        //     name = key;
-        // } else if (nameList.length === 2) {
-        //     name = nameList[1].trim();
-        // } else {
-        //     throw new Error('Invalid key format, expected "scope.name" or "name"');
-        // }
         return this.configRecord[key];
     }
 
@@ -212,20 +213,4 @@ export async function initAppConfig(configUrl: string, options: ConfigOptions): 
         return await PgConfigStore.NewPgConfigStore(configUrl, options)
     }
     return new FileConfigStore(configUrl);
-}
-
-export function runMode() {
-    return process.env.RUN_MODE || 'development'
-}
-
-export function isDev() {
-    return process.env.RUN_MODE === 'development'
-}
-
-export function isTest() {
-    return process.env.RUN_MODE === 'test'
-}
-
-export function isProd() {
-    return process.env.RUN_MODE === 'production'
 }
