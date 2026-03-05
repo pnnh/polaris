@@ -5,11 +5,13 @@ import {css} from "@/gen/styled/css";
 import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
-import GlobalLayout from "@/components/server/global";
+import ConsoleLayout from "@/components/server/console/layout";
 import ComputerIcon from '@mui/icons-material/Computer';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import {transKey} from "@/components/common/locales/normal";
 import {isAnonymousAccount} from "@/components/common/models/account/account";
+import {getPathname} from "@/components/server/pathname";
+import {SymbolUnknown} from "@pnnh/atom";
 
 const pageStyles = {
     consolePage: css`
@@ -91,6 +93,8 @@ export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
+    const pathname = await getPathname()
+    const searchParamsValue = await searchParams
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
 
@@ -103,7 +107,7 @@ export default async function Page({params, searchParams}: {
         return <NeedLoginPage lang={lang}></NeedLoginPage>
     }
 
-    return <GlobalLayout lang={lang} metadata={metadata}>
+    return <ConsoleLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue} userInfo={currentUserInfo}>
         <div className={pageStyles.consolePage}>
             <div className={pageStyles.pageContainer}>
                 <div>欢迎信息</div>
@@ -138,7 +142,7 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
         </div>
-    </GlobalLayout>
+    </ConsoleLayout>
 }
 
 

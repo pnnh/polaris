@@ -6,9 +6,10 @@ import {calcPagination} from "@pnnh/atom";
 import {langEn} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import {serverConsoleSelectArticles} from "@/components/personal/articles";
-import GlobalLayout from "@/components/server/global";
+import ConsoleLayout from "@/components/server/console/layout";
 import ComputerIcon from "@mui/icons-material/Computer";
 import CloudQueueIcon from "@mui/icons-material/CloudQueue";
+import {SymbolUnknown} from "@pnnh/atom";
 
 const pageStyles = {
     personalPage: css`
@@ -79,7 +80,7 @@ export default async function Page({params, searchParams}: {
         lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
-    return <GlobalLayout lang={lang} metadata={metadata}>
+    return <ConsoleLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue} userInfo={SymbolUnknown}>
         <div className={pageStyles.personalPage}>
             个人目录主页
             <div className={pageStyles.libGrid}>
@@ -167,7 +168,7 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
         </div>
-    </GlobalLayout>
+    </ConsoleLayout>
 }
 
 

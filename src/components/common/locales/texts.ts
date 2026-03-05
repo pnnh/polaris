@@ -1603,15 +1603,35 @@ export const TransTexts: {
         "pt-PT": "Informações do usuário",
         "zh-TW": "個人信息"
     },
-    "common.articles": {
+    "common.files": {
+        "zh": "文件",
+        "en": "Files",
+        "es": "Archivos",
+        "fr": "Fichiers",
+        "ja": "ファイル",
+        "de-DE": "Dateien",
+        "pt-PT": "Arquivos",
+        "zh-TW": "文件"
+    },
+    "common.notes": {
         "zh": "笔记",
-        "en": "Articles",
-        "es": "Artículos",
-        "fr": "Articles",
-        "ja": "記事",
-        "de-DE": "Artikel",
-        "pt-PT": "Artigos",
+        "en": "Notes",
+        "es": "Notas",
+        "fr": "Notes",
+        "ja": "ノート",
+        "de-DE": "Notizen",
+        "pt-PT": "Notas",
         "zh-TW": "筆記"
+    },
+    "common.images": {
+        "zh": "图片",
+        "en": "Images",
+        "es": "Imágenes",
+        "fr": "Images",
+        "ja": "画像",
+        "de-DE": "Bilder",
+        "pt-PT": "Imagens",
+        "zh-TW": "圖片"
     },
     "comments.cannotBeEmpty": {
         "zh": "评论内容不能为空",

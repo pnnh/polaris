@@ -2,8 +2,8 @@ import React from 'react'
 import {css} from "@/gen/styled/css";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
-import {langEn} from "@pnnh/atom";
-import GlobalLayout from "@/components/server/global";
+import {langEn, SymbolUnknown} from "@pnnh/atom";
+import ConsoleLayout from "@/components/server/console/layout";
 import ComputerIcon from "@mui/icons-material/Computer";
 import CloudQueueIcon from "@mui/icons-material/CloudQueue";
 
@@ -60,7 +60,7 @@ export default async function Page({params, searchParams}: {
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
 
-    return <GlobalLayout lang={lang} metadata={metadata}>
+    return <ConsoleLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue} userInfo={SymbolUnknown}>
         <div className={pageStyles.communityPage}>
             社区目录主页
             <div className={pageStyles.libGrid}>
@@ -120,7 +120,7 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
         </div>
-    </GlobalLayout>
+    </ConsoleLayout>
 }
 
 

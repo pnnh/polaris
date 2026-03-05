@@ -7,9 +7,10 @@ import {notFound, redirect} from "next/navigation";
 import {ConsoleArticleForm} from "./form";
 import {serverConsoleGetNote} from "@/components/personal/notes-server";
 import {PSArticleModel} from "@/components/common/models/article";
-import GlobalLayout from "@/components/server/global";
+import ConsoleLayout from "@/components/server/console/layout";
 import {css} from "@/gen/styled/css";
 import {transKey} from "@/components/common/locales/normal";
+import {SymbolUnknown} from "@pnnh/atom";
 
 const pageStyles = {
     articlesPage: css`
@@ -105,7 +106,7 @@ export default async function Home({params, searchParams}: {
         }
     }
     const modelString = JSON.stringify(model)
-    return <GlobalLayout lang={pageLang} metadata={metadata}>
+    return <ConsoleLayout lang={pageLang} metadata={metadata} pathname={pathname} searchParams={searchValue} userInfo={SymbolUnknown}>
         <div className={pageStyles.articlesPage}>
             <div className={pageStyles.pageContainer}>
                 <ConsoleArticleForm stargateUrl={serverConfig.PUBLIC_STARGATE_URL} modelString={modelString}
@@ -114,5 +115,5 @@ export default async function Home({params, searchParams}: {
             </div>
 
         </div>
-    </GlobalLayout>
+    </ConsoleLayout>
 }

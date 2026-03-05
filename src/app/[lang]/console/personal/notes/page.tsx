@@ -2,18 +2,20 @@ import React from 'react'
 import {css} from "@/gen/styled/css";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {PaginationServer} from "@/components/server/pagination";
-import {calcPagination, langEn, replaceSearchParams} from "@pnnh/atom";
+import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import {serverConsoleSelectNotes} from "@/components/personal/notes-server";
-import GlobalLayout from "@/components/server/global";
+import ConsoleLayout from "@/components/server/console/layout";
 import {ConsoleArticleFilterBar} from "./filter";
 import {ConsoleArticleMiddleBody} from "./article";
+import {getPathname} from "@/components/server/pathname";
 
 const pageStyles = {
     articlesPage: css`
         height: 100vh;
         overflow-x: hidden;
         overflow-y: auto;
+        width: 100%;
     `,
     pageContainer: css`
         display: flex;
@@ -43,6 +45,7 @@ export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
+    const pathname = await getPathname()
     const searchParamsValue = await searchParams
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
@@ -62,7 +65,8 @@ export default async function Page({params, searchParams}: {
         filter: searchParamsValue.filter,
         page,
         size: pageSize,
-        channel: channelPk
+        channel: channelPk,
+        keyword: searchParamsValue.keyword
     }
     const serverConfig = await useServerConfig()
     const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
@@ -71,7 +75,8 @@ export default async function Page({params, searchParams}: {
         lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
-    return <GlobalLayout lang={lang} metadata={metadata}>
+    return <ConsoleLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue}
+                          userInfo={SymbolUnknown}>
         <div className={pageStyles.articlesPage}>
             <div className={pageStyles.pageContainer}>
                 <ConsoleArticleFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
@@ -85,7 +90,7 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
         </div>
-    </GlobalLayout>
+    </ConsoleLayout>
 }
 
 

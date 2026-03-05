@@ -4,6 +4,7 @@ import {SymbolUnknown} from "@pnnh/atom";
 import GlobalLayout from "@/components/server/global";
 import {PageMetadata} from "@/components/common/utils/page";
 import {ConsoleSidebar} from "@/components/server/console/sidebar";
+import {ConsoleNavbar} from "@/components/server/console/navbar";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {useServerConfig} from "@/components/server/config";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
@@ -12,9 +13,21 @@ import {AccountModel, isAnonymousAccount} from "@/components/common/models/accou
 const styles = {
     consoleContainer: css`
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         height: 100vh;
         width: 100vw;
+        overflow: hidden;
+    `,
+    templateNavbar: css`
+        width: 100vw;
+        background-color: var(--background-color);
+        border-bottom: solid 1px #d3d3d3;
+        flex-shrink: 0;
+    `,
+    consoleBody: css`
+        display: flex;
+        flex-direction: row;
+        flex: 1;
         overflow: hidden;
     `,
 };
@@ -49,8 +62,14 @@ export default async function ConsoleLayout(
     }
     return <GlobalLayout lang={lang} metadata={metadata}>
         <div className={styles.consoleContainer}>
-            <ConsoleSidebar lang={lang}/>
-            {children}
+            <div className={styles.templateNavbar}>
+                <ConsoleNavbar pathname={pathname} searchParams={searchParams} lang={lang}
+                               userInfo={currentUserInfo}/>
+            </div>
+            <div className={styles.consoleBody}>
+                <ConsoleSidebar lang={lang}/>
+                {children}
+            </div>
         </div>
     </GlobalLayout>
 }

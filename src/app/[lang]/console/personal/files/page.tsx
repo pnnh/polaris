@@ -3,11 +3,11 @@ import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
 import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {PaginationServer} from "@/components/server/pagination";
-import ConsoleImageLayout from "@/components/server/console/images/layout";
 import {ConsoleFileFilterBar} from "./filter";
 import {ConsoleFileMiddleBody} from "./file";
 import {css} from "@/gen/styled/css";
 import {serverConsoleSelectFiles} from "@/components/personal/file";
+import ConsoleLayout from "@/components/server/console/layout";
 
 export const dynamic = "force-dynamic";
 
@@ -62,8 +62,8 @@ export default async function Page({params, searchParams}: {
 
     const libName = searchParamsValue.libName
     const pagination = calcPagination(page, 100, pageSize)
-    return <ConsoleImageLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                               metadata={metadata}>
+    return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
+                          metadata={metadata}>
         <div className={pageStyles.contentContainer}>
             <ConsoleFileFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
             <div className={pageStyles.conMiddle}>
@@ -75,7 +75,7 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
         </div>
-    </ConsoleImageLayout>
+    </ConsoleLayout>
 }
 
 

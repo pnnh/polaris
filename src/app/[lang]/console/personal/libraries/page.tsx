@@ -4,11 +4,12 @@ import {css} from "@/gen/styled/css";
 import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
-import GlobalLayout from "@/components/server/global";
+import ConsoleLayout from "@/components/server/console/layout";
 import {ConsoleLibraryFilterBar} from "./filter";
 import {ConsoleLibraryMiddleBody} from "./library";
 import {isAnonymousAccount} from "@/components/common/models/account/account";
-import {langEn} from "@pnnh/atom";
+import {langEn, SymbolUnknown} from "@pnnh/atom";
+import {getPathname} from "@/components/server/pathname";
 
 const pageStyles = {
     consolePage: css`
@@ -30,6 +31,8 @@ export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
+    const pathname = await getPathname()
+    const searchParamsValue = await searchParams
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
 
@@ -42,7 +45,7 @@ export default async function Page({params, searchParams}: {
         return <NeedLoginPage lang={lang}></NeedLoginPage>
     }
 
-    return <GlobalLayout lang={lang} metadata={metadata}>
+    return <ConsoleLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue} userInfo={currentUserInfo}>
         <div className={pageStyles.consolePage}>
             <div className={pageStyles.libGrid}>
                 <div className={pageStyles.libHeader}>
@@ -51,7 +54,7 @@ export default async function Page({params, searchParams}: {
                 <ConsoleLibraryMiddleBody lang={lang} portalUrl={publicPortalUrl}/>
             </div>
         </div>
-    </GlobalLayout>
+    </ConsoleLayout>
 }
 
 

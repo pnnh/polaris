@@ -10,11 +10,14 @@ export function ConsoleSidebar({lang}: { lang: string }) {
         <a href={`/${lang}/console/userinfo`}>
             {transKey(lang, "common.userInfo")}
         </a>
-        <a href={`/${lang}/console/articles`}>
-            {transKey(lang, "common.articles")}
+        <a href={`/${lang}/console/personal/files`}>
+            {transKey(lang, "common.files")}
         </a>
-        <a href={`/${lang}/console/channels`}>
-            {transKey(lang, "common.channels")}
+        <a href={`/${lang}/console/personal/notes`}>
+            {transKey(lang, "common.notes")}
+        </a>
+        <a href={`/${lang}/console/personal/images`}>
+            {transKey(lang, "common.images")}
         </a>
     </div>
 }

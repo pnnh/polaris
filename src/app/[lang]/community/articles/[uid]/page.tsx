@@ -5,10 +5,12 @@ import {useServerConfig} from "@/components/server/config";
 import {notFound} from "next/navigation";
 import {ConsoleArticleForm} from "./form";
 import {PSArticleModel} from "@/components/common/models/article";
-import GlobalLayout from "@/components/server/global";
+import ConsoleLayout from "@/components/server/console/layout";
 import {css} from "@/gen/styled/css";
 import {CommunityArticleNodeService} from "@/components/community/articles";
 import {transKey} from "@/components/common/locales/normal";
+import {getPathname} from "@/components/server/pathname";
+import {SymbolUnknown} from "@pnnh/atom";
 
 export const dynamic = "force-dynamic";
 
@@ -26,6 +28,7 @@ export default async function Home({params, searchParams}: {
     params: Promise<{ lang: string, uid: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
+    const pathname = await getPathname()
     const paramsValue = await params;
     const searchValue = await searchParams;
     const pageLang = paramsValue.lang || langZh
@@ -108,11 +111,11 @@ export default async function Home({params, searchParams}: {
         }
     }
     const modelString = JSON.stringify(model)
-    return <GlobalLayout lang={pageLang} metadata={metadata}>
+    return <ConsoleLayout lang={pageLang} metadata={metadata} pathname={pathname} searchParams={searchValue} userInfo={SymbolUnknown}>
         <div className={pageStyles.articlesPage}>
             <div className={pageStyles.pageContainer}>
                 <ConsoleArticleForm publicPortalUrl={publicPortalUrl} modelString={modelString} lang={pageLang}/>
             </div>
         </div>
-    </GlobalLayout>
+    </ConsoleLayout>
 }

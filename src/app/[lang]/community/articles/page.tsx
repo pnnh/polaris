@@ -9,7 +9,9 @@ import {ConsoleArticleFilterBar} from "./filter";
 import {ConsoleArticleMiddleBody} from "./article";
 import {useServerConfig} from "@/components/server/config";
 import {CommunityArticleNodeService} from "@/components/community/articles";
-import GlobalLayout from "@/components/server/global";
+import ConsoleLayout from "@/components/server/console/layout";
+import {getPathname} from "@/components/server/pathname";
+import {SymbolUnknown} from "@pnnh/atom";
 
 const pageStyles = {
     articlesPage: css`
@@ -45,6 +47,7 @@ export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, channel: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
+    const pathname = await getPathname()
     const searchParamsValue = await searchParams
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
@@ -74,7 +77,7 @@ export default async function Page({params, searchParams}: {
         lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
-    return <GlobalLayout lang={lang} metadata={metadata}>
+    return <ConsoleLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue} userInfo={SymbolUnknown}>
         <div className={pageStyles.articlesPage}>
             <div className={pageStyles.pageContainer}>
                 <ConsoleArticleFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
@@ -89,7 +92,7 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
         </div>
-    </GlobalLayout>
+    </ConsoleLayout>
 }
 
 
