@@ -4,7 +4,7 @@ import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {PaginationServer} from "@/components/server/pagination";
 import {calcPagination, langEn, replaceSearchParams} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
-import {serverConsoleSelectArticles} from "@/components/personal/articles";
+import {serverConsoleSelectNotes} from "@/components/personal/notes-server";
 import GlobalLayout from "@/components/server/global";
 import {ConsoleArticleFilterBar} from "./filter";
 import {ConsoleArticleMiddleBody} from "./article";
@@ -67,7 +67,7 @@ export default async function Page({params, searchParams}: {
     const serverConfig = await useServerConfig()
     const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
 
-    const selectData = await serverConsoleSelectArticles(internalStargateUrl,
+    const selectData = await serverConsoleSelectNotes(internalStargateUrl,
         lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)

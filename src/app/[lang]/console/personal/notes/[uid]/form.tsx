@@ -8,33 +8,36 @@ import {PSArticleModel} from "@/components/common/models/article";
 import {getDefaultImageUrl} from "@/components/common/note";
 import MenuItem from '@mui/material/MenuItem';
 import {supportedLanguages} from "@/components/common/language";
-import {Select} from "@mui/material";
+import {Select, TextField, Card, CardMedia, CardContent, Box, Stack, Chip, IconButton, Tooltip} from "@mui/material";
 import {transKey} from "@/components/common/locales/normal";
-import {PersonalBrowser} from "@/components/personal/browser";
-import {css} from "@/gen/styled/css";
+import {PersonalNotesBrowser} from "@/components/personal/notes";
+import SaveIcon from '@mui/icons-material/Save';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import LanguageIcon from '@mui/icons-material/Language';
 
 function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (newLang: string) => void }) {
-    return <>
+    return (
         <Select
             value={lang}
             size={'small'}
-            label="Language"
+            variant="outlined"
+            startAdornment={<LanguageIcon sx={{ mr: 1, fontSize: 20 }} />}
             onChange={(event) => onChange(event.target.value)}
+            sx={{ minWidth: 140 }}
         >
             {
                 supportedLanguages.map(language => (
-                    <MenuItem key={language.key} value={language.key}
-                              selected={lang === language.key} disableRipple>
+                    <MenuItem key={language.key} value={language.key}>
                         {language.name}
                     </MenuItem>
                 ))
             }
         </Select>
-    </>
+    )
 }
 
-export function ConsoleArticleForm({portalUrl, modelString, lang}: {
-    portalUrl: string,
+export function ConsoleArticleForm({stargateUrl, modelString, lang}: {
+    stargateUrl: string,
     modelString: string,
     lang: string,
 }) {
@@ -57,155 +60,146 @@ export function ConsoleArticleForm({portalUrl, modelString, lang}: {
             body: bodyText,
             coverUrl: oldModel.coverUrl,
             header: oldModel.header,
-            lang: oldModel.lang,
+            lang: wangLang,
             channel: oldModel.channel
         }
         if (isNew) {
-            PersonalBrowser.clientConsoleInsertArticle(portalUrl, newModel).then((newArticleId) => {
-                if (!newArticleId) {
-                    console.error(transKey(lang, 'console.article.insertFailed'))
+            PersonalNotesBrowser.clientConsoleInsertNote(stargateUrl, newModel).then((newNoteId) => {
+                if (!newNoteId) {
+                    console.error(transKey(lang, 'console.note.insertFailed'))
                     return
                 }
-                window.location.href = `/${lang}/console/articles`
+                window.location.href = `/${lang}/console/personal/notes`
             })
         } else {
-            PersonalBrowser.clientConsoleUpdateArticle(portalUrl, oldModel.uid, newModel).then((articleId) => {
-                if (!articleId) {
-                    console.error(transKey(lang, 'console.article.updateFailed'))
+            PersonalNotesBrowser.clientConsoleUpdateNote(stargateUrl, oldModel.uid, newModel).then((noteId) => {
+                if (!noteId) {
+                    console.error(transKey(lang, 'console.note.updateFailed'))
                     return
                 }
-                window.location.href = `/${lang}/console/articles`
+                window.location.href = `/${lang}/console/personal/notes`
             })
         }
     }
     const coverUrl = oldModel.coverUrl || getDefaultImageUrl();
-    const createUrl = `/${lang}/console/articles/${uuidToBase58(oldModel.uid)}?wantLang=${isLangEn(oldModel.lang) ? langZh : langEn}&copyFrom=${uuidToBase58(oldModel.uid)}`
-    return <div className={formStyles.bodyContainer}>
-        <div className={formStyles.articleCover}>
-            <div className={formStyles.articleHeader}>
-                <div className={formStyles.articleTitle}>
-                    <input value={title} onChange={(event) => setTitle(event.target.value)}/>
-                </div>
-                <div className={formStyles.articleDescription}>
-                        <textarea name={'articleDescription'}
-                                  value={description} onChange={(event => setDescription(event.target.value))}/>
-                </div>
-            </div>
-            <img className={formStyles.coverImage} src={coverUrl} alt={oldModel.title}/>
-        </div>
-        <div className={formStyles.articleContainer}>
-            <ConsoleArticleEditor tocList={tocList} header={oldModel.header}
-                                  body={bodyText} assetsUrl={'assetsUrl'} portalUrl={portalUrl}
-                                  onChange={(bodyText) => setBodyText(bodyText)}/>
-        </div>
-        <div className={formStyles.bottomBar}>
-            <PSConsoleLanguageSelector lang={wangLang} onChange={setWantLang}/>
-            <Button variant={'contained'} size={'small'} onClick={onSubmit}>{
-                transKey(lang, 'console.article.save')
-            }</Button>
-            {!isNew &&
-                <Button variant={'contained'} size={'small'} href={createUrl}>{
-                    transKey(lang, 'console.article.viewCopy')
-                }</Button>
-            }
-        </div>
-    </div>
+    const createUrl = `/${lang}/console/personal/notes/${uuidToBase58(EmptyUUID)}?wantLang=${isLangEn(wangLang) ? langZh : langEn}&copyFrom=${uuidToBase58(oldModel.uid)}`
+    
+    return (
+        <Box className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-6">
+            <Box className="max-w-7xl mx-auto space-y-6">
+                {/* Header Card */}
+                <Card elevation={3} className="overflow-hidden">
+                    <Box className="flex flex-col md:flex-row">
+                        <Box className="flex-1 p-6">
+                            <Stack spacing={3}>
+                                <Box className="flex items-center gap-2">
+                                    <Chip 
+                                        label={isNew ? transKey(lang, 'console.note.createNew') : transKey(lang, 'console.note.edit')}
+                                        color={isNew ? 'success' : 'primary'}
+                                        size="small"
+                                    />
+                                    <Chip 
+                                        label={wangLang.toUpperCase()}
+                                        variant="outlined"
+                                        size="small"
+                                    />
+                                </Box>
+                                
+                                <TextField
+                                    fullWidth
+                                    label={transKey(lang, 'console.note.title')}
+                                    variant="outlined"
+                                    value={title}
+                                    onChange={(event) => setTitle(event.target.value)}
+                                    placeholder={transKey(lang, 'console.note.titlePlaceholder')}
+                                    InputProps={{
+                                        sx: { fontSize: '1.25rem', fontWeight: 600 }
+                                    }}
+                                />
+                                
+                                <TextField
+                                    fullWidth
+                                    label={transKey(lang, 'console.note.description')}
+                                    variant="outlined"
+                                    multiline
+                                    rows={3}
+                                    value={description}
+                                    onChange={(event) => setDescription(event.target.value)}
+                                    placeholder={transKey(lang, 'console.note.descriptionPlaceholder')}
+                                />
+                            </Stack>
+                        </Box>
+                        
+                        <Box className="md:w-64 relative">
+                            <CardMedia
+                                component="img"
+                                image={coverUrl}
+                                alt={title || 'Note cover'}
+                                className="h-full object-cover"
+                                sx={{ minHeight: 250 }}
+                            />
+                            <Box className="absolute top-2 right-2">
+                                <Tooltip title="Change cover">
+                                    <IconButton
+                                        size="small"
+                                        sx={{ bgcolor: 'rgba(255,255,255,0.9)', '&:hover': { bgcolor: 'white' } }}
+                                    >
+                                        <ContentCopyIcon fontSize="small" />
+                                    </IconButton>
+                                </Tooltip>
+                            </Box>
+                        </Box>
+                    </Box>
+                </Card>
+
+                {/* Editor Card */}
+                <Card elevation={3} className="overflow-hidden">
+                    <CardContent className="p-0">
+                        <ConsoleArticleEditor 
+                            tocList={tocList} 
+                            header={oldModel.header}
+                            body={bodyText} 
+                            assetsUrl={'assetsUrl'}
+                            onChange={(bodyText) => setBodyText(bodyText)}
+                        />
+                    </CardContent>
+                </Card>
+
+                {/* Action Bar */}
+                <Card elevation={3}>
+                    <Box className="p-4">
+                        <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
+                            <Stack direction="row" spacing={2} alignItems="center">
+                                <PSConsoleLanguageSelector lang={wangLang} onChange={setWantLang}/>
+                            </Stack>
+                            
+                            <Stack direction="row" spacing={2}>
+                                {!isNew && (
+                                    <Button 
+                                        variant="outlined" 
+                                        startIcon={<ContentCopyIcon />}
+                                        href={createUrl}
+                                    >
+                                        {transKey(lang, 'console.note.viewCopy')}
+                                    </Button>
+                                )}
+                                <Button 
+                                    variant="contained" 
+                                    size="large"
+                                    startIcon={<SaveIcon />}
+                                    onClick={onSubmit}
+                                    sx={{ minWidth: 120 }}
+                                >
+                                    {transKey(lang, 'console.note.save')}
+                                </Button>
+                            </Stack>
+                        </Stack>
+                    </Box>
+                </Card>
+            </Box>
+        </Box>
+    )
 }
 
-const formStyles = {
-    bodyContainer: css`
-        overflow: hidden;
-    `,
-    articleCover: css`
-        width: calc(100vw - 16rem);
-        height: 12rem;
-        position: relative;
-        border-radius: 6px;
-        overflow: hidden;
-        background: var(--background-color);
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    `,
-    articleHeader: css`
-        flex-grow: 1;
-        position: relative;
-        z-index: 1;
-        border-radius: 4px;
-        overflow: hidden;
-    `,
-    articleTitle: css`
-        font-weight: 600;
-        font-size: 20px;
-        margin-bottom: 16px;
-        padding-left: 1rem;
 
-        & input {
-            width: calc(100% - 3rem);
-            border-color: #b4b4b4;
-            border-radius: 4px;
-            border-width: 1px;
-            padding: 0.5rem;
-        }
-    `,
-    articleDescription: css`
-        font-size: 1rem;
-        color: var(--text-primary-color);
-        padding-left: 1rem;
-        border: solid 1px #b4b4b4;
-        border-radius: 4px;
-
-        & textarea {
-            resize: none;
-            width: calc(100% - 3rem);
-            height: 5rem;
-            border-color: #b4b4b4;
-            border-radius: 4px;
-            padding: 0.5rem;
-            scrollbar-width: thin;
-        }
-    `,
-    coverImage: css`
-        width: 8rem;
-        height: 8rem;
-        flex-shrink: 0;
-        object-fit: cover;
-        top: 0;
-        z-index: 0;
-        margin-right: 1rem;
-    `,
-    articleContainer: css`
-        display: flex;
-        flex-direction: row;
-        margin-top: 1rem;
-        margin-bottom: 2rem;
-        width: calc(100vw - 16rem - 2rem);
-        height: calc(100vh - 12rem - 4rem - 6rem);
-        gap: 1rem;
-        background: var(--background-color);
-        padding: 1rem;
-
-        @media screen and (min-width: 80rem) {
-            width: 80vw;
-            margin: 1rem auto 0 auto;
-        }
-    `,
-    bottomBar: css`
-        height: 4rem;
-        width: 100vw;
-        background: var(--background-color);
-        display: flex;
-        flex-direction: row;
-        justify-items: center;
-        align-items: center;
-        gap: 1rem;
-        padding-left: 1rem;
-
-        @media screen and (min-width: 80rem) {
-            width: 80vw;
-            margin: 1rem auto 0 auto;
-        }
-    `
-}
 

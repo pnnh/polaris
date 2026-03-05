@@ -5,7 +5,7 @@ import {EmptyUUID, langZh, mustBase58ToUuid, tryBase58ToUuid, uuidToBase58} from
 import {useServerConfig} from "@/components/server/config";
 import {notFound, redirect} from "next/navigation";
 import {ConsoleArticleForm} from "./form";
-import {serverConsoleGetArticle} from "@/components/personal/articles";
+import {serverConsoleGetNote} from "@/components/personal/notes-server";
 import {PSArticleModel} from "@/components/common/models/article";
 import GlobalLayout from "@/components/server/global";
 import {css} from "@/gen/styled/css";
@@ -33,7 +33,7 @@ export default async function Home({params, searchParams}: {
     const pageLang = paramsValue.lang || langZh
     const metadata = new PageMetadata(pageLang)
     const serverConfig = await useServerConfig()
-    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
+    const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
     const articleUid = tryBase58ToUuid(paramsValue.uid)
     const isNew = articleUid === EmptyUUID;
     let model: PSArticleModel | undefined = undefined;
@@ -68,9 +68,9 @@ export default async function Home({params, searchParams}: {
         }
         if (copyFrom) {
             const copyFromUid = mustBase58ToUuid(copyFrom);
-            const originModel = await serverConsoleGetArticle(pageLang, internalPortalUrl, copyFromUid)
+            const originModel = await serverConsoleGetNote(pageLang, internalStargateUrl, copyFromUid)
             if (!originModel) {
-                throw new Error(transKey(pageLang, 'console.article.cannotFindCopy'));
+                throw new Error(transKey(pageLang, 'console.note.cannotFindCopy'));
             }
             model.name = originModel.name;
             model.channel = originModel.channel;
@@ -85,10 +85,10 @@ export default async function Home({params, searchParams}: {
         if (!articleUid) {
             notFound();
         }
-        model = await serverConsoleGetArticle(pageLang, internalPortalUrl, articleUid, wantLang)
+        model = await serverConsoleGetNote(pageLang, internalStargateUrl, articleUid, wantLang)
         if (!model || !model.uid) {
             if (wantLang) {
-                const createUrl = `/${pageLang}/console/articles/${uuidToBase58(EmptyUUID)}?wantLang=${wantLang}&copyFrom=${uuidToBase58(articleUid)}`;
+                const createUrl = `/${pageLang}/console/personal/notes/${uuidToBase58(EmptyUUID)}?wantLang=${wantLang}&copyFrom=${uuidToBase58(articleUid)}`;
                 redirect(createUrl)
             } else {
                 notFound();
@@ -101,14 +101,14 @@ export default async function Home({params, searchParams}: {
         metadata.keywords = model.keywords
 
         if (!model.body) {
-            return <div>{transKey(pageLang, 'console.article.unsupportedType')}</div>
+            return <div>{transKey(pageLang, 'console.note.unsupportedType')}</div>
         }
     }
     const modelString = JSON.stringify(model)
     return <GlobalLayout lang={pageLang} metadata={metadata}>
         <div className={pageStyles.articlesPage}>
             <div className={pageStyles.pageContainer}>
-                <ConsoleArticleForm portalUrl={serverConfig.PUBLIC_PORTAL_URL} modelString={modelString}
+                <ConsoleArticleForm stargateUrl={serverConfig.PUBLIC_STARGATE_URL} modelString={modelString}
                                     lang={pageLang}/>
 
             </div>

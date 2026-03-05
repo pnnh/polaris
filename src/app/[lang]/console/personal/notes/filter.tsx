@@ -16,13 +16,13 @@ export function ConsoleArticleFilterBar({lang, keyword}: {
         console.debug('go search', searchText);
     }
     const goCreateArticle = () => {
-        window.location.href = `/${lang}/console/articles/${uuidToBase58(EmptyUUID)}`
+        window.location.href = `/${lang}/console/personal/notes/${uuidToBase58(EmptyUUID)}`
     }
     return <>
         <div className={filterStyles.middleTop}>
             <div className={filterStyles.topLeft}>
                 <Button size={'small'} variant={'contained'} onClick={goCreateArticle}>
-                    {transKey(lang, 'console.article.createNew')}
+                    {transKey(lang, 'console.note.createNew')}
                 </Button>
             </div>
             <div className={filterStyles.topRight}>

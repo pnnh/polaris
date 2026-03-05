@@ -127,22 +127,22 @@ export function NoteHeader({lang}: {
 }) {
     return <div className={articleStyles.tableHeader}>
         <div className={articleStyles.headerLabel}>
-            {transKey(lang, 'console.article.cover')}
+            {transKey(lang, 'console.note.cover')}
         </div>
         <div className={articleStyles.headerLabel}>
-            {transKey(lang, 'console.article.title')}
+            {transKey(lang, 'console.note.title')}
         </div>
         <div className={articleStyles.headerLabel}>
-            {transKey(lang, 'console.article.description')}
+            {transKey(lang, 'console.note.description')}
         </div>
         <div className={articleStyles.headerLabel}>
-            {transKey(lang, 'console.article.extendedInfo')}
+            {transKey(lang, 'console.note.extendedInfo')}
         </div>
         <div className={articleStyles.headerLabel}>
             {transKey(lang, 'navChannels')}
         </div>
         <div className={articleStyles.headerLabel}>
-            {transKey(lang, 'console.article.action')}
+            {transKey(lang, 'console.note.action')}
         </div>
     </div>
 }
@@ -152,7 +152,7 @@ export function NoteCard({model, lang, portalUrl, stargateUrl}: {
     lang: string,
     portalUrl: string, stargateUrl: string
 }) {
-    const readUrl = `${lang}/console/articles/${uuidToBase58(model.uid)}`
+    const readUrl = `/${lang}/console/personal/notes/${uuidToBase58(model.uid)}`
     let imageUrl = model.url || getDefaultNoteImageByUid(model.uid)
 
     let chanUrl = ''

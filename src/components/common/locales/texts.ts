@@ -1193,6 +1193,176 @@ export const TransTexts: {
         "pt-PT": "Criar artigo",
         "zh-TW": "新增筆記"
     },
+    "console.article.titlePlaceholder": {
+        "zh": "请输入笔记标题...",
+        "en": "Enter note title...",
+        "es": "Ingrese el título de la nota...",
+        "fr": "Entrez le titre de la note...",
+        "ja": "ノートのタイトルを入力...",
+        "de-DE": "Notiz-Titel eingeben...",
+        "pt-PT": "Digite o título da nota...",
+        "zh-TW": "請輸入筆記標題..."
+    },
+    "console.article.descriptionPlaceholder": {
+        "zh": "请输入笔记描述...",
+        "en": "Enter note description...",
+        "es": "Ingrese la descripción de la nota...",
+        "fr": "Entrez la description de la note...",
+        "ja": "ノートの説明を入力...",
+        "de-DE": "Notiz-Beschreibung eingeben...",
+        "pt-PT": "Digite a descrição da nota...",
+        "zh-TW": "請輸入筆記描述..."
+    },
+    "console.note.cannotFindCopy": {
+        "zh": "无法找到要复制的笔记",
+        "en": "Cannot find the note to copy",
+        "es": "No se puede encontrar la nota para copiar",
+        "fr": "Impossible de trouver la note à copier",
+        "ja": "コピーするノートが見つかりません",
+        "de-DE": "Die zu kopierende Notiz kann nicht gefunden werden",
+        "pt-PT": "Não foi possível encontrar a nota para copiar",
+        "zh-TW": "無法找到要複製的筆記"
+    },
+    "console.note.unsupportedType": {
+        "zh": "暂不支持的笔记类型",
+        "en": "Unsupported note type",
+        "es": "Tipo de nota no compatible",
+        "fr": "Type de note non pris en charge",
+        "ja": "サポートされていないノートタイプ",
+        "de-DE": "Nicht unterstützter Notiztyp",
+        "pt-PT": "Tipo de nota não suportado",
+        "zh-TW": "暫不支持的筆記類型"
+    },
+    "console.note.insertFailed": {
+        "zh": "笔记创建失败",
+        "en": "Note creation failed",
+        "es": "Error al crear la nota",
+        "fr": "Échec de la création de la note",
+        "ja": "ノートの作成に失敗しました",
+        "de-DE": "Erstellen der Notiz fehlgeschlagen",
+        "pt-PT": "Falha ao criar nota",
+        "zh-TW": "筆記創建失敗"
+    },
+    "console.note.updateFailed": {
+        "zh": "笔记更新失败",
+        "en": "Note update failed",
+        "es": "Error al actualizar la nota",
+        "fr": "Échec de la mise à jour de la note",
+        "ja": "ノートの更新に失敗しました",
+        "de-DE": "Aktualisierung der Notiz fehlgeschlagen",
+        "pt-PT": "Falha ao atualizar nota",
+        "zh-TW": "筆記更新失敗"
+    },
+    "console.note.save": {
+        "zh": "保存笔记",
+        "en": "Save Note",
+        "es": "Guardar nota",
+        "fr": "Enregistrer la note",
+        "ja": "ノートを保存",
+        "de-DE": "Notiz speichern",
+        "pt-PT": "Salvar nota",
+        "zh-TW": "保存筆記"
+    },
+    "console.note.viewCopy": {
+        "zh": "创建副本",
+        "en": "Create Copy",
+        "es": "Crear copia",
+        "fr": "Créer une copie",
+        "ja": "コピーを作成",
+        "de-DE": "Kopie erstellen",
+        "pt-PT": "Criar cópia",
+        "zh-TW": "創建副本"
+    },
+    "console.note.cover": {
+        "zh": "封面",
+        "en": "Cover",
+        "es": "Portada",
+        "fr": "Couverture",
+        "ja": "カバー",
+        "de-DE": "Cover",
+        "pt-PT": "Capa",
+        "zh-TW": "封面"
+    },
+    "console.note.title": {
+        "zh": "标题",
+        "en": "Title",
+        "es": "Título",
+        "fr": "Titre",
+        "ja": "タイトル",
+        "de-DE": "Titel",
+        "pt-PT": "Título",
+        "zh-TW": "標題"
+    },
+    "console.note.description": {
+        "zh": "描述",
+        "en": "Description",
+        "es": "Descripción",
+        "fr": "Description",
+        "ja": "説明",
+        "de-DE": "Beschreibung",
+        "pt-PT": "Descrição",
+        "zh-TW": "描述"
+    },
+    "console.note.extendedInfo": {
+        "zh": "扩展信息",
+        "en": "Extended Info",
+        "es": "Información extendida",
+        "fr": "Informations étendues",
+        "ja": "拡張情報",
+        "de-DE": "Erweiterte Informationen",
+        "pt-PT": "Informações estendidas",
+        "zh-TW": "擴展信息"
+    },
+    "console.note.action": {
+        "zh": "操作",
+        "en": "Action",
+        "es": "Acción",
+        "fr": "Action",
+        "ja": "操作",
+        "de-DE": "Aktion",
+        "pt-PT": "Ação",
+        "zh-TW": "操作"
+    },
+    "console.note.createNew": {
+        "zh": "新建笔记",
+        "en": "Create Note",
+        "es": "Crear nota",
+        "fr": "Créer une note",
+        "ja": "ノートを作成",
+        "de-DE": "Notiz erstellen",
+        "pt-PT": "Criar nota",
+        "zh-TW": "新建筆記"
+    },
+    "console.note.edit": {
+        "zh": "编辑笔记",
+        "en": "Edit Note",
+        "es": "Editar nota",
+        "fr": "Modifier la note",
+        "ja": "ノートを編集",
+        "de-DE": "Notiz bearbeiten",
+        "pt-PT": "Editar nota",
+        "zh-TW": "編輯筆記"
+    },
+    "console.note.titlePlaceholder": {
+        "zh": "请输入笔记标题...",
+        "en": "Enter note title...",
+        "es": "Ingrese el título de la nota...",
+        "fr": "Entrez le titre de la note...",
+        "ja": "ノートのタイトルを入力...",
+        "de-DE": "Notiz-Titel eingeben...",
+        "pt-PT": "Digite o título da nota...",
+        "zh-TW": "請輸入筆記標題..."
+    },
+    "console.note.descriptionPlaceholder": {
+        "zh": "请输入笔记描述...",
+        "en": "Enter note description...",
+        "es": "Ingrese la descripción de la nota...",
+        "fr": "Entrez la description de la note...",
+        "ja": "ノートの説明を入力...",
+        "de-DE": "Notiz-Beschreibung eingeben...",
+        "pt-PT": "Digite a descrição da nota...",
+        "zh-TW": "請輸入筆記描述..."
+    },
     "console.userinfo.failed": {
         "zh": "出错了",
         "en": "Failed",
