@@ -1882,5 +1882,295 @@ export const TransTexts: {
         "de-DE": "Fehler beim Abrufen der Bildliste",
         "pt-PT": "Falha ao obter lista de imagens",
         "zh-TW": "獲取圖片列表失敗"
-    }
+    },
+    "console.article.selectChannel": {
+        "zh": "选择频道",
+        "en": "Select Channel",
+        "es": "Seleccionar canal",
+        "fr": "Sélectionner un canal",
+        "ja": "チャンネルを選択",
+        "de-DE": "Kanal auswählen",
+        "pt-PT": "Selecionar canal",
+        "zh-TW": "選擇頻道"
+    },
+    "console.article.channelRequired": {
+        "zh": "频道是必选项",
+        "en": "Channel is required",
+        "es": "El canal es obligatorio",
+        "fr": "Le canal est requis",
+        "ja": "チャンネルは必須です",
+        "de-DE": "Kanal ist erforderlich",
+        "pt-PT": "O canal é obrigatório",
+        "zh-TW": "頻道是必選項"
+    },
+    "console.note.publishToChannel": {
+        "zh": "发布到频道",
+        "en": "Publish to Channel",
+        "es": "Publicar en canal",
+        "fr": "Publier dans le canal",
+        "ja": "チャンネルに公開",
+        "de-DE": "In Kanal veröffentlichen",
+        "pt-PT": "Publicar no canal",
+        "zh-TW": "發布到頻道"
+    },
+    "console.note.selectChannel": {
+        "zh": "选择频道",
+        "en": "Select Channel",
+        "es": "Seleccionar canal",
+        "fr": "Sélectionner un canal",
+        "ja": "チャンネルを選択",
+        "de-DE": "Kanal auswählen",
+        "pt-PT": "Selecionar canal",
+        "zh-TW": "選擇頻道"
+    },
+    "console.note.publish": {
+        "zh": "发布",
+        "en": "Publish",
+        "es": "Publicar",
+        "fr": "Publier",
+        "ja": "公開",
+        "de-DE": "Veröffentlichen",
+        "pt-PT": "Publicar",
+        "zh-TW": "發布"
+    },
+    "console.note.publishSuccess": {
+        "zh": "发布成功",
+        "en": "Published successfully",
+        "es": "Publicado con éxito",
+        "fr": "Publié avec succès",
+        "ja": "正常に公開されました",
+        "de-DE": "Erfolgreich veröffentlicht",
+        "pt-PT": "Publicado com sucesso",
+        "zh-TW": "發布成功"
+    },
+    "console.note.publishFailed": {
+        "zh": "发布失败",
+        "en": "Publish failed",
+        "es": "Error al publicar",
+        "fr": "Échec de la publication",
+        "ja": "公開に失敗しました",
+        "de-DE": "Veröffentlichung fehlgeschlagen",
+        "pt-PT": "Falha ao publicar",
+        "zh-TW": "發布失敗"
+    },
+    "console.article.importFromNotes": {
+        "zh": "从笔记导入",
+        "en": "Import from Notes",
+        "es": "Importar desde notas",
+        "fr": "Importer depuis les notes",
+        "ja": "ノートからインポート",
+        "de-DE": "Aus Notizen importieren",
+        "pt-PT": "Importar de notas",
+        "zh-TW": "從筆記導入"
+    },
+    "console.article.selectChannelFirst": {
+        "zh": "请先选择频道",
+        "en": "Please select a channel first",
+        "es": "Por favor seleccione un canal primero",
+        "fr": "Veuillez d'abord sélectionner un canal",
+        "ja": "最初にチャンネルを選択してください",
+        "de-DE": "Bitte wählen Sie zuerst einen Kanal",
+        "pt-PT": "Por favor, selecione um canal primeiro",
+        "zh-TW": "請先選擇頻道"
+    },
+    "console.article.selectNotesFirst": {
+        "zh": "请至少选择一个笔记",
+        "en": "Please select at least one note",
+        "es": "Por favor seleccione al menos una nota",
+        "fr": "Veuillez sélectionner au moins une note",
+        "ja": "少なくとも1つのノートを選択してください",
+        "de-DE": "Bitte wählen Sie mindestens eine Notiz",
+        "pt-PT": "Por favor, selecione pelo menos uma nota",
+        "zh-TW": "請至少選擇一個筆記"
+    },
+    "console.article.importResult": {
+        "zh": "导入完成！成功：{success}，失败：{fail}",
+        "en": "Import complete! Success: {success}, Failed: {fail}",
+        "es": "¡Importación completa! Éxito: {success}, Fallido: {fail}",
+        "fr": "Importation terminée ! Réussi: {success}, Échoué: {fail}",
+        "ja": "インポート完了！成功: {success}、失敗: {fail}",
+        "de-DE": "Import abgeschlossen! Erfolg: {success}, Fehlgeschlagen: {fail}",
+        "pt-PT": "Importação concluída! Sucesso: {success}, Falhou: {fail}",
+        "zh-TW": "導入完成！成功：{success}，失敗：{fail}"
+    },
+    "console.article.importFailed": {
+        "zh": "导入失败",
+        "en": "Import failed",
+        "es": "Error al importar",
+        "fr": "Échec de l'importation",
+        "ja": "インポートに失敗しました",
+        "de-DE": "Import fehlgeschlagen",
+        "pt-PT": "Falha ao importar",
+        "zh-TW": "導入失敗"
+    },
+    "console.article.confirmImport": {
+        "zh": "确定导入",
+        "en": "Confirm Import",
+        "es": "Confirmar importación",
+        "fr": "Confirmer l'importation",
+        "ja": "インポートを確認",
+        "de-DE": "Import bestätigen",
+        "pt-PT": "Confirmar importação",
+        "zh-TW": "確定導入"
+    },
+    "console.article.importing": {
+        "zh": "导入中...",
+        "en": "Importing...",
+        "es": "Importando...",
+        "fr": "Importation...",
+        "ja": "インポート中...",
+        "de-DE": "Importieren...",
+        "pt-PT": "Importando...",
+        "zh-TW": "導入中..."
+    },
+    "console.article.selectedCount": {
+        "zh": "已选择 {count} 个笔记",
+        "en": "Selected {count} notes",
+        "es": "{count} notas seleccionadas",
+        "fr": "{count} notes sélectionnées",
+        "ja": "{count}個のノートが選択されました",
+        "de-DE": "{count} Notizen ausgewählt",
+        "pt-PT": "{count} notas selecionadas",
+        "zh-TW": "已選擇 {count} 個筆記"
+    },
+    "console.article.pleaseSelectChannel": {
+        "zh": "请选择频道",
+        "en": "Please select a channel",
+        "es": "Por favor seleccione un canal",
+        "fr": "Veuillez sélectionner un canal",
+        "ja": "チャンネルを選択してください",
+        "de-DE": "Bitte wählen Sie einen Kanal",
+        "pt-PT": "Por favor, selecione um canal",
+        "zh-TW": "請選擇頻道"
+    },
+    "console.article.maxNotesShown": {
+        "zh": "最多显示50条笔记，如需查看更多请使用搜索功能",
+        "en": "Maximum 50 notes shown, use search to find more",
+        "es": "Se muestran un máximo de 50 notas, use la búsqueda para encontrar más",
+        "fr": "Maximum 50 notes affichées, utilisez la recherche pour en trouver plus",
+        "ja": "最大50件のノートが表示されます。さらに検索するには検索機能を使用してください",
+        "de-DE": "Maximal 50 Notizen angezeigt, verwenden Sie die Suche, um mehr zu finden",
+        "pt-PT": "Máximo de 50 notas mostradas, use a pesquisa para encontrar mais",
+        "zh-TW": "最多顯示50條筆記，如需查看更多請使用搜索功能"
+    },
+    "console.note.body": {
+        "zh": "正文",
+        "en": "Body",
+        "es": "Cuerpo",
+        "fr": "Corps",
+        "ja": "本文",
+        "de-DE": "Körper",
+        "pt-PT": "Corpo",
+        "zh-TW": "正文"
+    },
+    "console.note.language": {
+        "zh": "语言",
+        "en": "Language",
+        "es": "Idioma",
+        "fr": "Langue",
+        "ja": "言語",
+        "de-DE": "Sprache",
+        "pt-PT": "Idioma",
+        "zh-TW": "語言"
+    },
+    "console.note.updateTime": {
+        "zh": "更新时间",
+        "en": "Update Time",
+        "es": "Hora de actualización",
+        "fr": "Heure de mise à jour",
+        "ja": "更新時間",
+        "de-DE": "Aktualisierungszeit",
+        "pt-PT": "Tempo de atualização",
+        "zh-TW": "更新時間"
+    },
+    "console.note.noData": {
+        "zh": "暂无数据",
+        "en": "No data",
+        "es": "Sin datos",
+        "fr": "Pas de données",
+        "ja": "データなし",
+        "de-DE": "Keine Daten",
+        "pt-PT": "Sem dados",
+        "zh-TW": "暫無數據"
+    },
+    "console.note.untitled": {
+        "zh": "无标题",
+        "en": "Untitled",
+        "es": "Sin título",
+        "fr": "Sans titre",
+        "ja": "無題",
+        "de-DE": "Ohne Titel",
+        "pt-PT": "Sem título",
+        "zh-TW": "無標題"
+    },
+    "console.note.selectChannelFirst": {
+        "zh": "请先选择频道",
+        "en": "Please select a channel first",
+        "es": "Por favor seleccione un canal primero",
+        "fr": "Veuillez d'abord sélectionner un canal",
+        "ja": "最初にチャンネルを選択してください",
+        "de-DE": "Bitte wählen Sie zuerst einen Kanal",
+        "pt-PT": "Por favor, selecione um canal primeiro",
+        "zh-TW": "請先選擇頻道"
+    },
+    "common.search": {
+        "zh": "搜索",
+        "en": "Search",
+        "es": "Buscar",
+        "fr": "Rechercher",
+        "ja": "検索",
+        "de-DE": "Suchen",
+        "pt-PT": "Pesquisar",
+        "zh-TW": "搜索"
+    },
+    "console.article.sync": {
+        "zh": "同步",
+        "en": "Sync",
+        "es": "Sincronizar",
+        "fr": "Synchroniser",
+        "ja": "同期",
+        "de-DE": "Synchronisieren",
+        "pt-PT": "Sincronizar",
+        "zh-TW": "同步"
+    },
+    "console.article.syncConfirmTitle": {
+        "zh": "确认同步",
+        "en": "Confirm Synchronization",
+        "es": "Confirmar sincronización",
+        "fr": "Confirmer la synchronisation",
+        "ja": "同期の確認",
+        "de-DE": "Synchronisation bestätigen",
+        "pt-PT": "Confirmar sincronização",
+        "zh-TW": "確認同步"
+    },
+    "console.article.syncConfirmMessage": {
+        "zh": "确定要从笔记同步内容到此文章吗？这将更新文章的标题、正文和描述。",
+        "en": "Are you sure you want to sync content from the note to this article? This will update the article's title, body, and description.",
+        "es": "¿Está seguro de que desea sincronizar el contenido de la nota con este artículo? Esto actualizará el título, el cuerpo y la descripción del artículo.",
+        "fr": "Êtes-vous sûr de vouloir synchroniser le contenu de la note avec cet article ? Cela mettra à jour le titre, le corps et la description de l'article.",
+        "ja": "ノートからこの記事にコンテンツを同期してもよろしいですか？これにより、記事のタイトル、本文、説明が更新されます。",
+        "de-DE": "Sind Sie sicher, dass Sie den Inhalt der Notiz mit diesem Artikel synchronisieren möchten? Dadurch werden Titel, Inhalt und Beschreibung des Artikels aktualisiert.",
+        "pt-PT": "Tem certeza de que deseja sincronizar o conteúdo da nota com este artigo? Isso atualizará o título, corpo e descrição do artigo.",
+        "zh-TW": "確定要從筆記同步內容到此文章嗎？這將更新文章的標題、正文和描述。"
+    },
+    "console.article.confirmSync": {
+        "zh": "确定同步",
+        "en": "Confirm Sync",
+        "es": "Confirmar sincronización",
+        "fr": "Confirmer la synchronisation",
+        "ja": "同期を確認",
+        "de-DE": "Synchronisation bestätigen",
+        "pt-PT": "Confirmar sincronização",
+        "zh-TW": "確定同步"
+    },
+    "console.article.syncFailed": {
+        "zh": "同步失败",
+        "en": "Sync failed",
+        "es": "Error de sincronización",
+        "fr": "Échec de la synchronisation",
+        "ja": "同期に失敗しました",
+        "de-DE": "Synchronisation fehlgeschlagen",
+        "pt-PT": "Falha na sincronização",
+        "zh-TW": "同步失敗"
+    },
 }

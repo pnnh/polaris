@@ -44,25 +44,17 @@ export default async function Page({params, searchParams}: {
     metadata.title = pageTitle('')
     const serverConfig = await useServerConfig()
 
-    const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
-    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
+    const publicStargateUrl = serverConfig.PUBLIC_STARGATE_URL
+    const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
     const isNew = channelUid === EmptyUUID;
     let model: PSChannelModel | undefined = undefined;
     if (isNew) {
-        let channelUid = '';
-        if (searchValue.channel) {
-            channelUid = mustBase58ToUuid(searchValue.channel);
-        }
         model = {
-            match: "", profile: "",
             name: "",
             image: "",
-            creator: "",
-            owner: "",
-            uid: EmptyUUID,     // 设置为空以供form表单识别是新建文章
-            title: '',
+            owner: EmptyUUID,
+            uid: EmptyUUID,
             description: '',
-            lang,
             create_time: '',
             update_time: ''
         }
@@ -70,13 +62,12 @@ export default async function Page({params, searchParams}: {
         if (!channelUid) {
             notFound();
         }
-        model = await serverConsoleGetChannel(internalPortalUrl, channelUid)
+        model = await serverConsoleGetChannel(internalStargateUrl, channelUid)
         if (!model || !model.uid) {
             notFound();
         }
-        metadata.title = pageTitle(lang, model.title)
-
-        metadata.description = model.description
+        metadata.title = pageTitle(lang, model.name)
+        metadata.description = model.description || ''
 
     }
 
@@ -87,7 +78,7 @@ export default async function Page({params, searchParams}: {
                           metadata={metadata}>
         <div className={pageStyles.contentContainer}>
             <div className={pageStyles.conMiddle}>
-                <ConsoleChannelForm publicPortalUrl={publicPortalUrl} modelString={modelString}/>
+                <ConsoleChannelForm stargateUrl={publicStargateUrl} modelString={modelString}/>
             </div>
         </div>
     </ConsoleLayout>

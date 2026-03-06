@@ -8,12 +8,15 @@ import {PSArticleModel} from "@/components/common/models/article";
 import {getDefaultImageUrl} from "@/components/common/note";
 import MenuItem from '@mui/material/MenuItem';
 import {supportedLanguages} from "@/components/common/language";
-import {Select, TextField, Card, CardMedia, CardContent, Box, Stack, Chip, IconButton, Tooltip} from "@mui/material";
+import {Box, Card, CardContent, CardMedia, Chip, IconButton, Select, Stack, TextField, Tooltip} from "@mui/material";
 import {transKey} from "@/components/common/locales/normal";
 import {PersonalNotesBrowser} from "@/components/personal/notes";
+import {CommunityBrowser} from "@/components/community/browser";
+import {PSChannelModel} from "@/components/common/models/channel";
 import SaveIcon from '@mui/icons-material/Save';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import LanguageIcon from '@mui/icons-material/Language';
+import PublishIcon from '@mui/icons-material/Publish';
 
 function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (newLang: string) => void }) {
     return (
@@ -21,9 +24,9 @@ function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (
             value={lang}
             size={'small'}
             variant="outlined"
-            startAdornment={<LanguageIcon sx={{ mr: 1, fontSize: 20 }} />}
+            startAdornment={<LanguageIcon sx={{mr: 1, fontSize: 20}}/>}
             onChange={(event) => onChange(event.target.value)}
-            sx={{ minWidth: 140 }}
+            sx={{minWidth: 140}}
         >
             {
                 supportedLanguages.map(language => (
@@ -36,16 +39,19 @@ function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (
     )
 }
 
-export function ConsoleArticleForm({stargateUrl, modelString, lang}: {
+export function ConsoleArticleForm({stargateUrl, modelString, channelsString, lang}: {
     stargateUrl: string,
     modelString: string,
+    channelsString: string,
     lang: string,
 }) {
     const oldModel = JSON.parse(modelString) as PSArticleModel;
+    const channels = JSON.parse(channelsString) as PSChannelModel[];
     const [wangLang, setWantLang] = React.useState(oldModel.lang);
     const [title, setTitle] = React.useState(oldModel.title);
     const [description, setDescription] = React.useState(oldModel.description);
     const [bodyText, setBodyText] = React.useState(oldModel.body || '');
+    const [selectedChannel, setSelectedChannel] = React.useState('');
 
     const tocList: TocItem[] = []
     const titleId = generatorRandomString(8)
@@ -81,11 +87,38 @@ export function ConsoleArticleForm({stargateUrl, modelString, lang}: {
             })
         }
     }
+
+    const onPublish = () => {
+        if (!selectedChannel) {
+            alert(transKey(lang, "console.note.selectChannelFirst"));
+            return;
+        }
+        const articleModel = {
+            uid: oldModel.uid,
+            title: title,
+            description: description,
+            body: bodyText,
+            cover: oldModel.cover,
+            header: oldModel.header,
+            lang: wangLang,
+            channel: selectedChannel
+        }
+        CommunityBrowser.clientConsoleInsertArticle(stargateUrl, articleModel).then((articleId) => {
+            if (!articleId) {
+                alert(transKey(lang, "console.note.publishFailed"));
+                return;
+            }
+            alert(transKey(lang, "console.note.publishSuccess"));
+            window.location.href = `/${lang}/console/personal/notes`;
+        });
+    }
+
     const coverUrl = oldModel.coverUrl || getDefaultImageUrl();
     const createUrl = `/${lang}/console/personal/notes/${uuidToBase58(EmptyUUID)}?wantLang=${isLangEn(wangLang) ? langZh : langEn}&copyFrom=${uuidToBase58(oldModel.uid)}`
-    
+
     return (
-        <Box className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-6">
+        <Box
+            className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-6">
             <Box className="max-w-7xl mx-auto space-y-6">
                 {/* Header Card */}
                 <Card elevation={3} className="overflow-hidden">
@@ -93,18 +126,18 @@ export function ConsoleArticleForm({stargateUrl, modelString, lang}: {
                         <Box className="flex-1 p-6">
                             <Stack spacing={3}>
                                 <Box className="flex items-center gap-2">
-                                    <Chip 
+                                    <Chip
                                         label={isNew ? transKey(lang, 'console.note.createNew') : transKey(lang, 'console.note.edit')}
                                         color={isNew ? 'success' : 'primary'}
                                         size="small"
                                     />
-                                    <Chip 
+                                    <Chip
                                         label={wangLang.toUpperCase()}
                                         variant="outlined"
                                         size="small"
                                     />
                                 </Box>
-                                
+
                                 <TextField
                                     fullWidth
                                     label={transKey(lang, 'console.note.title')}
@@ -113,10 +146,10 @@ export function ConsoleArticleForm({stargateUrl, modelString, lang}: {
                                     onChange={(event) => setTitle(event.target.value)}
                                     placeholder={transKey(lang, 'console.note.titlePlaceholder')}
                                     InputProps={{
-                                        sx: { fontSize: '1.25rem', fontWeight: 600 }
+                                        sx: {fontSize: '1.25rem', fontWeight: 600}
                                     }}
                                 />
-                                
+
                                 <TextField
                                     fullWidth
                                     label={transKey(lang, 'console.note.description')}
@@ -129,22 +162,22 @@ export function ConsoleArticleForm({stargateUrl, modelString, lang}: {
                                 />
                             </Stack>
                         </Box>
-                        
+
                         <Box className="md:w-64 relative">
                             <CardMedia
                                 component="img"
                                 image={coverUrl}
                                 alt={title || 'Note cover'}
                                 className="h-full object-cover"
-                                sx={{ minHeight: 250 }}
+                                sx={{minHeight: 250}}
                             />
                             <Box className="absolute top-2 right-2">
                                 <Tooltip title="Change cover">
                                     <IconButton
                                         size="small"
-                                        sx={{ bgcolor: 'rgba(255,255,255,0.9)', '&:hover': { bgcolor: 'white' } }}
+                                        sx={{bgcolor: 'rgba(255,255,255,0.9)', '&:hover': {bgcolor: 'white'}}}
                                     >
-                                        <ContentCopyIcon fontSize="small" />
+                                        <ContentCopyIcon fontSize="small"/>
                                     </IconButton>
                                 </Tooltip>
                             </Box>
@@ -155,10 +188,10 @@ export function ConsoleArticleForm({stargateUrl, modelString, lang}: {
                 {/* Editor Card */}
                 <Card elevation={3} className="overflow-hidden">
                     <CardContent className="p-0">
-                        <ConsoleArticleEditor 
-                            tocList={tocList} 
+                        <ConsoleArticleEditor
+                            tocList={tocList}
                             header={oldModel.header}
-                            body={bodyText} 
+                            body={bodyText}
                             assetsUrl={'assetsUrl'}
                             onChange={(bodyText) => setBodyText(bodyText)}
                         />
@@ -172,23 +205,23 @@ export function ConsoleArticleForm({stargateUrl, modelString, lang}: {
                             <Stack direction="row" spacing={2} alignItems="center">
                                 <PSConsoleLanguageSelector lang={wangLang} onChange={setWantLang}/>
                             </Stack>
-                            
+
                             <Stack direction="row" spacing={2}>
                                 {!isNew && (
-                                    <Button 
-                                        variant="outlined" 
-                                        startIcon={<ContentCopyIcon />}
+                                    <Button
+                                        variant="outlined"
+                                        startIcon={<ContentCopyIcon/>}
                                         href={createUrl}
                                     >
                                         {transKey(lang, 'console.note.viewCopy')}
                                     </Button>
                                 )}
-                                <Button 
-                                    variant="contained" 
+                                <Button
+                                    variant="contained"
                                     size="large"
-                                    startIcon={<SaveIcon />}
+                                    startIcon={<SaveIcon/>}
                                     onClick={onSubmit}
-                                    sx={{ minWidth: 120 }}
+                                    sx={{minWidth: 120}}
                                 >
                                     {transKey(lang, 'console.note.save')}
                                 </Button>
@@ -196,6 +229,52 @@ export function ConsoleArticleForm({stargateUrl, modelString, lang}: {
                         </Stack>
                     </Box>
                 </Card>
+
+                {/* Publish to Channel (Only for existing notes) */}
+                {!isNew && (
+                    <Card elevation={3}>
+                        <Box className="p-4">
+                            <Stack spacing={2}>
+                                <Box className="flex items-center gap-2">
+                                    <PublishIcon color="primary"/>
+                                    <span className="font-semibold text-lg">
+                                        {transKey(lang, 'console.note.publishToChannel')}
+                                    </span>
+                                </Box>
+                                <Stack direction="row" spacing={2} alignItems="center">
+                                    <Select
+                                        value={selectedChannel}
+                                        size="small"
+                                        onChange={(event) => setSelectedChannel(event.target.value)}
+                                        displayEmpty
+                                        sx={{minWidth: 300}}
+                                    >
+                                        <MenuItem value="" disabled>
+                                            {transKey(lang, "console.note.selectChannel")}
+                                        </MenuItem>
+                                        {
+                                            channels.map(channel => (
+                                                <MenuItem key={channel.uid} value={channel.uid}>
+                                                    {channel.name}
+                                                </MenuItem>
+                                            ))
+                                        }
+                                    </Select>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        startIcon={<PublishIcon/>}
+                                        onClick={onPublish}
+                                        disabled={!selectedChannel}
+                                        sx={{minWidth: 120}}
+                                    >
+                                        {transKey(lang, 'console.note.publish')}
+                                    </Button>
+                                </Stack>
+                            </Stack>
+                        </Box>
+                    </Card>
+                )}
             </Box>
         </Box>
     )

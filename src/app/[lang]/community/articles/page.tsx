@@ -2,16 +2,13 @@ import React from 'react'
 import {css} from "@/gen/styled/css";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {PaginationServer} from "@/components/server/pagination";
-import {replaceSearchParams} from "@pnnh/atom";
-import {calcPagination} from "@pnnh/atom";
-import {langEn} from "@pnnh/atom";
+import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {ConsoleArticleFilterBar} from "./filter";
 import {ConsoleArticleMiddleBody} from "./article";
 import {useServerConfig} from "@/components/server/config";
 import {CommunityArticleNodeService} from "@/components/community/articles";
-import ConsoleLayout from "@/components/server/console/layout";
 import {getPathname} from "@/components/server/pathname";
-import {SymbolUnknown} from "@pnnh/atom";
+import CommunityLayout from "@/components/server/community/layout";
 
 const pageStyles = {
     articlesPage: css`
@@ -71,28 +68,29 @@ export default async function Page({params, searchParams}: {
     }
     const serverConfig = await useServerConfig()
 
-    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
-    const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
-    const selectData = await CommunityArticleNodeService.consoleQueryArticles(internalPortalUrl,
+    const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
+    const publicStargateUrl = serverConfig.PUBLIC_STARGATE_URL
+    const selectData = await CommunityArticleNodeService.consoleQueryArticles(internalStargateUrl,
         lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
-    return <ConsoleLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue} userInfo={SymbolUnknown}>
+    return <CommunityLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue}
+                            userInfo={SymbolUnknown}>
         <div className={pageStyles.articlesPage}>
             <div className={pageStyles.pageContainer}>
                 <ConsoleArticleFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
                 <div className={pageStyles.conMiddle}>
                     <ConsoleArticleMiddleBody selectData={selectData} lang={lang}
-                                              publicPortalUrl={publicPortalUrl}/>
+                                              stargateUrl={publicStargateUrl}/>
                     <div className={pageStyles.middlePagination}>
                         <PaginationServer lang={lang} pagination={pagination}
                                           pageLinkFunc={(page) =>
-                                              `/${lang}/console/community/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
+                                              `/${lang}/community/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                     </div>
                 </div>
             </div>
         </div>
-    </ConsoleLayout>
+    </CommunityLayout>
 }
 
 

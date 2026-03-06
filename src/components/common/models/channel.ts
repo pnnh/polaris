@@ -1,14 +1,9 @@
 export interface PSChannelModel {
+    uid: string
     name: string
-    title: string
-    create_time: string
-    update_time: string
-    creator: string
     description: string
     image: string
-    profile: string
-    uid: string
-    lang: string
-    match: string
     owner: string
+    create_time: string
+    update_time: string
 }

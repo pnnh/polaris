@@ -7,9 +7,9 @@ import queryString from "query-string";
 import {transKey} from "@/components/common/locales/normal";
 
 export class CommunityArticleNodeService {
-    static async consoleQueryArticles(portalUrl: string, lang: string, queryParams: Record<string, any>): Promise<PLSelectData<PSArticleModel>> {
+    static async consoleQueryArticles(stargateUrl: string, lang: string, queryParams: Record<string, any>): Promise<PLSelectData<PSArticleModel>> {
         const rawQuery = queryString.stringify(queryParams)
-        const url = `${portalUrl}/console/community/articles?${rawQuery}`
+        const url = `${stargateUrl}/console/community/articles?${rawQuery}`
         const cookieStore = await cookies()
         const authHeader = cookieStore.toString()
         const getResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, authHeader);
@@ -28,7 +28,7 @@ export class CommunityArticleNodeService {
             }
             if (modelInfo.cover) {
                 modelInfo.coverUrl = modelInfo.cover.startsWith('http://') || modelInfo.cover.startsWith("https://") ?
-                    modelInfo.cover : `${portalUrl}/storage${modelInfo.cover}`
+                    modelInfo.cover : `/storage${modelInfo.cover}`
             } else {
                 modelInfo.coverUrl = getDefaultImageUrl()
             }

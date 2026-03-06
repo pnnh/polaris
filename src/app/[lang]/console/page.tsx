@@ -6,12 +6,10 @@ import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
 import ConsoleLayout from "@/components/server/console/layout";
-import ComputerIcon from '@mui/icons-material/Computer';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import {transKey} from "@/components/common/locales/normal";
 import {isAnonymousAccount} from "@/components/common/models/account/account";
 import {getPathname} from "@/components/server/pathname";
-import {SymbolUnknown} from "@pnnh/atom";
 
 const pageStyles = {
     consolePage: css`
@@ -107,7 +105,8 @@ export default async function Page({params, searchParams}: {
         return <NeedLoginPage lang={lang}></NeedLoginPage>
     }
 
-    return <ConsoleLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue} userInfo={currentUserInfo}>
+    return <ConsoleLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue}
+                          userInfo={currentUserInfo}>
         <div className={pageStyles.consolePage}>
             <div className={pageStyles.pageContainer}>
                 <div>欢迎信息</div>

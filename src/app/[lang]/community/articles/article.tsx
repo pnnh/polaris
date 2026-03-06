@@ -8,6 +8,7 @@ import {PSImageServer} from "@/components/server/image";
 import React from "react";
 import {css} from "@/gen/styled/css";
 import PSDeleteButton from "@/components/client/console/delete";
+import PSSyncButton from "@/components/client/console/sync";
 import PublicIcon from '@mui/icons-material/Public';
 import {transKey} from "@/components/common/locales/normal";
 
@@ -19,7 +20,7 @@ const articleStyles = {
     `,
     tableHeader: css`
         display: grid;
-        grid-template-columns: 10rem 1fr 1fr 1fr 1fr 6rem;
+        grid-template-columns: 10rem 1fr 1fr 1fr 1fr 8rem;
         gap: 1rem;
         font-weight: bold;
         border-bottom: 1px solid var(--border-color);
@@ -29,7 +30,7 @@ const articleStyles = {
     `,
     middleItem: css`
         display: grid;
-        grid-template-columns: 10rem 1fr 1fr 1fr 1fr 6rem;
+        grid-template-columns: 10rem 1fr 1fr 1fr 1fr 8rem;
         gap: 1rem;
         border-bottom: 1px solid var(--border-color);
         padding: 0.5rem;
@@ -56,10 +57,10 @@ const articleStyles = {
     `
 }
 
-export function ConsoleArticleMiddleBody({selectData, lang, publicPortalUrl}: {
+export function ConsoleArticleMiddleBody({selectData, lang, stargateUrl}: {
     selectData: PLSelectData<PSArticleModel>,
     lang: string,
-    publicPortalUrl: string
+    stargateUrl: string
 }) {
     if (!selectData || !selectData.range || selectData.range.length === 0) {
         return <NoData size='large'/>
@@ -67,7 +68,7 @@ export function ConsoleArticleMiddleBody({selectData, lang, publicPortalUrl}: {
     return <div className={articleStyles.middleBody}>
         <ArticleHeader lang={lang}/>
         {selectData.range.map((model, index) => {
-            return <ArticleCard key={index} model={model} lang={lang} publicPortalUrl={publicPortalUrl}/>
+            return <ArticleCard key={index} model={model} lang={lang} stargateUrl={stargateUrl}/>
         })}
     </div>
 }
@@ -97,21 +98,25 @@ export function ArticleHeader({lang}: {
     </div>
 }
 
-export function ArticleCard({model, lang, publicPortalUrl}: {
+export function ArticleCard({model, lang, stargateUrl}: {
     model: PSArticleModel,
     lang: string,
-    publicPortalUrl: string
+    stargateUrl: string
 }) {
-    const readUrl = `${lang}/console/community/articles/${uuidToBase58(model.uid)}`
+    const readUrl = `${lang}/community/articles/${uuidToBase58(model.uid)}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)
     if (model.cover && isValidUUID(model.cover)) {
-        imageUrl = `${publicPortalUrl}/articles/${model.uid}/assets/${model.cover}`
+        imageUrl = `${stargateUrl}/articles/${model.uid}/assets/${model.cover}`
     }
     let chanUrl = ''
     if (model.channel) {
         chanUrl = `/${lang}/channels/${uuidToBase58(model.channel)}`
     }
-    const deleteUrl = `${publicPortalUrl}/console/community/articles/${model.uid}?action=delete`
+    const deleteUrl = `${stargateUrl}/console/community/articles/${model.uid}`
+    const syncUrl = `${stargateUrl}/console/community/articles/${model.uid}/sync`
+    // @ts-ignore - has_note is added by SQL query
+    const hasNote = model.has_note === true || model.has_note === 'true' || model.has_note === 't';
+    
     return <div className={articleStyles.middleItem} key={model.uid} data-article={model.uid}>
         <div className={articleStyles.itemCover}>
             <PSImageServer lang={lang} src={imageUrl} alt={model.title} fill={true}/>
@@ -130,7 +135,12 @@ export function ArticleCard({model, lang, publicPortalUrl}: {
         <div>
             <a href={chanUrl}>{model.channel_name}</a>
         </div>
-        <div>
+        <div className={articleStyles.action}>
+            {hasNote && (
+                <PSSyncButton lang={lang} syncUrl={syncUrl} resTitle={model.title || model.name}>
+                    {transKey(lang, "console.article.sync")}
+                </PSSyncButton>
+            )}
             <PSDeleteButton lang={lang} deleteUrl={deleteUrl} resTitle={model.title || model.name}>
                 {transKey(lang, "console.common.delete")}
             </PSDeleteButton>

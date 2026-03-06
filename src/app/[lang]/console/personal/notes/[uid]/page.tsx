@@ -1,7 +1,7 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
-import {EmptyUUID, langZh, mustBase58ToUuid, tryBase58ToUuid, uuidToBase58} from "@pnnh/atom";
+import {EmptyUUID, langZh, mustBase58ToUuid, SymbolUnknown, tryBase58ToUuid, uuidToBase58} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import {notFound, redirect} from "next/navigation";
 import {ConsoleArticleForm} from "./form";
@@ -10,13 +10,14 @@ import {PSArticleModel} from "@/components/common/models/article";
 import ConsoleLayout from "@/components/server/console/layout";
 import {css} from "@/gen/styled/css";
 import {transKey} from "@/components/common/locales/normal";
-import {SymbolUnknown} from "@pnnh/atom";
+import {serverConsoleSelectChannels} from "@/components/server/channels/channels";
 
 const pageStyles = {
     articlesPage: css`
         height: 100vh;
         overflow-x: hidden;
         overflow-y: auto;
+        width: 100%;
     `,
     pageContainer: css`
     `
@@ -105,11 +106,21 @@ export default async function Home({params, searchParams}: {
             return <div>{transKey(pageLang, 'console.note.unsupportedType')}</div>
         }
     }
+    
+    // Query channels for publishing to community
+    const channelsData = await serverConsoleSelectChannels(internalStargateUrl, pageLang, {
+        page: 1,
+        size: 100
+    });
+    
     const modelString = JSON.stringify(model)
-    return <ConsoleLayout lang={pageLang} metadata={metadata} pathname={pathname} searchParams={searchValue} userInfo={SymbolUnknown}>
+    const channelsString = JSON.stringify(channelsData.range)
+    return <ConsoleLayout lang={pageLang} metadata={metadata} pathname={pathname} searchParams={searchValue}
+                          userInfo={SymbolUnknown}>
         <div className={pageStyles.articlesPage}>
             <div className={pageStyles.pageContainer}>
                 <ConsoleArticleForm stargateUrl={serverConfig.PUBLIC_STARGATE_URL} modelString={modelString}
+                                    channelsString={channelsString}
                                     lang={pageLang}/>
 
             </div>

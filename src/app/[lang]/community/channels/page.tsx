@@ -1,19 +1,18 @@
 import React from 'react'
 import {getPathname} from "@/components/server/pathname";
 import {css} from "@/gen/styled/css";
-import {EmptyUUID, isValidUUID, langEn, STSubString, SymbolUnknown, uuidToBase58} from "@pnnh/atom";
+import {isValidUUID, langEn, STSubString, SymbolUnknown, uuidToBase58} from "@pnnh/atom";
 import {PSChannelModel} from "@/components/common/models/channel";
 import {NoData} from "@/components/common/empty";
 import {PSImageServer} from "@/components/server/image";
 import {getDefaultChanImageByUid} from "@/components/common/channel";
 import {PageMetadata} from "@/components/common/utils/page";
-import ConsoleLayout from "@/components/server/console/layout";
-import Button from "@mui/material/Button";
 import {ConsoleChannelFilterBar} from "./filter";
 import {serverConsoleSelectChannels} from "@/components/server/channels/channels";
 import {useServerConfig} from "@/components/server/config";
 import PSDeleteButton from "@/components/client/console/delete";
 import {transKey} from "@/components/common/locales/normal";
+import CommunityLayout from "@/components/server/community/layout";
 
 const pageStyles = {
     channelsContainer: css`
@@ -49,11 +48,11 @@ const pageStyles = {
     `,
     link: css`
         text-decoration: none;
-        color: var(--text-color);
+        color: var(--text-primary-color);
     `,
     description: css`
         font-size: 0.9rem;
-        color: var(--text-secondary);
+        color: var(--text-secondary-color);
     `,
     operation: css`
         display: flex;
@@ -69,9 +68,11 @@ export default async function Page({params, searchParams}: {
     const searchValue = await searchParams
     const lang = paramsValue.lang || langEn
     const serverConfig = await useServerConfig()
-    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
-    const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
-    const selectData = await serverConsoleSelectChannels(internalPortalUrl, lang, {})
+    const publicStargateUrl = serverConfig.PUBLIC_STARGATE_URL
+    const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
+    const selectData = await serverConsoleSelectChannels(internalStargateUrl, lang, {
+        keyword: searchValue.keyword
+    })
 
     if (!selectData) {
         return <NoData size={'middle'}/>
@@ -79,29 +80,28 @@ export default async function Page({params, searchParams}: {
     const pathname = await getPathname()
     const metadata = new PageMetadata(lang)
 
-    return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchValue} pathname={pathname}
-                          metadata={metadata}>
+    return <CommunityLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchValue} pathname={pathname}
+                            metadata={metadata}>
         <div className={pageStyles.channelsContainer}>
             <ConsoleChannelFilterBar lang={lang} keyword={searchValue.keyword}/>
             <div className={pageStyles.list}>
                 {selectData.range.map((model) => {
-                    return <Item key={model.uid} model={model} publicPortalUrl={publicPortalUrl} lang={lang}/>
+                    return <Item key={model.uid} model={model} stargateUrl={publicStargateUrl} lang={lang}/>
                 })}
             </div>
         </div>
-    </ConsoleLayout>
+    </CommunityLayout>
 }
 
-function Item(props: { model: PSChannelModel, publicPortalUrl: string, lang: string }) {
+function Item(props: { model: PSChannelModel, stargateUrl: string, lang: string }) {
     const model = props.model
-    const readUrl = `/${props.lang}/console/channels/${uuidToBase58(props.model.uid)}`
+    const readUrl = `/${props.lang}/community/channels/${uuidToBase58(props.model.uid)}`
     let imageUrl = getDefaultChanImageByUid(model.uid)
     if (model.image && isValidUUID(model.image)) {
-        imageUrl = `${props.publicPortalUrl}/channels/${model.uid}/assets/${model.image}`
+        imageUrl = `${props.stargateUrl}/channels/${model.uid}/assets/${model.image}`
     }
 
-    const newUrl = `/${props.lang}/console/articles/${uuidToBase58(EmptyUUID)}?channel=${uuidToBase58(model.uid)}`
-    const deleteUrl = `${props.publicPortalUrl}/console/channels/${model.uid}`
+    const deleteUrl = `${props.stargateUrl}/console/channels/${model.uid}`
     return <div className={pageStyles.item}>
         <div className={pageStyles.itemCover}>
             <PSImageServer lang={props.lang} src={imageUrl} alt='star' width={256} height={256}/>
@@ -112,13 +112,8 @@ function Item(props: { model: PSChannelModel, publicPortalUrl: string, lang: str
         <div className={pageStyles.description}>
             {STSubString(props.model.description, 140)}
         </div>
-        <div className={pageStyles.operation}>
-            <Button size={'small'} variant={'text'} href={newUrl}>
-                {transKey(props.lang, "console.article.createNew")}
-            </Button>
-        </div>
         <div>
-            <PSDeleteButton lang={props.lang} deleteUrl={deleteUrl} resTitle={model.title || model.name}>
+            <PSDeleteButton lang={props.lang} deleteUrl={deleteUrl} resTitle={model.name}>
                 {transKey(props.lang, "console.common.delete")}
             </PSDeleteButton>
         </div>

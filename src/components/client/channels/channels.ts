@@ -17,8 +17,8 @@ export async function clientChannelsComplete(portalUrl: string, selectQuery: Rec
     return selectResult.data
 }
 
-export async function clientConsoleInsertChannel(portalUrl: string, model: unknown): Promise<string> {
-    const url = `${portalUrl}/console/channels`
+export async function clientConsoleInsertChannel(stargateUrl: string, model: unknown): Promise<string> {
+    const url = `${stargateUrl}/console/channels`
     const insertResult = await clientMakePost<PLInsertResult>(url, model);
     if (!insertResult || insertResult.code !== CodeOk || !insertResult.data) {
         console.debug('文章插入失败', insertResult);
@@ -27,8 +27,8 @@ export async function clientConsoleInsertChannel(portalUrl: string, model: unkno
     return insertResult.data
 }
 
-export async function clientConsoleUpdateChannel(portalUrl: string, uid: string, model: unknown): Promise<string> {
-    const url = `${portalUrl}/console/channels/${uid}`
+export async function clientConsoleUpdateChannel(stargateUrl: string, uid: string, model: unknown): Promise<string> {
+    const url = `${stargateUrl}/console/channels/${uid}`
     const insertResult = await clientMakePut<PLUpdateResult>(url, model);
     if (!insertResult || insertResult.code !== CodeOk || !insertResult.data) {
         console.warn('文章更新失败', insertResult);

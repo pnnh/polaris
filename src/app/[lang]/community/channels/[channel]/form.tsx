@@ -1,6 +1,5 @@
 'use client'
 
-import {FormControlLabel, Radio, RadioGroup} from "@mui/material";
 import Button from "@mui/material/Button";
 import React from "react";
 import {PSChannelModel} from "@/components/common/models/channel";
@@ -10,37 +9,33 @@ import {getDefaultImageUrl} from "@/components/common/note";
 import {transKey} from "@/components/common/locales/normal";
 import {css} from "@/gen/styled/css";
 
-export function ConsoleChannelForm({publicPortalUrl, modelString}: { publicPortalUrl: string, modelString: string }) {
+export function ConsoleChannelForm({stargateUrl, modelString}: { stargateUrl: string, modelString: string }) {
     const oldModel = JSON.parse(modelString) as PSChannelModel;
-    const [lang, setLang] = React.useState(oldModel.lang);
     const [name, setName] = React.useState(oldModel.name);
-    const [title, setTitle] = React.useState(oldModel.title);
-    const [description, setDescription] = React.useState(oldModel.description);
+    const [description, setDescription] = React.useState(oldModel.description || '');
 
     const isNew = oldModel.uid === EmptyUUID;
     const onSubmit = () => {
         const newModel = {
             uid: oldModel.uid,
-            title: title,
-            description: description,
-            lang: oldModel.lang,
             name: name,
+            description: description,
         }
         if (isNew) {
-            clientConsoleInsertChannel(publicPortalUrl, newModel).then((newChannelId) => {
+            clientConsoleInsertChannel(stargateUrl, newModel).then((newChannelId) => {
                 if (!newChannelId) {
-                    console.error(transKey(lang, "console.channel.insertFailed"))
+                    console.error(transKey('en', "console.channel.insertFailed"))
                     return
                 }
-                window.location.href = `/${lang}/console/channels`
+                window.location.href = `/en/community/channels`
             })
         } else {
-            clientConsoleUpdateChannel(publicPortalUrl, oldModel.uid, newModel).then((channelId) => {
+            clientConsoleUpdateChannel(stargateUrl, oldModel.uid, newModel).then((channelId) => {
                 if (!channelId) {
-                    console.error(transKey(lang, "console.channel.updateFailed"))
+                    console.error(transKey('en', "console.channel.updateFailed"))
                     return
                 }
-                window.location.href = `/${lang}/console/channels`
+                window.location.href = `/en/community/channels`
             })
         }
     }
@@ -48,32 +43,20 @@ export function ConsoleChannelForm({publicPortalUrl, modelString}: { publicPorta
     return <div className={channelStyles.bodyContainer}>
         <div className={channelStyles.channelCover}>
             <div className={channelStyles.channelHeader}>
-                <div>
-                    <input value={name} onChange={(event) => setName(event.target.value)}/>
-                </div>
                 <div className={channelStyles.channelTitle}>
-                    <input value={title} onChange={(event) => setTitle(event.target.value)}/>
+                    <input placeholder="Channel Name" value={name} onChange={(event) => setName(event.target.value)}/>
                 </div>
                 <div className={channelStyles.channelDescription}>
-                        <textarea name={'channelDescription'}
+                        <textarea name={'channelDescription'} placeholder="Channel Description"
                                   value={description} onChange={(event => setDescription(event.target.value))}/>
                 </div>
             </div>
-            <img className={channelStyles.coverImage} src={coverUrl} alt={oldModel.title}/>
+            <img className={channelStyles.coverImage} src={coverUrl} alt={oldModel.name}/>
         </div>
         <div className={channelStyles.bottomBar}>
-            <RadioGroup row aria-labelledby="demo-row-radio-buttons-group-label"
-                        name="row-radio-buttons-group" value={lang}
-                        onChange={(event) => setLang(event.target.value)}>
-                <FormControlLabel value="zh" control={<Radio/>} label="中文"/>
-                <FormControlLabel value="en" control={<Radio/>} label="English"/>
-            </RadioGroup>
-            <Button variant={'contained'} size={'small'} onClick={onSubmit}>{
-                transKey(lang, "console.channel.save")
-            }</Button>
-            <Button variant={'contained'} size={'small'}>{
-                transKey(lang, "console.channel.createMultilingualCopy")
-            }</Button>
+            <Button variant={'contained'} size={'small'} onClick={onSubmit}>
+                {transKey('en', "console.channel.save")}
+            </Button>
         </div>
     </div>
 }

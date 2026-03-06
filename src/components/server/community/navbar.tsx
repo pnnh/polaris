@@ -39,7 +39,7 @@ const styles = {
         height: 2.2rem;
         width: 2.2rem;
     `,
-    consoleTitle: css`
+    communityTitle: css`
         font-size: 1.2rem;
         font-weight: 600;
         color: var(--text-primary-color);
@@ -54,7 +54,7 @@ const styles = {
     `,
 };
 
-export async function ConsoleNavbar({pathname, searchParams, lang, userInfo}: {
+export async function CommunityNavbar({pathname, searchParams, lang, userInfo}: {
     pathname: string,
     searchParams: Record<string, string>,
     lang: string,
@@ -69,7 +69,7 @@ export async function ConsoleNavbar({pathname, searchParams, lang, userInfo}: {
             <a className={styles.brandLink} href={`/`}>
                 <Image src='/images/logo.png' alt='logo' priority={false} fill={true} sizes={'48px,48px'}/>
             </a>
-            <div className={styles.consoleTitle}>控制台</div>
+            <div className={styles.communityTitle}>控制台</div>
         </div>
         <div className={styles.rightNav}>
             <ThemeSwitch lang={lang} themeName={themeName}/>

@@ -4,7 +4,7 @@ import React from "react";
 import {transKey} from "@/components/common/locales/normal";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
-import {EmptyUUID, uuidToBase58} from "@pnnh/atom";
+import ClearIcon from "@mui/icons-material/Clear";import UploadFileIcon from "@mui/icons-material/UploadFile";import {EmptyUUID, uuidToBase58} from "@pnnh/atom";
 import {css} from "@/gen/styled/css";
 
 export function ConsoleArticleFilterBar({lang, keyword}: {
@@ -13,11 +13,27 @@ export function ConsoleArticleFilterBar({lang, keyword}: {
 }) {
     const [searchText, setSearchText] = React.useState(keyword || '');
     const goSearch = () => {
-        console.debug('go search', searchText);
-        window.location.href = `/${lang}/console/community/articles?keyword=${encodeURIComponent(searchText)}`
+        const url = new URL(window.location.href);
+        if (searchText) {
+            url.searchParams.set('keyword', searchText);
+        } else {
+            url.searchParams.delete('keyword');
+        }
+        url.searchParams.delete('page'); // Reset to page 1 when searching
+        window.location.href = url.pathname + url.search;
+    }
+    const clearSearch = () => {
+        setSearchText('');
+        const url = new URL(window.location.href);
+        url.searchParams.delete('keyword');
+        url.searchParams.delete('page');
+        window.location.href = url.pathname + url.search;
     }
     const goCreateArticle = () => {
-        window.location.href = `/${lang}/console/community/articles/${uuidToBase58(EmptyUUID)}`
+        window.location.href = `/${lang}/community/articles/${uuidToBase58(EmptyUUID)}`
+    }
+    const goImportArticles = () => {
+        window.location.href = `/${lang}/community/articles/import`
     }
     return <>
         <div className={filterStyles.middleTop}>
@@ -25,17 +41,35 @@ export function ConsoleArticleFilterBar({lang, keyword}: {
                 <Button size={'small'} variant={'contained'} onClick={goCreateArticle}>
                     {transKey(lang, "console.article.createNew")}
                 </Button>
+                <Button size={'small'} variant={'outlined'} onClick={goImportArticles} startIcon={<UploadFileIcon />}>
+                    {transKey(lang, "console.article.importFromNotes")}
+                </Button>
             </div>
             <div className={filterStyles.topRight}>
                 <div className={filterStyles.searchBox}>
-                    <input placeholder={transKey(lang, "searchPlaceholder")} maxLength={128} value={searchText}
-                           onChange={(event) => setSearchText(event.target.value)}
-                           onKeyDown={(event) => {
-                               if (event.key === 'Enter') {
-                                   goSearch()
-                               }
-                           }}/>
-                    <SearchIcon fontSize={'small'} onClick={goSearch}/>
+                    <input 
+                        placeholder={transKey(lang, "searchPlaceholder")} 
+                        maxLength={128} 
+                        value={searchText}
+                        onChange={(event) => setSearchText(event.target.value)}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                                goSearch()
+                            }
+                        }}
+                    />
+                    {searchText && (
+                        <ClearIcon 
+                            fontSize={'small'} 
+                            onClick={clearSearch}
+                            style={{ cursor: 'pointer', color: '#999' }}
+                        />
+                    )}
+                    <SearchIcon 
+                        fontSize={'small'} 
+                        onClick={goSearch}
+                        style={{ cursor: 'pointer' }}
+                    />
                 </div>
             </div>
         </div>

@@ -10,8 +10,7 @@ import {css} from "@/gen/styled/css";
 import {CommunityArticleNodeService} from "@/components/community/articles";
 import {transKey} from "@/components/common/locales/normal";
 import {getPathname} from "@/components/server/pathname";
-import {SymbolUnknown} from "@pnnh/atom";
-
+import {SymbolUnknown} from "@pnnh/atom";import {serverConsoleSelectChannels} from "@/components/server/channels/channels";
 export const dynamic = "force-dynamic";
 
 const pageStyles = {
@@ -34,8 +33,8 @@ export default async function Home({params, searchParams}: {
     const pageLang = paramsValue.lang || langZh
     const metadata = new PageMetadata(pageLang)
     const serverConfig = await useServerConfig()
-    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
-    const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
+    const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
+    const publicStargateUrl = serverConfig.PUBLIC_STARGATE_URL
     const articleUid = tryBase58ToUuid(paramsValue.uid)
     const isNew = articleUid === EmptyUUID;
     let model: PSArticleModel | undefined = undefined;
@@ -74,7 +73,7 @@ export default async function Home({params, searchParams}: {
                 action: 'get',
                 keyword: copyFromUid
             }
-            const queryResult = await CommunityArticleNodeService.consoleQueryArticles(internalPortalUrl, pageLang, query)
+            const queryResult = await CommunityArticleNodeService.consoleQueryArticles(internalStargateUrl, pageLang, query)
             if (!queryResult || queryResult.range.length === 0) {
                 throw new Error(transKey(pageLang, "console.article.cannotFindCopy"));
             }
@@ -96,7 +95,7 @@ export default async function Home({params, searchParams}: {
             action: 'get',
             keyword: articleUid
         }
-        const queryResult = await CommunityArticleNodeService.consoleQueryArticles(internalPortalUrl, pageLang, query)
+        const queryResult = await CommunityArticleNodeService.consoleQueryArticles(internalStargateUrl, pageLang, query)
         if (!queryResult || queryResult.range.length === 0) {
             notFound()
         }
@@ -110,11 +109,19 @@ export default async function Home({params, searchParams}: {
             return <div>{transKey(pageLang, "console.article.unsupportedType")}</div>
         }
     }
+    
+    // Query channels for selection
+    const channelsData = await serverConsoleSelectChannels(internalStargateUrl, pageLang, {
+        page: 1,
+        size: 100
+    });
+    
     const modelString = JSON.stringify(model)
+    const channelsString = JSON.stringify(channelsData.range)
     return <ConsoleLayout lang={pageLang} metadata={metadata} pathname={pathname} searchParams={searchValue} userInfo={SymbolUnknown}>
         <div className={pageStyles.articlesPage}>
             <div className={pageStyles.pageContainer}>
-                <ConsoleArticleForm publicPortalUrl={publicPortalUrl} modelString={modelString} lang={pageLang}/>
+                <ConsoleArticleForm stargateUrl={publicStargateUrl} modelString={modelString} channelsString={channelsString} lang={pageLang}/>
             </div>
         </div>
     </ConsoleLayout>

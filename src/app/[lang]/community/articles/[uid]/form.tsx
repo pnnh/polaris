@@ -1,10 +1,11 @@
 'use client'
 
-import {generatorRandomString, TocItem} from "@pnnh/atom";
+import {EmptyUUID, generatorRandomString, TocItem} from "@pnnh/atom";
 import {ConsoleArticleEditor} from "./editor";
 import Button from "@mui/material/Button";
 import React from "react";
 import {PSArticleModel} from "@/components/common/models/article";
+import {PSChannelModel} from "@/components/common/models/channel";
 import {getDefaultImageUrl} from "@/components/common/note";
 import MenuItem from '@mui/material/MenuItem';
 import {supportedLanguages} from "@/components/common/language";
@@ -33,39 +34,86 @@ function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (
     </>
 }
 
-export function ConsoleArticleForm({publicPortalUrl, modelString, lang}: {
-    publicPortalUrl: string,
+function PSConsoleChannelSelector({channelUid, channels, onChange, lang}: { 
+    channelUid: string, 
+    channels: PSChannelModel[], 
+    onChange: (newChannel: string) => void,
+    lang: string
+}) {
+    return <>
+        <Select
+            value={channelUid}
+            size={'small'}
+            label="Channel"
+            onChange={(event) => onChange(event.target.value)}
+            displayEmpty
+        >
+            <MenuItem value="" disabled>
+                {transKey(lang, "console.article.selectChannel")}
+            </MenuItem>
+            {
+                channels.map(channel => (
+                    <MenuItem key={channel.uid} value={channel.uid}
+                              selected={channelUid === channel.uid} disableRipple>
+                        {channel.name}
+                    </MenuItem>
+                ))
+            }
+        </Select>
+    </>
+}
+
+export function ConsoleArticleForm({stargateUrl, modelString, channelsString, lang}: {
+    stargateUrl: string,
     modelString: string,
+    channelsString: string,
     lang: string
 }) {
     const oldModel = JSON.parse(modelString) as PSArticleModel;
+    const channels = JSON.parse(channelsString) as PSChannelModel[];
     const [wangLang, setWantLang] = React.useState(oldModel.lang);
     const [title, setTitle] = React.useState(oldModel.title);
     const [description, setDescription] = React.useState(oldModel.description);
     const [bodyText, setBodyText] = React.useState(oldModel.body || '');
+    const [selectedChannel, setSelectedChannel] = React.useState(oldModel.channel || '');
 
     const tocList: TocItem[] = []
     const titleId = generatorRandomString(8)
     tocList.push({title: oldModel.title, header: 0, id: titleId})
 
+    const isNew = oldModel.uid === EmptyUUID;
     const onSubmit = () => {
+        if (!selectedChannel) {
+            alert(transKey(lang, "console.article.channelRequired"));
+            return;
+        }
         const newModel = {
             uid: oldModel.uid,
             title: title,
             description: description,
             body: bodyText,
-            coverUrl: oldModel.coverUrl,
+            cover: oldModel.cover,
             header: oldModel.header,
             lang: wangLang,
-            channel: oldModel.channel
+            channel: selectedChannel
         }
-        CommunityBrowser.clientConsoleUpdateArticle(publicPortalUrl, oldModel.uid, newModel).then((articleId) => {
-            if (!articleId) {
-                console.error(transKey(lang, "console.article.updateFailed"))
-                return
-            }
-            window.location.href = `/${lang}/console/community/articles`
-        })
+        if (isNew) {
+            CommunityBrowser.clientConsoleInsertArticle(stargateUrl, newModel).then((articleId) => {
+                if (!articleId) {
+                    console.error(transKey(lang, "console.article.insertFailed"))
+                    return
+                }
+                window.location.href = `/${lang}/community/articles`
+            })
+        } else {
+            CommunityBrowser.clientConsoleUpdateArticle(stargateUrl, oldModel.uid, newModel).then((articleId) => {
+                if (!articleId) {
+                    console.error(transKey(lang, "console.article.updateFailed"))
+                    return
+                }
+                window.location.href = `/${lang}/community/articles`
+            })
+        }
     }
     const coverUrl = oldModel.coverUrl || getDefaultImageUrl();
     return <div className={formStyles.bodyContainer}>
@@ -83,10 +131,11 @@ export function ConsoleArticleForm({publicPortalUrl, modelString, lang}: {
         </div>
         <div className={formStyles.articleContainer}>
             <ConsoleArticleEditor tocList={tocList} header={oldModel.header}
-                                  body={bodyText} assetsUrl={'assetsUrl'} portalUrl={publicPortalUrl}
+                                  body={bodyText} assetsUrl={'assetsUrl'} portalUrl={stargateUrl}
                                   onChange={(bodyText) => setBodyText(bodyText)}/>
         </div>
         <div className={formStyles.bottomBar}>
+            <PSConsoleChannelSelector channelUid={selectedChannel} channels={channels} onChange={setSelectedChannel} lang={lang}/>
             <PSConsoleLanguageSelector lang={wangLang} onChange={setWantLang}/>
             <Button variant={'contained'} size={'small'} onClick={onSubmit}>{
                 transKey(lang, "console.article.save")

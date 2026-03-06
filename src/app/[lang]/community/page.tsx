@@ -3,12 +3,13 @@ import {css} from "@/gen/styled/css";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
 import {langEn, SymbolUnknown} from "@pnnh/atom";
-import ConsoleLayout from "@/components/server/console/layout";
 import ComputerIcon from "@mui/icons-material/Computer";
 import CloudQueueIcon from "@mui/icons-material/CloudQueue";
+import CommunityLayout from "@/components/server/community/layout";
 
 const pageStyles = {
     communityPage: css`
+        width: 100%;
     `,
     libGrid: css`
         margin-top: 1rem;
@@ -25,7 +26,7 @@ const pageStyles = {
         color: #000;
         text-decoration: none;
         padding: 0.5rem 1rem;
-        
+
         &:hover {
             background-color: #f0f0f0;
         }
@@ -60,67 +61,69 @@ export default async function Page({params, searchParams}: {
     const metadata = new PageMetadata(lang)
     metadata.title = pageTitle(lang, '')
 
-    return <ConsoleLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue} userInfo={SymbolUnknown}>
+    return <CommunityLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue}
+                            userInfo={SymbolUnknown}>
         <div className={pageStyles.communityPage}>
             社区目录主页
+
             <div className={pageStyles.libGrid}>
                 <div className={pageStyles.libHeader}>
-                    <a className={pageStyles.libLink}>最近笔记</a>
-                    <a href={`/${lang}/console/community/articles`} className={pageStyles.libLink}>全部笔记</a>
-                </div>
-                <div className={pageStyles.libBody}>
-                    <div className={pageStyles.libCard}>
-                        <ComputerIcon/>
-                        最近笔记1
-                    </div>
-                    <div className={pageStyles.libCard}>
-                        <ComputerIcon/>
-                        最近笔记2
-                    </div>
-                    <div className={pageStyles.libCard}>
-                        <CloudQueueIcon/>
-                        最近笔记3
-                    </div>
-                </div>
-            </div>
-            <div className={pageStyles.libGrid}>
-                <div className={pageStyles.libHeader}>
-                    <a className={pageStyles.libLink}>最近图片</a>
-                    <a href={`/${lang}/console/community/images`} className={pageStyles.libLink}>全部图片</a>
-                </div>
-                <div className={pageStyles.libBody}>
-                    <div className={pageStyles.libCard}>
-                        <ComputerIcon/>
-                        最近图片1
-                    </div>
-                    <div className={pageStyles.libCard}>
-                        <ComputerIcon/>
-                        最近图片2
-                    </div>
-                </div>
-            </div>
-            <div className={pageStyles.libGrid}>
-                <div className={pageStyles.libHeader}>
-                    <a className={pageStyles.libLink}>最近频道</a>
+                    <a className={pageStyles.libLink}>全部频道</a>
                     <a href={`/${lang}/console/community/channels`} className={pageStyles.libLink}>全部频道</a>
                 </div>
                 <div className={pageStyles.libBody}>
                     <div className={pageStyles.libCard}>
                         <ComputerIcon/>
-                        最近频道1
+                        全部频道1
                     </div>
                     <div className={pageStyles.libCard}>
                         <ComputerIcon/>
-                        最近频道2
+                        全部频道2
                     </div>
                     <div className={pageStyles.libCard}>
                         <CloudQueueIcon/>
-                        最近频道3
+                        全部频道3
+                    </div>
+                </div>
+            </div>
+            <div className={pageStyles.libGrid}>
+                <div className={pageStyles.libHeader}>
+                    <a className={pageStyles.libLink}>全部笔记</a>
+                    <a href={`/${lang}/console/community/articles`} className={pageStyles.libLink}>全部笔记</a>
+                </div>
+                <div className={pageStyles.libBody}>
+                    <div className={pageStyles.libCard}>
+                        <ComputerIcon/>
+                        全部笔记1
+                    </div>
+                    <div className={pageStyles.libCard}>
+                        <ComputerIcon/>
+                        全部笔记2
+                    </div>
+                    <div className={pageStyles.libCard}>
+                        <CloudQueueIcon/>
+                        全部笔记3
+                    </div>
+                </div>
+            </div>
+            <div className={pageStyles.libGrid}>
+                <div className={pageStyles.libHeader}>
+                    <a className={pageStyles.libLink}>全部图片</a>
+                    <a href={`/${lang}/console/community/images`} className={pageStyles.libLink}>全部图片</a>
+                </div>
+                <div className={pageStyles.libBody}>
+                    <div className={pageStyles.libCard}>
+                        <ComputerIcon/>
+                        全部图片1
+                    </div>
+                    <div className={pageStyles.libCard}>
+                        <ComputerIcon/>
+                        全部图片2
                     </div>
                 </div>
             </div>
         </div>
-    </ConsoleLayout>
+    </CommunityLayout>
 }
 
 
