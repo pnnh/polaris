@@ -6,4 +6,5 @@ export interface PSChannelModel {
     owner: string
     create_time: string
     update_time: string
+    match?: string
 }
