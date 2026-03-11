@@ -1,3 +1,24 @@
+export interface CmFileModel {
+    uid: string
+    name: string
+    title: string
+    header: string
+    body: string
+    create_time: string
+    update_time: string
+    keywords: string
+    description: string
+    status: number
+    cover: string
+    discover: number
+    owner: string
+    owner_name: string
+    url: string
+    mimetype: string
+    parent: string
+    path: string
+}
+
 export interface PSFileModel {
     title: string
     create_time: string

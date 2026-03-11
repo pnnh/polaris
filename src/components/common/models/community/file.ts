@@ -1,4 +1,4 @@
-export interface PMFileModel {
+export interface CMFileModel {
     title: string
     create_time: string
     update_time: string
@@ -26,3 +26,6 @@ export interface PMFileModel {
     is_ignore: string
     object_uid: string
 }
+
+// 根目录的文件uid，固定不变
+export const RootFileUid = "76de121c-0fab-11f1-a643-6c02e0549f86";

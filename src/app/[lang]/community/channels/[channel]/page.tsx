@@ -2,15 +2,13 @@ import React from 'react'
 import {css} from "@/gen/styled/css";
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
-import {SymbolUnknown} from "@pnnh/atom";
-import {mustBase58ToUuid, tryBase58ToUuid} from "@pnnh/atom";
+import {EmptyUUID, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
 import {notFound} from "next/navigation";
-import ConsoleLayout from "@/components/server/console/layout";
 import {serverConsoleGetChannel} from "@/components/server/channels/channels";
 import {useServerConfig} from "@/components/server/config";
 import {ConsoleChannelForm} from "./form";
-import {EmptyUUID} from "@pnnh/atom";
 import {PSChannelModel} from "@/components/common/models/channel";
+import CommunityLayout from "@/components/server/community/layout";
 
 export const dynamic = "force-dynamic";
 
@@ -74,14 +72,14 @@ export default async function Page({params, searchParams}: {
 
     const modelString = JSON.stringify(model)
 
-    return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchValue} pathname={pathname}
-                          metadata={metadata}>
+    return <CommunityLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchValue} pathname={pathname}
+                            metadata={metadata}>
         <div className={pageStyles.contentContainer}>
             <div className={pageStyles.conMiddle}>
                 <ConsoleChannelForm stargateUrl={publicStargateUrl} modelString={modelString}/>
             </div>
         </div>
-    </ConsoleLayout>
+    </CommunityLayout>
 }
 
 

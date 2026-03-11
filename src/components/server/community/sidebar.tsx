@@ -7,9 +7,6 @@ import {css} from "@/gen/styled/css";
 export function CommunitySidebar({lang}: { lang: string }) {
     return <div className={sidebarStyles.communitySidebar}>
         <a href={`/${lang}`}>{transKey(lang, "common.home")}</a>
-        <a href={`/${lang}/community/userinfo`}>
-            {transKey(lang, "common.userInfo")}
-        </a>
         <a href={`/${lang}/community/files`}>
             {transTodo("文件")}
         </a>

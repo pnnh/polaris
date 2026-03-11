@@ -2173,4 +2173,234 @@ export const TransTexts: {
         "pt-PT": "Falha na sincronização",
         "zh-TW": "同步失敗"
     },
+    "console.photo.createNew": {
+        "zh": "新增图集",
+        "en": "Create Photo",
+        "es": "Crear foto",
+        "fr": "Créer une photo",
+        "ja": "写真を作成",
+        "de-DE": "Foto erstellen",
+        "pt-PT": "Criar foto",
+        "zh-TW": "新增圖集"
+    },
+    "console.photo.title": {
+        "zh": "标题",
+        "en": "Title",
+        "es": "Título",
+        "fr": "Titre",
+        "ja": "タイトル",
+        "de-DE": "Titel",
+        "pt-PT": "Título",
+        "zh-TW": "標題"
+    },
+    "console.photo.description": {
+        "zh": "描述",
+        "en": "Description",
+        "es": "Descripción",
+        "fr": "Description",
+        "ja": "説明",
+        "de-DE": "Beschreibung",
+        "pt-PT": "Descrição",
+        "zh-TW": "描述"
+    },
+    "console.photo.extendedInfo": {
+        "zh": "扩展信息",
+        "en": "Extended Info",
+        "es": "Información extendida",
+        "fr": "Informations étendues",
+        "ja": "拡張情報",
+        "de-DE": "Erweiterte Informationen",
+        "pt-PT": "Informações estendidas",
+        "zh-TW": "擴展信息"
+    },
+    "console.photo.action": {
+        "zh": "操作",
+        "en": "Action",
+        "es": "Acción",
+        "fr": "Action",
+        "ja": "操作",
+        "de-DE": "Aktion",
+        "pt-PT": "Ação",
+        "zh-TW": "操作"
+    },
+    "console.photo.save": {
+        "zh": "保存图集",
+        "en": "Save Photo",
+        "es": "Guardar foto",
+        "fr": "Enregistrer la photo",
+        "ja": "写真を保存",
+        "de-DE": "Foto speichern",
+        "pt-PT": "Salvar foto",
+        "zh-TW": "保存圖集"
+    },
+    "console.photo.insertFailed": {
+        "zh": "图集插入失败",
+        "en": "Photo insert failed",
+        "es": "Error al insertar foto",
+        "fr": "Échec de l'insertion de la photo",
+        "ja": "写真の挿入に失敗しました",
+        "de-DE": "Einfügen des Fotos fehlgeschlagen",
+        "pt-PT": "Falha ao inserir foto",
+        "zh-TW": "圖集插入失敗"
+    },
+    "console.photo.updateFailed": {
+        "zh": "图集更新失败",
+        "en": "Photo update failed",
+        "es": "Error al actualizar foto",
+        "fr": "Échec de la mise à jour de la photo",
+        "ja": "写真の更新に失敗しました",
+        "de-DE": "Aktualisierung des Fotos fehlgeschlagen",
+        "pt-PT": "Falha ao atualizar foto",
+        "zh-TW": "圖集更新失敗"
+    },
+    "console.photo.selectChannel": {
+        "zh": "选择频道",
+        "en": "Select Channel",
+        "es": "Seleccionar canal",
+        "fr": "Sélectionner un canal",
+        "ja": "チャンネルを選択",
+        "de-DE": "Kanal auswählen",
+        "pt-PT": "Selecionar canal",
+        "zh-TW": "選擇頻道"
+    },
+    "console.photo.channelRequired": {
+        "zh": "请选择频道",
+        "en": "Please select a channel",
+        "es": "Por favor seleccione un canal",
+        "fr": "Veuillez sélectionner un canal",
+        "ja": "チャンネルを選択してください",
+        "de-DE": "Bitte wählen Sie einen Kanal",
+        "pt-PT": "Por favor, selecione um canal",
+        "zh-TW": "請選擇頻道"
+    },
+    "console.photo.sync": {
+        "zh": "同步",
+        "en": "Sync",
+        "es": "Sincronizar",
+        "fr": "Synchroniser",
+        "ja": "同期",
+        "de-DE": "Synchronisieren",
+        "pt-PT": "Sincronizar",
+        "zh-TW": "同步"
+    },
+    "photos.getListFailed": {
+        "zh": "获取图集列表失败",
+        "en": "Failed to get photo list",
+        "es": "Error al obtener la lista de fotos",
+        "fr": "Échec de l'obtention de la liste de photos",
+        "ja": "写真リストの取得に失敗しました",
+        "de-DE": "Fehler beim Abrufen der Fotoliste",
+        "pt-PT": "Falha ao obter a lista de fotos",
+        "zh-TW": "獲取圖集列表失敗"
+    },
+    "console.file.createNew": {
+        "zh": "新增文件",
+        "en": "Create File",
+        "es": "Crear archivo",
+        "fr": "Créer un fichier",
+        "ja": "ファイルを作成",
+        "de-DE": "Datei erstellen",
+        "pt-PT": "Criar arquivo",
+        "zh-TW": "新增文件"
+    },
+    "console.file.title": {
+        "zh": "标题",
+        "en": "Title",
+        "es": "Título",
+        "fr": "Titre",
+        "ja": "タイトル",
+        "de-DE": "Titel",
+        "pt-PT": "Título",
+        "zh-TW": "標題"
+    },
+    "console.file.description": {
+        "zh": "描述",
+        "en": "Description",
+        "es": "Descripción",
+        "fr": "Description",
+        "ja": "説明",
+        "de-DE": "Beschreibung",
+        "pt-PT": "Descrição",
+        "zh-TW": "描述"
+    },
+    "console.file.url": {
+        "zh": "链接",
+        "en": "URL",
+        "es": "URL",
+        "fr": "URL",
+        "ja": "URL",
+        "de-DE": "URL",
+        "pt-PT": "URL",
+        "zh-TW": "鏈接"
+    },
+    "console.file.mimetype": {
+        "zh": "类型",
+        "en": "Type",
+        "es": "Tipo",
+        "fr": "Type",
+        "ja": "タイプ",
+        "de-DE": "Typ",
+        "pt-PT": "Tipo",
+        "zh-TW": "類型"
+    },
+    "console.file.extendedInfo": {
+        "zh": "扩展信息",
+        "en": "Extended Info",
+        "es": "Información extendida",
+        "fr": "Informations étendues",
+        "ja": "拡張情報",
+        "de-DE": "Erweiterte Informationen",
+        "pt-PT": "Informações estendidas",
+        "zh-TW": "擴展信息"
+    },
+    "console.file.action": {
+        "zh": "操作",
+        "en": "Action",
+        "es": "Acción",
+        "fr": "Action",
+        "ja": "操作",
+        "de-DE": "Aktion",
+        "pt-PT": "Ação",
+        "zh-TW": "操作"
+    },
+    "console.file.save": {
+        "zh": "保存文件",
+        "en": "Save File",
+        "es": "Guardar archivo",
+        "fr": "Enregistrer le fichier",
+        "ja": "ファイルを保存",
+        "de-DE": "Datei speichern",
+        "pt-PT": "Salvar arquivo",
+        "zh-TW": "保存文件"
+    },
+    "console.file.insertFailed": {
+        "zh": "文件插入失败",
+        "en": "File insert failed",
+        "es": "Error al insertar archivo",
+        "fr": "Échec de l'insertion du fichier",
+        "ja": "ファイルの挿入に失敗しました",
+        "de-DE": "Einfügen der Datei fehlgeschlagen",
+        "pt-PT": "Falha ao inserir arquivo",
+        "zh-TW": "文件插入失敗"
+    },
+    "console.file.updateFailed": {
+        "zh": "文件更新失败",
+        "en": "File update failed",
+        "es": "Error al actualizar archivo",
+        "fr": "Échec de la mise à jour du fichier",
+        "ja": "ファイルの更新に失敗しました",
+        "de-DE": "Aktualisierung der Datei fehlgeschlagen",
+        "pt-PT": "Falha ao atualizar arquivo",
+        "zh-TW": "文件更新失敗"
+    },
+    "files.getListFailed": {
+        "zh": "获取文件列表失败",
+        "en": "Failed to get file list",
+        "es": "Error al obtener la lista de archivos",
+        "fr": "Échec de l'obtention de la liste de fichiers",
+        "ja": "ファイルリストの取得に失敗しました",
+        "de-DE": "Fehler beim Abrufen der Dateiliste",
+        "pt-PT": "Falha ao obter a lista de arquivos",
+        "zh-TW": "獲取文件列表失敗"
+    },
 }
