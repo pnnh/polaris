@@ -2,7 +2,7 @@ import React from 'react'
 import {css} from "@/gen/styled/css";
 import {PSFileModel} from "@/components/common/models/file";
 import {transTodo} from "@/components/common/locales/normal";
-import {replaceSearchParams, STSubString, uuidToBase58} from "@pnnh/atom";
+import {STSubString, uuidToBase58} from "@pnnh/atom";
 import {PSImageServer} from "@/components/server/image";
 import {getDefaultImageUrl} from "@/components/common/note";
 
@@ -68,7 +68,7 @@ export function PSImageCard({model, lang}: {
 
     return <div className={imageStyles.middleItem} key={model.uid}>
         <div className={imageStyles.imageCover} data-article={model.uid}>
-            <PSImageServer lang={lang} src={imageUrl} alt={model.title} fill={true}/>
+            <PSImageServer src={imageUrl} alt={model.title} fill={true}/>
         </div>
         <div className={imageStyles.imageInfo}>
             <div className={imageStyles.itemTitle}>

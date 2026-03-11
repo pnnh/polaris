@@ -1,16 +1,10 @@
 import React from 'react'
 
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import {getClientIp, getPathname} from "@/components/server/pathname";
-import {
-    CodeOk,
-    CommonResult,
-    langEn,
-    SymbolUnknown,
-    tryBase58ToUuid
-} from "@pnnh/atom";
+import {getPathname} from "@/components/server/pathname";
+import {CodeOk, CommonResult, langEn, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
-import {getDefaultImageUrl, getDefaultNoteImageByUid} from "@/components/common/note";
+import {getDefaultImageUrl} from "@/components/common/note";
 import ArticleReadLayout from "@/components/server/content/article/layout";
 import {useServerConfig} from "@/components/server/config";
 
@@ -51,7 +45,7 @@ export default async function Home({params, searchParams}: {
                               metadata={metadata} userInfo={SymbolUnknown}>
         <div>
 
-            <PSImageServer lang={lang} src={imageUrl} alt={model.title} fill={true}/>
+            <PSImageServer src={imageUrl} alt={model.title} fill={true}/>
         </div>
     </ArticleReadLayout>
 }

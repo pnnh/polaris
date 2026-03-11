@@ -11,7 +11,7 @@ export function CommunitySidebar({lang}: { lang: string }) {
             {transKey(lang, "common.userInfo")}
         </a>
         <a href={`/${lang}/community/files`}>
-            {transKey(lang, "common.files")}
+            {transTodo("文件")}
         </a>
         <a href={`/${lang}/community/articles`}>
             {transTodo("文章")}
@@ -20,7 +20,7 @@ export function CommunitySidebar({lang}: { lang: string }) {
             {transTodo("频道")}
         </a>
         <a href={`/${lang}/community/photos`}>
-            {transKey(lang, "common.images")}
+            {transTodo("图片")}
         </a>
     </div>
 }

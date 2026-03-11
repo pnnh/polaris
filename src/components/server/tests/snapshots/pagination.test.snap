@@ -2,103 +2,68 @@
 
 exports[`PaginationServer renders correctly 1`] = `
 <div>
-  <style
-    id="style-d59f406b"
-  >
-    .atom-00f84672{
-    margin: 0.5rem;
-}
-.atom-d587e55c{
-    padding: 8px;
-    margin-right: 4px;
-    min-width: 16px;
-    text-decoration: none;
-    text-align: center;
-    color: #000000;
-    width: 32px;
-    height: 32px;
-}
-.atom-2b159ee4{
-    background-color: rgba(42, 142, 224, 0.84);
-    display: inline-block;
-    min-width: 16px;
-    text-decoration: none;
-    width: 32px;
-    text-align: center;
-    color: #FFFFFF;
-}
-.atom-396fccb3{
-    width: 100%;
-    display: flex;
-    justify-content: flex-start;
-    margin: 0 auto;
-    list-style: none;
-    padding: 0 16px 0 16px;
-}
-
-  </style>
   <div
-    class="atom-396fccb3"
+    class="width_100% display_flex justify-content_center margin_0_auto list-style_none padding_0_16px_0_16px"
   >
     <div
-      class="atom-00f84672"
+      class="margin_0.5rem"
     >
       <a
-        class="atom-d587e55c"
+        class="padding_8px margin-right_4px min-width_16px text-decoration_none text-align_center color_#000000 width_32px height_32px"
         href="/articles?page=2"
       >
         Previous Page
       </a>
       <a
-        class="atom-d587e55c"
+        class="padding_8px margin-right_4px min-width_16px text-decoration_none text-align_center color_#000000 width_32px height_32px"
         href="/articles?page=1"
       >
         1
       </a>
       <a
-        class="atom-d587e55c"
+        class="padding_8px margin-right_4px min-width_16px text-decoration_none text-align_center color_#000000 width_32px height_32px"
         href="/articles?page=2"
       >
         2
       </a>
       <a
-        class="atom-2b159ee4"
+        class="background-color_rgba(42,_142,_224,_0.84) display_inline-block min-width_16px text-decoration_none width_32px text-align_center color_#FFFFFF"
         href="/articles?page=3"
       >
         3
       </a>
       <a
-        class="atom-d587e55c"
+        class="padding_8px margin-right_4px min-width_16px text-decoration_none text-align_center color_#000000 width_32px height_32px"
         href="/articles?page=4"
       >
         4
       </a>
       <a
-        class="atom-d587e55c"
+        class="padding_8px margin-right_4px min-width_16px text-decoration_none text-align_center color_#000000 width_32px height_32px"
         href="/articles?page=5"
       >
         5
       </a>
       <a
-        class="atom-d587e55c"
+        class="padding_8px margin-right_4px min-width_16px text-decoration_none text-align_center color_#000000 width_32px height_32px"
         href="/articles?page=6"
       >
         6
       </a>
       <a
-        class="atom-d587e55c"
+        class="padding_8px margin-right_4px min-width_16px text-decoration_none text-align_center color_#000000 width_32px height_32px"
         href="/articles?page=7"
       >
         7
       </a>
       <a
-        class="atom-d587e55c"
+        class="padding_8px margin-right_4px min-width_16px text-decoration_none text-align_center color_#000000 width_32px height_32px"
         href="/articles?page=8"
       >
         8
       </a>
       <a
-        class="atom-d587e55c"
+        class="padding_8px margin-right_4px min-width_16px text-decoration_none text-align_center color_#000000 width_32px height_32px"
         href="/articles?page=4"
       >
         Next Page

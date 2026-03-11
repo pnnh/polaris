@@ -1,6 +1,5 @@
 'use client'
 
-import Image from "next/image";
 import {useEffect, useState} from "react";
 import {css} from "@/gen/styled/css";
 
@@ -42,6 +41,6 @@ export function GoTop({anchor}: { anchor: string }) {
                         behavior: 'smooth'
                     })
                 }}>
-        <Image src='/icons/gotop.svg' alt='go-top' height={48} width={48}/>
+        <img src='/icons/gotop.svg' alt='go-top' height={48} width={48}/>
     </div>
 }

@@ -1,4 +1,3 @@
-import {IBrowserConfig} from "@/components/common/config";
 import {serverGetGlobalVariable, serverSetGlobalVariable} from "@pnnh/atom/nodejs";
 import {ConfigOptions, initAppConfig} from "@/components/server/config/config";
 

@@ -1,0 +1,33 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`GoTop snapshot - hidden by default 1`] = `
+<div>
+  <div
+    class="position_fixed bottom_4rem right_4rem z-index_1000 cursor_pointer"
+    style="display: none;"
+  >
+    <img
+      alt="go-top"
+      height="48"
+      src="/icons/gotop.svg"
+      width="48"
+    />
+  </div>
+</div>
+`;
+
+exports[`GoTop snapshot - with custom anchor 1`] = `
+<div>
+  <div
+    class="position_fixed bottom_4rem right_4rem z-index_1000 cursor_pointer"
+    style="display: none;"
+  >
+    <img
+      alt="go-top"
+      height="48"
+      src="/icons/gotop.svg"
+      width="48"
+    />
+  </div>
+</div>
+`;

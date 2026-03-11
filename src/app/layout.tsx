@@ -2,9 +2,8 @@ import 'server-only'
 
 import React from "react";
 import './global.css'
-import {langEnUS} from "@/components/common/language";
+import {getTargetLang, langEnUS} from "@/components/common/language";
 import {headers} from "next/headers";
-import {filterAcceptLanguage} from "@/components/server/language";
 import {JotaiProvider} from "@/components/client/content/provider";
 import {AppRouterCacheProvider} from "@mui/material-nextjs/v15-appRouter";
 import {ThemeProvider} from '@mui/material/styles';
@@ -23,7 +22,7 @@ export default async function RootLayout({
 }) {
     const headersList = await headers()
     const acceptLang = headersList.get('Accept-Language') || langEnUS
-    const lang = filterAcceptLanguage(acceptLang)
+    const lang = getTargetLang(acceptLang, langEnUS)
     // const serverConfig = await useServerConfig()
     // const browserConfigString = JSON.stringify(usePublicConfig(serverConfig))
     // const encodedBrowserConfig = encodeBase58String(browserConfigString)

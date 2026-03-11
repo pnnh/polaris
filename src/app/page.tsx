@@ -4,8 +4,7 @@ import {getPathname} from "@/components/server/pathname";
 import {calcPagination, replaceSearchParams, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
 import {PageMetadata} from "@/components/common/utils/page";
 import {headers} from "next/headers";
-import {langEnUS} from "@/components/common/language";
-import {filterAcceptLanguage} from "@/components/server/language";
+import {getTargetLang, langEnUS} from "@/components/common/language";
 import {PaginationServer} from "@/components/server/pagination";
 import {FileSelectOptions, selectFilesFromBackend} from "@/components/server/tools/tools";
 import {PSHomeBody} from "@/components/server/body";
@@ -24,7 +23,7 @@ export default async function Page({searchParams}: {
     const pageSize = 16
     const headersList = await headers()
     const acceptLang = headersList.get('Accept-Language') || langEnUS
-    const lang = filterAcceptLanguage(acceptLang)
+    const lang = getTargetLang(acceptLang, langEnUS)
 
     const options: FileSelectOptions = {
         page, size: pageSize

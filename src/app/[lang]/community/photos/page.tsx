@@ -1,16 +1,10 @@
 import React from 'react'
 import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getPathname} from "@/components/server/pathname";
-import {SymbolUnknown} from "@pnnh/atom";
-import {PaginationServer} from "@/components/server/pagination";
-import {replaceSearchParams} from "@pnnh/atom";
-import {calcPagination} from "@pnnh/atom";
-import {langEn} from "@pnnh/atom";
+import {calcPagination, langEn, SymbolUnknown} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
-import ConsoleImageLayout from "@/components/server/console/images/layout";
-import {ConsoleImageFilterBar} from "./filter";
-import {ConsoleImageMiddleBody} from "./image";
 import {css} from "@/gen/styled/css";
+import CommunityLayout from "@/components/server/community/layout";
 
 export const dynamic = "force-dynamic";
 
@@ -59,19 +53,9 @@ export default async function Page({params, searchParams}: {
 
     const libName = searchParamsValue.libName
     const pagination = calcPagination(page, 100, pageSize)
-    return <ConsoleImageLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                               metadata={metadata}>
+    return <CommunityLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
+                            metadata={metadata}>
         <div className={pageStyles.contentContainer}>
-            <ConsoleImageFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
-            <div className={pageStyles.conMiddle}>
-                <ConsoleImageMiddleBody libKey={libName} lang={lang}
-                                        portalUrl={serverConfig.PUBLIC_PORTAL_URL}/>
-                <div className={pageStyles.middlePagination}>
-                    <PaginationServer lang={lang} pagination={pagination}
-                                      pageLinkFunc={(page) =>
-                                          `/${lang}/console/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
-                </div>
-            </div>
         </div>
-    </ConsoleImageLayout>
+    </CommunityLayout>
 }

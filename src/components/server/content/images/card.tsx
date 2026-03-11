@@ -15,6 +15,7 @@ const styles = {
         flex-shrink: 0;
         position: relative;
         margin-right: 1rem;
+
         & img {
             width: 100%;
             height: 100%;
@@ -37,6 +38,7 @@ const styles = {
         line-height: 24px;
         color: #252933;
         overflow: hidden;
+
         & a {
             color: #252933;
             text-decoration: none;
@@ -63,7 +65,7 @@ export function ImageCard({model, lang}: {
 
     return <div className={styles.middleItem} key={model.uid}>
         <div className={styles.imageCover} data-article={model.uid}>
-            <PSImageServer lang={lang} src={imageUrl} alt={model.title} fill={true}/>
+            <PSImageServer src={imageUrl} alt={model.title} fill={true}/>
         </div>
         <div className={styles.imageInfo}>
             <div className={styles.itemTitle}>

@@ -116,10 +116,10 @@ export function ArticleCard({model, lang, stargateUrl}: {
     const syncUrl = `${stargateUrl}/console/community/articles/${model.uid}/sync`
     // @ts-ignore - has_note is added by SQL query
     const hasNote = model.has_note === true || model.has_note === 'true' || model.has_note === 't';
-    
+
     return <div className={articleStyles.middleItem} key={model.uid} data-article={model.uid}>
         <div className={articleStyles.itemCover}>
-            <PSImageServer lang={lang} src={imageUrl} alt={model.title} fill={true}/>
+            <PSImageServer src={imageUrl} alt={model.title} fill={true}/>
         </div>
         <div className={articleStyles.itemTitle}>
             <a href={readUrl} title={model.uid}>{model.title}</a>

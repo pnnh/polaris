@@ -38,6 +38,7 @@ const styles = {
         line-height: 24px;
         color: var(--text-primary-color);
         overflow: hidden;
+
         & a {
             color: var(--text-primary-color);
             text-decoration: none;
@@ -69,6 +70,7 @@ const styles = {
         height: 8rem;
         position: relative;
         margin-right: 1rem;
+
         & img {
             width: 100%;
             height: 100%;
@@ -116,7 +118,7 @@ export function ArticleCard({model, lang}: {
             </div>
         </div>
         <div className={styles.itemCover}>
-            <PSImageServer lang={lang} src={imageUrl} alt={model.title} fill={true}/>
+            <PSImageServer src={imageUrl} alt={model.title} fill={true}/>
         </div>
     </div>
 }

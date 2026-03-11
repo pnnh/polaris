@@ -1,5 +1,4 @@
 import {FullPagination} from "@pnnh/atom";
-import {PSComponentLayout, PSComponentLayoutProps} from "@/components/common/component";
 import {transKey} from "@/components/common/locales/normal";
 import {css} from "@/gen/styled/css";
 
@@ -36,12 +35,12 @@ const stylePageList = css`
     padding: 0 16px 0 16px;
 `
 
-export function PaginationServer({lang, pagination, pageLinkFunc, inlineStyle, comId}:
-                                     {
-                                         lang: string,
-                                         pagination: FullPagination,
-                                         pageLinkFunc: (page: number) => string
-                                     } & PSComponentLayoutProps) {
+export function PaginationServer({lang, pagination, pageLinkFunc}:
+                                 {
+                                     lang: string,
+                                     pagination: FullPagination,
+                                     pageLinkFunc: (page: number) => string
+                                 }) {
     return (<div className={stylePageList}>
         <div className={stylePageContent}>
             {pagination.previousPage >= 1

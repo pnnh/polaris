@@ -2,15 +2,11 @@ import React from 'react'
 import ContentLayout from "@/components/server/content/layout";
 import {getPathname} from "@/components/server/pathname";
 import {css} from "@/gen/styled/css";
-import {CodeOk, PLSelectResult, SymbolUnknown} from "@pnnh/atom";
+import {CodeOk, isValidUUID, langEn, PLSelectResult, STSubString, SymbolUnknown, uuidToBase58} from "@pnnh/atom";
 import {PSChannelModel} from "@/components/common/models/channel";
-import {uuidToBase58} from "@pnnh/atom";
-import {isValidUUID} from "@pnnh/atom";
 import {PSImageServer} from "@/components/server/image";
-import {STSubString} from "@pnnh/atom";
 import {getDefaultChanImageByUid} from "@/components/common/channel";
 import {PageMetadata} from "@/components/common/utils/page";
-import {langEn} from "@pnnh/atom";
 import queryString from "query-string";
 import {useServerConfig} from "@/components/server/config";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
@@ -31,7 +27,7 @@ const pageStyles = {
         display: grid;
         grid-gap: 1rem;
         grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-        
+
         @media (max-width: 48rem) {
             grid-template-columns: 1fr;
         }
@@ -55,7 +51,7 @@ const pageStyles = {
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05), 0 0 1px rgba(0, 0, 0, 0.1);
         color: #4a4a4a;
         position: relative;
-        
+
         &:last-child {
             border-bottom-width: 0;
         }
@@ -92,7 +88,7 @@ const pageStyles = {
         width: 200px;
         height: 160px;
         position: relative;
-        
+
         img {
             width: 100%;
             height: 100%;
@@ -155,7 +151,7 @@ function Item(props: { model: PSChannelModel, lang: string }) {
 
     return < div className={pageStyles.item}>
         <div className={pageStyles.itemCover}>
-            <PSImageServer lang={props.lang} src={imageUrl} alt='star' width={256} height={256}/>
+            <PSImageServer src={imageUrl} alt='star' width={256} height={256}/>
         </div>
         <div className={pageStyles.content}>
             <div className={pageStyles.title}>
