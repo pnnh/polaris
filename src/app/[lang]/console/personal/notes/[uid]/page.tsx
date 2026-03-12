@@ -1,5 +1,5 @@
 import React from 'react'
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+
 import {getPathname} from "@/components/server/pathname";
 import {EmptyUUID, langZh, mustBase58ToUuid, SymbolUnknown, tryBase58ToUuid, uuidToBase58} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
@@ -33,7 +33,6 @@ export default async function Home({params, searchParams}: {
     const paramsValue = await params;
     const searchValue = await searchParams;
     const pageLang = paramsValue.lang || langZh
-    const metadata = new PageMetadata(pageLang)
     const serverConfig = await useServerConfig()
     const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
     const articleUid = tryBase58ToUuid(paramsValue.uid)
@@ -97,25 +96,21 @@ export default async function Home({params, searchParams}: {
             }
             return
         }
-        metadata.title = pageTitle(pageLang, model.title)
-
-        metadata.description = model.description
-        metadata.keywords = model.keywords
 
         if (!model.body) {
             return <div>{transKey(pageLang, 'console.note.unsupportedType')}</div>
         }
     }
-    
+
     // Query channels for publishing to community
     const channelsData = await serverConsoleSelectChannels(internalStargateUrl, pageLang, {
         page: 1,
         size: 100
     });
-    
+
     const modelString = JSON.stringify(model)
     const channelsString = JSON.stringify(channelsData.range)
-    return <ConsoleLayout lang={pageLang} metadata={metadata} pathname={pathname} searchParams={searchValue}
+    return <ConsoleLayout lang={pageLang} pathname={pathname} searchParams={searchValue}
                           userInfo={SymbolUnknown}>
         <div className={pageStyles.articlesPage}>
             <div className={pageStyles.pageContainer}>

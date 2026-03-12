@@ -5,7 +5,7 @@ import {getPathname} from "@/components/server/pathname";
 import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {PaginationServer} from "@/components/server/pagination";
 import {useServerConfig} from "@/components/server/config";
-import {PageMetadata} from "@/components/common/utils/page";
+
 import {serverSelectImages} from "@/components/server/images/image";
 import {ImageMiddleBody} from "@/components/server/content/images/image";
 import {transKey} from "@/components/common/locales/normal";
@@ -28,7 +28,7 @@ const pageStyles = {
         padding: 0.5rem 0.5rem;
         border-radius: 0.25rem;
         background-color: var(--background-color);
-        
+
         &:hover {
             text-decoration: underline;
         }
@@ -58,8 +58,6 @@ export default async function Page({params, searchParams}: {
     const lang = paramsValue.lang || langEn
     const searchParamsValue = await searchParams
 
-    const metadata = new PageMetadata(lang)
-
     let page = Number(searchParamsValue.page)
     if (isNaN(page)) {
         page = 1
@@ -81,7 +79,7 @@ export default async function Page({params, searchParams}: {
     const pagination = calcPagination(page, selectData.count, pageSize)
 
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata}>
+    >
         <div className={pageStyles.contentContainer}>
             <div className={pageStyles.conTop}>
                 <a className={pageStyles.linkTag} href={`/${lang}/images?type=illustration`}>

@@ -1,6 +1,6 @@
 import React from 'react'
 import {css} from "@/gen/styled/css";
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+
 import {getPathname} from "@/components/server/pathname";
 import {langEn, SymbolUnknown} from "@pnnh/atom";
 import ComputerIcon from "@mui/icons-material/Computer";
@@ -58,10 +58,8 @@ export default async function Page({params, searchParams}: {
     if (isNaN(page)) {
         page = 1
     }
-    const metadata = new PageMetadata(lang)
-    metadata.title = pageTitle(lang, '')
 
-    return <CommunityLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue}
+    return <CommunityLayout lang={lang} pathname={pathname} searchParams={searchParamsValue}
                             userInfo={SymbolUnknown}>
         <div className={pageStyles.communityPage}>
             社区目录主页
@@ -69,7 +67,7 @@ export default async function Page({params, searchParams}: {
             <div className={pageStyles.libGrid}>
                 <div className={pageStyles.libHeader}>
                     <a className={pageStyles.libLink}>全部频道</a>
-                    <a href={`/${lang}/console/community/channels`} className={pageStyles.libLink}>全部频道</a>
+                    <a href={`/${lang}/community/channels`} className={pageStyles.libLink}>全部频道</a>
                 </div>
                 <div className={pageStyles.libBody}>
                     <div className={pageStyles.libCard}>
@@ -89,7 +87,7 @@ export default async function Page({params, searchParams}: {
             <div className={pageStyles.libGrid}>
                 <div className={pageStyles.libHeader}>
                     <a className={pageStyles.libLink}>全部笔记</a>
-                    <a href={`/${lang}/console/community/articles`} className={pageStyles.libLink}>全部笔记</a>
+                    <a href={`/${lang}/community/articles`} className={pageStyles.libLink}>全部笔记</a>
                 </div>
                 <div className={pageStyles.libBody}>
                     <div className={pageStyles.libCard}>
@@ -109,7 +107,7 @@ export default async function Page({params, searchParams}: {
             <div className={pageStyles.libGrid}>
                 <div className={pageStyles.libHeader}>
                     <a className={pageStyles.libLink}>全部图片</a>
-                    <a href={`/${lang}/console/community/images`} className={pageStyles.libLink}>全部图片</a>
+                    <a href={`/${lang}/community/images`} className={pageStyles.libLink}>全部图片</a>
                 </div>
                 <div className={pageStyles.libBody}>
                     <div className={pageStyles.libCard}>

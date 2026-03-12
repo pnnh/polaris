@@ -1,6 +1,6 @@
 import React from 'react'
 import {css} from "@/gen/styled/css";
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+
 import {PaginationServer} from "@/components/server/pagination";
 import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
@@ -57,9 +57,6 @@ export default async function Page({params, searchParams}: {
     const pageSize = 10
     const channelPk = searchParamsValue.channel
 
-    const metadata = new PageMetadata(lang)
-    metadata.title = pageTitle(lang, '')
-
     const selectQuery = {
         sort: searchParamsValue.sort,
         filter: searchParamsValue.filter,
@@ -75,7 +72,7 @@ export default async function Page({params, searchParams}: {
         lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
-    return <ConsoleLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue}
+    return <ConsoleLayout lang={lang} pathname={pathname} searchParams={searchParamsValue}
                           userInfo={SymbolUnknown}>
         <div className={pageStyles.articlesPage}>
             <div className={pageStyles.pageContainer}>

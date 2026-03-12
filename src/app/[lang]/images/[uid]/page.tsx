@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+
 import {getPathname} from "@/components/server/pathname";
 import {CodeOk, CommonResult, langEn, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
@@ -21,7 +21,6 @@ export default async function Home({params, searchParams}: {
     const pathname = await getPathname()
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
-    const metadata = new PageMetadata(lang)
     const serverConfig = await useServerConfig()
     const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
     const imageUid = tryBase58ToUuid(paramsValue.uid)
@@ -35,14 +34,9 @@ export default async function Home({params, searchParams}: {
         return <div>遇到错误3</div>
     }
     const model = getResult.data
-    metadata.title = pageTitle(lang, getResult.data.title)
-
-    metadata.description = getResult.data.description
-    metadata.keywords = getResult.data.keywords
-
     let imageUrl = model.url || getDefaultImageUrl()
     return <ArticleReadLayout lang={lang} searchParams={await searchParams} pathname={pathname}
-                              metadata={metadata} userInfo={SymbolUnknown}>
+                              userInfo={SymbolUnknown}>
         <div>
 
             <PSImageServer src={imageUrl} alt={model.title} fill={true}/>

@@ -1,5 +1,4 @@
 import {getPathname} from "@/components/server/pathname";
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import AccountLayout from "@/components/server/account/layout";
 import {css} from "@/gen/styled/css";
 import {SignupForm} from "./form";
@@ -37,13 +36,11 @@ export default async function Page({params, searchParams}: {
 
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
-    const metadata = new PageMetadata(lang)
-    metadata.title = pageTitle(lang, '')
 
     const serverConfig = await useServerConfig()
     const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
     return <AccountLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata}>
+    >
         <div className={pageStyles.signupCard}>
             <div className={pageStyles.signupTitle}>{transKey(lang, "signup.registrationPage")}</div>
             <div className={pageStyles.signupBody}>

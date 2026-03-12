@@ -88,7 +88,7 @@ export function PhotoCard({model, lang, stargateUrl}: {
     stargateUrl: string
 }) {
     const editUrl = `/${lang}/community/photos/${uuidToBase58(model.uid)}`
-    const deleteUrl = `${stargateUrl}/console/community/images/${model.uid}`
+    const deleteUrl = `${stargateUrl}/community/images/${model.uid}`
 
     return <div className={photoStyles.middleItem} key={model.uid} data-photo={model.uid}>
         <div className={photoStyles.itemTitle}>

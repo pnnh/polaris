@@ -1,7 +1,5 @@
 import {css} from "@/gen/styled/css";
 import React from 'react'
-
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {templateBodyId} from '@/components/server/content/layout'
 import {getClientIp, getPathname} from "@/components/server/pathname";
 import {GoTop} from "@/components/client/gotop";
@@ -139,7 +137,6 @@ export default async function Home({params, searchParams}: {
     const pathname = await getPathname()
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
-    const metadata = new PageMetadata(lang)
     const serverConfig = await useServerConfig()
     const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
     const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
@@ -154,11 +151,6 @@ export default async function Home({params, searchParams}: {
         return <div>遇到错误2</div>
     }
     const model = getResult.data
-    metadata.title = pageTitle(lang, getResult.data.title)
-
-    metadata.description = getResult.data.description
-    metadata.keywords = getResult.data.keywords
-
     const tocList: TocItem[] = []
     const titleId = generatorRandomString(8)
     tocList.push({title: getResult.data.title, header: 0, id: titleId})
@@ -177,7 +169,7 @@ export default async function Home({params, searchParams}: {
     }
     const fullRepoPath = model.full_repo_path
     return <ArticleReadLayout lang={lang} searchParams={await searchParams} pathname={pathname}
-                              metadata={metadata} userInfo={SymbolUnknown}>
+                              userInfo={SymbolUnknown}>
 
         <div className={pageStyles.articleCover}>
             <div className={pageStyles.articleHeader}>

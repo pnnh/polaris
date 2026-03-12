@@ -1,5 +1,5 @@
 import React from 'react'
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+
 import {getPathname} from "@/components/server/pathname";
 import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {PaginationServer} from "@/components/server/pagination";
@@ -49,9 +49,6 @@ export default async function Page({params, searchParams}: {
     }
     const pageSize = 16
 
-    const metadata = new PageMetadata(lang)
-    metadata.title = pageTitle(lang, '')
-
     const selectQuery = {
         sort: searchParamsValue.sort,
         filter: searchParamsValue.filter,
@@ -63,7 +60,7 @@ export default async function Page({params, searchParams}: {
     const libName = searchParamsValue.libName
     const pagination = calcPagination(page, 100, pageSize)
     return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata}>
+    >
         <div className={pageStyles.contentContainer}>
             <ConsoleImageFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
             <div className={pageStyles.conMiddle}>

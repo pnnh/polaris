@@ -1,5 +1,5 @@
 import React from 'react'
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+
 import {getPathname} from "@/components/server/pathname";
 import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
@@ -56,9 +56,6 @@ export default async function Page({params, searchParams}: {
     const pageSize = 10
     const searchText = searchParamsValue.keyword
 
-    const metadata = new PageMetadata(lang)
-    metadata.title = pageTitle(lang, '')
-
     const selectQuery = {
         sort: searchParamsValue.sort,
         filter: searchParamsValue.filter,
@@ -74,7 +71,7 @@ export default async function Page({params, searchParams}: {
 
     const pagination = calcPagination(page, selectData.count, pageSize)
     return <CommunityLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                            metadata={metadata}>
+    >
         <div className={pageStyles.photosPage}>
             <div className={pageStyles.contentContainer}>
                 <ConsolePhotoFilterBar lang={lang} keyword={searchParamsValue.keyword}/>

@@ -35,7 +35,7 @@ export async function serverConsoleGetArticle(lang: string, portalUrl: string, u
     if (!uid) {
         return undefined
     }
-    let url = `${portalUrl}/${lang}/console/community/articles/${uid}`
+    let url = `${portalUrl}/${lang}/community/articles/${uid}`
     if (wantLang && isSupportedLanguage(wantLang)) {
         if (!isSupportedLanguage(wantLang)) {
             throw new Error(`serverConsoleGetArticle unsupported language: ${wantLang}`);

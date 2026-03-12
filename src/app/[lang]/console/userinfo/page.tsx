@@ -1,5 +1,5 @@
 import {getPathname} from "@/components/server/pathname";
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+
 import {css} from "@/gen/styled/css";
 import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
@@ -79,8 +79,6 @@ export default async function Page({params, searchParams}: {
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
 
-    const metadata = new PageMetadata(lang)
-    metadata.title = pageTitle(lang, '')
     const serverConfig = await useServerConfig()
     const interlanPortalUrl = serverConfig.INTERNAL_PORTAL_URL
 
@@ -90,7 +88,7 @@ export default async function Page({params, searchParams}: {
     }
 
     return <ConsoleLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata} userInfo={userInfo}>
+                          userInfo={userInfo}>
         <div className={pageStyles.userInfoContainer}>
             <div className={pageStyles.userInfoCard}>
                 <div className={pageStyles.avatar}>

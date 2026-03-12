@@ -1,8 +1,7 @@
 import React from 'react'
 import {css} from "@/gen/styled/css";
 import {SymbolUnknown} from "@pnnh/atom";
-import GlobalLayout from "@/components/server/global";
-import {PageMetadata} from "@/components/common/utils/page";
+
 import {ConsoleSidebar} from "@/components/server/console/sidebar";
 import {ConsoleNavbar} from "@/components/server/console/navbar";
 import {serverGetUserinfo} from "@/components/server/account/account";
@@ -37,14 +36,12 @@ export default async function ConsoleLayout(
         children,
         pathname,
         searchParams,
-        metadata,
         lang,
         userInfo,
     }: {
         children: React.ReactNode,
         pathname: string,
         searchParams: Record<string, string>,
-        metadata: PageMetadata,
         lang: string,
         userInfo: AccountModel | typeof SymbolUnknown
     }) {
@@ -60,16 +57,14 @@ export default async function ConsoleLayout(
     if (!currentUserInfo || isAnonymousAccount(currentUserInfo)) {
         return <NeedLoginPage lang={lang}></NeedLoginPage>
     }
-    return <GlobalLayout lang={lang} metadata={metadata}>
-        <div className={styles.consoleContainer}>
-            <div className={styles.templateNavbar}>
-                <ConsoleNavbar pathname={pathname} searchParams={searchParams} lang={lang}
-                               userInfo={currentUserInfo}/>
-            </div>
-            <div className={styles.consoleBody}>
-                <ConsoleSidebar lang={lang}/>
-                {children}
-            </div>
+    return <div className={styles.consoleContainer}>
+        <div className={styles.templateNavbar}>
+            <ConsoleNavbar pathname={pathname} searchParams={searchParams} lang={lang}
+                           userInfo={currentUserInfo}/>
         </div>
-    </GlobalLayout>
+        <div className={styles.consoleBody}>
+            <ConsoleSidebar lang={lang}/>
+            {children}
+        </div>
+    </div>
 }

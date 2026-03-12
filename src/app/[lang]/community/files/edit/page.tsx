@@ -1,5 +1,5 @@
 import React from 'react'
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+
 import {EmptyUUID, langZh, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import {notFound} from "next/navigation";
@@ -24,18 +24,17 @@ const pageStyles = {
 }
 
 export default async function Home({params, searchParams}: {
-    params: Promise<{ lang: string, uid: string }>,
+    params: Promise<{ lang: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
     const pathname = await getPathname()
     const paramsValue = await params;
     const searchValue = await searchParams;
     const pageLang = paramsValue.lang || langZh
-    const metadata = new PageMetadata(pageLang)
     const serverConfig = await useServerConfig()
     const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
     const publicStargateUrl = serverConfig.PUBLIC_STARGATE_URL
-    const isNew = paramsValue.uid === 'new';
+    const isNew = searchValue.isNew === 'true';
     let model: CmFileModel | undefined = undefined;
 
     if (isNew) {
@@ -60,7 +59,7 @@ export default async function Home({params, searchParams}: {
             update_time: ''
         }
     } else {
-        const fileUid = tryBase58ToUuid(paramsValue.uid)
+        const fileUid = tryBase58ToUuid(searchValue.uid)
         if (!fileUid) {
             notFound();
         }
@@ -73,12 +72,9 @@ export default async function Home({params, searchParams}: {
             notFound()
         }
         model = queryResult.range[0];
-        metadata.title = pageTitle(pageLang, model.title)
-        metadata.description = model.description || ''
-        metadata.keywords = model.keywords || ''
     }
 
-    return <CommunityLayout lang={pageLang} metadata={metadata} pathname={pathname} searchParams={searchValue}
+    return <CommunityLayout lang={pageLang} pathname={pathname} searchParams={searchValue}
                             userInfo={SymbolUnknown}>
         <div className={pageStyles.filesPage}>
             <div className={pageStyles.pageContainer}>

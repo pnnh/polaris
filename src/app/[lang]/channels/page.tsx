@@ -6,7 +6,6 @@ import {CodeOk, isValidUUID, langEn, PLSelectResult, STSubString, SymbolUnknown,
 import {PSChannelModel} from "@/components/common/models/channel";
 import {PSImageServer} from "@/components/server/image";
 import {getDefaultChanImageByUid} from "@/components/common/channel";
-import {PageMetadata} from "@/components/common/utils/page";
 import queryString from "query-string";
 import {useServerConfig} from "@/components/server/config";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
@@ -119,18 +118,17 @@ export default async function Page({params, searchParams}: {
     const result = await serverMakeGet<PLSelectResult<PSChannelModel>>(url, '')
 
     const pathname = await getPathname()
-    const metadata = new PageMetadata(lang)
     if (!result || !result.data) {
         return <NoDataPage lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                           metadata={metadata} size={'middle'}/>
+                           size={'middle'}/>
     }
     if (result.code !== CodeOk) {
         return <NoDataPage lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                           metadata={metadata} size={'middle'} message={result.message}/>
+                           size={'middle'} message={result.message}/>
     }
 
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata}>
+    >
         <div className={pageStyles.container}>
             <div className={pageStyles.list}>
                 {result.data.range.map((model) => {

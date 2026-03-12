@@ -1,11 +1,10 @@
 import React from 'react'
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+
 import {getPathname} from "@/components/server/pathname";
 import {langZh, SymbolUnknown} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import ConsoleLayout from "@/components/server/console/layout";
 import {css} from "@/gen/styled/css";
-import {transKey} from "@/components/common/locales/normal";
 import {serverConsoleSelectNotes} from "@/components/personal/notes-server";
 import {serverConsoleSelectChannels} from "@/components/server/channels/channels";
 import {ImportArticlesForm} from "./form";
@@ -35,13 +34,11 @@ export default async function ImportArticlesPage({params, searchParams}: {
     const paramsValue = await params;
     const searchValue = await searchParams;
     const pageLang = paramsValue.lang || langZh
-    const metadata = new PageMetadata(pageLang)
-    metadata.title = pageTitle(pageLang, transKey(pageLang, 'console.article.importFromNotes'))
-    
+
     const serverConfig = await useServerConfig()
     const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
     const publicStargateUrl = serverConfig.PUBLIC_STARGATE_URL
-    
+
     // Query notes (max 50)
     const keyword = searchValue.keyword || '';
     const notesData = await serverConsoleSelectNotes(internalStargateUrl, pageLang, {
@@ -49,21 +46,21 @@ export default async function ImportArticlesPage({params, searchParams}: {
         page: 1,
         size: 50
     });
-    
+
     // Query channels for selection
     const channelsData = await serverConsoleSelectChannels(internalStargateUrl, pageLang, {
         page: 1,
         size: 100
     });
-    
+
     const notesString = JSON.stringify(notesData.range);
     const channelsString = JSON.stringify(channelsData.range);
-    
-    return <ConsoleLayout lang={pageLang} metadata={metadata} pathname={pathname} searchParams={searchValue}
+
+    return <ConsoleLayout lang={pageLang} pathname={pathname} searchParams={searchValue}
                           userInfo={SymbolUnknown}>
         <div className={pageStyles.importPage}>
             <div className={pageStyles.pageContainer}>
-                <ImportArticlesForm 
+                <ImportArticlesForm
                     stargateUrl={publicStargateUrl}
                     notesString={notesString}
                     channelsString={channelsString}

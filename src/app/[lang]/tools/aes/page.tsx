@@ -3,7 +3,7 @@ import {langEn, SymbolUnknown} from "@pnnh/atom";
 import {getPathname} from "@/components/server/pathname";
 import {aesUid, queryApp} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
-import {PageMetadata} from "@/components/common/utils/page";
+
 import AesComponent from "./aes";
 import {css} from '@/gen/styled/css'
 
@@ -27,11 +27,8 @@ export default async function Home({params, searchParams}: {
     if (!appInfo) {
         notFound()
     }
-
-    const metadata = new PageMetadata(lang, appInfo.name)
-    metadata.description = appInfo.description
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata} userInfo={SymbolUnknown}>
+                          userInfo={SymbolUnknown}>
         <div className={pageStyles.pageContainer}>
             <AesComponent lang={lang} appInfo={appInfo}/>
         </div>

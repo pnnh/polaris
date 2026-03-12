@@ -8,7 +8,7 @@ import {transKey} from "@/components/common/locales/normal";
 export class CommunityImageNodeService {
     static async consoleQueryImages(stargateUrl: string, lang: string, queryParams: Record<string, any>): Promise<PLSelectData<PSImageModel>> {
         const rawQuery = queryString.stringify(queryParams)
-        const url = `${stargateUrl}/console/community/images?${rawQuery}`
+        const url = `${stargateUrl}/community/images?${rawQuery}`
         const cookieStore = await cookies()
         const authHeader = cookieStore.toString()
         const getResult = await serverMakeGet<PLSelectResult<PSImageModel>>(url, authHeader);

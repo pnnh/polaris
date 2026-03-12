@@ -3,16 +3,13 @@ import {css} from "@/gen/styled/css";
 import queryString from 'query-string'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
-import {PLSelectResult, SymbolUnknown} from "@pnnh/atom";
+import {calcPagination, langEn, PLSelectResult, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 
 import {NoData} from "@/components/common/empty";
 import {PaginationServer} from "@/components/server/pagination";
-import {replaceSearchParams} from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
-import {calcPagination} from "@pnnh/atom";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
-import {langEn} from "@pnnh/atom";
-import {PageMetadata} from "@/components/common/utils/page";
+
 import {useServerConfig} from "@/components/server/config";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
 
@@ -70,7 +67,6 @@ export default async function Page({params, searchParams}: {
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
 
-    const metadata = new PageMetadata(lang)
     const searchParamsValue = await searchParams
     let page = Number(searchParamsValue.page)
     if (isNaN(page)) {
@@ -98,7 +94,7 @@ export default async function Page({params, searchParams}: {
     }
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata}>
+    >
         <div className={pageStyles.searchPage}>
             <div className={pageStyles.pageContainer}>
                 <div>

@@ -4,8 +4,6 @@ import {css} from "@/gen/styled/css";
 import {SymbolUnknown} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
-import GlobalLayout from "@/components/server/global";
-import {PageMetadata} from "@/components/common/utils/page";
 import {AccountModel} from "@/components/common/models/account/account";
 
 const styles = {
@@ -38,14 +36,12 @@ export default async function ArticleReadLayout({
                                                     children,
                                                     pathname,
                                                     searchParams,
-                                                    metadata,
                                                     lang,
                                                     userInfo
                                                 }: {
     children: React.ReactNode,
     pathname: string,
     searchParams: Record<string, string>,
-    metadata: PageMetadata,
     lang: string,
     userInfo: AccountModel | typeof SymbolUnknown
 }) {
@@ -57,17 +53,15 @@ export default async function ArticleReadLayout({
     } else {
         currentUserInfo = userInfo;
     }
-    return <GlobalLayout lang={lang} metadata={metadata}>
-        <div className={styles.templateContainer}>
-            <div className={styles.templateNavbar}>
-                <ContentPublicNavbar pathname={pathname} searchParams={searchParams} lang={lang}
-                                     userInfo={currentUserInfo}/>
-            </div>
-            <div id={templateBodyId} className={styles.templateBody}>
-                <div className={styles.bodyContainer}>
-                    {children}
-                </div>
+    return <div className={styles.templateContainer}>
+        <div className={styles.templateNavbar}>
+            <ContentPublicNavbar pathname={pathname} searchParams={searchParams} lang={lang}
+                                 userInfo={currentUserInfo}/>
+        </div>
+        <div id={templateBodyId} className={styles.templateBody}>
+            <div className={styles.bodyContainer}>
+                {children}
             </div>
         </div>
-    </GlobalLayout>
+    </div>
 }

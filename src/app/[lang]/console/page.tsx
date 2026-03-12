@@ -1,5 +1,5 @@
 import React from 'react'
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+
 import {langEn} from "@pnnh/atom";
 import {css} from "@/gen/styled/css";
 import {useServerConfig} from "@/components/server/config";
@@ -99,13 +99,11 @@ export default async function Page({params, searchParams}: {
     const serverConfig = await useServerConfig()
     const portalUrl = serverConfig.INTERNAL_PORTAL_URL
     const currentUserInfo = await serverGetUserinfo(portalUrl);
-    const metadata = new PageMetadata(lang)
-    metadata.title = pageTitle(lang, '')
     if (!currentUserInfo || isAnonymousAccount(currentUserInfo)) {
         return <NeedLoginPage lang={lang}></NeedLoginPage>
     }
 
-    return <ConsoleLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue}
+    return <ConsoleLayout lang={lang} pathname={pathname} searchParams={searchParamsValue}
                           userInfo={currentUserInfo}>
         <div className={pageStyles.consolePage}>
             <div className={pageStyles.pageContainer}>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+
 import {EmptyUUID, langZh, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import {notFound} from "next/navigation";
@@ -32,7 +32,6 @@ export default async function Home({params, searchParams}: {
     const paramsValue = await params;
     const searchValue = await searchParams;
     const pageLang = paramsValue.lang || langZh
-    const metadata = new PageMetadata(pageLang)
     const serverConfig = await useServerConfig()
     const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
     const publicStargateUrl = serverConfig.PUBLIC_STARGATE_URL
@@ -76,9 +75,6 @@ export default async function Home({params, searchParams}: {
             notFound()
         }
         model = queryResult.range[0];
-        metadata.title = pageTitle(pageLang, model.title)
-        metadata.description = model.description
-        metadata.keywords = model.keywords
     }
 
     const channelsData = await serverConsoleSelectChannels(internalStargateUrl, pageLang, {
@@ -88,7 +84,7 @@ export default async function Home({params, searchParams}: {
 
     const modelString = JSON.stringify(model)
     const channelsString = JSON.stringify(channelsData.range)
-    return <CommunityLayout lang={pageLang} metadata={metadata} pathname={pathname} searchParams={searchValue}
+    return <CommunityLayout lang={pageLang} pathname={pathname} searchParams={searchValue}
                             userInfo={SymbolUnknown}>
         <div className={pageStyles.photosPage}>
             <div className={pageStyles.pageContainer}>

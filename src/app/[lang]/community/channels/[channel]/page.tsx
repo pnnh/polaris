@@ -1,6 +1,6 @@
 import React from 'react'
 import {css} from "@/gen/styled/css";
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+
 import {getPathname} from "@/components/server/pathname";
 import {EmptyUUID, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
 import {notFound} from "next/navigation";
@@ -38,8 +38,6 @@ export default async function Page({params, searchParams}: {
     if (!channelUid) {
         notFound();
     }
-    const metadata = new PageMetadata(lang)
-    metadata.title = pageTitle('')
     const serverConfig = await useServerConfig()
 
     const publicStargateUrl = serverConfig.PUBLIC_STARGATE_URL
@@ -64,16 +62,13 @@ export default async function Page({params, searchParams}: {
         if (!model || !model.uid) {
             notFound();
         }
-        metadata.title = pageTitle(lang, model.name)
-        metadata.description = model.description || ''
-
     }
 
 
     const modelString = JSON.stringify(model)
 
     return <CommunityLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchValue} pathname={pathname}
-                            metadata={metadata}>
+    >
         <div className={pageStyles.contentContainer}>
             <div className={pageStyles.conMiddle}>
                 <ConsoleChannelForm stargateUrl={publicStargateUrl} modelString={modelString}/>

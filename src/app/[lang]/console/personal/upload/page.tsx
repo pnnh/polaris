@@ -1,11 +1,8 @@
 import React from 'react'
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+
 import {getPathname} from "@/components/server/pathname";
-import {SymbolUnknown} from "@pnnh/atom";
+import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {PaginationServer} from "@/components/server/pagination";
-import {replaceSearchParams} from "@pnnh/atom";
-import {calcPagination} from "@pnnh/atom";
-import {langEn} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import ConsoleImageLayout from "@/components/server/console/images/layout";
 import {ConsoleImageFilterBar} from "./filter";
@@ -52,15 +49,12 @@ export default async function Page({params, searchParams}: {
     }
     const pageSize = 10
 
-    const metadata = new PageMetadata(lang)
-    metadata.title = pageTitle(lang, '')
-
     const serverConfig = await useServerConfig()
 
     const libName = searchParamsValue.libName
     const pagination = calcPagination(page, 100, pageSize)
     return <ConsoleImageLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                               metadata={metadata}>
+    >
         <div className={pageStyles.contentContainer}>
             <ConsoleImageFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
             <div className={pageStyles.conMiddle}>

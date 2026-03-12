@@ -6,7 +6,7 @@ import {PSChannelModel} from "@/components/common/models/channel";
 import {NoData} from "@/components/common/empty";
 import {PSImageServer} from "@/components/server/image";
 import {getDefaultChanImageByUid} from "@/components/common/channel";
-import {PageMetadata} from "@/components/common/utils/page";
+
 import {ConsoleChannelFilterBar} from "./filter";
 import {serverConsoleSelectChannels} from "@/components/server/channels/channels";
 import {useServerConfig} from "@/components/server/config";
@@ -78,10 +78,9 @@ export default async function Page({params, searchParams}: {
         return <NoData size={'middle'}/>
     }
     const pathname = await getPathname()
-    const metadata = new PageMetadata(lang)
 
     return <CommunityLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchValue} pathname={pathname}
-                            metadata={metadata}>
+    >
         <div className={pageStyles.channelsContainer}>
             <ConsoleChannelFilterBar lang={lang} keyword={searchValue.keyword}/>
             <div className={pageStyles.list}>

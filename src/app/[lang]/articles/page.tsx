@@ -1,7 +1,6 @@
 import React from 'react'
 import {css} from "@/gen/styled/css";
 import queryString from 'query-string'
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
 import {calcPagination, langEn, PLSelectResult, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
@@ -63,16 +62,6 @@ export default async function Page({params, searchParams}: {
     const pageSize = 10
     const channelPk = searchParamsValue.channel
 
-    const metadata = new PageMetadata(lang)
-    metadata.title = pageTitle(lang, '')
-    const rankQuery = queryString.stringify({
-        sort: 'read',
-        filter: 'year',
-        page: '1',
-        direction: 'cta',
-        size: 10,
-        lang: lang
-    })
     const serverConfig = await useServerConfig()
     const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
     const selectQuery = {
@@ -89,7 +78,7 @@ export default async function Page({params, searchParams}: {
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata}>
+    >
         <div className={pageStyles.contentContainer}>
             <div className={pageStyles.conMiddle}>
                 <ArticleFilterBar lang={lang} searchParamsValue={searchParamsValue}/>

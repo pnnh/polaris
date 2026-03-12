@@ -88,9 +88,11 @@ export function FileCard({model, lang, stargateUrl}: {
     lang: string,
     stargateUrl: string
 }) {
-    const editUrl = `/${lang}/community/files/${uuidToBase58(model.uid)}`
-    const deleteUrl = `${stargateUrl}/console/community/files/${model.uid}`
-    const subDirUrl = `/${lang}/community/files?parent=${encodeURIComponent(uuidToBase58(model.uid))}`
+    const prettyUid = uuidToBase58(model.uid)
+    const editUrl = `/${lang}/community/files/edit?uid=${prettyUid}`
+    const deleteUrl = `${stargateUrl}/community/files/${model.uid}`
+    const subDirUrl = `/${lang}/community/files?parent=${encodeURIComponent(prettyUid)}`
+    const viewUrl = `/${lang}/community/files/view?uid=${encodeURIComponent(prettyUid)}`
 
     return <div className={fileStyles.middleItem} key={model.uid} data-file={model.uid}>
         <div className={fileStyles.itemTitle}>
@@ -101,7 +103,7 @@ export function FileCard({model, lang, stargateUrl}: {
             {
                 model.mimetype === 'directory' || model.mimetype === 'folder' ?
                     <a href={subDirUrl} title={model.uid}>{model.title}</a>
-                    : <span>{model.title}</span>}
+                    : <a href={viewUrl}>{model.title}</a>}
         </div>
         <div className={fileStyles.description} title={model.description}>
             {STSubString(model.description || '', 100)}

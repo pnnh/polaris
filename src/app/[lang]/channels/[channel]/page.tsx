@@ -2,7 +2,6 @@ import React from 'react'
 import {css} from "@/gen/styled/css";
 import queryString from 'query-string'
 
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
 import {calcPagination, langEn, PLSelectResult, replaceSearchParams, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
@@ -68,8 +67,6 @@ export default async function Page({params, searchParams}: {
     if (!channelUrn) {
         notFound();
     }
-    const metadata = new PageMetadata(lang)
-    metadata.title = pageTitle('')
     const rankQuery = queryString.stringify({
         sort: 'read',
         filter: 'year',
@@ -80,9 +77,6 @@ export default async function Page({params, searchParams}: {
     })
     const serverConfig = await useServerConfig()
     const serverUrl = serverConfig.INTERNAL_PORTAL_URL
-    const rankUrl = `${serverUrl}/articles?${rankQuery}`
-    const rankSelectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(rankUrl, '')
-
     const selectQuery = {
         sort: searchParamsValue.sort,
         filter: searchParamsValue.filter,
@@ -96,7 +90,7 @@ export default async function Page({params, searchParams}: {
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata}>
+    >
         <div className={pageStyles.contentContainer}>
             <div className={pageStyles.conMiddle}>
                 <ArticleFilterBar lang={lang} searchParamsValue={searchParamsValue}/>

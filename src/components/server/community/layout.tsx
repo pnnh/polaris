@@ -1,8 +1,6 @@
 import React from 'react'
 import {css} from "@/gen/styled/css";
 import {SymbolUnknown} from "@pnnh/atom";
-import GlobalLayout from "@/components/server/global";
-import {PageMetadata} from "@/components/common/utils/page";
 import {CommunitySidebar} from "./sidebar";
 import {CommunityNavbar} from "./navbar";
 import {serverGetUserinfo} from "@/components/server/account/account";
@@ -37,14 +35,12 @@ export default async function CommunityLayout(
         children,
         pathname,
         searchParams,
-        metadata,
         lang,
         userInfo,
     }: {
         children: React.ReactNode,
         pathname: string,
         searchParams: Record<string, string>,
-        metadata: PageMetadata,
         lang: string,
         userInfo: AccountModel | typeof SymbolUnknown
     }) {
@@ -60,16 +56,14 @@ export default async function CommunityLayout(
     if (!currentUserInfo || isAnonymousAccount(currentUserInfo)) {
         return <NeedLoginPage lang={lang}></NeedLoginPage>
     }
-    return <GlobalLayout lang={lang} metadata={metadata}>
-        <div className={styles.communityContainer}>
-            <div className={styles.templateNavbar}>
-                <CommunityNavbar pathname={pathname} searchParams={searchParams} lang={lang}
-                                 userInfo={currentUserInfo}/>
-            </div>
-            <div className={styles.communityBody}>
-                <CommunitySidebar lang={lang}/>
-                {children}
-            </div>
+    return <div className={styles.communityContainer}>
+        <div className={styles.templateNavbar}>
+            <CommunityNavbar pathname={pathname} searchParams={searchParams} lang={lang}
+                             userInfo={currentUserInfo}/>
         </div>
-    </GlobalLayout>
+        <div className={styles.communityBody}>
+            <CommunitySidebar lang={lang}/>
+            {children}
+        </div>
+    </div>
 }

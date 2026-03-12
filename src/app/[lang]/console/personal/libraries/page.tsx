@@ -1,5 +1,5 @@
 import React from 'react'
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
+
 import {css} from "@/gen/styled/css";
 import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
@@ -8,7 +8,7 @@ import ConsoleLayout from "@/components/server/console/layout";
 import {ConsoleLibraryFilterBar} from "./filter";
 import {ConsoleLibraryMiddleBody} from "./library";
 import {isAnonymousAccount} from "@/components/common/models/account/account";
-import {langEn, SymbolUnknown} from "@pnnh/atom";
+import {langEn} from "@pnnh/atom";
 import {getPathname} from "@/components/server/pathname";
 
 const pageStyles = {
@@ -39,13 +39,12 @@ export default async function Page({params, searchParams}: {
     const serverConfig = await useServerConfig()
     const publicPortalUrl = serverConfig.PUBLIC_PORTAL_URL
     const currentUserInfo = await serverGetUserinfo(serverConfig.INTERNAL_PORTAL_URL);
-    const metadata = new PageMetadata(lang)
-    metadata.title = pageTitle(lang, '')
+
     if (!currentUserInfo || isAnonymousAccount(currentUserInfo)) {
         return <NeedLoginPage lang={lang}></NeedLoginPage>
     }
 
-    return <ConsoleLayout lang={lang} metadata={metadata} pathname={pathname} searchParams={searchParamsValue} userInfo={currentUserInfo}>
+    return <ConsoleLayout lang={lang} pathname={pathname} searchParams={searchParamsValue} userInfo={currentUserInfo}>
         <div className={pageStyles.consolePage}>
             <div className={pageStyles.libGrid}>
                 <div className={pageStyles.libHeader}>

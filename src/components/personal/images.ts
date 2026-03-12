@@ -35,7 +35,7 @@ export async function serverConsoleGetImage(lang: string, portalUrl: string, uid
     if (!uid) {
         return undefined
     }
-    let url = `${portalUrl}/${lang}/console/community/images/${uid}`
+    let url = `${portalUrl}/${lang}/community/images/${uid}`
     if (wantLang && isSupportedLanguage(wantLang)) {
         if (!isSupportedLanguage(wantLang)) {
             throw new Error(`serverConsoleGetImage unsupported language: ${wantLang}`);

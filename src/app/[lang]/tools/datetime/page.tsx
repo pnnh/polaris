@@ -2,10 +2,9 @@ import React from 'react'
 import {css} from "@/gen/styled/css";
 import {getPathname} from "@/components/server/pathname";
 import DatetimeComponent from '@/components/client/tools/datetime/datetime';
-import {langEn} from "@pnnh/atom";
-import {PageMetadata} from "@/components/common/utils/page";
+import {langEn, SymbolUnknown} from "@pnnh/atom";
+
 import ContentLayout from "@/components/server/content/layout";
-import {SymbolUnknown} from "@pnnh/atom";
 
 const pageStyles = {
     qrCodePage: css`
@@ -22,10 +21,9 @@ export default async function Home({params, searchParams}: {
     const paramsValue = await params;
     const lang = paramsValue.lang || langEn
     const searchParamsValue = await searchParams
-
-    const metadata = new PageMetadata(lang)
+ 
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata} userInfo={SymbolUnknown}>
+                          userInfo={SymbolUnknown}>
         <div className={pageStyles.qrCodePage}>
             <DatetimeComponent lang={lang}/>
         </div>

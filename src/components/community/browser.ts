@@ -5,7 +5,7 @@ import {clientMakePost, clientMakePut} from "@pnnh/atom/browser";
 
 export class CommunityBrowser {
     static async clientConsoleInsertArticle(stargateUrl: string, model: unknown): Promise<string> {
-        const url = `${stargateUrl}/console/community/articles`
+        const url = `${stargateUrl}/community/articles`
         const insertResult = await clientMakePost<PLInsertResult>(url, model);
         if (!insertResult || insertResult.code !== CodeOk || !insertResult.data) {
             console.warn('文章插入失败', insertResult);
@@ -15,7 +15,7 @@ export class CommunityBrowser {
     }
 
     static async clientConsoleUpdateArticle(stargateUrl: string, uid: string, model: unknown): Promise<string> {
-        const url = `${stargateUrl}/console/community/articles/${uid}`
+        const url = `${stargateUrl}/community/articles/${uid}`
         const insertResult = await clientMakePut<PLUpdateResult>(url, model);
         if (!insertResult || insertResult.code !== CodeOk || !insertResult.data) {
             console.warn('文章更新失败', insertResult);
@@ -25,7 +25,7 @@ export class CommunityBrowser {
     }
 
     static async clientConsoleInsertImage(stargateUrl: string, model: unknown): Promise<string> {
-        const url = `${stargateUrl}/console/community/images`
+        const url = `${stargateUrl}/community/images`
         const insertResult = await clientMakePost<PLInsertResult>(url, model);
         if (!insertResult || insertResult.code !== CodeOk || !insertResult.data) {
             console.warn('图集插入失败', insertResult);
@@ -35,7 +35,7 @@ export class CommunityBrowser {
     }
 
     static async clientConsoleUpdateImage(stargateUrl: string, uid: string, model: unknown): Promise<string> {
-        const url = `${stargateUrl}/console/community/images/${uid}`
+        const url = `${stargateUrl}/community/images/${uid}`
         const insertResult = await clientMakePut<PLUpdateResult>(url, model);
         if (!insertResult || insertResult.code !== CodeOk || !insertResult.data) {
             console.warn('图集更新失败', insertResult);
@@ -45,7 +45,7 @@ export class CommunityBrowser {
     }
 
     static async clientConsoleDeleteImage(stargateUrl: string, uid: string): Promise<boolean> {
-        const url = `${stargateUrl}/console/community/images/${uid}`
+        const url = `${stargateUrl}/community/images/${uid}`
         const deleteResult = await clientMakePost<PLDeleteResult>(url, {});
         if (!deleteResult || deleteResult.code !== CodeOk) {
             console.warn('图集删除失败', deleteResult);
@@ -55,7 +55,7 @@ export class CommunityBrowser {
     }
 
     static async clientConsoleInsertFile(stargateUrl: string, model: unknown): Promise<string> {
-        const url = `${stargateUrl}/console/community/files`
+        const url = `${stargateUrl}/community/files`
         const insertResult = await clientMakePost<PLInsertResult>(url, model);
         if (!insertResult || insertResult.code !== CodeOk || !insertResult.data) {
             console.warn('文件插入失败', insertResult);
@@ -65,7 +65,7 @@ export class CommunityBrowser {
     }
 
     static async clientConsoleUpdateFile(stargateUrl: string, uid: string, model: unknown): Promise<string> {
-        const url = `${stargateUrl}/console/community/files/${uid}`
+        const url = `${stargateUrl}/community/files/${uid}`
         const insertResult = await clientMakePut<PLUpdateResult>(url, model);
         if (!insertResult || insertResult.code !== CodeOk || !insertResult.data) {
             console.warn('文件更新失败', insertResult);

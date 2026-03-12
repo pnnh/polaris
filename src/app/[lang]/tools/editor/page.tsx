@@ -1,11 +1,9 @@
 import {css} from "@/gen/styled/css";
 import ContentLayout from "@/components/server/content/layout";
-import {SymbolUnknown} from "@pnnh/atom";
+import {langEn, SymbolUnknown} from "@pnnh/atom";
 import {getPathname} from "@/components/server/pathname";
-import {langEn} from "@pnnh/atom";
-import {PageMetadata} from "@/components/common/utils/page";
+
 import {EditorComponent} from "@/app/[lang]/tools/editor/editor";
-import {transKey} from "@/components/common/locales/normal";
 
 const pageStyles = {
     editorPage: css`
@@ -23,10 +21,8 @@ export default async function Home({params, searchParams}: {
     const lang = paramsValue.lang || langEn
     const searchParamsValue = await searchParams
 
-    const metadata = new PageMetadata(lang, transKey(lang, 'toolEditorName'))
-    metadata.description = transKey(lang, 'toolEditorDesc')
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata} userInfo={SymbolUnknown}>
+                          userInfo={SymbolUnknown}>
         <div className={pageStyles.editorPage}>
             <EditorComponent lang={lang}/>
         </div>

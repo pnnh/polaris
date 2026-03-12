@@ -112,8 +112,8 @@ export function ArticleCard({model, lang, stargateUrl}: {
     if (model.channel) {
         chanUrl = `/${lang}/channels/${uuidToBase58(model.channel)}`
     }
-    const deleteUrl = `${stargateUrl}/console/community/articles/${model.uid}`
-    const syncUrl = `${stargateUrl}/console/community/articles/${model.uid}/sync`
+    const deleteUrl = `${stargateUrl}/community/articles/${model.uid}`
+    const syncUrl = `${stargateUrl}/community/articles/${model.uid}/sync`
     // @ts-ignore - has_note is added by SQL query
     const hasNote = model.has_note === true || model.has_note === 'true' || model.has_note === 't';
 

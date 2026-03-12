@@ -61,7 +61,8 @@ export function ImageCard({model, lang}: {
     model: PSImageModel, lang: string,
 }) {
     const readUrl = `${lang}/images/${uuidToBase58(model.uid || model.uid)}`
-    let imageUrl = model.file_url || getDefaultImageUrl()
+
+    let imageUrl = model.url || getDefaultImageUrl()
 
     return <div className={styles.middleItem} key={model.uid}>
         <div className={styles.imageCover} data-article={model.uid}>

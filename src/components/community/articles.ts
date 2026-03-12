@@ -9,7 +9,7 @@ import {transKey} from "@/components/common/locales/normal";
 export class CommunityArticleNodeService {
     static async consoleQueryArticles(stargateUrl: string, lang: string, queryParams: Record<string, any>): Promise<PLSelectData<PSArticleModel>> {
         const rawQuery = queryString.stringify(queryParams)
-        const url = `${stargateUrl}/console/community/articles?${rawQuery}`
+        const url = `${stargateUrl}/community/articles?${rawQuery}`
         const cookieStore = await cookies()
         const authHeader = cookieStore.toString()
         const getResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, authHeader);

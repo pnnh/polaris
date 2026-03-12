@@ -30,7 +30,7 @@ export function ConsoleFileFilterBar({lang, keyword}: {
         window.location.href = url.pathname + url.search;
     }
     const goCreateFile = () => {
-        window.location.href = `/${lang}/community/files/new`
+        window.location.href = `/${lang}/community/files/edit?isNew=true`
     }
     return <>
         <div className={filterStyles.middleTop}>

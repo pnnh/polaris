@@ -8,7 +8,7 @@ import {transKey} from "@/components/common/locales/normal";
 export class CommunityFileNodeService {
     static async consoleQueryFiles(stargateUrl: string, lang: string, queryParams: Record<string, any>): Promise<PLSelectData<CmFileModel>> {
         const rawQuery = queryString.stringify(queryParams)
-        const url = `${stargateUrl}/console/community/files?${rawQuery}`
+        const url = `${stargateUrl}/community/files?${rawQuery}`
         const cookieStore = await cookies()
         const authHeader = cookieStore.toString()
         const getResult = await serverMakeGet<PLSelectResult<CmFileModel>>(url, authHeader);

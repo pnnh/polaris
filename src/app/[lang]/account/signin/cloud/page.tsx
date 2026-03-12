@@ -1,11 +1,8 @@
 import {getPathname} from "@/components/server/pathname";
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
-import AccountLayout from "@/components/server/account/layout";
 import {css} from "@/gen/styled/css";
 import {SigninForm} from "./form";
 import {useServerConfig} from "@/components/server/config";
 import {langEn} from "@pnnh/atom";
-import GlobalLayout from "@/components/server/global";
 
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {LinkSession} from "@/app/[lang]/account/signin/link";
@@ -59,18 +56,11 @@ export default async function Page({params, searchParams}: {
         }
         return <div><a href={'/'}>{transKey(lang, "signin.goHomePage")}</a></div>
     }
-    const metadata = new PageMetadata(lang)
-    metadata.title = pageTitle(lang, '')
-    return <GlobalLayout lang={lang} metadata={metadata}>
-        <AccountLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                       metadata={metadata}>
-            <div className={pageStyles.signinCard}>
-                <div className={pageStyles.signinTitle}>{transKey(lang, "signin.loginPage")}</div>
-                <div className={pageStyles.signinBody}>
-                    <SigninForm portalUrl={publicPortalUrl} lang={lang} signinLink={signinLink}
-                                linkApp={linkApp} signinCallback={signinCallback}/>
-                </div>
-            </div>
-        </AccountLayout>
-    </GlobalLayout>
+    return <div className={pageStyles.signinCard}>
+        <div className={pageStyles.signinTitle}>{transKey(lang, "signin.loginPage")}</div>
+        <div className={pageStyles.signinBody}>
+            <SigninForm portalUrl={publicPortalUrl} lang={lang} signinLink={signinLink}
+                        linkApp={linkApp} signinCallback={signinCallback}/>
+        </div>
+    </div>
 }

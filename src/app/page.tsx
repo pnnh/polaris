@@ -2,7 +2,6 @@ import React from 'react'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
 import {calcPagination, replaceSearchParams, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
-import {PageMetadata} from "@/components/common/utils/page";
 import {headers} from "next/headers";
 import {getTargetLang, langEnUS} from "@/components/common/language";
 import {PaginationServer} from "@/components/server/pagination";
@@ -35,12 +34,11 @@ export default async function Page({searchParams}: {
             options.parent = parentUid
         }
     }
-    const metadata = new PageMetadata(lang)
     const selectResult = await selectFilesFromBackend(options)
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
 
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata} userInfo={SymbolUnknown}>
+                          userInfo={SymbolUnknown}>
 
         <PSHomeBody lang={lang} searchParams={searchParamsValue} selectResult={selectResult}/>
         <div className={paginationStyles.paginationContainer}>

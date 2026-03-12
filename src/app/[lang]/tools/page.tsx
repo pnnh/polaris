@@ -1,13 +1,10 @@
 import React from 'react'
 import {getPathname} from "@/components/server/pathname";
 
-import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
-import {PageMetadata} from "@/components/common/utils/page";
+import {langEn, SymbolUnknown} from "@pnnh/atom";
+
 import ContentLayout from "@/components/server/content/layout";
 import {css} from "@/gen/styled/css";
-import {selectFilesFromBackend} from "@/components/server/tools/tools";
-import {ResourceCard} from "@/app/[lang]/tools/tool";
-import {PaginationServer} from "@/components/server/pagination";
 
 const toolStyles = {
     toolBodyComponent: css`
@@ -73,14 +70,10 @@ export default async function Page({params, searchParams}: {
     if (isNaN(page)) {
         page = 1
     }
-    const pageSize = 10
-    const metadata = new PageMetadata(lang)
-
-
     // const appList = await selectFilesFromBackend(page, pageSize)
     // const pagination = calcPagination(page, appList.data.count, pageSize)
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata} userInfo={SymbolUnknown}>
+                          userInfo={SymbolUnknown}>
         <div className={toolStyles.toolBodyComponent}>
             {/*<div className={toolStyles.appGrid}>*/}
             {/*    {*/}

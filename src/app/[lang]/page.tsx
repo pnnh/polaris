@@ -2,7 +2,6 @@ import React from 'react'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
 import {calcPagination, replaceSearchParams, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
-import {PageMetadata, pageTitle} from "@/components/common/utils/page";
 import {getTargetLang, unknownLanguage} from "@/components/common/language";
 import {notFound} from "next/navigation";
 import {FileSelectOptions, selectFilesFromBackend} from "@/components/server/tools/tools";
@@ -44,10 +43,8 @@ export default async function Page({params, searchParams}: {
     serverLogDebugMeta("select files with options", options)
     const selectResult = await selectFilesFromBackend(options)
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
-    const metadata = new PageMetadata(lang)
-    metadata.title = pageTitle(lang, '')
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          metadata={metadata} userInfo={SymbolUnknown}>
+                          userInfo={SymbolUnknown}>
 
         <PSHomeBody lang={lang} searchParams={searchParamsValue} selectResult={selectResult}/>
 
