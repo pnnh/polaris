@@ -73,7 +73,7 @@ export default async function Home({params, searchParams}: {
                 action: 'get',
                 keyword: copyFromUid
             }
-            const queryResult = await CommunityArticleNodeService.consoleQueryArticles(internalStargateUrl, pageLang, query)
+            const queryResult = await CommunityArticleNodeService.queryArticles(internalStargateUrl, pageLang, query)
             if (!queryResult || queryResult.range.length === 0) {
                 throw new Error(transKey(pageLang, "console.article.cannotFindCopy"));
             }
@@ -95,7 +95,7 @@ export default async function Home({params, searchParams}: {
             action: 'get',
             keyword: articleUid
         }
-        const queryResult = await CommunityArticleNodeService.consoleQueryArticles(internalStargateUrl, pageLang, query)
+        const queryResult = await CommunityArticleNodeService.queryArticles(internalStargateUrl, pageLang, query)
         if (!queryResult || queryResult.range.length === 0) {
             notFound()
         }

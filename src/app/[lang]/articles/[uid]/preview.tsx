@@ -27,28 +27,26 @@ export function ArticlePreview(
                               assetsUrl={assetsUrl} libUrl={'/abc'}/>
     }
     const fileRepoPath = previewState.full_repo_path
-    return <>
-        <div className={previewStyles.assertPreview}>
-            <div className={previewStyles.previewHeader}>
-                <div className={previewStyles.pathTitle}>
-                    {previewState.title}
-                </div>
-                <div className={previewStyles.fileActions}>
-                    <a href={fileRepoPath} target={'_blank'}>
-                        <OpenInNewIcon/>
-                    </a>
-                    <i onClick={() => {
-                        setPreviewState(undefined)
-                    }}>
-                        <IoClose size={'1.2rem'}/>
-                    </i>
-                </div>
+    return <div className={previewStyles.assertPreview}>
+        <div className={previewStyles.previewHeader}>
+            <div className={previewStyles.pathTitle}>
+                {previewState.title}
             </div>
-            <div className={previewStyles.previewBody}>
-                <PreviewBody portalUrl={portalUrl} model={previewState}/>
+            <div className={previewStyles.fileActions}>
+                <a href={fileRepoPath} target={'_blank'}>
+                    <OpenInNewIcon/>
+                </a>
+                <i onClick={() => {
+                    setPreviewState(undefined)
+                }}>
+                    <IoClose size={'1.2rem'}/>
+                </i>
             </div>
         </div>
-    </>
+        <div className={previewStyles.previewBody}>
+            <PreviewBody portalUrl={portalUrl} model={previewState}/>
+        </div>
+    </div>
 }
 
 function PreviewBody({portalUrl, model}: { portalUrl: string, model: PSArticleFileModel }) {
@@ -117,11 +115,11 @@ const previewStyles = {
         flex-direction: row;
         align-items: center;
         gap: 0.5rem;
-        
+
         & i {
             cursor: pointer;
         }
-        
+
         & a svg {
             height: 1rem;
             width: 1rem;

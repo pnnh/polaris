@@ -159,7 +159,7 @@ export function NoteCard({model, lang, portalUrl, stargateUrl}: {
     if (model.channel) {
         chanUrl = `/${lang}/channels/${uuidToBase58(model.channel)}`
     }
-    const deleteUrl = `${stargateUrl}/console/notes/${model.uid}`
+    const deleteUrl = `${stargateUrl}/personal/notes/${model.uid}`
     return <div className={articleStyles.middleItem} key={model.uid} data-article={model.uid}>
         <div className={articleStyles.itemCover}>
             <PSImageServer src={imageUrl} alt={model.title} fill={true}/>

@@ -100,7 +100,7 @@ function Item(props: { model: PSChannelModel, stargateUrl: string, lang: string 
         imageUrl = `${props.stargateUrl}/channels/${model.uid}/assets/${model.image}`
     }
 
-    const deleteUrl = `${props.stargateUrl}/console/channels/${model.uid}`
+    const deleteUrl = `${props.stargateUrl}/community/channels/${model.uid}`
     return <div className={pageStyles.item}>
         <div className={pageStyles.itemCover}>
             <PSImageServer src={imageUrl} alt='star' width={256} height={256}/>

@@ -22,11 +22,11 @@ import {getDefaultNoteImageByUid} from "@/components/common/note";
 import ArticleReadLayout from "@/components/server/content/article/layout";
 import {CommentsClient} from "@/components/client/comments/comments";
 import {useServerConfig} from "@/components/server/config";
-import {ArticlePreview} from "./preview";
 import {notFound} from "next/navigation";
 import {serverInsertArticleViewer} from "@/components/server/viewers/viewers";
 // import '@/atom/client/editor/editor.scss';
 import {serverMakeGet} from "@pnnh/atom/nodejs";
+import {BuildBodyHtml} from "@/app/[lang]/articles/[uid]/body";
 
 const pageStyles = {
     articleCover: css`
@@ -188,9 +188,10 @@ export default async function Home({params, searchParams}: {
             <div className={pageStyles.leftArea} id={'articleReadBody'}>
                 <div className={pageStyles.articleInfo}>
                     <div className={pageStyles.articleBody}>
-                        <ArticlePreview tocList={tocList} header={getResult.data.header}
-                                        body={getResult.data.body}
-                                        assetsUrl={'assetsUrl'} portalUrl={publicPortalUrl}/>
+                        {/*<ArticlePreview tocList={tocList} header={getResult.data.header}*/}
+                        {/*                body={getResult.data.body}*/}
+                        {/*                assetsUrl={'assetsUrl'} portalUrl={publicPortalUrl}/>*/}
+                        <BuildBodyHtml tocList={tocList} model={getResult.data}/>
                     </div>
                 </div>
                 <div className={pageStyles.commentsClient}>

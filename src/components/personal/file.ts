@@ -10,7 +10,7 @@ export async function serverConsoleSelectFiles(lang: string, queryParams: Record
     const serverConfig = await useServerConfig()
     const stargateUrl = serverConfig.INTERNAL_STARGATE_URL
     const rawQuery = queryString.stringify(queryParams)
-    const url = `${stargateUrl}/console/files?${rawQuery}`
+    const url = `${stargateUrl}/personal/files?${rawQuery}`
     const cookieStore = await cookies()
     const authHeader = cookieStore.toString()
     const getResult = await serverMakeGet<PLSelectResult<PSFileModel>>(url, authHeader);

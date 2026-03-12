@@ -67,7 +67,7 @@ export default async function Page({params, searchParams}: {
 
     const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
     const publicStargateUrl = serverConfig.PUBLIC_STARGATE_URL
-    const selectData = await CommunityArticleNodeService.consoleQueryArticles(internalStargateUrl,
+    const selectData = await CommunityArticleNodeService.queryArticles(internalStargateUrl,
         lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)

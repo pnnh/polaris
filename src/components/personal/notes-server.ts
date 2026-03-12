@@ -13,7 +13,7 @@ export async function serverConsoleGetNote(lang: string, stargateUrl: string, ui
     if (!uid) {
         return undefined
     }
-    let url = `${stargateUrl}/console/notes/${uid}`
+    let url = `${stargateUrl}/personal/notes/${uid}`
     if (wantLang && isSupportedLanguage(wantLang)) {
         url += `?wantLang=${wantLang}`
     }
@@ -42,7 +42,7 @@ export async function serverConsoleGetNote(lang: string, stargateUrl: string, ui
  */
 export async function serverConsoleSelectNotes(stargateUrl: string, lang: string, queryParams: Record<string, any>): Promise<PLSelectData<PSArticleModel>> {
     const rawQuery = queryString.stringify(queryParams)
-    const url = `${stargateUrl}/console/notes?${rawQuery}`
+    const url = `${stargateUrl}/personal/notes?${rawQuery}`
     const cookieStore = await cookies()
     const authHeader = cookieStore.toString()
     const getResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, authHeader);

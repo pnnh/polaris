@@ -24,6 +24,7 @@ export interface PSArticleModel {
     repo_url: string
     full_repo_url: string
     full_repo_path: string
+    mimetype: string
 }
 
 export interface PSArticleMetadataModel {

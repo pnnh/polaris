@@ -9,7 +9,7 @@ export async function serverConsoleGetChannel(stargateUrl: string, uid: string):
     if (!uid) {
         return undefined
     }
-    const url = `${stargateUrl}/console/channels/${uid}`
+    const url = `${stargateUrl}/community/channels/${uid}`
     const cookieStore = await cookies()
     const authHeader = cookieStore.toString()
     const getResult = await serverMakeGet<CommonResult<PSChannelModel | undefined>>(url, authHeader);
@@ -26,7 +26,7 @@ export async function serverConsoleGetChannel(stargateUrl: string, uid: string):
 
 export async function serverConsoleSelectChannels(stargateUrl: string, lang: string, queryParams: Record<string, any>): Promise<PLSelectData<PSChannelModel>> {
     const rawQuery = queryString.stringify(queryParams)
-    const url = `${stargateUrl}/console/channels?${rawQuery}`
+    const url = `${stargateUrl}/community/channels?${rawQuery}`
     const cookieStore = await cookies()
     const authHeader = cookieStore.toString()
     const getResult = await serverMakeGet<PLSelectResult<PSChannelModel>>(url, authHeader);

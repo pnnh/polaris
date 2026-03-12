@@ -66,7 +66,7 @@ export async function serverConsoleSelectImages(lang: string, queryParams: Recor
     const serverConfig = await useServerConfig()
     const stargateUrl = serverConfig.INTERNAL_STARGATE_URL
     const rawQuery = queryString.stringify(queryParams)
-    const url = `${stargateUrl}/console/images?${rawQuery}`
+    const url = `${stargateUrl}/personal/images?${rawQuery}`
     const cookieStore = await cookies()
     const authHeader = cookieStore.toString()
     const getResult = await serverMakeGet<PLSelectResult<PSImageModel>>(url, authHeader);
