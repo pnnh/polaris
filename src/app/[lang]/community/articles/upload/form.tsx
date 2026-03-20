@@ -176,7 +176,8 @@ export function UploadArticlesForm({stargateUrl, channelsString, lang}: {
                 cover: '',
                 lang: lang,
                 channel: selectedChannel,
-                name: f.name.replace(/\.md$/i, '').substring(0, 128)
+                name: f.name.replace(/\.md$/i, '').substring(0, 128),
+                mimetype: 'text/markdown'
             }));
 
             // Batch upload via stargate

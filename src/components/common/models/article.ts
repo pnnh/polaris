@@ -13,6 +13,7 @@ export interface PSArticleModel {
     coverUrl: string
     discover: number
     owner: string
+    owner_name: string
     channel: string
     partition: string
     path: string
@@ -25,6 +26,7 @@ export interface PSArticleModel {
     full_repo_url: string
     full_repo_path: string
     mimetype: string
+    status: number
 }
 
 export interface PSArticleMetadataModel {

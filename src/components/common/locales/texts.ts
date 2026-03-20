@@ -2563,4 +2563,174 @@ export const TransTexts: {
         "pt-PT": "Falha ao obter a lista de arquivos",
         "zh-TW": "獲取文件列表失敗"
     },
+    "management.article.pageTitle": {
+        "zh": "文章审核管理",
+        "en": "Article Review Management",
+        "es": "Gestión de revisión de artículos",
+        "fr": "Gestion des examens d'articles",
+        "ja": "記事審査管理",
+        "de-DE": "Artikel-Überprüfungsverwaltung",
+        "pt-PT": "Gestão de revisão de artigos",
+        "zh-TW": "文章審核管理"
+    },
+    "management.article.approve": {
+        "zh": "审核通过",
+        "en": "Approve",
+        "es": "Aprobar",
+        "fr": "Approuver",
+        "ja": "承認",
+        "de-DE": "Genehmigen",
+        "pt-PT": "Aprovar",
+        "zh-TW": "審核通過"
+    },
+    "management.article.onlyPending": {
+        "zh": "仅显示待审核",
+        "en": "Pending Only",
+        "es": "Solo pendientes",
+        "fr": "En attente uniquement",
+        "ja": "未審査のみ",
+        "de-DE": "Nur ausstehend",
+        "pt-PT": "Apenas pendentes",
+        "zh-TW": "僅顯示待審核"
+    },
+    "management.article.statusPending": {
+        "zh": "待审核",
+        "en": "Pending",
+        "es": "Pendiente",
+        "fr": "En attente",
+        "ja": "未審査",
+        "de-DE": "Ausstehend",
+        "pt-PT": "Pendente",
+        "zh-TW": "待審核"
+    },
+    "management.article.statusApproved": {
+        "zh": "已通过",
+        "en": "Approved",
+        "es": "Aprobado",
+        "fr": "Approuvé",
+        "ja": "承認済み",
+        "de-DE": "Genehmigt",
+        "pt-PT": "Aprovado",
+        "zh-TW": "已通過"
+    },
+    "management.article.approveSuccess": {
+        "zh": "审核成功，已通过 {count} 篇文章",
+        "en": "Approved {count} articles successfully",
+        "es": "{count} artículos aprobados con éxito",
+        "fr": "{count} articles approuvés avec succès",
+        "ja": "{count}件の記事を承認しました",
+        "de-DE": "{count} Artikel erfolgreich genehmigt",
+        "pt-PT": "{count} artigos aprovados com sucesso",
+        "zh-TW": "審核成功，已通過 {count} 篇文章"
+    },
+    "management.article.approveFailed": {
+        "zh": "审核失败，请重试",
+        "en": "Approval failed, please try again",
+        "es": "Error de aprobación, inténtelo de nuevo",
+        "fr": "Échec de l'approbation, veuillez réessayer",
+        "ja": "承認に失敗しました。もう一度お試しください",
+        "de-DE": "Genehmigung fehlgeschlagen, bitte erneut versuchen",
+        "pt-PT": "Aprovação falhou, tente novamente",
+        "zh-TW": "審核失敗，請重試"
+    },
+    "management.article.selectFirst": {
+        "zh": "请先选择要审核的文章",
+        "en": "Please select articles to approve first",
+        "es": "Por favor seleccione artículos para aprobar primero",
+        "fr": "Veuillez d'abord sélectionner les articles à approuver",
+        "ja": "まず承認する記事を選択してください",
+        "de-DE": "Bitte wählen Sie zuerst zu genehmigende Artikel aus",
+        "pt-PT": "Por favor, selecione os artigos para aprovar primeiro",
+        "zh-TW": "請先選擇要審核的文章"
+    },
+    "management.article.ownerName": {
+        "zh": "作者",
+        "en": "Author",
+        "es": "Autor",
+        "fr": "Auteur",
+        "ja": "著者",
+        "de-DE": "Autor",
+        "pt-PT": "Autor",
+        "zh-TW": "作者"
+    },
+    "management.article.channelName": {
+        "zh": "频道",
+        "en": "Channel",
+        "es": "Canal",
+        "fr": "Canal",
+        "ja": "チャンネル",
+        "de-DE": "Kanal",
+        "pt-PT": "Canal",
+        "zh-TW": "頻道"
+    },
+    "management.article.statusLabel": {
+        "zh": "状态",
+        "en": "Status",
+        "es": "Estado",
+        "fr": "Statut",
+        "ja": "ステータス",
+        "de-DE": "Status",
+        "pt-PT": "Estado",
+        "zh-TW": "狀態"
+    },
+    "management.article.updateTime": {
+        "zh": "修改时间",
+        "en": "Updated",
+        "es": "Actualizado",
+        "fr": "Mis à jour",
+        "ja": "更新日時",
+        "de-DE": "Aktualisiert",
+        "pt-PT": "Atualizado",
+        "zh-TW": "修改時間"
+    },
+    "management.article.articleName": {
+        "zh": "文章名称",
+        "en": "Article Name",
+        "es": "Nombre del artículo",
+        "fr": "Nom de l'article",
+        "ja": "記事名",
+        "de-DE": "Artikelname",
+        "pt-PT": "Nome do artigo",
+        "zh-TW": "文章名稱"
+    },
+    "management.article.getListFailed": {
+        "zh": "获取文章列表失败",
+        "en": "Failed to get article list",
+        "es": "Error al obtener la lista de artículos",
+        "fr": "Échec de l'obtention de la liste d'articles",
+        "ja": "記事リストの取得に失敗しました",
+        "de-DE": "Fehler beim Abrufen der Artikelliste",
+        "pt-PT": "Falha ao obter a lista de artigos",
+        "zh-TW": "獲取文章列表失敗"
+    },
+    "management.article.noPermission": {
+        "zh": "无权访问，需要管理员权限",
+        "en": "Access denied. Administrator privileges required.",
+        "es": "Acceso denegado. Se requieren privilegios de administrador.",
+        "fr": "Accès refusé. Privileges d'administrateur requis.",
+        "ja": "アクセスが拒否されました。管理者権限が必要です。",
+        "de-DE": "Zugriff verweigert. Administratorrechte erforderlich.",
+        "pt-PT": "Acesso negado. São necessários privilégios de administrador.",
+        "zh-TW": "無權訪問，需要管理員權限"
+    },
+    "management.article.approving": {
+        "zh": "审核中...",
+        "en": "Approving...",
+        "es": "Aprobando...",
+        "fr": "Approbation en cours...",
+        "ja": "承認中...",
+        "de-DE": "Genehmigung läuft...",
+        "pt-PT": "A aprovar...",
+        "zh-TW": "審核中..."
+    },
+    "management.article.selectedCount": {
+        "zh": "已选择 {count} 篇",
+        "en": "Selected {count}",
+        "es": "{count} seleccionados",
+        "fr": "{count} sélectionnés",
+        "ja": "{count}件選択中",
+        "de-DE": "{count} ausgewählt",
+        "pt-PT": "{count} selecionados",
+        "zh-TW": "已選擇 {count} 篇"
+    }
 }

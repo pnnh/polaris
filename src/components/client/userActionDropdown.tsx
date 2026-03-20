@@ -9,6 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import React from "react";
 import ComputerIcon from '@mui/icons-material/Computer';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
+import {transTodo} from "@/components/common/locales/normal";
 
 const styles = {
     userAction: css`
@@ -84,13 +85,19 @@ export function UserActionDropdown({lang, userInfo}: {
                 <MenuItem onClick={handleClose}>
                     <a className={styles.menuItem} href={`/${lang}/console`}>
                         <ComputerIcon fontSize="small"/>
-                        <span>个人控制台</span>
+                        <span>{transTodo('个人控制台')}</span>
                     </a>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                     <a className={styles.menuItem} href={`/${lang}/community`}>
                         <CloudQueueIcon fontSize="small"/>
-                        <span>社区</span>
+                        <span>{transTodo('社区控制台')}</span>
+                    </a>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                    <a className={styles.menuItem} href={`/${lang}/management`}>
+                        <ComputerIcon fontSize="small"/>
+                        <span>{transTodo('管理控制台')}</span>
                     </a>
                 </MenuItem>
             </StyledMenu>

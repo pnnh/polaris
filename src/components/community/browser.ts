@@ -4,7 +4,7 @@ import {CodeOk, PLDeleteResult, PLInsertResult, PLUpdateResult} from "@pnnh/atom
 import {clientMakePost, clientMakePut} from "@pnnh/atom/browser";
 
 interface BatchInsertResult {
-    code: string;
+    code: number;
     message: string;
     data: string; // Number of successfully inserted articles as string
 }
