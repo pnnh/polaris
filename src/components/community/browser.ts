@@ -3,7 +3,32 @@
 import {CodeOk, PLDeleteResult, PLInsertResult, PLUpdateResult} from "@pnnh/atom";
 import {clientMakePost, clientMakePut} from "@pnnh/atom/browser";
 
+interface BatchInsertResult {
+    code: string;
+    message: string;
+    data: string; // Number of successfully inserted articles as string
+}
+
 export class CommunityBrowser {
+    /**
+     * Batch insert multiple articles from .md files into the community articles table.
+     * Calls POST /stargate/community/articles/batch
+     * Returns { success: number, fail: number }
+     */
+    static async clientConsoleBatchInsertArticles(
+        stargateUrl: string,
+        models: unknown[]
+    ): Promise<{ success: number; fail: number }> {
+        const url = `${stargateUrl}/community/articles/batch`;
+        const result = await clientMakePost<BatchInsertResult>(url, models);
+        if (!result || result.code !== CodeOk) {
+            console.warn('批量文章插入失败', result);
+            return {success: 0, fail: models.length};
+        }
+        const successCount = parseInt(result.data || '0', 10);
+        return {success: successCount, fail: models.length - successCount};
+    }
+
     static async clientConsoleInsertArticle(stargateUrl: string, model: unknown): Promise<string> {
         const url = `${stargateUrl}/community/articles`
         const insertResult = await clientMakePost<PLInsertResult>(url, model);

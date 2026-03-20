@@ -4,7 +4,10 @@ import React from "react";
 import {transKey} from "@/components/common/locales/normal";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
-import ClearIcon from "@mui/icons-material/Clear";import UploadFileIcon from "@mui/icons-material/UploadFile";import {EmptyUUID, uuidToBase58} from "@pnnh/atom";
+import ClearIcon from "@mui/icons-material/Clear";
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+import FolderOpenIcon from "@mui/icons-material/FolderOpen";
+import {EmptyUUID, uuidToBase58} from "@pnnh/atom";
 import {css} from "@/gen/styled/css";
 
 export function ConsoleArticleFilterBar({lang, keyword}: {
@@ -35,6 +38,9 @@ export function ConsoleArticleFilterBar({lang, keyword}: {
     const goImportArticles = () => {
         window.location.href = `/${lang}/community/articles/import`
     }
+    const goUploadArticles = () => {
+        window.location.href = `/${lang}/community/articles/upload`
+    }
     return <>
         <div className={filterStyles.middleTop}>
             <div className={filterStyles.topLeft}>
@@ -43,6 +49,9 @@ export function ConsoleArticleFilterBar({lang, keyword}: {
                 </Button>
                 <Button size={'small'} variant={'outlined'} onClick={goImportArticles} startIcon={<UploadFileIcon />}>
                     {transKey(lang, "console.article.importFromNotes")}
+                </Button>
+                <Button size={'small'} variant={'outlined'} onClick={goUploadArticles} startIcon={<FolderOpenIcon />}>
+                    {transKey(lang, "console.article.uploadFromFolder")}
                 </Button>
             </div>
             <div className={filterStyles.topRight}>

@@ -2173,6 +2173,166 @@ export const TransTexts: {
         "pt-PT": "Falha na sincronização",
         "zh-TW": "同步失敗"
     },
+    "console.article.uploadFromFolder": {
+        "zh": "从文件夹上传",
+        "en": "Upload from Folder",
+        "es": "Subir desde carpeta",
+        "fr": "Télécharger depuis un dossier",
+        "ja": "フォルダからアップロード",
+        "de-DE": "Aus Ordner hochladen",
+        "pt-PT": "Carregar da pasta",
+        "zh-TW": "從文件夾上傳"
+    },
+    "console.article.uploadPageTitle": {
+        "zh": "从文件夹批量上传文章",
+        "en": "Batch Upload Articles from Folder",
+        "es": "Subir artículos en lote desde carpeta",
+        "fr": "Télécharger des articles en lot depuis un dossier",
+        "ja": "フォルダから記事を一括アップロード",
+        "de-DE": "Artikel aus Ordner stapelweise hochladen",
+        "pt-PT": "Upload em lote de artigos da pasta",
+        "zh-TW": "從文件夾批量上傳文章"
+    },
+    "console.article.selectFolder": {
+        "zh": "选择文件夹",
+        "en": "Select Folder",
+        "es": "Seleccionar carpeta",
+        "fr": "Sélectionner un dossier",
+        "ja": "フォルダを選択",
+        "de-DE": "Ordner auswählen",
+        "pt-PT": "Selecionar pasta",
+        "zh-TW": "選擇文件夾"
+    },
+    "console.article.scanningFolder": {
+        "zh": "扫描中...",
+        "en": "Scanning...",
+        "es": "Escaneando...",
+        "fr": "Analyse en cours...",
+        "ja": "スキャン中...",
+        "de-DE": "Wird gescannt...",
+        "pt-PT": "A digitalizar...",
+        "zh-TW": "掃描中..."
+    },
+    "console.article.noFolderSelected": {
+        "zh": "未选择文件夹",
+        "en": "No folder selected",
+        "es": "Ninguna carpeta seleccionada",
+        "fr": "Aucun dossier sélectionné",
+        "ja": "フォルダが選択されていません",
+        "de-DE": "Kein Ordner ausgewählt",
+        "pt-PT": "Nenhuma pasta selecionada",
+        "zh-TW": "未選擇文件夾"
+    },
+    "console.article.noFolderHint": {
+        "zh": "点击\"选择文件夹\"选择包含 .md 文件的目录，将自动扫描所有子目录中的 .md 文件。",
+        "en": "Click \"Select Folder\" to choose a directory containing .md files. All .md files in subfolders will be scanned automatically.",
+        "es": "Haga clic en \"Seleccionar carpeta\" para elegir un directorio con archivos .md. Se escanearán automáticamente todos los archivos .md en subcarpetas.",
+        "fr": "Cliquez sur \"Sélectionner un dossier\" pour choisir un répertoire contenant des fichiers .md. Tous les fichiers .md dans les sous-dossiers seront analysés automatiquement.",
+        "ja": ".mdファイルを含むディレクトリを選択するには\"フォルダを選択\"をクリックしてください。サブフォルダ内のすべての.mdファイルが自動的にスキャンされます。",
+        "de-DE": "Klicken Sie auf \"Ordner auswählen\", um ein Verzeichnis mit .md-Dateien auszuwählen. Alle .md-Dateien in Unterordnern werden automatisch gescannt.",
+        "pt-PT": "Clique em \"Selecionar pasta\" para escolher um diretório com ficheiros .md. Todos os ficheiros .md em subpastas serão digitalizados automaticamente.",
+        "zh-TW": "點擊\"選擇文件夾\"選擇包含 .md 文件的目錄，將自動掃描所有子目錄中的 .md 文件。"
+    },
+    "console.article.mdFilesFound": {
+        "zh": "找到 {count} 个 .md 文件，已选择 {selected} 个",
+        "en": "{count} .md files found, {selected} selected",
+        "es": "{count} archivos .md encontrados, {selected} seleccionados",
+        "fr": "{count} fichiers .md trouvés, {selected} sélectionnés",
+        "ja": "{count}個の.mdファイルが見つかりました、{selected}個選択済み",
+        "de-DE": "{count} .md-Dateien gefunden, {selected} ausgewählt",
+        "pt-PT": "{count} ficheiros .md encontrados, {selected} selecionados",
+        "zh-TW": "找到 {count} 個 .md 文件，已選擇 {selected} 個"
+    },
+    "console.article.uploadFiles": {
+        "zh": "上传",
+        "en": "Upload",
+        "es": "Subir",
+        "fr": "Télécharger",
+        "ja": "アップロード",
+        "de-DE": "Hochladen",
+        "pt-PT": "Carregar",
+        "zh-TW": "上傳"
+    },
+    "console.article.uploading": {
+        "zh": "上传中...",
+        "en": "Uploading...",
+        "es": "Subiendo...",
+        "fr": "Téléchargement en cours...",
+        "ja": "アップロード中...",
+        "de-DE": "Wird hochgeladen...",
+        "pt-PT": "A carregar...",
+        "zh-TW": "上傳中..."
+    },
+    "console.article.uploadResult": {
+        "zh": "上传完成！成功：{success}，失败：{fail}",
+        "en": "Upload complete! Success: {success}, Failed: {fail}",
+        "es": "¡Subida completa! Éxito: {success}, Fallido: {fail}",
+        "fr": "Téléchargement terminé ! Réussi: {success}, Échoué: {fail}",
+        "ja": "アップロード完了！成功: {success}、失敗: {fail}",
+        "de-DE": "Upload abgeschlossen! Erfolg: {success}, Fehlgeschlagen: {fail}",
+        "pt-PT": "Upload concluído! Sucesso: {success}, Falhou: {fail}",
+        "zh-TW": "上傳完成！成功：{success}，失敗：{fail}"
+    },
+    "console.article.uploadFailed": {
+        "zh": "上传失败，请重试",
+        "en": "Upload failed, please try again",
+        "es": "Error al subir, inténtelo de nuevo",
+        "fr": "Échec du téléchargement, veuillez réessayer",
+        "ja": "アップロードに失敗しました。もう一度お試しください",
+        "de-DE": "Upload fehlgeschlagen, bitte erneut versuchen",
+        "pt-PT": "Falha no upload, tente novamente",
+        "zh-TW": "上傳失敗，請重試"
+    },
+    "console.article.selectFilesFirst": {
+        "zh": "请至少选择一个文件",
+        "en": "Please select at least one file",
+        "es": "Por favor seleccione al menos un archivo",
+        "fr": "Veuillez sélectionner au moins un fichier",
+        "ja": "少なくとも1つのファイルを選択してください",
+        "de-DE": "Bitte wählen Sie mindestens eine Datei aus",
+        "pt-PT": "Por favor, selecione pelo menos um ficheiro",
+        "zh-TW": "請至少選擇一個文件"
+    },
+    "console.article.fileName": {
+        "zh": "文件名",
+        "en": "Filename",
+        "es": "Nombre de archivo",
+        "fr": "Nom de fichier",
+        "ja": "ファイル名",
+        "de-DE": "Dateiname",
+        "pt-PT": "Nome do ficheiro",
+        "zh-TW": "文件名"
+    },
+    "console.article.filePath": {
+        "zh": "路径",
+        "en": "Path",
+        "es": "Ruta",
+        "fr": "Chemin",
+        "ja": "パス",
+        "de-DE": "Pfad",
+        "pt-PT": "Caminho",
+        "zh-TW": "路徑"
+    },
+    "console.article.fileSize": {
+        "zh": "大小",
+        "en": "Size",
+        "es": "Tamaño",
+        "fr": "Taille",
+        "ja": "サイズ",
+        "de-DE": "Größe",
+        "pt-PT": "Tamanho",
+        "zh-TW": "大小"
+    },
+    "console.article.filePreview": {
+        "zh": "内容预览",
+        "en": "Preview",
+        "es": "Vista previa",
+        "fr": "Aperçu",
+        "ja": "プレビュー",
+        "de-DE": "Vorschau",
+        "pt-PT": "Pré-visualização",
+        "zh-TW": "內容預覽"
+    },
     "console.photo.createNew": {
         "zh": "新增图集",
         "en": "Create Photo",
