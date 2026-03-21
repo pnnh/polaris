@@ -98,7 +98,7 @@ const pageStyles = {
     `,
     leftArea: css`
         border-radius: 2px;
-        width: calc(100% - 20rem - 1rem);
+        width: 100%;
     `,
     commentsClient: css`
         margin-top: 1rem;

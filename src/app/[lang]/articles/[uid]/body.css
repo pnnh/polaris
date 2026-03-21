@@ -1,0 +1,21 @@
+/*该css文件实现文章加载动画*/
+
+polaris-markdown-viewer {
+    display: block;
+    min-height: 200px;
+}
+
+/* 在 polaris-markdown-viewer 还没被 customElements.define 注册前 */
+polaris-markdown-viewer:not(:defined) {
+    /* 隐藏内容，防止闪烁 */
+    visibility: hidden;
+    /* 或者设置一个最小高度，防止布局抖动 */
+    display: block;
+    min-height: 200px;
+}
+
+/* 注册后自动显示 */
+polaris-markdown-viewer:defined {
+    visibility: visible;
+    transition: opacity 0.3s ease-in; /* 甚至可以加个淡入效果 */
+}

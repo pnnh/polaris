@@ -3,8 +3,8 @@
 import {useClientConfig} from "@/components/client/config/config";
 import {IBrowserConfig} from "@/components/common/config";
 import {cfTurnstileSetup} from "@/components/client/cloudflare/cloud";
-import {langEnUS} from "@/components/common/language";
-import $ from 'jquery';
+
+import {html, LitElement} from 'lit';
 
 function setupPWA(lang: string) {
     // const manifestLink = document.getElementById('manifest-link') as HTMLLinkElement | null;
@@ -118,11 +118,28 @@ function setupNow() {
 }
 
 // 需要页面加载后立即执行的初始化，不用等待页面完全加载
-setupNow()
+// setupNow()
 
-$(async function () {
-    const lang = document.documentElement.lang || langEnUS;
-    setupPWA(lang)
+// $(async function () {
+//     const lang = document.documentElement.lang || langEnUS;
+//     setupPWA(lang)
+//
+//     setupSqlite()
+// })
 
-    setupSqlite()
-})
+
+class MyWrapper extends LitElement {
+    static properties = {
+        active: {type: Boolean}
+    };
+
+    // 这里的 render 只负责包裹层和逻辑，不破坏 slot 里的服务端内容
+    render() {
+        return html`
+            <slot></slot> <!-- 服务端渲染的内容会出现在这里 -->
+        `;
+    }
+}
+
+customElements.define('polaris-markdown-viewer', MyWrapper);
+

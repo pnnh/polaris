@@ -7,8 +7,6 @@ import {useAtom} from "jotai";
 import {PSArticleFileModel} from "@/components/common/models/article";
 import {TocItem} from "@pnnh/atom";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import {renderCodeBlock} from "@/app/[lang]/articles/[uid]/codeblock";
-import {BuildBodyHtml} from "./body";
 import {css} from "@/gen/styled/css";
 
 export function ArticlePreview(
@@ -23,8 +21,9 @@ export function ArticlePreview(
     }) {
     const [previewState, setPreviewState] = useAtom(articleAssetsPreviewAtom)
     if (!previewState) {
-        return <BuildBodyHtml tocList={tocList} header={header} body={body}
-                              assetsUrl={assetsUrl} libUrl={'/abc'}/>
+        // return <BuildBodyHtml tocList={tocList}
+        //                       assetsUrl={assetsUrl} libUrl={'/abc'}/>
+        return <div>ArticlePreview</div>;
     }
     const fileRepoPath = previewState.full_repo_path
     return <div className={previewStyles.assertPreview}>
@@ -68,8 +67,9 @@ function TextPreview({portalUrl, model}: { portalUrl: string, model: PSArticleFi
         fetch(fileUrl).then(response => {
             return response.text()
         }).then(text => {
-            const contentHtml = renderCodeBlock(text, model.storage_path)
-            setContentHtml(contentHtml)
+            // const contentHtml = renderCodeBlock(text, model.storage_path)
+            // setContentHtml(contentHtml)
+            setContentHtml(text)
         })
     }, [fileUrl])
     if (!contentHtml) {

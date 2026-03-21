@@ -17,7 +17,6 @@ declare global {
         interface IntrinsicElements {
             // 注册你的自定义标签
             'my-custom-element': MyCustomElementProps;
-            'another-web-component': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
             'polaris-markdown-viewer': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
         }
     }

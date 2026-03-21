@@ -1,29 +1,32 @@
 'use client'
 
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {buildNodeView, SteleBody, TocItem} from "@pnnh/atom";
 import DOMPurify from 'isomorphic-dompurify';
 import {PSArticleModel} from "@/components/common/models/article";
+import './body.css'
+import {transTodo} from "@/components/common/locales/normal";
 
 export function BuildBodyHtml({tocList, model}: {
     tocList: Array<TocItem>,
     model: PSArticleModel
 }) {
+
+    if (!model.body || !model.content) return <div>
+        {transTodo('无效格式')}
+    </div>
+
     const body = model.body
+    let sanitizedHtml = ''
+    let santitizedCss = ''
 
-    const [santitizedCss, setSantitizedCss] = useState<string>('')
-    const [sanitizedHtml, setSanitizedHtml] = useState('')
+    if (model.mimetype === 'text/markdown' && typeof model.content === 'string') {
+        sanitizedHtml = DOMPurify.sanitize(model.content, {USE_PROFILES: {html: true}})
 
-    useEffect(() => {
-        if (model.mimetype === 'text/markdown' && typeof model.content === 'string') {
-            setSanitizedHtml(DOMPurify.sanitize(model.content, {USE_PROFILES: {html: true}}))
-            if (typeof model.styles === 'string') {
-                setSantitizedCss(DOMPurify.sanitize(model.styles, {USE_PROFILES: {html: true}}))
-            }
+        if (typeof model.styles === 'string') {
+            santitizedCss = DOMPurify.sanitize(model.styles, {USE_PROFILES: {html: true}})
         }
-    }, [body, model.mimetype])
-
-    if (!body) return <></>
+    }
     let bodyObject: SteleBody | null = null
     if (model.mimetype === 'stele' && typeof body === 'string') {
         bodyObject = JSON.parse(body)
