@@ -27,6 +27,8 @@ export interface PSArticleModel {
     full_repo_path: string
     mimetype: string
     status: number
+    content?: string
+    styles?: string
 }
 
 export interface PSArticleMetadataModel {

@@ -188,9 +188,6 @@ export default async function Home({params, searchParams}: {
             <div className={pageStyles.leftArea} id={'articleReadBody'}>
                 <div className={pageStyles.articleInfo}>
                     <div className={pageStyles.articleBody}>
-                        {/*<ArticlePreview tocList={tocList} header={getResult.data.header}*/}
-                        {/*                body={getResult.data.body}*/}
-                        {/*                assetsUrl={'assetsUrl'} portalUrl={publicPortalUrl}/>*/}
                         <BuildBodyHtml tocList={tocList} model={getResult.data}/>
                     </div>
                 </div>

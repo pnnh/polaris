@@ -40,7 +40,7 @@
     "plugins": [
       {
         "name": "next"
-      },
+      }
     ]
   },
   "include": [
@@ -48,7 +48,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    "src/types/**/*.d.ts",
+    "src/gen/styled/**/*.d.ts"
   ],
   "exclude": [
     "node_modules",
