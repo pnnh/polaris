@@ -1,4 +1,5 @@
 import {PSChannelModel} from "@/components/common/models/channel";
+import {EmptyUUID} from "@pnnh/atom";
 
 export interface PSArticleModel {
     title: string
@@ -29,6 +30,32 @@ export interface PSArticleModel {
     status: number
     content?: string
     styles?: string
+}
+
+export function NewArticleModel(): PSArticleModel {
+    return {
+        mimetype: "", owner_name: "", status: 0,
+        full_repo_path: "", full_repo_url: "", repo_url: "", url: "",
+        name: "",
+        channel_name: "",
+        channel: '',
+        cover: "",
+        coverUrl: "",
+        creator: "",
+        discover: 0,
+        header: "",
+        owner: "",
+        partition: "",
+        path: "",
+        uid: EmptyUUID,     // 设置为空以供form表单识别是新建文章
+        title: '',
+        description: '',
+        keywords: '',
+        body: '',
+        lang: '',
+        create_time: '',
+        update_time: ''
+    }
 }
 
 export interface PSArticleMetadataModel {

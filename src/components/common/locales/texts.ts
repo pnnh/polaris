@@ -1693,36 +1693,6 @@ export const TransTexts: {
         "pt-PT": "Enviar comentário",
         "zh-TW": "提交評論"
     },
-    "tools.markdown.inputPlaceholder": {
-        "zh": "请输入Markdown文本",
-        "en": "Please enter Markdown text",
-        "es": "Por favor ingrese texto Markdown",
-        "fr": "Veuillez saisir du texte Markdown",
-        "ja": "Markdownテキストを入力してください",
-        "de-DE": "Bitte geben Sie Markdown-Text ein",
-        "pt-PT": "Por favor insira texto Markdown",
-        "zh-TW": "請輸入Markdown文本"
-    },
-    "tools.markdown.preview": {
-        "zh": "Markdown 预览",
-        "en": "Markdown Preview",
-        "es": "Vista previa de Markdown",
-        "fr": "Aperçu Markdown",
-        "ja": "Markdown プレビュー",
-        "de-DE": "Markdown-Vorschau",
-        "pt-PT": "Visualização de Markdown",
-        "zh-TW": "Markdown 預覽"
-    },
-    "tools.markdown.previewResult": {
-        "zh": "Markdown 预览结果",
-        "en": "Markdown Preview Result",
-        "es": "Resultado de vista previa de Markdown",
-        "fr": "Résultat de l'aperçu Markdown",
-        "ja": "Markdown プレビュー結果",
-        "de-DE": "Markdown-Vorschauergebnis",
-        "pt-PT": "Resultado da visualização de Markdown",
-        "zh-TW": "Markdown 預覽結果"
-    },
     "tools.base32.encode": {
         "zh": "Base32编码",
         "en": "Base32 Encode",

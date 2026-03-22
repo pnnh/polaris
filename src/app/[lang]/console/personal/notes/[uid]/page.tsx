@@ -6,7 +6,7 @@ import {useServerConfig} from "@/components/server/config";
 import {notFound, redirect} from "next/navigation";
 import {ConsoleArticleForm} from "./form";
 import {serverConsoleGetNote} from "@/components/personal/notes-server";
-import {PSArticleModel} from "@/components/common/models/article";
+import {NewArticleModel, PSArticleModel} from "@/components/common/models/article";
 import ConsoleLayout from "@/components/server/console/layout";
 import {css} from "@/gen/styled/css";
 import {transKey} from "@/components/common/locales/normal";
@@ -45,28 +45,9 @@ export default async function Home({params, searchParams}: {
         if (searchValue.channel) {
             channelUid = mustBase58ToUuid(searchValue.channel);
         }
-        model = {
-            full_repo_path: "", full_repo_url: "", repo_url: "", url: "",
-            name: "",
-            channel_name: "",
-            channel: channelUid,
-            cover: "",
-            coverUrl: "",
-            creator: "",
-            discover: 0,
-            header: "",
-            owner: "",
-            partition: "",
-            path: "",
-            uid: EmptyUUID,     // 设置为空以供form表单识别是新建文章
-            title: '',
-            description: '',
-            keywords: '',
-            body: '',
-            lang: wantLang,
-            create_time: '',
-            update_time: ''
-        }
+        model = NewArticleModel()
+        model.channel = channelUid;
+        model.lang = wantLang
         if (copyFrom) {
             const copyFromUid = mustBase58ToUuid(copyFrom);
             const originModel = await serverConsoleGetNote(pageLang, internalStargateUrl, copyFromUid)

@@ -1,13 +1,7 @@
 'use client'
 
-import {CodeOk} from "@pnnh/atom";
+import {CodeOk, CommonResult} from "@pnnh/atom";
 import {clientMakePost} from "@pnnh/atom/browser";
-
-interface ApproveResult {
-    code: string;
-    message: string;
-    data: string; // number of updated articles as string
-}
 
 export class ManagementBrowser {
     /**
@@ -24,7 +18,7 @@ export class ManagementBrowser {
         status: number = 1
     ): Promise<{ success: number; fail: number }> {
         const url = `${stargateUrl}/management/articles/approve`;
-        const result = await clientMakePost<ApproveResult>(url, {uids, status});
+        const result = await clientMakePost<CommonResult<string>>(url, {uids, status});
         if (!result || result.code !== CodeOk) {
             console.warn('批量审核失败', result);
             return {success: 0, fail: uids.length};
