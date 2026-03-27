@@ -4,7 +4,7 @@ import React from "react";
 import {SiteNavMenu} from "@/components/server/content/partials/profile";
 import {UserActionDropdown} from "@/components/client/userActionDropdown";
 import {PSLanguageSelector} from "./language";
-import MenuIcon from '@mui/icons-material/Menu';
+import { Menu } from 'lucide-react';
 import {ThemeSwitch} from "@/components/server/content/partials/theme";
 import {getServerTheme} from "@/components/server/theme";
 import {AccountModel} from "@/components/common/models/account/account";
@@ -166,7 +166,7 @@ export async function ContentPublicNavbar({pathname, searchParams, lang, userInf
         </div>
         <div className={styles.rightNavMobile}>
             {/*<PSLanguageSelector lang={lang} currentUrl={currentUrl}/>*/}
-            <a className={styles.mobileMenu} href={`${lang}`}><MenuIcon/></a>
+            <a className={styles.mobileMenu} href={`${lang}`}><Menu size={22}/></a>
         </div>
     </div>
 }

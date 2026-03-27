@@ -1,7 +1,7 @@
 'use client'
 
 import React from "react";
-import Button from "@mui/material/Button";
+import { Button } from "@/components/ui/button";
 import {PSToolModel} from "@/components/common/models/tool";
 import {clientManagementInsertTool, clientManagementUpdateTool} from "@/components/client/tools/tools";
 import {EmptyUUID} from "@pnnh/atom";
@@ -101,10 +101,10 @@ export function ManagementToolForm({stargateUrl, lang, modelString}: {
             </div>
         </div>
         <div className={formStyles.bottomBar}>
-            <Button variant={'contained'} size={'small'} onClick={onSubmit}>
+            <Button size={'sm'} onClick={onSubmit}>
                 保存
             </Button>
-            <Button variant={'outlined'} size={'small'}
+            <Button variant={'outline'} size={'sm'}
                     onClick={() => window.location.href = `/${lang}/management/tools`}>
                 取消
             </Button>

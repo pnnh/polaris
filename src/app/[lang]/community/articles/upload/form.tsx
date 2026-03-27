@@ -21,10 +21,7 @@ import {
 } from "@mui/material";
 import {PSChannelModel} from "@/components/common/models/channel";
 import {CommunityBrowser} from "@/components/community/browser";
-import FolderOpenIcon from '@mui/icons-material/FolderOpen';
-import PublishIcon from '@mui/icons-material/Publish';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import { FolderOpen, Upload, Square, SquareCheck } from 'lucide-react';
 
 interface MdFileItem {
     name: string;
@@ -220,7 +217,7 @@ export function UploadArticlesForm({stargateUrl, channelsString, lang}: {
                         {/* Select Folder button */}
                         <Button
                             variant="outlined"
-                            startIcon={<FolderOpenIcon/>}
+                            startIcon={<FolderOpen size={18}/>}
                             onClick={handleSelectFolder}
                             disabled={scanning || uploading}
                         >
@@ -266,7 +263,7 @@ export function UploadArticlesForm({stargateUrl, channelsString, lang}: {
                             variant="contained"
                             color="primary"
                             size="large"
-                            startIcon={<PublishIcon/>}
+                            startIcon={<Upload size={18}/>}
                             onClick={handleUpload}
                             disabled={!selectedChannel || selectedFiles.size === 0 || uploading}
                         >
@@ -301,7 +298,7 @@ export function UploadArticlesForm({stargateUrl, channelsString, lang}: {
             {/* Empty state - no folder selected yet */}
             {files.length === 0 && !scanning && (
                 <Card sx={{p: 6, textAlign: 'center'}}>
-                    <FolderOpenIcon sx={{fontSize: 72, color: 'text.disabled', mb: 2}}/>
+                    <FolderOpen size={72} style={{color: 'var(--text-disabled-color)', marginBottom: '0.5rem'}}/>
                     <Typography variant="h6" color="text.secondary" gutterBottom>
                         {transKey(lang, "console.article.noFolderSelected")}
                     </Typography>
@@ -310,7 +307,7 @@ export function UploadArticlesForm({stargateUrl, channelsString, lang}: {
                     </Typography>
                     <Button
                         variant="contained"
-                        startIcon={<FolderOpenIcon/>}
+                        startIcon={<FolderOpen size={18}/>}
                         onClick={handleSelectFolder}
                         size="large"
                     >
@@ -330,8 +327,8 @@ export function UploadArticlesForm({stargateUrl, channelsString, lang}: {
                                         indeterminate={someSelected}
                                         checked={allSelected}
                                         onChange={handleSelectAll}
-                                        icon={<CheckBoxOutlineBlankIcon/>}
-                                        checkedIcon={<CheckBoxIcon/>}
+                                        icon={<Square size={20}/>}
+                                        checkedIcon={<SquareCheck size={20}/>}
                                         disabled={uploading}
                                     />
                                 </TableCell>
@@ -369,8 +366,8 @@ export function UploadArticlesForm({stargateUrl, channelsString, lang}: {
                                     <TableCell padding="checkbox">
                                         <Checkbox
                                             checked={selectedFiles.has(file.path)}
-                                            icon={<CheckBoxOutlineBlankIcon/>}
-                                            checkedIcon={<CheckBoxIcon/>}
+                                                    icon={<Square size={20}/>}
+                                                    checkedIcon={<SquareCheck size={20}/>}
                                             disabled={uploading}
                                             onClick={(e) => e.stopPropagation()}
                                             onChange={() => handleToggleFile(file.path)}

@@ -1583,6 +1583,16 @@ export const TransTexts: {
         "pt-PT": "Canais",
         "zh-TW": "頻道"
     },
+    "console.personal": {
+        "zh": "个人中心",
+        "en": "Personal",
+        "es": "Personal",
+        "fr": "Personnel",
+        "ja": "パーソナル",
+        "de-DE": "Persönlich",
+        "pt-PT": "Pessoal",
+        "zh-TW": "個人中心"
+    },
     "common.home": {
         "zh": "首页",
         "en": "Home",

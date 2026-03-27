@@ -3,8 +3,7 @@ import {css} from "@/gen/styled/css";
 
 import {getPathname} from "@/components/server/pathname";
 import {langEn, SymbolUnknown} from "@pnnh/atom";
-import ComputerIcon from "@mui/icons-material/Computer";
-import CloudQueueIcon from "@mui/icons-material/CloudQueue";
+import { Monitor, Cloud } from "lucide-react";
 import ManagementLayout from "@/components/server/management/layout";
 
 const pageStyles = {
@@ -71,15 +70,15 @@ export default async function Page({params, searchParams}: {
                 </div>
                 <div className={pageStyles.libBody}>
                     <div className={pageStyles.libCard}>
-                        <ComputerIcon/>
+                        <Monitor size={20}/>
                         全部频道1
                     </div>
                     <div className={pageStyles.libCard}>
-                        <ComputerIcon/>
+                        <Monitor size={20}/>
                         全部频道2
                     </div>
                     <div className={pageStyles.libCard}>
-                        <CloudQueueIcon/>
+                        <Cloud size={20}/>
                         全部频道3
                     </div>
                 </div>
@@ -91,15 +90,15 @@ export default async function Page({params, searchParams}: {
                 </div>
                 <div className={pageStyles.libBody}>
                     <div className={pageStyles.libCard}>
-                        <ComputerIcon/>
+                        <Monitor size={20}/>
                         全部笔记1
                     </div>
                     <div className={pageStyles.libCard}>
-                        <ComputerIcon/>
+                        <Monitor size={20}/>
                         全部笔记2
                     </div>
                     <div className={pageStyles.libCard}>
-                        <CloudQueueIcon/>
+                        <Cloud size={20}/>
                         全部笔记3
                     </div>
                 </div>

@@ -2,7 +2,7 @@
 
 import {EmptyUUID, generatorRandomString, isLangEn, langEn, langZh, TocItem, uuidToBase58} from "@pnnh/atom";
 import {ConsoleArticleEditor} from "./editor";
-import Button from "@mui/material/Button";
+import { Button } from "@/components/ui/button";
 import React from "react";
 import {PSArticleModel} from "@/components/common/models/article";
 import {getDefaultImageUrl} from "@/components/common/note";
@@ -13,10 +13,7 @@ import {transKey} from "@/components/common/locales/normal";
 import {PersonalNotesBrowser} from "@/components/personal/notes";
 import {CommunityBrowser} from "@/components/community/browser";
 import {PSChannelModel} from "@/components/common/models/channel";
-import SaveIcon from '@mui/icons-material/Save';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import LanguageIcon from '@mui/icons-material/Language';
-import PublishIcon from '@mui/icons-material/Publish';
+import { Save, Copy, Languages, Upload } from 'lucide-react';
 
 function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (newLang: string) => void }) {
     return (
@@ -24,7 +21,7 @@ function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (
             value={lang}
             size={'small'}
             variant="outlined"
-            startAdornment={<LanguageIcon sx={{mr: 1, fontSize: 20}}/>}
+            startAdornment={<Languages size={20} style={{marginRight: '0.25rem'}}/>}
             onChange={(event) => onChange(event.target.value)}
             sx={{minWidth: 140}}
         >
@@ -177,7 +174,7 @@ export function ConsoleArticleForm({stargateUrl, modelString, channelsString, la
                                         size="small"
                                         sx={{bgcolor: 'rgba(255,255,255,0.9)', '&:hover': {bgcolor: 'white'}}}
                                     >
-                                        <ContentCopyIcon fontSize="small"/>
+                                        <Copy size={16}/>
                                     </IconButton>
                                 </Tooltip>
                             </Box>
@@ -209,20 +206,21 @@ export function ConsoleArticleForm({stargateUrl, modelString, channelsString, la
                             <Stack direction="row" spacing={2}>
                                 {!isNew && (
                                     <Button
-                                        variant="outlined"
-                                        startIcon={<ContentCopyIcon/>}
-                                        href={createUrl}
+                                        variant="outline"
+                                        asChild
                                     >
-                                        {transKey(lang, 'console.note.viewCopy')}
+                                        <a href={createUrl}>
+                                            <Copy size={16} />
+                                            {transKey(lang, 'console.note.viewCopy')}
+                                        </a>
                                     </Button>
                                 )}
                                 <Button
-                                    variant="contained"
-                                    size="large"
-                                    startIcon={<SaveIcon/>}
+                                    size="lg"
+                                    style={{minWidth: 120}}
                                     onClick={onSubmit}
-                                    sx={{minWidth: 120}}
                                 >
+                                    <Save size={16} />
                                     {transKey(lang, 'console.note.save')}
                                 </Button>
                             </Stack>
@@ -236,7 +234,7 @@ export function ConsoleArticleForm({stargateUrl, modelString, channelsString, la
                         <Box className="p-4">
                             <Stack spacing={2}>
                                 <Box className="flex items-center gap-2">
-                                    <PublishIcon color="primary"/>
+                                    <Upload size={20} color="var(--primary-color)"/>
                                     <span className="font-semibold text-lg">
                                         {transKey(lang, 'console.note.publishToChannel')}
                                     </span>
@@ -261,13 +259,11 @@ export function ConsoleArticleForm({stargateUrl, modelString, channelsString, la
                                         }
                                     </Select>
                                     <Button
-                                        variant="contained"
-                                        color="primary"
-                                        startIcon={<PublishIcon/>}
                                         onClick={onPublish}
                                         disabled={!selectedChannel}
-                                        sx={{minWidth: 120}}
+                                        style={{minWidth: 120}}
                                     >
+                                        <Upload size={16} />
                                         {transKey(lang, 'console.note.publish')}
                                     </Button>
                                 </Stack>

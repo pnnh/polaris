@@ -1,5 +1,5 @@
 import {css} from "@/gen/styled/css";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { CircleUser } from 'lucide-react';
 import {sanitizeUrl} from "@pnnh/atom";
 import {AccountModel, isAnonymousAccount} from "@/components/common/models/account/account";
 
@@ -66,7 +66,7 @@ export function UserAction({lang, userInfo}: {
     }
     return <div className={styles.userAction}>
         <a className={styles.loginLink} href={`/${lang}/account/signin`}>
-            <AccountCircleIcon/>
+            <CircleUser size={24}/>
             {/*{transKey(lang, 'signin')}*/}
         </a>
         {/*<a className={styles.loginLink} href={`${lang}/account/signup`}>注册</a>*/}

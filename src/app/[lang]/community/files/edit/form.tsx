@@ -1,7 +1,7 @@
 'use client'
 
 import {EmptyUUID} from "@pnnh/atom";
-import Button from "@mui/material/Button";
+import { Button } from "@/components/ui/button";
 import React from "react";
 import {CmFileModel} from "@/components/common/models/file";
 import {transKey, transTodo} from "@/components/common/locales/normal";
@@ -120,7 +120,7 @@ export function ConsoleFileForm({stargateUrl, model, lang}: {
             </div>
         </div>
         <div className={formStyles.bottomBar}>
-            <Button variant={'contained'} size={'small'} onClick={onSubmit}>
+            <Button size={'sm'} onClick={onSubmit}>
                 {transKey(lang, "console.file.save")}
             </Button>
         </div>

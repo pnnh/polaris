@@ -8,7 +8,7 @@ import {
     IImageEntry,
     ILibraryEntry
 } from "@/components/client/images/service";
-import Button from "@mui/material/Button";
+import { Button } from "@/components/ui/button";
 import {NoData} from "@/components/common/empty";
 import {css} from "@/gen/styled/css";
 
@@ -78,7 +78,7 @@ export function ConsoleImageMiddleBody({libKey, lang, portalUrl}: {
     if (dirEntry.isLocal && needPermission) {
         return <>
             <div className={imageStyles.middleBody}>
-                <Button size={'small'} onClick={() => {
+                <Button size={'sm'} variant={'ghost'} onClick={() => {
                     clientRequestFilePermission(dirEntry).then((ok) => {
                         if (!ok) {
                             return

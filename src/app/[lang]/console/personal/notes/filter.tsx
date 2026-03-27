@@ -2,9 +2,8 @@
 
 import React from "react";
 import {transKey} from "@/components/common/locales/normal";
-import Button from "@mui/material/Button";
-import SearchIcon from "@mui/icons-material/Search";
-import ClearIcon from "@mui/icons-material/Clear";
+import { Button } from "@/components/ui/button";
+import { Search, X } from "lucide-react";
 import {EmptyUUID, uuidToBase58} from "@pnnh/atom";
 import {css} from "@/gen/styled/css";
 
@@ -36,15 +35,15 @@ export function ConsoleArticleFilterBar({lang, keyword}: {
     return <>
         <div className={filterStyles.middleTop}>
             <div className={filterStyles.topLeft}>
-                <Button size={'small'} variant={'contained'} onClick={goCreateArticle}>
+                <Button size={'sm'} onClick={goCreateArticle}>
                     {transKey(lang, 'console.note.createNew')}
                 </Button>
             </div>
             <div className={filterStyles.topRight}>
                 <div className={filterStyles.searchBox}>
-                    <input 
-                        placeholder={transKey(lang, "searchPlaceholder")} 
-                        maxLength={128} 
+                    <input
+                        placeholder={transKey(lang, "searchPlaceholder")}
+                        maxLength={128}
                         value={searchText}
                         onChange={(event) => setSearchText(event.target.value)}
                         onKeyDown={(event) => {
@@ -54,14 +53,14 @@ export function ConsoleArticleFilterBar({lang, keyword}: {
                         }}
                     />
                     {searchText && (
-                        <ClearIcon 
-                            fontSize={'small'} 
+                        <X 
+                            size={16}
                             onClick={clearSearch}
                             style={{ cursor: 'pointer', color: '#999' }}
                         />
                     )}
-                    <SearchIcon 
-                        fontSize={'small'} 
+                    <Search 
+                        size={16}
                         onClick={goSearch}
                         style={{ cursor: 'pointer' }}
                     />

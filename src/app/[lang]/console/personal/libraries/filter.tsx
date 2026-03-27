@@ -2,8 +2,8 @@
 
 import React from "react";
 import {transKey} from "@/components/common/locales/normal";
-import Button from "@mui/material/Button";
-import SearchIcon from "@mui/icons-material/Search";
+import { Button } from "@/components/ui/button";
+import { Search } from "lucide-react";
 import {clientOpenImageLibrary} from "@/components/client/images/service";
 import {css} from "@/gen/styled/css";
 
@@ -43,7 +43,7 @@ export function ConsoleLibraryFilterBar({lang, keyword, portalUrl}: {
     return <>
         <div className={filterStyles.middleTop}>
             <div className={filterStyles.topLeft}>
-                <Button size={'small'} variant={'contained'} onClick={goCreateArticle}>
+                <Button size={'sm'} onClick={goCreateArticle}>
                     打开图片目录
                 </Button>
             </div>
@@ -56,7 +56,7 @@ export function ConsoleLibraryFilterBar({lang, keyword, portalUrl}: {
                                    goSearch()
                                }
                            }}/>
-                    <SearchIcon fontSize={'small'} onClick={goSearch}/>
+                    <Search size={16} onClick={goSearch} style={{cursor: 'pointer'}}/>
                 </div>
             </div>
         </div>

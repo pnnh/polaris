@@ -8,7 +8,7 @@ import {PSArticleFileModel} from "@/components/common/models/article";
 import {clientMakeGet} from "@pnnh/atom/browser";
 import {useAtom} from "jotai";
 import {articleAssetsPreviewAtom} from "./state";
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { ExternalLink } from 'lucide-react';
 import {css} from "@/gen/styled/css";
 
 async function selectFiles(portalUrl: string, articleUid: string, parentPath: string = '') {
@@ -39,7 +39,7 @@ export function ArticleAssets({portalUrl, fullRepoPath, articleUid}: {
     return <>
         <div className={assetsStyles.tocCard} id={'assetsCard'}>
             <div className={assetsStyles.tocHeader}>
-                <span>文件信息</span><a href={fullRepoPath} target={'_blank'}><OpenInNewIcon/></a>
+                <span>文件信息</span><a href={fullRepoPath} target={'_blank'}><ExternalLink size={20}/></a>
             </div>
             <div className={assetsStyles.tocBody} id={'assetsBody'}>
                 {

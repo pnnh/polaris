@@ -3,7 +3,7 @@
 import {useState} from "react";
 import {StyledMenu} from "@/components/client/dropmenu";
 import MenuItem from "@mui/material/MenuItem";
-import ContrastIcon from '@mui/icons-material/Contrast';
+import { Contrast } from 'lucide-react';
 import {clientSetCurrentTheme, ThemeType} from "@/components/client/theme";
 import {transKey} from "@/components/common/locales/normal";
 import {css} from "@/gen/styled/css";
@@ -24,7 +24,7 @@ export function ThemeSwitch({themeName, lang}: { themeName: string, lang: string
     return <>
         <div className={themeStyles.themeSelector}
              onClick={handleClick}>
-            <ContrastIcon className="themeIcon" aria-hidden={undefined} sx={{cursor: 'pointer'}}/>
+            <Contrast className="themeIcon" aria-hidden={undefined} size={20} style={{cursor: 'pointer'}}/>
             {/*{themeName === 'dark' ? transKey(lang, "DarkTheme") : themeName === 'light' ?*/}
             {/*    transKey(lang, "LightTheme") : transKey(lang, "AutoTheme")}*/}
         </div>

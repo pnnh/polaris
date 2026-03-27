@@ -23,10 +23,7 @@ import {PSArticleModel} from "@/components/common/models/article";
 import {PSChannelModel} from "@/components/common/models/channel";
 import {CommunityBrowser} from "@/components/community/browser";
 import {EmptyUUID, formatRfc3339, STSubString} from "@pnnh/atom";
-import PublishIcon from '@mui/icons-material/Publish';
-import SearchIcon from '@mui/icons-material/Search';
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import { Upload, Search, Square, SquareCheck } from 'lucide-react';
 
 export function ImportArticlesForm({stargateUrl, notesString, channelsString, keyword, lang}: {
     stargateUrl: string,
@@ -37,12 +34,12 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
 }) {
     const notes = JSON.parse(notesString) as PSArticleModel[];
     const channels = JSON.parse(channelsString) as PSChannelModel[];
-    
+
     const [selectedChannel, setSelectedChannel] = React.useState('');
     const [selectedNotes, setSelectedNotes] = React.useState<Set<string>>(new Set());
     const [searchText, setSearchText] = React.useState(keyword || '');
     const [importing, setImporting] = React.useState(false);
-    
+
     const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.checked) {
             setSelectedNotes(new Set(notes.map(note => note.uid)));
@@ -50,7 +47,7 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
             setSelectedNotes(new Set());
         }
     };
-    
+
     const handleSelectNote = (noteUid: string) => {
         const newSelected = new Set(selectedNotes);
         if (newSelected.has(noteUid)) {
@@ -60,7 +57,7 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
         }
         setSelectedNotes(newSelected);
     };
-    
+
     const handleSearch = () => {
         const url = new URL(window.location.href);
         if (searchText) {
@@ -70,7 +67,7 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
         }
         window.location.href = url.pathname + url.search;
     };
-    
+
     const handleImport = async () => {
         if (!selectedChannel) {
             alert(transKey(lang, "console.article.selectChannelFirst"));
@@ -80,14 +77,14 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
             alert(transKey(lang, "console.article.selectNotesFirst"));
             return;
         }
-        
+
         setImporting(true);
-        
+
         try {
             const selectedNotesList = notes.filter(note => selectedNotes.has(note.uid));
             let successCount = 0;
             let failCount = 0;
-            
+
             for (const note of selectedNotesList) {
                 const articleModel = {
                     uid: EmptyUUID,
@@ -101,7 +98,7 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
                     keywords: note.keywords,
                     name: note.name
                 };
-                
+
                 const articleId = await CommunityBrowser.clientConsoleInsertArticle(stargateUrl, articleModel);
                 if (articleId) {
                     successCount++;
@@ -109,11 +106,11 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
                     failCount++;
                 }
             }
-            
+
             alert(transKey(lang, "console.article.importResult")
                 .replace('{success}', successCount.toString())
                 .replace('{fail}', failCount.toString()));
-            
+
             if (successCount > 0) {
                 window.location.href = `/${lang}/community/articles`;
             }
@@ -124,16 +121,16 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
             setImporting(false);
         }
     };
-    
+
     const allSelected = notes.length > 0 && selectedNotes.size === notes.length;
     const someSelected = selectedNotes.size > 0 && selectedNotes.size < notes.length;
-    
+
     return (
         <Box>
             <Typography variant="h4" gutterBottom>
                 {transKey(lang, "console.article.importFromNotes")}
             </Typography>
-            
+
             {/* Toolbar */}
             <Card sx={{ mb: 3, p: 2 }}>
                 <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
@@ -158,23 +155,23 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
                             ))}
                         </Select>
                     </Stack>
-                    
-                    <Button 
-                        variant="contained" 
+
+                    <Button
+                        variant="contained"
                         color="primary"
                         size="large"
-                        startIcon={<PublishIcon />}
+                        startIcon={<Upload size={18} />}
                         onClick={handleImport}
                         disabled={!selectedChannel || selectedNotes.size === 0 || importing}
                     >
-                        {importing 
+                        {importing
                             ? transKey(lang, 'console.article.importing')
                             : transKey(lang, 'console.article.confirmImport')}
                         {selectedNotes.size > 0 && ` (${selectedNotes.size})`}
                     </Button>
                 </Stack>
             </Card>
-            
+
             {/* Search Box */}
             <Card sx={{ mb: 2, p: 2 }}>
                 <Stack direction="row" spacing={2} alignItems="center">
@@ -190,16 +187,16 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
                             }
                         }}
                     />
-                    <Button 
-                        variant="outlined" 
-                        startIcon={<SearchIcon />}
+                    <Button
+                        variant="outlined"
+                        startIcon={<Search size={18} />}
                         onClick={handleSearch}
                     >
                         {transKey(lang, "common.search")}
                     </Button>
                 </Stack>
             </Card>
-            
+
             {/* Info Alert */}
             {selectedNotes.size > 0 && (
                 <Alert severity="info" sx={{ mb: 2 }}>
@@ -207,7 +204,7 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
                         .replace('{count}', selectedNotes.size.toString())}
                 </Alert>
             )}
-            
+
             {/* Notes List */}
             <Card>
                 <Table>
@@ -218,8 +215,8 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
                                     indeterminate={someSelected}
                                     checked={allSelected}
                                     onChange={handleSelectAll}
-                                    icon={<CheckBoxOutlineBlankIcon />}
-                                    checkedIcon={<CheckBoxIcon />}
+                                    icon={<Square size={20} />}
+                                    checkedIcon={<SquareCheck size={20} />}
                                 />
                             </TableCell>
                             <TableCell>{transKey(lang, "console.note.title")}</TableCell>
@@ -237,7 +234,7 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
                             </TableRow>
                         ) : (
                             notes.map((note) => (
-                                <TableRow 
+                                <TableRow
                                     key={note.uid}
                                     hover
                                     onClick={() => handleSelectNote(note.uid)}
@@ -247,8 +244,8 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
                                     <TableCell padding="checkbox">
                                         <Checkbox
                                             checked={selectedNotes.has(note.uid)}
-                                            icon={<CheckBoxOutlineBlankIcon />}
-                                            checkedIcon={<CheckBoxIcon />}
+                                            icon={<Square size={20} />}
+                                            checkedIcon={<SquareCheck size={20} />}
                                         />
                                     </TableCell>
                                     <TableCell>
@@ -277,7 +274,7 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
                     </TableBody>
                 </Table>
             </Card>
-            
+
             {notes.length >= 50 && (
                 <Alert severity="warning" sx={{ mt: 2 }}>
                     {transKey(lang, "console.article.maxNotesShown")}

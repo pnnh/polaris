@@ -7,6 +7,44 @@
 
 @plugin "daisyui";
 
+/* ─── shadcn/ui — Tailwind v4 theme mapping ───────────────────────────────── */
+/* Maps shadcn CSS variables to Tailwind color utilities (bg-sidebar, etc.)   */
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-border: var(--border);
+    --color-ring: var(--ring);
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --radius-sm: calc(var(--radius) - 2px);
+    --radius-md: var(--radius);
+    --radius-lg: calc(var(--radius) + 2px);
+}
+
+/* ─── Radix UI Collapsible — height animation ─────────────────────────────── */
+@keyframes collapsible-open {
+    from { height: 0; opacity: 0; }
+    to   { height: var(--radix-collapsible-content-height); opacity: 1; }
+}
+@keyframes collapsible-close {
+    from { height: var(--radix-collapsible-content-height); opacity: 1; }
+    to   { height: 0; opacity: 0; }
+}
+[data-radix-collapsible-content] {
+    overflow: hidden;
+}
+[data-radix-collapsible-content][data-state='open'] {
+    animation: collapsible-open 200ms ease-out;
+}
+[data-radix-collapsible-content][data-state='closed'] {
+    animation: collapsible-close 180ms ease-in;
+}
+
 /*配色方案参考MUI组件，分别是MUI组件的亮色和暗色主题颜色*/
 
 :root {
@@ -28,6 +66,22 @@
     --action-disabled-background-color: rgba(0, 0, 0, 0.12);
     --action-focus-color: rgba(0, 0, 0, 0.12);
     --border-color: #e0e0e0;
+
+    /* ─── shadcn/ui CSS variables (light theme) ──────────────────────────── */
+    --background: var(--background-color);
+    --foreground: var(--text-primary-color);
+    --border: var(--border-color);
+    --ring: var(--primary-color);
+    --radius: 0.5rem;
+
+    /* Sidebar tokens */
+    --sidebar: #f8fafc;
+    --sidebar-foreground: var(--text-primary-color);
+    --sidebar-border: var(--border-color);
+    --sidebar-accent: var(--action-hover-color);
+    --sidebar-accent-foreground: var(--text-primary-color);
+    --sidebar-primary: var(--primary-color);
+    --sidebar-primary-foreground: #ffffff;
 
     --screenSmallWidth: 20rem; /* 约320px，小于该屏幕宽度时，提示屏幕尺寸过小无法保证展示效果 */
     --screenMediumWidth: 48rem; /*  约768px，达到该屏幕宽度时显示中等屏幕模式 */
@@ -53,6 +107,21 @@ body.darkTheme {
     --action-disabled-color: rgba(255, 255, 255, 0.3);
     --action-disabled-background-color: rgba(255, 255, 255, 0.12);
     --action-focus-color: rgba(255, 255, 255, 0.12);
+
+    /* ─── shadcn/ui CSS variables (dark theme) ──────────────────────────── */
+    --background: var(--background-color);
+    --foreground: var(--text-primary-color);
+    --border: rgba(255, 255, 255, 0.12);
+    --ring: var(--primary-color);
+
+    /* Sidebar tokens */
+    --sidebar: #1a1a2e;
+    --sidebar-foreground: var(--text-primary-color);
+    --sidebar-border: rgba(255, 255, 255, 0.1);
+    --sidebar-accent: rgba(255, 255, 255, 0.08);
+    --sidebar-accent-foreground: #ffffff;
+    --sidebar-primary: var(--primary-color);
+    --sidebar-primary-foreground: #000000;
 }
 
 body {

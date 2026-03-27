@@ -2,9 +2,8 @@
 
 import React from "react";
 import {transKey} from "@/components/common/locales/normal";
-import Button from "@mui/material/Button";
-import SearchIcon from "@mui/icons-material/Search";
-import ClearIcon from "@mui/icons-material/Clear";
+import { Button } from "@/components/ui/button";
+import { Search, X } from "lucide-react";
 import {EmptyUUID, uuidToBase58} from "@pnnh/atom";
 import {css} from "@/gen/styled/css";
 
@@ -36,7 +35,7 @@ export function ConsolePhotoFilterBar({lang, keyword}: {
     return <>
         <div className={filterStyles.middleTop}>
             <div className={filterStyles.topLeft}>
-                <Button size={'small'} variant={'contained'} onClick={goCreatePhoto}>
+                <Button size={'sm'} onClick={goCreatePhoto}>
                     {transKey(lang, "console.image.createNew")}
                 </Button>
             </div>
@@ -54,14 +53,14 @@ export function ConsolePhotoFilterBar({lang, keyword}: {
                         }}
                     />
                     {searchText && (
-                        <ClearIcon
-                            fontSize={'small'}
+                        <X
+                            size={16}
                             onClick={clearSearch}
                             style={{cursor: 'pointer', color: '#999'}}
                         />
                     )}
-                    <SearchIcon
-                        fontSize={'small'}
+                    <Search
+                        size={16}
                         onClick={goSearch}
                         style={{cursor: 'pointer'}}
                     />

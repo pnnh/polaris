@@ -1,9 +1,8 @@
 'use client'
 
 import React from "react";
-import Button from "@mui/material/Button";
-import SearchIcon from "@mui/icons-material/Search";
-import ClearIcon from "@mui/icons-material/Clear";
+import { Button } from "@/components/ui/button";
+import { Search, X } from "lucide-react";
 import {EmptyUUID, uuidToBase58} from "@pnnh/atom";
 import {css} from "@/gen/styled/css";
 
@@ -38,7 +37,7 @@ export function ManagementToolFilterBar({lang, keyword}: {
 
     return <div className={filterStyles.middleTop}>
         <div className={filterStyles.topLeft}>
-            <Button size={'small'} variant={'contained'} onClick={goCreateTool}>
+            <Button size={'sm'} onClick={goCreateTool}>
                 新建工具
             </Button>
         </div>
@@ -54,14 +53,14 @@ export function ManagementToolFilterBar({lang, keyword}: {
                     }}
                 />
                 {searchText && (
-                    <ClearIcon
-                        fontSize={'small'}
+                    <X
+                        size={16}
                         onClick={clearSearch}
                         style={{cursor: 'pointer', color: '#999'}}
                     />
                 )}
-                <SearchIcon
-                    fontSize={'small'}
+                <Search
+                    size={16}
                     onClick={goSearch}
                     style={{cursor: 'pointer'}}
                 />

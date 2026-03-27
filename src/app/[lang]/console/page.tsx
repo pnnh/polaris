@@ -6,7 +6,7 @@ import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
 import ConsoleLayout from "@/components/server/console/layout";
-import CloudQueueIcon from '@mui/icons-material/CloudQueue';
+import { Cloud } from 'lucide-react';
 import {transKey} from "@/components/common/locales/normal";
 import {isAnonymousAccount} from "@/components/common/models/account/account";
 import {getPathname} from "@/components/server/pathname";
@@ -124,15 +124,15 @@ export default async function Page({params, searchParams}: {
                     </div>
                     <div className={pageStyles.libBody}>
                         <div className={pageStyles.libCard}>
-                            <CloudQueueIcon/>
+                            <Cloud size={20}/>
                             <a href={`/${lang}/console/personal/files`} className={pageStyles.libLink}>所有文件</a>
                         </div>
                         <div className={pageStyles.libCard}>
-                            <CloudQueueIcon/>
+                            <Cloud size={20}/>
                             <a href={`/${lang}/console/personal/notes`} className={pageStyles.libLink}>所有笔记</a>
                         </div>
                         <div className={pageStyles.libCard}>
-                            <CloudQueueIcon/>
+                            <Cloud size={20}/>
                             <a href={`/${lang}/console/personal/images`} className={pageStyles.libLink}>所有图片</a>
                         </div>
                     </div>

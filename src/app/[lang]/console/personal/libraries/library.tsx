@@ -1,9 +1,8 @@
 'use client'
 
 import React, {useEffect, useState} from "react";
-import ComputerIcon from "@mui/icons-material/Computer";
+import { Monitor, Cloud } from "lucide-react";
 import {clientLoadLibraryEntries, ILibraryEntry} from "@/components/client/images/service";
-import CloudQueueIcon from "@mui/icons-material/CloudQueue";
 import {css} from "@/gen/styled/css";
 
 export function ConsoleLibraryMiddleBody({lang, portalUrl}: {
@@ -83,7 +82,7 @@ function LibraryCard({model, lang, portalUrl}: {
 }) {
     return <>
         <div className={libraryStyles.libCard}>
-            {model.isLocal ? <ComputerIcon/> : <CloudQueueIcon/>}
+            {model.isLocal ? <Monitor size={20}/> : <Cloud size={20}/>}
             <a href={`/${lang}/console/personal/images?libName=${encodeURIComponent(model.key)}`}>{model.name}</a>
         </div>
     </>

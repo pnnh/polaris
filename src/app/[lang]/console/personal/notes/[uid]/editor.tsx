@@ -1,9 +1,7 @@
 import React from "react";
 import {TocItem} from "@pnnh/atom";
 import {Box, Tab, Tabs, Paper, IconButton, Tooltip, Stack, Chip} from "@mui/material";
-import CodeIcon from '@mui/icons-material/Code';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import SplitscreenIcon from '@mui/icons-material/Splitscreen';
+import { Code, Eye, Columns2 } from 'lucide-react';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -46,42 +44,42 @@ export function ConsoleArticleEditor({
             {/* Editor Toolbar */}
             <Box className="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
                 <Stack direction="row" justifyContent="space-between" alignItems="center" className="px-4 py-2">
-                    <Tabs 
-                        value={editorMode} 
+                    <Tabs
+                        value={editorMode}
                         onChange={(_, newValue) => setEditorMode(newValue)}
                         variant="standard"
                     >
-                        <Tab 
-                            icon={<CodeIcon />} 
-                            label="Edit" 
+                        <Tab
+                            icon={<Code size={18} />} 
+                            label="Edit"
                             iconPosition="start"
                             sx={{ minHeight: 48 }}
                         />
-                        <Tab 
-                            icon={<VisibilityIcon />} 
-                            label="Preview" 
+                        <Tab
+                            icon={<Eye size={18} />} 
+                            label="Preview"
                             iconPosition="start"
                             sx={{ minHeight: 48 }}
                             disabled
                         />
-                        <Tab 
-                            icon={<SplitscreenIcon />} 
-                            label="Split" 
+                        <Tab
+                            icon={<Columns2 size={18} />} 
+                            label="Split"
                             iconPosition="start"
                             sx={{ minHeight: 48 }}
                             disabled
                         />
                     </Tabs>
-                    
+
                     <Stack direction="row" spacing={1}>
-                        <Chip 
-                            label={`${wordCount} chars`} 
-                            size="small" 
+                        <Chip
+                            label={`${wordCount} chars`}
+                            size="small"
                             variant="outlined"
                         />
-                        <Chip 
-                            label={`${lineCount} lines`} 
-                            size="small" 
+                        <Chip
+                            label={`${lineCount} lines`}
+                            size="small"
                             variant="outlined"
                         />
                     </Stack>
@@ -90,9 +88,9 @@ export function ConsoleArticleEditor({
 
             {/* Editor Content */}
             <TabPanel value={editorMode} index={0}>
-                <textarea 
+                <textarea
                     className="w-full h-full p-6 font-mono text-sm resize-none border-0 focus:outline-none focus:ring-0 bg-white dark:bg-gray-900 dark:text-gray-100"
-                    style={{ 
+                    style={{
                         minHeight: 'calc(100vh - 400px)',
                         lineHeight: '1.6',
                     }}
@@ -102,7 +100,7 @@ export function ConsoleArticleEditor({
                     spellCheck={false}
                 />
             </TabPanel>
-            
+
             <TabPanel value={editorMode} index={1}>
                 <Box className="p-6 h-full overflow-auto">
                     <div className="prose dark:prose-invert max-w-none">
@@ -111,11 +109,11 @@ export function ConsoleArticleEditor({
                     </div>
                 </Box>
             </TabPanel>
-            
+
             <TabPanel value={editorMode} index={2}>
                 <Box className="flex h-full">
                     <Box className="flex-1 border-r border-gray-200 dark:border-gray-700">
-                        <textarea 
+                        <textarea
                             className="w-full h-full p-6 font-mono text-sm resize-none border-0 focus:outline-none focus:ring-0"
                             value={bodyText}
                             onChange={(event) => onChange(event.target.value)}

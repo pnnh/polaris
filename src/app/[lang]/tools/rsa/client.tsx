@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import { Button } from "@/components/ui/button";
 import {transKey} from "@/components/common/locales/normal";
 import {rsaServerEncode} from "./server";
 import {PSFileModel} from "@/components/common/models/file";
@@ -26,7 +26,7 @@ export default function RsaComponent({lang, appInfo}: { lang: string, appInfo: P
         } value={source}
                   onChange={(event) => setSource(event.target.value)}/>
         <div className={rsaStyles.toolButtons}>
-            <Button variant="contained" size={'small'} onClick={encodeFunc}>
+            <Button size={'sm'} onClick={encodeFunc}>
                 {transKey(lang, "tools.rsa.encode")}
             </Button>
         </div>

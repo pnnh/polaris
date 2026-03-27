@@ -8,7 +8,7 @@ import {PSImageServer} from "@/components/server/image";
 import React from "react";
 import {css} from "@/gen/styled/css";
 import PSDeleteButton from "@/components/client/console/delete";
-import PublicIcon from '@mui/icons-material/Public';
+import { Globe } from 'lucide-react';
 import {transKey} from "@/components/common/locales/normal";
 import {useServerConfig} from "@/components/server/config";
 
@@ -173,7 +173,7 @@ export function NoteCard({model, lang, portalUrl, stargateUrl}: {
         <div className={articleStyles.action}>
             <FaEye size={'1rem'}/><span>{model.discover}</span>
             <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(model.update_time)}</span>
-            <PublicIcon/><span>{model.lang}</span>
+            <Globe size={16}/><span>{model.lang}</span>
         </div>
         <div>
             <a href={chanUrl}>{model.channel_name}</a>

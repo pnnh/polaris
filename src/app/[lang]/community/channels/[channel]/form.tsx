@@ -1,6 +1,6 @@
 'use client'
 
-import Button from "@mui/material/Button";
+import { Button } from "@/components/ui/button";
 import React from "react";
 import {PSChannelModel} from "@/components/common/models/channel";
 import {clientConsoleInsertChannel, clientConsoleUpdateChannel} from "@/components/client/channels/channels";
@@ -54,7 +54,7 @@ export function ConsoleChannelForm({stargateUrl, modelString}: { stargateUrl: st
             <img className={channelStyles.coverImage} src={coverUrl} alt={oldModel.name}/>
         </div>
         <div className={channelStyles.bottomBar}>
-            <Button variant={'contained'} size={'small'} onClick={onSubmit}>
+            <Button size={'sm'} onClick={onSubmit}>
                 {transKey('en', "console.channel.save")}
             </Button>
         </div>

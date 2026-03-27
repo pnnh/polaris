@@ -1,7 +1,7 @@
 'use client'
 
 import {EmptyUUID} from "@pnnh/atom";
-import Button from "@mui/material/Button";
+import { Button } from "@/components/ui/button";
 import React from "react";
 import {PSImageModel} from "@/components/common/models/image";
 import {PSChannelModel} from "@/components/common/models/channel";
@@ -129,7 +129,7 @@ export function ConsolePhotoForm({stargateUrl, modelString, channelsString, lang
                 onChange={setSelectedChannel}
                 lang={lang}
             />
-            <Button variant={'contained'} size={'small'} onClick={onSubmit}>
+            <Button size={'sm'} onClick={onSubmit}>
                 {transKey(lang, "console.image.save")}
             </Button>
         </div>

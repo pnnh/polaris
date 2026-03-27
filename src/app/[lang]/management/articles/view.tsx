@@ -15,12 +15,7 @@ import {
     TableRow,
     Typography
 } from "@mui/material";
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
-import VerifiedIcon from '@mui/icons-material/Verified';
-import SearchIcon from '@mui/icons-material/Search';
-import ClearIcon from '@mui/icons-material/Clear';
+import { Square, SquareCheck, Hourglass, BadgeCheck, Search, X } from 'lucide-react';
 import {PSArticleModel} from "@/components/common/models/article";
 import {ManagementBrowser} from "@/components/management/browser";
 import {css} from "@/gen/styled/css";
@@ -34,7 +29,7 @@ function StatusChip({status, lang}: { status: number; lang: string }) {
     if (status === STATUS_APPROVED) {
         return (
             <Chip
-                icon={<VerifiedIcon sx={{fontSize: 14}}/>}
+                icon={<BadgeCheck size={14}/>}
                 label={transKey(lang, "management.article.statusApproved")}
                 color="success"
                 size="small"
@@ -44,7 +39,7 @@ function StatusChip({status, lang}: { status: number; lang: string }) {
     }
     return (
         <Chip
-            icon={<HourglassEmptyIcon sx={{fontSize: 14}}/>}
+            icon={<Hourglass size={14}/>}
             label={transKey(lang, "management.article.statusPending")}
             color="warning"
             size="small"
@@ -205,7 +200,7 @@ export function ManagementArticlesView({
                         size="small"
                         variant="contained"
                         color="primary"
-                        startIcon={<VerifiedIcon/>}
+                        startIcon={<BadgeCheck size={18}/>}
                         onClick={handleApprove}
                         disabled={approving || selectedUids.size === 0}
                     >
@@ -222,7 +217,7 @@ export function ManagementArticlesView({
                         size="small"
                         variant={statusFilter === 'pending' ? 'contained' : 'outlined'}
                         color={statusFilter === 'pending' ? 'warning' : 'inherit'}
-                        startIcon={<HourglassEmptyIcon/>}
+                        startIcon={<Hourglass size={18}/>}
                         onClick={togglePendingFilter}
                     >
                         {transKey(lang, "management.article.onlyPending")}
@@ -242,14 +237,14 @@ export function ManagementArticlesView({
                             }}
                         />
                         {searchText && (
-                            <ClearIcon
-                                fontSize="small"
+                            <X
+                                size={16}
                                 onClick={clearSearch}
                                 style={{cursor: 'pointer', color: '#999'}}
                             />
                         )}
-                        <SearchIcon
-                            fontSize="small"
+                        <Search
+                            size={16}
                             onClick={goSearch}
                             style={{cursor: 'pointer'}}
                         />
@@ -281,8 +276,8 @@ export function ManagementArticlesView({
                                     indeterminate={someSelected}
                                     checked={allSelected}
                                     onChange={handleSelectAll}
-                                    icon={<CheckBoxOutlineBlankIcon/>}
-                                    checkedIcon={<CheckBoxIcon/>}
+                                    icon={<Square size={20}/>}
+                                    checkedIcon={<SquareCheck size={20}/>}
                                     disabled={approving}
                                 />
                             </TableCell>
@@ -332,8 +327,8 @@ export function ManagementArticlesView({
                                 <TableCell padding="checkbox">
                                     <Checkbox
                                         checked={selectedUids.has(article.uid)}
-                                        icon={<CheckBoxOutlineBlankIcon/>}
-                                        checkedIcon={<CheckBoxIcon/>}
+                                        icon={<Square size={20}/>}
+                                        checkedIcon={<SquareCheck size={20}/>}
                                         disabled={approving}
                                         onClick={e => e.stopPropagation()}
                                         onChange={() => handleToggle(article.uid)}

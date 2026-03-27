@@ -1,14 +1,12 @@
 'use client';
 
 import {css} from "@/gen/styled/css";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { CircleUser, Monitor, Cloud } from 'lucide-react';
 import {sanitizeUrl} from "@pnnh/atom";
 import {AccountModel, isAnonymousAccount} from "@/components/common/models/account/account";
 import {StyledMenu} from "@/components/client/dropmenu";
 import MenuItem from "@mui/material/MenuItem";
 import React from "react";
-import ComputerIcon from '@mui/icons-material/Computer';
-import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import {transTodo} from "@/components/common/locales/normal";
 
 const styles = {
@@ -84,19 +82,19 @@ export function UserActionDropdown({lang, userInfo}: {
             >
                 <MenuItem onClick={handleClose}>
                     <a className={styles.menuItem} href={`/${lang}/console`}>
-                        <ComputerIcon fontSize="small"/>
+                        <Monitor size={18}/>
                         <span>{transTodo('个人控制台')}</span>
                     </a>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                     <a className={styles.menuItem} href={`/${lang}/community`}>
-                        <CloudQueueIcon fontSize="small"/>
+                        <Cloud size={18}/>
                         <span>{transTodo('社区控制台')}</span>
                     </a>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                     <a className={styles.menuItem} href={`/${lang}/management`}>
-                        <ComputerIcon fontSize="small"/>
+                        <Monitor size={18}/>
                         <span>{transTodo('管理控制台')}</span>
                     </a>
                 </MenuItem>
@@ -106,7 +104,7 @@ export function UserActionDropdown({lang, userInfo}: {
 
     return <div className={styles.userAction}>
         <a className={styles.loginLink} href={`/${lang}/account/signin`}>
-            <AccountCircleIcon/>
+            <CircleUser size={24}/>
         </a>
     </div>
 }

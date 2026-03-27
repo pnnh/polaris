@@ -4,7 +4,7 @@ import {css} from "@/gen/styled/css";
 import * as React from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import {getLangInfo, replaceLangInUrl, supportedLanguages} from "@/components/common/language";
-import LanguageIcon from '@mui/icons-material/Language';
+import { Languages } from 'lucide-react';
 import {StyledMenu} from "@/components/client/dropmenu";
 
 const styles = {
@@ -64,7 +64,7 @@ export function PSLanguageSelector({lang, currentUrl}: { lang: string, currentUr
     return <>
         <div className={styles.langSelector}
              onClick={handleClick}>
-            <LanguageIcon aria-hidden={undefined}/>
+            <Languages size={20} aria-hidden={undefined}/>
             {/*{langInfo.name}*/}
         </div>
         <StyledMenu

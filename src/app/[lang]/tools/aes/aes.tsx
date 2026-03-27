@@ -1,11 +1,11 @@
 'use client'
 
 import * as React from 'react';
-import Button from '@mui/material/Button';
+import { Button } from "@/components/ui/button";
 import {transKey} from "@/components/common/locales/normal";
 import {aesServerDecode, aesServerEncode, aesServerGenerateKey} from "@/app/[lang]/tools/aes/server";
 import {IconButton, TextField} from "@mui/material";
-import ImportExportIcon from '@mui/icons-material/ImportExport';
+import { ArrowUpDown } from 'lucide-react';
 import {PSFileModel} from "@/components/common/models/file";
 import {css} from "@/gen/styled/css";
 
@@ -41,14 +41,14 @@ export default function AesComponent({lang, appInfo}: { lang: string, appInfo: P
                        value={aesKey} slotProps={{htmlInput: {maxLength: 64}}}
                        placeholder={transKey(lang, 'tools.aes.keyPlaceholder')}
                        onChange={(event) => setAesKey(event.target.value)}/>
-            <Button variant={'contained'} size={'small'}
+            <Button size={'sm'}
                     onClick={() => {
                         aesServerGenerateKey().then((newKey) => setAesKey(newKey))
                     }}>{transKey(lang, 'tools.aes.randomKey')}</Button>
-            <Button variant="contained" size={'small'} onClick={encodeFunc}>
+            <Button size={'sm'} onClick={encodeFunc}>
                 {transKey(lang, 'tools.aes.encode')}
             </Button>
-            <Button variant="contained" size={'small'} onClick={decodeFunc}>
+            <Button size={'sm'} onClick={decodeFunc}>
                 {transKey(lang, 'tools.aes.decode')}
             </Button>
             <IconButton size={'small'} onClick={() => {
@@ -56,7 +56,7 @@ export default function AesComponent({lang, appInfo}: { lang: string, appInfo: P
                 setSource(output);
                 setOutput(currentSource);
             }}>
-                <ImportExportIcon/>
+                <ArrowUpDown size={20}/>
             </IconButton>
         </div>
         <textarea className={aesStyles.targetText} placeholder={

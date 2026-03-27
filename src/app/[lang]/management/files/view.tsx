@@ -5,12 +5,7 @@ import {
     Alert, Box, Button, Checkbox, Chip,
     Table, TableBody, TableCell, TableHead, TableRow, Typography
 } from "@mui/material";
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
-import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
-import VerifiedIcon from '@mui/icons-material/Verified';
-import SearchIcon from '@mui/icons-material/Search';
-import ClearIcon from '@mui/icons-material/Clear';
+import { Square, SquareCheck, Hourglass, BadgeCheck, Search, X } from 'lucide-react';
 import {CmFileModel} from "@/components/common/models/file";
 import {ManagementBrowser} from "@/components/management/browser";
 import {css} from "@/gen/styled/css";
@@ -20,9 +15,9 @@ const STATUS_APPROVED = 1;
 
 function StatusChip({status}: { status: number }) {
     if (status === STATUS_APPROVED) {
-        return <Chip icon={<VerifiedIcon sx={{fontSize: 14}}/>} label="已审核" color="success" size="small" variant="outlined"/>;
+        return <Chip icon={<BadgeCheck size={14}/>} label="已审核" color="success" size="small" variant="outlined"/>;
     }
-    return <Chip icon={<HourglassEmptyIcon sx={{fontSize: 14}}/>} label="待审核" color="warning" size="small" variant="outlined"/>;
+    return <Chip icon={<Hourglass size={14}/>} label="待审核" color="warning" size="small" variant="outlined"/>;
 }
 
 const filterStyles = {
@@ -116,13 +111,13 @@ export function ManagementFilesView({lang, stargateUrl, dataJson, keyword, statu
         <Box sx={{flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column'}}>
             <div className={filterStyles.toolbar}>
                 <div className={filterStyles.leftGroup}>
-                    <Button size="small" variant="contained" color="primary" startIcon={<VerifiedIcon/>}
+                    <Button size="small" variant="contained" color="primary" startIcon={<BadgeCheck size={18}/>}
                             onClick={handleApprove} disabled={approving || selectedUids.size === 0}>
                         {approving ? '审核中...' : selectedUids.size > 0 ? `审核 (${selectedUids.size})` : '审核'}
                     </Button>
                     <Button size="small" variant={statusFilter === 'pending' ? 'contained' : 'outlined'}
                             color={statusFilter === 'pending' ? 'warning' : 'inherit'}
-                            startIcon={<HourglassEmptyIcon/>} onClick={togglePendingFilter}>
+                            startIcon={<Hourglass size={18}/>} onClick={togglePendingFilter}>
                         仅待审核
                     </Button>
                 </div>
@@ -131,8 +126,8 @@ export function ManagementFilesView({lang, stargateUrl, dataJson, keyword, statu
                         <input placeholder="搜索文件..." maxLength={128} value={searchText}
                                onChange={e => setSearchText(e.target.value)}
                                onKeyDown={e => { if (e.key === 'Enter') goSearch(); }}/>
-                        {searchText && <ClearIcon fontSize="small" onClick={clearSearch} style={{cursor: 'pointer', color: '#999'}}/>}
-                        <SearchIcon fontSize="small" onClick={goSearch} style={{cursor: 'pointer'}}/>
+                        {searchText && <X size={16} onClick={clearSearch} style={{cursor: 'pointer', color: '#999'}}/>}
+                        <Search size={16} onClick={goSearch} style={{cursor: 'pointer'}}/>
                     </div>
                 </div>
             </div>
@@ -147,8 +142,8 @@ export function ManagementFilesView({lang, stargateUrl, dataJson, keyword, statu
                         <TableRow>
                             <TableCell padding="checkbox" sx={{width: 48}}>
                                 <Checkbox indeterminate={someSelected} checked={allSelected}
-                                          onChange={handleSelectAll} icon={<CheckBoxOutlineBlankIcon/>}
-                                          checkedIcon={<CheckBoxIcon/>} disabled={approving}/>
+                                          onChange={handleSelectAll} icon={<Square size={20}/>}
+                                          checkedIcon={<SquareCheck size={20}/>} disabled={approving}/>
                             </TableCell>
                             <TableCell><Typography variant="body2" fontWeight={600}>文件名</Typography></TableCell>
                             <TableCell sx={{width: 160}}><Typography variant="body2" fontWeight={600}>所有者</Typography></TableCell>
@@ -170,8 +165,8 @@ export function ManagementFilesView({lang, stargateUrl, dataJson, keyword, statu
                                       onClick={() => !approving && handleToggle(file.uid)}
                                       sx={{cursor: approving ? 'default' : 'pointer'}}>
                                 <TableCell padding="checkbox">
-                                    <Checkbox checked={selectedUids.has(file.uid)} icon={<CheckBoxOutlineBlankIcon/>}
-                                              checkedIcon={<CheckBoxIcon/>} disabled={approving}
+                                    <Checkbox checked={selectedUids.has(file.uid)} icon={<Square size={20}/>}
+                                              checkedIcon={<SquareCheck size={20}/>} disabled={approving}
                                               onClick={e => e.stopPropagation()} onChange={() => handleToggle(file.uid)}/>
                                 </TableCell>
                                 <TableCell>

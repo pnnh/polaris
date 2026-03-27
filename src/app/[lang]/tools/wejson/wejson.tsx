@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {WePreview} from "./preview";
-import Button from "@mui/material/Button";
+import { Button } from "@/components/ui/button";
 import {Alert} from "@mui/material";
 import {css} from "@/gen/styled/css";
 
@@ -27,7 +27,7 @@ export function WeJsonClient() {
                 {errMsg && <Alert severity="error">{errMsg}</Alert>}
             </div>
             <div className={wejsonStyles.toolButtons}>
-                <Button variant={'contained'} size={'small'} onClick={() => {
+                <Button size={'sm'} onClick={() => {
                     try {
                         const parsed = JSON.parse(rawContent);
                         setParsedContent(JSON.stringify(parsed, null, 2));

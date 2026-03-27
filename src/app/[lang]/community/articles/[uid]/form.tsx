@@ -2,7 +2,7 @@
 
 import {EmptyUUID, generatorRandomString, TocItem} from "@pnnh/atom";
 import {ConsoleArticleEditor} from "./editor";
-import Button from "@mui/material/Button";
+import { Button } from "@/components/ui/button";
 import React from "react";
 import {PSArticleModel} from "@/components/common/models/article";
 import {PSChannelModel} from "@/components/common/models/channel";
@@ -34,9 +34,9 @@ function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (
     </>
 }
 
-function PSConsoleChannelSelector({channelUid, channels, onChange, lang}: { 
-    channelUid: string, 
-    channels: PSChannelModel[], 
+function PSConsoleChannelSelector({channelUid, channels, onChange, lang}: {
+    channelUid: string,
+    channels: PSChannelModel[],
     onChange: (newChannel: string) => void,
     lang: string
 }) {
@@ -137,7 +137,7 @@ export function ConsoleArticleForm({stargateUrl, modelString, channelsString, la
         <div className={formStyles.bottomBar}>
             <PSConsoleChannelSelector channelUid={selectedChannel} channels={channels} onChange={setSelectedChannel} lang={lang}/>
             <PSConsoleLanguageSelector lang={wangLang} onChange={setWantLang}/>
-            <Button variant={'contained'} size={'small'} onClick={onSubmit}>{
+            <Button size={'sm'} onClick={onSubmit}>{
                 transKey(lang, "console.article.save")
             }</Button>
         </div>

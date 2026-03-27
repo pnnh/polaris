@@ -1,22 +1,12 @@
 'use client';
 
 import * as React from 'react';
-import {styled} from '@mui/material/styles';
-import Button, {ButtonProps} from '@mui/material/Button';
-import {red} from '@mui/material/colors';
 import {Dialog} from '@mui/material';
 import {CodeOk, PLDeleteResult} from "@pnnh/atom";
 import {clientMakePost} from "@pnnh/atom/browser";
 import {transKey} from "@/components/common/locales/normal";
 import {css} from "@/gen/styled/css";
-
-const ColorButton = styled(Button)<ButtonProps>(({theme}) => ({
-    color: theme.palette.getContrastText(red[500]),
-    backgroundColor: red[500],
-    '&:hover': {
-        backgroundColor: red[700],
-    },
-}));
+import { Button } from '@/components/ui/button';
 
 export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
     children: React.ReactNode,
@@ -51,7 +41,7 @@ export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
     };
     return (
         <div>
-            <ColorButton variant="text" size={'small'} onClick={handleClickOpen}>{children}</ColorButton>
+            <Button variant="destructive" size={'sm'} onClick={handleClickOpen}>{children}</Button>
             <Dialog onClose={handleClose} open={open}>
                 <div className={deleteStyles.deleteDialog}>
 
@@ -62,10 +52,10 @@ export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
                         {resTitle}
                     </div>
                     <div className={deleteStyles.dialogActions}>
-                        <Button variant={'contained'} size={'small'} onClick={() => handleSubmit('ok')}>
+                        <Button size={'sm'} onClick={() => handleSubmit('ok')}>
                             {transKey(lang, 'console.delete.ok')}
                         </Button>
-                        <Button variant={'contained'} size={'small'} onClick={() => handleClose()}>
+                        <Button size={'sm'} onClick={() => handleClose()}>
                             {transKey(lang, 'console.common.cancel')}
                         </Button>
 
@@ -98,4 +88,3 @@ const deleteStyles = {
         gap: 0.5rem;
     `
 }
-

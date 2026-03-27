@@ -7,10 +7,8 @@ import React from "react";
 import {css} from "@/gen/styled/css";
 import PSDeleteButton from "@/components/client/console/delete";
 import {transKey} from "@/components/common/locales/normal";
-import Button from "@mui/material/Button";
-import FolderOpenIcon from '@mui/icons-material/FolderOpen';
-import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-import EditDocumentIcon from '@mui/icons-material/EditDocument';
+import { Button } from "@/components/ui/button";
+import { FolderOpen, File, FilePen } from 'lucide-react';
 
 const fileStyles = {
     middleBody: css`
@@ -98,7 +96,7 @@ export function FileCard({model, lang, stargateUrl}: {
         <div className={fileStyles.itemTitle}>
             {
                 model.mimetype === 'directory' || model.mimetype === 'folder' ?
-                    <FolderOpenIcon/> : <InsertDriveFileIcon/>
+                    <FolderOpen size={18}/> : <File size={18}/>
             }
             {
                 model.mimetype === 'directory' || model.mimetype === 'folder' ?
@@ -116,8 +114,8 @@ export function FileCard({model, lang, stargateUrl}: {
             <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(model.update_time)}</span>
         </div>
         <div className={fileStyles.action}>
-            <Button size={'small'} href={editUrl} title={editUrl}>
-                <EditDocumentIcon/>
+            <Button size={'icon'} variant={'ghost'} asChild>
+                <a href={editUrl} title={editUrl}><FilePen size={16} /></a>
             </Button>
             <PSDeleteButton lang={lang} deleteUrl={deleteUrl} resTitle={model.title}>
                 {transKey(lang, "console.common.delete")}

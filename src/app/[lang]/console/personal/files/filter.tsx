@@ -2,7 +2,7 @@
 
 import React from "react";
 import {transKey} from "@/components/common/locales/normal";
-import SearchIcon from "@mui/icons-material/Search";
+import { Search } from "lucide-react";
 import {css} from "@/gen/styled/css";
 
 export function ConsoleFileFilterBar({lang, keyword}: {
@@ -29,7 +29,7 @@ export function ConsoleFileFilterBar({lang, keyword}: {
                                    goSearch()
                                }
                            }}/>
-                    <SearchIcon fontSize={'small'} onClick={goSearch}/>
+                    <Search size={16} onClick={goSearch} style={{cursor: 'pointer'}}/>
                 </div>
             </div>
         </div>
