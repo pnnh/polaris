@@ -15,12 +15,13 @@ const styles = {
     navHeader: css`
         display: flex;
         flex-direction: row;
-        height: 3rem;
+        height: 3.25rem;
         justify-content: space-between;
         align-items: center;
         font-size: 1rem;
         font-weight: 400;
         color: var(--text-primary-color);
+        padding: 0 0.5rem;
         @media screen and (min-width: 120rem) {
             width: 120rem;
             margin: 0 auto;
@@ -30,7 +31,7 @@ const styles = {
         display: flex;
         flex-direction: row;
         align-items: center;
-        margin-left: 1rem;
+        margin-left: 0.75rem;
         gap: 1rem;
     `,
     brandLink: css`
@@ -39,16 +40,23 @@ const styles = {
         font-size: 1rem;
         display: inline-block;
         position: relative;
-        height: 2.2rem;
-        width: 2.2rem;
+        height: 2rem;
+        width: 2rem;
+        border-radius: 6px;
+        overflow: hidden;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.8;
+        }
     `,
     rightNav: css`
-        margin-right: 2rem;
+        margin-right: 1.5rem;
         display: none;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        gap: 0.9rem;
+        gap: 0.75rem;
         @media screen and (min-width: 48rem) {
             display: flex;
             margin-right: 1rem;
@@ -58,9 +66,17 @@ const styles = {
         text-decoration: none;
         color: var(--text-primary-color);
         cursor: pointer;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         height: 1.5rem;
         width: 1.5rem;
+        border-radius: 6px;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: var(--action-hover-color);
+        }
 
         & svg {
             width: 100%;
@@ -72,15 +88,24 @@ const styles = {
         flex-direction: row;
         gap: 0.5rem;
         align-items: center;
-        margin-right: 0.5rem;
+        margin-right: 0.25rem;
 
         & a {
             text-decoration: none;
-            color: var(--text-primary-color);
-            font-size: 0.9rem;
+            color: var(--text-secondary-color);
+            font-size: 0.85rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            transition: color 0.2s ease, background-color 0.2s ease;
+
+            &:hover {
+                color: var(--text-primary-color);
+                background-color: var(--action-hover-color);
+            }
 
             &.active {
-                color: dodgerblue;
+                color: var(--primary-color);
+                font-weight: 500;
             }
         }
     `,
@@ -95,13 +120,22 @@ const styles = {
         }
     `,
     mobileMenu: css`
-        display: inline-block;
-        height: 1.8rem;
-        width: 1.8rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 2rem;
+        width: 2rem;
+        border-radius: 6px;
+        color: var(--text-primary-color);
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background-color: var(--action-hover-color);
+        }
 
         & svg {
-            width: 100%;
-            height: 100%;
+            width: 1.4rem;
+            height: 1.4rem;
         }
     `,
 };

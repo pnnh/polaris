@@ -58,9 +58,9 @@ export default async function Page({params, searchParams}: {
 
 const paginationStyles = {
     paginationContainer: css`
-
-        width: 1024px;
+        width: 100%;
+        max-width: 80rem;
         margin: 0 auto;
-        padding-top: 1rem;
-        padding-bottom: 2rem;`
+        padding: 0.5rem 1rem 1.5rem;
+    `
 }

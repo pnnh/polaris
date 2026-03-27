@@ -11,28 +11,42 @@ const styles = {
             display: flex;
             flex-direction: row;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.25rem;
         }
     `,
     selectorBox: css`
-        border: solid 1px #e0e0e0;
-        border-radius: 4px;
-        background: #FFFFFF;
+        border: solid 1px var(--border-color);
+        border-radius: 8px;
+        background: var(--background-color);
         display: flex;
         flex-direction: column;
         gap: 0;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     `,
     navLink: css`
-        color: var(--text-primary-color);
+        color: var(--text-secondary-color);
         text-decoration: none;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
+        padding: 4px 10px;
+        border-radius: 6px;
+        transition: color 0.2s ease, background-color 0.2s ease;
+
+        &:hover {
+            color: var(--text-primary-color);
+            background-color: var(--action-hover-color);
+        }
     `,
     navLinkInBox: css`
         color: var(--text-primary-color);
         padding: 8px 16px;
         text-decoration: none;
-        font-size: 1rem;
-        border-bottom: solid 1px #e0e0e0;
+        font-size: 0.95rem;
+        border-bottom: solid 1px var(--divider-color);
+        transition: background-color 0.15s ease;
+
+        &:hover {
+            background-color: var(--action-hover-color);
+        }
 
         &:last-child {
             border-width: 0;
@@ -41,7 +55,7 @@ const styles = {
     roleButtonContainer: css`
         display: flex;
         flex-direction: row;
-        gap: 8px;
+        gap: 4px;
         justify-content: center;
         align-items: center;
     `,
@@ -49,14 +63,30 @@ const styles = {
         text-decoration: none;
         color: var(--text-primary-color);
         cursor: pointer;
-        font-size: 1.1rem;
+        font-size: 1rem;
+        font-weight: 500;
+        padding: 4px 10px;
+        border-radius: 6px;
+        transition: color 0.2s ease, background-color 0.2s ease;
+
+        &:hover {
+            background-color: var(--action-hover-color);
+        }
     `,
     toolsLink: css`
         text-decoration: none;
-        color: #4e4e4e;
+        color: var(--text-secondary-color);
         cursor: pointer;
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 400;
+        padding: 4px 10px;
+        border-radius: 6px;
+        transition: color 0.2s ease, background-color 0.2s ease;
+
+        &:hover {
+            color: var(--text-primary-color);
+            background-color: var(--action-hover-color);
+        }
     `,
 };
 

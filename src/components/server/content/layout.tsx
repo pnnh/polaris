@@ -19,12 +19,16 @@ const styles = {
     templateNavbar: css`
         width: 100vw;
         background-color: var(--background-color);
-        border-bottom: solid 1px #d3d3d3;
+        border-bottom: solid 1px var(--divider-color);
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
+        flex-shrink: 0;
+        z-index: 10;
     `,
     templateBody: css`
         scrollbar-width: thin;
         overflow-x: hidden;
         overflow-y: auto;
+        flex: 1;
     `,
     bodyContainer: css`
         margin: 0 auto;

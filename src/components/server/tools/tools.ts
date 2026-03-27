@@ -3,7 +3,6 @@ import {PSFileModel} from "@/components/common/models/file";
 import {clientMakeGet} from "@pnnh/atom/browser";
 import {PLGetResult, PLSelectResult} from "@pnnh/atom";
 import queryString from "query-string";
-import {isUUID} from "validator";
 
 export const articlesUid = '019bbb53-f051-750a-8532-2358b64f31f3'
 export const imagesUid = '019bbb53-ef8d-7589-aebc-851c627eabd0'
@@ -61,7 +60,7 @@ export async function selectFilesFromBackend(options: FileSelectOptions | undefi
     }
     const selectResult = await clientMakeGet<PLSelectResult<PSFileModel>>(url)
     if (!selectResult || selectResult.code !== 200 || !selectResult.data) {
-        throw new Error("host notebook")
+        throw new Error("selectFilesFromBackend" + selectResult.code)
     }
     return selectResult
 }

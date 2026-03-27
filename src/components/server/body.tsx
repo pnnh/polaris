@@ -1,33 +1,46 @@
-import {PLSelectResult, replaceSearchParams, tryBase58ToUuid, uuidToBase58} from "@pnnh/atom";
+import {PLSelectResult, tryBase58ToUuid, uuidToBase58} from "@pnnh/atom";
 import React from "react";
 import {css} from "@/gen/styled/css";
 import {PSFileModel} from "@/components/common/models/file";
 import {ResourceCard} from "@/app/[lang]/tools/tool";
-import {FileSelectOptions, selectFilePathFromBackend, selectFilesFromBackend} from "@/components/server/tools/tools";
+import {selectFilePathFromBackend} from "@/components/server/tools/tools";
 
-const toolStyles = {
-    toolBodyComponent: css`
-        width: 1024px;
+const resStyles = {
+    resBodyComponent: css`
+        width: 100%;
+        max-width: 80rem;
         margin: 0 auto;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+        padding: 1.5rem 1rem 2rem;
+        @media screen and (min-width: 48rem) {
+            padding: 2rem 1.5rem;
+        }
+        @media screen and (min-width: 80rem) {
+            padding: 2rem;
+        }
     `,
-    appGrid: css`
+    resGrid: css`
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-gap: 1rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.875rem;
         width: 100%;
         margin-bottom: 1rem;
-        grid-auto-rows: 1fr;
+        @media screen and (min-width: 48rem) {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        @media screen and (min-width: 80rem) {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+        }
     `,
-    appCard: css`
-        border: 1px solid #e0e0e0;
-        background-color: #ffffff;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-        aspect-ratio: 1/1.2;
+    resCard: css`
+        background-color: var(--background-color);
+        border-radius: 12px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
         position: relative;
         overflow: hidden;
+        transition: box-shadow 0.25s ease, transform 0.25s ease;
+
     `,
 }
 
@@ -41,12 +54,12 @@ export async function PSHomeBody({lang, selectResult, searchParams}: {
     if (parent) {
         parentUid = tryBase58ToUuid(parent)
     }
-    return <div className={toolStyles.toolBodyComponent}>
+    return <div className={resStyles.resBodyComponent}>
         <PSFilePath lang={lang} uid={parentUid}/>
-        <div className={toolStyles.appGrid}>
+        <div className={resStyles.resGrid}>
             {
                 selectResult.data.range.map(async (app) => {
-                    return <div className={toolStyles.appCard}>
+                    return <div className={resStyles.resCard}>
                         <ResourceCard searchParams={searchParams} model={app} lang={lang}/>
                     </div>
                 })
@@ -57,13 +70,31 @@ export async function PSHomeBody({lang, selectResult, searchParams}: {
 
 const pathStyles = {
     container: css`
-        margin-bottom: 1rem;
-        background-color: #f3f3f3;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
+        margin-bottom: 1.25rem;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+        padding: 0.5rem 0.875rem;
+        background-color: var(--action-hover-color);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        font-size: 0.875rem;
+        color: var(--text-secondary-color);
     `,
     dir: css`
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+
+        & a {
+            color: var(--primary-color);
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     `
 }
 

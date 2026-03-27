@@ -10,7 +10,9 @@ const imageStyles = {
     middleItem: css`
         position: relative;
         overflow: hidden;
-        border-radius: 8px;
+        border-radius: 12px;
+        background-color: var(--background-color);
+        transition: box-shadow 0.25s ease, transform 0.25s ease;
     `,
     imageCover: css`
         flex-shrink: 0;
@@ -28,7 +30,7 @@ const imageStyles = {
     `,
     imageInfo: css`
         display: flex;
-        padding: 0.5rem 1rem;
+        padding: 0.5rem 0.875rem;
         flex-direction: column;
         justify-content: flex-start;
         flex-grow: 1;
@@ -37,19 +39,23 @@ const imageStyles = {
         height: 1.5rem;
         flex-shrink: 0;
         font-weight: 600;
-        font-size: 16px;
-        line-height: 24px;
-        color: #252933;
+        font-size: 0.9rem;
+        line-height: 1.5rem;
+        color: var(--text-primary-color);
         overflow: hidden;
 
         & a {
-            color: #252933;
+            color: var(--text-primary-color);
             text-decoration: none;
+
+            &:hover {
+                color: var(--primary-color);
+            }
         }
     `,
     action: css`
         height: 1rem;
-        color: #8a919f;
+        color: var(--text-secondary-color);
         font-size: 12px;
         line-height: 22px;
         display: flex;
@@ -80,25 +86,35 @@ export function PSImageCard({model, lang}: {
 
 const toolStyles = {
     toolBodyComponent: css`
-        width: 1024px;
+        width: 100%;
+        max-width: 80rem;
         margin: 0 auto;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+        padding: 1.5rem 1rem 2rem;
     `,
     appGrid: css`
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 3rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
         width: 100%;
         margin-bottom: 1rem;
+        @media screen and (min-width: 48rem) {
+            grid-template-columns: repeat(3, 1fr);
+        }
     `,
     appCard: css`
-        border: 1px solid #e0e0e0;
-        background-color: #ffffff;
-        border-radius: 4px;
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border-color);
+        background-color: var(--background-color);
+        border-radius: 12px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
         aspect-ratio: 1/0.8;
         position: relative;
+        overflow: hidden;
+        transition: box-shadow 0.25s ease, transform 0.25s ease;
+
+        &:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
     `,
     appImage: css`
         width: 100%;
@@ -106,24 +122,26 @@ const toolStyles = {
         position: absolute;
         top: 0;
         left: 0;
-        opacity: 0.2;
+        opacity: 0.15;
         z-index: 0;
         object-fit: cover;
     `,
     appTitle: css`
-        font-size: 20px;
+        font-size: 1.1rem;
         font-weight: 600;
         position: relative;
         z-index: 2;
-        padding: 16px;
+        padding: 16px 16px 8px;
+        color: var(--text-primary-color);
     `,
     appDescription: css`
         margin: 0;
-        padding: 16px;
-        font-size: 16px;
-        color: #555;
+        padding: 0 16px 16px;
+        font-size: 0.9rem;
+        color: var(--text-secondary-color);
         position: relative;
         z-index: 2;
+        line-height: 1.5;
     `
 }
 
@@ -151,11 +169,11 @@ export function ResourceCard({model, lang, searchParams}: {
 }
 
 async function FileItemCard({lang, model}: { lang: string, model: PSFileModel }) {
-    const toolUrl = model.url.startsWith('https') || model.url.startsWith('https')
+    const toolUrl = model.url.startsWith('https') || model.url.startsWith('http')
         ? model.url : `${lang}${model.url}`
     return <div className={toolStyles.appCard} key={model.uid}>
         <div className={toolStyles.appTitle}>
-            <a style={{color: '#333', textDecoration: 'none'}} href={toolUrl}
+            <a style={{color: 'var(--text-primary-color)', textDecoration: 'none'}} href={toolUrl}
                title={model.title || model.name}>{model.title || model.name}</a>
         </div>
         <div className={toolStyles.appDescription}>
@@ -166,11 +184,38 @@ async function FileItemCard({lang, model}: { lang: string, model: PSFileModel })
 
 const cardStyles = {
     cardItem: css`
-        padding: 12px;
-        border: 1px solid #e0e0e0;
-        border-radius: 8px;
-        background-color: #fafafa;
-        transition: box-shadow 0.3s ease;
+        padding: 14px 16px;
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        background-color: var(--background-color);
+        transition: box-shadow 0.25s ease, transform 0.25s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        &:hover {
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+
+        & > a, & > div > a {
+            color: var(--text-primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            line-height: 1.4;
+
+            &:hover {
+                color: var(--primary-color);
+            }
+        }
+
+        & > div {
+            color: var(--text-secondary-color);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
     `
 }
 
