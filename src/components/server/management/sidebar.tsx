@@ -16,8 +16,11 @@ export function ManagementSidebar({lang}: { lang: string }) {
         <a href={`/${lang}/management/channels`}>
             {transTodo("频道")}
         </a>
-        <a href={`/${lang}/management/photos`}>
+        <a href={`/${lang}/management/images`}>
             {transTodo("图片")}
+        </a>
+        <a href={`/${lang}/management/tools`}>
+            {transTodo("工具")}
         </a>
     </div>
 }

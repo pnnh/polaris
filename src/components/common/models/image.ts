@@ -10,6 +10,7 @@ export interface PSImageModel {
     discover: number
     status: number
     owner: string
+    owner_name?: string
     channel: string
     partition: string
     uid: string

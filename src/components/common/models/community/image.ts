@@ -1,4 +1,4 @@
-export interface PMImageModel {
+export interface CMImageModel {
     title: string
     header: string
     body: string

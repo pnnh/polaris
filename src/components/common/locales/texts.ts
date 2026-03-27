@@ -2303,7 +2303,7 @@ export const TransTexts: {
         "pt-PT": "Pré-visualização",
         "zh-TW": "內容預覽"
     },
-    "console.photo.createNew": {
+    "console.image.createNew": {
         "zh": "新增图集",
         "en": "Create Photo",
         "es": "Crear foto",
@@ -2313,7 +2313,7 @@ export const TransTexts: {
         "pt-PT": "Criar foto",
         "zh-TW": "新增圖集"
     },
-    "console.photo.title": {
+    "console.image.title": {
         "zh": "标题",
         "en": "Title",
         "es": "Título",
@@ -2323,7 +2323,7 @@ export const TransTexts: {
         "pt-PT": "Título",
         "zh-TW": "標題"
     },
-    "console.photo.description": {
+    "console.image.description": {
         "zh": "描述",
         "en": "Description",
         "es": "Descripción",
@@ -2333,7 +2333,7 @@ export const TransTexts: {
         "pt-PT": "Descrição",
         "zh-TW": "描述"
     },
-    "console.photo.extendedInfo": {
+    "console.image.extendedInfo": {
         "zh": "扩展信息",
         "en": "Extended Info",
         "es": "Información extendida",
@@ -2343,7 +2343,7 @@ export const TransTexts: {
         "pt-PT": "Informações estendidas",
         "zh-TW": "擴展信息"
     },
-    "console.photo.action": {
+    "console.image.action": {
         "zh": "操作",
         "en": "Action",
         "es": "Acción",
@@ -2353,7 +2353,7 @@ export const TransTexts: {
         "pt-PT": "Ação",
         "zh-TW": "操作"
     },
-    "console.photo.save": {
+    "console.image.save": {
         "zh": "保存图集",
         "en": "Save Photo",
         "es": "Guardar foto",
@@ -2363,7 +2363,7 @@ export const TransTexts: {
         "pt-PT": "Salvar foto",
         "zh-TW": "保存圖集"
     },
-    "console.photo.insertFailed": {
+    "console.image.insertFailed": {
         "zh": "图集插入失败",
         "en": "Photo insert failed",
         "es": "Error al insertar foto",
@@ -2373,7 +2373,7 @@ export const TransTexts: {
         "pt-PT": "Falha ao inserir foto",
         "zh-TW": "圖集插入失敗"
     },
-    "console.photo.updateFailed": {
+    "console.image.updateFailed": {
         "zh": "图集更新失败",
         "en": "Photo update failed",
         "es": "Error al actualizar foto",
@@ -2383,7 +2383,7 @@ export const TransTexts: {
         "pt-PT": "Falha ao atualizar foto",
         "zh-TW": "圖集更新失敗"
     },
-    "console.photo.selectChannel": {
+    "console.image.selectChannel": {
         "zh": "选择频道",
         "en": "Select Channel",
         "es": "Seleccionar canal",
@@ -2393,7 +2393,7 @@ export const TransTexts: {
         "pt-PT": "Selecionar canal",
         "zh-TW": "選擇頻道"
     },
-    "console.photo.channelRequired": {
+    "console.image.channelRequired": {
         "zh": "请选择频道",
         "en": "Please select a channel",
         "es": "Por favor seleccione un canal",
@@ -2403,7 +2403,7 @@ export const TransTexts: {
         "pt-PT": "Por favor, selecione um canal",
         "zh-TW": "請選擇頻道"
     },
-    "console.photo.sync": {
+    "console.image.sync": {
         "zh": "同步",
         "en": "Sync",
         "es": "Sincronizar",
@@ -2412,16 +2412,6 @@ export const TransTexts: {
         "de-DE": "Synchronisieren",
         "pt-PT": "Sincronizar",
         "zh-TW": "同步"
-    },
-    "photos.getListFailed": {
-        "zh": "获取图集列表失败",
-        "en": "Failed to get photo list",
-        "es": "Error al obtener la lista de fotos",
-        "fr": "Échec de l'obtention de la liste de photos",
-        "ja": "写真リストの取得に失敗しました",
-        "de-DE": "Fehler beim Abrufen der Fotoliste",
-        "pt-PT": "Falha ao obter a lista de fotos",
-        "zh-TW": "獲取圖集列表失敗"
     },
     "console.file.createNew": {
         "zh": "新增文件",

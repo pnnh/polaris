@@ -14,7 +14,7 @@ import CommunityLayout from "@/components/server/community/layout";
 export const dynamic = "force-dynamic";
 
 const pageStyles = {
-    photosPage: css`
+    imagesPage: css`
         height: 100vh;
         overflow-x: hidden;
         overflow-y: auto;
@@ -86,7 +86,7 @@ export default async function Home({params, searchParams}: {
     const channelsString = JSON.stringify(channelsData.range)
     return <CommunityLayout lang={pageLang} pathname={pathname} searchParams={searchValue}
                             userInfo={SymbolUnknown}>
-        <div className={pageStyles.photosPage}>
+        <div className={pageStyles.imagesPage}>
             <div className={pageStyles.pageContainer}>
                 <ConsolePhotoForm stargateUrl={publicStargateUrl} modelString={modelString}
                                   channelsString={channelsString} lang={pageLang}/>

@@ -31,13 +31,13 @@ export function ConsolePhotoFilterBar({lang, keyword}: {
         window.location.href = url.pathname + url.search;
     }
     const goCreatePhoto = () => {
-        window.location.href = `/${lang}/community/photos/${uuidToBase58(EmptyUUID)}`
+        window.location.href = `/${lang}/community/images/${uuidToBase58(EmptyUUID)}`
     }
     return <>
         <div className={filterStyles.middleTop}>
             <div className={filterStyles.topLeft}>
                 <Button size={'small'} variant={'contained'} onClick={goCreatePhoto}>
-                    {transKey(lang, "console.photo.createNew")}
+                    {transKey(lang, "console.image.createNew")}
                 </Button>
             </div>
             <div className={filterStyles.topRight}>

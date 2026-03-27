@@ -13,7 +13,7 @@ import {PaginationServer} from "@/components/server/pagination";
 export const dynamic = "force-dynamic";
 
 const pageStyles = {
-    photosPage: css`
+    imagesPage: css`
         height: 100vh;
         overflow-x: hidden;
         overflow-y: auto;
@@ -72,7 +72,7 @@ export default async function Page({params, searchParams}: {
     const pagination = calcPagination(page, selectData.count, pageSize)
     return <CommunityLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
     >
-        <div className={pageStyles.photosPage}>
+        <div className={pageStyles.imagesPage}>
             <div className={pageStyles.contentContainer}>
                 <ConsolePhotoFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
                 <div className={pageStyles.conMiddle}>
@@ -80,7 +80,7 @@ export default async function Page({params, searchParams}: {
                     <div className={pageStyles.middlePagination}>
                         <PaginationServer lang={lang} pagination={pagination}
                                           pageLinkFunc={(page) =>
-                                              `/${lang}/community/photos` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
+                                              `/${lang}/community/images` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                     </div>
                 </div>
             </div>

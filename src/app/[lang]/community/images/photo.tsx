@@ -68,16 +68,16 @@ export function PhotoHeader({lang}: {
 }) {
     return <div className={photoStyles.tableHeader}>
         <div className={photoStyles.headerLabel}>
-            {transKey(lang, "console.photo.title")}
+            {transKey(lang, "console.image.title")}
         </div>
         <div className={photoStyles.headerLabel}>
-            {transKey(lang, "console.photo.description")}
+            {transKey(lang, "console.image.description")}
         </div>
         <div className={photoStyles.headerLabel}>
-            {transKey(lang, "console.photo.extendedInfo")}
+            {transKey(lang, "console.image.extendedInfo")}
         </div>
         <div className={photoStyles.headerLabel}>
-            {transKey(lang, "console.photo.action")}
+            {transKey(lang, "console.image.action")}
         </div>
     </div>
 }
@@ -87,7 +87,7 @@ export function PhotoCard({model, lang, stargateUrl}: {
     lang: string,
     stargateUrl: string
 }) {
-    const editUrl = `/${lang}/community/photos/${uuidToBase58(model.uid)}`
+    const editUrl = `/${lang}/community/images/${uuidToBase58(model.uid)}`
     const deleteUrl = `${stargateUrl}/community/images/${model.uid}`
 
     return <div className={photoStyles.middleItem} key={model.uid} data-photo={model.uid}>

@@ -16,7 +16,7 @@ export function CommunitySidebar({lang}: { lang: string }) {
         <a href={`/${lang}/community/channels`}>
             {transTodo("频道")}
         </a>
-        <a href={`/${lang}/community/photos`}>
+        <a href={`/${lang}/community/images`}>
             {transTodo("图片")}
         </a>
     </div>

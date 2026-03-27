@@ -27,7 +27,7 @@ function PSConsoleChannelSelector({channelUid, channels, onChange, lang}: {
             displayEmpty
         >
             <MenuItem value="" disabled>
-                {transKey(lang, "console.photo.selectChannel")}
+                {transKey(lang, "console.image.selectChannel")}
             </MenuItem>
             {
                 channels.map(channel => (
@@ -58,7 +58,7 @@ export function ConsolePhotoForm({stargateUrl, modelString, channelsString, lang
 
     const onSubmit = () => {
         if (!selectedChannel) {
-            alert(transKey(lang, "console.photo.channelRequired"));
+            alert(transKey(lang, "console.image.channelRequired"));
             return;
         }
         const newModel = {
@@ -71,18 +71,18 @@ export function ConsolePhotoForm({stargateUrl, modelString, channelsString, lang
         if (isNew) {
             CommunityBrowser.clientConsoleInsertImage(stargateUrl, newModel).then((imageId) => {
                 if (!imageId) {
-                    console.error(transKey(lang, "console.photo.insertFailed"))
+                    console.error(transKey(lang, "console.image.insertFailed"))
                     return
                 }
-                window.location.href = `/${lang}/community/photos`
+                window.location.href = `/${lang}/community/images`
             })
         } else {
             CommunityBrowser.clientConsoleUpdateImage(stargateUrl, oldModel.uid, newModel).then((imageId) => {
                 if (!imageId) {
-                    console.error(transKey(lang, "console.photo.updateFailed"))
+                    console.error(transKey(lang, "console.image.updateFailed"))
                     return
                 }
-                window.location.href = `/${lang}/community/photos`
+                window.location.href = `/${lang}/community/images`
             })
         }
     }
@@ -91,24 +91,24 @@ export function ConsolePhotoForm({stargateUrl, modelString, channelsString, lang
         <div className={formStyles.formSection}>
             <div className={formStyles.fieldGroup}>
                 <label className={formStyles.fieldLabel}>
-                    {transKey(lang, "console.photo.title")}
+                    {transKey(lang, "console.image.title")}
                 </label>
                 <input
                     className={formStyles.fieldInput}
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
-                    placeholder={transKey(lang, "console.photo.title")}
+                    placeholder={transKey(lang, "console.image.title")}
                 />
             </div>
             <div className={formStyles.fieldGroup}>
                 <label className={formStyles.fieldLabel}>
-                    {transKey(lang, "console.photo.description")}
+                    {transKey(lang, "console.image.description")}
                 </label>
                 <textarea
                     className={formStyles.fieldTextarea}
                     value={description}
                     onChange={(event) => setDescription(event.target.value)}
-                    placeholder={transKey(lang, "console.photo.description")}
+                    placeholder={transKey(lang, "console.image.description")}
                 />
             </div>
             <ImageCard lang={lang} model={oldModel}/>
@@ -130,7 +130,7 @@ export function ConsolePhotoForm({stargateUrl, modelString, channelsString, lang
                 lang={lang}
             />
             <Button variant={'contained'} size={'small'} onClick={onSubmit}>
-                {transKey(lang, "console.photo.save")}
+                {transKey(lang, "console.image.save")}
             </Button>
         </div>
     </div>
