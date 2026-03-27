@@ -4,7 +4,7 @@ import {getPathname} from "@/components/server/pathname";
 import {calcPagination, langEn, replaceSearchParams, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import {css} from "@/gen/styled/css";
-import CommunityLayout from "@/components/server/community/layout";
+import ConsoleLayout from "@/components/server/console/layout";
 import {CommunityFileNodeService} from "@/components/community/files";
 import {ConsoleFileFilterBar} from "./filter";
 import {ConsoleFileMiddleBody} from "./file-list";
@@ -73,7 +73,7 @@ export default async function Page({params, searchParams}: {
     const selectData = await CommunityFileNodeService.consoleQueryFiles(internalStargateUrl, lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
-    return <CommunityLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
+    return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
     >
         <div className={pageStyles.filesPage}>
             <div className={pageStyles.contentContainer}>
@@ -88,5 +88,5 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
         </div>
-    </CommunityLayout>
+    </ConsoleLayout>
 }

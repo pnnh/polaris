@@ -19,8 +19,8 @@ const styles = {
     `,
     templateNavbar: css`
         width: 100vw;
-        background-color: var(--background-color);
-        border-bottom: solid 1px #d3d3d3;
+        background: var(--sidebar);
+        border-bottom: 1px solid var(--sidebar-border);
         flex-shrink: 0;
     `,
     consoleBody: css`

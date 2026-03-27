@@ -6,7 +6,7 @@ import {getPathname} from "@/components/server/pathname";
 import {ManagementArticleService} from "@/components/management/articles";
 import {ManagementArticlesView} from "./view";
 import {PaginationServer} from "@/components/server/pagination";
-import ManagementLayout from "@/components/server/management/layout";
+import ConsoleLayout from "@/components/server/console/layout";
 
 const pageStyles = {
     articlesPage: css`
@@ -59,8 +59,8 @@ export default async function ManagementArticlesPage({params, searchParams}: {
 
     const articlesJson = JSON.stringify(selectData.range)
 
-    return <ManagementLayout lang={lang} pathname={pathname} searchParams={searchValue}
-                             userInfo={SymbolUnknown}>
+    return <ConsoleLayout lang={lang} pathname={pathname} searchParams={searchValue}
+                          userInfo={SymbolUnknown}>
         <div className={pageStyles.articlesPage}>
             <div className={pageStyles.pageContainer}>
                 {/* Toolbar + Table (single unified client component) */}
@@ -82,5 +82,5 @@ export default async function ManagementArticlesPage({params, searchParams}: {
                 </div>
             </div>
         </div>
-    </ManagementLayout>
+    </ConsoleLayout>
 }

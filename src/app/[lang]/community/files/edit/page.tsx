@@ -8,7 +8,7 @@ import {CmFileModel} from "@/components/common/models/file";
 import {css} from "@/gen/styled/css";
 import {CommunityFileNodeService} from "@/components/community/files";
 import {getPathname} from "@/components/server/pathname";
-import CommunityLayout from "@/components/server/community/layout";
+import ConsoleLayout from "@/components/server/console/layout";
 import {RootFileUid} from "@/components/common/models/community/file";
 
 export const dynamic = "force-dynamic";
@@ -74,12 +74,12 @@ export default async function Home({params, searchParams}: {
         model = queryResult.range[0];
     }
 
-    return <CommunityLayout lang={pageLang} pathname={pathname} searchParams={searchValue}
-                            userInfo={SymbolUnknown}>
+    return <ConsoleLayout lang={pageLang} pathname={pathname} searchParams={searchValue}
+                          userInfo={SymbolUnknown}>
         <div className={pageStyles.filesPage}>
             <div className={pageStyles.pageContainer}>
                 <ConsoleFileForm stargateUrl={publicStargateUrl} model={model} lang={pageLang}/>
             </div>
         </div>
-    </CommunityLayout>
+    </ConsoleLayout>
 }

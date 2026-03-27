@@ -1,4 +1,3 @@
-import {css} from "@/gen/styled/css";
 import Image from 'next/image'
 import React from "react";
 import {UserActionDropdown} from "@/components/client/userActionDropdown";
@@ -7,52 +6,6 @@ import {ThemeSwitch} from "@/components/server/content/partials/theme";
 import {getServerTheme} from "@/components/server/theme";
 import {AccountModel} from "@/components/common/models/account/account";
 import {getSearchString} from "@/components/server/pathname";
-
-const styles = {
-    navHeader: css`
-        display: flex;
-        flex-direction: row;
-        height: 3rem;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 1rem;
-        font-weight: 400;
-        color: var(--text-primary-color);
-        @media screen and (min-width: 120rem) {
-            width: 120rem;
-            margin: 0 auto;
-        }
-    `,
-    leftNav: css`
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-left: 1rem;
-        gap: 1rem;
-    `,
-    brandLink: css`
-        color: var(--text-primary-color);
-        text-decoration: none;
-        font-size: 1rem;
-        display: inline-block;
-        position: relative;
-        height: 2.2rem;
-        width: 2.2rem;
-    `,
-    consoleTitle: css`
-        font-size: 1.2rem;
-        font-weight: 600;
-        color: var(--text-primary-color);
-    `,
-    rightNav: css`
-        margin-right: 1rem;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 0.9rem;
-    `,
-};
 
 export async function ConsoleNavbar({pathname, searchParams, lang, userInfo}: {
     pathname: string,
@@ -64,17 +17,51 @@ export async function ConsoleNavbar({pathname, searchParams, lang, userInfo}: {
     const currentUrl = `${pathname}${searchString}`
     const themeName = await getServerTheme()
 
-    return <div className={styles.navHeader}>
-        <div className={styles.leftNav}>
-            <a className={styles.brandLink} href={`/`}>
-                <Image src='/images/logo.png' alt='logo' priority={false} fill={true} sizes={'48px,48px'}/>
-            </a>
-            <div className={styles.consoleTitle}>控制台</div>
+    return (
+        <div className="flex flex-row h-12 items-center w-full">
+            {/* ── Left brand section — same width as sidebar (w-64) ── */}
+            <div
+                className="flex items-center gap-3 px-4 h-full flex-shrink-0"
+                style={{
+                    width: "16rem",
+                    borderRight: "1px solid var(--sidebar-border)",
+                }}
+            >
+                <a
+                    href="/"
+                    className="relative flex-shrink-0 rounded-md overflow-hidden"
+                    style={{width: "1.75rem", height: "1.75rem"}}
+                >
+                    <Image
+                        src='/images/logo.png'
+                        alt='logo'
+                        priority={false}
+                        fill={true}
+                        sizes="28px"
+                    />
+                </a>
+                <span
+                    className="text-sm font-semibold tracking-wide truncate"
+                    style={{color: "var(--text-primary-color)"}}
+                >
+                    控制台
+                </span>
+            </div>
+
+            {/* ── Right actions section ── */}
+            <div className="flex-1 flex items-center justify-end gap-2 px-4">
+                <ThemeSwitch lang={lang} themeName={themeName}/>
+                <div
+                    className="w-px h-4 flex-shrink-0"
+                    style={{background: "var(--sidebar-border)"}}
+                />
+                <PSLanguageSelector lang={lang} currentUrl={currentUrl}/>
+                <div
+                    className="w-px h-4 flex-shrink-0"
+                    style={{background: "var(--sidebar-border)"}}
+                />
+                <UserActionDropdown lang={lang} userInfo={userInfo}/>
+            </div>
         </div>
-        <div className={styles.rightNav}>
-            <ThemeSwitch lang={lang} themeName={themeName}/>
-            <PSLanguageSelector lang={lang} currentUrl={currentUrl}/>
-            <UserActionDropdown lang={lang} userInfo={userInfo}/>
-        </div>
-    </div>
+    )
 }

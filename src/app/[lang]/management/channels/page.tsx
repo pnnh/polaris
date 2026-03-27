@@ -6,7 +6,8 @@ import {getPathname} from "@/components/server/pathname";
 import {ManagementChannelService} from "@/components/management/channels";
 import {ManagementChannelsView} from "./view";
 import {PaginationServer} from "@/components/server/pagination";
-import ManagementLayout from "@/components/server/management/layout";
+
+import ConsoleLayout from "@/components/server/console/layout";
 
 const pageStyles = {
     channelsPage: css`
@@ -57,8 +58,8 @@ export default async function ManagementChannelsPage({params, searchParams}: {
     const pagination = calcPagination(page, selectData.count, pageSize)
     const dataJson = JSON.stringify(selectData.range)
 
-    return <ManagementLayout lang={lang} pathname={pathname} searchParams={searchValue}
-                             userInfo={SymbolUnknown}>
+    return <ConsoleLayout lang={lang} pathname={pathname} searchParams={searchValue}
+                          userInfo={SymbolUnknown}>
         <div className={pageStyles.channelsPage}>
             <div className={pageStyles.pageContainer}>
                 <ManagementChannelsView
@@ -78,5 +79,5 @@ export default async function ManagementChannelsPage({params, searchParams}: {
                 </div>
             </div>
         </div>
-    </ManagementLayout>
+    </ConsoleLayout>
 }

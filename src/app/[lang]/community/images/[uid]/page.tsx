@@ -9,7 +9,7 @@ import {css} from "@/gen/styled/css";
 import {CommunityImageNodeService} from "@/components/community/images";
 import {getPathname} from "@/components/server/pathname";
 import {serverConsoleSelectChannels} from "@/components/server/channels/channels";
-import CommunityLayout from "@/components/server/community/layout";
+import ConsoleLayout from "@/components/server/console/layout";
 
 export const dynamic = "force-dynamic";
 
@@ -84,13 +84,13 @@ export default async function Home({params, searchParams}: {
 
     const modelString = JSON.stringify(model)
     const channelsString = JSON.stringify(channelsData.range)
-    return <CommunityLayout lang={pageLang} pathname={pathname} searchParams={searchValue}
-                            userInfo={SymbolUnknown}>
+    return <ConsoleLayout lang={pageLang} pathname={pathname} searchParams={searchValue}
+                          userInfo={SymbolUnknown}>
         <div className={pageStyles.imagesPage}>
             <div className={pageStyles.pageContainer}>
                 <ConsolePhotoForm stargateUrl={publicStargateUrl} modelString={modelString}
                                   channelsString={channelsString} lang={pageLang}/>
             </div>
         </div>
-    </CommunityLayout>
+    </ConsoleLayout>
 }

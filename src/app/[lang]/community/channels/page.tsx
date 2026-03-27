@@ -12,7 +12,7 @@ import {serverConsoleSelectChannels} from "@/components/server/channels/channels
 import {useServerConfig} from "@/components/server/config";
 import PSDeleteButton from "@/components/client/console/delete";
 import {transKey} from "@/components/common/locales/normal";
-import CommunityLayout from "@/components/server/community/layout";
+import ConsoleLayout from "@/components/server/console/layout";
 
 const pageStyles = {
     channelsContainer: css`
@@ -79,7 +79,7 @@ export default async function Page({params, searchParams}: {
     }
     const pathname = await getPathname()
 
-    return <CommunityLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchValue} pathname={pathname}
+    return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchValue} pathname={pathname}
     >
         <div className={pageStyles.channelsContainer}>
             <ConsoleChannelFilterBar lang={lang} keyword={searchValue.keyword}/>
@@ -89,7 +89,7 @@ export default async function Page({params, searchParams}: {
                 })}
             </div>
         </div>
-    </CommunityLayout>
+    </ConsoleLayout>
 }
 
 function Item(props: { model: PSChannelModel, stargateUrl: string, lang: string }) {

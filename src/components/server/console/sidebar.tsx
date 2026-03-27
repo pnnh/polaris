@@ -1,23 +1,11 @@
 'use client';
 
-import React, { useState } from "react";
-import { usePathname } from "next/navigation";
-import { transKey } from "@/components/common/locales/normal";
-import { cn } from "@/lib/utils";
-import {
-    Collapsible,
-    CollapsibleContent,
-    CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import {
-    Home,
-    User,
-    FileText,
-    StickyNote,
-    Image,
-    ChevronDown,
-    LayoutDashboard,
-} from "lucide-react";
+import React, {useState} from "react";
+import {usePathname} from "next/navigation";
+import {transKey, transTodo} from "@/components/common/locales/normal";
+import {cn} from "@/lib/utils";
+import {Collapsible, CollapsibleContent, CollapsibleTrigger,} from "@/components/ui/collapsible";
+import {ChevronDown, FileText, Home, Image, LayoutDashboard, StickyNote, User,} from "lucide-react";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -37,35 +25,91 @@ type NavGroup = {
 
 // ── Main sidebar (RSC-passable: receives lang from server, state lives here) ─
 
-export function ConsoleSidebar({ lang }: { lang: string }) {
+export function ConsoleSidebar({lang}: { lang: string }) {
     const pathname = usePathname();
 
     const groups: NavGroup[] = [
         {
             id: "personal",
             label: transKey(lang, "console.personal"),
-            icon: <LayoutDashboard size={15} />,
+            icon: <LayoutDashboard size={15}/>,
             defaultOpen: true,
             items: [
                 {
                     label: transKey(lang, "common.userInfo"),
                     href: `/${lang}/console/userinfo`,
-                    icon: <User size={15} />,
+                    icon: <User size={15}/>,
                 },
                 {
                     label: transKey(lang, "common.files"),
                     href: `/${lang}/console/personal/files`,
-                    icon: <FileText size={15} />,
+                    icon: <FileText size={15}/>,
                 },
                 {
                     label: transKey(lang, "common.notes"),
                     href: `/${lang}/console/personal/notes`,
-                    icon: <StickyNote size={15} />,
+                    icon: <StickyNote size={15}/>,
                 },
                 {
                     label: transKey(lang, "common.images"),
                     href: `/${lang}/console/personal/images`,
-                    icon: <Image size={15} />,
+                    icon: <Image size={15}/>,
+                },
+            ],
+        },
+        {
+            id: "community",    // todo: 当关闭社区功能时不显示
+            label: transTodo('社区功能'),
+            icon: <LayoutDashboard size={15}/>,
+            defaultOpen: true,
+            items: [
+                {
+                    label: transTodo('频道'),
+                    href: `/${lang}/community/channels`,
+                    icon: <Image size={15}/>,
+                },
+                {
+                    label: transTodo('文件'),
+                    href: `/${lang}/community/files`,
+                    icon: <FileText size={15}/>,
+                },
+                {
+                    label: transTodo('笔记'),
+                    href: `/${lang}/community/articles`,
+                    icon: <StickyNote size={15}/>,
+                },
+                {
+                    label: transTodo('图片'),
+                    href: `/${lang}/community/images`,
+                    icon: <Image size={15}/>,
+                },
+            ],
+        },
+        {
+            id: "management",  // todo: 需要限制仅超级管理员账号显示
+            label: transTodo('管理功能'),
+            icon: <LayoutDashboard size={15}/>,
+            defaultOpen: true,
+            items: [
+                {
+                    label: transTodo('频道'),
+                    href: `/${lang}/management/channels`,
+                    icon: <Image size={15}/>,
+                },
+                {
+                    label: transTodo('文件'),
+                    href: `/${lang}/management/files`,
+                    icon: <FileText size={15}/>,
+                },
+                {
+                    label: transTodo('笔记'),
+                    href: `/${lang}/management/articles`,
+                    icon: <StickyNote size={15}/>,
+                },
+                {
+                    label: transTodo('图片'),
+                    href: `/${lang}/management/images`,
+                    icon: <Image size={15}/>,
                 },
             ],
         },
@@ -82,11 +126,11 @@ export function ConsoleSidebar({ lang }: { lang: string }) {
             {/* Section label */}
             <div
                 className="px-4 py-3"
-                style={{ borderBottom: "1px solid var(--sidebar-border)" }}
+                style={{borderBottom: "1px solid var(--sidebar-border)"}}
             >
                 <span
                     className="text-xs font-semibold uppercase tracking-widest"
-                    style={{ color: "var(--text-secondary-color)" }}
+                    style={{color: "var(--text-secondary-color)"}}
                 >
                     Console
                 </span>
@@ -103,12 +147,12 @@ export function ConsoleSidebar({ lang }: { lang: string }) {
                     style={
                         pathname === `/${lang}`
                             ? {
-                                  background: "var(--sidebar-primary)",
-                                  color: "var(--sidebar-primary-foreground)",
-                              }
+                                background: "var(--sidebar-primary)",
+                                color: "var(--sidebar-primary-foreground)",
+                            }
                             : {
-                                  color: "var(--sidebar-foreground)",
-                              }
+                                color: "var(--sidebar-foreground)",
+                            }
                     }
                     onMouseEnter={(e) => {
                         if (pathname !== `/${lang}`) {
@@ -123,14 +167,14 @@ export function ConsoleSidebar({ lang }: { lang: string }) {
                         }
                     }}
                 >
-                    <Home size={16} />
+                    <Home size={16}/>
                     <span>{transKey(lang, "common.home")}</span>
                 </a>
             </div>
 
             {/* Divider */}
             <div className="px-3 py-2">
-                <div style={{ height: "1px", background: "var(--sidebar-border)" }} />
+                <div style={{height: "1px", background: "var(--sidebar-border)"}}/>
             </div>
 
             {/* Collapsible groups */}
@@ -150,9 +194,9 @@ export function ConsoleSidebar({ lang }: { lang: string }) {
 // ── Collapsible group ─────────────────────────────────────────────────────────
 
 function CollapsibleNavGroup({
-    group,
-    pathname,
-}: {
+                                 group,
+                                 pathname,
+                             }: {
     group: NavGroup;
     pathname: string;
 }) {
@@ -167,7 +211,7 @@ function CollapsibleNavGroup({
                         "w-full flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-semibold",
                         "transition-colors duration-150 cursor-pointer",
                     )}
-                    style={{ color: "var(--text-secondary-color)" }}
+                    style={{color: "var(--text-secondary-color)"}}
                     onMouseEnter={(e) => {
                         (e.currentTarget as HTMLElement).style.background =
                             "var(--sidebar-accent)";
@@ -209,14 +253,14 @@ function CollapsibleNavGroup({
                                 style={
                                     isActive
                                         ? {
-                                              background:
-                                                  "color-mix(in srgb, var(--sidebar-primary) 12%, transparent)",
-                                              color: "var(--sidebar-primary)",
-                                              fontWeight: 600,
-                                          }
+                                            background:
+                                                "color-mix(in srgb, var(--sidebar-primary) 12%, transparent)",
+                                            color: "var(--sidebar-primary)",
+                                            fontWeight: 600,
+                                        }
                                         : {
-                                              color: "var(--sidebar-foreground)",
-                                          }
+                                            color: "var(--sidebar-foreground)",
+                                        }
                                 }
                                 onMouseEnter={(e) => {
                                     if (!isActive) {

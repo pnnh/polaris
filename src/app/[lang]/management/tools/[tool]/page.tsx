@@ -6,8 +6,9 @@ import {notFound} from "next/navigation";
 import {useServerConfig} from "@/components/server/config";
 import {ManagementToolService} from "@/components/management/tools";
 import {PSToolModel} from "@/components/common/models/tool";
-import ManagementLayout from "@/components/server/management/layout";
+
 import {ManagementToolForm} from "./form";
+import ConsoleLayout from "@/components/server/console/layout";
 
 export const dynamic = "force-dynamic";
 
@@ -69,11 +70,11 @@ export default async function Page({params, searchParams}: {
 
     const modelString = JSON.stringify(model)
 
-    return <ManagementLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchValue} pathname={pathname}>
+    return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchValue} pathname={pathname}>
         <div className={pageStyles.contentContainer}>
             <div className={pageStyles.conMiddle}>
                 <ManagementToolForm stargateUrl={publicStargateUrl} lang={lang} modelString={modelString}/>
             </div>
         </div>
-    </ManagementLayout>
+    </ConsoleLayout>
 }

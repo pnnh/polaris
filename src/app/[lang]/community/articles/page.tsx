@@ -8,7 +8,7 @@ import {ConsoleArticleMiddleBody} from "./article";
 import {useServerConfig} from "@/components/server/config";
 import {CommunityArticleNodeService} from "@/components/community/articles";
 import {getPathname} from "@/components/server/pathname";
-import CommunityLayout from "@/components/server/community/layout";
+import ConsoleLayout from "@/components/server/console/layout";
 
 const pageStyles = {
     articlesPage: css`
@@ -71,8 +71,8 @@ export default async function Page({params, searchParams}: {
         lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
-    return <CommunityLayout lang={lang} pathname={pathname} searchParams={searchParamsValue}
-                            userInfo={SymbolUnknown}>
+    return <ConsoleLayout lang={lang} pathname={pathname} searchParams={searchParamsValue}
+                          userInfo={SymbolUnknown}>
         <div className={pageStyles.articlesPage}>
             <div className={pageStyles.pageContainer}>
                 <ConsoleArticleFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
@@ -87,7 +87,7 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
         </div>
-    </CommunityLayout>
+    </ConsoleLayout>
 }
 
 

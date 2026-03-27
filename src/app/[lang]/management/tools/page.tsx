@@ -1,15 +1,16 @@
 import React from 'react'
 import {css} from "@/gen/styled/css";
 import {getPathname} from "@/components/server/pathname";
-import {langEn, replaceSearchParams, calcPagination, SymbolUnknown, uuidToBase58} from "@pnnh/atom";
+import {calcPagination, langEn, replaceSearchParams, SymbolUnknown, uuidToBase58} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import {ManagementToolService} from "@/components/management/tools";
 import {PSToolModel} from "@/components/common/models/tool";
 import {PaginationServer} from "@/components/server/pagination";
 import PSDeleteButton from "@/components/client/console/delete";
-import ManagementLayout from "@/components/server/management/layout";
+
 import {NoData} from "@/components/common/empty";
 import {ManagementToolFilterBar} from "./filter";
+import ConsoleLayout from "@/components/server/console/layout";
 
 const pageStyles = {
     toolsContainer: css`
@@ -79,8 +80,8 @@ export default async function ManagementToolsPage({params, searchParams}: {
 
     const pagination = calcPagination(page, selectData.count, pageSize)
 
-    return <ManagementLayout lang={lang} pathname={pathname} searchParams={searchValue}
-                             userInfo={SymbolUnknown}>
+    return <ConsoleLayout lang={lang} pathname={pathname} searchParams={searchValue}
+                          userInfo={SymbolUnknown}>
         <div className={pageStyles.toolsContainer}>
             <ManagementToolFilterBar lang={lang} keyword={keyword || ''}/>
             <div className={pageStyles.list}>
@@ -114,7 +115,7 @@ export default async function ManagementToolsPage({params, searchParams}: {
                 />
             </div>
         </div>
-    </ManagementLayout>
+    </ConsoleLayout>
 }
 
 function ToolRow(props: { model: PSToolModel, stargateUrl: string, lang: string }) {
@@ -130,7 +131,10 @@ function ToolRow(props: { model: PSToolModel, stargateUrl: string, lang: string 
         <td className={pageStyles.td}>{model.version || '-'}</td>
         <td className={pageStyles.td}>
             <span className={pageStyles.statusChip}
-                  style={{background: model.status === 1 ? '#e8f5e9' : '#fff3e0', color: model.status === 1 ? '#2e7d32' : '#e65100'}}>
+                  style={{
+                      background: model.status === 1 ? '#e8f5e9' : '#fff3e0',
+                      color: model.status === 1 ? '#2e7d32' : '#e65100'
+                  }}>
                 {model.status === 1 ? '已启用' : '已禁用'}
             </span>
         </td>

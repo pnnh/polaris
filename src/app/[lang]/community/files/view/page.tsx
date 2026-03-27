@@ -8,7 +8,7 @@ import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {CMResourceCard} from "@/components/community/resource";
 import {CMFileModel} from "@/components/common/models/community/file";
 import {cookies} from "next/headers";
-import CommunityLayout from "@/components/server/community/layout";
+import ConsoleLayout from "@/components/server/console/layout";
 
 export const dynamic = "force-dynamic";
 
@@ -36,10 +36,10 @@ export default async function Home({params, searchParams}: {
     }
     const model = getResult.data
 
-    return <CommunityLayout lang={lang} searchParams={await searchParams} pathname={pathname}
-                            userInfo={SymbolUnknown}>
+    return <ConsoleLayout lang={lang} searchParams={await searchParams} pathname={pathname}
+                          userInfo={SymbolUnknown}>
         <div>
             <CMResourceCard lang={lang} model={model}/>
         </div>
-    </CommunityLayout>
+    </ConsoleLayout>
 }

@@ -6,7 +6,8 @@ import {getPathname} from "@/components/server/pathname";
 import {ManagementFileService} from "@/components/management/files";
 import {ManagementFilesView} from "./view";
 import {PaginationServer} from "@/components/server/pagination";
-import ManagementLayout from "@/components/server/management/layout";
+
+import ConsoleLayout from "@/components/server/console/layout";
 
 const pageStyles = {
     filesPage: css`
@@ -57,8 +58,8 @@ export default async function ManagementFilesPage({params, searchParams}: {
     const pagination = calcPagination(page, selectData.count, pageSize)
     const dataJson = JSON.stringify(selectData.range)
 
-    return <ManagementLayout lang={lang} pathname={pathname} searchParams={searchValue}
-                             userInfo={SymbolUnknown}>
+    return <ConsoleLayout lang={lang} pathname={pathname} searchParams={searchValue}
+                          userInfo={SymbolUnknown}>
         <div className={pageStyles.filesPage}>
             <div className={pageStyles.pageContainer}>
                 <ManagementFilesView
@@ -78,5 +79,5 @@ export default async function ManagementFilesPage({params, searchParams}: {
                 </div>
             </div>
         </div>
-    </ManagementLayout>
+    </ConsoleLayout>
 }

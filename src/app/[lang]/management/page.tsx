@@ -3,8 +3,8 @@ import {css} from "@/gen/styled/css";
 
 import {getPathname} from "@/components/server/pathname";
 import {langEn, SymbolUnknown} from "@pnnh/atom";
-import { Monitor, Cloud } from "lucide-react";
-import ManagementLayout from "@/components/server/management/layout";
+import {Cloud, Monitor} from "lucide-react";
+import ConsoleLayout from "@/components/server/console/layout";
 
 const pageStyles = {
     communityPage: css`
@@ -58,8 +58,8 @@ export default async function Page({params, searchParams}: {
         page = 1
     }
 
-    return <ManagementLayout lang={lang} pathname={pathname} searchParams={searchParamsValue}
-                             userInfo={SymbolUnknown}>
+    return <ConsoleLayout lang={lang} pathname={pathname} searchParams={searchParamsValue}
+                          userInfo={SymbolUnknown}>
         <div className={pageStyles.communityPage}>
             社区目录主页
 
@@ -104,7 +104,7 @@ export default async function Page({params, searchParams}: {
                 </div>
             </div>
         </div>
-    </ManagementLayout>
+    </ConsoleLayout>
 }
 
 

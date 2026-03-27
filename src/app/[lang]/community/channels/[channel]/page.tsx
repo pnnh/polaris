@@ -8,7 +8,7 @@ import {serverConsoleGetChannel} from "@/components/server/channels/channels";
 import {useServerConfig} from "@/components/server/config";
 import {ConsoleChannelForm} from "./form";
 import {PSChannelModel} from "@/components/common/models/channel";
-import CommunityLayout from "@/components/server/community/layout";
+import ConsoleLayout from "@/components/server/console/layout";
 
 export const dynamic = "force-dynamic";
 
@@ -67,14 +67,14 @@ export default async function Page({params, searchParams}: {
 
     const modelString = JSON.stringify(model)
 
-    return <CommunityLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchValue} pathname={pathname}
+    return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchValue} pathname={pathname}
     >
         <div className={pageStyles.contentContainer}>
             <div className={pageStyles.conMiddle}>
                 <ConsoleChannelForm stargateUrl={publicStargateUrl} modelString={modelString}/>
             </div>
         </div>
-    </CommunityLayout>
+    </ConsoleLayout>
 }
 
 
