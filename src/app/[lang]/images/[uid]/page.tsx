@@ -5,12 +5,12 @@ import {getPathname} from "@/components/server/pathname";
 import {CodeOk, CommonResult, langEn, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
 import {getDefaultImageUrl} from "@/components/common/note";
-import ArticleReadLayout from "@/components/server/content/article/layout";
 import {useServerConfig} from "@/components/server/config";
 
 import {notFound} from "next/navigation";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {PSImageServer} from "@/components/server/image";
+import ContentLayout from "@/components/server/content/layout";
 
 export const dynamic = "force-dynamic";
 
@@ -35,11 +35,11 @@ export default async function Home({params, searchParams}: {
     }
     const model = getResult.data
     let imageUrl = model.url || getDefaultImageUrl()
-    return <ArticleReadLayout lang={lang} searchParams={await searchParams} pathname={pathname}
-                              userInfo={SymbolUnknown}>
+    return <ContentLayout lang={lang} searchParams={await searchParams} pathname={pathname}
+                          userInfo={SymbolUnknown}>
         <div>
 
             <PSImageServer src={imageUrl} alt={model.title} fill={true}/>
         </div>
-    </ArticleReadLayout>
+    </ContentLayout>
 }

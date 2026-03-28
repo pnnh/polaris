@@ -1,11 +1,11 @@
 'use client';
 
-import { css } from "@/gen/styled/css";
-import { CircleUser, Monitor, Cloud } from 'lucide-react';
-import { sanitizeUrl } from "@pnnh/atom";
-import { AccountModel, isAnonymousAccount } from "@/components/common/models/account/account";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/client/dropmenu";
-import { transTodo } from "@/components/common/locales/normal";
+import {css} from "@/gen/styled/css";
+import {CircleUser, Monitor} from 'lucide-react';
+import {sanitizeUrl} from "@pnnh/atom";
+import {AccountModel, isAnonymousAccount} from "@/components/common/models/account/account";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/client/dropmenu";
+import {transTodo} from "@/components/common/locales/normal";
 
 const styles = {
     userAction: css`
@@ -51,7 +51,7 @@ const styles = {
     `,
 };
 
-export function UserActionDropdown({ lang, userInfo }: {
+export function UserActionDropdown({lang, userInfo}: {
     lang: string, userInfo: AccountModel | undefined
 }) {
     const photoUrl = sanitizeUrl(userInfo?.photoUrl)
@@ -62,27 +62,15 @@ export function UserActionDropdown({ lang, userInfo }: {
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <div className={styles.userPhoto} title={userInfo.nickname}>
-                            <img src={photoUrl} alt="User Avatar" />
+                            <img src={photoUrl} alt="User Avatar"/>
                             <span className={styles.userNickname}>{userInfo.nickname}</span>
                         </div>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         <DropdownMenuItem asChild>
                             <a className={styles.menuItem} href={`/${lang}/console`}>
-                                <Monitor size={18} />
-                                <span>{transTodo('个人控制台')}</span>
-                            </a>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                            <a className={styles.menuItem} href={`/${lang}/community`}>
-                                <Cloud size={18} />
-                                <span>{transTodo('社区控制台')}</span>
-                            </a>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild>
-                            <a className={styles.menuItem} href={`/${lang}/management`}>
-                                <Monitor size={18} />
-                                <span>{transTodo('管理控制台')}</span>
+                                <Monitor size={18}/>
+                                <span>{transTodo('控制台')}</span>
                             </a>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
@@ -94,7 +82,7 @@ export function UserActionDropdown({ lang, userInfo }: {
     return (
         <div className={styles.userAction}>
             <a className={styles.loginLink} href={`/${lang}/account/signin`}>
-                <CircleUser size={24} />
+                <CircleUser size={24}/>
             </a>
         </div>
     )

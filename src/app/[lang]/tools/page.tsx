@@ -1,75 +1,148 @@
 import React from 'react'
 import {getPathname} from "@/components/server/pathname";
-
-import {langEn, SymbolUnknown} from "@pnnh/atom";
-
+import {CodeOk, langEn, PLSelectResult, SymbolUnknown} from "@pnnh/atom";
 import ContentLayout from "@/components/server/content/layout";
 import {css} from "@/gen/styled/css";
+import {PSToolModel} from "@/components/common/models/tool";
+import {useServerConfig} from "@/components/server/config";
+import {serverMakeGet} from "@pnnh/atom/nodejs";
+import queryString from "query-string";
+import {NoDataPage} from "@/components/misc/NoData";
+import {SafeLink} from "@/components/client/link";
 
 const toolStyles = {
-    toolBodyComponent: css`
-        width: 1024px;
-        margin: 0 auto;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
+    container: css`
+        flex-grow: 1;
+        flex-direction: row;
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        margin: 1rem;
     `,
-    appGrid: css`
+    list: css`
+        padding: 0;
+        gap: 1rem;
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 3rem;
-        width: 100%;
-        margin-bottom: 1rem;
-        grid-auto-rows: 1fr;
+        grid-gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+
+        @media (max-width: 48rem) {
+            grid-template-columns: 1fr;
+        }
     `,
-    appCard: css`
-        border: 1px solid #e0e0e0;
-        background-color: #ffffff;
+    item: css`
+        border-bottom: 1px solid #e5e6eb;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        gap: 16px;
+        height: 10rem;
+        transition: opacity 0.3s ease-out 0s, transform 0.3s ease-out 0s;
+        opacity: 1;
         border-radius: 4px;
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-        aspect-ratio: 1/0.8;
+        background-color: #fff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05), 0 0 1px rgba(0, 0, 0, 0.1);
+        color: #4a4a4a;
         position: relative;
+
+        &:last-child {
+            border-bottom-width: 0;
+        }
     `,
-    appImage: css`
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0.2;
-        z-index: 0;
-        object-fit: cover;
+    content: css`
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        justify-content: flex-start;
+        align-items: flex-start;
+        overflow: hidden;
     `,
-    appTitle: css`
-        font-size: 20px;
+    title: css`
+        flex-shrink: 0;
+    `,
+    link: css`
+        color: #000;
+        text-decoration: none;
+        font-size: 1rem;
         font-weight: 600;
-        position: relative;
-        z-index: 2;
-        padding: 16px;
+        line-height: 1.6;
     `,
-    appDescription: css`
-        margin: 0;
-        padding: 16px;
-        font-size: 16px;
-        color: #555;
-        position: relative;
-        z-index: 2;
-    `
+    description: css`
+        color: #5e5e5e;
+        font-size: 14px;
+        line-height: 22px;
+        overflow: hidden;
+        white-space: break-spaces;
+        text-overflow: ellipsis;
+    `,
+    version: css`
+        font-size: 12px;
+        color: #999;
+    `,
 }
 
-
 export default async function Page({params, searchParams}: {
-    params: Promise<{ lang: string, channel: string }>,
+    params: Promise<{ lang: string }>,
     searchParams: Promise<Record<string, string>>
 }) {
-    const pathname = await getPathname()
-    const paramsValue = await params;
-    const lang = paramsValue.lang || langEn
+    const serverConfig = await useServerConfig()
+    const serverUrl = serverConfig.INTERNAL_PORTAL_URL
+    const paramsValue = await params
     const searchParamsValue = await searchParams
+    const lang = paramsValue.lang || langEn
+    const pathname = await getPathname()
 
-    return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
-                          userInfo={SymbolUnknown}>
-        <div className={toolStyles.toolBodyComponent}>
-            Todo
+    const selectQuery = {
+        page: 1,
+        size: 64,
+        lang: lang,
+    }
+    const rawQuery = queryString.stringify(selectQuery)
+    const url = `${serverUrl}/tools?${rawQuery}`
+    const result = await serverMakeGet<PLSelectResult<PSToolModel>>(url, '')
+
+    if (!result || !result.data) {
+        return <NoDataPage lang={lang} searchParams={searchParamsValue} pathname={pathname} size={'middle'}/>
+    }
+    if (result.code !== CodeOk) {
+        return <NoDataPage lang={lang} searchParams={searchParamsValue} pathname={pathname}
+                           size={'middle'} message={result.message}/>
+    }
+
+    return (
+        <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}>
+            <div className={toolStyles.container}>
+                <div className={toolStyles.list}>
+                    {result.data.range.map((model) => (
+                        <Item key={model.uid} model={model} lang={lang}/>
+                    ))}
+                </div>
+            </div>
+        </ContentLayout>
+    )
+}
+
+function Item({model, lang}: { model: PSToolModel, lang: string }) {
+    const href = model.url || `/${lang}/tools/${model.uid}`
+
+    return (
+        <div className={toolStyles.item}>
+            <div className={toolStyles.content}>
+                <div className={toolStyles.title}>
+                    <SafeLink className={toolStyles.link} href={href}>{model.title || model.name}</SafeLink>
+
+                </div>
+                {model.description && (
+                    <div className={toolStyles.description}>{model.description}</div>
+                )}
+                {model.version && (
+                    <div className={toolStyles.version}>v{model.version}</div>
+                )}
+            </div>
         </div>
-    </ContentLayout>
+    )
 }

@@ -7,7 +7,6 @@ import {calcPagination, langEn, PLSelectResult, replaceSearchParams, SymbolUnkno
 import {PaginationServer} from "@/components/server/pagination";
 import {PSArticleModel} from "@/components/common/models/article";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
-import {ArticleFilterBar} from "@/components/server/content/article/filter";
 import {useServerConfig} from "@/components/server/config";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
 
@@ -81,7 +80,6 @@ export default async function Page({params, searchParams}: {
     >
         <div className={pageStyles.contentContainer}>
             <div className={pageStyles.conMiddle}>
-                <ArticleFilterBar lang={lang} searchParamsValue={searchParamsValue}/>
                 <ArticleMiddleBody selectResult={selectResult} lang={lang}/>
                 <div className={pageStyles.middlePagination}>
                     <PaginationServer lang={lang} pagination={pagination}

@@ -1,6 +1,6 @@
 import {css} from "@/gen/styled/css";
 import React from 'react'
-import {templateBodyId} from '@/components/server/content/layout'
+import ContentLayout, {templateBodyId} from '@/components/server/content/layout'
 import {getClientIp, getPathname} from "@/components/server/pathname";
 import {GoTop} from "@/components/client/gotop";
 import {CiAlarmOn} from "react-icons/ci";
@@ -19,12 +19,10 @@ import {
 } from "@pnnh/atom";
 import {PSArticleModel} from "@/components/common/models/article";
 import {getDefaultNoteImageByUid} from "@/components/common/note";
-import ArticleReadLayout from "@/components/server/content/article/layout";
 import {CommentsClient} from "@/components/client/comments/comments";
 import {useServerConfig} from "@/components/server/config";
 import {notFound} from "next/navigation";
 import {serverInsertArticleViewer} from "@/components/server/viewers/viewers";
-// import '@/atom/client/editor/editor.scss';
 import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {BuildBodyHtml} from "@/app/[lang]/articles/[uid]/body";
 
@@ -158,18 +156,15 @@ export default async function Home({params, searchParams}: {
         return <div>暂不支持的文章类型</div>
     }
     const clientIp = await getClientIp()
-    // update article discover count
     if (clientIp) {
         await serverInsertArticleViewer(internalPortalUrl, articleUid, clientIp)
     }
-    const readUrl = `/${lang}/articles/articles/${paramsValue.uid}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)
     if (model.cover && isValidUUID(model.cover)) {
         imageUrl = `/articles/${model.uid}/assets/${model.cover}`
     }
-    const fullRepoPath = model.full_repo_path
-    return <ArticleReadLayout lang={lang} searchParams={await searchParams} pathname={pathname}
-                              userInfo={SymbolUnknown}>
+    return <ContentLayout lang={lang} searchParams={await searchParams} pathname={pathname}
+                          userInfo={SymbolUnknown}>
 
         <div className={pageStyles.articleCover}>
             <div className={pageStyles.articleHeader}>
@@ -202,5 +197,5 @@ export default async function Home({params, searchParams}: {
             {/*</div>*/}
         </div>
         <GoTop anchor={templateBodyId}/>
-    </ArticleReadLayout>
+    </ContentLayout>
 }
