@@ -1,8 +1,5 @@
-import {useServerConfig} from "@/components/server/config";
 import {PSFileModel} from "@/components/common/models/file";
-import {clientMakeGet} from "@pnnh/atom/browser";
-import {PLGetResult, PLSelectResult} from "@pnnh/atom";
-import queryString from "query-string";
+
 
 export const articlesUid = '019bbb53-f051-750a-8532-2358b64f31f3'
 export const imagesUid = '019bbb53-ef8d-7589-aebc-851c627eabd0'
@@ -28,87 +25,8 @@ export const sha512Uid = '019b2090-217a-738a-a9bc-e76de965787e'
 export const aesUid = '019b2176-8409-773d-9d64-57fd408491df'
 export const rsaUid = '019b217f-6e4a-73cd-bb11-ede2f6e27297'
 
-export async function queryApp(expectLang: string, appUid: string): Promise<PSFileModel | undefined> {
-    const appInfo = queryBuildIn(expectLang, appUid)
-    if (appInfo) {
-        return appInfo
-    }
 
-    const serverConfig = await useServerConfig()
-    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
-    const url = `${internalPortalUrl}/cloud/files/desc?uid=${appUid}`
-    const selectResult = await clientMakeGet<PLGetResult<PSFileModel>>(url)
-    if (!selectResult || selectResult.code !== 200 || !selectResult.data) {
-        throw new Error("host notebook")
-    }
-    return selectResult.data
+export async function queryTool(expectLang: string, appUid: string): Promise<PSFileModel | undefined> {
+    throw new Error("Not implemented");
 }
 
-export interface FileSelectOptions {
-    page: number,
-    size: number
-    parent?: string
-}
-
-export async function selectFilesFromBackend(options: FileSelectOptions | undefined = undefined): Promise<PLSelectResult<PSFileModel>> {
-    const serverConfig = await useServerConfig()
-    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
-    let url = `${internalPortalUrl}/cloud/files`
-    if (options) {
-        const query = queryString.stringify(options)
-        url = `${url}?${query}`
-    }
-    const selectResult = await clientMakeGet<PLSelectResult<PSFileModel>>(url)
-    if (!selectResult || selectResult.code !== 200 || !selectResult.data) {
-        throw new Error("selectFilesFromBackend" + selectResult.code)
-    }
-    return selectResult
-}
-
-export async function selectFilePathFromBackend(uid: string): Promise<PLSelectResult<PSFileModel>> {
-    const serverConfig = await useServerConfig()
-    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
-
-    let url = `${internalPortalUrl}/cloud/files/path?uid=${encodeURIComponent(uid)}`
-    const selectResult = await clientMakeGet<PLSelectResult<PSFileModel>>(url)
-    if (!selectResult || selectResult.code !== 200 || !selectResult.data) {
-        throw new Error("host notebook")
-    }
-    return selectResult
-}
-
-function queryBuildIn(expectLang: string, appUid: string): PSFileModel | undefined {
-    let appInfo: PSFileModel | undefined
-    if (appUid === uuidUid) {
-        appInfo = {
-            body: "",
-            channel: "",
-            create_time: "",
-            creator: "",
-            discover: 0,
-            full_repo_path: "",
-            header: "",
-            image_url: "",
-            is_dir: false,
-            is_ignore: "",
-            is_image: false,
-            is_text: false,
-            keywords: "",
-            mimetype: "",
-            object_uid: "",
-            owner: "",
-            partition: "",
-            path: "",
-            status: 0,
-            storage_path: "",
-            title: "",
-            update_time: "",
-            url: "",
-            uid: uuidUid,
-            name: "UUID Generator",
-            description: "Generate and parse UUIDs in various formats."
-        }
-        return appInfo
-    }
-    return undefined
-}

@@ -17,6 +17,14 @@
 import React, {useState} from "react";
 import {css} from "@/gen/styled/css";
 
+export function MyClientComponent({lang}: { lang: string }) {
+    const [state, setState] = useState(false);
+
+    return <div className={styles.container}>
+        {/* 交互内容 */}
+    </div>
+}
+
 const styles = {
     container: css`
         display: flex;
@@ -25,13 +33,6 @@ const styles = {
     `,
 }
 
-export function MyClientComponent({lang}: { lang: string }) {
-    const [state, setState] = useState(false);
-
-    return <div className={styles.container}>
-        {/* 交互内容 */}
-    </div>
-}
 ```
 
 **常见陷阱**：

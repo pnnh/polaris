@@ -66,27 +66,9 @@ export default async function Page({params, searchParams}: {
     const lang = paramsValue.lang || langEn
     const searchParamsValue = await searchParams
 
-    let page = Number(searchParamsValue.page)
-    if (isNaN(page)) {
-        page = 1
-    }
-    // const appList = await selectFilesFromBackend(page, pageSize)
-    // const pagination = calcPagination(page, appList.data.count, pageSize)
     return <ContentLayout lang={lang} searchParams={searchParamsValue} pathname={pathname}
                           userInfo={SymbolUnknown}>
         <div className={toolStyles.toolBodyComponent}>
-            {/*<div className={toolStyles.appGrid}>*/}
-            {/*    {*/}
-            {/*        appList.data.range.map(async (app) => {*/}
-            {/*            return ResourceCard({model: app, lang})*/}
-            {/*        })*/}
-            {/*    }*/}
-            {/*</div>*/}
-            {/*<div>*/}
-            {/*    <PaginationServer lang={lang} pagination={pagination}*/}
-            {/*                      pageLinkFunc={(page) =>*/}
-            {/*                          `/${lang}/articles` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>*/}
-            {/*</div>*/}
             Todo
         </div>
     </ContentLayout>

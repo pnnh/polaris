@@ -2,8 +2,8 @@ import {PLSelectResult, tryBase58ToUuid, uuidToBase58} from "@pnnh/atom";
 import React from "react";
 import {css} from "@/gen/styled/css";
 import {PSFileModel} from "@/components/common/models/file";
-import {ResourceCard} from "@/app/[lang]/tools/tool";
-import {selectFilePathFromBackend} from "@/components/server/tools/tools";
+import {ResourceCard} from "@/components/community/resource";
+import {selectFilePathFromBackend} from "@/components/community/files";
 
 const resStyles = {
     resBodyComponent: css`
@@ -58,9 +58,9 @@ export async function PSHomeBody({lang, selectResult, searchParams}: {
         <PSFilePath lang={lang} uid={parentUid}/>
         <div className={resStyles.resGrid}>
             {
-                selectResult.data.range.map(async (app) => {
+                selectResult.data.range.map(async (fileModel) => {
                     return <div className={resStyles.resCard}>
-                        <ResourceCard searchParams={searchParams} model={app} lang={lang}/>
+                        <ResourceCard searchParams={searchParams} model={fileModel} lang={lang}/>
                     </div>
                 })
             }

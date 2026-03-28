@@ -1,9 +1,11 @@
 import {CodeOk, PLSelectData, PLSelectResult} from "@pnnh/atom";
-import {CmFileModel} from "@/components/common/models/file";
+import {CmFileModel, PSFileModel} from "@/components/common/models/file";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
 import {cookies} from "next/headers";
 import queryString from "query-string";
 import {transKey} from "@/components/common/locales/normal";
+import {useServerConfig} from "@/components/server/config";
+import {clientMakeGet} from "@pnnh/atom/browser";
 
 export class CommunityFileNodeService {
     static async consoleQueryFiles(stargateUrl: string, lang: string, queryParams: Record<string, any>): Promise<PLSelectData<CmFileModel>> {
@@ -21,4 +23,39 @@ export class CommunityFileNodeService {
         }
         return selectData;
     }
+}
+
+export interface FileSelectOptions {
+    page: number,
+    size: number
+    parent?: string
+    skipDir?: boolean
+    channel?: string
+}
+
+export async function selectFilePathFromBackend(uid: string): Promise<PLSelectResult<PSFileModel>> {
+    const serverConfig = await useServerConfig()
+    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
+
+    let url = `${internalPortalUrl}/cloud/files/path?uid=${encodeURIComponent(uid)}`
+    const selectResult = await clientMakeGet<PLSelectResult<PSFileModel>>(url)
+    if (!selectResult || selectResult.code !== 200 || !selectResult.data) {
+        throw new Error("host notebook")
+    }
+    return selectResult
+}
+
+export async function selectFilesFromBackend(options: FileSelectOptions | undefined = undefined): Promise<PLSelectResult<PSFileModel>> {
+    const serverConfig = await useServerConfig()
+    const internalPortalUrl = serverConfig.INTERNAL_PORTAL_URL
+    let url = `${internalPortalUrl}/cloud/files`
+    if (options) {
+        const query = queryString.stringify(options)
+        url = `${url}?${query}`
+    }
+    const selectResult = await clientMakeGet<PLSelectResult<PSFileModel>>(url)
+    if (!selectResult || selectResult.code !== 200 || !selectResult.data) {
+        throw new Error("selectFilesFromBackend" + selectResult.code)
+    }
+    return selectResult
 }

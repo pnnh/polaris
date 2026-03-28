@@ -5,10 +5,10 @@ import {useServerConfig} from "@/components/server/config";
 
 import {notFound} from "next/navigation";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
-import {CMResourceCard} from "@/components/community/resource";
 import {CMFileModel} from "@/components/common/models/community/file";
 import {cookies} from "next/headers";
 import ConsoleLayout from "@/components/server/console/layout";
+import {ResourceCard} from "@/components/community/resource";
 
 export const dynamic = "force-dynamic";
 
@@ -39,7 +39,7 @@ export default async function Home({params, searchParams}: {
     return <ConsoleLayout lang={lang} searchParams={await searchParams} pathname={pathname}
                           userInfo={SymbolUnknown}>
         <div>
-            <CMResourceCard lang={lang} model={model}/>
+            <ResourceCard lang={lang} model={model} searchParams={{}}/>
         </div>
     </ConsoleLayout>
 }

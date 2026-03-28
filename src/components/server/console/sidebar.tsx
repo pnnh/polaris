@@ -5,7 +5,7 @@ import {usePathname} from "next/navigation";
 import {transKey, transTodo} from "@/components/common/locales/normal";
 import {cn} from "@/lib/utils";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger,} from "@/components/ui/collapsible";
-import {ChevronDown, FileText, Home, Image, LayoutDashboard, StickyNote, User,} from "lucide-react";
+import {ChevronDown, FileText, Image, LayoutDashboard, User,} from "lucide-react";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -31,29 +31,14 @@ export function ConsoleSidebar({lang}: { lang: string }) {
     const groups: NavGroup[] = [
         {
             id: "personal",
-            label: transKey(lang, "console.personal"),
+            label: transTodo('我的文件'),
             icon: <LayoutDashboard size={15}/>,
             defaultOpen: true,
             items: [
                 {
-                    label: transKey(lang, "common.userInfo"),
-                    href: `/${lang}/console/userinfo`,
-                    icon: <User size={15}/>,
-                },
-                {
                     label: transKey(lang, "common.files"),
                     href: `/${lang}/console/personal/files`,
                     icon: <FileText size={15}/>,
-                },
-                {
-                    label: transKey(lang, "common.notes"),
-                    href: `/${lang}/console/personal/notes`,
-                    icon: <StickyNote size={15}/>,
-                },
-                {
-                    label: transKey(lang, "common.images"),
-                    href: `/${lang}/console/personal/images`,
-                    icon: <Image size={15}/>,
                 },
             ],
         },
@@ -64,23 +49,8 @@ export function ConsoleSidebar({lang}: { lang: string }) {
             defaultOpen: true,
             items: [
                 {
-                    label: transTodo('频道'),
+                    label: transTodo('频道相关'),
                     href: `/${lang}/community/channels`,
-                    icon: <Image size={15}/>,
-                },
-                {
-                    label: transTodo('文件'),
-                    href: `/${lang}/community/files`,
-                    icon: <FileText size={15}/>,
-                },
-                {
-                    label: transTodo('笔记'),
-                    href: `/${lang}/community/articles`,
-                    icon: <StickyNote size={15}/>,
-                },
-                {
-                    label: transTodo('图片'),
-                    href: `/${lang}/community/images`,
                     icon: <Image size={15}/>,
                 },
             ],
@@ -92,23 +62,8 @@ export function ConsoleSidebar({lang}: { lang: string }) {
             defaultOpen: true,
             items: [
                 {
-                    label: transTodo('频道'),
+                    label: transTodo('内容审批'),
                     href: `/${lang}/management/channels`,
-                    icon: <Image size={15}/>,
-                },
-                {
-                    label: transTodo('文件'),
-                    href: `/${lang}/management/files`,
-                    icon: <FileText size={15}/>,
-                },
-                {
-                    label: transTodo('笔记'),
-                    href: `/${lang}/management/articles`,
-                    icon: <StickyNote size={15}/>,
-                },
-                {
-                    label: transTodo('图片'),
-                    href: `/${lang}/management/images`,
                     icon: <Image size={15}/>,
                 },
             ],
@@ -136,16 +91,16 @@ export function ConsoleSidebar({lang}: { lang: string }) {
                 </span>
             </div>
 
-            {/* Home — standalone link */}
+            {/* Userinfo — standalone link */}
             <div className="px-3 pt-3">
                 <a
-                    href={`/${lang}`}
+                    href={`/${lang}/console/userinfo`}
                     className={cn(
                         "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium",
                         "transition-colors duration-150",
                     )}
                     style={
-                        pathname === `/${lang}`
+                        pathname.startsWith(`/${lang}/console/userinfo`)
                             ? {
                                 background: "var(--sidebar-primary)",
                                 color: "var(--sidebar-primary-foreground)",
@@ -155,20 +110,20 @@ export function ConsoleSidebar({lang}: { lang: string }) {
                             }
                     }
                     onMouseEnter={(e) => {
-                        if (pathname !== `/${lang}`) {
+                        if (!pathname.startsWith(`/${lang}/console/userinfo`)) {
                             (e.currentTarget as HTMLElement).style.background =
                                 "var(--sidebar-accent)";
                         }
                     }}
                     onMouseLeave={(e) => {
-                        if (pathname !== `/${lang}`) {
+                        if (!pathname.startsWith(`/${lang}/console/userinfo`)) {
                             (e.currentTarget as HTMLElement).style.background =
                                 "transparent";
                         }
                     }}
                 >
-                    <Home size={16}/>
-                    <span>{transKey(lang, "common.home")}</span>
+                    <User size={16}/>
+                    <span>{transKey(lang, "common.userInfo")}</span>
                 </a>
             </div>
 

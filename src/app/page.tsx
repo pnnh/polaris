@@ -1,13 +1,13 @@
 import React from 'react'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
-import {calcPagination, replaceSearchParams, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
+import {calcPagination, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {headers} from "next/headers";
 import {getTargetLang, langEnUS} from "@/components/common/language";
 import {PaginationServer} from "@/components/server/pagination";
-import {FileSelectOptions, selectFilesFromBackend} from "@/components/server/tools/tools";
 import {PSHomeBody} from "@/components/server/body";
 import {css} from "@/gen/styled/css";
+import {FileSelectOptions, selectFilesFromBackend} from "@/components/community/files";
 
 export default async function Page({searchParams}: {
     searchParams: Promise<Record<string, string>>
@@ -26,13 +26,6 @@ export default async function Page({searchParams}: {
 
     const options: FileSelectOptions = {
         page, size: pageSize
-    }
-    let parent = searchParamsValue.parent
-    if (parent) {
-        const parentUid = tryBase58ToUuid(parent)
-        if (parentUid) {
-            options.parent = parentUid
-        }
     }
     const selectResult = await selectFilesFromBackend(options)
     const pagination = calcPagination(page, selectResult.data.count, pageSize)

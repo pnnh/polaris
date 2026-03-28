@@ -2,7 +2,7 @@ import {css} from "@/gen/styled/css";
 import ContentLayout from "@/components/server/content/layout";
 import {langEn, SymbolUnknown} from "@pnnh/atom";
 import {getPathname} from "@/components/server/pathname";
-import {qrcodeUid, queryApp} from "@/components/server/tools/tools";
+import {qrcodeUid, queryTool} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
 
 import {QRCodeComponent} from "./qrcode";
@@ -23,7 +23,7 @@ export default async function Home({params, searchParams}: {
     const lang = paramsValue.lang || langEn
     const searchParamsValue = await searchParams
 
-    const appInfo = await queryApp(lang, qrcodeUid)
+    const appInfo = await queryTool(lang, qrcodeUid)
     if (!appInfo) {
         notFound()
     }

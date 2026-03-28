@@ -1,7 +1,7 @@
 import ContentLayout from "@/components/server/content/layout";
 import {langEn, SymbolUnknown} from "@pnnh/atom";
 import {getPathname} from "@/components/server/pathname";
-import {aesUid, queryApp} from "@/components/server/tools/tools";
+import {aesUid, queryTool} from "@/components/server/tools/tools";
 import {notFound} from "next/navigation";
 
 import AesComponent from "./aes";
@@ -23,7 +23,7 @@ export default async function Home({params, searchParams}: {
     const lang = paramsValue.lang || langEn
     const searchParamsValue = await searchParams
 
-    const appInfo = await queryApp(lang, aesUid)
+    const appInfo = await queryTool(lang, aesUid)
     if (!appInfo) {
         notFound()
     }

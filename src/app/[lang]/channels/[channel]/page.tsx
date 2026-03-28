@@ -1,17 +1,13 @@
 import React from 'react'
 import {css} from "@/gen/styled/css";
-import queryString from 'query-string'
 
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
-import {calcPagination, langEn, PLSelectResult, replaceSearchParams, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
+import {calcPagination, langEn, replaceSearchParams, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
 import {PaginationServer} from "@/components/server/pagination";
-import {PSArticleModel} from "@/components/common/models/article";
 import {notFound} from "next/navigation";
-import {ArticleFilterBar} from "@/components/server/content/article/filter";
-import {ArticleMiddleBody} from "@/components/server/content/article/article";
-import {useServerConfig} from "@/components/server/config";
-import {serverMakeGet} from "@pnnh/atom/nodejs";
+import {PSHomeBody} from "@/components/server/body";
+import {FileSelectOptions, selectFilesFromBackend} from "@/components/community/files";
 
 const pageStyles = {
     contentContainer: css`
@@ -63,41 +59,33 @@ export default async function Page({params, searchParams}: {
     }
     const pageSize = 10
 
-    const channelUrn = tryBase58ToUuid(paramsValue.channel)
-    if (!channelUrn) {
+    const channelParam = paramsValue.channel
+    const channelUid = tryBase58ToUuid(channelParam)
+    if (!channelUid) {
         notFound();
     }
-    const rankQuery = queryString.stringify({
-        sort: 'read',
-        filter: 'year',
-        page: '1',
-        direction: 'cta',
-        size: 10,
-        channel: channelUrn
-    })
-    const serverConfig = await useServerConfig()
-    const serverUrl = serverConfig.INTERNAL_PORTAL_URL
-    const selectQuery = {
-        sort: searchParamsValue.sort,
-        filter: searchParamsValue.filter,
-        page,
-        size: pageSize,
-        channel: channelUrn
+    const options: FileSelectOptions = {
+        page, size: pageSize, channel: channelUid,
     }
-    const rawQuery = queryString.stringify(selectQuery)
-    const url = `${serverUrl}/articles?${rawQuery}`
-    const selectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, '')
+    let parent = searchParamsValue.parent
+    if (parent) {
+        const parentUid = tryBase58ToUuid(parent)
+        if (parentUid) {
+            options.parent = parentUid
+        }
+    }
+    const selectResult = await selectFilesFromBackend(options)
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
     >
         <div className={pageStyles.contentContainer}>
             <div className={pageStyles.conMiddle}>
-                <ArticleFilterBar lang={lang} searchParamsValue={searchParamsValue}/>
-                <ArticleMiddleBody selectResult={selectResult} lang={lang}/>
+                <PSHomeBody lang={lang} searchParams={searchParamsValue} selectResult={selectResult}/>
+
                 <div className={pageStyles.middlePagination}>
                     <PaginationServer lang={lang} pagination={pagination}
-                                      pageLinkFunc={(page) => replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
+                                      pageLinkFunc={(page) => `/${lang}/channels/${channelParam}` + replaceSearchParams(searchParamsValue, 'page', page.toString())}/>
                 </div>
             </div>
         </div>

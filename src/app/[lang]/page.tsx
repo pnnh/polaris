@@ -1,14 +1,14 @@
 import React from 'react'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
-import {calcPagination, replaceSearchParams, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
+import {calcPagination, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {getTargetLang, unknownLanguage} from "@/components/common/language";
 import {notFound} from "next/navigation";
-import {FileSelectOptions, selectFilesFromBackend} from "@/components/server/tools/tools";
 import {PaginationServer} from "@/components/server/pagination";
 import {PSHomeBody} from "@/components/server/body";
 import {serverLogDebugMeta} from "@/components/server/logger";
 import {css} from "@/gen/styled/css";
+import {FileSelectOptions, selectFilesFromBackend} from "@/components/community/files";
 
 export const dynamic = "force-dynamic";
 
@@ -31,14 +31,7 @@ export default async function Page({params, searchParams}: {
         notFound()
     }
     const options: FileSelectOptions = {
-        page, size: pageSize
-    }
-    let parent = searchParamsValue.parent
-    if (parent) {
-        const parentUid = tryBase58ToUuid(parent)
-        if (parentUid) {
-            options.parent = parentUid
-        }
+        page, size: pageSize, skipDir: true
     }
     serverLogDebugMeta("select files with options", options)
     const selectResult = await selectFilesFromBackend(options)

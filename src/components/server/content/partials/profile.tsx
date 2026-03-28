@@ -1,6 +1,6 @@
 import React, {CSSProperties} from "react";
 import {css} from "@/gen/styled/css";
-import {transKey} from "@/components/common/locales/normal";
+import {transKey, transTodo} from "@/components/common/locales/normal";
 import {getPathname} from "@/components/server/pathname";
 import {pageTitle} from "@/components/common/utils/page";
 
@@ -126,10 +126,11 @@ function ArticleNavbar({lang, pathname}: {
     lang: string, pathname: string
 }) {
     const navLinks = [
-        {name: transKey(lang, "navTools"), href: `/${lang}/tools`},
-        {name: transKey(lang, "navArticles"), href: `/${lang}/articles`},
+        {name: transTodo("文件"), href: `/${lang}`},
         {name: transKey(lang, "navChannels"), href: `/${lang}/channels`},
-        {name: transKey(lang, "navImages"), href: `/${lang}/images`},
+        {name: transKey(lang, "navTools"), href: `/${lang}/tools`},
+        // {name: transKey(lang, "navArticles"), href: `/${lang}/articles`},
+        // {name: transKey(lang, "navImages"), href: `/${lang}/images`},
         // {name: '图片', href: `/images`},
         // {name: '随机密码', href: `/tools/password`},
         // {name: 'UUID', href: `/tools/uuid`},

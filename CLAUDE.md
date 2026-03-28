@@ -4,8 +4,8 @@
 
 ## 技术栈
 
-- **框架**: Next.js 16 (App Router) + React 19 + TypeScript 5.9
-- **样式**: Tailwind CSS v4 + DaisyUI v5 + Panda CSS + MUI v7
+- **框架**: Next.js (App Router) + React + TypeScript 
+- **样式**: Tailwind CSS + DaisyUI + Panda CSS
 - **状态管理**: Jotai + SWR
 - **编辑器**: Slate.js（富文本）
 - **运行端口**: 7100
@@ -42,14 +42,7 @@ src/
 │       ├── images/         # 图片模块
 │       ├── account/        # 账户（登录/注册）
 │       ├── search/         # 搜索
-│       └── tools/          # 工具集
-├── components/
-│   ├── server/             # 服务端组件（async function，直接访问 DB/API）
-│   │   ├── content/        # 布局相关（layout.tsx、navbar、profile）
-│   │   ├── body.tsx        # 首页主体（PSHomeBody）
-│   │   └── pagination.tsx  # 分页组件
-│   ├── client/             # 客户端组件（'use client'，含交互逻辑）
-│   └── common/             # 通用工具（language.ts、models、locales）
+│       └── tools/          # 工具集 
 └── gen/styled/             # Panda CSS 自动生成代码（勿手动修改）
 ```
 
@@ -57,14 +50,13 @@ src/
 
 ### CSS 层级（global.css 中定义）
 ```
-theme → base → mui → components → utilities
+theme → base → components → utilities
 panda-reset → panda-base → panda-tokens → panda-recipes → panda-utilities
 ```
 
 ### 三套样式系统并存
 1. **Panda CSS**（主要）：`css\`...\`` 模板字面量，需 `npm run panda` 生成类名
-2. **Tailwind CSS v4 + DaisyUI v5**：直接在 `className` 中使用工具类
-3. **MUI v7**：通过 `ThemeProvider` 管理，含亮/暗主题
+2. **Tailwind CSS + DaisyUI **：直接在 `className` 中使用工具类
 
 ### CSS 变量（主题相关）
 ```css
@@ -80,12 +72,7 @@ var(--action-hover-color)    /* hover 背景色 */
 暗色主题通过 `body.darkTheme` 类切换。**避免在样式中使用硬编码颜色，应优先使用 CSS 变量。**
 
 ## 重要约束
-
-### 服务端 vs 客户端组件
-- `src/components/server/` 下的组件均为**服务端组件**，可以是 `async function`，可直接 `await` 调用后端 API 或数据库
-- `src/components/client/` 下的组件顶部有 `'use client'`，不能直接 async 或访问服务端资源
-- **不要在服务端组件中添加 `'use client'`，也不要在客户端组件中使用服务端数据获取**
-
+ 
 ### Panda CSS
 - 样式用 `css\`...\`` 模板字面量编写，从 `@/gen/styled/css` 导入
 - 修改样式后需要 `npm run panda` 重新生成（开发时用 watch 模式）
