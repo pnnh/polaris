@@ -1,49 +1,30 @@
-import {expect, test} from 'vitest'
-import {render} from '@testing-library/react'
-import {StyledMenu} from '@/components/client/dropmenu'
-import {createTheme, ThemeProvider} from '@mui/material/styles'
+import { expect, test } from 'vitest'
+import { render } from '@testing-library/react'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/client/dropmenu'
 
-const theme = createTheme()
-
-function Wrapper({children}: { children: React.ReactNode }) {
-    return <ThemeProvider theme={theme}>{children}</ThemeProvider>
-}
-
-test('StyledMenu snapshot - closed', () => {
-    const {container} = render(
-        <Wrapper>
-            <StyledMenu
-                open={false}
-                anchorEl={null}
-                onClose={() => {
-                }}
-            >
-                <li>Item 1</li>
-                <li>Item 2</li>
-            </StyledMenu>
-        </Wrapper>
+test('DropdownMenu renders trigger without throwing', () => {
+    const { getByText } = render(
+        <DropdownMenu>
+            <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <DropdownMenuItem>Item 1</DropdownMenuItem>
+                <DropdownMenuItem>Item 2</DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
     )
-    expect(container).toMatchSnapshot()
+    expect(getByText('Open')).toBeTruthy()
 })
 
-test('StyledMenu snapshot - open with anchor', () => {
-    const anchor = document.createElement('button')
-    document.body.appendChild(anchor)
-
-    const {container} = render(
-        <Wrapper>
-            <StyledMenu
-                open={true}
-                anchorEl={anchor}
-                onClose={() => {
-                }}
-            >
-                <li>Item A</li>
-                <li>Item B</li>
-            </StyledMenu>
-        </Wrapper>
+test('DropdownMenu renders items when open', () => {
+    const { getByText } = render(
+        <DropdownMenu defaultOpen>
+            <DropdownMenuTrigger>Open</DropdownMenuTrigger>
+            <DropdownMenuContent>
+                <DropdownMenuItem>Item A</DropdownMenuItem>
+                <DropdownMenuItem>Item B</DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
     )
-    expect(container).toMatchSnapshot()
-
-    document.body.removeChild(anchor)
+    expect(getByText('Item A')).toBeTruthy()
+    expect(getByText('Item B')).toBeTruthy()
 })

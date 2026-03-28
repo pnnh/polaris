@@ -52,7 +52,8 @@ export default async function Page({params, searchParams}: {
             uid: EmptyUUID,
             description: '',
             create_time: '',
-            update_time: ''
+            update_time: '',
+            status: 0
         }
     } else {
         if (!channelUid) {

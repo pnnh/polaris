@@ -1,14 +1,14 @@
 'use client';
 
 import * as React from 'react';
-import {Dialog} from '@mui/material';
-import {CodeOk, PLDeleteResult} from "@pnnh/atom";
-import {clientMakePost} from "@pnnh/atom/browser";
-import {transKey} from "@/components/common/locales/normal";
-import {css} from "@/gen/styled/css";
+import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { CodeOk, PLDeleteResult } from "@pnnh/atom";
+import { clientMakePost } from "@pnnh/atom/browser";
+import { transKey } from "@/components/common/locales/normal";
+import { css } from "@/gen/styled/css";
 import { Button } from '@/components/ui/button';
 
-export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
+export default function PSDeleteButton({ children, deleteUrl, lang, resTitle }: {
     children: React.ReactNode,
     deleteUrl: string,
     lang: string,
@@ -42,25 +42,27 @@ export default function PSDeleteButton({children, deleteUrl, lang, resTitle}: {
     return (
         <div>
             <Button variant="destructive" size={'sm'} onClick={handleClickOpen}>{children}</Button>
-            <Dialog onClose={handleClose} open={open}>
-                <div className={deleteStyles.deleteDialog}>
+            <Dialog open={open} onOpenChange={(isOpen) => { if (!isOpen) handleClose(); }}>
+                <DialogContent>
+                    <div className={deleteStyles.deleteDialog}>
 
-                    <div className={deleteStyles.dialogTitle}>
-                        {transKey(lang, 'console.delete.confirm')}
-                    </div>
-                    <div className={deleteStyles.resTitle}>
-                        {resTitle}
-                    </div>
-                    <div className={deleteStyles.dialogActions}>
-                        <Button size={'sm'} onClick={() => handleSubmit('ok')}>
-                            {transKey(lang, 'console.delete.ok')}
-                        </Button>
-                        <Button size={'sm'} onClick={() => handleClose()}>
-                            {transKey(lang, 'console.common.cancel')}
-                        </Button>
+                        <div className={deleteStyles.dialogTitle}>
+                            {transKey(lang, 'console.delete.confirm')}
+                        </div>
+                        <div className={deleteStyles.resTitle}>
+                            {resTitle}
+                        </div>
+                        <div className={deleteStyles.dialogActions}>
+                            <Button size={'sm'} onClick={() => handleSubmit('ok')}>
+                                {transKey(lang, 'console.delete.ok')}
+                            </Button>
+                            <Button size={'sm'} onClick={() => handleClose()}>
+                                {transKey(lang, 'console.common.cancel')}
+                            </Button>
 
+                        </div>
                     </div>
-                </div>
+                </DialogContent>
             </Dialog>
         </div>
     );

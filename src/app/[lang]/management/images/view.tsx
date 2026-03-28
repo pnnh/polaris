@@ -1,23 +1,38 @@
 'use client'
 
 import React from "react";
-import {
-    Alert, Box, Button, Checkbox, Chip,
-    Table, TableBody, TableCell, TableHead, TableRow, Typography
-} from "@mui/material";
-import { Square, SquareCheck, Hourglass, BadgeCheck, Search, X } from 'lucide-react';
-import {PSImageModel} from "@/components/common/models/image";
-import {ManagementBrowser} from "@/components/management/browser";
-import {css} from "@/gen/styled/css";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { BadgeCheck, Hourglass, Search, X } from 'lucide-react';
+import { PSImageModel } from "@/components/common/models/image";
+import { ManagementBrowser } from "@/components/management/browser";
+import { css } from "@/gen/styled/css";
 
-const STATUS_PENDING = 0;
-const STATUS_APPROVED = 1;
-
-function StatusChip({status}: { status: number }) {
-    if (status === STATUS_APPROVED) {
-        return <Chip icon={<BadgeCheck size={14}/>} label="已审核" color="success" size="small" variant="outlined"/>;
+function StatusBadge({ status }: { status: number }) {
+    if (status === 1) {
+        return (
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-xs border-green-500 text-green-700">
+                <BadgeCheck size={12} />已审核
+            </span>
+        );
     }
-    return <Chip icon={<Hourglass size={14}/>} label="待审核" color="warning" size="small" variant="outlined"/>;
+    return (
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-xs border-yellow-500 text-yellow-700">
+            <Hourglass size={12} />待审核
+        </span>
+    );
+}
+
+function InlineCheckbox({ checked, indeterminate, onChange, onClick, disabled }: {
+    checked: boolean; indeterminate?: boolean;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
+    disabled?: boolean;
+}) {
+    const ref = React.useRef<HTMLInputElement>(null);
+    React.useEffect(() => { if (ref.current) ref.current.indeterminate = !!indeterminate; }, [indeterminate]);
+    return <input type="checkbox" ref={ref} checked={checked} onChange={onChange}
+        onClick={onClick} disabled={disabled} className="w-4 h-4 cursor-pointer" />;
 }
 
 const filterStyles = {
@@ -52,7 +67,7 @@ const filterStyles = {
     `,
 }
 
-export function ManagementImagesView({lang, stargateUrl, dataJson, keyword, statusFilter}: {
+export function ManagementImagesView({ lang, stargateUrl, dataJson, keyword, statusFilter }: {
     lang: string
     stargateUrl: string
     dataJson: string
@@ -86,16 +101,16 @@ export function ManagementImagesView({lang, stargateUrl, dataJson, keyword, stat
         window.location.href = url.pathname + url.search;
     };
 
-    const goSearch = () => navigate({keyword: searchText || undefined});
-    const clearSearch = () => { setSearchText(''); navigate({keyword: undefined}); };
-    const togglePendingFilter = () => navigate({status: statusFilter === 'pending' ? undefined : 'pending'});
+    const goSearch = () => navigate({ keyword: searchText || undefined });
+    const clearSearch = () => { setSearchText(''); navigate({ keyword: undefined }); };
+    const togglePendingFilter = () => navigate({ status: statusFilter === 'pending' ? undefined : 'pending' });
 
     const handleApprove = async () => {
         if (selectedUids.size === 0) { alert('请先选择图片'); return; }
         setApproving(true);
         setApproveResult(null);
         try {
-            const result = await ManagementBrowser.clientApproveImages(stargateUrl, Array.from(selectedUids), STATUS_APPROVED);
+            const result = await ManagementBrowser.clientApproveImages(stargateUrl, Array.from(selectedUids), 1);
             setApproveResult(result);
             setSelectedUids(new Set());
             if (result.success > 0) setTimeout(() => window.location.reload(), 1200);
@@ -108,87 +123,83 @@ export function ManagementImagesView({lang, stargateUrl, dataJson, keyword, stat
     };
 
     return (
-        <Box sx={{flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column'}}>
+        <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
             <div className={filterStyles.toolbar}>
                 <div className={filterStyles.leftGroup}>
-                    <Button size="small" variant="contained" color="primary" startIcon={<BadgeCheck size={18}/>}
-                            onClick={handleApprove} disabled={approving || selectedUids.size === 0}>
+                    <Button size="sm" onClick={handleApprove} disabled={approving || selectedUids.size === 0}>
+                        <BadgeCheck size={16} />
                         {approving ? '审核中...' : selectedUids.size > 0 ? `审核 (${selectedUids.size})` : '审核'}
                     </Button>
-                    <Button size="small" variant={statusFilter === 'pending' ? 'contained' : 'outlined'}
-                            color={statusFilter === 'pending' ? 'warning' : 'inherit'}
-                            startIcon={<Hourglass size={18}/>} onClick={togglePendingFilter}>
-                        仅待审核
+                    <Button size="sm" variant={statusFilter === 'pending' ? 'default' : 'outline'}
+                        onClick={togglePendingFilter}>
+                        <Hourglass size={16} />仅待审核
                     </Button>
                 </div>
                 <div className={filterStyles.rightGroup}>
                     <div className={filterStyles.searchBox}>
                         <input placeholder="搜索图片..." maxLength={128} value={searchText}
-                               onChange={e => setSearchText(e.target.value)}
-                               onKeyDown={e => { if (e.key === 'Enter') goSearch(); }}/>
-                        {searchText && <X size={16} onClick={clearSearch} style={{cursor: 'pointer', color: '#999'}}/>}
-                        <Search size={16} onClick={goSearch} style={{cursor: 'pointer'}}/>
+                            onChange={e => setSearchText(e.target.value)}
+                            onKeyDown={e => { if (e.key === 'Enter') goSearch(); }} />
+                        {searchText && <X size={16} onClick={clearSearch} style={{ cursor: 'pointer', color: '#999' }} />}
+                        <Search size={16} onClick={goSearch} style={{ cursor: 'pointer' }} />
                     </div>
                 </div>
             </div>
             {approveResult && (
-                <Alert severity={approveResult.fail === 0 ? 'success' : 'warning'} onClose={() => setApproveResult(null)} sx={{mx: 1, mt: 1}}>
-                    已成功审核 {approveResult.success} 张图片{approveResult.fail > 0 && `（${approveResult.fail} 个失败）`}
+                <Alert className="mx-1 mt-1">
+                    <div className="flex items-center justify-between">
+                        <AlertDescription>
+                            已成功审核 {approveResult.success} 张图片{approveResult.fail > 0 && `（${approveResult.fail} 个失败）`}
+                        </AlertDescription>
+                        <button onClick={() => setApproveResult(null)} className="ml-2 opacity-70 hover:opacity-100"><X size={14} /></button>
+                    </div>
                 </Alert>
             )}
-            <Box sx={{flex: 1, overflowY: 'auto', overflowX: 'hidden'}}>
-                <Table size="small" stickyHeader>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell padding="checkbox" sx={{width: 48}}>
-                                <Checkbox indeterminate={someSelected} checked={allSelected}
-                                          onChange={handleSelectAll} icon={<Square size={20}/>}
-                                          checkedIcon={<SquareCheck size={20}/>} disabled={approving}/>
-                            </TableCell>
-                            <TableCell><Typography variant="body2" fontWeight={600}>标题</Typography></TableCell>
-                            <TableCell sx={{width: 160}}><Typography variant="body2" fontWeight={600}>所有者</Typography></TableCell>
-                            <TableCell sx={{width: 120}}><Typography variant="body2" fontWeight={600}>状态</Typography></TableCell>
-                            <TableCell sx={{width: 180}}><Typography variant="body2" fontWeight={600}>更新时间</Typography></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
+            <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden' }}>
+                <table className="w-full text-sm border-collapse">
+                    <thead className="sticky top-0 bg-background">
+                        <tr>
+                            <th className="w-12 p-1 border-b text-left">
+                                <InlineCheckbox indeterminate={someSelected} checked={allSelected}
+                                    onChange={handleSelectAll} disabled={approving} />
+                            </th>
+                            <th className="p-2 border-b text-left font-semibold">标题</th>
+                            <th className="w-40 p-2 border-b text-left font-semibold">所有者</th>
+                            <th className="w-28 p-2 border-b text-left font-semibold">状态</th>
+                            <th className="w-44 p-2 border-b text-left font-semibold">更新时间</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {images.length === 0 && (
-                            <TableRow>
-                                <TableCell colSpan={5} align="center" sx={{py: 4}}>
-                                    <Typography color="text.secondary">暂无数据</Typography>
-                                </TableCell>
-                            </TableRow>
+                            <tr><td colSpan={5} className="py-8 text-center text-muted-foreground">暂无数据</td></tr>
                         )}
                         {images.map(image => (
-                            <TableRow key={image.uid} hover selected={selectedUids.has(image.uid)}
-                                      onClick={() => !approving && handleToggle(image.uid)}
-                                      sx={{cursor: approving ? 'default' : 'pointer'}}>
-                                <TableCell padding="checkbox">
-                                    <Checkbox checked={selectedUids.has(image.uid)} icon={<Square size={20}/>}
-                                              checkedIcon={<SquareCheck size={20}/>} disabled={approving}
-                                              onClick={e => e.stopPropagation()} onChange={() => handleToggle(image.uid)}/>
-                                </TableCell>
-                                <TableCell>
-                                    <Typography variant="body2" fontWeight={500} noWrap>{image.title || image.name}</Typography>
+                            <tr key={image.uid}
+                                data-selected={selectedUids.has(image.uid) || undefined}
+                                onClick={() => !approving && handleToggle(image.uid)}
+                                className="hover:bg-muted/50 data-[selected]:bg-muted border-b"
+                                style={{ cursor: approving ? 'default' : 'pointer' }}>
+                                <td className="w-12 p-1">
+                                    <InlineCheckbox checked={selectedUids.has(image.uid)} disabled={approving}
+                                        onClick={e => e.stopPropagation()}
+                                        onChange={() => handleToggle(image.uid)} />
+                                </td>
+                                <td className="p-2 max-w-[400px]">
+                                    <p className="font-medium truncate">{image.title || image.name}</p>
                                     {image.description && (
-                                        <Typography variant="caption" color="text.secondary"
-                                                    sx={{display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 400}}>
-                                            {image.description}
-                                        </Typography>
+                                        <p className="text-xs text-muted-foreground truncate">{image.description}</p>
                                     )}
-                                </TableCell>
-                                <TableCell><Typography variant="body2" color="text.secondary">{image.owner_name || '—'}</Typography></TableCell>
-                                <TableCell><StatusChip status={image.status ?? 0}/></TableCell>
-                                <TableCell>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {image.update_time ? new Date(image.update_time).toLocaleString() : '—'}
-                                    </Typography>
-                                </TableCell>
-                            </TableRow>
+                                </td>
+                                <td className="w-40 p-2 text-muted-foreground text-xs">{image.owner_name || '—'}</td>
+                                <td className="w-28 p-2"><StatusBadge status={image.status ?? 0} /></td>
+                                <td className="w-44 p-2 text-muted-foreground text-xs">
+                                    {image.update_time ? new Date(image.update_time).toLocaleString() : '—'}
+                                </td>
+                            </tr>
                         ))}
-                    </TableBody>
-                </Table>
-            </Box>
-        </Box>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     );
 }

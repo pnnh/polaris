@@ -1,47 +1,36 @@
 'use client'
 
-import {EmptyUUID} from "@pnnh/atom";
+import { EmptyUUID } from "@pnnh/atom";
 import { Button } from "@/components/ui/button";
 import React from "react";
-import {PSImageModel} from "@/components/common/models/image";
-import {PSChannelModel} from "@/components/common/models/channel";
-import MenuItem from '@mui/material/MenuItem';
-import {Select} from "@mui/material";
-import {transKey} from "@/components/common/locales/normal";
-import {CommunityBrowser} from "@/components/community/browser";
-import {css} from "@/gen/styled/css";
-import {getDefaultImageUrl} from "@/components/common/note";
+import { PSImageModel } from "@/components/common/models/image";
+import { PSChannelModel } from "@/components/common/models/channel";
+import { transKey } from "@/components/common/locales/normal";
+import { CommunityBrowser } from "@/components/community/browser";
+import { css } from "@/gen/styled/css";
+import { getDefaultImageUrl } from "@/components/common/note";
 
-function PSConsoleChannelSelector({channelUid, channels, onChange, lang}: {
+function PSConsoleChannelSelector({ channelUid, channels, onChange, lang }: {
     channelUid: string,
     channels: PSChannelModel[],
     onChange: (newChannel: string) => void,
     lang: string
 }) {
-    return <>
-        <Select
+    return (
+        <select
             value={channelUid}
-            size={'small'}
-            label="Channel"
             onChange={(event) => onChange(event.target.value)}
-            displayEmpty
+            className="h-8 rounded border px-2 text-sm min-w-[180px]"
         >
-            <MenuItem value="" disabled>
-                {transKey(lang, "console.image.selectChannel")}
-            </MenuItem>
-            {
-                channels.map(channel => (
-                    <MenuItem key={channel.uid} value={channel.uid}
-                              selected={channelUid === channel.uid} disableRipple>
-                        {channel.name}
-                    </MenuItem>
-                ))
-            }
-        </Select>
-    </>
+            <option value="" disabled>{transKey(lang, "console.image.selectChannel")}</option>
+            {channels.map(channel => (
+                <option key={channel.uid} value={channel.uid}>{channel.name}</option>
+            ))}
+        </select>
+    )
 }
 
-export function ConsolePhotoForm({stargateUrl, modelString, channelsString, lang}: {
+export function ConsolePhotoForm({ stargateUrl, modelString, channelsString, lang }: {
     stargateUrl: string,
     modelString: string,
     channelsString: string,
@@ -111,7 +100,7 @@ export function ConsolePhotoForm({stargateUrl, modelString, channelsString, lang
                     placeholder={transKey(lang, "console.image.description")}
                 />
             </div>
-            <ImageCard lang={lang} model={oldModel}/>
+            <ImageCard lang={lang} model={oldModel} />
             <div className={formStyles.fieldGroup}>
                 <label className={formStyles.fieldLabel}>Keywords</label>
                 <input
@@ -188,7 +177,7 @@ const formStyles = {
     `
 }
 
-function ImageCard({model, lang}: {
+function ImageCard({ model, lang }: {
     model: PSImageModel,
     lang: string
 }) {
@@ -196,7 +185,7 @@ function ImageCard({model, lang}: {
 
     return <>
         <div className={imageStyles.imageCard}>
-            {imageUrl && <img src={imageUrl} alt={model.name}/>}
+            {imageUrl && <img src={imageUrl} alt={model.name} />}
         </div>
     </>
 }

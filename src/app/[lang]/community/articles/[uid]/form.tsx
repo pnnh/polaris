@@ -1,69 +1,52 @@
 'use client'
 
-import {EmptyUUID, generatorRandomString, TocItem} from "@pnnh/atom";
-import {ConsoleArticleEditor} from "./editor";
+import { EmptyUUID, generatorRandomString, TocItem } from "@pnnh/atom";
+import { ConsoleArticleEditor } from "./editor";
 import { Button } from "@/components/ui/button";
 import React from "react";
-import {PSArticleModel} from "@/components/common/models/article";
-import {PSChannelModel} from "@/components/common/models/channel";
-import {getDefaultImageUrl} from "@/components/common/note";
-import MenuItem from '@mui/material/MenuItem';
-import {supportedLanguages} from "@/components/common/language";
-import {Select} from "@mui/material";
-import {transKey} from "@/components/common/locales/normal";
-import {CommunityBrowser} from "@/components/community/browser";
-import {css} from "@/gen/styled/css";
+import { PSArticleModel } from "@/components/common/models/article";
+import { PSChannelModel } from "@/components/common/models/channel";
+import { getDefaultImageUrl } from "@/components/common/note";
+import { supportedLanguages } from "@/components/common/language";
+import { transKey } from "@/components/common/locales/normal";
+import { CommunityBrowser } from "@/components/community/browser";
+import { css } from "@/gen/styled/css";
 
-function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (newLang: string) => void }) {
-    return <>
-        <Select
+function PSConsoleLanguageSelector({ lang, onChange }: { lang: string, onChange: (newLang: string) => void }) {
+    return (
+        <select
             value={lang}
-            size={'small'}
-            label="Language"
             onChange={(event) => onChange(event.target.value)}
+            className="h-8 rounded border px-2 text-sm min-w-[140px]"
         >
-            {
-                supportedLanguages.map(language => (
-                    <MenuItem key={language.key} value={language.key}
-                              selected={lang === language.key} disableRipple>
-                        {language.name}
-                    </MenuItem>
-                ))
-            }
-        </Select>
-    </>
+            {supportedLanguages.map(language => (
+                <option key={language.key} value={language.key}>{language.name}</option>
+            ))}
+        </select>
+    )
 }
 
-function PSConsoleChannelSelector({channelUid, channels, onChange, lang}: {
+function PSConsoleChannelSelector({ channelUid, channels, onChange, lang }: {
     channelUid: string,
     channels: PSChannelModel[],
     onChange: (newChannel: string) => void,
     lang: string
 }) {
-    return <>
-        <Select
+    return (
+        <select
             value={channelUid}
-            size={'small'}
-            label="Channel"
             onChange={(event) => onChange(event.target.value)}
-            displayEmpty
+            className="h-8 rounded border px-2 text-sm min-w-[180px]"
         >
-            <MenuItem value="" disabled>
-                {transKey(lang, "console.article.selectChannel")}
-            </MenuItem>
-            {
-                channels.map(channel => (
-                    <MenuItem key={channel.uid} value={channel.uid}
-                              selected={channelUid === channel.uid} disableRipple>
-                        {channel.name}
-                    </MenuItem>
-                ))
-            }
-        </Select>
-    </>
+            <option value="" disabled>{transKey(lang, "console.article.selectChannel")}</option>
+            {channels.map(channel => (
+                <option key={channel.uid} value={channel.uid}>{channel.name}</option>
+            ))}
+        </select>
+    )
 }
 
-export function ConsoleArticleForm({stargateUrl, modelString, channelsString, lang}: {
+export function ConsoleArticleForm({ stargateUrl, modelString, channelsString, lang }: {
     stargateUrl: string,
     modelString: string,
     channelsString: string,
@@ -79,7 +62,7 @@ export function ConsoleArticleForm({stargateUrl, modelString, channelsString, la
 
     const tocList: TocItem[] = []
     const titleId = generatorRandomString(8)
-    tocList.push({title: oldModel.title, header: 0, id: titleId})
+    tocList.push({ title: oldModel.title, header: 0, id: titleId })
 
     const isNew = oldModel.uid === EmptyUUID;
     const onSubmit = () => {
@@ -120,23 +103,23 @@ export function ConsoleArticleForm({stargateUrl, modelString, channelsString, la
         <div className={formStyles.articleCover}>
             <div className={formStyles.articleHeader}>
                 <div className={formStyles.articleTitle}>
-                    <input value={title} onChange={(event) => setTitle(event.target.value)}/>
+                    <input value={title} onChange={(event) => setTitle(event.target.value)} />
                 </div>
                 <div className={formStyles.articleDescription}>
-                        <textarea name={'articleDescription'}
-                                  value={description} onChange={(event => setDescription(event.target.value))}/>
+                    <textarea name={'articleDescription'}
+                        value={description} onChange={(event => setDescription(event.target.value))} />
                 </div>
             </div>
-            <img className={formStyles.coverImage} src={coverUrl} alt={oldModel.title}/>
+            <img className={formStyles.coverImage} src={coverUrl} alt={oldModel.title} />
         </div>
         <div className={formStyles.articleContainer}>
             <ConsoleArticleEditor tocList={tocList} header={oldModel.header}
-                                  body={bodyText} assetsUrl={'assetsUrl'} portalUrl={stargateUrl}
-                                  onChange={(bodyText) => setBodyText(bodyText)}/>
+                body={bodyText} assetsUrl={'assetsUrl'} portalUrl={stargateUrl}
+                onChange={(bodyText) => setBodyText(bodyText)} />
         </div>
         <div className={formStyles.bottomBar}>
-            <PSConsoleChannelSelector channelUid={selectedChannel} channels={channels} onChange={setSelectedChannel} lang={lang}/>
-            <PSConsoleLanguageSelector lang={wangLang} onChange={setWantLang}/>
+            <PSConsoleChannelSelector channelUid={selectedChannel} channels={channels} onChange={setSelectedChannel} lang={lang} />
+            <PSConsoleLanguageSelector lang={wangLang} onChange={setWantLang} />
             <Button size={'sm'} onClick={onSubmit}>{
                 transKey(lang, "console.article.save")
             }</Button>

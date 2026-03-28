@@ -13,10 +13,7 @@ self.onmessage = async (event) => {
     if (action === 'SQLITE_INIT') {
         console.log('Initialize SQLite request received.');
         // Initialization logic for SQLite can be added here.
-        sqlite3 = await sqlite3InitModule({
-            print: console.log,
-            printErr: console.error,
-        });
+        sqlite3 = await sqlite3InitModule();
         // Check for OPFS support first
         if (!('storage' in navigator) || !navigator.storage.getDirectory) {
             throw new Error('Browser does not support OPFS');

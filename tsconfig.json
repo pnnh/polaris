@@ -30,6 +30,7 @@
     "esModuleInterop": true,
     "strict": true,
     "allowSyntheticDefaultImports": true,
+    "ignoreDeprecations": "6.0",
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {

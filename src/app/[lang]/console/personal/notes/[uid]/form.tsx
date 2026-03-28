@@ -1,42 +1,37 @@
 'use client'
 
-import {EmptyUUID, generatorRandomString, isLangEn, langEn, langZh, TocItem, uuidToBase58} from "@pnnh/atom";
-import {ConsoleArticleEditor} from "./editor";
+import { EmptyUUID, generatorRandomString, isLangEn, langEn, langZh, TocItem, uuidToBase58 } from "@pnnh/atom";
+import { ConsoleArticleEditor } from "./editor";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import React from "react";
-import {PSArticleModel} from "@/components/common/models/article";
-import {getDefaultImageUrl} from "@/components/common/note";
-import MenuItem from '@mui/material/MenuItem';
-import {supportedLanguages} from "@/components/common/language";
-import {Box, Card, CardContent, CardMedia, Chip, IconButton, Select, Stack, TextField, Tooltip} from "@mui/material";
-import {transKey} from "@/components/common/locales/normal";
-import {PersonalNotesBrowser} from "@/components/personal/notes";
-import {CommunityBrowser} from "@/components/community/browser";
-import {PSChannelModel} from "@/components/common/models/channel";
+import { PSArticleModel } from "@/components/common/models/article";
+import { getDefaultImageUrl } from "@/components/common/note";
+import { supportedLanguages } from "@/components/common/language";
+import { transKey } from "@/components/common/locales/normal";
+import { PersonalNotesBrowser } from "@/components/personal/notes";
+import { CommunityBrowser } from "@/components/community/browser";
+import { PSChannelModel } from "@/components/common/models/channel";
 import { Save, Copy, Languages, Upload } from 'lucide-react';
 
-function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (newLang: string) => void }) {
+function PSConsoleLanguageSelector({ lang, onChange }: { lang: string, onChange: (newLang: string) => void }) {
     return (
-        <Select
-            value={lang}
-            size={'small'}
-            variant="outlined"
-            startAdornment={<Languages size={20} style={{marginRight: '0.25rem'}}/>}
-            onChange={(event) => onChange(event.target.value)}
-            sx={{minWidth: 140}}
-        >
-            {
-                supportedLanguages.map(language => (
-                    <MenuItem key={language.key} value={language.key}>
-                        {language.name}
-                    </MenuItem>
-                ))
-            }
-        </Select>
+        <div className="flex items-center gap-1">
+            <Languages size={16} className="text-muted-foreground" />
+            <select
+                value={lang}
+                onChange={(event) => onChange(event.target.value)}
+                className="h-8 rounded border px-2 text-sm min-w-[140px]"
+            >
+                {supportedLanguages.map(language => (
+                    <option key={language.key} value={language.key}>{language.name}</option>
+                ))}
+            </select>
+        </div>
     )
 }
 
-export function ConsoleArticleForm({stargateUrl, modelString, channelsString, lang}: {
+export function ConsoleArticleForm({ stargateUrl, modelString, channelsString, lang }: {
     stargateUrl: string,
     modelString: string,
     channelsString: string,
@@ -52,7 +47,7 @@ export function ConsoleArticleForm({stargateUrl, modelString, channelsString, la
 
     const tocList: TocItem[] = []
     const titleId = generatorRandomString(8)
-    tocList.push({title: oldModel.title, header: 0, id: titleId})
+    tocList.push({ title: oldModel.title, header: 0, id: titleId })
     const isNew = oldModel.uid === EmptyUUID;
 
     const onSubmit = () => {
@@ -114,165 +109,135 @@ export function ConsoleArticleForm({stargateUrl, modelString, channelsString, la
     const createUrl = `/${lang}/console/personal/notes/${uuidToBase58(EmptyUUID)}?wantLang=${isLangEn(wangLang) ? langZh : langEn}&copyFrom=${uuidToBase58(oldModel.uid)}`
 
     return (
-        <Box
-            className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-6">
-            <Box className="max-w-7xl mx-auto space-y-6">
+        <div className="min-h-screen p-6">
+            <div className="max-w-7xl mx-auto space-y-6">
                 {/* Header Card */}
-                <Card elevation={3} className="overflow-hidden">
-                    <Box className="flex flex-col md:flex-row">
-                        <Box className="flex-1 p-6">
-                            <Stack spacing={3}>
-                                <Box className="flex items-center gap-2">
-                                    <Chip
-                                        label={isNew ? transKey(lang, 'console.note.createNew') : transKey(lang, 'console.note.edit')}
-                                        color={isNew ? 'success' : 'primary'}
-                                        size="small"
+                <div className="rounded-lg border shadow-sm overflow-hidden">
+                    <div className="flex flex-col md:flex-row">
+                        <div className="flex-1 p-6">
+                            <div className="flex flex-col gap-4">
+                                <div className="flex items-center gap-2">
+                                    <span className="inline-flex items-center px-2 py-0.5 rounded-full border text-xs font-medium"
+                                        style={{ borderColor: isNew ? '#22c55e' : '#3b82f6', color: isNew ? '#16a34a' : '#2563eb' }}>
+                                        {isNew ? transKey(lang, 'console.note.createNew') : transKey(lang, 'console.note.edit')}
+                                    </span>
+                                    <span className="inline-flex items-center px-2 py-0.5 rounded-full border text-xs font-medium">
+                                        {wangLang.toUpperCase()}
+                                    </span>
+                                </div>
+
+                                <div className="flex flex-col gap-1">
+                                    <label className="text-sm font-medium">{transKey(lang, 'console.note.title')}</label>
+                                    <Input
+                                        value={title}
+                                        onChange={(event) => setTitle(event.target.value)}
+                                        placeholder={transKey(lang, 'console.note.titlePlaceholder')}
+                                        className="text-xl font-semibold"
                                     />
-                                    <Chip
-                                        label={wangLang.toUpperCase()}
-                                        variant="outlined"
-                                        size="small"
+                                </div>
+
+                                <div className="flex flex-col gap-1">
+                                    <label className="text-sm font-medium">{transKey(lang, 'console.note.description')}</label>
+                                    <textarea
+                                        rows={3}
+                                        value={description}
+                                        onChange={(event) => setDescription(event.target.value)}
+                                        placeholder={transKey(lang, 'console.note.descriptionPlaceholder')}
+                                        className="w-full rounded-md border px-3 py-2 text-sm resize-none focus:outline-none focus:ring-1 focus:ring-ring"
                                     />
-                                </Box>
+                                </div>
+                            </div>
+                        </div>
 
-                                <TextField
-                                    fullWidth
-                                    label={transKey(lang, 'console.note.title')}
-                                    variant="outlined"
-                                    value={title}
-                                    onChange={(event) => setTitle(event.target.value)}
-                                    placeholder={transKey(lang, 'console.note.titlePlaceholder')}
-                                    InputProps={{
-                                        sx: {fontSize: '1.25rem', fontWeight: 600}
-                                    }}
-                                />
-
-                                <TextField
-                                    fullWidth
-                                    label={transKey(lang, 'console.note.description')}
-                                    variant="outlined"
-                                    multiline
-                                    rows={3}
-                                    value={description}
-                                    onChange={(event) => setDescription(event.target.value)}
-                                    placeholder={transKey(lang, 'console.note.descriptionPlaceholder')}
-                                />
-                            </Stack>
-                        </Box>
-
-                        <Box className="md:w-64 relative">
-                            <CardMedia
-                                component="img"
-                                image={coverUrl}
+                        <div className="md:w-64 relative">
+                            <img
+                                src={coverUrl}
                                 alt={title || 'Note cover'}
-                                className="h-full object-cover"
-                                sx={{minHeight: 250}}
+                                className="w-full h-full object-cover"
+                                style={{ minHeight: 250 }}
                             />
-                            <Box className="absolute top-2 right-2">
-                                <Tooltip title="Change cover">
-                                    <IconButton
-                                        size="small"
-                                        sx={{bgcolor: 'rgba(255,255,255,0.9)', '&:hover': {bgcolor: 'white'}}}
-                                    >
-                                        <Copy size={16}/>
-                                    </IconButton>
-                                </Tooltip>
-                            </Box>
-                        </Box>
-                    </Box>
-                </Card>
+                            <div className="absolute top-2 right-2">
+                                <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    title="Change cover"
+                                    className="bg-white/90 hover:bg-white"
+                                >
+                                    <Copy size={16} />
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 {/* Editor Card */}
-                <Card elevation={3} className="overflow-hidden">
-                    <CardContent className="p-0">
-                        <ConsoleArticleEditor
-                            tocList={tocList}
-                            header={oldModel.header}
-                            body={bodyText}
-                            assetsUrl={'assetsUrl'}
-                            onChange={(bodyText) => setBodyText(bodyText)}
-                        />
-                    </CardContent>
-                </Card>
+                <div className="rounded-lg border shadow-sm overflow-hidden">
+                    <ConsoleArticleEditor
+                        tocList={tocList}
+                        header={oldModel.header}
+                        body={bodyText}
+                        assetsUrl={'assetsUrl'}
+                        onChange={(bodyText) => setBodyText(bodyText)}
+                    />
+                </div>
 
                 {/* Action Bar */}
-                <Card elevation={3}>
-                    <Box className="p-4">
-                        <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
-                            <Stack direction="row" spacing={2} alignItems="center">
-                                <PSConsoleLanguageSelector lang={wangLang} onChange={setWantLang}/>
-                            </Stack>
+                <div className="rounded-lg border shadow-sm p-4">
+                    <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2">
+                            <PSConsoleLanguageSelector lang={wangLang} onChange={setWantLang} />
+                        </div>
 
-                            <Stack direction="row" spacing={2}>
-                                {!isNew && (
-                                    <Button
-                                        variant="outline"
-                                        asChild
-                                    >
-                                        <a href={createUrl}>
-                                            <Copy size={16} />
-                                            {transKey(lang, 'console.note.viewCopy')}
-                                        </a>
-                                    </Button>
-                                )}
-                                <Button
-                                    size="lg"
-                                    style={{minWidth: 120}}
-                                    onClick={onSubmit}
-                                >
-                                    <Save size={16} />
-                                    {transKey(lang, 'console.note.save')}
+                        <div className="flex items-center gap-2">
+                            {!isNew && (
+                                <Button variant="outline" asChild>
+                                    <a href={createUrl}>
+                                        <Copy size={16} />
+                                        {transKey(lang, 'console.note.viewCopy')}
+                                    </a>
                                 </Button>
-                            </Stack>
-                        </Stack>
-                    </Box>
-                </Card>
+                            )}
+                            <Button onClick={onSubmit}>
+                                <Save size={16} />
+                                {transKey(lang, 'console.note.save')}
+                            </Button>
+                        </div>
+                    </div>
+                </div>
 
                 {/* Publish to Channel (Only for existing notes) */}
                 {!isNew && (
-                    <Card elevation={3}>
-                        <Box className="p-4">
-                            <Stack spacing={2}>
-                                <Box className="flex items-center gap-2">
-                                    <Upload size={20} color="var(--primary-color)"/>
-                                    <span className="font-semibold text-lg">
-                                        {transKey(lang, 'console.note.publishToChannel')}
-                                    </span>
-                                </Box>
-                                <Stack direction="row" spacing={2} alignItems="center">
-                                    <Select
-                                        value={selectedChannel}
-                                        size="small"
-                                        onChange={(event) => setSelectedChannel(event.target.value)}
-                                        displayEmpty
-                                        sx={{minWidth: 300}}
-                                    >
-                                        <MenuItem value="" disabled>
-                                            {transKey(lang, "console.note.selectChannel")}
-                                        </MenuItem>
-                                        {
-                                            channels.map(channel => (
-                                                <MenuItem key={channel.uid} value={channel.uid}>
-                                                    {channel.name}
-                                                </MenuItem>
-                                            ))
-                                        }
-                                    </Select>
-                                    <Button
-                                        onClick={onPublish}
-                                        disabled={!selectedChannel}
-                                        style={{minWidth: 120}}
-                                    >
-                                        <Upload size={16} />
-                                        {transKey(lang, 'console.note.publish')}
-                                    </Button>
-                                </Stack>
-                            </Stack>
-                        </Box>
-                    </Card>
+                    <div className="rounded-lg border shadow-sm p-4">
+                        <div className="flex flex-col gap-3">
+                            <div className="flex items-center gap-2">
+                                <Upload size={20} />
+                                <span className="font-semibold text-lg">
+                                    {transKey(lang, 'console.note.publishToChannel')}
+                                </span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <select
+                                    value={selectedChannel}
+                                    onChange={(event) => setSelectedChannel(event.target.value)}
+                                    className="h-9 rounded border px-2 text-sm min-w-[300px]"
+                                >
+                                    <option value="" disabled>
+                                        {transKey(lang, "console.note.selectChannel")}
+                                    </option>
+                                    {channels.map(channel => (
+                                        <option key={channel.uid} value={channel.uid}>{channel.name}</option>
+                                    ))}
+                                </select>
+                                <Button onClick={onPublish} disabled={!selectedChannel}>
+                                    <Upload size={16} />
+                                    {transKey(lang, 'console.note.publish')}
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
                 )}
-            </Box>
-        </Box>
+            </div>
+        </div>
     )
 }
 

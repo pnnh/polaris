@@ -1,13 +1,11 @@
 'use client';
 
-import {css} from "@/gen/styled/css";
+import { css } from "@/gen/styled/css";
 import { CircleUser, Monitor, Cloud } from 'lucide-react';
-import {sanitizeUrl} from "@pnnh/atom";
-import {AccountModel, isAnonymousAccount} from "@/components/common/models/account/account";
-import {StyledMenu} from "@/components/client/dropmenu";
-import MenuItem from "@mui/material/MenuItem";
-import React from "react";
-import {transTodo} from "@/components/common/locales/normal";
+import { sanitizeUrl } from "@pnnh/atom";
+import { AccountModel, isAnonymousAccount } from "@/components/common/models/account/account";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/client/dropmenu";
+import { transTodo } from "@/components/common/locales/normal";
 
 const styles = {
     userAction: css`
@@ -53,58 +51,51 @@ const styles = {
     `,
 };
 
-export function UserActionDropdown({lang, userInfo}: {
+export function UserActionDropdown({ lang, userInfo }: {
     lang: string, userInfo: AccountModel | undefined
 }) {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
-
-    const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
     const photoUrl = sanitizeUrl(userInfo?.photoUrl)
 
     if (userInfo && !isAnonymousAccount(userInfo)) {
-        return <div className={styles.userAction}>
-            <div className={styles.userPhoto} title={userInfo.nickname} onClick={handleClick}>
-                <img src={photoUrl} alt="User Avatar"/>
-                <span className={styles.userNickname}>{userInfo.nickname}</span>
+        return (
+            <div className={styles.userAction}>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <div className={styles.userPhoto} title={userInfo.nickname}>
+                            <img src={photoUrl} alt="User Avatar" />
+                            <span className={styles.userNickname}>{userInfo.nickname}</span>
+                        </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuItem asChild>
+                            <a className={styles.menuItem} href={`/${lang}/console`}>
+                                <Monitor size={18} />
+                                <span>{transTodo('个人控制台')}</span>
+                            </a>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                            <a className={styles.menuItem} href={`/${lang}/community`}>
+                                <Cloud size={18} />
+                                <span>{transTodo('社区控制台')}</span>
+                            </a>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild>
+                            <a className={styles.menuItem} href={`/${lang}/management`}>
+                                <Monitor size={18} />
+                                <span>{transTodo('管理控制台')}</span>
+                            </a>
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </div>
-            <StyledMenu
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-            >
-                <MenuItem onClick={handleClose}>
-                    <a className={styles.menuItem} href={`/${lang}/console`}>
-                        <Monitor size={18}/>
-                        <span>{transTodo('个人控制台')}</span>
-                    </a>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                    <a className={styles.menuItem} href={`/${lang}/community`}>
-                        <Cloud size={18}/>
-                        <span>{transTodo('社区控制台')}</span>
-                    </a>
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
-                    <a className={styles.menuItem} href={`/${lang}/management`}>
-                        <Monitor size={18}/>
-                        <span>{transTodo('管理控制台')}</span>
-                    </a>
-                </MenuItem>
-            </StyledMenu>
-        </div>
+        )
     }
 
-    return <div className={styles.userAction}>
-        <a className={styles.loginLink} href={`/${lang}/account/signin`}>
-            <CircleUser size={24}/>
-        </a>
-    </div>
+    return (
+        <div className={styles.userAction}>
+            <a className={styles.loginLink} href={`/${lang}/account/signin`}>
+                <CircleUser size={24} />
+            </a>
+        </div>
+    )
 }

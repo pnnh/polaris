@@ -1,31 +1,29 @@
 'use client'
 
 import React from "react";
-import {transKey} from "@/components/common/locales/normal";
-import {
-    Box,
-    Button,
-    Card,
-    Checkbox,
-    MenuItem,
-    Select,
-    Stack,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-    TextField,
-    Typography,
-    Alert
-} from "@mui/material";
-import {PSArticleModel} from "@/components/common/models/article";
-import {PSChannelModel} from "@/components/common/models/channel";
-import {CommunityBrowser} from "@/components/community/browser";
-import {EmptyUUID, formatRfc3339, STSubString} from "@pnnh/atom";
-import { Upload, Search, Square, SquareCheck } from 'lucide-react';
+import { transKey } from "@/components/common/locales/normal";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { PSArticleModel } from "@/components/common/models/article";
+import { PSChannelModel } from "@/components/common/models/channel";
+import { CommunityBrowser } from "@/components/community/browser";
+import { EmptyUUID, formatRfc3339, STSubString } from "@pnnh/atom";
+import { Square, SquareCheck } from 'lucide-react';
 
-export function ImportArticlesForm({stargateUrl, notesString, channelsString, keyword, lang}: {
+function InlineCheckbox({ checked, indeterminate, onChange, onClick, disabled }: {
+    checked: boolean; indeterminate?: boolean;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
+    disabled?: boolean;
+}) {
+    const ref = React.useRef<HTMLInputElement>(null);
+    React.useEffect(() => { if (ref.current) ref.current.indeterminate = !!indeterminate; }, [indeterminate]);
+    return <input type="checkbox" ref={ref} checked={checked} onChange={onChange}
+        onClick={onClick} disabled={disabled} className="w-4 h-4 cursor-pointer" />;
+}
+
+export function ImportArticlesForm({ stargateUrl, notesString, channelsString, keyword, lang }: {
     stargateUrl: string,
     notesString: string,
     channelsString: string,
@@ -126,160 +124,106 @@ export function ImportArticlesForm({stargateUrl, notesString, channelsString, ke
     const someSelected = selectedNotes.size > 0 && selectedNotes.size < notes.length;
 
     return (
-        <Box>
-            <Typography variant="h4" gutterBottom>
+        <div>
+            <h4 className="text-xl font-semibold mb-4">
                 {transKey(lang, "console.article.importFromNotes")}
-            </Typography>
+            </h4>
 
             {/* Toolbar */}
-            <Card sx={{ mb: 3, p: 2 }}>
-                <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between">
-                    <Stack direction="row" spacing={2} alignItems="center" sx={{ flex: 1 }}>
-                        <Typography variant="body1" sx={{ minWidth: 100 }}>
-                            {transKey(lang, "console.article.selectChannel")}:
-                        </Typography>
-                        <Select
-                            value={selectedChannel}
-                            size="small"
-                            onChange={(event) => setSelectedChannel(event.target.value)}
-                            displayEmpty
-                            sx={{ minWidth: 300 }}
-                        >
-                            <MenuItem value="" disabled>
-                                {transKey(lang, "console.article.pleaseSelectChannel")}
-                            </MenuItem>
-                            {channels.map(channel => (
-                                <MenuItem key={channel.uid} value={channel.uid}>
-                                    {channel.name}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </Stack>
-
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        startIcon={<Upload size={18} />}
-                        onClick={handleImport}
-                        disabled={!selectedChannel || selectedNotes.size === 0 || importing}
+            <div className="rounded-lg border shadow-sm p-3 mb-4 flex flex-wrap gap-3 items-center justify-between">
+                <div className="flex flex-1 items-center gap-2">
+                    <span className="text-sm min-w-[100px]">{transKey(lang, "console.article.selectChannel")}:</span>
+                    <select
+                        value={selectedChannel}
+                        onChange={(event) => setSelectedChannel(event.target.value)}
+                        className="h-8 rounded border px-2 text-sm min-w-[300px] flex-1"
                     >
-                        {importing
-                            ? transKey(lang, 'console.article.importing')
-                            : transKey(lang, 'console.article.confirmImport')}
-                        {selectedNotes.size > 0 && ` (${selectedNotes.size})`}
-                    </Button>
-                </Stack>
-            </Card>
+                        <option value="" disabled>
+                            {transKey(lang, "console.article.pleaseSelectChannel")}
+                        </option>
+                        {channels.map(channel => (
+                            <option key={channel.uid} value={channel.uid}>{channel.name}</option>
+                        ))}
+                    </select>
+                </div>
+                <Button onClick={handleImport}
+                    disabled={!selectedChannel || selectedNotes.size === 0 || importing}>
+                    {importing
+                        ? transKey(lang, 'console.article.importing')
+                        : transKey(lang, 'console.article.confirmImport')}
+                    {selectedNotes.size > 0 && ` (${selectedNotes.size})`}
+                </Button>
+            </div>
 
             {/* Search Box */}
-            <Card sx={{ mb: 2, p: 2 }}>
-                <Stack direction="row" spacing={2} alignItems="center">
-                    <TextField
-                        fullWidth
-                        size="small"
-                        placeholder={transKey(lang, "searchPlaceholder")}
-                        value={searchText}
-                        onChange={(event) => setSearchText(event.target.value)}
-                        onKeyDown={(event) => {
-                            if (event.key === 'Enter') {
-                                handleSearch();
-                            }
-                        }}
-                    />
-                    <Button
-                        variant="outlined"
-                        startIcon={<Search size={18} />}
-                        onClick={handleSearch}
-                    >
-                        {transKey(lang, "common.search")}
-                    </Button>
-                </Stack>
-            </Card>
+            <div className="rounded-lg border shadow-sm p-3 mb-3 flex gap-2 items-center">
+                <Input
+                    placeholder={transKey(lang, "searchPlaceholder")}
+                    value={searchText}
+                    onChange={(event) => setSearchText(event.target.value)}
+                    onKeyDown={(event) => { if (event.key === 'Enter') handleSearch(); }}
+                />
+                <Button onClick={handleSearch}>{transKey(lang, "common.search")}</Button>
+            </div>
 
             {/* Info Alert */}
             {selectedNotes.size > 0 && (
-                <Alert severity="info" sx={{ mb: 2 }}>
-                    {transKey(lang, "console.article.selectedCount")
-                        .replace('{count}', selectedNotes.size.toString())}
+                <Alert className="mb-3">
+                    <AlertDescription>
+                        {transKey(lang, "console.article.selectedCount")
+                            .replace('{count}', selectedNotes.size.toString())}
+                    </AlertDescription>
                 </Alert>
             )}
 
             {/* Notes List */}
-            <Card>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell padding="checkbox">
-                                <Checkbox
-                                    indeterminate={someSelected}
-                                    checked={allSelected}
-                                    onChange={handleSelectAll}
-                                    icon={<Square size={20} />}
-                                    checkedIcon={<SquareCheck size={20} />}
-                                />
-                            </TableCell>
-                            <TableCell>{transKey(lang, "console.note.title")}</TableCell>
-                            <TableCell>{transKey(lang, "console.note.body")}</TableCell>
-                            <TableCell>{transKey(lang, "console.note.language")}</TableCell>
-                            <TableCell>{transKey(lang, "console.note.updateTime")}</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
+            <div className="rounded-lg border shadow-sm">
+                <table className="w-full text-sm border-collapse">
+                    <thead>
+                        <tr>
+                            <th className="w-10 p-2 border-b text-left">
+                                <InlineCheckbox indeterminate={someSelected} checked={allSelected}
+                                    onChange={handleSelectAll} />
+                            </th>
+                            <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.note.title")}</th>
+                            <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.note.body")}</th>
+                            <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.note.language")}</th>
+                            <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.note.updateTime")}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {notes.length === 0 ? (
-                            <TableRow>
-                                <TableCell colSpan={5} align="center">
-                                    {transKey(lang, "console.note.noData")}
-                                </TableCell>
-                            </TableRow>
+                            <tr><td colSpan={5} className="py-8 text-center text-muted-foreground">
+                                {transKey(lang, "console.note.noData")}
+                            </td></tr>
                         ) : (
                             notes.map((note) => (
-                                <TableRow
-                                    key={note.uid}
-                                    hover
+                                <tr key={note.uid}
+                                    data-selected={selectedNotes.has(note.uid) || undefined}
                                     onClick={() => handleSelectNote(note.uid)}
-                                    sx={{ cursor: 'pointer' }}
-                                    selected={selectedNotes.has(note.uid)}
-                                >
-                                    <TableCell padding="checkbox">
-                                        <Checkbox
-                                            checked={selectedNotes.has(note.uid)}
-                                            icon={<Square size={20} />}
-                                            checkedIcon={<SquareCheck size={20} />}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography variant="body2" fontWeight={500}>
-                                            {note.title || transKey(lang, "console.note.untitled")}
-                                        </Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography variant="body2" color="text.secondary">
-                                            {STSubString(note.body || note.description || '', 100)}
-                                        </Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography variant="body2">
-                                            {note.lang.toUpperCase()}
-                                        </Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography variant="body2" color="text.secondary">
-                                            {formatRfc3339(note.update_time)}
-                                        </Typography>
-                                    </TableCell>
-                                </TableRow>
+                                    className="hover:bg-muted/50 data-[selected]:bg-muted border-b cursor-pointer">
+                                    <td className="w-10 p-2">
+                                        <InlineCheckbox checked={selectedNotes.has(note.uid)}
+                                            onChange={() => handleSelectNote(note.uid)} />
+                                    </td>
+                                    <td className="p-2 font-medium">{note.title || transKey(lang, "console.note.untitled")}</td>
+                                    <td className="p-2 text-muted-foreground truncate max-w-[300px]">
+                                        {STSubString(note.body || note.description || '', 100)}
+                                    </td>
+                                    <td className="p-2">{note.lang.toUpperCase()}</td>
+                                    <td className="p-2 text-muted-foreground text-xs">{formatRfc3339(note.update_time)}</td>
+                                </tr>
                             ))
                         )}
-                    </TableBody>
-                </Table>
-            </Card>
+                    </tbody>
+                </table>
+            </div>
 
             {notes.length >= 50 && (
-                <Alert severity="warning" sx={{ mt: 2 }}>
-                    {transKey(lang, "console.article.maxNotesShown")}
+                <Alert className="mt-3">
+                    <AlertDescription>{transKey(lang, "console.article.maxNotesShown")}</AlertDescription>
                 </Alert>
             )}
-        </Box>
+        </div>
     )
 }

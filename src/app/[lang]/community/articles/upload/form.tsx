@@ -1,27 +1,24 @@
 'use client'
 
 import React from "react";
-import {transKey} from "@/components/common/locales/normal";
-import {
-    Alert,
-    Box,
-    Button,
-    Card,
-    Checkbox,
-    LinearProgress,
-    MenuItem,
-    Select,
-    Stack,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-    Typography
-} from "@mui/material";
-import {PSChannelModel} from "@/components/common/models/channel";
-import {CommunityBrowser} from "@/components/community/browser";
-import { FolderOpen, Upload, Square, SquareCheck } from 'lucide-react';
+import { transKey } from "@/components/common/locales/normal";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
+import { PSChannelModel } from "@/components/common/models/channel";
+import { CommunityBrowser } from "@/components/community/browser";
+import { FolderOpen } from 'lucide-react';
+
+function InlineCheckbox({ checked, indeterminate, onChange, onClick, disabled }: {
+    checked: boolean; indeterminate?: boolean;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
+    disabled?: boolean;
+}) {
+    const ref = React.useRef<HTMLInputElement>(null);
+    React.useEffect(() => { if (ref.current) ref.current.indeterminate = !!indeterminate; }, [indeterminate]);
+    return <input type="checkbox" ref={ref} checked={checked} onChange={onChange}
+        onClick={onClick} disabled={disabled} className="w-4 h-4 cursor-pointer" />;
+}
 
 interface MdFileItem {
     name: string;
@@ -83,7 +80,7 @@ function extractDescription(content: string): string {
     return (lines[0] || '').substring(0, 200);
 }
 
-export function UploadArticlesForm({stargateUrl, channelsString, lang}: {
+export function UploadArticlesForm({ stargateUrl, channelsString, lang }: {
     stargateUrl: string,
     channelsString: string,
     lang: string
@@ -204,213 +201,127 @@ export function UploadArticlesForm({stargateUrl, channelsString, lang}: {
     const someSelected = selectedFiles.size > 0 && selectedFiles.size < files.length;
 
     return (
-        <Box>
-            <Typography variant="h5" gutterBottom fontWeight={600}>
+        <div>
+            <h5 className="text-lg font-semibold mb-4">
                 {transKey(lang, "console.article.uploadPageTitle")}
-            </Typography>
+            </h5>
 
-            {/* Toolbar Card */}
-            <Card sx={{mb: 3, p: 2}}>
-                <Stack direction="row" spacing={2} alignItems="center" justifyContent="space-between"
-                       flexWrap="wrap" gap={1}>
-                    <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap" gap={1}>
-                        {/* Select Folder button */}
-                        <Button
-                            variant="outlined"
-                            startIcon={<FolderOpen size={18}/>}
-                            onClick={handleSelectFolder}
-                            disabled={scanning || uploading}
-                        >
-                            {scanning
-                                ? transKey(lang, "console.article.scanningFolder")
-                                : transKey(lang, "console.article.selectFolder")}
-                        </Button>
-
-                        {/* File count info */}
-                        {files.length > 0 && (
-                            <Typography variant="body2" color="text.secondary">
-                                {transKey(lang, "console.article.mdFilesFound")
-                                    .replace('{count}', files.length.toString())
-                                    .replace('{selected}', selectedFiles.size.toString())}
-                            </Typography>
-                        )}
-
-                        {/* Channel selector - shown when files are loaded */}
-                        {files.length > 0 && (
-                            <Select
-                                value={selectedChannel}
-                                size="small"
-                                onChange={(e) => setSelectedChannel(e.target.value)}
-                                displayEmpty
-                                sx={{minWidth: 280}}
-                                disabled={uploading}
-                            >
-                                <MenuItem value="" disabled>
-                                    {transKey(lang, "console.article.pleaseSelectChannel")}
-                                </MenuItem>
-                                {channels.map(ch => (
-                                    <MenuItem key={ch.uid} value={ch.uid}>
-                                        {ch.name}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        )}
-                    </Stack>
-
-                    {/* Upload button - only shown when files are loaded */}
+            {/* Toolbar */}
+            <div className="rounded-lg border shadow-sm p-3 mb-4 flex flex-wrap gap-2 items-center justify-between">
+                <div className="flex flex-wrap gap-2 items-center">
+                    <Button onClick={handleSelectFolder} disabled={scanning || uploading}>
+                        {scanning
+                            ? transKey(lang, "console.article.scanningFolder")
+                            : transKey(lang, "console.article.selectFolder")}
+                    </Button>
                     {files.length > 0 && (
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            size="large"
-                            startIcon={<Upload size={18}/>}
-                            onClick={handleUpload}
-                            disabled={!selectedChannel || selectedFiles.size === 0 || uploading}
-                        >
-                            {uploading
-                                ? transKey(lang, 'console.article.uploading')
-                                : `${transKey(lang, 'console.article.uploadFiles')} (${selectedFiles.size})`}
-                        </Button>
+                        <span className="text-sm text-muted-foreground">
+                            {transKey(lang, "console.article.mdFilesFound")
+                                .replace('{count}', files.length.toString())
+                                .replace('{selected}', selectedFiles.size.toString())}
+                        </span>
                     )}
-                </Stack>
-            </Card>
+                    {files.length > 0 && (
+                        <select
+                            value={selectedChannel}
+                            onChange={(e) => setSelectedChannel(e.target.value)}
+                            disabled={uploading}
+                            className="h-8 rounded border px-2 text-sm min-w-[280px]"
+                        >
+                            <option value="" disabled>
+                                {transKey(lang, "console.article.pleaseSelectChannel")}
+                            </option>
+                            {channels.map(ch => (
+                                <option key={ch.uid} value={ch.uid}>{ch.name}</option>
+                            ))}
+                        </select>
+                    )}
+                </div>
+                {files.length > 0 && (
+                    <Button onClick={handleUpload}
+                        disabled={!selectedChannel || selectedFiles.size === 0 || uploading}>
+                        {uploading
+                            ? transKey(lang, 'console.article.uploading')
+                            : `${transKey(lang, 'console.article.uploadFiles')} (${selectedFiles.size})`}
+                    </Button>
+                )}
+            </div>
 
             {/* Upload progress bar */}
             {uploading && (
-                <Box sx={{mb: 2}}>
-                    <LinearProgress variant={uploadProgress > 0 ? 'determinate' : 'indeterminate'}
-                                    value={uploadProgress}/>
-                </Box>
+                <div className="mb-3">
+                    <progress className="w-full h-2"
+                        value={uploadProgress > 0 ? uploadProgress : undefined} max={100} />
+                </div>
             )}
 
             {/* Upload result alert */}
             {uploadResult && (
-                <Alert
-                    severity={uploadResult.fail === 0 ? 'success' : (uploadResult.success > 0 ? 'warning' : 'error')}
-                    sx={{mb: 2}}
-                >
-                    {transKey(lang, "console.article.uploadResult")
-                        .replace('{success}', uploadResult.success.toString())
-                        .replace('{fail}', uploadResult.fail.toString())}
+                <Alert className="mb-3">
+                    <AlertDescription>
+                        {transKey(lang, "console.article.uploadResult")
+                            .replace('{success}', uploadResult.success.toString())
+                            .replace('{fail}', uploadResult.fail.toString())}
+                    </AlertDescription>
                 </Alert>
             )}
 
-            {/* Empty state - no folder selected yet */}
+            {/* Empty state */}
             {files.length === 0 && !scanning && (
-                <Card sx={{p: 6, textAlign: 'center'}}>
-                    <FolderOpen size={72} style={{color: 'var(--text-disabled-color)', marginBottom: '0.5rem'}}/>
-                    <Typography variant="h6" color="text.secondary" gutterBottom>
+                <div className="rounded-lg border shadow-sm p-12 text-center">
+                    <FolderOpen size={72} style={{ color: 'var(--text-disabled-color)', marginBottom: '0.5rem', margin: '0 auto' }} />
+                    <h6 className="text-muted-foreground font-medium mt-2 mb-1">
                         {transKey(lang, "console.article.noFolderSelected")}
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{mb: 3, maxWidth: 480, mx: 'auto'}}>
+                    </h6>
+                    <p className="text-sm text-muted-foreground mb-4 max-w-[480px] mx-auto">
                         {transKey(lang, "console.article.noFolderHint")}
-                    </Typography>
-                    <Button
-                        variant="contained"
-                        startIcon={<FolderOpen size={18}/>}
-                        onClick={handleSelectFolder}
-                        size="large"
-                    >
+                    </p>
+                    <Button onClick={handleSelectFolder}>
                         {transKey(lang, "console.article.selectFolder")}
                     </Button>
-                </Card>
+                </div>
             )}
 
             {/* File list table */}
             {files.length > 0 && (
-                <Card>
-                    <Table size="small">
-                        <TableHead>
-                            <TableRow>
-                                <TableCell padding="checkbox">
-                                    <Checkbox
-                                        indeterminate={someSelected}
-                                        checked={allSelected}
-                                        onChange={handleSelectAll}
-                                        icon={<Square size={20}/>}
-                                        checkedIcon={<SquareCheck size={20}/>}
-                                        disabled={uploading}
-                                    />
-                                </TableCell>
-                                <TableCell>
-                                    <Typography variant="body2" fontWeight={600}>
-                                        {transKey(lang, "console.article.fileName")}
-                                    </Typography>
-                                </TableCell>
-                                <TableCell>
-                                    <Typography variant="body2" fontWeight={600}>
-                                        {transKey(lang, "console.article.filePath")}
-                                    </Typography>
-                                </TableCell>
-                                <TableCell>
-                                    <Typography variant="body2" fontWeight={600}>
-                                        {transKey(lang, "console.article.fileSize")}
-                                    </Typography>
-                                </TableCell>
-                                <TableCell>
-                                    <Typography variant="body2" fontWeight={600}>
-                                        {transKey(lang, "console.article.filePreview")}
-                                    </Typography>
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
+                <div className="rounded-lg border shadow-sm">
+                    <table className="w-full text-sm border-collapse">
+                        <thead>
+                            <tr>
+                                <th className="w-10 p-2 border-b text-left">
+                                    <InlineCheckbox indeterminate={someSelected} checked={allSelected}
+                                        onChange={handleSelectAll} disabled={uploading} />
+                                </th>
+                                <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.article.fileName")}</th>
+                                <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.article.filePath")}</th>
+                                <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.article.fileSize")}</th>
+                                <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.article.filePreview")}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             {files.map((file) => (
-                                <TableRow
-                                    key={file.path}
-                                    hover
+                                <tr key={file.path}
+                                    data-selected={selectedFiles.has(file.path) || undefined}
                                     onClick={() => !uploading && handleToggleFile(file.path)}
-                                    sx={{cursor: uploading ? 'default' : 'pointer'}}
-                                    selected={selectedFiles.has(file.path)}
-                                >
-                                    <TableCell padding="checkbox">
-                                        <Checkbox
-                                            checked={selectedFiles.has(file.path)}
-                                                    icon={<Square size={20}/>}
-                                                    checkedIcon={<SquareCheck size={20}/>}
-                                            disabled={uploading}
+                                    className="hover:bg-muted/50 data-[selected]:bg-muted border-b"
+                                    style={{ cursor: uploading ? 'default' : 'pointer' }}>
+                                    <td className="w-10 p-2">
+                                        <InlineCheckbox checked={selectedFiles.has(file.path)} disabled={uploading}
                                             onClick={(e) => e.stopPropagation()}
-                                            onChange={() => handleToggleFile(file.path)}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography variant="body2" fontWeight={500}>
-                                            {file.name}
-                                        </Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography
-                                            variant="body2"
-                                            color="text.secondary"
-                                            sx={{fontSize: '0.75rem', fontFamily: 'monospace'}}
-                                        >
-                                            {file.path}
-                                        </Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography variant="body2" color="text.secondary">
-                                            {formatFileSize(file.size)}
-                                        </Typography>
-                                    </TableCell>
-                                    <TableCell sx={{maxWidth: 300}}>
-                                        <Typography
-                                            variant="body2"
-                                            color="text.secondary"
-                                            sx={{
-                                                overflow: 'hidden',
-                                                textOverflow: 'ellipsis',
-                                                whiteSpace: 'nowrap'
-                                            }}
-                                        >
-                                            {file.content.substring(0, 100)}
-                                        </Typography>
-                                    </TableCell>
-                                </TableRow>
+                                            onChange={() => handleToggleFile(file.path)} />
+                                    </td>
+                                    <td className="p-2 font-medium">{file.name}</td>
+                                    <td className="p-2 text-muted-foreground font-mono text-xs">{file.path}</td>
+                                    <td className="p-2 text-muted-foreground text-xs">{formatFileSize(file.size)}</td>
+                                    <td className="p-2 text-muted-foreground text-xs truncate max-w-[300px]">
+                                        {file.content.substring(0, 100)}
+                                    </td>
+                                </tr>
                             ))}
-                        </TableBody>
-                    </Table>
-                </Card>
+                        </tbody>
+                    </table>
+                </div>
             )}
-        </Box>
+        </div>
     );
 }

@@ -2,14 +2,14 @@
 
 import * as React from 'react';
 import { Button } from "@/components/ui/button";
-import {transKey} from "@/components/common/locales/normal";
-import {aesServerDecode, aesServerEncode, aesServerGenerateKey} from "@/app/[lang]/tools/aes/server";
-import {IconButton, TextField} from "@mui/material";
+import { transKey } from "@/components/common/locales/normal";
+import { aesServerDecode, aesServerEncode, aesServerGenerateKey } from "@/app/[lang]/tools/aes/server";
+import { Input } from "@/components/ui/input";
 import { ArrowUpDown } from 'lucide-react';
-import {PSFileModel} from "@/components/common/models/file";
-import {css} from "@/gen/styled/css";
+import { PSFileModel } from "@/components/common/models/file";
+import { css } from "@/gen/styled/css";
 
-export default function AesComponent({lang, appInfo}: { lang: string, appInfo: PSFileModel }) {
+export default function AesComponent({ lang, appInfo }: { lang: string, appInfo: PSFileModel }) {
     const [source, setSource] = React.useState('');
     const [output, setOutput] = React.useState('');
     const [aesKey, setAesKey] = React.useState('')
@@ -35,34 +35,34 @@ export default function AesComponent({lang, appInfo}: { lang: string, appInfo: P
         <textarea className={aesStyles.sourceText} placeholder={
             transKey(lang, "tools.common.inputPlaceholder")
         } value={source}
-                  onChange={(event) => setSource(event.target.value)}/>
+            onChange={(event) => setSource(event.target.value)} />
         <div className={aesStyles.toolButtons}>
-            <TextField id={'AesKeyInput'} maxRows={1} sx={{width: 400}} variant={'outlined'} size={'small'}
-                       value={aesKey} slotProps={{htmlInput: {maxLength: 64}}}
-                       placeholder={transKey(lang, 'tools.aes.keyPlaceholder')}
-                       onChange={(event) => setAesKey(event.target.value)}/>
+            <Input id={'AesKeyInput'} style={{ width: 400 }}
+                value={aesKey} maxLength={64}
+                placeholder={transKey(lang, 'tools.aes.keyPlaceholder')}
+                onChange={(event) => setAesKey(event.target.value)} />
             <Button size={'sm'}
-                    onClick={() => {
-                        aesServerGenerateKey().then((newKey) => setAesKey(newKey))
-                    }}>{transKey(lang, 'tools.aes.randomKey')}</Button>
+                onClick={() => {
+                    aesServerGenerateKey().then((newKey) => setAesKey(newKey))
+                }}>{transKey(lang, 'tools.aes.randomKey')}</Button>
             <Button size={'sm'} onClick={encodeFunc}>
                 {transKey(lang, 'tools.aes.encode')}
             </Button>
             <Button size={'sm'} onClick={decodeFunc}>
                 {transKey(lang, 'tools.aes.decode')}
             </Button>
-            <IconButton size={'small'} onClick={() => {
+            <Button variant="ghost" size="icon" onClick={() => {
                 const currentSource = source;
                 setSource(output);
                 setOutput(currentSource);
             }}>
-                <ArrowUpDown size={20}/>
-            </IconButton>
+                <ArrowUpDown size={20} />
+            </Button>
         </div>
         <textarea className={aesStyles.targetText} placeholder={
             transKey(lang, "tools.common.resultPlaceholder")
         } value={output} onChange={(event) =>
-            setOutput(event.target.value)}/>
+            setOutput(event.target.value)} />
     </div>
 }
 

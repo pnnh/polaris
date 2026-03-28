@@ -1,10 +1,10 @@
 'use client'
 
 import React from 'react';
-import {WePreview} from "./preview";
+import { WePreview } from "./preview";
 import { Button } from "@/components/ui/button";
-import {Alert} from "@mui/material";
-import {css} from "@/gen/styled/css";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { css } from "@/gen/styled/css";
 
 export function WeJsonClient() {
     const [rawContent, setRawContent] = React.useState('');
@@ -16,15 +16,15 @@ export function WeJsonClient() {
             <h1>WeJson Client Component</h1>
             <div className={wejsonStyles.parseRow}>
                 <div className={wejsonStyles.rawContent}>
-                <textarea value={rawContent}
-                          onChange={(event) => setRawContent(event.target.value)}/>
+                    <textarea value={rawContent}
+                        onChange={(event) => setRawContent(event.target.value)} />
                 </div>
                 <div className={wejsonStyles.previewContent}>
-                    <WePreview jsonText={parsedContent}/>
+                    <WePreview jsonText={parsedContent} />
                 </div>
             </div>
             <div>
-                {errMsg && <Alert severity="error">{errMsg}</Alert>}
+                {errMsg && <Alert variant="destructive"><AlertDescription>{errMsg}</AlertDescription></Alert>}
             </div>
             <div className={wejsonStyles.toolButtons}>
                 <Button size={'sm'} onClick={() => {
