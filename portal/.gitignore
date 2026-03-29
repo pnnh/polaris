@@ -1,0 +1,8 @@
+.idea/
+build/
+__debug_bin*
+target/assets/
+target/bin/
+debug/
+portal
+portal.exe

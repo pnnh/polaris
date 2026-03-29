@@ -1,0 +1,13 @@
+database:
+  dsn: "postgresql+asyncpg://postgres:123@localhost:5432/portal"
+
+redis:
+  url: "redis://localhost:6379"
+  stream: "article:render"
+  group: "advisor"
+  consumer: "advisor-1"
+
+batch_convert:
+  enabled: true
+  interval: 300   # seconds between each run
+  limit: 100      # max articles processed per run

@@ -1,0 +1,94 @@
+services:
+  postgres:
+    build:
+      context: ../pagana
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_DB: portal
+      PGPASSWORD: "123456"
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d portal"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  portal:
+    build:
+      context: ../portal
+    environment:
+      CONFIG: "file:///app/host.yml"
+      GIN_MODE: release
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./config/portal.yml:/app/host.yml:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8001/portal/healthz || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  stargate:
+    build:
+      context: ../stargate
+    environment:
+      ConnectionString: "Server=postgres;Port=5432;Database=portal;User Id=postgres;Password=123456;"
+      INTERNAL_PORTAL_URL: "http://portal:8001/portal"
+      ASPNETCORE_ENVIRONMENT: Production
+    ports:
+      - "8101:8101"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/localhost/8101 && echo -e \"GET / HTTP/1.1\\r\\nHost: localhost\\r\\nConnection: close\\r\\n\\r\\n\" >&3 && cat <&3 | grep -q \"200 OK\"'"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 15s
+
+  polaris:
+    build:
+      context: ../polaris
+    environment:
+      NODE_ENV: production
+      PORT: "7100"
+      HOSTNAME: "0.0.0.0"
+    ports:
+      - "8100:7100"
+    volumes:
+      - ./config/polaris.env:/app/config/host.env:ro
+    depends_on:
+      portal:
+        condition: service_healthy
+      stargate:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8100/healthz || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 15
+      start_period: 20s
+
+  gatekeeper:
+    build:
+      context: .
+      dockerfile: Testing.Dockerfile
+    environment:
+      PUBLIC_SELF_URL: "http://polaris:7100"
+      RUN_MODE: test
+      CI: "true"
+    volumes:
+      - ./playwright-report:/app/playwright-report
+      - ./test-results:/app/test-results
+    depends_on:
+      polaris:
+        condition: service_healthy

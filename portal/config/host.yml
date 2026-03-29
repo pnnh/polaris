@@ -1,0 +1,45 @@
+PUBLIC_PORTAL_URL: "https://huable.local/portal"
+INTERNAL_PORTAL_URL: "http://127.0.0.1:8001/portal"
+DATABASE: "host=127.0.0.1 user=postgres password=123 dbname=portal port=5432 sslmode=disable"
+SOURCE_URL: "file://home/Projects/github/blog"
+STORAGE_URL: "file://home/Projects/temp/blog"
+SERVE_MODE: "SELFHOST"
+JWT_PRIVATE_KEY: |
+    -----BEGIN PRIVATE KEY-----
+    MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCoyWL+HiqE9qFJ
+    spAIvtlF/xbiX5Xu5TUmrC5nYaEXtBmujdP61Ec10K6Isk95vffrKNFyiimnaytO
+    m70BnJkIChCdMbAHr3LhNB79y5gOBHScWdb5EXFAXPHbjC/ZZGtBPSG3q3ZbvCBz
+    Yc2cmAi2TdDu+zreP5wJ83koSzmzG+7lS5lldxtDkYbNbTRJjpWwUMZk/IquLb/M
+    A8aGZhdrHvgxMBTQ9OR/jcYCDLPJIMhtBVM2cuApVhhrMudE+T85UEnTzhCNDc/L
+    hfW0dxMK07Dujnj5JxjvBbZqb+VA1HByteilYXJL7wzifgPUrNVnDK/GgHsLp2t6
+    eghT39w/AgMBAAECggEAaS2tgVs89cRWd31NIhYDgQnXsdMMtGSifWnYNNXys7mo
+    M0zwJqL3iQJ0cHxk6CFIB4NVGUIdeNVglEiaPBHgjtDuz3XyEqfzN4DqOw8OvtVp
+    8TBOtMB4yTniAQTXoGliKLI2e6TeSYXu1tfAb++RpkDRjMqDQZFz5AOToVdXKlOf
+    csW2n8H2ly5+5IjzY8FIgZy0hld8F+M1alIWCitPkn6x9PhSvwd9CNSen5YjS/HZ
+    UhEZXLH+DQcMv7DH7jl0I54gt+OUndpmLehLV41BpEX0MH38V5TQjfURzPqOUktN
+    W/EXLkrl0gqmxrBWPAFp8wxD0+FnMqMkoP1YynD3WQKBgQDZdnR3tUFKj/dJmCaU
+    PlYjpusK/mjYptY7Qjm2xQ6+JiI2lSVnZjquBzBd7nfEYNsv4ECmeCMo7wiLBcvt
+    CRa3SNmNvrIZUiO/1CQUpCtDfGU4Oq6jyKgs3P7xZKskrj5I2mhcR51YYdU2V/+p
+    k2heAcCs0DISPGrTtwNlb2b6owKBgQDGsqoqP4epPYc1GLFCaBP+DQz02Fgd4E5Q
+    Swgy+F0y6Elsd2NPTJY+XdN9c2qXkoO1f5hxAXa7ilUdEnkDrjhh4fglaYm8orVU
+    1izO7gdWqijjVwFR+sLVnJtfZAhEwGL+QkCNiteqINwYI4659eWhWRWiCZMC9vOu
+    mVIBJBYttQKBgCk0eskb/S0lrlOxks3QKf5DaJICttcmdb1wxQLOwAZjr2PsStQW
+    2NOU5SNHRkZdm+qscVOZu//LmzDMfmGBsV41XZOwKIsHt2JnzhZjLRdygLNw2xqJ
+    sOQfU+dljdA7e+3OBKxHnZbboszTS8xT9Bir+FhGctZlwFAxg2E7BKZFAoGACCJq
+    Wv5s1F3jeiX/o8NVBjKMlD2DJf331surk0KdtibSUrF0jFuLTxRSQzGFbJ0f7T9D
+    A2VW8giQwXbvI1pvjnpMyWNPszxKBiYagYI3JLIkqGH4eN22Oj6GEdqrh/0EUHpv
+    4BuOBrX/rLFP94b8lqVqAE86CIYJpd07ATbz/X0CgYAmo578Xiy6SFoWZYgojbwX
+    9fvL0XR2NmyGGeijIJkMbtOCfJ1HiwWigsJ4V3qn5tyxlHUdiI/S3mAkcleOApnT
+    zd7b8mZON0DCvmYwcWI9hZ51IvYH7PyHkKWO3iFJnUZPQttgIUTqbum42UHhPNjC
+    ajnS3MtWpB+ozmncEwMy8w==
+    -----END PRIVATE KEY-----
+JWT_PUBLIC_KEY: |
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqMli/h4qhPahSbKQCL7Z
+    Rf8W4l+V7uU1JqwuZ2GhF7QZro3T+tRHNdCuiLJPeb336yjRcoopp2srTpu9AZyZ
+    CAoQnTGwB69y4TQe/cuYDgR0nFnW+RFxQFzx24wv2WRrQT0ht6t2W7wgc2HNnJgI
+    tk3Q7vs63j+cCfN5KEs5sxvu5UuZZXcbQ5GGzW00SY6VsFDGZPyKri2/zAPGhmYX
+    ax74MTAU0PTkf43GAgyzySDIbQVTNnLgKVYYazLnRPk/OVBJ084QjQ3Py4X1tHcT
+    CtOw7o54+ScY7wW2am/lQNRwcrXopWFyS+8M4n4D1KzVZwyvxoB7C6drenoIU9/c
+    PwIDAQAB
+    -----END PUBLIC KEY-----
