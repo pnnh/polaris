@@ -4,13 +4,13 @@ import {EmptyUUID, langZh, mustBase58ToUuid, SymbolUnknown, tryBase58ToUuid} fro
 import {useServerConfig} from "@/components/server/config";
 import {notFound} from "next/navigation";
 import {ConsoleArticleForm} from "./form";
-import {NewArticleModel, PSArticleModel} from "@/components/common/models/article";
+import {NewFileModel, PSFileModel} from "@/components/common/models/file";
 import {css} from "@/gen/styled/css";
-import {CommunityArticleNodeService} from "@/components/community/articles";
 import {transKey} from "@/components/common/locales/normal";
 import {getPathname} from "@/components/server/pathname";
 import {serverConsoleSelectChannels} from "@/components/server/channels/channels";
 import ConsoleLayout from "@/components/server/console/layout";
+import {CommunityFileNodeService} from "@/components/community/files";
 
 export const dynamic = "force-dynamic";
 
@@ -37,7 +37,7 @@ export default async function Home({params, searchParams}: {
     const publicStargateUrl = serverConfig.PUBLIC_STARGATE_URL
     const articleUid = tryBase58ToUuid(paramsValue.uid)
     const isNew = articleUid === EmptyUUID;
-    let model: PSArticleModel | undefined = undefined;
+    let model: PSFileModel | undefined = undefined;
     const wantLang = searchValue.wantLang || pageLang;
     const copyFrom = searchValue.copyFrom
     if (isNew) {
@@ -45,7 +45,7 @@ export default async function Home({params, searchParams}: {
         if (searchValue.channel) {
             channelUid = mustBase58ToUuid(searchValue.channel);
         }
-        model = NewArticleModel()
+        model = NewFileModel()
         model.channel = channelUid;
         model.lang = wantLang;
         if (copyFrom) {
@@ -54,7 +54,7 @@ export default async function Home({params, searchParams}: {
                 action: 'get',
                 keyword: copyFromUid
             }
-            const queryResult = await CommunityArticleNodeService.queryArticles(internalStargateUrl, pageLang, query)
+            const queryResult = await CommunityFileNodeService.consoleQueryFiles(internalStargateUrl, pageLang, query)
             if (!queryResult || queryResult.range.length === 0) {
                 throw new Error(transKey(pageLang, "console.article.cannotFindCopy"));
             }
@@ -76,7 +76,7 @@ export default async function Home({params, searchParams}: {
             action: 'get',
             keyword: articleUid
         }
-        const queryResult = await CommunityArticleNodeService.queryArticles(internalStargateUrl, pageLang, query)
+        const queryResult = await CommunityFileNodeService.consoleQueryFiles(internalStargateUrl, pageLang, query)
         if (!queryResult || queryResult.range.length === 0) {
             notFound()
         }

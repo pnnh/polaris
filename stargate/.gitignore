@@ -12,7 +12,6 @@ vcpkg_installed/
 bazel-*
 .cache/
 CMakeLists.txt.user
-.xmake/
 bin/
 obj/
 /packages/

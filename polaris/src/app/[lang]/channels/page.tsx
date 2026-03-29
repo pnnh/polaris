@@ -3,13 +3,12 @@ import ContentLayout from "@/components/server/content/layout";
 import {getPathname} from "@/components/server/pathname";
 import {css} from "@/gen/styled/css";
 import {CodeOk, isValidUUID, langEn, PLSelectResult, STSubString, SymbolUnknown, uuidToBase58} from "@pnnh/atom";
-import {PSChannelModel} from "@/components/common/models/channel";
-import {PSImageServer} from "@/components/server/image";
-import {getDefaultChanImageByUid} from "@/components/common/channel";
+import {getDefaultChanImageByUid, PSChannelModel} from "@/components/common/models/channel";
+import {PSImageServer} from "@/components/widget/image";
 import queryString from "query-string";
 import {useServerConfig} from "@/components/server/config";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
-import {NoDataPage} from "@/components/misc/NoData";
+import {NoDataPage} from "@/components/widget/NoData";
 
 const pageStyles = {
     container: css`

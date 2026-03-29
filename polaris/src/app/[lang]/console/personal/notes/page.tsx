@@ -1,14 +1,14 @@
 import React from 'react'
 import {css} from "@/gen/styled/css";
 
-import {PaginationServer} from "@/components/server/pagination";
+import {PaginationServer} from "@/components/widget/pagination";
 import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
-import {serverConsoleSelectNotes} from "@/components/personal/notes-server";
 import ConsoleLayout from "@/components/server/console/layout";
 import {ConsoleArticleFilterBar} from "./filter";
 import {ConsoleArticleMiddleBody} from "./article";
 import {getPathname} from "@/components/server/pathname";
+import {serverConsoleSelectFiles} from "@/components/personal/files-server";
 
 const pageStyles = {
     articlesPage: css`
@@ -68,8 +68,8 @@ export default async function Page({params, searchParams}: {
     const serverConfig = await useServerConfig()
     const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
 
-    const selectData = await serverConsoleSelectNotes(internalStargateUrl,
-        lang, selectQuery)
+    const selectData = await serverConsoleSelectFiles(internalStargateUrl,
+        selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
     return <ConsoleLayout lang={lang} pathname={pathname} searchParams={searchParamsValue}

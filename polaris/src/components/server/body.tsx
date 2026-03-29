@@ -5,6 +5,30 @@ import {PSFileModel} from "@/components/common/models/file";
 import {ResourceCard} from "@/components/community/resource";
 import {selectFilePathFromBackend} from "@/components/community/files";
 
+export async function PSHomeBody({lang, selectResult, searchParams}: {
+    lang: string,
+    searchParams: Record<string, string>, selectResult: PLSelectResult<PSFileModel>
+}) {
+
+    let parent = searchParams.parent
+    let parentUid: string | undefined = undefined
+    if (parent) {
+        parentUid = tryBase58ToUuid(parent)
+    }
+    return <div className={resStyles.resBodyComponent}>
+        <PSFilePath lang={lang} uid={parentUid}/>
+        <div className={resStyles.resGrid}>
+            {
+                selectResult.data.range.map(async (fileModel) => {
+                    return <div className={resStyles.resCard}>
+                        <ResourceCard searchParams={searchParams} model={fileModel} lang={lang}/>
+                    </div>
+                })
+            }
+        </div>
+    </div>
+}
+
 const resStyles = {
     resBodyComponent: css`
         width: 100%;
@@ -42,30 +66,6 @@ const resStyles = {
         transition: box-shadow 0.25s ease, transform 0.25s ease;
 
     `,
-}
-
-export async function PSHomeBody({lang, selectResult, searchParams}: {
-    lang: string,
-    searchParams: Record<string, string>, selectResult: PLSelectResult<PSFileModel>
-}) {
-
-    let parent = searchParams.parent
-    let parentUid: string | undefined = undefined
-    if (parent) {
-        parentUid = tryBase58ToUuid(parent)
-    }
-    return <div className={resStyles.resBodyComponent}>
-        <PSFilePath lang={lang} uid={parentUid}/>
-        <div className={resStyles.resGrid}>
-            {
-                selectResult.data.range.map(async (fileModel) => {
-                    return <div className={resStyles.resCard}>
-                        <ResourceCard searchParams={searchParams} model={fileModel} lang={lang}/>
-                    </div>
-                })
-            }
-        </div>
-    </div>
 }
 
 const pathStyles = {

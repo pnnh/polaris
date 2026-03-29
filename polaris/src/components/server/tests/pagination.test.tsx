@@ -1,5 +1,5 @@
 import {calcPagination, langEn} from "@pnnh/atom";
-import {PaginationServer} from "@/components/server/pagination";
+import {PaginationServer} from "@/components/widget/pagination";
 import React from "react";
 import {expect, test} from 'vitest'
 import {render} from '@testing-library/react'

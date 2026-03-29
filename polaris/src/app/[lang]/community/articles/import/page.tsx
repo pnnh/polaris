@@ -5,9 +5,9 @@ import {langZh, SymbolUnknown} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import ConsoleLayout from "@/components/server/console/layout";
 import {css} from "@/gen/styled/css";
-import {serverConsoleSelectNotes} from "@/components/personal/notes-server";
 import {serverConsoleSelectChannels} from "@/components/server/channels/channels";
 import {ImportArticlesForm} from "./form";
+import {serverConsoleSelectFiles} from "@/components/personal/files-server";
 
 const pageStyles = {
     importPage: css`
@@ -41,7 +41,7 @@ export default async function ImportArticlesPage({params, searchParams}: {
 
     // Query notes (max 50)
     const keyword = searchValue.keyword || '';
-    const notesData = await serverConsoleSelectNotes(internalStargateUrl, pageLang, {
+    const notesData = await serverConsoleSelectFiles(internalStargateUrl, {
         keyword,
         page: 1,
         size: 50

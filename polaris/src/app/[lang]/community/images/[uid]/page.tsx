@@ -4,12 +4,12 @@ import {EmptyUUID, langZh, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import {notFound} from "next/navigation";
 import {ConsolePhotoForm} from "./form";
-import {PSImageModel} from "@/components/common/models/image";
+import {NewFileModel, PSFileModel} from "@/components/common/models/file";
 import {css} from "@/gen/styled/css";
-import {CommunityImageNodeService} from "@/components/community/images";
 import {getPathname} from "@/components/server/pathname";
 import {serverConsoleSelectChannels} from "@/components/server/channels/channels";
 import ConsoleLayout from "@/components/server/console/layout";
+import {CommunityFileNodeService} from "@/components/community/files";
 
 export const dynamic = "force-dynamic";
 
@@ -37,31 +37,10 @@ export default async function Home({params, searchParams}: {
     const publicStargateUrl = serverConfig.PUBLIC_STARGATE_URL
     const imageUid = tryBase58ToUuid(paramsValue.uid)
     const isNew = imageUid === EmptyUUID;
-    let model: PSImageModel | undefined = undefined;
+    let model: PSFileModel | undefined = undefined;
 
     if (isNew) {
-        model = {
-            name: "",
-            channel_name: "",
-            channel: "",
-            discover: 0,
-            status: 0,
-            owner: "",
-            partition: "",
-            uid: EmptyUUID,
-            title: '',
-            description: '',
-            keywords: '',
-            body: '',
-            header: '',
-            creator: '',
-            file_path: '',
-            file_url: '',
-            ext_name: '',
-            url: '',
-            create_time: '',
-            update_time: ''
-        }
+        model = NewFileModel()
     } else {
         if (!imageUid) {
             notFound();
@@ -70,7 +49,7 @@ export default async function Home({params, searchParams}: {
             action: 'get',
             keyword: imageUid
         }
-        const queryResult = await CommunityImageNodeService.consoleQueryImages(internalStargateUrl, pageLang, query)
+        const queryResult = await CommunityFileNodeService.consoleQueryFiles(internalStargateUrl, pageLang, query)
         if (!queryResult || queryResult.range.length === 0) {
             notFound()
         }

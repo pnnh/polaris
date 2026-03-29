@@ -4,17 +4,17 @@
 
 ## 功能概览
 
-| 页面模块 | 路径 | 描述 |
-|---|---|---|
-| 首页 | `/` | 平台主页 |
-| 文章 | `/[lang]/articles` | 文章列表与详情 |
-| 频道 | `/[lang]/channels` | 频道浏览 |
-| 图片 | `/[lang]/images` | 图片浏览 |
-| 搜索 | `/[lang]/search` | 全文搜索 |
-| 社区 | `/[lang]/community` | 社区内容与频道 |
-| 个人控制台 | `/[lang]/console` | 笔记、文件、个人信息管理 |
-| 账户 | `/[lang]/account` | 登录、注册、用户设置 |
-| 工具箱 | `/[lang]/tools` | 辅助工具页面 |
+| 页面模块  | 路径                  | 描述           |
+|-------|---------------------|--------------|
+| 首页    | `/`                 | 平台主页         |
+| 文章    | `/[lang]/articles`  | 文章列表与详情      |
+| 频道    | `/[lang]/channels`  | 频道浏览         |
+| 图片    | `/[lang]/images`    | 图片浏览         |
+| 搜索    | `/[lang]/search`    | 全文搜索         |
+| 社区    | `/[lang]/community` | 社区内容与频道      |
+| 个人控制台 | `/[lang]/console`   | 文件、文件、个人信息管理 |
+| 账户    | `/[lang]/account`   | 登录、注册、用户设置   |
+| 工具箱   | `/[lang]/tools`     | 辅助工具页面       |
 
 详细页面与组件说明请参阅 [docs/pages.md](docs/pages.md)。
 
@@ -22,53 +22,53 @@
 
 ### 核心框架
 
-| 组件 | 版本 | 用途 |
-|---|---|---|
-| Next.js | 16.x | SSR/SSG 框架 |
-| React | 19.x | UI 库 |
-| TypeScript | 5.x | 类型系统 |
-| Vite | — | 客户端构建工具 |
+| 组件         | 版本   | 用途         |
+|------------|------|------------|
+| Next.js    | 16.x | SSR/SSG 框架 |
+| React      | 19.x | UI 库       |
+| TypeScript | 5.x  | 类型系统       |
+| Vite       | —    | 客户端构建工具    |
 
 ### UI 组件与样式
 
-| 组件 | 版本 | 用途 |
-|---|---|---|
-| MUI (Material UI) | 7.x | 基础组件库 |
-| Emotion | 11.x | CSS-in-JS |
-| Panda CSS | 1.x | 原子化 CSS 生成 |
-| TailwindCSS | 4.x | 工具类 CSS |
-| DaisyUI | 5.x | TailwindCSS 组件 |
-| HugeIcons | 3.x | 图标库 |
+| 组件                | 版本   | 用途             |
+|-------------------|------|----------------|
+| MUI (Material UI) | 7.x  | 基础组件库          |
+| Emotion           | 11.x | CSS-in-JS      |
+| Panda CSS         | 1.x  | 原子化 CSS 生成     |
+| TailwindCSS       | 4.x  | 工具类 CSS        |
+| DaisyUI           | 5.x  | TailwindCSS 组件 |
+| HugeIcons         | 3.x  | 图标库            |
 
 ### 状态管理与数据
 
-| 组件 | 版本 | 用途 |
-|---|---|---|
-| Jotai | 2.x | 原子化状态管理 |
-| SWR | 2.x | 数据请求与缓存 |
-| idb / idb-keyval | 8.x | IndexedDB 本地存储 |
-| SQLite Wasm | 3.x | 浏览器端 SQLite |
-| pg / pg-promise | 8.x | 服务端 PostgreSQL 访问 |
+| 组件               | 版本  | 用途                |
+|------------------|-----|-------------------|
+| Jotai            | 2.x | 原子化状态管理           |
+| SWR              | 2.x | 数据请求与缓存           |
+| idb / idb-keyval | 8.x | IndexedDB 本地存储    |
+| SQLite Wasm      | 3.x | 浏览器端 SQLite       |
+| pg / pg-promise  | 8.x | 服务端 PostgreSQL 访问 |
 
 ### 编辑器与内容
 
-| 组件 | 版本 | 用途 |
-|---|---|---|
-| Slate.js | 0.118.x | 富文本编辑器 |
-| Marked + marked-highlight | 17.x | Markdown 渲染 |
-| Prism.js | 1.29 | 代码高亮 |
-| DOMPurify | 3.x | HTML 安全净化 |
+| 组件                        | 版本      | 用途          |
+|---------------------------|---------|-------------|
+| Slate.js                  | 0.118.x | 富文本编辑器      |
+| Marked + marked-highlight | 17.x    | Markdown 渲染 |
+| Prism.js                  | 1.29    | 代码高亮        |
+| DOMPurify                 | 3.x     | HTML 安全净化   |
 
 ### 工具库
 
-| 组件 | 用途 |
-|---|---|
-| FingerprintJS | 浏览器设备指纹 |
-| crypto-js | 客户端加密 |
+| 组件                 | 用途        |
+|--------------------|-----------|
+| FingerprintJS      | 浏览器设备指纹   |
+| crypto-js          | 客户端加密     |
 | jsbarcode / qrcode | 条形码/二维码生成 |
-| moment | 日期处理 |
-| lodash | 工具函数 |
-| node-cron | 服务端定时任务 |
+| moment             | 日期处理      |
+| lodash             | 工具函数      |
+| node-cron          | 服务端定时任务   |
 
 ## 开发
 
@@ -115,10 +115,10 @@ docker push your-registry/polaris:v0.x.x
 
 服务端运行时配置位于 `config/host.env`，主要字段：
 
-| 变量 | 说明 |
-|---|---|
-| `INTERNAL_PORTAL_URL` | portal 服务内部地址 |
-| `PUBLIC_PORTAL_URL` | portal 服务公开地址 |
+| 变量                      | 说明              |
+|-------------------------|-----------------|
+| `INTERNAL_PORTAL_URL`   | portal 服务内部地址   |
+| `PUBLIC_PORTAL_URL`     | portal 服务公开地址   |
 | `INTERNAL_STARGATE_URL` | stargate 服务内部地址 |
 
 ## 国际化
@@ -143,7 +143,7 @@ polaris/src/
 │   └── @footer/          # 布局插槽：底栏
 ├── components/           # 公共 UI 组件
 ├── services/             # API 调用与业务逻辑
-├── photon/               # 笔记公用业务逻辑
+├── photon/               # 文件公用业务逻辑
 ├── gen/                  # Panda CSS 生成代码
 ├── types/                # TypeScript 类型定义
 ├── utils/                # 工具函数

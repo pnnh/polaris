@@ -8,8 +8,8 @@ import {
     IImageEntry,
     ILibraryEntry
 } from "@/components/client/images/service";
-import { Button } from "@/components/ui/button";
-import {NoData} from "@/components/common/empty";
+import {Button} from "@/components/ui/button";
+import {NoData} from "@/components/widget/empty";
 import {css} from "@/gen/styled/css";
 
 export function ConsoleImageMiddleBody({libKey, lang, portalUrl}: {

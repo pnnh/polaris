@@ -8,7 +8,7 @@ import ConsoleLayout from "@/components/server/console/layout";
 import {CommunityFileNodeService} from "@/components/community/files";
 import {ConsoleFileFilterBar} from "./filter";
 import {ConsoleFileMiddleBody} from "./file-list";
-import {PaginationServer} from "@/components/server/pagination";
+import {PaginationServer} from "@/components/widget/pagination";
 
 export const dynamic = "force-dynamic";
 

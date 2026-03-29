@@ -5,10 +5,10 @@ import {calcPagination, langEn, replaceSearchParams, SymbolUnknown, uuidToBase58
 import {useServerConfig} from "@/components/server/config";
 import {ManagementToolService} from "@/components/management/tools";
 import {PSToolModel} from "@/components/common/models/tool";
-import {PaginationServer} from "@/components/server/pagination";
+import {PaginationServer} from "@/components/widget/pagination";
 import PSDeleteButton from "@/components/client/console/delete";
 
-import {NoData} from "@/components/common/empty";
+import {NoData} from "@/components/widget/empty";
 import {ManagementToolFilterBar} from "./filter";
 import ConsoleLayout from "@/components/server/console/layout";
 

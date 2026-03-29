@@ -4,7 +4,7 @@ import {IServerConfigStore} from "./store";
 import {GalaxyConfigStore} from "./galaxy";
 import {PgConfigStore} from "./pgstore";
 import {getEnvName, getRunMode, IServerConfigProvider} from "../config";
-import {psResolvePath} from "@/components/server/filesystem/path";
+import {psResolvePath} from "@/components/utils/path";
 
 export class FileConfigProvider implements IServerConfigProvider {
     private configStore: IServerConfigStore;

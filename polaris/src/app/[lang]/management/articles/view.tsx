@@ -1,41 +1,45 @@
 'use client'
 
 import React from "react";
-import { transKey } from "@/components/common/locales/normal";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
-import { BadgeCheck, Hourglass, Search, X } from 'lucide-react';
-import { PSArticleModel } from "@/components/common/models/article";
-import { ManagementBrowser } from "@/components/management/browser";
-import { css } from "@/gen/styled/css";
+import {transKey} from "@/components/common/locales/normal";
+import {Alert, AlertDescription} from "@/components/ui/alert";
+import {Button} from "@/components/ui/button";
+import {BadgeCheck, Hourglass, Search, X} from 'lucide-react';
+import {PSFileModel} from "@/components/common/models/file";
+import {ManagementBrowser} from "@/components/management/browser";
+import {css} from "@/gen/styled/css";
 
 const STATUS_APPROVED = 1;
 
-function StatusBadge({ status, lang }: { status: number; lang: string }) {
+function StatusBadge({status, lang}: { status: number; lang: string }) {
     if (status === 1) {
         return (
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-xs border-green-500 text-green-700">
-                <BadgeCheck size={12} />{transKey(lang, "management.article.statusApproved")}
+            <span
+                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-xs border-green-500 text-green-700">
+                <BadgeCheck size={12}/>{transKey(lang, "management.article.statusApproved")}
             </span>
         );
     }
     return (
-        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-xs border-yellow-500 text-yellow-700">
-            <Hourglass size={12} />{transKey(lang, "management.article.statusPending")}
+        <span
+            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full border text-xs border-yellow-500 text-yellow-700">
+            <Hourglass size={12}/>{transKey(lang, "management.article.statusPending")}
         </span>
     );
 }
 
-function InlineCheckbox({ checked, indeterminate, onChange, onClick, disabled }: {
+function InlineCheckbox({checked, indeterminate, onChange, onClick, disabled}: {
     checked: boolean; indeterminate?: boolean;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
     disabled?: boolean;
 }) {
     const ref = React.useRef<HTMLInputElement>(null);
-    React.useEffect(() => { if (ref.current) ref.current.indeterminate = !!indeterminate; }, [indeterminate]);
+    React.useEffect(() => {
+        if (ref.current) ref.current.indeterminate = !!indeterminate;
+    }, [indeterminate]);
     return <input type="checkbox" ref={ref} checked={checked} onChange={onChange}
-        onClick={onClick} disabled={disabled} className="w-4 h-4 cursor-pointer" />;
+                  onClick={onClick} disabled={disabled} className="w-4 h-4 cursor-pointer"/>;
 }
 
 // ─── Status helpers ─────────────────────────────────────────
@@ -91,19 +95,19 @@ const filterStyles = {
 // ─── Main component ──────────────────────────────────────────
 
 export function ManagementArticlesView({
-    lang,
-    stargateUrl,
-    articlesJson,
-    keyword,
-    statusFilter,
-}: {
+                                           lang,
+                                           stargateUrl,
+                                           articlesJson,
+                                           keyword,
+                                           statusFilter,
+                                       }: {
     lang: string
     stargateUrl: string
     articlesJson: string
     keyword: string
     statusFilter: string
 }) {
-    const articles: PSArticleModel[] = JSON.parse(articlesJson);
+    const articles: PSFileModel[] = JSON.parse(articlesJson);
 
     const [selectedUids, setSelectedUids] = React.useState<Set<string>>(new Set());
     const [approving, setApproving] = React.useState(false);
@@ -140,14 +144,14 @@ export function ManagementArticlesView({
         window.location.href = url.pathname + url.search;
     };
 
-    const goSearch = () => navigate({ keyword: searchText || undefined });
+    const goSearch = () => navigate({keyword: searchText || undefined});
     const clearSearch = () => {
         setSearchText('');
-        navigate({ keyword: undefined });
+        navigate({keyword: undefined});
     };
 
     const togglePendingFilter = () => {
-        navigate({ status: statusFilter === 'pending' ? undefined : 'pending' });
+        navigate({status: statusFilter === 'pending' ? undefined : 'pending'});
     };
 
     // ── Approve ──────────────────────────────────────────────
@@ -159,7 +163,7 @@ export function ManagementArticlesView({
         setApproving(true);
         setApproveResult(null);
         try {
-            const result = await ManagementBrowser.clientApproveArticles(
+            const result = await ManagementBrowser.clientApproveFiles(
                 stargateUrl,
                 Array.from(selectedUids),
                 STATUS_APPROVED
@@ -180,7 +184,7 @@ export function ManagementArticlesView({
 
     // ── Render ───────────────────────────────────────────────
     return (
-        <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        <div style={{flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column'}}>
 
             {/* ── Toolbar ── */}
             <div className={filterStyles.toolbar}>
@@ -212,12 +216,14 @@ export function ManagementArticlesView({
                             maxLength={128}
                             value={searchText}
                             onChange={e => setSearchText(e.target.value)}
-                            onKeyDown={e => { if (e.key === 'Enter') goSearch(); }}
+                            onKeyDown={e => {
+                                if (e.key === 'Enter') goSearch();
+                            }}
                         />
                         {searchText && (
-                            <X size={16} onClick={clearSearch} style={{ cursor: 'pointer', color: '#999' }} />
+                            <X size={16} onClick={clearSearch} style={{cursor: 'pointer', color: '#999'}}/>
                         )}
-                        <Search size={16} onClick={goSearch} style={{ cursor: 'pointer' }} />
+                        <Search size={16} onClick={goSearch} style={{cursor: 'pointer'}}/>
                     </div>
                 </div>
             </div>
@@ -232,80 +238,80 @@ export function ManagementArticlesView({
                             {approveResult.fail > 0 && ` (${approveResult.fail} failed)`}
                         </AlertDescription>
                         <button onClick={() => setApproveResult(null)} className="ml-2 opacity-70 hover:opacity-100">
-                            <X size={14} />
+                            <X size={14}/>
                         </button>
                     </div>
                 </Alert>
             )}
 
             {/* ── Article table ── */}
-            <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden' }}>
+            <div style={{flex: 1, overflowY: 'auto', overflowX: 'hidden'}}>
                 <table className="w-full text-sm border-collapse">
                     <thead className="sticky top-0 bg-background">
-                        <tr>
-                            <th className="w-12 p-1 border-b text-left">
-                                <InlineCheckbox indeterminate={someSelected} checked={allSelected}
-                                    onChange={handleSelectAll} disabled={approving} />
-                            </th>
-                            <th className="p-2 border-b text-left font-semibold">
-                                {transKey(lang, "management.article.articleName")}
-                            </th>
-                            <th className="w-40 p-2 border-b text-left font-semibold">
-                                {transKey(lang, "management.article.ownerName")}
-                            </th>
-                            <th className="w-40 p-2 border-b text-left font-semibold">
-                                {transKey(lang, "management.article.channelName")}
-                            </th>
-                            <th className="w-28 p-2 border-b text-left font-semibold">
-                                {transKey(lang, "management.article.statusLabel")}
-                            </th>
-                            <th className="w-44 p-2 border-b text-left font-semibold">
-                                {transKey(lang, "management.article.updateTime")}
-                            </th>
-                        </tr>
+                    <tr>
+                        <th className="w-12 p-1 border-b text-left">
+                            <InlineCheckbox indeterminate={someSelected} checked={allSelected}
+                                            onChange={handleSelectAll} disabled={approving}/>
+                        </th>
+                        <th className="p-2 border-b text-left font-semibold">
+                            {transKey(lang, "management.article.articleName")}
+                        </th>
+                        <th className="w-40 p-2 border-b text-left font-semibold">
+                            {transKey(lang, "management.article.ownerName")}
+                        </th>
+                        <th className="w-40 p-2 border-b text-left font-semibold">
+                            {transKey(lang, "management.article.channelName")}
+                        </th>
+                        <th className="w-28 p-2 border-b text-left font-semibold">
+                            {transKey(lang, "management.article.statusLabel")}
+                        </th>
+                        <th className="w-44 p-2 border-b text-left font-semibold">
+                            {transKey(lang, "management.article.updateTime")}
+                        </th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {articles.length === 0 && (
-                            <tr>
-                                <td colSpan={6} className="py-8 text-center text-muted-foreground">
-                                    No articles found
-                                </td>
-                            </tr>
-                        )}
-                        {articles.map(article => (
-                            <tr
-                                key={article.uid}
-                                data-selected={selectedUids.has(article.uid) || undefined}
-                                onClick={() => !approving && handleToggle(article.uid)}
-                                className="hover:bg-muted/50 data-[selected]:bg-muted border-b"
-                                style={{ cursor: approving ? 'default' : 'pointer' }}
-                            >
-                                <td className="w-12 p-1">
-                                    <InlineCheckbox checked={selectedUids.has(article.uid)}
-                                        disabled={approving}
-                                        onClick={e => e.stopPropagation()}
-                                        onChange={() => handleToggle(article.uid)} />
-                                </td>
-                                <td className="p-2 max-w-[400px]">
-                                    <p className="font-medium truncate">{article.title || article.name}</p>
-                                    {article.description && (
-                                        <p className="text-xs text-muted-foreground truncate">{article.description}</p>
-                                    )}
-                                </td>
-                                <td className="w-40 p-2 text-muted-foreground text-xs">
-                                    {(article as unknown as Record<string, string>)['owner_name'] || '—'}
-                                </td>
-                                <td className="w-40 p-2 text-muted-foreground text-xs">
-                                    {article.channel_name || '—'}
-                                </td>
-                                <td className="w-28 p-2">
-                                    <StatusBadge status={article.status ?? 0} lang={lang} />
-                                </td>
-                                <td className="w-44 p-2 text-muted-foreground text-xs">
-                                    {article.update_time ? new Date(article.update_time).toLocaleString() : '—'}
-                                </td>
-                            </tr>
-                        ))}
+                    {articles.length === 0 && (
+                        <tr>
+                            <td colSpan={6} className="py-8 text-center text-muted-foreground">
+                                No articles found
+                            </td>
+                        </tr>
+                    )}
+                    {articles.map(article => (
+                        <tr
+                            key={article.uid}
+                            data-selected={selectedUids.has(article.uid) || undefined}
+                            onClick={() => !approving && handleToggle(article.uid)}
+                            className="hover:bg-muted/50 data-[selected]:bg-muted border-b"
+                            style={{cursor: approving ? 'default' : 'pointer'}}
+                        >
+                            <td className="w-12 p-1">
+                                <InlineCheckbox checked={selectedUids.has(article.uid)}
+                                                disabled={approving}
+                                                onClick={e => e.stopPropagation()}
+                                                onChange={() => handleToggle(article.uid)}/>
+                            </td>
+                            <td className="p-2 max-w-[400px]">
+                                <p className="font-medium truncate">{article.title || article.name}</p>
+                                {article.description && (
+                                    <p className="text-xs text-muted-foreground truncate">{article.description}</p>
+                                )}
+                            </td>
+                            <td className="w-40 p-2 text-muted-foreground text-xs">
+                                {(article as unknown as Record<string, string>)['owner_name'] || '—'}
+                            </td>
+                            <td className="w-40 p-2 text-muted-foreground text-xs">
+                                {article.channel_name || '—'}
+                            </td>
+                            <td className="w-28 p-2">
+                                <StatusBadge status={article.status ?? 0} lang={lang}/>
+                            </td>
+                            <td className="w-44 p-2 text-muted-foreground text-xs">
+                                {article.update_time ? new Date(article.update_time).toLocaleString() : '—'}
+                            </td>
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>

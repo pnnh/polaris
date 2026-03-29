@@ -2,12 +2,13 @@ import React from 'react'
 
 import {getPathname} from "@/components/server/pathname";
 import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
-import {PaginationServer} from "@/components/server/pagination";
+import {PaginationServer} from "@/components/widget/pagination";
 import {ConsoleImageFilterBar} from "./filter";
 import {ConsoleImageMiddleBody} from "./image";
 import {css} from "@/gen/styled/css";
-import {serverConsoleSelectImages} from "@/components/personal/images";
 import ConsoleLayout from "@/components/server/console/layout";
+import {useServerConfig} from "@/components/server/config";
+import {CommunityFileNodeService} from "@/components/community/files";
 
 export const dynamic = "force-dynamic";
 
@@ -55,7 +56,12 @@ export default async function Page({params, searchParams}: {
         page,
         size: pageSize,
     }
-    const selectData = await serverConsoleSelectImages(lang, selectQuery)
+    const serverConfig = await useServerConfig()
+
+    const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
+    const selectData = await CommunityFileNodeService.consoleQueryFiles(internalStargateUrl,
+        lang, selectQuery)
+
 
     const libName = searchParamsValue.libName
     const pagination = calcPagination(page, 100, pageSize)

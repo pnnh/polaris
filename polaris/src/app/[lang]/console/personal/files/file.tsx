@@ -1,9 +1,8 @@
 import React from "react";
-import {NoData} from "@/components/common/empty";
+import {NoData} from "@/components/widget/empty";
 import {css} from "@/gen/styled/css";
 import {PLSelectData} from "@pnnh/atom";
-import {getDefaultImageUrl} from "@/components/common/note"
-import {PSFileModel} from "@/components/common/models/file";
+import {getDefaultImageUrl, PSFileModel} from "@/components/common/models/file";
 
 export function ConsoleFileMiddleBody({selectData, libKey, lang}: {
     libKey: string, lang: string,

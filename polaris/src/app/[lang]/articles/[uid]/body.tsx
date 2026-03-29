@@ -3,16 +3,16 @@
 import React from "react";
 import {buildNodeView, SteleBody, TocItem} from "@pnnh/atom";
 import DOMPurify from 'isomorphic-dompurify';
-import {PSArticleModel} from "@/components/common/models/article";
+import {PSFileModel} from "@/components/common/models/file";
 import './body.css'
 import {transTodo} from "@/components/common/locales/normal";
 
 export function BuildBodyHtml({tocList, model}: {
     tocList: Array<TocItem>,
-    model: PSArticleModel
+    model: PSFileModel
 }) {
 
-    if (!model.body || !model.content) return <div>
+    if (!model.body) return <div>
         {transTodo('无效格式')}
     </div>
 
@@ -21,7 +21,7 @@ export function BuildBodyHtml({tocList, model}: {
     let santitizedCss = ''
 
     if (model.mimetype === 'text/markdown' && typeof model.content === 'string') {
-        sanitizedHtml = DOMPurify.sanitize(model.content, {USE_PROFILES: {html: true}})
+        sanitizedHtml = DOMPurify.sanitize(model.body, {USE_PROFILES: {html: true}})
 
         if (typeof model.styles === 'string') {
             santitizedCss = DOMPurify.sanitize(model.styles, {USE_PROFILES: {html: true}})

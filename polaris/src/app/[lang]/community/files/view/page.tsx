@@ -5,10 +5,10 @@ import {useServerConfig} from "@/components/server/config";
 
 import {notFound} from "next/navigation";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
-import {CMFileModel} from "@/components/common/models/community/file";
 import {cookies} from "next/headers";
 import ConsoleLayout from "@/components/server/console/layout";
 import {ResourceCard} from "@/components/community/resource";
+import {CMFileModel} from "@/components/common/models/file";
 
 export const dynamic = "force-dynamic";
 

@@ -4,10 +4,10 @@ import {getPathname} from "@/components/server/pathname";
 import {calcPagination, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {headers} from "next/headers";
 import {getTargetLang, langEnUS} from "@/components/common/language";
-import {PaginationServer} from "@/components/server/pagination";
 import {PSHomeBody} from "@/components/server/body";
 import {css} from "@/gen/styled/css";
 import {FileSelectOptions, selectFilesFromBackend} from "@/components/community/files";
+import {PaginationServer} from "@/components/widget/pagination";
 
 export default async function Page({searchParams}: {
     searchParams: Promise<Record<string, string>>

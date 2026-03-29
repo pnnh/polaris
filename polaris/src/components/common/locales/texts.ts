@@ -44,7 +44,7 @@ export const TransTexts: {
         "zh-TW": "操作過於頻繁"
     },
     "handwrittenNotes": {
-        "zh": "手写笔记",
+        "zh": "手写文件",
         "en": "Handwritten Notes",
         "es": "Notas manuscritas",
         "fr": "Notes manuscrites",
@@ -54,7 +54,7 @@ export const TransTexts: {
         "zh-TW": "手寫筆記"
     },
     "codeNotes": {
-        "zh": "代码笔记",
+        "zh": "代码文件",
         "en": "Code Notes",
         "es": "Notas de código",
         "fr": "Notes de code",
@@ -1184,7 +1184,7 @@ export const TransTexts: {
         "zh-TW": "操作"
     },
     "console.article.createNew": {
-        "zh": "新增笔记",
+        "zh": "新增文件",
         "en": "Create Article",
         "es": "Crear artículo",
         "fr": "Créer un article",
@@ -1194,7 +1194,7 @@ export const TransTexts: {
         "zh-TW": "新增筆記"
     },
     "console.article.titlePlaceholder": {
-        "zh": "请输入笔记标题...",
+        "zh": "请输入文件标题...",
         "en": "Enter note title...",
         "es": "Ingrese el título de la nota...",
         "fr": "Entrez le titre de la note...",
@@ -1204,7 +1204,7 @@ export const TransTexts: {
         "zh-TW": "請輸入筆記標題..."
     },
     "console.article.descriptionPlaceholder": {
-        "zh": "请输入笔记描述...",
+        "zh": "请输入文件描述...",
         "en": "Enter note description...",
         "es": "Ingrese la descripción de la nota...",
         "fr": "Entrez la description de la note...",
@@ -1214,7 +1214,7 @@ export const TransTexts: {
         "zh-TW": "請輸入筆記描述..."
     },
     "console.note.cannotFindCopy": {
-        "zh": "无法找到要复制的笔记",
+        "zh": "无法找到要复制的文件",
         "en": "Cannot find the note to copy",
         "es": "No se puede encontrar la nota para copiar",
         "fr": "Impossible de trouver la note à copier",
@@ -1224,7 +1224,7 @@ export const TransTexts: {
         "zh-TW": "無法找到要複製的筆記"
     },
     "console.note.unsupportedType": {
-        "zh": "暂不支持的笔记类型",
+        "zh": "暂不支持的文件类型",
         "en": "Unsupported note type",
         "es": "Tipo de nota no compatible",
         "fr": "Type de note non pris en charge",
@@ -1234,7 +1234,7 @@ export const TransTexts: {
         "zh-TW": "暫不支持的筆記類型"
     },
     "console.note.insertFailed": {
-        "zh": "笔记创建失败",
+        "zh": "文件创建失败",
         "en": "Note creation failed",
         "es": "Error al crear la nota",
         "fr": "Échec de la création de la note",
@@ -1244,7 +1244,7 @@ export const TransTexts: {
         "zh-TW": "筆記創建失敗"
     },
     "console.note.updateFailed": {
-        "zh": "笔记更新失败",
+        "zh": "文件更新失败",
         "en": "Note update failed",
         "es": "Error al actualizar la nota",
         "fr": "Échec de la mise à jour de la note",
@@ -1254,7 +1254,7 @@ export const TransTexts: {
         "zh-TW": "筆記更新失敗"
     },
     "console.note.save": {
-        "zh": "保存笔记",
+        "zh": "保存文件",
         "en": "Save Note",
         "es": "Guardar nota",
         "fr": "Enregistrer la note",
@@ -1324,7 +1324,7 @@ export const TransTexts: {
         "zh-TW": "操作"
     },
     "console.note.createNew": {
-        "zh": "新建笔记",
+        "zh": "新建文件",
         "en": "Create Note",
         "es": "Crear nota",
         "fr": "Créer une note",
@@ -1334,7 +1334,7 @@ export const TransTexts: {
         "zh-TW": "新建筆記"
     },
     "console.note.edit": {
-        "zh": "编辑笔记",
+        "zh": "编辑文件",
         "en": "Edit Note",
         "es": "Editar nota",
         "fr": "Modifier la note",
@@ -1344,7 +1344,7 @@ export const TransTexts: {
         "zh-TW": "編輯筆記"
     },
     "console.note.titlePlaceholder": {
-        "zh": "请输入笔记标题...",
+        "zh": "请输入文件标题...",
         "en": "Enter note title...",
         "es": "Ingrese el título de la nota...",
         "fr": "Entrez le titre de la note...",
@@ -1354,7 +1354,7 @@ export const TransTexts: {
         "zh-TW": "請輸入筆記標題..."
     },
     "console.note.descriptionPlaceholder": {
-        "zh": "请输入笔记描述...",
+        "zh": "请输入文件描述...",
         "en": "Enter note description...",
         "es": "Ingrese la descripción de la nota...",
         "fr": "Entrez la description de la note...",
@@ -1624,7 +1624,7 @@ export const TransTexts: {
         "zh-TW": "文件"
     },
     "common.notes": {
-        "zh": "笔记",
+        "zh": "文件",
         "en": "Notes",
         "es": "Notas",
         "fr": "Notes",
@@ -1934,7 +1934,7 @@ export const TransTexts: {
         "zh-TW": "發布失敗"
     },
     "console.article.importFromNotes": {
-        "zh": "从笔记导入",
+        "zh": "从文件导入",
         "en": "Import from Notes",
         "es": "Importar desde notas",
         "fr": "Importer depuis les notes",
@@ -1954,7 +1954,7 @@ export const TransTexts: {
         "zh-TW": "請先選擇頻道"
     },
     "console.article.selectNotesFirst": {
-        "zh": "请至少选择一个笔记",
+        "zh": "请至少选择一个文件",
         "en": "Please select at least one note",
         "es": "Por favor seleccione al menos una nota",
         "fr": "Veuillez sélectionner au moins une note",
@@ -2004,7 +2004,7 @@ export const TransTexts: {
         "zh-TW": "導入中..."
     },
     "console.article.selectedCount": {
-        "zh": "已选择 {count} 个笔记",
+        "zh": "已选择 {count} 个文件",
         "en": "Selected {count} notes",
         "es": "{count} notas seleccionadas",
         "fr": "{count} notes sélectionnées",
@@ -2024,7 +2024,7 @@ export const TransTexts: {
         "zh-TW": "請選擇頻道"
     },
     "console.article.maxNotesShown": {
-        "zh": "最多显示50条笔记，如需查看更多请使用搜索功能",
+        "zh": "最多显示50条文件，如需查看更多请使用搜索功能",
         "en": "Maximum 50 notes shown, use search to find more",
         "es": "Se muestran un máximo de 50 notas, use la búsqueda para encontrar más",
         "fr": "Maximum 50 notes affichées, utilisez la recherche pour en trouver plus",
@@ -2124,7 +2124,7 @@ export const TransTexts: {
         "zh-TW": "確認同步"
     },
     "console.article.syncConfirmMessage": {
-        "zh": "确定要从笔记同步内容到此文章吗？这将更新文章的标题、正文和描述。",
+        "zh": "确定要从文件同步内容到此文章吗？这将更新文章的标题、正文和描述。",
         "en": "Are you sure you want to sync content from the note to this article? This will update the article's title, body, and description.",
         "es": "¿Está seguro de que desea sincronizar el contenido de la nota con este artículo? Esto actualizará el título, el cuerpo y la descripción del artículo.",
         "fr": "Êtes-vous sûr de vouloir synchroniser le contenu de la note avec cet article ? Cela mettra à jour le titre, le corps et la description de l'article.",

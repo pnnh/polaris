@@ -7,8 +7,8 @@ import {PSToolModel} from "@/components/common/models/tool";
 import {useServerConfig} from "@/components/server/config";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
 import queryString from "query-string";
-import {NoDataPage} from "@/components/misc/NoData";
 import {SafeLink} from "@/components/client/link";
+import {NoDataPage} from "@/components/widget/NoData";
 
 const toolStyles = {
     container: css`

@@ -85,21 +85,21 @@ export default async function Page({params, searchParams}: {
             </div>
             <div className={pageStyles.libGrid}>
                 <div className={pageStyles.libHeader}>
-                    <a className={pageStyles.libLink}>全部笔记</a>
-                    <a href={`/${lang}/community/articles`} className={pageStyles.libLink}>全部笔记</a>
+                    <a className={pageStyles.libLink}>全部文件</a>
+                    <a href={`/${lang}/community/articles`} className={pageStyles.libLink}>全部文件</a>
                 </div>
                 <div className={pageStyles.libBody}>
                     <div className={pageStyles.libCard}>
                         <Monitor size={20}/>
-                        全部笔记1
+                        全部文件1
                     </div>
                     <div className={pageStyles.libCard}>
                         <Monitor size={20}/>
-                        全部笔记2
+                        全部文件2
                     </div>
                     <div className={pageStyles.libCard}>
                         <Cloud size={20}/>
-                        全部笔记3
+                        全部文件3
                     </div>
                 </div>
             </div>

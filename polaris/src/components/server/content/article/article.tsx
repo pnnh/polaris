@@ -1,12 +1,11 @@
 import {formatRfc3339, isValidUUID, PLSelectResult, STSubString, uuidToBase58} from "@pnnh/atom";
-import {NoData} from "@/components/common/empty";
-import {PSArticleModel} from "@/components/common/models/article";
-import {getDefaultNoteImageByUid} from "@/components/common/note";
+import {getDefaultNoteImageByUid, PSFileModel} from "@/components/common/models/file";
 import {FaEye} from "react-icons/fa";
 import {CiAlarmOn} from "react-icons/ci";
-import {PSImageServer} from "@/components/server/image";
+import {PSImageServer} from "@/components/widget/image";
 import React from "react";
 import {css} from "@/gen/styled/css";
+import {NoData} from "@/components/widget/empty";
 
 const styles = {
     middleBody: css`
@@ -81,7 +80,7 @@ const styles = {
 };
 
 export function ArticleMiddleBody({selectResult, lang}: {
-    selectResult: PLSelectResult<PSArticleModel>,
+    selectResult: PLSelectResult<PSFileModel>,
     lang: string
 }) {
     if (!selectResult || !selectResult.data || !selectResult.data.range || selectResult.data.range.length === 0) {
@@ -95,7 +94,7 @@ export function ArticleMiddleBody({selectResult, lang}: {
 }
 
 export function ArticleCard({model, lang}: {
-    model: PSArticleModel, lang: string
+    model: PSFileModel, lang: string
 }) {
     let readUrl = `${lang}/articles/${uuidToBase58(model.uid)}`
     if (model.header === 'MTLink') {

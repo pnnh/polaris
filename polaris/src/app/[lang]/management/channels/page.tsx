@@ -5,7 +5,7 @@ import {useServerConfig} from "@/components/server/config";
 import {getPathname} from "@/components/server/pathname";
 import {ManagementChannelService} from "@/components/management/channels";
 import {ManagementChannelsView} from "./view";
-import {PaginationServer} from "@/components/server/pagination";
+import {PaginationServer} from "@/components/widget/pagination";
 
 import ConsoleLayout from "@/components/server/console/layout";
 

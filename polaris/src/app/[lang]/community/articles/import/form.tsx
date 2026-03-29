@@ -1,36 +1,37 @@
 'use client'
 
 import React from "react";
-import { transKey } from "@/components/common/locales/normal";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { PSArticleModel } from "@/components/common/models/article";
-import { PSChannelModel } from "@/components/common/models/channel";
-import { CommunityBrowser } from "@/components/community/browser";
-import { EmptyUUID, formatRfc3339, STSubString } from "@pnnh/atom";
-import { Square, SquareCheck } from 'lucide-react';
+import {transKey} from "@/components/common/locales/normal";
+import {Alert, AlertDescription} from "@/components/ui/alert";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
+import {PSFileModel} from "@/components/common/models/file";
+import {PSChannelModel} from "@/components/common/models/channel";
+import {CommunityBrowser} from "@/components/community/browser";
+import {EmptyUUID, formatRfc3339, STSubString} from "@pnnh/atom";
 
-function InlineCheckbox({ checked, indeterminate, onChange, onClick, disabled }: {
+function InlineCheckbox({checked, indeterminate, onChange, onClick, disabled}: {
     checked: boolean; indeterminate?: boolean;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
     disabled?: boolean;
 }) {
     const ref = React.useRef<HTMLInputElement>(null);
-    React.useEffect(() => { if (ref.current) ref.current.indeterminate = !!indeterminate; }, [indeterminate]);
+    React.useEffect(() => {
+        if (ref.current) ref.current.indeterminate = !!indeterminate;
+    }, [indeterminate]);
     return <input type="checkbox" ref={ref} checked={checked} onChange={onChange}
-        onClick={onClick} disabled={disabled} className="w-4 h-4 cursor-pointer" />;
+                  onClick={onClick} disabled={disabled} className="w-4 h-4 cursor-pointer"/>;
 }
 
-export function ImportArticlesForm({ stargateUrl, notesString, channelsString, keyword, lang }: {
+export function ImportArticlesForm({stargateUrl, notesString, channelsString, keyword, lang}: {
     stargateUrl: string,
     notesString: string,
     channelsString: string,
     keyword: string,
     lang: string
 }) {
-    const notes = JSON.parse(notesString) as PSArticleModel[];
+    const notes = JSON.parse(notesString) as PSFileModel[];
     const channels = JSON.parse(channelsString) as PSChannelModel[];
 
     const [selectedChannel, setSelectedChannel] = React.useState('');
@@ -147,7 +148,7 @@ export function ImportArticlesForm({ stargateUrl, notesString, channelsString, k
                     </select>
                 </div>
                 <Button onClick={handleImport}
-                    disabled={!selectedChannel || selectedNotes.size === 0 || importing}>
+                        disabled={!selectedChannel || selectedNotes.size === 0 || importing}>
                     {importing
                         ? transKey(lang, 'console.article.importing')
                         : transKey(lang, 'console.article.confirmImport')}
@@ -161,7 +162,9 @@ export function ImportArticlesForm({ stargateUrl, notesString, channelsString, k
                     placeholder={transKey(lang, "searchPlaceholder")}
                     value={searchText}
                     onChange={(event) => setSearchText(event.target.value)}
-                    onKeyDown={(event) => { if (event.key === 'Enter') handleSearch(); }}
+                    onKeyDown={(event) => {
+                        if (event.key === 'Enter') handleSearch();
+                    }}
                 />
                 <Button onClick={handleSearch}>{transKey(lang, "common.search")}</Button>
             </div>
@@ -180,41 +183,43 @@ export function ImportArticlesForm({ stargateUrl, notesString, channelsString, k
             <div className="rounded-lg border shadow-sm">
                 <table className="w-full text-sm border-collapse">
                     <thead>
-                        <tr>
-                            <th className="w-10 p-2 border-b text-left">
-                                <InlineCheckbox indeterminate={someSelected} checked={allSelected}
-                                    onChange={handleSelectAll} />
-                            </th>
-                            <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.note.title")}</th>
-                            <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.note.body")}</th>
-                            <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.note.language")}</th>
-                            <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.note.updateTime")}</th>
-                        </tr>
+                    <tr>
+                        <th className="w-10 p-2 border-b text-left">
+                            <InlineCheckbox indeterminate={someSelected} checked={allSelected}
+                                            onChange={handleSelectAll}/>
+                        </th>
+                        <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.note.title")}</th>
+                        <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.note.body")}</th>
+                        <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.note.language")}</th>
+                        <th className="p-2 border-b text-left font-semibold">{transKey(lang, "console.note.updateTime")}</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        {notes.length === 0 ? (
-                            <tr><td colSpan={5} className="py-8 text-center text-muted-foreground">
+                    {notes.length === 0 ? (
+                        <tr>
+                            <td colSpan={5} className="py-8 text-center text-muted-foreground">
                                 {transKey(lang, "console.note.noData")}
-                            </td></tr>
-                        ) : (
-                            notes.map((note) => (
-                                <tr key={note.uid}
-                                    data-selected={selectedNotes.has(note.uid) || undefined}
-                                    onClick={() => handleSelectNote(note.uid)}
-                                    className="hover:bg-muted/50 data-[selected]:bg-muted border-b cursor-pointer">
-                                    <td className="w-10 p-2">
-                                        <InlineCheckbox checked={selectedNotes.has(note.uid)}
-                                            onChange={() => handleSelectNote(note.uid)} />
-                                    </td>
-                                    <td className="p-2 font-medium">{note.title || transKey(lang, "console.note.untitled")}</td>
-                                    <td className="p-2 text-muted-foreground truncate max-w-[300px]">
-                                        {STSubString(note.body || note.description || '', 100)}
-                                    </td>
-                                    <td className="p-2">{note.lang.toUpperCase()}</td>
-                                    <td className="p-2 text-muted-foreground text-xs">{formatRfc3339(note.update_time)}</td>
-                                </tr>
-                            ))
-                        )}
+                            </td>
+                        </tr>
+                    ) : (
+                        notes.map((note) => (
+                            <tr key={note.uid}
+                                data-selected={selectedNotes.has(note.uid) || undefined}
+                                onClick={() => handleSelectNote(note.uid)}
+                                className="hover:bg-muted/50 data-[selected]:bg-muted border-b cursor-pointer">
+                                <td className="w-10 p-2">
+                                    <InlineCheckbox checked={selectedNotes.has(note.uid)}
+                                                    onChange={() => handleSelectNote(note.uid)}/>
+                                </td>
+                                <td className="p-2 font-medium">{note.title || transKey(lang, "console.note.untitled")}</td>
+                                <td className="p-2 text-muted-foreground truncate max-w-[300px]">
+                                    {STSubString(note.body || note.description || '', 100)}
+                                </td>
+                                <td className="p-2">{note.lang.toUpperCase()}</td>
+                                <td className="p-2 text-muted-foreground text-xs">{formatRfc3339(note.update_time)}</td>
+                            </tr>
+                        ))
+                    )}
                     </tbody>
                 </table>
             </div>

@@ -1,7 +1,7 @@
 import {PLSelectData} from "@pnnh/atom";
-import {NoData} from "@/components/common/empty";
+import {NoData} from "@/components/widget/empty";
 import {css} from "@/gen/styled/css";
-import {PSImageModel} from "@/components/common/models/image";
+import {PSFileModel} from "@/components/common/models/file";
 import {ImageCard} from "@/components/server/content/images/card";
 
 const styles = {
@@ -14,7 +14,7 @@ const styles = {
 };
 
 export async function ImageMiddleBody({selectData, lang}: {
-    selectData: PLSelectData<PSImageModel>,
+    selectData: PLSelectData<PSFileModel>,
     lang: string,
 }) {
     if (!selectData || !selectData.range || selectData.range.length === 0) {

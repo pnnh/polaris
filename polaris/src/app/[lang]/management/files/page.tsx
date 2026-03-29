@@ -5,7 +5,7 @@ import {useServerConfig} from "@/components/server/config";
 import {getPathname} from "@/components/server/pathname";
 import {ManagementFileService} from "@/components/management/files";
 import {ManagementFilesView} from "./view";
-import {PaginationServer} from "@/components/server/pagination";
+import {PaginationServer} from "@/components/widget/pagination";
 
 import ConsoleLayout from "@/components/server/console/layout";
 

@@ -1,16 +1,15 @@
 'use client'
 
-import { EmptyUUID } from "@pnnh/atom";
-import { Button } from "@/components/ui/button";
+import {EmptyUUID} from "@pnnh/atom";
+import {Button} from "@/components/ui/button";
 import React from "react";
-import { PSImageModel } from "@/components/common/models/image";
-import { PSChannelModel } from "@/components/common/models/channel";
-import { transKey } from "@/components/common/locales/normal";
-import { CommunityBrowser } from "@/components/community/browser";
-import { css } from "@/gen/styled/css";
-import { getDefaultImageUrl } from "@/components/common/note";
+import {PSChannelModel} from "@/components/common/models/channel";
+import {transKey} from "@/components/common/locales/normal";
+import {CommunityBrowser} from "@/components/community/browser";
+import {css} from "@/gen/styled/css";
+import {getDefaultImageUrl, PSFileModel} from "@/components/common/models/file";
 
-function PSConsoleChannelSelector({ channelUid, channels, onChange, lang }: {
+function PSConsoleChannelSelector({channelUid, channels, onChange, lang}: {
     channelUid: string,
     channels: PSChannelModel[],
     onChange: (newChannel: string) => void,
@@ -30,13 +29,13 @@ function PSConsoleChannelSelector({ channelUid, channels, onChange, lang }: {
     )
 }
 
-export function ConsolePhotoForm({ stargateUrl, modelString, channelsString, lang }: {
+export function ConsolePhotoForm({stargateUrl, modelString, channelsString, lang}: {
     stargateUrl: string,
     modelString: string,
     channelsString: string,
     lang: string
 }) {
-    const oldModel = JSON.parse(modelString) as PSImageModel;
+    const oldModel = JSON.parse(modelString) as PSFileModel;
     const channels = JSON.parse(channelsString) as PSChannelModel[];
     const [title, setTitle] = React.useState(oldModel.title || '');
     const [description, setDescription] = React.useState(oldModel.description || '');
@@ -100,7 +99,7 @@ export function ConsolePhotoForm({ stargateUrl, modelString, channelsString, lan
                     placeholder={transKey(lang, "console.image.description")}
                 />
             </div>
-            <ImageCard lang={lang} model={oldModel} />
+            <ImageCard lang={lang} model={oldModel}/>
             <div className={formStyles.fieldGroup}>
                 <label className={formStyles.fieldLabel}>Keywords</label>
                 <input
@@ -177,15 +176,15 @@ const formStyles = {
     `
 }
 
-function ImageCard({ model, lang }: {
-    model: PSImageModel,
+function ImageCard({model, lang}: {
+    model: PSFileModel,
     lang: string
 }) {
     let imageUrl = model.url || getDefaultImageUrl()
 
     return <>
         <div className={imageStyles.imageCard}>
-            {imageUrl && <img src={imageUrl} alt={model.name} />}
+            {imageUrl && <img src={imageUrl} alt={model.name}/>}
         </div>
     </>
 }

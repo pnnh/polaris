@@ -1,6 +1,6 @@
 import {formatRfc3339, PLSelectData, STSubString, uuidToBase58} from "@pnnh/atom";
-import {NoData} from "@/components/common/empty";
-import {PSImageModel} from "@/components/common/models/image";
+import {NoData} from "@/components/widget/empty";
+import {PSFileModel} from "@/components/common/models/file";
 import {FaEye} from "react-icons/fa";
 import {CiAlarmOn} from "react-icons/ci";
 import React from "react";
@@ -48,7 +48,7 @@ const photoStyles = {
 }
 
 export function ConsolePhotoMiddleBody({selectData, lang, stargateUrl}: {
-    selectData: PLSelectData<PSImageModel>,
+    selectData: PLSelectData<PSFileModel>,
     lang: string,
     stargateUrl: string
 }) {
@@ -83,7 +83,7 @@ export function PhotoHeader({lang}: {
 }
 
 export function PhotoCard({model, lang, stargateUrl}: {
-    model: PSImageModel,
+    model: PSFileModel,
     lang: string,
     stargateUrl: string
 }) {

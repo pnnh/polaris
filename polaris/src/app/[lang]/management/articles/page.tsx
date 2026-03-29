@@ -3,10 +3,10 @@ import {css} from "@/gen/styled/css";
 import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import {getPathname} from "@/components/server/pathname";
-import {ManagementArticleService} from "@/components/management/articles";
 import {ManagementArticlesView} from "./view";
-import {PaginationServer} from "@/components/server/pagination";
+import {PaginationServer} from "@/components/widget/pagination";
 import ConsoleLayout from "@/components/server/console/layout";
+import {ManagementFileService} from "@/components/management/files";
 
 const pageStyles = {
     articlesPage: css`
@@ -49,9 +49,8 @@ export default async function ManagementArticlesPage({params, searchParams}: {
     const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
     const publicStargateUrl = serverConfig.PUBLIC_STARGATE_URL
 
-    const selectData = await ManagementArticleService.queryArticles(
+    const selectData = await ManagementFileService.queryFiles(
         internalStargateUrl,
-        lang,
         {keyword, status: statusFilter, page, size: pageSize, sort: searchValue.sort}
     )
 

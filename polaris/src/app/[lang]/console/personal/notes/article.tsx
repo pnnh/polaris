@@ -1,16 +1,15 @@
 import {formatRfc3339, localText, PLSelectData, STSubString, uuidToBase58} from "@pnnh/atom";
-import {NoData} from "@/components/common/empty";
-import {PSArticleModel} from "@/components/common/models/article";
-import {getDefaultNoteImageByUid} from "@/components/common/note";
+import {getDefaultNoteImageByUid, PSFileModel} from "@/components/common/models/file";
 import {FaEye} from "react-icons/fa";
 import {CiAlarmOn} from "react-icons/ci";
-import {PSImageServer} from "@/components/server/image";
+import {PSImageServer} from "@/components/widget/image";
 import React from "react";
 import {css} from "@/gen/styled/css";
 import PSDeleteButton from "@/components/client/console/delete";
-import { Globe } from 'lucide-react';
+import {Globe} from 'lucide-react';
 import {transKey} from "@/components/common/locales/normal";
 import {useServerConfig} from "@/components/server/config";
+import {NoData} from "@/components/widget/empty";
 
 const articleStyles = {
     middleBody: css`
@@ -104,7 +103,7 @@ const articleStyles = {
 }
 
 export async function ConsoleArticleMiddleBody({selectData, lang}: {
-    selectData: PLSelectData<PSArticleModel>,
+    selectData: PLSelectData<PSFileModel>,
     lang: string
 }) {
     if (!selectData || !selectData.range || selectData.range.length === 0) {
@@ -148,7 +147,7 @@ export function NoteHeader({lang}: {
 }
 
 export function NoteCard({model, lang, portalUrl, stargateUrl}: {
-    model: PSArticleModel,
+    model: PSFileModel,
     lang: string,
     portalUrl: string, stargateUrl: string
 }) {

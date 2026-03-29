@@ -5,9 +5,9 @@ import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
 import {calcPagination, langEn, PLSelectResult, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
 
-import {NoData} from "@/components/common/empty";
-import {PaginationServer} from "@/components/server/pagination";
-import {PSArticleModel} from "@/components/common/models/article";
+import {NoData} from "@/components/widget/empty";
+import {PaginationServer} from "@/components/widget/pagination";
+import {PSFileModel} from "@/components/common/models/file";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
 
 import {useServerConfig} from "@/components/server/config";
@@ -88,7 +88,7 @@ export default async function Page({params, searchParams}: {
     const rawQuery = queryString.stringify(selectQuery)
     const url = `${serverUrl}/articles?${rawQuery}`
 
-    const selectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, '')
+    const selectResult = await serverMakeGet<PLSelectResult<PSFileModel>>(url, '')
     if (!selectResult || !selectResult.data) {
         return <NoData size={'large'}/>
     }

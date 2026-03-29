@@ -2,7 +2,7 @@ import 'server-only'
 import ContentLayout from "@/components/server/content/layout";
 import {SymbolUnknown} from "@pnnh/atom";
 import React from "react";
-import {NoData} from "@/components/common/empty";
+import {NoData} from "@/components/widget/empty";
 
 export function NoDataPage({
                                lang,

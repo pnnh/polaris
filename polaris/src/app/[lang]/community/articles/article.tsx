@@ -1,16 +1,15 @@
-import {formatRfc3339, isValidUUID, PLSelectData, STSubString, uuidToBase58} from "@pnnh/atom";
-import {NoData} from "@/components/common/empty";
-import {PSArticleModel} from "@/components/common/models/article";
-import {getDefaultNoteImageByUid} from "@/components/common/note";
+import {formatRfc3339, PLSelectData, STSubString, uuidToBase58} from "@pnnh/atom";
+import {getDefaultNoteImageByUid, PSFileModel} from "@/components/common/models/file";
 import {FaEye} from "react-icons/fa";
 import {CiAlarmOn} from "react-icons/ci";
-import {PSImageServer} from "@/components/server/image";
+import {PSImageServer} from "@/components/widget/image";
 import React from "react";
 import {css} from "@/gen/styled/css";
 import PSDeleteButton from "@/components/client/console/delete";
 import PSSyncButton from "@/components/client/console/sync";
-import { Globe } from 'lucide-react';
+import {Globe} from 'lucide-react';
 import {transKey} from "@/components/common/locales/normal";
+import {NoData} from "@/components/widget/empty";
 
 const articleStyles = {
     middleBody: css`
@@ -58,7 +57,7 @@ const articleStyles = {
 }
 
 export function ConsoleArticleMiddleBody({selectData, lang, stargateUrl}: {
-    selectData: PLSelectData<PSArticleModel>,
+    selectData: PLSelectData<PSFileModel>,
     lang: string,
     stargateUrl: string
 }) {
@@ -99,15 +98,12 @@ export function ArticleHeader({lang}: {
 }
 
 export function ArticleCard({model, lang, stargateUrl}: {
-    model: PSArticleModel,
+    model: PSFileModel,
     lang: string,
     stargateUrl: string
 }) {
     const readUrl = `${lang}/community/articles/${uuidToBase58(model.uid)}`
     let imageUrl = getDefaultNoteImageByUid(model.uid)
-    if (model.cover && isValidUUID(model.cover)) {
-        imageUrl = `${stargateUrl}/articles/${model.uid}/assets/${model.cover}`
-    }
     let chanUrl = ''
     if (model.channel) {
         chanUrl = `/${lang}/channels/${uuidToBase58(model.channel)}`

@@ -3,12 +3,12 @@ import {css} from "@/gen/styled/css";
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
 import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
-import {PaginationServer} from "@/components/server/pagination";
+import {PaginationServer} from "@/components/widget/pagination";
 import {useServerConfig} from "@/components/server/config";
 
-import {serverSelectImages} from "@/components/server/images/image";
 import {ImageMiddleBody} from "@/components/server/content/images/image";
 import {transKey} from "@/components/common/locales/normal";
+import {serverConsoleSelectFiles} from "@/components/personal/files-server";
 
 const pageStyles = {
     contentContainer: css`
@@ -74,7 +74,7 @@ export default async function Page({params, searchParams}: {
     }
     const serverConfig = await useServerConfig()
 
-    const selectData = await serverSelectImages(serverConfig.INTERNAL_PORTAL_URL, lang, selectQuery)
+    const selectData = await serverConsoleSelectFiles(lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
 

@@ -2,9 +2,8 @@ import {NextRequest} from 'next/server'
 import {SitemapItemLoose, SitemapStream, streamToPromise} from 'sitemap'
 import {Readable} from 'stream'
 import {useServerConfig} from "@/components/server/config";
-import {PLSelectResult} from "@pnnh/atom";
-import {PSArticleModel} from "@/components/common/models/article";
-import {uuidToBase58} from "@pnnh/atom";
+import {PLSelectResult, uuidToBase58} from "@pnnh/atom";
+import {PSFileModel} from "@/components/common/models/file";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
 
 export const dynamic = "force-dynamic";
@@ -13,7 +12,7 @@ export async function GET(request: NextRequest) {
     const serverConfig = await useServerConfig()
     const serverUrl = serverConfig.INTERNAL_PORTAL_URL
     const url = `${serverUrl}/articles?` + `page=1&size=${100}`
-    const result = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, '')
+    const result = await serverMakeGet<PLSelectResult<PSFileModel>>(url, '')
     const selfUrl = serverConfig.PUBLIC_SELF_URL
     let links: SitemapItemLoose[] = []
 

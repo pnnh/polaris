@@ -1,16 +1,16 @@
 'use client'
 
 import {EmptyUUID} from "@pnnh/atom";
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 import React from "react";
-import {CmFileModel} from "@/components/common/models/file";
+import {CMFileModel} from "@/components/common/models/file";
 import {transKey, transTodo} from "@/components/common/locales/normal";
 import {CommunityBrowser} from "@/components/community/browser";
 import {css} from "@/gen/styled/css";
 
 export function ConsoleFileForm({stargateUrl, model, lang}: {
     stargateUrl: string,
-    model: CmFileModel,
+    model: CMFileModel,
     lang: string
 }) {
     const [name, setName] = React.useState(model.name || '');

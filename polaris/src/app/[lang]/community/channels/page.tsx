@@ -2,10 +2,9 @@ import React from 'react'
 import {getPathname} from "@/components/server/pathname";
 import {css} from "@/gen/styled/css";
 import {isValidUUID, langEn, STSubString, SymbolUnknown, uuidToBase58} from "@pnnh/atom";
-import {PSChannelModel} from "@/components/common/models/channel";
-import {NoData} from "@/components/common/empty";
-import {PSImageServer} from "@/components/server/image";
-import {getDefaultChanImageByUid} from "@/components/common/channel";
+import {getDefaultChanImageByUid, PSChannelModel} from "@/components/common/models/channel";
+import {NoData} from "@/components/widget/empty";
+import {PSImageServer} from "@/components/widget/image";
 
 import {ConsoleChannelFilterBar} from "./filter";
 import {serverConsoleSelectChannels} from "@/components/server/channels/channels";
@@ -14,51 +13,6 @@ import PSDeleteButton from "@/components/client/console/delete";
 import {transKey} from "@/components/common/locales/normal";
 import ConsoleLayout from "@/components/server/console/layout";
 
-const pageStyles = {
-    channelsContainer: css`
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        gap: 0.5rem;
-    `,
-    list: css`
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
-        gap: 1rem;
-    `,
-    item: css`
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-        border: 1px solid var(--border-color);
-        border-radius: 0.5rem;
-        padding: 1rem;
-        background: var(--background-color);
-    `,
-    itemCover: css`
-        width: 100%;
-        height: 256px;
-        overflow: hidden;
-        border-radius: 0.5rem;
-    `,
-    title: css`
-        font-size: 1.2rem;
-        font-weight: bold;
-    `,
-    link: css`
-        text-decoration: none;
-        color: var(--text-primary-color);
-    `,
-    description: css`
-        font-size: 0.9rem;
-        color: var(--text-secondary-color);
-    `,
-    operation: css`
-        display: flex;
-        gap: 0.5rem;
-    `
-}
 
 export default async function Page({params, searchParams}: {
     params: Promise<{ lang: string, viewer: string }>,
@@ -117,4 +71,50 @@ function Item(props: { model: PSChannelModel, stargateUrl: string, lang: string 
             </PSDeleteButton>
         </div>
     </div>
+}
+
+const pageStyles = {
+    channelsContainer: css`
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    `,
+    list: css`
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+        gap: 1rem;
+    `,
+    item: css`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        padding: 1rem;
+        background: var(--background-color);
+    `,
+    itemCover: css`
+        width: 100%;
+        height: 256px;
+        overflow: hidden;
+        border-radius: 0.5rem;
+    `,
+    title: css`
+        font-size: 1.2rem;
+        font-weight: bold;
+    `,
+    link: css`
+        text-decoration: none;
+        color: var(--text-primary-color);
+    `,
+    description: css`
+        font-size: 0.9rem;
+        color: var(--text-secondary-color);
+    `,
+    operation: css`
+        display: flex;
+        gap: 0.5rem;
+    `
 }

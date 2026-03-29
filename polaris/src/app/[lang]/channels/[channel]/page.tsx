@@ -4,10 +4,10 @@ import {css} from "@/gen/styled/css";
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
 import {calcPagination, langEn, replaceSearchParams, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
-import {PaginationServer} from "@/components/server/pagination";
 import {notFound} from "next/navigation";
 import {PSHomeBody} from "@/components/server/body";
 import {FileSelectOptions, selectFilesFromBackend} from "@/components/community/files";
+import {PaginationServer} from "@/components/widget/pagination";
 
 const pageStyles = {
     contentContainer: css`

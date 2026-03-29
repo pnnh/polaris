@@ -2,12 +2,12 @@ import React from 'react'
 
 import {getPathname} from "@/components/server/pathname";
 import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
-import {PaginationServer} from "@/components/server/pagination";
 import {useServerConfig} from "@/components/server/config";
 import ConsoleImageLayout from "@/components/server/console/images/layout";
 import {ConsoleImageFilterBar} from "./filter";
 import {ConsoleImageMiddleBody} from "./image";
 import {css} from "@/gen/styled/css";
+import {PaginationServer} from "@/components/widget/pagination";
 
 export const dynamic = "force-dynamic";
 

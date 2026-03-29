@@ -14,7 +14,7 @@ polaris 使用 Next.js App Router，所有用户可见页面位于 `src/app/[lan
 ### 频道（`/[lang]/channels`）
 
 - 频道列表：展示所有公开频道
-- 频道详情：频道内文章/笔记列表
+- 频道详情：频道内文章/文件列表
 
 ### 图片（`/[lang]/images`）
 
@@ -23,7 +23,7 @@ polaris 使用 Next.js App Router，所有用户可见页面位于 `src/app/[lan
 
 ### 搜索（`/[lang]/search`）
 
-全文搜索入口，支持搜索文章、笔记、频道等内容。
+全文搜索入口，支持搜索文章、文件、频道等内容。
 
 ### 社区（`/[lang]/community`）
 
@@ -35,11 +35,11 @@ polaris 使用 Next.js App Router，所有用户可见页面位于 `src/app/[lan
 
 需要登录后访问：
 
-| 子页面 | 路径 | 功能 |
-|---|---|---|
-| 控制台首页 | `/console` | 概览 |
-| 个人信息 | `/console/userinfo` | 查看与编辑个人资料 |
-| 个人文件 | `/console/personal` | 文件上传与管理 |
+| 子页面   | 路径                  | 功能        |
+|-------|---------------------|-----------|
+| 控制台首页 | `/console`          | 概览        |
+| 个人信息  | `/console/userinfo` | 查看与编辑个人资料 |
+| 个人文件  | `/console/personal` | 文件上传与管理   |
 
 ### 账户（`/[lang]/account`）
 
@@ -56,13 +56,13 @@ polaris 使用 Next.js App Router，所有用户可见页面位于 `src/app/[lan
 
 公共组件位于 `src/components/` 目录，主要分类：
 
-| 目录 | 说明 |
-|---|---|
-| `common/` | 通用基础组件（按钮、表单、弹窗、布局等） |
-| `editor/` | 基于 Slate.js 的富文本编辑器 |
-| `markdown/` | Markdown 渲染组件 |
-| `image/` | 图片展示与上传组件 |
-| `account/` | 账户相关 UI 组件 |
+| 目录          | 说明                   |
+|-------------|----------------------|
+| `common/`   | 通用基础组件（按钮、表单、弹窗、布局等） |
+| `editor/`   | 基于 Slate.js 的富文本编辑器  |
+| `markdown/` | Markdown 渲染组件        |
+| `image/`    | 图片展示与上传组件            |
+| `account/`  | 账户相关 UI 组件           |
 
 ## 服务层
 
@@ -70,7 +70,7 @@ polaris 使用 Next.js App Router，所有用户可见页面位于 `src/app/[lan
 
 - `account.ts` — 账户认证接口
 - `channels.ts` — 频道接口
-- `notes.ts` — 笔记接口
+- `notes.ts` — 文件接口
 - `images.ts` — 图片接口
 - `files.ts` — 文件接口
 - `comments.ts` — 评论接口

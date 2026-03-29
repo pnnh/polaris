@@ -1,10 +1,9 @@
 import React from 'react'
 import {css} from "@/gen/styled/css";
-import {PSFileModel} from "@/components/common/models/file";
+import {getDefaultImageUrl, PSFileModel} from "@/components/common/models/file";
 import {transTodo} from "@/components/common/locales/normal";
 import {STSubString, uuidToBase58} from "@pnnh/atom";
-import {PSImageServer} from "@/components/server/image";
-import {getDefaultImageUrl} from "@/components/common/note";
+import {PSImageServer} from "@/components/widget/image";
 
 const imageStyles = {
     middleItem: css`
@@ -270,7 +269,7 @@ export async function PSNoteItemCard({lang, model}: { lang: string, model: PSFil
     } catch (error) {
         console.error("Error rendering PSNoteItemCard:", error);
         return <div className={cardStyles.cardItem}>
-            {transTodo("无法显示笔记")}
+            {transTodo("无法显示文件")}
         </div>
     }
 }

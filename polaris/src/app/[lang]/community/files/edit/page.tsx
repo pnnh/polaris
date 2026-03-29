@@ -1,15 +1,14 @@
 import React from 'react'
 
-import {EmptyUUID, langZh, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
+import {langZh, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
 import {useServerConfig} from "@/components/server/config";
 import {notFound} from "next/navigation";
 import {ConsoleFileForm} from "./form";
-import {CmFileModel} from "@/components/common/models/file";
+import {NewFileModel, PSFileModel} from "@/components/common/models/file";
 import {css} from "@/gen/styled/css";
 import {CommunityFileNodeService} from "@/components/community/files";
 import {getPathname} from "@/components/server/pathname";
 import ConsoleLayout from "@/components/server/console/layout";
-import {RootFileUid} from "@/components/common/models/community/file";
 
 export const dynamic = "force-dynamic";
 
@@ -35,29 +34,10 @@ export default async function Home({params, searchParams}: {
     const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
     const publicStargateUrl = serverConfig.PUBLIC_STARGATE_URL
     const isNew = searchValue.isNew === 'true';
-    let model: CmFileModel | undefined = undefined;
+    let model: PSFileModel | undefined = undefined;
 
     if (isNew) {
-        model = {
-            uid: EmptyUUID,
-            name: '',
-            title: '',
-            description: '',
-            keywords: '',
-            body: '',
-            header: '',
-            cover: '',
-            owner: '',
-            owner_name: '',
-            status: 0,
-            discover: 0,
-            url: '',
-            mimetype: '',
-            parent: RootFileUid,
-            path: '',
-            create_time: '',
-            update_time: ''
-        }
+        model = NewFileModel()
     } else {
         const fileUid = tryBase58ToUuid(searchValue.uid)
         if (!fileUid) {

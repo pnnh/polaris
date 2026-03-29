@@ -1,10 +1,10 @@
 # polaris — 希波万象前端
 
-希波万象资源管理平台的 Next.js 16 前端，支持文章、笔记、频道、图片、文件等多种内容类型。
+希波万象资源管理平台的 Next.js 16 前端，支持文章、文件、频道、图片、文件等多种内容类型。
 
 ## 技术栈
 
-- **框架**: Next.js (App Router) + React + TypeScript 
+- **框架**: Next.js (App Router) + React + TypeScript
 - **样式**: Tailwind CSS + DaisyUI + Panda CSS
 - **状态管理**: Jotai + SWR
 - **编辑器**: Slate.js（富文本）
@@ -49,16 +49,19 @@ src/
 ## 样式架构
 
 ### CSS 层级（global.css 中定义）
+
 ```
 theme → base → components → utilities
 panda-reset → panda-base → panda-tokens → panda-recipes → panda-utilities
 ```
 
 ### 三套样式系统并存
+
 1. **Panda CSS**（主要）：`css\`...\`` 模板字面量，需 `npm run panda` 生成类名
 2. **Tailwind CSS + DaisyUI **：直接在 `className` 中使用工具类
 
 ### CSS 变量（主题相关）
+
 ```css
 var(--background-color)      /* 背景色 */
 var(--primary-color)         /* 主色（亮色 #1976d2，暗色 #90caf9）*/
@@ -72,22 +75,24 @@ var(--action-hover-color)    /* hover 背景色 */
 暗色主题通过 `body.darkTheme` 类切换。**避免在样式中使用硬编码颜色，应优先使用 CSS 变量。**
 
 ## 重要约束
- 
+
 ### Panda CSS
+
 - 样式用 `css\`...\`` 模板字面量编写，从 `@/gen/styled/css` 导入
 - 修改样式后需要 `npm run panda` 重新生成（开发时用 watch 模式）
 - `src/gen/styled/` 目录是自动生成的，不要手动修改
 
 ### 国际化路由
+
 - 语言通过 `[lang]` 动态路由段传递（如 `/en`、`/zh`）
 - 根路由 `/` 通过 `Accept-Language` 头自动检测语言
 - 无效语言返回 `notFound()`
 
 ## 与其他服务的通信
 
-| 服务 | 访问方式 | 说明 |
-|------|---------|------|
-| portal | `INTERNAL_PORTAL_URL`（服务端） | 公共 API 及认证，端口 8001 |
+| 服务       | 访问方式                         | 说明                    |
+|----------|------------------------------|-----------------------|
+| portal   | `INTERNAL_PORTAL_URL`（服务端）   | 公共 API 及认证，端口 8001    |
 | stargate | `INTERNAL_STARGATE_URL`（服务端） | 登录后的个人/社区 API，端口 8101 |
 
 ## 路由路径别名

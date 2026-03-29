@@ -3,13 +3,12 @@ import React from 'react'
 
 import {getPathname} from "@/components/server/pathname";
 import {CodeOk, CommonResult, langEn, SymbolUnknown, tryBase58ToUuid} from "@pnnh/atom";
-import {PSArticleModel} from "@/components/common/models/article";
-import {getDefaultImageUrl} from "@/components/common/note";
+import {getDefaultImageUrl, PSFileModel} from "@/components/common/models/file";
 import {useServerConfig} from "@/components/server/config";
 
 import {notFound} from "next/navigation";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
-import {PSImageServer} from "@/components/server/image";
+import {PSImageServer} from "@/components/widget/image";
 import ContentLayout from "@/components/server/content/layout";
 
 export const dynamic = "force-dynamic";
@@ -28,7 +27,7 @@ export default async function Home({params, searchParams}: {
         notFound();
     }
     const url = `${internalPortalUrl}/images/${imageUid}?lang=${lang}`
-    const getResult = await serverMakeGet<CommonResult<PSArticleModel | undefined>>(url, '')
+    const getResult = await serverMakeGet<CommonResult<PSFileModel | undefined>>(url, '')
 
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {
         return <div>遇到错误3</div>

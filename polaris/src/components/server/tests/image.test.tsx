@@ -1,7 +1,7 @@
 import React from "react";
 import {expect, test} from 'vitest'
 import {render} from '@testing-library/react'
-import {PSImageServer} from "@/components/server/image";
+import {PSImageServer} from "@/components/widget/image";
 
 const comId = '308bca47-86dc-48d6-8b4e-aa822689af8f'
 

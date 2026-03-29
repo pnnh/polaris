@@ -1,14 +1,15 @@
 import {formatRfc3339, PLSelectData, STSubString, uuidToBase58} from "@pnnh/atom";
-import {NoData} from "@/components/common/empty";
-import {CmFileModel} from "@/components/common/models/file";
+
+import {CMFileModel} from "@/components/common/models/file";
 import {FaEye} from "react-icons/fa";
 import {CiAlarmOn} from "react-icons/ci";
 import React from "react";
 import {css} from "@/gen/styled/css";
 import PSDeleteButton from "@/components/client/console/delete";
 import {transKey} from "@/components/common/locales/normal";
-import { Button } from "@/components/ui/button";
-import { FolderOpen, File, FilePen } from 'lucide-react';
+import {Button} from "@/components/ui/button";
+import {File, FilePen, FolderOpen} from 'lucide-react';
+import {NoData} from "@/components/widget/empty";
 
 const fileStyles = {
     middleBody: css`
@@ -56,7 +57,7 @@ const fileStyles = {
 }
 
 export function ConsoleFileMiddleBody({selectData, lang, stargateUrl}: {
-    selectData: PLSelectData<CmFileModel>,
+    selectData: PLSelectData<CMFileModel>,
     lang: string,
     stargateUrl: string
 }) {
@@ -82,7 +83,7 @@ export function FileHeader({lang}: { lang: string }) {
 }
 
 export function FileCard({model, lang, stargateUrl}: {
-    model: CmFileModel,
+    model: CMFileModel,
     lang: string,
     stargateUrl: string
 }) {
@@ -115,7 +116,7 @@ export function FileCard({model, lang, stargateUrl}: {
         </div>
         <div className={fileStyles.action}>
             <Button size={'icon'} variant={'ghost'} asChild>
-                <a href={editUrl} title={editUrl}><FilePen size={16} /></a>
+                <a href={editUrl} title={editUrl}><FilePen size={16}/></a>
             </Button>
             <PSDeleteButton lang={lang} deleteUrl={deleteUrl} resTitle={model.title}>
                 {transKey(lang, "console.common.delete")}

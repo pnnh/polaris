@@ -6,7 +6,7 @@ import {useServerConfig} from "@/components/server/config";
 import {serverGetUserinfo} from "@/components/server/account/account";
 import {NeedLoginPage} from "@/components/server/content/needLogin";
 import ConsoleLayout from "@/components/server/console/layout";
-import { Cloud } from 'lucide-react';
+import {Cloud} from 'lucide-react';
 import {transKey} from "@/components/common/locales/normal";
 import {isAnonymousAccount} from "@/components/common/models/account/account";
 import {getPathname} from "@/components/server/pathname";
@@ -129,7 +129,7 @@ export default async function Page({params, searchParams}: {
                         </div>
                         <div className={pageStyles.libCard}>
                             <Cloud size={20}/>
-                            <a href={`/${lang}/console/personal/notes`} className={pageStyles.libLink}>所有笔记</a>
+                            <a href={`/${lang}/console/personal/notes`} className={pageStyles.libLink}>所有文件</a>
                         </div>
                         <div className={pageStyles.libCard}>
                             <Cloud size={20}/>

@@ -4,11 +4,11 @@ import queryString from 'query-string'
 import ContentLayout from '@/components/server/content/layout'
 import {getPathname} from "@/components/server/pathname";
 import {calcPagination, langEn, PLSelectResult, replaceSearchParams, SymbolUnknown} from "@pnnh/atom";
-import {PaginationServer} from "@/components/server/pagination";
-import {PSArticleModel} from "@/components/common/models/article";
+import {PSFileModel} from "@/components/common/models/file";
 import {ArticleMiddleBody} from "@/components/server/content/article/article";
 import {useServerConfig} from "@/components/server/config";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
+import {PaginationServer} from "@/components/widget/pagination";
 
 const pageStyles = {
     contentContainer: css`
@@ -73,7 +73,7 @@ export default async function Page({params, searchParams}: {
     }
     const rawQuery = queryString.stringify(selectQuery)
     const url = `${internalPortalUrl}/articles?${rawQuery}`
-    const selectResult = await serverMakeGet<PLSelectResult<PSArticleModel>>(url, '')
+    const selectResult = await serverMakeGet<PLSelectResult<PSFileModel>>(url, '')
 
     const pagination = calcPagination(page, selectResult.data.count, pageSize)
     return <ContentLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}

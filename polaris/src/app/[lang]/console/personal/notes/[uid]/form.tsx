@@ -1,23 +1,21 @@
 'use client'
 
-import { EmptyUUID, generatorRandomString, isLangEn, langEn, langZh, TocItem, uuidToBase58 } from "@pnnh/atom";
-import { ConsoleArticleEditor } from "./editor";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import {EmptyUUID, generatorRandomString, isLangEn, langEn, langZh, TocItem, uuidToBase58} from "@pnnh/atom";
+import {ConsoleArticleEditor} from "./editor";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
 import React from "react";
-import { PSArticleModel } from "@/components/common/models/article";
-import { getDefaultImageUrl } from "@/components/common/note";
-import { supportedLanguages } from "@/components/common/language";
-import { transKey } from "@/components/common/locales/normal";
-import { PersonalNotesBrowser } from "@/components/personal/notes";
-import { CommunityBrowser } from "@/components/community/browser";
-import { PSChannelModel } from "@/components/common/models/channel";
-import { Save, Copy, Languages, Upload } from 'lucide-react';
+import {getDefaultImageUrl, PSFileModel} from "@/components/common/models/file";
+import {supportedLanguages} from "@/components/common/language";
+import {transKey} from "@/components/common/locales/normal";
+import {CommunityBrowser} from "@/components/community/browser";
+import {PSChannelModel} from "@/components/common/models/channel";
+import {Copy, Languages, Save, Upload} from 'lucide-react';
 
-function PSConsoleLanguageSelector({ lang, onChange }: { lang: string, onChange: (newLang: string) => void }) {
+function PSConsoleLanguageSelector({lang, onChange}: { lang: string, onChange: (newLang: string) => void }) {
     return (
         <div className="flex items-center gap-1">
-            <Languages size={16} className="text-muted-foreground" />
+            <Languages size={16} className="text-muted-foreground"/>
             <select
                 value={lang}
                 onChange={(event) => onChange(event.target.value)}
@@ -31,13 +29,13 @@ function PSConsoleLanguageSelector({ lang, onChange }: { lang: string, onChange:
     )
 }
 
-export function ConsoleArticleForm({ stargateUrl, modelString, channelsString, lang }: {
+export function ConsoleArticleForm({stargateUrl, modelString, channelsString, lang}: {
     stargateUrl: string,
     modelString: string,
     channelsString: string,
     lang: string,
 }) {
-    const oldModel = JSON.parse(modelString) as PSArticleModel;
+    const oldModel = JSON.parse(modelString) as PSFileModel;
     const channels = JSON.parse(channelsString) as PSChannelModel[];
     const [wangLang, setWantLang] = React.useState(oldModel.lang);
     const [title, setTitle] = React.useState(oldModel.title);
@@ -47,7 +45,7 @@ export function ConsoleArticleForm({ stargateUrl, modelString, channelsString, l
 
     const tocList: TocItem[] = []
     const titleId = generatorRandomString(8)
-    tocList.push({ title: oldModel.title, header: 0, id: titleId })
+    tocList.push({title: oldModel.title, header: 0, id: titleId})
     const isNew = oldModel.uid === EmptyUUID;
 
     const onSubmit = () => {
@@ -62,21 +60,23 @@ export function ConsoleArticleForm({ stargateUrl, modelString, channelsString, l
             channel: oldModel.channel
         }
         if (isNew) {
-            PersonalNotesBrowser.clientConsoleInsertNote(stargateUrl, newModel).then((newNoteId) => {
-                if (!newNoteId) {
-                    console.error(transKey(lang, 'console.note.insertFailed'))
-                    return
-                }
-                window.location.href = `/${lang}/console/personal/notes`
-            })
+            // todo
+            // PersonalFilesBrowser.clientConsoleInsertFile(stargateUrl, newModel).then((newNoteId) => {
+            //     if (!newNoteId) {
+            //         console.error(transKey(lang, 'console.note.insertFailed'))
+            //         return
+            //     }
+            //     window.location.href = `/${lang}/console/personal/notes`
+            // })
         } else {
-            PersonalNotesBrowser.clientConsoleUpdateNote(stargateUrl, oldModel.uid, newModel).then((noteId) => {
-                if (!noteId) {
-                    console.error(transKey(lang, 'console.note.updateFailed'))
-                    return
-                }
-                window.location.href = `/${lang}/console/personal/notes`
-            })
+            // todo
+            // PersonalFilesBrowser.clientConsoleUpdateFile(stargateUrl, oldModel.uid, newModel).then((noteId) => {
+            //     if (!noteId) {
+            //         console.error(transKey(lang, 'console.note.updateFailed'))
+            //         return
+            //     }
+            //     window.location.href = `/${lang}/console/personal/notes`
+            // })
         }
     }
 
@@ -117,17 +117,23 @@ export function ConsoleArticleForm({ stargateUrl, modelString, channelsString, l
                         <div className="flex-1 p-6">
                             <div className="flex flex-col gap-4">
                                 <div className="flex items-center gap-2">
-                                    <span className="inline-flex items-center px-2 py-0.5 rounded-full border text-xs font-medium"
-                                        style={{ borderColor: isNew ? '#22c55e' : '#3b82f6', color: isNew ? '#16a34a' : '#2563eb' }}>
+                                    <span
+                                        className="inline-flex items-center px-2 py-0.5 rounded-full border text-xs font-medium"
+                                        style={{
+                                            borderColor: isNew ? '#22c55e' : '#3b82f6',
+                                            color: isNew ? '#16a34a' : '#2563eb'
+                                        }}>
                                         {isNew ? transKey(lang, 'console.note.createNew') : transKey(lang, 'console.note.edit')}
                                     </span>
-                                    <span className="inline-flex items-center px-2 py-0.5 rounded-full border text-xs font-medium">
+                                    <span
+                                        className="inline-flex items-center px-2 py-0.5 rounded-full border text-xs font-medium">
                                         {wangLang.toUpperCase()}
                                     </span>
                                 </div>
 
                                 <div className="flex flex-col gap-1">
-                                    <label className="text-sm font-medium">{transKey(lang, 'console.note.title')}</label>
+                                    <label
+                                        className="text-sm font-medium">{transKey(lang, 'console.note.title')}</label>
                                     <Input
                                         value={title}
                                         onChange={(event) => setTitle(event.target.value)}
@@ -137,7 +143,8 @@ export function ConsoleArticleForm({ stargateUrl, modelString, channelsString, l
                                 </div>
 
                                 <div className="flex flex-col gap-1">
-                                    <label className="text-sm font-medium">{transKey(lang, 'console.note.description')}</label>
+                                    <label
+                                        className="text-sm font-medium">{transKey(lang, 'console.note.description')}</label>
                                     <textarea
                                         rows={3}
                                         value={description}
@@ -154,7 +161,7 @@ export function ConsoleArticleForm({ stargateUrl, modelString, channelsString, l
                                 src={coverUrl}
                                 alt={title || 'Note cover'}
                                 className="w-full h-full object-cover"
-                                style={{ minHeight: 250 }}
+                                style={{minHeight: 250}}
                             />
                             <div className="absolute top-2 right-2">
                                 <Button
@@ -163,7 +170,7 @@ export function ConsoleArticleForm({ stargateUrl, modelString, channelsString, l
                                     title="Change cover"
                                     className="bg-white/90 hover:bg-white"
                                 >
-                                    <Copy size={16} />
+                                    <Copy size={16}/>
                                 </Button>
                             </div>
                         </div>
@@ -185,20 +192,20 @@ export function ConsoleArticleForm({ stargateUrl, modelString, channelsString, l
                 <div className="rounded-lg border shadow-sm p-4">
                     <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2">
-                            <PSConsoleLanguageSelector lang={wangLang} onChange={setWantLang} />
+                            <PSConsoleLanguageSelector lang={wangLang} onChange={setWantLang}/>
                         </div>
 
                         <div className="flex items-center gap-2">
                             {!isNew && (
                                 <Button variant="outline" asChild>
                                     <a href={createUrl}>
-                                        <Copy size={16} />
+                                        <Copy size={16}/>
                                         {transKey(lang, 'console.note.viewCopy')}
                                     </a>
                                 </Button>
                             )}
                             <Button onClick={onSubmit}>
-                                <Save size={16} />
+                                <Save size={16}/>
                                 {transKey(lang, 'console.note.save')}
                             </Button>
                         </div>
@@ -210,7 +217,7 @@ export function ConsoleArticleForm({ stargateUrl, modelString, channelsString, l
                     <div className="rounded-lg border shadow-sm p-4">
                         <div className="flex flex-col gap-3">
                             <div className="flex items-center gap-2">
-                                <Upload size={20} />
+                                <Upload size={20}/>
                                 <span className="font-semibold text-lg">
                                     {transKey(lang, 'console.note.publishToChannel')}
                                 </span>
@@ -229,7 +236,7 @@ export function ConsoleArticleForm({ stargateUrl, modelString, channelsString, l
                                     ))}
                                 </select>
                                 <Button onClick={onPublish} disabled={!selectedChannel}>
-                                    <Upload size={16} />
+                                    <Upload size={16}/>
                                     {transKey(lang, 'console.note.publish')}
                                 </Button>
                             </div>

@@ -17,8 +17,7 @@ import {
     TocItem,
     tryBase58ToUuid
 } from "@pnnh/atom";
-import {PSArticleModel} from "@/components/common/models/article";
-import {getDefaultNoteImageByUid} from "@/components/common/note";
+import {getDefaultNoteImageByUid, PSFileModel} from "@/components/common/models/file";
 import {CommentsClient} from "@/components/client/comments/comments";
 import {useServerConfig} from "@/components/server/config";
 import {notFound} from "next/navigation";
@@ -143,7 +142,7 @@ export default async function Home({params, searchParams}: {
         notFound();
     }
     const url = `${internalPortalUrl}/articles/${articleUid}?lang=${lang}`
-    const getResult = await serverMakeGet<CommonResult<PSArticleModel | undefined>>(url, '')
+    const getResult = await serverMakeGet<CommonResult<PSFileModel | undefined>>(url, '')
 
     if (!getResult || getResult.code !== CodeOk || !getResult.data) {
         return <div>遇到错误2</div>

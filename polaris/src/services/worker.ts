@@ -82,7 +82,7 @@ self.onmessage = async (event) => {
                         key: `image-${libName}-${img.uid}`,
                         name: img.title,
                         handle: null,
-                        url: img.file_url,
+                        url: img.url,
                         isLocal: false,
                     }
                     dirFiles.push(imageEntry)

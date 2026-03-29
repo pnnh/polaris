@@ -9,12 +9,9 @@ import (
 
 	"portal/business/account"
 	"portal/business/account/userauth"
-	"portal/business/articles"
 	"portal/business/channels"
 	"portal/business/comments"
-	"portal/business/images"
 	"portal/business/tools"
-	"portal/business/viewers"
 	"portal/cloud/files"
 
 	"github.com/pnnh/neutron/config"
@@ -112,13 +109,13 @@ func (s *WebServer) Init() error {
 
 	s.router.POST("/portal/comments", comments.CommentInsertHandler)
 	s.router.GET("/portal/comments", comments.CommentSelectHandler)
-	s.router.GET("/portal/articles", articles.NoteSelectHandler)
-	s.router.GET("/portal/articles/:uid", articles.NoteGetHandler)
-	s.router.GET("/portal/articles/:uid/assets", articles.NoteAssetsSelectHandler)
+	//s.router.GET("/portal/articles", articles.NoteSelectHandler)
+	//s.router.GET("/portal/articles/:uid", articles.NoteGetHandler)
+	//s.router.GET("/portal/articles/:uid/assets", articles.NoteAssetsSelectHandler)
+	//s.router.POST("/portal/articles/:uid/viewer", viewers.NoteViewerInsertHandler)
 	s.router.GET("/portal/channels", channels.ChannelSelectHandler)
 	s.router.GET("/portal/channels/complete", channels.ChannelCompleteHandler)
 	s.router.GET("/portal/channels/:uid", channels.ChannelGetByUidHandler)
-	s.router.POST("/portal/articles/:uid/viewer", viewers.NoteViewerInsertHandler)
 
 	s.router.POST("/portal/account/signup", account.SignupHandler)
 	s.router.POST("/portal/account/signin", account.SigninHandler)
@@ -129,8 +126,8 @@ func (s *WebServer) Init() error {
 	s.router.POST("/portal/account/auth/permit", account.PermitAppLoginHandler)
 	s.router.GET("/portal/account/auth/userinfo", userauth.UserinfoHandler)
 
-	s.router.GET("/portal/images", images.ImageSelectHandler)
-	s.router.GET("/portal/images/:uid", images.ImageGetHandler)
+	//s.router.GET("/portal/images", images.ImageSelectHandler)
+	//s.router.GET("/portal/images/:uid", images.ImageGetHandler)
 
 	s.router.GET("/portal/tools", tools.ToolSelectHandler)
 

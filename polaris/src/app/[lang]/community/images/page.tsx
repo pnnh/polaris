@@ -5,10 +5,10 @@ import {calcPagination, langEn, replaceSearchParams, SymbolUnknown} from "@pnnh/
 import {useServerConfig} from "@/components/server/config";
 import {css} from "@/gen/styled/css";
 import ConsoleLayout from "@/components/server/console/layout";
-import {CommunityImageNodeService} from "@/components/community/images";
 import {ConsolePhotoFilterBar} from "./filter";
 import {ConsolePhotoMiddleBody} from "./photo";
-import {PaginationServer} from "@/components/server/pagination";
+import {PaginationServer} from "@/components/widget/pagination";
+import {CommunityFileNodeService} from "@/components/community/files";
 
 export const dynamic = "force-dynamic";
 
@@ -67,7 +67,7 @@ export default async function Page({params, searchParams}: {
     const internalStargateUrl = serverConfig.INTERNAL_STARGATE_URL
     const publicStargateUrl = serverConfig.PUBLIC_STARGATE_URL
 
-    const selectData = await CommunityImageNodeService.consoleQueryImages(internalStargateUrl, lang, selectQuery)
+    const selectData = await CommunityFileNodeService.consoleQueryFiles(internalStargateUrl, lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
     return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}

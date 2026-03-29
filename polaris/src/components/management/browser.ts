@@ -4,21 +4,6 @@ import {CodeOk, CommonResult} from "@pnnh/atom";
 import {clientMakePost} from "@pnnh/atom/browser";
 
 export class ManagementBrowser {
-    static async clientApproveArticles(
-        stargateUrl: string,
-        uids: string[],
-        status: number = 1
-    ): Promise<{ success: number; fail: number }> {
-        const url = `${stargateUrl}/management/articles/approve`;
-        const result = await clientMakePost<CommonResult<string>>(url, {uids, status});
-        if (!result || result.code !== CodeOk) {
-            console.warn('批量审核失败', result);
-            return {success: 0, fail: uids.length};
-        }
-        const successCount = parseInt(result.data || '0', 10);
-        return {success: successCount, fail: uids.length - successCount};
-    }
-
     static async clientApproveChannels(
         stargateUrl: string,
         uids: string[],
@@ -49,18 +34,4 @@ export class ManagementBrowser {
         return {success: successCount, fail: uids.length - successCount};
     }
 
-    static async clientApproveImages(
-        stargateUrl: string,
-        uids: string[],
-        status: number = 1
-    ): Promise<{ success: number; fail: number }> {
-        const url = `${stargateUrl}/management/images/approve`;
-        const result = await clientMakePost<CommonResult<string>>(url, {uids, status});
-        if (!result || result.code !== CodeOk) {
-            console.warn('批量审核图片失败', result);
-            return {success: 0, fail: uids.length};
-        }
-        const successCount = parseInt(result.data || '0', 10);
-        return {success: successCount, fail: uids.length - successCount};
-    }
 }

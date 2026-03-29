@@ -2,7 +2,40 @@ import React, {CSSProperties} from "react";
 import {css} from "@/gen/styled/css";
 import {transKey, transTodo} from "@/components/common/locales/normal";
 import {getPathname} from "@/components/server/pathname";
-import {pageTitle} from "@/components/common/utils/page";
+import {pageTitle} from "@/components/utils/page";
+
+export async function SiteNavMenu({lang, searchParams}: {
+    lang: string,
+    searchParams: Record<string, string>
+}) {
+    const pathname = await getPathname()
+
+    const siteLinks = [
+        {name: pageTitle(lang), href: `/${lang}`},
+    ]
+    return <div className={styles.siteNavMenu}>
+        <div className={styles.roleButtonContainer}>
+            {
+                siteLinks.map((link) => {
+                    let style: CSSProperties = {}
+                    if (pathname === link.href) {
+                        style = {
+                            color: '#4A95DD',
+                        }
+                    }
+                    return <a key={link.name} className={styles.siteLink} style={style} href={link
+                        .href}>{link.name}</a>
+                })
+            }
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#C6C6C6">
+            <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>
+        </svg>
+        <ArticleNavbar pathname={pathname} lang={lang}/>
+        {/*<ArticleSubNavbar lang={lang} pathname={pathname} searchParams={searchParams}/>*/}
+    </div>
+}
+
 
 const styles = {
     siteNavMenu: css`
@@ -89,38 +122,6 @@ const styles = {
         }
     `,
 };
-
-export async function SiteNavMenu({lang, searchParams}: {
-    lang: string,
-    searchParams: Record<string, string>
-}) {
-    const pathname = await getPathname()
-
-    const siteLinks = [
-        {name: pageTitle(lang), href: `/${lang}`},
-    ]
-    return <div className={styles.siteNavMenu}>
-        <div className={styles.roleButtonContainer}>
-            {
-                siteLinks.map((link) => {
-                    let style: CSSProperties = {}
-                    if (pathname === link.href) {
-                        style = {
-                            color: '#4A95DD',
-                        }
-                    }
-                    return <a key={link.name} className={styles.siteLink} style={style} href={link
-                        .href}>{link.name}</a>
-                })
-            }
-        </div>
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#C6C6C6">
-            <path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/>
-        </svg>
-        <ArticleNavbar pathname={pathname} lang={lang}/>
-        {/*<ArticleSubNavbar lang={lang} pathname={pathname} searchParams={searchParams}/>*/}
-    </div>
-}
 
 function ArticleNavbar({lang, pathname}: {
     lang: string, pathname: string

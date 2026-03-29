@@ -1,13 +1,12 @@
 import React from "react";
-import {PSImageModel} from "@/components/common/models/image";
-import {NoData} from "@/components/common/empty";
+import {getDefaultImageUrl, PSFileModel} from "@/components/common/models/file";
+import {NoData} from "@/components/widget/empty";
 import {css} from "@/gen/styled/css";
 import {PLSelectData} from "@pnnh/atom";
-import {getDefaultImageUrl} from "@/components/common/note"
 
 export function ConsoleImageMiddleBody({selectData, libKey, lang}: {
     libKey: string, lang: string,
-    selectData: PLSelectData<PSImageModel>
+    selectData: PLSelectData<PSFileModel>
 }) {
     if (!selectData) {
         return <>
@@ -31,7 +30,7 @@ export function ConsoleImageMiddleBody({selectData, libKey, lang}: {
 }
 
 export async function ImageCard({model, lang}: {
-    model: PSImageModel,
+    model: PSFileModel,
     lang: string
 }) {
     let imageUrl = model.url || getDefaultImageUrl()

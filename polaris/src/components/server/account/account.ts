@@ -2,9 +2,9 @@
 
 import {CodeOk, PLGetResult} from "@pnnh/atom";
 import {serverMakeGet} from "@pnnh/atom/nodejs";
-import {getDefaultImageUrl} from "@/components/common/note";
 import {cookies} from "next/headers";
 import {AccountModel} from "@/components/common/models/account/account";
+import {getDefaultImageUrl} from "@/components/common/models/file";
 
 export async function serverGetUserinfo(portalUrl: string): Promise<AccountModel | undefined> {
     const url = `${portalUrl}/account/userinfo`

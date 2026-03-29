@@ -3,9 +3,8 @@ import {CiAlarmOn} from "react-icons/ci";
 import React from "react";
 import {css} from "@/gen/styled/css";
 import {formatRfc3339, uuidToBase58} from "@pnnh/atom";
-import {PSImageServer} from "@/components/server/image";
-import {getDefaultImageUrl} from "@/components/common/note";
-import {PSImageModel} from "@/components/common/models/image";
+import {PSImageServer} from "@/components/widget/image";
+import {getDefaultImageUrl, PSFileModel} from "@/components/common/models/file";
 
 const styles = {
     middleItem: css`
@@ -58,7 +57,7 @@ const styles = {
 };
 
 export function ImageCard({model, lang}: {
-    model: PSImageModel, lang: string,
+    model: PSFileModel, lang: string,
 }) {
     const readUrl = `${lang}/images/${uuidToBase58(model.uid || model.uid)}`
 

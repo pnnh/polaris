@@ -1,11 +1,11 @@
 'use client'
 
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 import React from "react";
 import {PSChannelModel} from "@/components/common/models/channel";
 import {clientConsoleInsertChannel, clientConsoleUpdateChannel} from "@/components/client/channels/channels";
 import {EmptyUUID} from "@pnnh/atom";
-import {getDefaultImageUrl} from "@/components/common/note";
+import {getDefaultImageUrl} from "@/components/common/models/file";
 import {transKey} from "@/components/common/locales/normal";
 import {css} from "@/gen/styled/css";
 

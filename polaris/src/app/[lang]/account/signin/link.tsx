@@ -4,9 +4,9 @@ import {IAuthApp} from "@/components/common/models/auth";
 import {useEffect, useState} from "react";
 import {permitAppLogin, queryAuthApp} from "@/components/client/account/account";
 import {CodeOk} from "@pnnh/atom";
-import {Loading} from "@/components/common/loading";
 import {transKey} from "@/components/common/locales/normal";
 import {css} from "@/gen/styled/css";
+import {Loading} from "@/components/widget/loading";
 
 export function LinkSession({lang, portalUrl, signinLink, linkApp, signinCallback}: {
     lang: string, portalUrl: string, signinLink: string, linkApp: string, signinCallback: string
