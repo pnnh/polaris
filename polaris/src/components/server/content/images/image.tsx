@@ -4,15 +4,6 @@ import {css} from "@/gen/styled/css";
 import {PSFileModel} from "@/components/common/models/file";
 import {ImageCard} from "@/components/server/content/images/card";
 
-const styles = {
-    middleBody: css`
-        width: 100%;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-        gap: 1rem;
-    `,
-};
-
 export async function ImageMiddleBody({selectData, lang}: {
     selectData: PLSelectData<PSFileModel>,
     lang: string,
@@ -26,3 +17,12 @@ export async function ImageMiddleBody({selectData, lang}: {
         })}
     </div>
 }
+
+const styles = {
+    middleBody: css`
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+        gap: 1rem;
+    `,
+};

@@ -1,10 +1,42 @@
 'use client';
 
-import { css } from "@/gen/styled/css";
+import {css} from "@/gen/styled/css";
 import * as React from 'react';
-import { getLangInfo, replaceLangInUrl, supportedLanguages } from "@/components/common/language";
-import { Languages } from 'lucide-react';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/client/dropmenu";
+import {getLangInfo, replaceLangInUrl, supportedLanguages} from "@/components/common/language";
+import {Languages} from 'lucide-react';
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/client/dropmenu";
+
+export function PSLanguageSelector({lang, currentUrl}: { lang: string, currentUrl: string }) {
+    const langInfo = getLangInfo(lang)
+    if (!langInfo) {
+        throw new Error('Invalid language: ' + lang)
+    }
+    const goUrl = (targetLang: string) => {
+        const targetUrl = replaceLangInUrl(window.location.href, targetLang);
+        window.location.href = targetUrl;
+    }
+    return (
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <div className={styles.langSelector}>
+                    <Languages size={20} aria-hidden={undefined}/>
+                </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                {supportedLanguages.map(language => (
+                    <DropdownMenuItem
+                        key={language.key}
+                        onClick={() => goUrl(language.key)}
+                        data-selected={lang === language.key || undefined}
+                        className="data-[selected]:font-semibold"
+                    >
+                        {language.name}
+                    </DropdownMenuItem>
+                ))}
+            </DropdownMenuContent>
+        </DropdownMenu>
+    )
+}
 
 const styles = {
     langSelector: css`
@@ -43,35 +75,3 @@ const styles = {
         }
     `,
 };
-
-export function PSLanguageSelector({ lang, currentUrl }: { lang: string, currentUrl: string }) {
-    const langInfo = getLangInfo(lang)
-    if (!langInfo) {
-        throw new Error('Invalid language: ' + lang)
-    }
-    const goUrl = (targetLang: string) => {
-        const targetUrl = replaceLangInUrl(window.location.href, targetLang);
-        window.location.href = targetUrl;
-    }
-    return (
-        <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-                <div className={styles.langSelector}>
-                    <Languages size={20} aria-hidden={undefined} />
-                </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-                {supportedLanguages.map(language => (
-                    <DropdownMenuItem
-                        key={language.key}
-                        onClick={() => goUrl(language.key)}
-                        data-selected={lang === language.key || undefined}
-                        className="data-[selected]:font-semibold"
-                    >
-                        {language.name}
-                    </DropdownMenuItem>
-                ))}
-            </DropdownMenuContent>
-        </DropdownMenu>
-    )
-}

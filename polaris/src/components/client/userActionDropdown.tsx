@@ -7,6 +7,43 @@ import {AccountModel, isAnonymousAccount} from "@/components/common/models/accou
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/client/dropmenu";
 import {transTodo} from "@/components/common/locales/normal";
 
+export function UserActionDropdown({lang, userInfo}: {
+    lang: string, userInfo: AccountModel | undefined
+}) {
+    const photoUrl = sanitizeUrl(userInfo?.photoUrl)
+
+    if (userInfo && !isAnonymousAccount(userInfo)) {
+        return (
+            <div className={styles.userAction}>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <div className={styles.userPhoto} title={userInfo.nickname}>
+                            <img src={photoUrl} alt="User Avatar"/>
+                            <span className={styles.userNickname}>{userInfo.nickname}</span>
+                        </div>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuItem asChild>
+                            <a className={styles.menuItem} href={`/${lang}/console`}>
+                                <Monitor size={18}/>
+                                <span>{transTodo('控制台')}</span>
+                            </a>
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            </div>
+        )
+    }
+
+    return (
+        <div className={styles.userAction}>
+            <a className={styles.loginLink} href={`/${lang}/account/signin`}>
+                <CircleUser size={24}/>
+            </a>
+        </div>
+    )
+}
+
 const styles = {
     userAction: css`
         display: flex;
@@ -50,40 +87,3 @@ const styles = {
         text-decoration: none;
     `,
 };
-
-export function UserActionDropdown({lang, userInfo}: {
-    lang: string, userInfo: AccountModel | undefined
-}) {
-    const photoUrl = sanitizeUrl(userInfo?.photoUrl)
-
-    if (userInfo && !isAnonymousAccount(userInfo)) {
-        return (
-            <div className={styles.userAction}>
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <div className={styles.userPhoto} title={userInfo.nickname}>
-                            <img src={photoUrl} alt="User Avatar"/>
-                            <span className={styles.userNickname}>{userInfo.nickname}</span>
-                        </div>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuItem asChild>
-                            <a className={styles.menuItem} href={`/${lang}/console`}>
-                                <Monitor size={18}/>
-                                <span>{transTodo('控制台')}</span>
-                            </a>
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            </div>
-        )
-    }
-
-    return (
-        <div className={styles.userAction}>
-            <a className={styles.loginLink} href={`/${lang}/account/signin`}>
-                <CircleUser size={24}/>
-            </a>
-        </div>
-    )
-}

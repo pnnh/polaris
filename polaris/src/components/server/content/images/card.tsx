@@ -6,6 +6,28 @@ import {formatRfc3339, uuidToBase58} from "@pnnh/atom";
 import {PSImageServer} from "@/components/widget/image";
 import {getDefaultImageUrl, PSFileModel} from "@/components/common/models/file";
 
+export function ImageCard({model, lang}: {
+    model: PSFileModel, lang: string,
+}) {
+    const readUrl = `${lang}/images/${uuidToBase58(model.uid || model.uid)}`
+
+    let imageUrl = model.url || getDefaultImageUrl()
+
+    return <div className={styles.middleItem} key={model.uid}>
+        <div className={styles.imageCover} data-article={model.uid}>
+            <PSImageServer src={imageUrl} alt={model.title} fill={true}/>
+        </div>
+        <div className={styles.imageInfo}>
+            <div className={styles.itemTitle}>
+                <a href={readUrl} title={model.uid}>{model.title}</a></div>
+            <div className={styles.action}>
+                <FaEye size={'1rem'}/><span>{model.discover}</span>
+                <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(model.update_time)}</span>
+            </div>
+        </div>
+    </div>
+}
+
 const styles = {
     middleItem: css`
         border-bottom: solid 1px #e4e6eb80;
@@ -55,25 +77,3 @@ const styles = {
         gap: 6px;
     `,
 };
-
-export function ImageCard({model, lang}: {
-    model: PSFileModel, lang: string,
-}) {
-    const readUrl = `${lang}/images/${uuidToBase58(model.uid || model.uid)}`
-
-    let imageUrl = model.url || getDefaultImageUrl()
-
-    return <div className={styles.middleItem} key={model.uid}>
-        <div className={styles.imageCover} data-article={model.uid}>
-            <PSImageServer src={imageUrl} alt={model.title} fill={true}/>
-        </div>
-        <div className={styles.imageInfo}>
-            <div className={styles.itemTitle}>
-                <a href={readUrl} title={model.uid}>{model.title}</a></div>
-            <div className={styles.action}>
-                <FaEye size={'1rem'}/><span>{model.discover}</span>
-                <CiAlarmOn size={'1rem'}/><span>{formatRfc3339(model.update_time)}</span>
-            </div>
-        </div>
-    </div>
-}

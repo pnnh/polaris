@@ -73,8 +73,7 @@ export default async function Page({params, searchParams}: {
     const selectData = await CommunityFileNodeService.consoleQueryFiles(internalStargateUrl, lang, selectQuery)
 
     const pagination = calcPagination(page, selectData.count, pageSize)
-    return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}
-    >
+    return <ConsoleLayout userInfo={SymbolUnknown} lang={lang} searchParams={searchParamsValue} pathname={pathname}>
         <div className={pageStyles.filesPage}>
             <div className={pageStyles.contentContainer}>
                 <ConsoleFileFilterBar lang={lang} keyword={searchParamsValue.keyword}/>
